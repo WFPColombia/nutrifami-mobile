@@ -1,0 +1,14 @@
+/nbproject/private/
+#netbeans specific
+core
+nbproject/*
+!nbproject/project.properties
+!nbproject/project.xml
+
+/node_modules
+/app/lib
+/nbproject
+/platforms
+/plugins
+/hooks
+/www
