@@ -31,6 +31,10 @@ Tareas Gulp
 
 En la consola de comandos (sin las comillas):
 
+Instalar dependencias antes de los siguientes pasos
+
+    $npm install --save-dev
+
 1. 'gulp' -> Ejecutar servidor web de desarrollo
 2. 'gulp cordovaDev' -> Alistar los archivos rapidamente y sin comprimir para probarlos como aplicaciones mobiles
 3. 'gulp compileCordova' -> Alistar archivos comprimirdos para generar una versión para publicar
