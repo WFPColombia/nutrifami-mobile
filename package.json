@@ -1,0 +1,49 @@
+{
+    "name": "nutrifami-mobile",
+    "version": "0.0.1",
+    "description": "Aplicación móvil multiplataforma para Nutrifami",
+    "author": [
+        "Alejandro Tunaroza<alejandro.tunaroza@gmail.com>",
+        "Abel Moreno<abel.moreno@wfp.org>"
+    ],
+    "contributors": [
+        {
+            "name": "Alejandro Tunaroza",
+            "email": "alejandro.tunaroza@gmail.com"
+        },
+        {
+            "name": "Abel Moreno",
+            "email": "abel.moreno@wfp.org"
+        }
+    ],
+    "scripts": {},
+    "main": "app/index.html",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/WFPColombia/nutrifami-mobile.git"
+    },
+    "bugs": {
+        "url": "https://github.com/WFPColombia/nutrifami-mobile/issues"
+    },
+    "keywords": [
+        "PMA",
+        "Nutrifami"
+    ],
+    "dependencies": {
+        "angular-mocks": "^1.5.7",
+        "gulp": "^3.9.1",
+        "gulp-closure-compiler": "^0.4.0",
+        "gulp-concat": "^2.6.0",
+        "gulp-delete-lines": "0.0.7",
+        "gulp-jshint": "^2.0.1",
+        "gulp-jsmin": "^0.1.5",
+        "gulp-minify-html": "^1.0.6",
+        "gulp-rename": "^1.2.2",
+        "gulp-uglify": "^1.5.4",
+        "gulp-webserver": "^0.9.1",
+        "jshint": "^2.9.2"
+    },
+    "preferGlobal": true,
+    "private": false,
+    "license": "MIT"
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Nutrifami</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="lib/mobile-angular-ui/dist/css/mobile-angular-ui-base.css" DEVFILE="true"/>
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+
+
+        <!-- BEGIN PROD FILES
+        <link rel="stylesheet" href="lib/mobile-angular-ui/dist/css/mobile-angular-ui-base.min.css" />
+        END PROD FILES -->
+    </head>
+    
+    <body ng-app="NutrifamiMobile" >
+    <ng-view>
+
+    </ng-view>
+
+    <!-- Modals and Overlays -->
+    <div ui-yield-to="modals"></div>
+
+    <script src="lib/angular/angular.js" DEVFILE="true"></script>
+    <script src="lib/angular-mocks/angular-mocks.js" DEVFILE="true"></script>
+    <script src="lib/angular-route/angular-route.js" DEVFILE="true"></script>
+    <script src="lib/angular-cookies/angular-cookies.js" type="text/javascript" DEVFILE="true"></script>
+    <script src="lib/mobile-angular-ui/dist/js/mobile-angular-ui.js" DEVFILE="true"></script>
+    <script src="lib/angular-audio/app/angular.audio.js" type="text/javascript" DEVFILE="true"></script>
+    <script src="lib/angular-loading-overlay/dist/angular-loading-overlay.js" type="text/javascript" DEVFILE="true"></script>
+    <script src="lib/angular-animate/angular-animate.js" type="text/javascript" DEVFILE="true"></script>
+
+    <script src="lib/jquery/dist/jquery.js" type="text/javascript" DEVFILE="true"></script>
+    <script src="lib/js-md5/build/md5.min.js" type="text/javascript" DEVFILE="true"></script>
+
+    <script src="js/nutrifami.js" type="text/javascript" DEVFILE="true"></script>
+    <script src="js/mainController.js" DEVFILE="true"></script>
+    <script src="js/controllers/homeController.js" DEVFILE="true"></script>
+    <script src="js/controllers/loginController.js" type="text/javascript" DEVFILE="true"></script>
+    <script src="js/services/AuthenticationService.js" type="text/javascript" DEVFILE="true"></script>
+
+    <!-- BEGIN PROD FILES
+
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/angular-route/angular-route.min.js"></script>
+    <script src="lib/mobile-angular-ui/dist/js/mobile-angular-ui.min.js"></script>
+    <script src="lib/angular-cookies/angular-cookies.min.js" type="text/javascript"></script>
+    <script src="lib/angular-audio/app/angular.audio.js" type="text/javascript"></script>
+    <script src="lib/angular-loading-overlay/dist/angular-loading-overlay.js" type="text/javascript"></script>
+    <script src="lib/angular-animate/angular-animate.min.js" type="text/javascript"></script>
+    <script src="lib/jquery/dist/jquery.min.js" type="text/javascript"></script>
+    <script src="lib/js-md5/build/md5.min.js" type="text/javascript"></script>
+    <script src="js/main.min.js"></script>
+    
+    END PROD FILES -->
+</body>
+</html>
