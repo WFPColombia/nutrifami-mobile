@@ -1,6 +1,6 @@
 /*global angular*/
 
-dependencies = ['Authentication', 'ngRoute', 'ngCookies', 'ngAudio', 'bsLoadingOverlay', 'mobile-angular-ui', 'ngAnimate'];
+dependencies = ['Authentication', 'ngRoute', 'ngCookies', 'ngAudio', 'bsLoadingOverlay', 'mobile-angular-ui', 'ngAnimate','ngCordova'];
 
 var nutrifamiLogin = angular.module('Authentication', []);
 var nutrifamiMobile = angular.module('NutrifamiMobile', dependencies);
@@ -15,7 +15,7 @@ nutrifamiMobile.config(['$locationProvider', '$routeProvider', function ($locati
             templateUrl: 'views/login.html',
             hideMenus: true
         });
-
+        
         $routeProvider.when('/', {
             controller: 'HomeController',
             templateUrl: 'views/home.html'
