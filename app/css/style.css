@@ -137,6 +137,50 @@ body{
     background-color: #f5f5f5;
 }
 
+.sidebar-left {
+    background: #71c881;
+    width: 300px;
+    left: 0;
+    right: auto;
+    -webkit-transition: width 400ms ease;
+    -o-transition: width 400ms ease;
+    transition: width 400ms ease;
+}
+
+.sidebar-left {
+    background: #71c881;
+}
+
+.scrollable-header {
+    padding-top: 16px;
+    padding-left: 16px;
+    height: 57px;
+    top: 0;
+}
+
+list-group-item,
+a.list-group-item {
+    background-color: #71c881;
+    border: none;
+    height: 57px;
+    font-size: 14pt;
+    line-height: 35px;
+    margin-bottom: 0;
+    color: #ffffff;
+
+}
+
+.list-group-item.active,
+.list-group-item.active:focus {
+
+    background-color: #2f6551;
+    border-color: #2f6551;
+}
+
+.list-group-item .icono{
+    margin-right: 17px;
+}
+
 
 .app header .navbar-absolute-top{
     height: 64px;
