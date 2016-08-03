@@ -7,10 +7,10 @@
     "projectDirectories": {},
     "currentService": {}
   },
-  "editorTab": {
-    "currentEditorMode": 0
-  },
   "build-tab": {
     "selectedTargets": []
+  },
+  "editorTab": {
+    "currentEditorMode": 0
   }
 }

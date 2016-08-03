@@ -5,9 +5,9 @@
       "type": "Import",
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "",
-      "projectGuid": "eb647c0f-ffc9-4f1f-9f3f-743e314c88b2",
-      "lastModifiedDate": 1470136994592,
-      "creationDate": 1470136842225
+      "projectGuid": "84af6877-dfbc-4fcf-a7e8-36a02b49b6d9",
+      "lastModifiedDate": 1470201776716,
+      "creationDate": 1470173667072
     },
     "sourceDirectory": "app",
     "cordovaPluginsDirectory": "plugins",
@@ -16,15 +16,7 @@
     "testDirectory": "test",
     "startFile": "index.html",
     "projectTags": [],
-    "projectFiles": {
-      "xdk-publish-meta-data.json": {
-        "settings": {
-          "project": {
-            "XDK-not-deployed": "True"
-          }
-        }
-      }
-    },
+    "projectFiles": {},
     "projectDirectories": {
       "xdk": {
         "settings": {
@@ -36,6 +28,43 @@
     },
     "libraries": [],
     "cordovaPlugins": [
+      {
+        "id": "cordova-plugin-splashscreen",
+        "name": "Splashscreen",
+        "version": "3.2.2",
+        "originType": "cordova.io",
+        "origin": "cordova-plugin-splashscreen",
+        "gitref": "",
+        "paramvals": {},
+        "sourceLocation": "plugins/cordova-plugin-splashscreen",
+        "selectedState": "Included",
+        "checksum": "b3ad230b",
+        "dependsOn": [],
+        "topLevel": true,
+        "permissions": {},
+        "description": "Cordova Splashscreen Plugin",
+        "data": {},
+        "dependedBy": []
+      },
+      {
+        "id": "cordova-plugin-whitelist",
+        "name": "Whitelist",
+        "version": "1.2.2",
+        "originType": "cordova.io",
+        "origin": "cordova-plugin-whitelist",
+        "gitref": "",
+        "paramvals": {},
+        "sourceLocation": "plugins/cordova-plugin-whitelist",
+        "selectedState": "Included",
+        "checksum": "c0d34e60",
+        "dependsOn": [],
+        "topLevel": true,
+        "permissions": {},
+        "description": "Cordova Network Whitelist Plugin",
+        "data": {},
+        "dependedBy": [],
+        "custom": "true"
+      },
       {
         "id": "cordova-plugin-compat",
         "name": "Compat",
@@ -98,43 +127,6 @@
         "description": "Cordova File Transfer Plugin",
         "data": {},
         "dependedBy": []
-      },
-      {
-        "id": "cordova-plugin-splashscreen",
-        "name": "Splashscreen",
-        "version": "3.2.2",
-        "originType": "cordova.io",
-        "origin": "cordova-plugin-splashscreen",
-        "gitref": "",
-        "paramvals": {},
-        "sourceLocation": "plugins/cordova-plugin-splashscreen",
-        "selectedState": "Included",
-        "checksum": "b3ad230b",
-        "dependsOn": [],
-        "topLevel": true,
-        "permissions": {},
-        "description": "Cordova Splashscreen Plugin",
-        "data": {},
-        "dependedBy": []
-      },
-      {
-        "id": "cordova-plugin-whitelist",
-        "name": "Whitelist",
-        "version": "1.2.2",
-        "originType": "cordova.io",
-        "origin": "cordova-plugin-whitelist",
-        "gitref": "",
-        "paramvals": {},
-        "sourceLocation": "plugins/cordova-plugin-whitelist",
-        "selectedState": "Included",
-        "checksum": "c0d34e60",
-        "dependsOn": [],
-        "topLevel": true,
-        "permissions": {},
-        "description": "Cordova Network Whitelist Plugin",
-        "data": {},
-        "dependedBy": [],
-        "custom": "true"
       }
     ],
     "serviceMethods": [],
