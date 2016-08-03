@@ -10,6 +10,7 @@
 
 body{
     font-family: 'Muli', sans-serif;
+    background-color: #f5f5f5;
 }
 
 .login{
@@ -128,3 +129,90 @@ body{
     text-align: center;
     margin-top: 110px;
 }
+
+
+/* HOME */
+
+.app{
+    background-color: #f5f5f5;
+}
+
+
+.app header .navbar-absolute-top{
+    height: 64px;
+    background-color: #71c881;
+    color:#ffffff;
+    padding-top: 17px;
+}
+
+.app header .navbar-absolute-top .navbar-brand-center {
+    margin-top: -18px;
+}
+
+.app header .navbar-absolute-top .btn-group .btn a{
+    color: #ffffff;
+}
+
+.app .app-body{
+    padding-top: 64px;
+}
+
+.app .app-body .modulos{
+    margin-top: 35px;
+}
+
+.modulo  {
+    margin: 0 28px 50px 28px;
+    background-color: #0dcd71;
+    border-radius: 10px;
+    padding-bottom: 8px;
+
+}
+
+.modulo img{
+    width: 100%;
+}
+
+.modulo h3,
+.modulo h4{
+    color: #ffffff;
+    text-align: center;
+    font-size: 15pt;
+    margin-top: 32px;
+    margin-bottom: 36px;
+}
+
+.modulo h4 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+.modulo .progress{
+    height: 11px;
+    margin-bottom: 0px; 
+    border-radius: 4px;
+    width: auto;
+    margin: 0 8px 0 8px;
+    background-color: #ffffff;
+    background-image: none;
+}
+
+
+.modulo .progress .progress-bar,
+.modulo-avance .progress .progress-bar{
+    background-color: #feea45;
+    background-image: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.modulo-no-disponible{
+    -webkit-filter: grayscale(100%) opacity(40%); /* Chrome, Safari, Opera */
+    filter: grayscale(100%) opacity(40%);
+}
+.modulo-no-disponible h3,
+.modulo-no-disponible h4{
+    color: #000000;
+}
+
