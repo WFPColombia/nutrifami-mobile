@@ -8,6 +8,16 @@
     src: url(../fonts/Muli-Light.ttf);
 }
 
+@font-face {
+    font-family: Muli-Italic;
+    src: url(../fonts/Muli-Italic.ttf);
+}
+
+@font-face {
+    font-family: Raleway-Bold;
+    src: url(../fonts/raleway/Raleway-Bold.ttf);
+}
+
 body{
     font-family: 'Muli', sans-serif;
     background-color: #f5f5f5;
@@ -206,7 +216,6 @@ a.list-group-item {
 }
 
 .modulo  {
-    margin: 0 28px 50px 28px;
     background-color: #0dcd71;
     border-radius: 10px;
     padding-bottom: 8px;
@@ -260,3 +269,189 @@ a.list-group-item {
     color: #000000;
 }
 
+
+/* UNIDADES */
+
+.app header .leccion-avance{
+    font-family: 'Muli', sans-serif;
+    background-color: #75a8fe;
+    font-size: 12pt;
+    color: white;
+}
+
+.app header .leccion-avance .progress{
+    height: 9px;
+    border-radius: 4px;
+    width: auto;
+    background-color: #ffffff;
+    background-image: none;
+}
+
+.app header .leccion-avance .progress .progress-bar{
+    background-color: #fdf418;
+    background-image: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.app header .leccion-avance .complete {
+    background-color: #e5e5e5;
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    top: 16px;
+    right: 0px;
+    border-radius: 11px;
+    border: solid 4px #ffffff;
+}
+
+.unidad .unidad-tipo{
+    background-color: #ffffff;
+    height: 55px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    text-align: center;
+    padding-top: 8px;
+    font-size: 10pt;
+    font-family: 'Muli-Italic', sans-serif;
+    color: #00965e;
+    margin-top: 13px;
+}
+
+.unidad .unidad-tipo.opciones {
+    padding-top: 15px;
+}
+.unidad .unidad-tipo img{
+    margin-right: 15px;
+}
+
+.unidad .unidad-tipo .sonido{
+    position: absolute;
+    top: -3px;
+    right: 20px;
+}
+
+.unidad .unidad-tipo.opciones .sonido{
+    top: -10px;
+}
+
+.unidad .unidad-tipo .sonido a{
+    color: #00965e;
+}
+
+.unidad .unidad-descripcion,
+.unidad .unidad-descripcion a{
+    color: #2f3e47;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 12pt;
+}
+
+.unidad .unidad-descripcion .fa{
+    margin-right: 7px;
+}
+
+.unidad .unidad-descripcion .unidad-instruccion,
+.unidad .unidad-descripcion .unidad-instruccion a{
+    font-family: 'Raleway-Bold', sans-serif;
+    color: rgba(0,0,0,0.6);
+    font-size: 9pt;
+    text-transform: uppercase;
+}
+
+.unidad .unidad-descripcion .unidad-imagen{
+     border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border: solid 1px #dcdcdc;
+}
+
+.unidad .opciones{
+    margin-bottom: 20px;
+}
+
+.unidad .opciones .opcion-pareja{
+    margin-top: 17px;
+    background-color: #ffffff;
+    height: 100px;
+    border: 1px solid #dcdcdc;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    color: #2f3e47;
+    text-align: center;
+    font-size: 10pt;
+}
+
+.unidad .opciones .selected{
+    background-color: #09df78;
+    color: #ffffff;
+}
+
+.unidad .opciones .wrong{
+    background-color: #ff1244;
+    color: #ffffff;
+}
+
+.unidad .opciones .pareja-match{
+    -webkit-filter: grayscale(100%) opacity(40%); /* Chrome, Safari, Opera */
+    filter: grayscale(100%) opacity(40%);
+}
+
+
+.unidad .opciones .opcion-pareja p{
+    position: relative;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.unidad .opciones .opcion-pareja .sonido{
+    position: absolute;
+    top: 22px;
+    right: 20px;
+}
+.unidad .opciones .opcion-pareja .sonido a{
+    color: #00965e;
+}
+
+.continuar{
+    height: 58px;
+    background-color: #00c97e;
+    font-family: 'Raleway-Bold', sans-serif;
+    font-size: 11pt;
+    color:#ffffff;
+    padding-top: 17px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    border: none;
+}
+
+.calificar{
+    background-color: #d0d0d0;
+}
+
+.sonido-unidad{
+    height: 58px;
+    width: 58px;
+    border-radius: 29px;
+    -moz-border-radius: 29px;
+    -webkit-border-radius: 29px;
+    background-color: #d200ff;
+    position: fixed;
+    bottom: 70px;
+    right: 15px;
+    text-align: center;
+    z-index: 2000;
+    padding-top: 14px;
+    -moz-box-shadow: 0 0 10px #d200ff;
+    -webkit-box-shadow: 0 0 10px #d200ff;
+    box-shadow: 0px 0px 10px #d200ff;
+}
+
+.sonido-unidad a{
+    color: #ffffff;
+}
