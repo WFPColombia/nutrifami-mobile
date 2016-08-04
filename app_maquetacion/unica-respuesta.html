@@ -101,22 +101,29 @@
 
         <div ui-content-for="modals">
             <div class="modal" ui-if="modal1" ui-state='modal1'>
-                <div class="modal-backdrop in"></div>
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <span class="center-block fa fa-check" aria-hidden="true"></span>
-                        </div>
-                        <div class="modal-body">
-                            <div>
-                                <span class="mensaje">Muy bien! Respuesta correcta</span>
-                                <span class="mensaje">Intenta de nuevo! respuesta incorrecta</span>
-                                <p class="feedback"> {{ data.feedback}} </p>
+                <div class="calificacion">
+                    <div class="modal-backdrop in"></div>
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <!--<span class="center-block fa fa-check fa-3x" aria-hidden="true"></span>-->
+                                <span class="center-block fa fa-times fa-3x sticker wrong" aria-hidden="true"></span>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <div class="activo"> 
-                                <a href class="btn btn-default center-block" role="button" ng-click="clickBoton()">{{ data.estado == 'acierto' ? 'Continuar':'Intentar de nuevo'}}</a>
+                            <div class="modal-body">
+                                <p class="mensaje">Intenta de nuevo! respuesta incorrecta <a href="#"><span  class="fa fa-volume-up" aria-hidden="true"></span></a></p>
+                                <!-- 
+                                <div class="feedback">
+                                      <p> La alimentación nos ayuda a mantenernos saludables. </p>
+                                      <div class="sonido">
+                                          <a href="#"><span  class="fa fa-volume-up" aria-hidden="true"></span></a>
+                                      </div>
+                                  </div>
+                                -->
+                            </div>
+                            <div class="modal-footer">
+                                <div class="activo"> 
+                                    <a href class="btn btn-default center-block" role="button" ng-click="clickBoton()">{{ data.estado == 'acierto' ? 'Continuar':'Intentar de nuevo'}}</a>
+                                </div>
                             </div>
                         </div>
                     </div>
