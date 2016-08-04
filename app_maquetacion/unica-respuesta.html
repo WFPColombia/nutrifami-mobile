@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </header>
-            <div class="navbar navbar-app navbar-absolute-bottom continuar">Continuar</div>
+            <div class="navbar navbar-app navbar-absolute-bottom calificar habilitado" ui-turn-on="modal1">Calificar</div>
             <div class="sonido-unidad">
                 <a href="#"><span class="fa fa-volume-up fa-2x" aria-hidden="true"></span></a>
             </div>
@@ -63,14 +63,32 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="opcion">
-                                    <p>Proteínas</p>
+                                    <p>mantener una adecuada salud y en los niños y niñas para crecer, desarrollarse  y mantenerse saludable.</p>
                                     <div class="sonido">
                                         <a href="#"><span  class="fa fa-volume-up" aria-hidden="true"></span></a>
                                     </div>
                                 </div>
                             </div>
-                            
-                            
+
+                            <div class="col-xs-12">
+                                <div class="opcion">
+                                    <p>estar enfermos.</p>
+                                    <div class="sonido">
+                                        <a href="#"><span  class="fa fa-volume-up" aria-hidden="true"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12">
+                                <div class="opcion">
+                                    <p>estar llenos.</p>
+                                    <div class="sonido">
+                                        <a href="#" ><span  class="fa fa-volume-up" aria-hidden="true"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
@@ -80,6 +98,31 @@
 
         <!-- Modals and Overlays -->
         <div ui-yield-to="modals"></div>
+
+        <div ui-content-for="modals">
+            <div class="modal" ui-if="modal1" ui-state='modal1'>
+                <div class="modal-backdrop in"></div>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <span class="center-block fa fa-check" aria-hidden="true"></span>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <span class="mensaje">Muy bien! Respuesta correcta</span>
+                                <span class="mensaje">Intenta de nuevo! respuesta incorrecta</span>
+                                <p class="feedback"> {{ data.feedback}} </p>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="activo"> 
+                                <a href class="btn btn-default center-block" role="button" ng-click="clickBoton()">{{ data.estado == 'acierto' ? 'Continuar':'Intentar de nuevo'}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <script>
 

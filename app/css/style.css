@@ -361,7 +361,7 @@ a.list-group-item {
 }
 
 .unidad .unidad-descripcion .unidad-imagen{
-     border-radius: 8px;
+    border-radius: 8px;
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
     border: solid 1px #dcdcdc;
@@ -371,6 +371,7 @@ a.list-group-item {
     margin-bottom: 20px;
 }
 
+.unidad .opciones .opcion,
 .unidad .opciones .opcion-pareja{
     margin-top: 17px;
     background-color: #ffffff;
@@ -399,7 +400,7 @@ a.list-group-item {
     filter: grayscale(100%) opacity(40%);
 }
 
-
+.unidad .opciones .opcion p,
 .unidad .opciones .opcion-pareja p{
     position: relative;
     top: 50%;
@@ -408,18 +409,21 @@ a.list-group-item {
     transform: translateY(-50%);
 }
 
+.unidad .opciones .opcion .sonido,
 .unidad .opciones .opcion-pareja .sonido{
     position: absolute;
     top: 22px;
     right: 20px;
 }
+
+.unidad .opciones .opcion .sonido a,
 .unidad .opciones .opcion-pareja .sonido a{
     color: #00965e;
 }
 
-.continuar{
+.calificar{
     height: 58px;
-    background-color: #00c97e;
+    background-color: #d0d0d0;
     font-family: 'Raleway-Bold', sans-serif;
     font-size: 11pt;
     color:#ffffff;
@@ -430,8 +434,8 @@ a.list-group-item {
     border: none;
 }
 
-.calificar{
-    background-color: #d0d0d0;
+.habilitado{
+    background-color: #00c97e;
 }
 
 .sonido-unidad{
