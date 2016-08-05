@@ -23,8 +23,18 @@ nutrifamiMobile.config(['$locationProvider', '$routeProvider', function ($locati
         });
         
         $routeProvider.when('/', {
-            controller: 'HomeController',
-            templateUrl: 'views/home.html'
+            controller: 'CapacitacionController',
+            templateUrl: 'views/capacitacion.html'
+        });
+        
+        $routeProvider.when('/m/:modulo', {
+            controller: 'ModuloController',
+            templateUrl: 'views/modulo.html'
+        });
+        
+        $routeProvider.when('/m/:modulo/:leccion/:unidad', {
+            controller: 'UnidadController',
+            templateUrl: 'views/unidad.html'
         });
 
         $routeProvider.otherwise({redirectTo: '/'});
@@ -36,6 +46,7 @@ nutrifamiMobile.run(['$rootScope', '$location', '$cookieStore', 'bsLoadingOverla
         $rootScope.globals = $cookieStore.get('globals') || {};
 
         nutrifami.getSessionId();
+        nutrifami.training.initClient();
 
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in

@@ -1,0 +1,150 @@
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <link href="../app/lib/mobile-angular-ui/dist/css/mobile-angular-ui-base.css" rel="stylesheet" type="text/css"/>
+        <link href="../app/css/style.css" rel="stylesheet" type="text/css"/>
+
+
+        <script src="../app/lib/angular/angular.js" ></script>
+        <script src="../app/lib/angular-route/angular-route.js"></script>
+        <script src="../app/lib/mobile-angular-ui/dist/js/mobile-angular-ui.js" type="text/javascript"></script>
+    </head>
+    <body ng-app="myApp">
+
+
+        <div class="app">
+            <header>
+                <div class="navbar navbar-app navbar-absolute-top leccion-avance">
+                    <div class="col-xs-2 btn-group">
+                        <div class="btn btn-navbar" >
+                            <a href="#"><i class="fa fa-times fa-2x" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-xs-9 ">
+                        <span>Paso 1 de 5</span>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 20%;"></div>
+                            <div class="complete"></div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div class="navbar navbar-app navbar-absolute-bottom calificar habilitado" ui-turn-on="modal1">Calificar</div>
+            <div class="sonido-unidad">
+                <a href="#"><span class="fa fa-volume-up fa-2x" aria-hidden="true"></span></a>
+            </div>
+
+            <!-- App body -->
+            <div class='app-body unidad scrollable'>
+                <div class="container scrollable-content">
+                    <div class="unidad-tipo opciones">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <img src="../app/img/icons/ico-unica-respuesta.png" alt="Formar Parejas"/>
+                                <span>Opción múltiple con única respuesta</span>
+                                <div class="sonido">
+                                    <a href="#"><span  class="fa fa-volume-up" aria-hidden="true"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="unidad-descripcion">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <p class="unidad-instruccion"><a href="#"><span  class="fa fa-volume-up" aria-hidden="true"></span></a>Lea y seleccione la respuesta correcta</p>
+                                <p class="unidad-texto"><a href="#"><span  class="fa fa-volume-up" aria-hidden="true"></span></a>La alimentación sirve para</p>
+                                <img src="../app/img/modulos/01-alimentacion-saludable/img-descrip.png"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="opciones">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="opcion">
+                                    <p>mantener una adecuada salud y en los niños y niñas para crecer, desarrollarse  y mantenerse saludable.</p>
+                                    <div class="sonido">
+                                        <a href="#"><span  class="fa fa-volume-up" aria-hidden="true"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12">
+                                <div class="opcion">
+                                    <p>estar enfermos.</p>
+                                    <div class="sonido">
+                                        <a href="#"><span  class="fa fa-volume-up" aria-hidden="true"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12">
+                                <div class="opcion">
+                                    <p>estar llenos.</p>
+                                    <div class="sonido">
+                                        <a href="#" ><span  class="fa fa-volume-up" aria-hidden="true"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- .app-body -->
+
+        </div><!-- ~ .app -->
+
+        <!-- Modals and Overlays -->
+        <div ui-yield-to="modals"></div>
+
+        <div ui-content-for="modals">
+            <div class="modal" ui-if="modal1" ui-state='modal1'>
+                <div class="calificacion">
+                    <div class="modal-backdrop in"></div>
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <!--<span class="center-block fa fa-check fa-3x" aria-hidden="true"></span>-->
+                                <span class="center-block fa fa-times fa-3x sticker wrong" aria-hidden="true"></span>
+                            </div>
+                            <div class="modal-body">
+                                <p class="mensaje">Intenta de nuevo! respuesta incorrecta <a href="#"><span  class="fa fa-volume-up" aria-hidden="true"></span></a></p>
+                                <!-- 
+                                <div class="feedback">
+                                      <p> La alimentación nos ayuda a mantenernos saludables. </p>
+                                      <div class="sonido">
+                                          <a href="#"><span  class="fa fa-volume-up" aria-hidden="true"></span></a>
+                                      </div>
+                                  </div>
+                                -->
+                            </div>
+                            <div class="modal-footer">
+                                <div class="activo"> 
+                                    <a href class="btn btn-default center-block" role="button" ng-click="clickBoton()">{{ data.estado == 'acierto' ? 'Continuar':'Intentar de nuevo'}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+
+            angular.module('myApp', ["mobile-angular-ui"]);
+
+            angular.module('myApp', [
+                "ngRoute",
+                "mobile-angular-ui",
+            ]).config(function ($routeProvider) {
+                $routeProvider.when('/', {
+                    // ...
+                });
+                // ...
+            });
+
+        </script>
+    </body>
+</html>

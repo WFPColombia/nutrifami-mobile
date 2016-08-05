@@ -1,0 +1,33 @@
+<header>
+    <div class="navbar navbar-app navbar-absolute-top">
+        <div class="navbar-brand navbar-brand-center">
+            <span><img src="img/logo-nutrifami-header.png" alt="Nutrifami"/></span>
+        </div>
+
+
+        <div class="btn-group pull-left">
+            <div class="btn btn-navbar" >
+                <a href ui-toggle='uiSidebarLeft'><i class="fa fa-bars fa-2x"></i></a>
+            </div>
+        </div>
+
+        <div class="btn-group pull-right">
+            <div class="btn btn-navbar" >
+                <a href="#">
+                    <i class="fa fa-bell-o fa-2x" aria-hidden="true"></i>
+                </a>
+            </div>
+            <div class="btn btn-navbar" >
+                <a ui-turn-on='myDropdown'>
+                    <i class="fa fa-ellipsis-v fa-2x"></i>
+                </a>
+            </div>
+            <ul class="dropdown-menu" ui-outer-click="Ui.turnOff('myDropdown')" ui-outer-click-if="Ui.active('myDropdown')" role="menu" ui-show="myDropdown" ui-state="myDropdown" ui-turn-off="myDropdown">
+                <li><a>Ver perfil</a></li>
+                <li><a>Configuración</a></li>
+                <li><a>Cerrar Sesión</a></li>
+            </ul>
+        </div>
+
+    </div>
+</header>
