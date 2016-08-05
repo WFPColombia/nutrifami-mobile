@@ -48,7 +48,12 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope','$locatio
                 /* Se mezclan los arreglos */
                 shuffle(tempImagenes);
                 shuffle(tempOpciones);
-                $scope.unidad.opciones = tempImagenes.concat(tempOpciones); /* Se concatenan los arreglos, con las imagenes primero y las opciones despues */
+                $scope.unidad.opciones=[];
+                /* Se concatenan los arreglos elemento por elemento, con las imagenes primero y las opciones despues */
+                for (var i in tempImagenes){
+                    $scope.unidad.opciones.push(tempImagenes[i]);
+                    $scope.unidad.opciones.push(tempOpciones[i]);
+                }
             } else {
                 for (var i in $scope.unidad.opciones) {
                     tempOpciones.push($scope.unidad.opciones[i]);
@@ -59,10 +64,11 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope','$locatio
 
             /*Verifica si la unidad tienen audio y lo carga*/
             if (typeof $scope.unidad.audio !== 'undefined') {
-                $scope.unidad.audio.audio = ngAudio.load($scope.unidad.audio.url);
+                $scope.unidad.audio.audio = ngAudio.load("assets/"+$scope.unidad.audio.nombre);
             }
         } catch (err) {
-            /* Se debe verificar que se este en la unidad actual y que que se acceda atraves del navegador*/
+            /* Se debe verificar que se este en la unidad actual y que no se acceda atraves del navegador*/
+            console.log(err);
             $location.path('/');
         }
 
@@ -80,7 +86,7 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope','$locatio
 
             /*Verifica si la opcion tienen audio y lo carga*/
             if (typeof $scope.unidad.opciones[i].audio !== 'undefined') {
-                $scope.unidad.opciones[i].audio.audio = ngAudio.load($scope.unidad.opciones[i].audio.url);
+                $scope.unidad.opciones[i].audio.audio = ngAudio.load("assets/"+$scope.unidad.opciones[i].audio.nombre);
             }
             console.log("Respuestas correctas: " + respuestasCorrectas);
         }
@@ -145,12 +151,10 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope','$locatio
 
                         if (pareja1Orden === pareja2Orden) {
                             /*Estilos para la pareja actual*/
-                            $scope.unidad.opciones[pareja2Pos].pareja = 'pareja-' + pareja2Orden;
                             $scope.unidad.opciones[pareja2Pos].selected = false;
                             $scope.unidad.opciones[pareja2Pos].match = true;
 
                             /*Estilos para pareja anterior*/
-                            $scope.unidad.opciones[pareja1Pos].pareja = 'pareja-' + pareja2Orden;
                             $scope.unidad.opciones[pareja1Pos].selected = false;
                             $scope.unidad.opciones[pareja1Pos].match = true;
 
@@ -279,62 +283,3 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope','$locatio
             }
         }
     }]);
-
-
-/*
- 
- 
- nutrifamiMobile.directive('parejasUnidadInfo', function () {
- return {
- restrict: 'E',
- scope: {
- info: '=',
- index: '@'
- },
- templateUrl: 'views/directives/parejasUnidadInfo.html',
- link: function ($scope, $element, $attrs) {
- $scope.click = function () {
- $scope.$parent.seleccionarPareja($scope.index);
- };
- }
- };
- });
- 
- 
- 
- nutrifamiMobile.directive('reiniciarUnidad', function () {
- return {
- restrict: 'E',
- scope: {
- feedback: '='
- },
- templateUrl: 'views/directives/reiniciarUnidad.html',
- link: function ($scope, $element, $attrs) {
- $scope.reiniciar = function () {
- $scope.$parent.reiniciarUnidad();
- };
- }
- };
- });
- 
- nutrifamiMobile.directive('siguienteUnidad', function () {
- return {
- restrict: 'E',
- scope: {},
- templateUrl: 'views/directives/siguienteUnidad.html',
- link: function ($scope, $element, $attrs) {
- $scope.siguienteUnidad = function () {
- $scope.$parent.irASiguienteUnidad();
- };
- }
- };
- });
- 
- 
- nutrifamiMobile.controller('ModalInstanceController', function ($scope, $uibModalInstance, data) {
- $scope.data = data;
- $scope.clickBoton = function () {
- $uibModalInstance.close($scope.data.estado);
- };
- });
- */

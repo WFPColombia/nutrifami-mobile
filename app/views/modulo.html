@@ -6,13 +6,13 @@
     <!-- App body -->
     <div class='app-body'>
         <div class="container">
-            <div class="modulos lecciones">
-                <div class="panel">
+            <div class="modulos unidad">
+                <div class="opciones">
                     <div class="row"> 
                         <div class="panel-header">
                             <div class="col-md-6">
                                 <div class="modulo-descripcion">
-                                    <h1>{{ modulo.titulo}}</h1>
+                                    <h3>{{ modulo.titulo}}</h3>
                                     <p>{{ modulo.descripcion}}</p>
                                 </div>
                             </div>
@@ -22,18 +22,16 @@
                                         <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{ porcentajeAvance()}}%;">
                                         </div>
                                     </div>
-                                    <h3>{{ avanceUsuario.leccionesTerminadas}}/{{modulo.totalLecciones}} Lecciones completadas</h3>
+                                    <p>{{ avanceUsuario.leccionesTerminadas}}/{{modulo.totalLecciones}} Lecciones completadas</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="panel-body">
                         <div class="row">
                             <ng-repeat ng-repeat="leccion in lecciones">
                                 <leccion-info leccion="leccion" modulo="modulo" index="{{$index + 1}}"></leccion-info>
                             </ng-repeat>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
