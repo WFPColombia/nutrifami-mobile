@@ -1,5 +1,5 @@
 /*global angular*/
-nutrifamiMobile.controller('UnidadController', ['$scope', '$location', '$routeParams', '$anchorScroll', 'ngAudio', 'bsLoadingOverlayService', '$timeout', '$log', function ($scope, $location, $routeParams, $anchorScroll, ngAudio, bsLoadingOverlayService, $timeout, $log) {
+nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope','$location', '$routeParams', '$anchorScroll', 'ngAudio', 'bsLoadingOverlayService', '$timeout', '$log', function ($scope, $rootScope, $location, $routeParams, $anchorScroll, ngAudio, bsLoadingOverlayService, $timeout, $log) {
         'use strict';
         $anchorScroll();
 
@@ -206,8 +206,10 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$location', '$routePa
             } else {
                 $scope.estadoUnidad = 'fallo';
             }
+            
+            $rootScope.Ui.turnOn('feedback');
 
-            $scope.feedback();
+            //$scope.feedback();
         };
 
         $scope.feedback = function () {
