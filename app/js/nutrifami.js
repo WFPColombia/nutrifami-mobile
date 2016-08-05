@@ -618,7 +618,7 @@ var nutrifami = {
         getCapacitacion: function(cid){
             cid = cid || 3;
             if (typeof nutrifami.training.cap_capacitaciones[cid] !== 'undefined') {
-                return nutrifami.training.cap_capacitaciones[cid]
+                return nutrifami.training.cap_capacitaciones[cid];
             }else{
                 return false;
             }   

@@ -23,6 +23,10 @@ body{
     background-color: #f5f5f5;
 }
 
+ng-view{
+    height: 100%;
+}
+
 .login{
     background-color: #00c97e;
     background-image: url('../img/login-bg.png');
@@ -48,7 +52,7 @@ body{
     border-radius: 29px;
     font-size: 19pt;
     text-align: center;
-    padding-top: 18px;
+    padding-top: 11px;
     font-weight: normal;
 }
 
@@ -161,6 +165,10 @@ body{
     background: #71c881;
 }
 
+.sidebar-left .app-name{
+    line-height: 0px;
+}
+
 .scrollable-header {
     padding-top: 16px;
     padding-left: 16px;
@@ -224,6 +232,7 @@ a.list-group-item {
 
 .modulo img{
     width: 100%;
+    border-radius: 10px 10px 0 0;
 }
 
 .modulo h3,
@@ -425,7 +434,7 @@ a.list-group-item {
     color: #ffffff;
     height: 86px;
     width: 86px;
-    background-color: 09df78;
+    background-color: #09df78;
     border-radius: 43px;
     text-align: center;
     padding-top: 22px;

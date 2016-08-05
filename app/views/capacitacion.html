@@ -1,0 +1,18 @@
+<ng-include src="'views/template/sidebarleft.tpl.html'"></ng-include>
+<div class="app">
+    <ng-include src="'views/template/header.tpl.html'"></ng-include>
+    <!--<div class="navbar navbar-app navbar-absolute-bottom"><h4>FOOTER</h4></div>-->
+
+    <!-- App body -->
+    <div class='app-body'>
+        <div class="container">
+            <div class="modulos">
+                <div class="row">
+                    <ng-repeat ng-repeat="modulo in modulos">
+                        <modulo-info info="modulo" avance="avanceUsuario"></modulo-info>
+                    </ng-repeat>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- ~ .app -->
