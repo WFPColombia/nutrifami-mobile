@@ -6,7 +6,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "",
       "projectGuid": "84af6877-dfbc-4fcf-a7e8-36a02b49b6d9",
-      "lastModifiedDate": 1470343413409,
+      "lastModifiedDate": 1470692702436,
       "creationDate": 1470173667072
     },
     "sourceDirectory": "app",
@@ -52,7 +52,8 @@
         "permissions": {},
         "description": "Cordova Splashscreen Plugin",
         "data": {},
-        "dependedBy": []
+        "dependedBy": [],
+        "cordovaVersion": ">=3.0.0"
       },
       {
         "id": "cordova-plugin-whitelist",
@@ -71,7 +72,8 @@
         "description": "Cordova Network Whitelist Plugin",
         "data": {},
         "dependedBy": [],
-        "custom": "true"
+        "custom": "true",
+        "cordovaVersion": ">=3.0.0"
       },
       {
         "id": "cordova-plugin-compat",
@@ -133,6 +135,25 @@
           ]
         },
         "description": "Cordova File Transfer Plugin",
+        "data": {},
+        "dependedBy": []
+      },
+      {
+        "id": "cordova-plugin-fullscreen",
+        "name": "cordova-plugin-fullscreen",
+        "version": "1.1.0",
+        "originType": "cordova.io",
+        "origin": "cordova-plugin-fullscreen",
+        "gitref": "",
+        "paramvals": {},
+        "sourceLocation": "plugins/cordova-plugin-fullscreen",
+        "selectedState": "Included",
+        "checksum": "2a5ac68c",
+        "dependsOn": [],
+        "topLevel": true,
+        "cordovaVersion": ">=3.0.0",
+        "permissions": {},
+        "description": "Plugin for Cordova (or PhoneGap) 3.0+ to enable true full screen on Android devices using lean and immersive modes",
         "data": {},
         "dependedBy": []
       }
