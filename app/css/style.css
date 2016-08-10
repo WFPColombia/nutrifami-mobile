@@ -282,29 +282,43 @@ a.list-group-item {
 
 /* UNIDADES */
 
-.app header .leccion-avance {
+
+.app .unidad {
+    padding-top: 0px;
+}
+
+
+.app .unidad .leccion-avance {
     font-family: 'Muli', sans-serif;
     background-color: #75a8fe;
     font-size: 12pt;
     color: white;
+    width: 100%;
+    height: 64px;
+    padding-top: 17px;
 }
 
-.app header .leccion-avance .progress {
+.app .unidad .leccion-avance a {
+   color: #ffffff;
+}
+
+.app .unidad .leccion-avance .progress {
     height: 9px;
     border-radius: 4px;
     width: auto;
     background-color: #ffffff;
     background-image: none;
+    margin-bottom: 0px;
 }
 
-.app header .leccion-avance .progress .progress-bar {
+.app .unidad .leccion-avance .progress .progress-bar {
     background-color: #fdf418;
     background-image: none;
     -webkit-box-shadow: none;
     box-shadow: none;
 }
 
-.app header .leccion-avance .complete {
+.app .unidad .leccion-avance .complete {
     background-color: #e5e5e5;
     width: 22px;
     height: 22px;

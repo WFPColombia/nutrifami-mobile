@@ -1,6 +1,6 @@
 /*global angular*/
 
-dependencies = ['Authentication', 'ngRoute', 'ngCookies', 'ngAudio', 'bsLoadingOverlay', 'mobile-angular-ui', 'ngAnimate','ngCordova'];
+dependencies = ['Authentication', 'ngRoute', 'ngCookies', 'ngAudio', 'bsLoadingOverlay', 'mobile-angular-ui', 'ngAnimate', 'ngCordova'];
 
 var nutrifamiLogin = angular.module('Authentication', []);
 var nutrifamiMobile = angular.module('NutrifamiMobile', dependencies);
@@ -15,26 +15,31 @@ nutrifamiMobile.config(['$locationProvider', '$routeProvider', function ($locati
             templateUrl: 'views/login.html',
             hideMenus: true
         });
-        
+
         $routeProvider.when('/file', {
             controller: 'FileController',
             templateUrl: 'views/file.html',
             hideMenus: true
         });
-        
+
         $routeProvider.when('/', {
             controller: 'CapacitacionController',
             templateUrl: 'views/capacitacion.html'
         });
-        
+
         $routeProvider.when('/m/:modulo', {
             controller: 'ModuloController',
             templateUrl: 'views/modulo.html'
         });
-        
+
         $routeProvider.when('/m/:modulo/:leccion/:unidad', {
             controller: 'UnidadController',
             templateUrl: 'views/unidad.html'
+        });
+
+        $routeProvider.when('/m/:modulo/:leccion/:unidad/leccion-terminada/', {
+            controller: 'LeccionTerminadaController',
+            templateUrl: 'views/leccionTerminada.html'
         });
 
         $routeProvider.otherwise({redirectTo: '/'});
