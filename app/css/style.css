@@ -27,6 +27,45 @@ ng-view {
     height: 100%;
 }
 
+/* RIPPLE EFFECT */
+
+button {
+    position: relative;
+    outline: none;
+    overflow: hidden;
+}
+
+.ripple {
+    position: absolute;
+    background: rgba(0,0,0,.25);
+    border-radius: 100%;
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+    pointer-events: none;
+}
+
+.ripple.show {
+    -webkit-animation: ripple .5s ease-out;
+    animation: ripple .5s ease-out;
+}
+@-webkit-keyframes 
+ripple { to {
+             -webkit-transform: scale(1.5);
+             transform: scale(1.5);
+             opacity: 0;
+         }
+}
+@keyframes 
+ripple { to {
+             -webkit-transform: scale(1.5);
+             transform: scale(1.5);
+             opacity: 0;
+         }
+}
+
+/* END RIPPLE EFFECT*/
+
 .login {
     background-color: #00c97e;
     background-image: url('../img/login-bg.png');
@@ -36,7 +75,7 @@ ng-view {
 }
 
 .login .logo {
-    margin-top: 128px;
+    margin-top: 6em;
     text-align: center;
 }
 
@@ -45,22 +84,23 @@ ng-view {
     width: 58px;
     height: 58px;
     position: absolute;
-    top: 40px;
+    top: 1em;
     right: 14px;
     border-radius: 29px;
-    font-size: 19pt;
     text-align: center;
-    padding-top: 11px;
     font-weight: normal;
-}
+    font-size: 19pt;
+    color: #00c97e;
+    border: none;
+}   
+
 
 .login .login-sonido a {
-    color: #00c97e;
     text-decoration: none;
 }
 
 .login form {
-    margin-top: 40px;
+    margin-top: 6em;
 }
 
 .login form .form-group {
@@ -98,7 +138,8 @@ ng-view {
 }
 
 .login form .form-group textarea:focus,
-.login form .form-group input:focus {
+.login form .form-group input:focus,
+.login form button:focus{
     outline: none;
 }
 
@@ -145,7 +186,10 @@ ng-view {
 
 .login .logo-wfp {
     text-align: center;
-    margin-top: 110px;
+    width: 100%;
+    position: absolute;
+    bottom: 15px;
+    left: 0px;
 }
 
 
@@ -307,7 +351,7 @@ a.list-group-item {
 }
 
 .app .unidad .leccion-avance a {
-   color: #ffffff;
+    color: #ffffff;
 }
 
 .app .unidad .leccion-avance .progress {
@@ -667,10 +711,15 @@ a.list-group-item {
 /* PERFIL Y EDITAR PERFIL */
 
 
-.perfil-panel{
-    margin-top: 35px;
+.perfil-panel {
+    margin-top: 45px;
     background-color: #ffffff;
     border-radius: 10px;
+}
+
+.perfil-header img {
+    margin-top: -35px;
+    margin-bottom: 10px;
 }
 
 .perfil-panel .boton-flotante {
