@@ -35,6 +35,7 @@
     "angular-animate": "^1.5.7",
     "angular-loading-overlay": "^1.1.1",
     "jquery": "^3.1.0",
-    "js-md5": "md5#^0.4.1"
+    "js-md5": "md5#^0.4.1",
+    "angular-ui-swiper": "^2.3.5"
   }
 }
