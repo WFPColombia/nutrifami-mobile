@@ -4,8 +4,8 @@
     <!--<div class="navbar navbar-app navbar-absolute-bottom"><h4>FOOTER</h4></div>-->
 
     <!-- App body -->
-    <div class='app-body'>
-        <div class="container">
+    <div class='app-body scrollable'>
+        <div class="container scrollable-content">
             <div class="modulos unidad">
                 <div class="opciones">
                     <div class="row"> 
@@ -27,11 +27,11 @@
                             </div>
                         </div>
                     </div>
-                        <div class="row">
-                            <ng-repeat ng-repeat="leccion in lecciones">
-                                <leccion-info leccion="leccion" modulo="modulo" index="{{$index + 1}}"></leccion-info>
-                            </ng-repeat>
-                        </div>
+                    <div class="row">
+                        <ng-repeat ng-repeat="leccion in lecciones">
+                            <leccion-info leccion="leccion" modulo="modulo" index="{{$index + 1}}"></leccion-info>
+                        </ng-repeat>
+                    </div>
                 </div>
             </div>
         </div>

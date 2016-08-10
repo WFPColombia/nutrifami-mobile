@@ -1,7 +1,11 @@
 nutrifamiLogin.controller('LoginController', ['$scope', '$location', 'AuthenticationService',
     function ($scope, $location, AuthenticationService) {
         'use strict';
-        // reset login status
+
+        /*document.addEventListener('deviceready', function () {
+         // reset login status
+         
+         AndroidFullScreen.immersiveMode();*/
         AuthenticationService.ClearCredentials();
         localStorage.clear();
 
@@ -17,4 +21,5 @@ nutrifamiLogin.controller('LoginController', ['$scope', '$location', 'Authentica
                 }
             });
         };
+        /*}, false);*/
     }]);
