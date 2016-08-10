@@ -2,10 +2,10 @@ nutrifamiLogin.controller('LoginController', ['$scope', '$location', 'Authentica
     function ($scope, $location, AuthenticationService, ngAudio) {
         'use strict';
 
-        /*document.addEventListener('deviceready', function () {
+        document.addEventListener('deviceready', function () {
             // reset login status
 
-            AndroidFullScreen.immersiveMode();*/
+            AndroidFullScreen.immersiveMode();
 
             /*Cargamos el audio de ayuda*/
             $scope.audio = ngAudio.load("assets/audio/login.mp3");
@@ -25,5 +25,5 @@ nutrifamiLogin.controller('LoginController', ['$scope', '$location', 'Authentica
                     }
                 });
             };
-        /*}, false);*/
+        }, false);
     }]);
