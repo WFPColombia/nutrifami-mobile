@@ -225,7 +225,8 @@ ripple { to {
 }
 
 list-group-item,
-a.list-group-item {
+a.list-group-item,
+button.list-group-item{
     background-color: #71c881;
     border: none;
     height: 57px;
@@ -236,9 +237,11 @@ a.list-group-item {
 }
 
 .list-group-item.active,
-.list-group-item.active:focus {
+.list-group-item.active:focus,
+button.list-group-item:focus{
     background-color: #2f6551;
     border-color: #2f6551;
+    color: #ffffff;
 }
 
 .list-group-item .icono {
@@ -256,8 +259,10 @@ a.list-group-item {
     margin-top: -18px;
 }
 
-.app header .navbar-absolute-top .btn-group .btn a {
+.app header .navbar-absolute-top .btn-group .btn {
     color: #ffffff;
+    padding: 0;
+    padding-right: 5px;
 }
 
 .app .app-body {
@@ -724,8 +729,9 @@ a.list-group-item {
 
 .perfil-panel .boton-flotante {
     position: absolute;
-    right: 30px;
-    top: 90px;
+    right: 14px;
+    top: 68px;
+    z-index: 1000;
 }
 
 .perfil-panel .boton-flotante a,

@@ -1,47 +1,51 @@
 <ng-include src="'views/template/sidebarleft.tpl.html'"></ng-include>
 <div class="app">
-    <ng-include src="'views/template/leccionAvance.tpl.html'"></ng-include>
+
 
     <!--<div class="navbar navbar-app navbar-absolute-bottom"><h4>FOOTER</h4></div>-->
 
     <!-- App body -->
     <div class='app-body unidad scrollable'>
-        <div class="container scrollable-content">
-            <div class="unidad-tipo opciones">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <img ng-src="img/icons/ico-unica-respuesta.png" ng-show="{{ unidad.tipo.id == 4}}"/>
-                        <img ng-src="img/icons/ico-formar-parejas.png" ng-show="{{ unidad.tipo.id == 2}}"/>
-                        <img ng-src="img/icons/ico-multiple-respuesta.png" ng-show="{{ unidad.tipo.id == 3}}"/>
-                        <span ng-show="{{ unidad.tipo.id == 4}}">Opción múltiple con única respuesta</span>
-                        <span ng-show="{{ unidad.tipo.id == 2}}">Formar Parejas</span>
-                        <span ng-show="{{ unidad.tipo.id == 3}}">Opción múltiple con múltiple respuesta</span>
+        <div class="scrollable-content">
+            <ng-include src="'views/template/leccionAvance.tpl.html'"></ng-include>
+            <div class="container">
+                <div class="unidad-tipo">
 
-                        <div class="sonido" ng-show="unidad.audio.url != ''">
-                            <a href><span ng-click='unidad.audio.audio.paused ? unidad.audio.audio.play() : unidad.audio.audio.pause()' class="fa fa-volume-up" aria-hidden="true"></span></a>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <img ng-src="img/icons/ico-unica-respuesta.png" ng-show="{{ unidad.tipo.id == 4}}"/>
+                            <img ng-src="img/icons/ico-formar-parejas.png" ng-show="{{ unidad.tipo.id == 2}}"/>
+                            <img ng-src="img/icons/ico-multiple-respuesta.png" ng-show="{{ unidad.tipo.id == 3}}"/>
+                            <span ng-show="{{ unidad.tipo.id == 4}}">Opción múltiple con única respuesta</span>
+                            <span ng-show="{{ unidad.tipo.id == 2}}">Formar Parejas</span>
+                            <span ng-show="{{ unidad.tipo.id == 3}}">Opción múltiple con múltiple respuesta</span>
+
+                            <div class="sonido" ng-show="unidad.audio.url != ''">
+                                <a href><span ng-click='unidad.audio.audio.paused ? unidad.audio.audio.play() : unidad.audio.audio.pause()' class="fa fa-volume-up" aria-hidden="true"></span></a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="unidad-descripcion">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <p class="unidad-instruccion"><!--<a href><span  class="fa fa-volume-up" aria-hidden="true"></span></a>-->{{ unidad.instruccion}}</p>
-                        <p class="unidad-texto"><!--<a href><span  class="fa fa-volume-up" aria-hidden="true"></span></a>-->{{ unidad.titulo}}</p>
-                        <img ng-src="assets/{{unidad.imagen.nombre}}" ng-hide="{{unidad.imagen === undefined}}"/>
+                <div class="unidad-descripcion">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p class="unidad-instruccion"><!--<a href><span  class="fa fa-volume-up" aria-hidden="true"></span></a>-->{{ unidad.instruccion}}</p>
+                            <p class="unidad-texto"><!--<a href><span  class="fa fa-volume-up" aria-hidden="true"></span></a>-->{{ unidad.titulo}}</p>
+                            <img ng-src="assets/{{unidad.imagen.nombre}}" ng-hide="{{unidad.imagen === undefined}}"/>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="opciones">
-                <div class="row" ng-hide="unidad.tipo.id == 2">
-                    <opcion-unidad-info ng-repeat="opcion in unidad.opciones" info="opcion" index="{{$index}}" colspan="unidad.colspan" ng-click="validar()"></opcion-unidad-info>
-                </div>
+                <div class="opciones">
+                    <div class="row" ng-hide="unidad.tipo.id == 2">
+                        <opcion-unidad-info ng-repeat="opcion in unidad.opciones" info="opcion" index="{{$index}}" colspan="unidad.colspan" ng-click="validar()"></opcion-unidad-info>
+                    </div>
 
-                <div class="row unidad-parejas" ng-show="unidad.tipo.id == '2'">
-                    <opcion-pareja-unidad-info ng-repeat="opcion in unidad.opciones" info="opcion" index="{{$index}}"></opcion-pareja-unidad-info>
-                </div>
+                    <div class="row unidad-parejas" ng-show="unidad.tipo.id == '2'">
+                        <opcion-pareja-unidad-info ng-repeat="opcion in unidad.opciones" info="opcion" index="{{$index}}"></opcion-pareja-unidad-info>
+                    </div>
 
-                <calificar-unidad data="botonCalificar"></calificar-unidad>
+                    <calificar-unidad data="botonCalificar"></calificar-unidad>
+                </div>
             </div>
         </div>
     </div> <!-- .app-body -->

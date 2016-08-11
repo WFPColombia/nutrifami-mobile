@@ -1,6 +1,6 @@
 var addRippleEffect = function (e) {
     var target = e.target;
-    if (target.tagName.toLowerCase() !== 'button')
+    if (target.tagName.toLowerCase() !== 'button' && target.tagName.toLowerCase() !== 'a')
         return false;
     var rect = target.getBoundingClientRect();
     var ripple = target.querySelector('.ripple');
@@ -30,3 +30,4 @@ var addRippleEffect = function (e) {
 }
 
 document.addEventListener('click', addRippleEffect, false);
+document.addEventListener('mousedown', addRippleEffect, false);

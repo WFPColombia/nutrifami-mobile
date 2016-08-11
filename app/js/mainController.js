@@ -47,10 +47,10 @@ nutrifamiMobile.config(['$locationProvider', '$routeProvider', function ($locati
             templateUrl: 'views/perfil.html'
         });
 
-        /*$routeProvider.when('/editar-perfil', {
+        $routeProvider.when('/editar-perfil', {
             controller: 'EditarPerfilController',
-            templateUrl: 'views/editar-perfil.html'
-        });*/
+            templateUrl: 'views/editarPerfil.html'
+        });
 
         $routeProvider.otherwise({redirectTo: '/'});
     }]);
