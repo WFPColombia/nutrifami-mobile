@@ -1,6 +1,6 @@
 /*global angular*/
 
-dependencies = ['Authentication', 'ngRoute', 'ngCookies', 'ngAudio', 'bsLoadingOverlay', 'mobile-angular-ui', 'ngAnimate', 'ngCordova'];
+dependencies = ['Authentication', 'ngRoute', 'ngCookies', 'ngAudio', 'bsLoadingOverlay', 'mobile-angular-ui', 'ngAnimate', 'ngCordova','ui.swiper'];
 
 var nutrifamiLogin = angular.module('Authentication', []);
 var nutrifamiMobile = angular.module('NutrifamiMobile', dependencies);
@@ -47,10 +47,10 @@ nutrifamiMobile.config(['$locationProvider', '$routeProvider', function ($locati
             templateUrl: 'views/perfil.html'
         });
 
-        /*$routeProvider.when('/editar-perfil', {
+        $routeProvider.when('/editar-perfil', {
             controller: 'EditarPerfilController',
-            templateUrl: 'views/editar-perfil.html'
-        });*/
+            templateUrl: 'views/editarPerfil.html'
+        });
 
         $routeProvider.otherwise({redirectTo: '/'});
     }]);
@@ -62,6 +62,10 @@ nutrifamiMobile.run(['$rootScope', '$location', '$cookieStore', 'bsLoadingOverla
 
         nutrifami.getSessionId();
         nutrifami.training.initClient();
+        
+        bsLoadingOverlayService.setGlobalConfig({
+		templateUrl: 'views/template/loading-overlay-tpl.html'
+	});
 
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in

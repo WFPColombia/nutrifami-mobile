@@ -7,20 +7,16 @@
 
         <div class="btn-group pull-left">
             <div class="btn btn-navbar" >
-                <a href ui-toggle='uiSidebarLeft'><i class="fa fa-bars fa-2x"></i></a>
+                <button ui-toggle='uiSidebarLeft' class="fa fa-bars fa-2x" aria-hidden="true"></button>
             </div>
         </div>
 
         <div class="btn-group pull-right">
+            <!--<div class="btn btn-navbar" >
+                <button href="#" class="fa fa-bell-o fa-2x" aria-hidden="true"></button>
+            </div>-->
             <div class="btn btn-navbar" >
-                <a href="#">
-                    <i class="fa fa-bell-o fa-2x" aria-hidden="true"></i>
-                </a>
-            </div>
-            <div class="btn btn-navbar" >
-                <a ui-turn-on='myDropdown'>
-                    <i class="fa fa-ellipsis-v fa-2x"></i>
-                </a>
+                <button ui-turn-on='myDropdown' class="fa fa-ellipsis-v fa-2x" aria-hidden="true"></button>
             </div>
             <ul class="dropdown-menu" ui-outer-click="Ui.turnOff('myDropdown')" ui-outer-click-if="Ui.active('myDropdown')" role="menu" ui-show="myDropdown" ui-state="myDropdown" ui-turn-off="myDropdown">
                 <li><a ng-href="#/perfil">Ver perfil</a></li>

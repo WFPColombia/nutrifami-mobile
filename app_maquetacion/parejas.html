@@ -10,7 +10,7 @@
         <script src="../app/lib/angular/angular.js" ></script>
         <script src="../app/lib/angular-route/angular-route.js"></script>
         <script src="../app/lib/mobile-angular-ui/dist/js/mobile-angular-ui.js" type="text/javascript"></script>
-        <script src="../app/lib/angular-sticky-navigation-directive/dist/ng-sticky.js" type="text/javascript"></script>
+        <!--<script src="../app/lib/angular-sticky-navigation-directive/dist/ng-sticky.js" type="text/javascript"></script>-->
 
         <style>
             .ng-sticky-fixed{
@@ -25,10 +25,12 @@
         </style>
     </head>
     <body ng-app="myApp">
+        <!--
         <section sticky-nav>
             <button class="btn btn-primary">Review</button>
             <button class="btn btn-danger">Delete</button>
         </section>
+        -->
         <div class="navbar navbar-app navbar-absolute-bottom calificar habilitado">Continuar</div>
         <div class="sonido-unidad">
             <a href="#"><span class="fa fa-volume-up fa-2x" aria-hidden="true"></span></a>
@@ -277,7 +279,7 @@
 
         <script>
 
-angular.module('myApp', ["ngRoute", "mobile-angular-ui", 'dm.stickyNav']).config(function ($routeProvider) {
+angular.module('myApp', ["ngRoute", "mobile-angular-ui"/*, 'dm.stickyNav'*/]).config(function ($routeProvider) {
     $routeProvider.when('/', {
         // ...
     });

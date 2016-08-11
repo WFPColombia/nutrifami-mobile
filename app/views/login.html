@@ -1,8 +1,6 @@
 <div class="login scrollable">
     <div class="container scrollable-content">
-        <div class="login-sonido" >
-            <a href="#"><span  class="fa fa-volume-up" aria-hidden="true"></span></a>
-        </div>
+        <button ng-click='audio.paused ? audio.play() : audio.pause()' class="login-sonido fa fa-volume-up" aria-hidden="true"></button>
         <div class="row logo center-block">
             <div class="col-xs-12">
                 <img src="img/logo-nutrifami.png" alt="Nutrifami"/>
