@@ -265,6 +265,11 @@ button.list-group-item:focus{
     padding-right: 5px;
 }
 
+.app header .navbar-absolute-top .btn-group .btn button {
+    background-color: rgba(0,0,0,0);
+    border: none;
+}
+
 .app .app-body {
     padding-top: 64px;
 }
@@ -492,15 +497,15 @@ button.list-group-item:focus{
     transform: translateY(-50%);
 }
 
-.unidad .opciones .opcion .sonido,
-.unidad .opciones .opcion-pareja .sonido {
+.unidad .opciones .opcion-sonido,
+.unidad .opciones .opcion-sonido {
     position: absolute;
     top: 22px;
     right: 20px;
 }
 
-.unidad .opciones .opcion .sonido a,
-.unidad .opciones .opcion-pareja .sonido a {
+.unidad .opciones .opcion-sonido a,
+.unidad .opciones .opcion-sonido a {
     color: #00965e;
 }
 
@@ -543,29 +548,19 @@ button.list-group-item:focus{
     border: 9px;
     -moz-border-radius: 9px;
     -webkit-border-radius: 9px;
-    height: 210px;
     background-color: #f5f5f5;
     font-family: 'Muli', sans-serif;
     text-align: center;
     color: #2f3e47;
+    padding: 10px;
 }
 
 .modal .calificacion .modal-body .feedback p {
-    font-size: 16pt;
-    position: relative;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
+    font-size: 14pt;
+    padding-top: 15px;
 }
 
 .modal .calificacion .modal-body .feedback .sonido {
-    position: absolute;
-    top: 88px;
-    right: 20px;
-}
-
-.modal .calificacion .modal-body .feedback .sonido a {
     color: #00965e;
 }
 
@@ -585,7 +580,7 @@ button.list-group-item:focus{
     border-radius: 26px;
     -moz-border-radius: 26px;
     -webkit-border-radius: 26px;
-    line-height: 47px;
+    line-height: 26px;
 }
 
 .modal .calificacion .intentar-nuevo {

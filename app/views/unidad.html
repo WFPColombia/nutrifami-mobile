@@ -1,11 +1,7 @@
 <ng-include src="'views/template/sidebarleft.tpl.html'"></ng-include>
 <div class="app">
-
-
-    <!--<div class="navbar navbar-app navbar-absolute-bottom"><h4>FOOTER</h4></div>-->
-
     <!-- App body -->
-    <div class='app-body unidad scrollable'>
+    <div class='app-body unidad scrollable' bs-loading-overlay>
         <div class="scrollable-content">
             <ng-include src="'views/template/leccionAvance.tpl.html'"></ng-include>
             <div class="container">
@@ -13,15 +9,10 @@
 
                     <div class="row">
                         <div class="col-xs-12">
-                            <img ng-src="img/icons/ico-unica-respuesta.png" ng-show="{{ unidad.tipo.id == 4}}"/>
-                            <img ng-src="img/icons/ico-formar-parejas.png" ng-show="{{ unidad.tipo.id == 2}}"/>
-                            <img ng-src="img/icons/ico-multiple-respuesta.png" ng-show="{{ unidad.tipo.id == 3}}"/>
-                            <span ng-show="{{ unidad.tipo.id == 4}}">Opción múltiple con única respuesta</span>
-                            <span ng-show="{{ unidad.tipo.id == 2}}">Formar Parejas</span>
-                            <span ng-show="{{ unidad.tipo.id == 3}}">Opción múltiple con múltiple respuesta</span>
-
-                            <div class="sonido" ng-show="unidad.audio.url != ''">
-                                <a href><span ng-click='unidad.audio.audio.paused ? unidad.audio.audio.play() : unidad.audio.audio.pause()' class="fa fa-volume-up" aria-hidden="true"></span></a>
+                            <img ng-src="img/icons/{{unidad.tipo.icono}}"/>
+                            <span>{{ unidad.tipo.nombre}}</span>
+                            <div class="sonido">
+                                <a href><span ng-click='unidad.tipo.audio.audio.paused ? unidad.tipo.audio.audio.play() : unidad.tipo.audio.audio.pause()' class="fa fa-volume-up" aria-hidden="true"></span></a>
                             </div>
                         </div>
                     </div>
@@ -29,9 +20,9 @@
                 <div class="unidad-descripcion">
                     <div class="row">
                         <div class="col-xs-12">
-                            <p class="unidad-instruccion"><!--<a href><span  class="fa fa-volume-up" aria-hidden="true"></span></a>-->{{ unidad.instruccion}}</p>
-                            <p class="unidad-texto"><!--<a href><span  class="fa fa-volume-up" aria-hidden="true"></span></a>-->{{ unidad.titulo}}</p>
-                            <img ng-src="assets/{{unidad.imagen.nombre}}" ng-hide="{{unidad.imagen === undefined}}"/>
+                            <p class="unidad-instruccion"><a href><span ng-click='unidad.instruccion.audio.audio.paused ? unidad.instruccion.audio.audio.play() : unidad.instruccion.audio.audio.pause()' class="fa fa-volume-up" aria-hidden="true"></span></a>{{ unidad.instruccion.texto }}</p>
+                            <p class="unidad-texto"><a href><span ng-click='unidad.titulo.audio.audio.paused ? unidad.titulo.audio.audio.play() : unidad.titulo.audio.audio.pause()' class="fa fa-volume-up" aria-hidden="true"></span></a>{{ unidad.titulo.texto}}</p>
+                            <img class="unidad-imagen"ng-src="assets/{{unidad.imagen.nombre}}" ng-hide="{{unidad.imagen === undefined}}"/>
                         </div>
                     </div>
                 </div>

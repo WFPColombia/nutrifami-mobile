@@ -10,7 +10,7 @@ var deleteLines = require('gulp-delete-lines');
 var rename = require('gulp-rename');
 
 // Servidor web de desarrollo
-gulp.task("dev-server", function() {
+gulp.task("dev-server", function () {
     "use strict";
 
     gulp.src("./app").pipe(webserver({
@@ -21,81 +21,88 @@ gulp.task("dev-server", function() {
 
 
 //Servidor web de producción
-gulp.task("prod-server", function() {
+gulp.task("prod-server", function () {
     "use strict";
     gulp.src("./dist")
-        .pipe(webserver({
-            open: true,
-            livereload: true
-        }));
+            .pipe(webserver({
+                open: true,
+                livereload: true
+            }));
 });
 
-gulp.task("jsHint", function() {
+gulp.task("publish", function () {
     "use strict";
-
-    return gulp.src("./app/js/**/*.js")
-        .pipe(jshint(".jshintrc"))
-        .pipe(jshint.reporter("default"));
-});
-
-gulp.task("publish", function() {
-    "use strict";
-
+    
     //copiando librerias
     gulp.src("./app/lib/**/*")
-        .pipe(gulp.dest("./dist/lib/"));
+            .pipe(gulp.dest("./dist/lib/"));
 
     //Minimizando y fusión de archivos JavaScript
     gulp.src("./app/js/**/*.js")
-        .pipe(concat("main.min.js"))
-        .pipe(jsmin())
-        .pipe(uglify())
-        .pipe(rename("main.min.js"))
-        .pipe(gulp.dest("dist/js/"));
+            .pipe(concat("main.min.js"))
+            .pipe(jsmin())
+            .pipe(uglify())
+            .pipe(rename("main.min.js"))
+            .pipe(gulp.dest("dist/js/"));
 
     //Minimizado y procesado de las plantillas HTML
     gulp.src("./app/view/**/*.html")
-        .pipe(minifyHTML())
-        .pipe(gulp.dest("dist/view/"));
+            .pipe(minifyHTML())
+            .pipe(gulp.dest("dist/view/"));
 
     //Minimizado y procesado de archivo index.html
     gulp.src("./app/index.html")
-        .pipe(deleteLines({
-            "filters": ["<!-- BEGIN PROD FILES"]
-        }))
-        .pipe(deleteLines({
-            "filters": ["END PROD FILES -->"]
-        }))
-        .pipe(deleteLines({
-            "filters": [new RegExp(".*DEVFILE.*")]
-        }))
-        .pipe(minifyHTML())
-        .pipe(gulp.dest("dist/"));
+            .pipe(deleteLines({
+                "filters": ["<!-- BEGIN PROD FILES"]
+            }))
+            .pipe(deleteLines({
+                "filters": ["END PROD FILES -->"]
+            }))
+            .pipe(deleteLines({
+                "filters": [new RegExp(".*DEVFILE.*")]
+            }))
+            .pipe(minifyHTML())
+            .pipe(gulp.dest("dist/"));
 
 
 
 });
 
-gulp.task("cordovaDev", function() {
+gulp.task("cordovaDev", function () {
     "use strict";
-    gulp.src("./app/**/**")
-        .pipe(gulp.dest("./www/"));
+    gulp.src(["./app/**/**", "!./app/index.html", "!./app/js/controllers/**"])
+            .pipe(gulp.dest("./www/"));
 
-    gulp.src("./app/res/**/**")
-        .pipe(gulp.dest("./www/res/"));
+    //Minimizado y procesado de archivo index.html
+    gulp.src("./app/index.html")
+            .pipe(deleteLines({
+                "filters": ["<!-- BEGIN CORDOVA FILES"]
+            }))
+            .pipe(deleteLines({
+                "filters": ["END CORDOVA FILES -->"]
+            }))
+            .pipe(gulp.dest("www/"));
+    
+    gulp.src("./app/js/controllers/**.js")
+            .pipe(deleteLines({
+                "filters": [new RegExp(".*BEGIN CORDOVA FILES.*")]
+            }))
+            .pipe(deleteLines({
+                "filters": [new RegExp(".*END CORDOVA FILES.*")]
+            }))
+            .pipe(gulp.dest("www/js/controllers/"));
 });
 
-gulp.task("cordovaDist", function() {
+gulp.task("cordovaDist", function () {
     "use strict";
     gulp.src("./dist/**/**")
-        .pipe(gulp.dest("./www/"));
+            .pipe(gulp.dest("./www/"));
 
     gulp.src("./app/res/**/**")
-        .pipe(gulp.dest("./www/res/"));
+            .pipe(gulp.dest("./www/res/"));
 });
 
 
 //gulp.task("default", ["jsHint", "dev-server"]);
 gulp.task("default", ["dev-server"]);
-gulp.task("compile", ["jsHint", "publish"]);
-gulp.task("compileCordova", ["compile", "cordovaDist"]);
+gulp.task("compileCordova", ["publish", "cordovaDist"]);
