@@ -18,10 +18,13 @@ nutrifamiMobile.controller('LeccionTerminadaController', ['$scope', '$routeParam
                 bsLoadingOverlayService.stop();
             }, 300);
         });
+        
+        $scope.progressbar = 0;
 
         $timeout(function () {
             ngAudio.play("audios/muy-bien-leccion-completada.mp3");
-        }, 3000);
+            $scope.progressbar = 100;
+        }, 1000);
 
         $scope.leccionCompletada = {};
         $scope.leccionCompletada.audio = ngAudio.load("audios/muy-bien-leccion-completada.mp3");

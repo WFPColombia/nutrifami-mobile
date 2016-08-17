@@ -665,10 +665,55 @@ button.list-group-item:focus{
     height: 30px;
     width: 30px;
     text-align: center;
-    padding-top: 5px;
+    padding-top: 0.2em;
     position: absolute;
     right: 0;
     top: 8px;
+    animation-name: sticker-size;
+    animation-duration: 2.3s;
+}
+
+.leccion-finalizada .progreso .sticker span{
+    animation-name: sticker-span-size;
+    animation-duration: 2.3s;
+}
+
+@keyframes sticker-size {
+    0%{
+        height: 0px;
+        width: 0px;
+        border: 0px;
+        right: 8px;
+        top: 18px;
+    }
+    66%{
+        height: 0px;
+        width: 0px;
+        border: 0px;
+        right: 8px;
+        top: 18px;
+    }
+
+    100% {
+        height: 30px;
+        width: 30px;
+        border: 3px #ffffff solid;
+        right: 0px;
+        top: 8px;
+    }
+}
+
+@keyframes sticker-span-size {
+    0%{
+       font-size:0px;
+    }
+    66%{
+        font-size:0px;
+    }
+
+    100% {
+        font-size:inherit;
+    }
 }
 
 .leccion-finalizada .badget {
@@ -681,6 +726,28 @@ button.list-group-item:focus{
     font-family: 'Muli-Italic', sans-serif;
     color: #ff5400;
     font-size: 11pt;
+}
+
+.leccion-finalizada .badget img {
+    animation-name: badget-img;
+    animation-duration: 2s;
+    animation-delay: 1s;
+    animation-iteration-count:infinite;
+}
+
+@keyframes badget-img {
+    0%   {
+        height: 228px;
+        margin:0px;
+    }
+    50%  {
+        height: 240px;
+        margin:-6px;
+    }
+    100%  {
+        height: 228px;
+        margin:0px;
+    }
 }
 
 .leccion-finalizada .badget p .fa {
