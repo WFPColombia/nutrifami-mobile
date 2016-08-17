@@ -173,6 +173,9 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope', '$locati
                             pareja1Orden = 0;
                             pareja2Orden = 0;
 
+                            /*ngAudio.play("audios/sound-ok.mp3");*/
+                            ngAudio.play("audios/muy-bien.mp3");
+
                             parejasCorrectas++;
                             if (parejasCorrectas == ($scope.unidad.opciones.length / 2)) {
                                 /*Si las parejas correctas es igual a la mitad de la cantidad de opciones habilitar el botón de continuar*/
@@ -192,6 +195,9 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope', '$locati
                             pareja2Pos = 0;
                             pareja1Orden = 0;
                             pareja2Orden = 0;
+                            if (navigator && navigator.vibrate) {
+                                navigator.vibrate([300, 100, 300]);
+                            }
 
                         }
                     }

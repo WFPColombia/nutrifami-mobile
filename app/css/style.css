@@ -200,17 +200,13 @@ ripple { to {
 }
 
 .sidebar-left {
-    background: #71c881;
+    background-color: #00c97e;
     width: 300px;
     left: 0;
     right: auto;
     -webkit-transition: width 400ms ease;
     -o-transition: width 400ms ease;
     transition: width 400ms ease;
-}
-
-.sidebar-left {
-    background: #71c881;
 }
 
 .sidebar-left .app-name {
@@ -227,7 +223,7 @@ ripple { to {
 list-group-item,
 a.list-group-item,
 button.list-group-item{
-    background-color: #71c881;
+    background-color: #00c97e;
     border: none;
     height: 57px;
     font-size: 14pt;
@@ -250,7 +246,7 @@ button.list-group-item:focus{
 
 .app header .navbar-absolute-top {
     height: 64px;
-    background-color: #71c881;
+    background-color: #00c97e;
     color: #ffffff;
     padding-top: 17px;
 }
@@ -637,8 +633,10 @@ button.list-group-item:focus{
     text-align: center;
 }
 
-.leccion-finalizada h1 a {
+.leccion-finalizada h1 button {
     color: #2f3e47;
+    border: none;
+    background-color: rgba(0,0,0,0);
 }
 
 .leccion-finalizada .progreso .progress {
@@ -685,9 +683,11 @@ button.list-group-item:focus{
     font-size: 11pt;
 }
 
-.leccion-finalizada .badget p a .fa {
+.leccion-finalizada .badget p .fa {
     color: #ffa67a;
     font-size: 11pt;
+    border: none;
+    background-color: rgba(0,0,0,0);
 }
 
 .leccion-finalizada .feedback p {
@@ -703,9 +703,11 @@ button.list-group-item:focus{
     top: 25px;
 }
 
-.leccion-finalizada .feedback .feedback-sonido a {
+.leccion-finalizada .feedback .feedback-sonido button {
     font-size: 10pt;
     color: #00c97e;
+    border:none;
+    background-color: rgba(0,0,0,0);
 }
 
 /* PERFIL Y EDITAR PERFIL */

@@ -8,7 +8,7 @@ nutrifamiLogin.controller('LoginController', ['$scope', '$location', 'Authentica
          END CORDOVA FILES */
 
         /*Cargamos el audio de ayuda*/
-        $scope.audio = ngAudio.load("assets/audio/login.mp3");
+        $scope.audio = ngAudio.load("audios/login.mp3");
 
         AuthenticationService.ClearCredentials();
         localStorage.clear();

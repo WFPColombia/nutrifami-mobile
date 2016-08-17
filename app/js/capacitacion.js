@@ -57,7 +57,16 @@ var serv_lecciones = {
         "imagen": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/", "nombre": "", "loaded": "empty"},
         "fecha": "2016-06-27 22:55:40",
         "activo": "1",
-        "unidades": ["1", "2", "3", "4", "5", "6"],
+        "unidades": ["1", "2", "3", "4"],
+        "finalizado":{
+            texto:"Una alimentación saludable lo ayuda a tener una vida sana y activa!",
+            "audio": {
+                "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L1_END.mp3",
+                "nombre": "training\/audios\/L1_END.mp3",
+                "loaded": "empty"
+            },
+            puntos:"100"           
+        },
         "completo": false
     },
     "17": {
@@ -197,9 +206,32 @@ var serv_unidades = {
     },
     "2": {
         "id": "2",
-        "tipo": {"id": "4", "nombre": "Unica Respuesta", "alias": "tipo4", "descripcion": "Lea y seleccione la respuesta correcta."},
-        "titulo": "La alimentaci\u00f3n sirve para \u2026",
-        "instruccion": "Lea y seleccione la respuesta correcta",
+        "tipo": {
+            "id": "4",
+            "nombre": "Unica Respuesta",
+            "alias": "tipo4",
+            "descripcion": "Lea y seleccione la respuesta correcta.",
+            "icono": "ico-unidad-tipo-4.png", /* Nuevo */
+            "audio": {
+                "nombre": "unidad-tipo-4.mp3" /* Nuevo */
+            }
+        },
+        "titulo": {
+            texto: "La alimentaci\u00f3n sirve para \u2026",
+            "audio": {
+                "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L1_P1.mp3",
+                "nombre": "training\/audios\/L1_P1.mp3",
+                "loaded": "empty"
+            }
+        },
+        "instruccion": {
+            texto: "Lea y seleccione la respuesta correcta",
+            "audio": {
+                "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L1_P1.mp3",
+                "nombre": "training\/audios\/L1_P1.mp3",
+                "loaded": "empty"
+            }
+        },
         "texto": null,
         "imagen": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/images\/L1_2.png", "nombre": "training\/images\/L1_2.png", "loaded": "empty"},
         "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L1_P2.mp3", "nombre": "training\/audios\/L1_P2.mp3", "loaded": "empty"},
@@ -213,8 +245,8 @@ var serv_unidades = {
     "3": {
         "id": "3",
         "tipo": {
-            "id": "3", 
-            "nombre": "Multiple Respuesta", 
+            "id": "3",
+            "nombre": "Multiple Respuesta",
             "alias": "tipo3",
             "descripcion": "Seleccione todas las respuestas correcatas.",
             "icono": "ico-unidad-tipo-3.png", /* Nuevo */
@@ -247,7 +279,7 @@ var serv_unidades = {
         "hijo": "0",
         "opciones": {
             "7": {
-                "id": "7", "correcta": "1", "orden": "1", "fecha": "2016-06-28 16:07:29", "visible": "1", "texto": "A. Consumir los alimentos con los nutrientes y la energ\u00eda necesarios para estar sanos. ", 
+                "id": "7", "correcta": "1", "orden": "1", "fecha": "2016-06-28 16:07:29", "visible": "1", "texto": "A. Consumir los alimentos con los nutrientes y la energ\u00eda necesarios para estar sanos. ",
                 "feedback": {
                     texto: "Los nutrientes son sustancias en los alimentos necesarios para el funcionamiento del cuerpo.",
                     audio: {
@@ -258,7 +290,7 @@ var serv_unidades = {
                 },
                 "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L1_P3_a.mp3", "nombre": "training\/audios\/L1_P3_a.mp3", "loaded": "empty"}},
             "8": {
-                "id": "8", "correcta": "0", "orden": "2", "fecha": "2016-06-28 16:07:30", "visible": "1", "texto": "B. Comer s\u00f3lo grasas y az\u00facares para tener energ\u00eda y estar activos. ", 
+                "id": "8", "correcta": "0", "orden": "2", "fecha": "2016-06-28 16:07:30", "visible": "1", "texto": "B. Comer s\u00f3lo grasas y az\u00facares para tener energ\u00eda y estar activos. ",
                 "feedback": {
                     texto: "La alimentaci\u00f3n es una actividad en la que consumimos alimentos como frutas, verduras y otros. ",
                     audio: {
@@ -294,26 +326,40 @@ var serv_unidades = {
     },
     "4": {
         "id": "4",
-        "tipo": {"id": "3", "nombre": "Multiple Respuesta", "alias": "tipo3", "descripcion": "Seleccione todas las respuestas correcatas."},
+        "tipo": {
+            "id": "2",
+            "nombre": "Formar Parejas",
+            "alias": "tipo2",
+            "descripcion": "Relacionar conceptos, im\u00e1genes, palabras agrupando en parejas.",
+            "icono": "ico-unidad-tipo-2.png", /* Nuevo */
+            "audio": {
+                "nombre": "unidad-tipo-2.mp3" /* Nuevo */
+            }
+        },
         "titulo": {
-            texto: "La alimentaci\u00f3n es\u2026",
+            texto: "Los nutrientes estan en los alimentos que diariamente consumimos, se encuentran en:",
             "audio": {
                 "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L1_P1.mp3",
                 "nombre": "training\/audios\/L1_P1.mp3",
                 "loaded": "empty"
             }
         },
-        "instruccion": "Seleccione todas las opciones verdaderas",
+        "instruccion": {
+            texto: "Lea y forme parejas",
+            "audio": {
+                "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L1_P1.mp3",
+                "nombre": "training\/audios\/L1_P1.mp3",
+                "loaded": "empty"
+            }
+        },
         "texto": null,
-        "imagen": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/images\/L1_4.png", "nombre": "training\/images\/L1_4.png", "loaded": "empty"},
-        "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L1_P4.mp3", "nombre": "training\/audios\/L1_P4.mp3", "loaded": "empty"},
-        "fecha": "2016-06-28 15:16:33",
+        "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L2_P2.mp3", "nombre": "training\/audios\/L2_P2.mp3", "loaded": "empty"},
+        "fecha": "2016-07-11 21:13:32",
         "activo": "1",
         "padre": "0",
         "hijo": "0",
-        "opciones": {"11": {"id": "11", "correcta": "1", "orden": "1", "fecha": "2016-06-28 16:07:28", "visible": "1", "texto": "A. Evitar enfermedades ", "feedback": "", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L1_P4_a.mp3", "nombre": "training\/audios\/L1_P4_a.mp3", "loaded": "empty"}}, "12": {"id": "12", "correcta": "1", "orden": "2", "fecha": "2016-06-28 16:07:28", "visible": "1", "texto": "B. Pensar y rendir en el estudio y trabajo", "feedback": "", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L1_P4_b.mp3", "nombre": "training\/audios\/L1_P4_b.mp3", "loaded": "empty"}}, "13": {"id": "13", "correcta": "0", "orden": "3", "fecha": "2016-06-28 16:07:30", "visible": "1", "texto": "C. Sentirnos llenos", "feedback": "La alimentaci\u00f3n saludable es comer la cantidad adecuada y necesaria, no significa sentirnos llenos", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L1_P4_c.mp3", "nombre": "training\/audios\/L1_P4_c.mp3", "loaded": "empty"}}, "14": {"id": "14", "correcta": "0", "orden": "4", "fecha": "2016-06-28 16:07:30", "visible": "1", "texto": "D. Realizar la dieta que est\u00e1 de moda", "feedback": "La alimentaci\u00f3n debe ser variada y nutritiva.", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L1_P4_d.mp3", "nombre": "training\/audios\/L1_P4_d.mp3", "loaded": "empty"}}},
-        "completo": false
-    },
+        "opciones": {"27": {"id": "27", "correcta": "1", "orden": "1", "fecha": "2016-07-11 21:39:55", "visible": "1", "texto": "Prote\u00edna", "feedback": "", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L2_P2_a1.mp3", "nombre": "training\/audios\/L2_P2_a1.mp3", "loaded": "empty"}, "media": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/images\/L2_2A.png", "nombre": "training\/images\/L2_2A.png", "loaded": "empty"}}, "28": {"id": "28", "correcta": "1", "orden": "1", "fecha": "2016-07-11 21:39:55", "visible": "1", "texto": "Crean anticuerpos, producen enzimas y forman los m\u00fasculos del cuerpo.Se encuentran en alimentos de origen animal y granos secos como la lenteja, frijol.", "feedback": "", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L2_P2_a2.mp3", "nombre": "training\/audios\/L2_P2_a2.mp3", "loaded": "empty"}}, "29": {"id": "29", "correcta": "1", "orden": "2", "fecha": "2016-07-11 21:39:55", "visible": "1", "texto": "Carbohidratos\r ", "feedback": "", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L2_P2_b1.mp3", "nombre": "training\/audios\/L2_P2_b1.mp3", "loaded": "empty"}, "media": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/images\/L2_2B.png", "nombre": "training\/images\/L2_2B.png", "loaded": "empty"}}, "30": {"id": "30", "correcta": "1", "orden": "2", "fecha": "2016-07-11 21:39:56", "visible": "1", "texto": "Sustancias que dan energ\u00eda al cuerpo. Se encuentran principalmente en cereales, ra\u00edces y tub\u00e9rculos.", "feedback": "", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L2_P2_b2.mp3", "nombre": "training\/audios\/L2_P2_b2.mp3", "loaded": "empty"}}, "31": {"id": "31", "correcta": "1", "orden": "3", "fecha": "2016-07-11 21:39:56", "visible": "1", "texto": "Grasas", "feedback": "", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L2_P2_c1.mp3", "nombre": "training\/audios\/L2_P2_c1.mp3", "loaded": "empty"}, "media": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/images\/L2_2C.png", "nombre": "training\/images\/L2_2C.png", "loaded": "empty"}}, "32": {"id": "32", "correcta": "1", "orden": "3", "fecha": "2016-07-11 21:39:56", "visible": "1", "texto": "Las grasas aportan el doble energ\u00eda que  los  cabohidratos. Se requieren en peque\u00f1a cantidad, ayudan que el cuerpo aproveche otros nutrientes, como las vitaminas.", "feedback": "", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L2_P2_c2.mp3", "nombre": "training\/audios\/L2_P2_c2.mp3", "loaded": "empty"}}, "33": {"id": "33", "correcta": "1", "orden": "4", "fecha": "2016-07-11 21:39:56", "visible": "1", "texto": "Vitaminas", "feedback": "", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L2_P2_d1.mp3", "nombre": "training\/audios\/L2_P2_d1.mp3", "loaded": "empty"}, "media": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/images\/L2_2D.png", "nombre": "training\/images\/L2_2D.png", "loaded": "empty"}}, "34": {"id": "34", "correcta": "1", "orden": "4", "fecha": "2016-07-11 21:39:56", "visible": "1", "texto": "Estan principalmente en frutas y verduras; su bajo consumo puede causar enfermedades como  la anemia.", "feedback": "", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L2_P2_d2.mp3", "nombre": "training\/audios\/L2_P2_d2.mp3", "loaded": "empty"}}},
+        "completo": false},
     "5": {
         "id": "5",
         "tipo": {"id": "3", "nombre": "Multiple Respuesta", "alias": "tipo3", "descripcion": "Seleccione todas las respuestas correcatas."},
@@ -361,9 +407,32 @@ var serv_unidades = {
     },
     "8": {
         "id": "8",
-        "tipo": {"id": "2", "nombre": "Formar Parejas", "alias": "tipo2", "descripcion": "Relacionar conceptos, im\u00e1genes, palabras agrupando en parejas."},
-        "titulo": "Los nutrientes estan en los alimentos que diariamente consumimos, se encuentran en:",
-        "instruccion": "Lea y forme parejas",
+        "tipo": {
+            "id": "2",
+            "nombre": "Formar Parejas",
+            "alias": "tipo2",
+            "descripcion": "Relacionar conceptos, im\u00e1genes, palabras agrupando en parejas.",
+            "icono": "ico-unidad-tipo-2.png", /* Nuevo */
+            "audio": {
+                "nombre": "unidad-tipo-2.mp3" /* Nuevo */
+            }
+        },
+        "titulo": {
+            texto: "Los nutrientes estan en los alimentos que diariamente consumimos, se encuentran en:",
+            "audio": {
+                "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L1_P1.mp3",
+                "nombre": "training\/audios\/L1_P1.mp3",
+                "loaded": "empty"
+            }
+        },
+        "instruccion": {
+            texto: "Lea y forme parejas",
+            "audio": {
+                "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L1_P1.mp3",
+                "nombre": "training\/audios\/L1_P1.mp3",
+                "loaded": "empty"
+            }
+        },
         "texto": null,
         "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L2_P2.mp3", "nombre": "training\/audios\/L2_P2.mp3", "loaded": "empty"},
         "fecha": "2016-07-11 21:13:32",
