@@ -21,11 +21,14 @@ nutrifamiMobile.controller('ModuloController', ['$rootScope', '$scope', '$locati
         /* Se hace un try por si el usuario intenta ingresar a la URL a otro modulo que lo lleve al home */
         try {
             $scope.modulo = nutrifami.training.getModulo($routeParams.modulo);
+            console.log($scope.modulo);
             $scope.modulo.totalLecciones = Object.keys($scope.modulo.lecciones).length;
             $scope.lids = nutrifami.training.getLeccionesId($routeParams.modulo);
+            console.log($scope.lids);
             for (var lid in $scope.lids) {
                 $scope.lecciones.push(nutrifami.training.getLeccion($scope.lids[lid]));
             }
+            console.log($scope.lecciones);
         } catch (err) {
             $location.path('/');
         }

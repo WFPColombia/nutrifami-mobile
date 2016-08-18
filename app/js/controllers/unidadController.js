@@ -1,6 +1,10 @@
 /*global angular*/
-nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope','$location', '$routeParams', '$anchorScroll', 'ngAudio', 'bsLoadingOverlayService', '$timeout', '$log', function ($scope, $rootScope, $location, $routeParams, $anchorScroll, ngAudio, bsLoadingOverlayService, $timeout, $log) {
+nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope', '$location', '$routeParams', '$anchorScroll', 'ngAudio', 'bsLoadingOverlayService', '$timeout', '$log', function ($scope, $rootScope, $location, $routeParams, $anchorScroll, ngAudio, bsLoadingOverlayService, $timeout, $log) {
         'use strict';
+        /* BEGIN CORDOVA FILES
+         document.addEventListener('deviceready', function () {
+         AndroidFullScreen.immersiveMode();
+         END CORDOVA FILES */
         $anchorScroll();
 
         /* Overloading*/
@@ -27,6 +31,11 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope','$locatio
             $scope.unidad.numeroUnidad = $routeParams.unidad;
             $scope.unidad.totalUnidades = temp.length;
 
+
+            $scope.unidad.tipo.audio.audio = ngAudio.load("audios/" + $scope.unidad.tipo.audio.nombre);
+            $scope.unidad.instruccion.audio.audio = ngAudio.load("assets/" + $scope.unidad.instruccion.audio.nombre);
+            $scope.unidad.titulo.audio.audio = ngAudio.load("assets/" + $scope.unidad.titulo.audio.nombre);
+
             console.log($scope.unidad);
 
             var tempOpciones = [];
@@ -48,9 +57,9 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope','$locatio
                 /* Se mezclan los arreglos */
                 shuffle(tempImagenes);
                 shuffle(tempOpciones);
-                $scope.unidad.opciones=[];
+                $scope.unidad.opciones = [];
                 /* Se concatenan los arreglos elemento por elemento, con las imagenes primero y las opciones despues */
-                for (var i in tempImagenes){
+                for (var i in tempImagenes) {
                     $scope.unidad.opciones.push(tempImagenes[i]);
                     $scope.unidad.opciones.push(tempOpciones[i]);
                 }
@@ -64,7 +73,7 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope','$locatio
 
             /*Verifica si la unidad tienen audio y lo carga*/
             if (typeof $scope.unidad.audio !== 'undefined') {
-                $scope.unidad.audio.audio = ngAudio.load("assets/"+$scope.unidad.audio.nombre);
+                $scope.unidad.audio.audio = ngAudio.load("assets/" + $scope.unidad.audio.nombre);
             }
         } catch (err) {
             /* Se debe verificar que se este en la unidad actual y que no se acceda atraves del navegador*/
@@ -86,7 +95,7 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope','$locatio
 
             /*Verifica si la opcion tienen audio y lo carga*/
             if (typeof $scope.unidad.opciones[i].audio !== 'undefined') {
-                $scope.unidad.opciones[i].audio.audio = ngAudio.load("assets/"+$scope.unidad.opciones[i].audio.nombre);
+                $scope.unidad.opciones[i].audio.audio = ngAudio.load("assets/" + $scope.unidad.opciones[i].audio.nombre);
             }
             console.log("Respuestas correctas: " + respuestasCorrectas);
         }
@@ -164,6 +173,9 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope','$locatio
                             pareja1Orden = 0;
                             pareja2Orden = 0;
 
+                            /*ngAudio.play("audios/sound-ok.mp3");*/
+                            ngAudio.play("audios/muy-bien.mp3");
+
                             parejasCorrectas++;
                             if (parejasCorrectas == ($scope.unidad.opciones.length / 2)) {
                                 /*Si las parejas correctas es igual a la mitad de la cantidad de opciones habilitar el botón de continuar*/
@@ -183,6 +195,9 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope','$locatio
                             pareja2Pos = 0;
                             pareja1Orden = 0;
                             pareja2Orden = 0;
+                            if (navigator && navigator.vibrate) {
+                                navigator.vibrate([300, 100, 300]);
+                            }
 
                         }
                     }
@@ -194,6 +209,7 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope','$locatio
         $scope.calificarUnidad = function () {
             /* Validar si acerto o fallo*/
             var respuestasAcertadas = 0;
+            $scope.feedback.feedbacks = []
             for (var i in $scope.unidad.opciones) {
                 if ($scope.unidad.opciones[i].selected) {
                     $scope.unidad.opciones[i].evaluacion = true;
@@ -201,16 +217,31 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope','$locatio
                         respuestasAcertadas++;
                     } else {
                         /* Almacena la respuesta incorrecta */
-                        $scope.unidad.feedback = $scope.unidad.opciones[i].feedback;
+                        var tempFeedback = {
+                            texto: $scope.unidad.opciones[i].feedback.texto,
+                            audio: ngAudio.load("audios/muy-bien-respuesta-correcta.mp3")
+                        };
+                        $scope.feedback.feedbacks.push(tempFeedback);
+                        console.log($scope.feedback.feedbacks);
                     }
                 }
             }
             if (respuestasAcertadas === respuestasCorrectas) {
                 $scope.estadoUnidad = 'acierto';
+                $scope.feedback.mensaje = "Muy bien! respuesta correcta";
+                $scope.feedback.audio = ngAudio.load("audios/muy-bien-respuesta-correcta.mp3");
+                ngAudio.play("audios/muy-bien.mp3");
+
             } else {
                 $scope.estadoUnidad = 'fallo';
+                $scope.feedback.mensaje = "Intenta de nuevo! respuesta incorrecta";
+                $scope.feedback.audio = ngAudio.load("audios/intenta-de-nuevo.mp3");
+                ngAudio.play("audios/respuesta-incorrecta.mp3");
+                if (navigator && navigator.vibrate) {
+                    navigator.vibrate(1000);
+                }
             }
-            
+
             $rootScope.Ui.turnOn('feedback');
 
             //$scope.feedback();
@@ -282,4 +313,7 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope','$locatio
                 a[j] = x;
             }
         }
+        /* BEGIN CORDOVA FILES
+         }, false);
+         END CORDOVA FILES */
     }]);
