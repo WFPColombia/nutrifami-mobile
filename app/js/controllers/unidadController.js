@@ -269,7 +269,7 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope', '$locati
                         indice = i;
                     }
                 }
-                avanceUsuario.lecciones[indice - 1] = 1;
+                avanceUsuario.lecciones[indice] = 1;
 
                 /* Mira cuantas lecciones se han terminaddo para dar un resultado final */
                 var contador = 0;

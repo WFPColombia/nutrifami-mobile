@@ -245,7 +245,7 @@ ripple { to {
     margin-bottom: 10px;
     width: 100%;
     letter-spacing: 5px;
-    
+
 }
 
 .intro .btn-default:focus,
@@ -411,8 +411,99 @@ button.list-group-item:focus{
 
 /* LECCIONES */
 
-.lecciones{
-    background-color: #00c97e;
+.lecciones .lecciones-header h1,
+.lecciones .lecciones-header h1 {
+    color: #00c97e;
+    font-size: 17pt;
+}
+
+.lecciones .lecciones-header .lecciones-titulo-sonido{
+    background-color: rgba(0,0,0,0);
+    border:none;
+    font-size: 12pt;
+    padding-top: -5px;
+}
+
+.lecciones .lecciones-header{
+    text-align: center;
+    margin-top: 35px;
+    color: #2f3e47;
+    font-size: 12pt;
+}
+
+.lecciones .lecciones-header p,
+.lecciones .lecciones-header img{
+    margin-top: 30px;
+}
+
+.lecciones .lecciones-header .lecciones-descripcion-sonido{
+    background-color: rgba(0,0,0,0);
+    border:none;
+    color: #4d6675;
+}
+
+.lecciones .lecciones-body{
+    margin-top: 30px;
+}
+.lecciones .lecciones-body .leccion{
+    height: 200px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    text-align: center;
+    border: 1px solid #dcdcdc;
+    margin-bottom: 18px;
+}
+
+.lecciones .lecciones-body .leccion-sonido{
+    background-color: rgba(0,0,0,0);
+    border:none;
+    color: #00c97e;
+    font-size: 12pt;
+    position: absolute;
+    top:5px;
+    right:15px;
+}
+
+.lecciones .lecciones-body .leccion img{
+    margin-top: 15px;
+}
+
+.lecciones .lecciones-body .leccion h2{
+    font-size: 12pt;
+    color: #2f3e47;
+    margin-top: 15px;
+}
+
+.lecciones .lecciones-body .leccion .leccion-comenzar{
+    width: -moz-calc(100% - 30px);
+    width: -webkit-calc(100% - 30px);
+    width: calc(100% - 30px);
+    height: 45px;
+    background-color: #09df78;
+    border-radius: 0 0 10px 10px;
+    font-family: 'Raleway-Bold', sans-serif;
+    -moz-border-radius:0 0 10px 10px;
+    -webkit-border-radius: 0 0 10px 10px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    border:none;
+    position: absolute;
+    left: 0;
+    bottom: 15px;
+    margin-left: 15px;
+}
+
+.lecciones .lecciones-body .leccion-terminada,
+.lecciones .lecciones-body .leccion-terminada h2,
+.lecciones .lecciones-body .leccion-terminada button{
+    background-color: #ffba23;
+    color:#ffffff;
+}
+
+.lecciones .lecciones-body .leccion-terminada .leccion-comenzar{
+    background-color: #ffa400;
 }
 
 /* END LECCIONES*/

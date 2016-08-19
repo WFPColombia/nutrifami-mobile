@@ -22,11 +22,30 @@ var serv_capacitaciones = {
 var serv_modulos = {
     "5": {
         "id": "5",
-        "titulo": "Alimentaci\u00f3n Saludable y Agua Sana",
-        "descripcion": "Alimentaci\u00f3n Saludable y Agua Sana",
+        "titulo": { /* Se convierte en objeto*/
+            texto: "La Alimentación",
+            "audio": {
+                "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L1_titulo.mp3",
+                "nombre": "training\/audios\/L1_titulo.mp3",
+                "loaded": "empty"
+            }
+        },
+        "descripcion": { /* Se convierte en objeto*/
+            texto: "El tema de Alimentación Saludable, le ayudará a identificar los alimentos y sus nutrientes para lograr una alimentación variada y sana. Usted aprenderá sobre:",
+            "audio": {
+                "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L1_descripcion.mp3",
+                "nombre": "training\/audios\/L1_descripcion.mp3",
+                "loaded": "empty"
+            }
+        },
         "imagen": {
             "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/images\/201661102023887.jpg",
             "nombre": "training\/images\/201661102023887.jpg",
+            "loaded": "empty"
+        },
+        "imagen2": { /*Nuevo: Se usa dentro del modulo*/
+            "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/images\/201661102023887.jpg",
+            "nombre": "training\/images\/M1.png",
             "loaded": "empty"
         },
         "fecha": "2016-06-27 22:52:26",
@@ -35,12 +54,31 @@ var serv_modulos = {
         "completo": false
     },
     "6": {
-        "id": "5",
-        "titulo": "Alimentaci\u00f3n Saludable y Agua Sana",
-        "descripcion": "Alimentaci\u00f3n Saludable y Agua Sana",
+        "id": "6",
+        "titulo": { /* Se convierte en objeto*/
+            texto: "La Alimentación",
+            "audio": {
+                "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L1_titulo.mp3",
+                "nombre": "training\/audios\/L1_titulo.mp3",
+                "loaded": "empty"
+            }
+        },
+        "descripcion": { /* Se convierte en objeto*/
+            texto: "El tema de Alimentación Saludable, le ayudará a identificar los alimentos y sus nutrientes para lograr una alimentación variada y sana. Usted aprenderá sobre:",
+            "audio": {
+                "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L1_descripcion.mp3",
+                "nombre": "training\/audios\/L1_descripcion.mp3",
+                "loaded": "empty"
+            }
+        },
         "imagen": {
             "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/images\/201661102023887.jpg",
             "nombre": "training\/images\/201661102023887.jpg",
+            "loaded": "empty"
+        },
+        "imagen2": { /*Nuevo: Se usa dentro del modulo*/
+            "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/images\/201661102023887.jpg",
+            "nombre": "training\/images\/M1.png",
             "loaded": "empty"
         },
         "fecha": "2016-06-27 22:52:26",
@@ -52,13 +90,24 @@ var serv_modulos = {
 var serv_lecciones = {
     "16": {
         "id": "16",
-        "titulo": "Alimentaci\u00f3n saludable",
+        "titulo": { /* Se convierte en objeto*/
+            texto: "Alimentaci\u00f3n saludable",
+            "audio": {
+                "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L1_titulo.mp3",
+                "nombre": "training\/audios\/L1_titulo.mp3",
+                "loaded": "empty"
+            }
+        },
         "descripcion": "Alimentaci\u00f3n saludable",
-        "imagen": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/", "nombre": "", "loaded": "empty"},
+        "imagen": {
+            "url": "https:\/\/s3.amazonaws.com\/nutrifami\/",
+            "nombre": "training\/images\/L1-ico.png",
+            "loaded": "empty"
+        },
         "fecha": "2016-06-27 22:55:40",
         "activo": "1",
         "unidades": ["1", "2", "3", "4"],
-        "finalizado":{
+        "finalizado":{ /* Nuevo */
             texto:"Una alimentación saludable lo ayuda a tener una vida sana y activa!",
             "audio": {
                 "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L1_END.mp3",
@@ -71,9 +120,20 @@ var serv_lecciones = {
     },
     "17": {
         "id": "17",
-        "titulo": "Beneficios y Propiedades de los Alimentos",
+        "titulo": { /* Se convierte en objeto*/
+            texto: "Beneficios y Propiedades de los Alimentos",
+            "audio": {
+                "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L1_titulo.mp3",
+                "nombre": "training\/audios\/L1_titulo.mp3",
+                "loaded": "empty"
+            }
+        },
         "descripcion": "Beneficios y propiedades de los alimentos",
-        "imagen": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/", "nombre": "", "loaded": "empty"},
+        "imagen": {
+            "url": "https:\/\/s3.amazonaws.com\/nutrifami\/",
+            "nombre": "training\/images\/L1-ico.png",
+            "loaded": "empty"
+        },
         "fecha": "2016-06-27 22:56:09",
         "activo": "1",
         "unidades": ["7", "8", "9", "10", "11", "12", "13", "15"],
@@ -81,9 +141,20 @@ var serv_lecciones = {
     },
     "18": {
         "id": "18",
-        "titulo": "Alimentaci\u00f3n Balanceada y Saludable",
+        "titulo": { /* Se convierte en objeto*/
+            texto: "Alimentaci\u00f3n Balanceada y Saludable",
+            "audio": {
+                "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L1_titulo.mp3",
+                "nombre": "training\/audios\/L1_titulo.mp3",
+                "loaded": "empty"
+            }
+        },
         "descripcion": "Alimentaci\u00f3n balanceada y saludable",
-        "imagen": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/", "nombre": "", "loaded": "empty"},
+        "imagen": {
+            "url": "https:\/\/s3.amazonaws.com\/nutrifami\/",
+            "nombre": "training\/images\/L1-ico.png",
+            "loaded": "empty"
+        },
         "fecha": "2016-06-27 22:56:30",
         "activo": "1",
         "unidades": ["16", "17", "18", "19", "20", "21"],
@@ -91,9 +162,20 @@ var serv_lecciones = {
     },
     "19": {
         "id": "19",
-        "titulo": "Los Colores Alimenticios",
+        "titulo": { /* Se convierte en objeto*/
+            texto: "Los Colores Alimenticios",
+            "audio": {
+                "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L1_titulo.mp3",
+                "nombre": "training\/audios\/L1_titulo.mp3",
+                "loaded": "empty"
+            }
+        },
         "descripcion": "Los colores alimenticios",
-        "imagen": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/", "nombre": "", "loaded": "empty"},
+        "imagen": {
+            "url": "https:\/\/s3.amazonaws.com\/nutrifami\/",
+            "nombre": "training\/images\/L1-ico.png",
+            "loaded": "empty"
+        },
         "fecha": "2016-06-27 22:56:43",
         "activo": "1",
         "unidades": ["22", "23", "24", "25", "26", "27", "28"],
@@ -101,9 +183,20 @@ var serv_lecciones = {
     },
     "20": {
         "id": "20",
-        "titulo": "Agua Sana ",
+        "titulo": { /* Se convierte en objeto*/
+            texto: "Agua Sana",
+            "audio": {
+                "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L1_titulo.mp3",
+                "nombre": "training\/audios\/L1_titulo.mp3",
+                "loaded": "empty"
+            }
+        },
         "descripcion": "Agua Sana ",
-        "imagen": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/", "nombre": "", "loaded": "empty"},
+        "imagen": {
+            "url": "https:\/\/s3.amazonaws.com\/nutrifami\/",
+            "nombre": "training\/images\/L1-ico.png",
+            "loaded": "empty"
+        },
         "fecha": "2016-06-27 22:57:05",
         "activo": "1",
         "unidades": ["29", "30", "31", "32", "33"],

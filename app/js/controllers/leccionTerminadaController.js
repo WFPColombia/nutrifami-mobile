@@ -32,10 +32,6 @@ nutrifamiMobile.controller('LeccionTerminadaController', ['$scope', '$routeParam
         $scope.leccion = nutrifami.training.getLeccion($routeParams.leccion);
         $scope.leccion.finalizado.audio.audio = ngAudio.load("assets/"+$scope.leccion.finalizado.audio.nombre);
         $scope.leccion.finalizado.audio.audioPuntos = ngAudio.load("audios/"+$scope.leccion.finalizado.puntos+"-puntos-ganados.mp3");
-        console.log($scope.leccion);
-
-
-
 
 
         /* BEGIN CORDOVA FILES

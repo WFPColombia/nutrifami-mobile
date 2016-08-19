@@ -4,35 +4,31 @@
     <!--<div class="navbar navbar-app navbar-absolute-bottom"><h4>FOOTER</h4></div>-->
 
     <!-- App body -->
-    <div class='app-body scrollable'>
+    <div class='app-body scrollable lecciones'>
         <div class="container scrollable-content">
-            <div class="modulos unidad">
-                <div class="opciones">
-                    <div class="row"> 
-                        <div class="panel-header">
-                            <div class="col-md-6">
-                                <div class="modulo-descripcion">
-                                    <h3>{{ modulo.titulo}}</h3>
-                                    <p>{{ modulo.descripcion}}</p>
-                                </div>
-                            </div>
-                            <div class="col-md-5 col-md-offset-1">
-                                <div class="modulo-avance">
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{ porcentajeAvance()}}%;">
-                                        </div>
-                                    </div>
-                                    <p>{{ avanceUsuario.leccionesTerminadas}}/{{modulo.totalLecciones}} Lecciones completadas</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <ng-repeat ng-repeat="leccion in lecciones">
-                            <leccion-info leccion="leccion" modulo="modulo" index="{{$index + 1}}"></leccion-info>
-                        </ng-repeat>
+            <div class="lecciones-header">
+                <div class="row">
+                    <h1><button ng-click='modulo.titulo.audio.audio.paused ? modulo.titulo.audio.audio.play() : modulo.titulo.audio.audio.pause()' class="lecciones-titulo-sonido fa fa-volume-up" aria-hidden="true"></button>{{modulo.titulo.texto}}</h1>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <img ng-src="assets/{{modulo.imagen2.nombre}}">
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p><button ng-click='modulo.descripcion.audio.audio.paused ? modulo.descripcion.audio.audio.play() : modulo.descripcion.audio.audio.pause()' class="lecciones-descripcion-sonido fa fa-volume-up" aria-hidden="true"></button> {{ modulo.descripcion.texto}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lecciones-body">
+                <div class="row">
+                    <ng-repeat ng-repeat="leccion in lecciones">
+                        <leccion-info leccion="leccion" modulo="modulo" index="{{$index + 1}}"></leccion-info>
+                    </ng-repeat>
+                </div>
+
             </div>
         </div>
     </div>

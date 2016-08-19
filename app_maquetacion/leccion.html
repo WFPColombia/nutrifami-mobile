@@ -63,47 +63,103 @@
                 </div>
             </header>
             <!-- App body -->
-            <div class='app-body lecciones'>
-                <div class="container">
+            <div class='app-body scrollable lecciones'>
+                <div class="container scrollable-content">
+                    <div class="lecciones-header">
                         <div class="row">
-                            
+                            <h1><button class="lecciones-titulo-sonido fa fa-volume-up" aria-hidden="true"></button> Alimentación Saludable</h1>
                         </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <img src="../app/img/leccion01.png" alt="Leccion01">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <p><button class="lecciones-descripcion-sonido fa fa-volume-up" aria-hidden="true"></button> El tema de Alimentación Saludable, le ayudará a identificar los alimentos y sus nutrientes para lograr una alimentación variada y sana. Usted aprenderá sobre:
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lecciones-body">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="leccion leccion-terminada">
+                                    <button class="leccion-sonido fa fa-volume-up" aria-hidden="true"></button>
+                                    <img src="../app/img/ico-leccion.png" alt="ico-lección">
+                                    <h2>Los Alimentos</h2>
+                                    <button class="leccion-comenzar" aria-hidden="true">Comenzar</button>
+
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="leccion">
+                                    <button class="leccion-sonido fa fa-volume-up" aria-hidden="true"></button>
+                                    <img src="../app/img/ico-leccion.png" alt="ico-lección">
+                                    <h2>Los Alimentos</h2>
+                                    <button class="leccion-comenzar" aria-hidden="true">Comenzar</button>
+
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="leccion">
+                                    <button class="leccion-sonido fa fa-volume-up" aria-hidden="true"></button>
+                                    <img src="../app/img/ico-leccion.png" alt="ico-lección">
+                                    <h2>Los Alimentos</h2>
+                                    <button class="leccion-comenzar" aria-hidden="true">Comenzar</button>
+
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="leccion">
+                                    <button class="leccion-sonido fa fa-volume-up" aria-hidden="true"></button>
+                                    <img src="../app/img/ico-leccion.png" alt="ico-lección">
+                                    <h2>Los Colores de los Alimentos</h2>
+                                    <button class="leccion-comenzar" aria-hidden="true">Comenzar</button>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
-        </div><!-- ~ .app -->
+        </div>
+    </div><!-- ~ .app -->
 
-        <!-- Modals and Overlays -->
-        <div ui-yield-to="modals"></div>
+    <!-- Modals and Overlays -->
+    <div ui-yield-to="modals"></div>
 
-        <script>
+    <script>
 
 
-            angular.module('myApp', ["ngRoute", "mobile-angular-ui", 'ui.swiper']).config(function ($routeProvider) {
-                $routeProvider.when('/', {
-                    // ...
-                });
+        angular.module('myApp', ["ngRoute", "mobile-angular-ui", 'ui.swiper']).config(function ($routeProvider) {
+            $routeProvider.when('/', {
                 // ...
-            }).controller('myController', AppController);
+            });
+            // ...
+        }).controller('myController', AppController);
 
-            function AppController($scope, $timeout) {
-                console.log("PRUEBA");
-                $scope.onTransitionStart = function (swiper) {
-                    alert("The current index is : " + swiper.activeIndex);
-                };
+        function AppController($scope, $timeout) {
+            console.log("PRUEBA");
+            $scope.onTransitionStart = function (swiper) {
+                alert("The current index is : " + swiper.activeIndex);
+            };
 
-                $scope.slides = [];
+            $scope.slides = [];
 
-                $timeout(function () {
-                    $scope.slides = ['Slide 1', 'Slide 2', 'Slide 3', 'Slide 4'];
-                }, 1000);
-
-
-                $scope.setSlide = function (index) {
-                    $scope.instance.slideTo(index, 300);
-                };
-            }
+            $timeout(function () {
+                $scope.slides = ['Slide 1', 'Slide 2', 'Slide 3', 'Slide 4'];
+            }, 1000);
 
 
-        </script>
-    </body>
+            $scope.setSlide = function (index) {
+                $scope.instance.slideTo(index, 300);
+            };
+        }
+
+
+    </script>
+</body>
 </html>
