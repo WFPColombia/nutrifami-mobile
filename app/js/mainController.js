@@ -15,6 +15,12 @@ nutrifamiMobile.config(['$locationProvider', '$routeProvider', function ($locati
             templateUrl: 'views/login.html',
             hideMenus: true
         });
+        
+        $routeProvider.when('/intro', {
+            controller: 'IntroController',
+            templateUrl: 'views/intro.html',
+            hideMenus: true
+        });
 
         $routeProvider.when('/file', {
             controller: 'FileController',
