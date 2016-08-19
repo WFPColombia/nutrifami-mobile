@@ -18,7 +18,7 @@ nutrifamiLogin.controller('LoginController', ['$scope', '$location', 'Authentica
             AuthenticationService.Login($scope.username, $scope.password, function (response) {
                 if (response.success) {
                     AuthenticationService.SetCredentials($scope.username, $scope.password, response.message);
-                    $location.path('/');
+                    $location.path('/intro');
                 } else {
                     $scope.error = response.message;
                     $scope.dataLoading = false;

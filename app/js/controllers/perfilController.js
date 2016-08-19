@@ -17,10 +17,10 @@ nutrifamiMobile.controller('PerfilController', ['$scope', '$rootScope', '$anchor
 
         /* Verifica si viene un mensaje, lo muestra cierta cantidad de tiempo y lo elimina*/
         /*if ($rootScope.mensaje.estado !== null) {
-            $timeout(function () {
-                $rootScope.mensaje.estado = false;
-            }, $rootScope.mensaje.tiempo);
-        }*/
+         $timeout(function () {
+         $rootScope.mensaje.estado = false;
+         }, $rootScope.mensaje.tiempo);
+         }*/
 
         $scope.usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
 
@@ -56,99 +56,68 @@ nutrifamiMobile.controller('PerfilController', ['$scope', '$rootScope', '$anchor
             }
         ];
 
-        $scope.usuarioActivo.totalMiembros = 0;
+        $scope.usuarioActivo.totalMiembrosPorInscribir = 0;
         for (var i in $scope.usuarioActivo.miembrosPorRango) {
-            $scope.usuarioActivo.totalMiembros = $scope.usuarioActivo.totalMiembros + $scope.usuarioActivo.miembrosPorRango[i].cantidad;
+            $scope.usuarioActivo.totalMiembrosPorInscribir = $scope.usuarioActivo.totalMiembrosPorInscribir + $scope.usuarioActivo.miembrosPorRango[i].cantidad;
         }
 
-        $scope.agregarFamiliar = function (familiar, index) {
+        $scope.familiar = {};
+        $scope.familiar.FAM_PER_NOMBRE = '';
+        $scope.familiar.FAM_PER_APELLIDO = '';
+        $scope.familiar.parentescos = {
+            availableOptions: [
+                {id: 'hijo', name: 'Hijo'},
+                {id: 'conyuge', name: 'Conyuge'},
+                {id: 'padre', name: 'Padre'},
+                {id: 'otros', name: 'Otros'}
+            ]
+        };
+
+        $scope.usuarioActivo.totalMiembrosInscritos = $scope.usuarioActivo.familia.length;
+
+        $scope.abrirModalEditarFamiliar = function (index) {
+            $scope.indexFamiliar = index;
+            $rootScope.Ui.turnOn('editarFamiliar');
+        };
+
+        $scope.agregarFamiliar = function () {
+            var index = $scope.indexFamiliar;
+            console.log(index);
+            var familiar = $scope.familiar;
+            familiar.FAM_PER_PARENTESCO = familiar.parentescos.selectedOption.id;
+            familiar.FAM_PER_JEFE = $scope.usuarioActivo.id;
+            familiar.FAM_PER_CODIGO = $scope.usuarioActivo.login_codigo;
+            familiar.documento_jefe = $scope.usuarioActivo.login_documento;
+            familiar.FAM_PER_BIRTHDATE = "0";
+
+            /* If para verificar si es usuario nuevo o miembro de la familia */
+            if (typeof $scope.miembro === 'undefined') {
+                familiar.rango = false;
+                familiar.cantidad = 0;
+            } else {
+                familiar.rango = $scope.miembro.rango_alias;
+                familiar.cantidad = $scope.miembro.cantidad - 1;
+            }
+
+            delete familiar["parentescos"];
+
             PerfilService.agregarFamiliar(familiar, function (response) {
+                console.log("Usa el service");
 
                 if (response.success) {
-
+                    console.log(response.message);
                     if (familiar.rango !== false) {
                         $scope.usuarioActivo.miembrosPorRango[index].cantidad--;
                         $scope.usuarioActivo['rango_' + familiar.rango] = familiar.cantidad;
                     }
+                    
+                    $scope.usuarioActivo.familia.push(familiar);
+                    
                     localStorage.setItem("usuarioActivo", JSON.stringify($scope.usuarioActivo));
+                    $rootScope.Ui.turnOff('editarFamiliar');
+                }else{
+                    console.log(response.message);
                 }
-                /*var feedbackModal = $uibModal.open({
-                    animation: true,
-                    templateUrl: 'views/modals/actualizacionUsuario.html',
-                    controller: 'ActualizarUsuarioModalController',
-                    backdrop: 'static',
-                    keyboard: false,
-                    size: 'lg',
-                    resolve: {
-                        data: function () {
-                            return response;
-                        }
-                    }
-                });
-                feedbackModal.result.then(function (estado) {
-                    $route.reload();
-                });*/
-
             });
         };
     }]);
-
-/*nutrifamiMobile.directive('agregarFamiliar', function () {
-    return {
-        restrict: 'E',
-        scope: {
-            miembro: "=",
-            index: '@'
-        },
-        templateUrl: 'views/directives/agregarFamiliar.html',
-        link: function ($scope, $element, $attrs) {
-            $scope.familiar = {};
-            $scope.familiar.nombre = '';
-            $scope.familiar.apellido = '';
-            $scope.familiar.birthdate = new Date();
-            $scope.familiar.parentescos = {
-                availableOptions: [
-                    {id: 'hijo', name: 'Hijo'},
-                    {id: 'conyuge', name: 'Conyuge'},
-                    {id: 'padre', name: 'Padre'},
-                    {id: 'otros', name: 'Otros'}
-                ]
-            };
-            $scope.update = function () {
-                var familiar = $scope.familiar;
-                var tempMonth = familiar.birthdate.getMonth() + 1;
-                if (tempMonth < 10) {
-                    tempMonth = "0" + tempMonth;
-                }
-
-                familiar.birthdate = familiar.birthdate.getFullYear() + "-" + tempMonth + "-" + familiar.birthdate.getDate();
-                familiar.parentesco = familiar.parentescos.selectedOption.id;
-                familiar.jefe = $scope.$parent.usuarioActivo.id;
-                familiar.codigo = $scope.$parent.usuarioActivo.login_codigo;
-                familiar.documento_jefe = $scope.$parent.usuarioActivo.login_documento;
-
-                console.log($scope.miembro);
-                console.log(typeof $scope.miembro === undefined);
-                /* If para verificar si es usuario nuevo o miembro de la familia */
-                /*if (typeof $scope.miembro === 'undefined') {
-                    familiar.rango = false;
-                    familiar.cantidad = 0;
-                } else {
-                    familiar.rango = $scope.miembro.rango_alias;
-                    familiar.cantidad = $scope.miembro.cantidad - 1;
-                }
-
-                delete familiar["parentescos"];
-
-                $scope.$parent.agregarFamiliar(familiar, $scope.index);
-            };
-        }
-    };
-});*/
-
-/*nutrifamiMobile.controller('ActualizarUsuarioModalController', function ($scope, $uibModalInstance, data) {
-    $scope.data = data;
-    $scope.clickBoton = function () {
-        $uibModalInstance.close();
-    };
-});*/

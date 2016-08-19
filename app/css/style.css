@@ -66,6 +66,7 @@ ripple { to {
 
 /* END RIPPLE EFFECT*/
 
+/* LOGIN - INTRO*/
 .login {
     background-color: #00c97e;
     background-image: url('../img/login-bg.png');
@@ -79,7 +80,8 @@ ripple { to {
     text-align: center;
 }
 
-.login .login-sonido {
+.login .login-sonido,
+.intro .intro-sonido{
     background-color: #ffffff;
     width: 58px;
     height: 58px;
@@ -177,6 +179,11 @@ ripple { to {
     margin-top: 68px;
 }
 
+.login .btn-default:focus,
+.login .btn-default:active{
+    outline:0;
+}
+
 .login .help-block {
     text-align: center;
     color: #d200ff;
@@ -192,6 +199,66 @@ ripple { to {
     left: 0px;
 }
 
+.intro {
+    background-color: #00c97e;
+    height: 100%;
+    width: 100%;
+    color: #ffffff;
+    font-family: 'Muli', sans-serif;
+}
+
+.intro .swiper-slide{
+    background-color: #00c97e;
+}
+
+.intro h1{
+    font-size: 18pt;
+    margin-bottom: 30px;
+}
+
+.intro h2{
+    font-size: 16pt;
+    margin-bottom: 45px;
+}
+
+.intro p{
+    font-size: 12pt;
+    margin-bottom: 50px;
+}
+
+.intro img{
+    margin-bottom: 30px;
+}
+
+.intro .btn-default{
+    margin-top: 28px;
+    text-transform: uppercase;
+    text-shadow: none;
+    color: #005d3a;
+    background-color: #fef418;
+    background-image: none;
+    border-radius: 23px;
+    border: none;
+    height: 50px;
+    padding: 17px 57px;
+    font-size: 12pt;
+    margin-bottom: 10px;
+    width: 100%;
+    letter-spacing: 5px;
+    
+}
+
+.intro .btn-default:focus,
+.intro .btn-default:active{
+    outline:0;
+}
+
+.intro .swiper-pagination-bullet-active {
+    opacity: 1;
+    background: #fef418;
+}
+
+/* END LOGIN - INTRO*/
 
 /* HOME */
 
@@ -199,6 +266,9 @@ ripple { to {
     background-color: #f5f5f5;
 }
 
+header .navbar-app{
+    border:none;
+}
 .sidebar-left {
     background-color: #00c97e;
     width: 300px;
@@ -336,6 +406,16 @@ button.list-group-item:focus{
 .modulo-no-disponible h4 {
     color: #000000;
 }
+
+/* END MODULOS*/
+
+/* LECCIONES */
+
+.lecciones{
+    background-color: #00c97e;
+}
+
+/* END LECCIONES*/
 
 
 /* UNIDADES */
@@ -705,7 +785,7 @@ button.list-group-item:focus{
 
 @keyframes sticker-span-size {
     0%{
-       font-size:0px;
+        font-size:0px;
     }
     66%{
         font-size:0px;
@@ -784,6 +864,8 @@ button.list-group-item:focus{
     margin-top: 45px;
     background-color: #ffffff;
     border-radius: 10px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
 }
 
 .perfil-header img {
@@ -812,6 +894,7 @@ button.list-group-item:focus{
 
 .perfil-panel .perfil-header{
     text-align: center;
+    margin-top: 25px;
 }
 
 .perfil-panel .perfil-body .form-group {
@@ -833,7 +916,12 @@ button.list-group-item:focus{
     text-transform: uppercase;
 }
 
-.perfil-body .form-group .form-control {
+.modal-dialog .modal-header {
+    text-align:center;
+}
+
+.perfil-body .form-group .form-control,
+.modal-dialog .form-group .form-control{
     height: 38px !important;
     border: 1px solid #dcdcdc;
     border-radius: 18px;
@@ -841,17 +929,21 @@ button.list-group-item:focus{
 }
 
 .perfil-body .form-group p,
-.perfil-body .form-group .sin-registro {
+.perfil-body .form-group .sin-registro,
+.modal-dialog .form-group p,
+.modal-dialog .form-group .sin-registro{
     font-size: 10pt;
     padding: 6px 22px;
     text-transform: capitalize;
 }
 
-.perfil-body .form-group .sin-registro {
+.perfil-body .form-group .sin-registro,
+.modal-dialog  .form-group .sin-registro{
     color: #c2c5c7;
 }
 
-.perfil-body .form-group select.form-control:not([multiple]) {
+.perfil-body .form-group select.form-control:not([multiple]),
+.modal-dialog .form-group select.form-control:not([multiple]) {
     -webkit-appearance: none;
     -moz-appearance: none;
     background-position: 96% 50%;
@@ -860,7 +952,8 @@ button.list-group-item:focus{
     padding: 6px 22px;
 }
 
-.perfil-body .form-group label {
+.perfil-body .form-group label,
+.modal-dialog .form-group label{
     padding-left: 22px;
     font-size: 7pt;
     font-family: 'Raleway-Bold', sans-serif;
@@ -869,7 +962,9 @@ button.list-group-item:focus{
 }
 
 .perfil-body .form-group .error,
-.perfil-body form .message{
+.perfil-body form .message,
+.modal-dialog .form-group .error,
+.modal-dialog form .message{
     font-size: 10px;
     color: #fc4cab;
     text-align: center;
@@ -907,8 +1002,7 @@ button.list-group-item:focus{
 }
 
 .perfil-body .miembros-header{
-    border-bottom: 2px solid #dcdcdc;
-    padding-bottom: 25px;
+    padding-bottom: 15px;
 }
 
 .perfil-body .miembros-header div {
@@ -916,6 +1010,15 @@ button.list-group-item:focus{
     text-align: center;
     font-size: 10px;
     font-weight: bold;
+}
+
+.perfil-body .miembros-body{
+    text-align: center;
+    border-top: 2px solid #dcdcdc;
+}
+
+.perfil-body .miembros-body .row{
+    padding: 10px 0;
 }
 
 .perfil-body .panel-group .panel {
