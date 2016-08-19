@@ -1,0 +1,24 @@
+<div class="modal" ui-if="feedback" ui-state='feedback'>
+    <div class="calificacion">
+        <div class="modal-backdrop in"></div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!--<span class="center-block fa fa-check fa-3x" aria-hidden="true"></span>-->
+                    <span class="center-block fa  fa-3x sticker" ng-class="estadoUnidad == 'acierto' ? 'fa-check':'fa-times wrong'" aria-hidden="true"></span>
+                </div>
+                <div class="modal-body">
+                    <p class="mensaje">{{feedback.mensaje}} <a href><span ng-click='feedback.audio.paused ? feedback.audio.play() : feedback.audio.pause()' class="fa fa-volume-up" aria-hidden="true"></span></a></p>
+                    <div class="feedback" ng-show="feedback.feedbacks !== undefined">
+                        <p ng-repeat="fb in feedback.feedbacks ">{{ fb.texto }} <a href class="sonido"><span ng-click='fb.audio.paused ? fb.audio.play() : fb.audio.pause()' class="fa fa-volume-up" aria-hidden="true"></span></a></p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="activo"> 
+                        <a href class="btn btn-default center-block" role="button" ui-turn-off="feedback" ng-click="feedback()">{{ estadoUnidad == 'acierto' ? 'Continuar':'Intentar de nuevo'}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
