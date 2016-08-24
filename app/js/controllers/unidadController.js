@@ -55,13 +55,21 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope', '$locati
                     }
                 }
                 /* Se mezclan los arreglos */
+                console.log(tempOpciones);
                 shuffle(tempImagenes);
                 shuffle(tempOpciones);
-                $scope.unidad.opciones = [];
+                var opcionesUnidad = [];
                 /* Se concatenan los arreglos elemento por elemento, con las imagenes primero y las opciones despues */
-                for (var i in tempImagenes) {
-                    $scope.unidad.opciones.push(tempImagenes[i]);
-                    $scope.unidad.opciones.push(tempOpciones[i]);
+                for (var i = 0; i < 10; i++) { /* CAMBIO DE FORMA DE LLENADO DEL ARREGLO */
+                    if (typeof tempImagenes[i] !== 'undefined') {
+                        opcionesUnidad.push(tempImagenes[i]);
+                    }
+                    if (typeof tempOpciones[i] !== 'undefined') {
+                        opcionesUnidad.push(tempOpciones[i]);
+                    }
+                }
+                if (typeof opcionesUnidad !== 'undefined' && opcionesUnidad.length > 0 ) {
+                    $scope.unidad.opciones = opcionesUnidad;
                 }
             } else {
                 for (var i in $scope.unidad.opciones) {
