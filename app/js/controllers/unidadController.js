@@ -28,6 +28,7 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope', '$locati
                 temp.push($scope.uids[i]);
             }
             $scope.unidad = nutrifami.training.getUnidad(temp[$routeParams.unidad - 1]);
+            console.log($scope.unidad);
             $scope.unidad.numeroUnidad = $routeParams.unidad;
             $scope.unidad.totalUnidades = temp.length;
 
