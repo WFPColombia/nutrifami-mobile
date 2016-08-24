@@ -25,6 +25,7 @@ nutrifamiMobile.controller('ModuloController', ['$rootScope', '$scope', '$locati
             $scope.modulo.descripcion.audio.audio = ngAudio.load("assets/" + $scope.modulo.descripcion.audio.nombre);
             $scope.modulo.totalLecciones = Object.keys($scope.modulo.lecciones).length;
             $scope.lids = nutrifami.training.getLeccionesId($routeParams.modulo);
+            console.log($scope.lids);
             for (var lid in $scope.lids) {
                 var tempLeccion = nutrifami.training.getLeccion($scope.lids[lid]);
                 tempLeccion.titulo.audio.audio = ngAudio.load("assets/"+tempLeccion.titulo.audio.nombre); 
@@ -35,13 +36,15 @@ nutrifamiMobile.controller('ModuloController', ['$rootScope', '$scope', '$locati
         }
         
         console.log($scope.avanceUsuario);
-
         for (var i = 0; i < $scope.avanceUsuario.lecciones.length; i++) {
-            if ($scope.avanceUsuario.lecciones[i] == 1) {
-                $scope.lecciones[i].class = 'leccion-terminada';
-                $scope.lecciones[i].terminada = true;
-            } else {
-                $scope.lecciones[i].terminada = false;
+            console.log($scope.lecciones[i]);
+            if ( typeof $scope.lecciones[i] !== 'undefined' ) {
+                if ($scope.avanceUsuario.lecciones[i] == 1 ) {
+                    $scope.lecciones[i].class = 'leccion-terminada';
+                    $scope.lecciones[i].terminada = true;
+                } else {
+                    $scope.lecciones[i].terminada = false;
+                }
             }
         }
         $scope.porcentajeAvance = function () {

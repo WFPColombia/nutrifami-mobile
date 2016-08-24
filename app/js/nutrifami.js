@@ -4,7 +4,8 @@ var familiaObj = new Object();      /* Datos de la familia del usuario logueado,
 
 
 
-var base_url = 'http://127.0.0.1:83/'; /* Direccion del servidor */
+/*var base_url = 'http://127.0.0.1:83/'; /* Direccion del servidor */
+var base_url = 'http://nutrifami.org/'; /* Direccion del servidor */
 
 var nutrifami = {
 
@@ -100,7 +101,7 @@ var nutrifami = {
 
                     /* Información Dummy de avance de usuario */
                     avanceUsuario = {
-                        lecciones: [0, 0, 0, 0, 0],
+                        lecciones: [0, 0, 0, 0],
                         leccionesTerminadas: 0
                     };
                     localStorage.setItem("avanceUsuario", JSON.stringify(avanceUsuario));

@@ -36,7 +36,6 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope', '$locati
             $scope.unidad.instruccion.audio.audio = ngAudio.load("assets/" + $scope.unidad.instruccion.audio.nombre);
             $scope.unidad.titulo.audio.audio = ngAudio.load("assets/" + $scope.unidad.titulo.audio.nombre);
 
-            console.log($scope.unidad);
 
             var tempOpciones = [];
 
@@ -72,6 +71,7 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope', '$locati
             }
 
             /*Verifica si la unidad tienen audio y lo carga*/
+            console.log($scope.unidad);
             if (typeof $scope.unidad.audio !== 'undefined') {
                 $scope.unidad.audio.audio = ngAudio.load("assets/" + $scope.unidad.audio.nombre);
             }
