@@ -637,6 +637,7 @@ button.list-group-item:focus{
     color: #2f3e47;
     text-align: center;
     font-size: 10pt;
+    width: 100%;
 }
 
 .unidad .opciones .selected {
@@ -667,12 +668,12 @@ button.list-group-item:focus{
 .unidad .opciones .opcion-sonido,
 .unidad .opciones .opcion-sonido {
     position: absolute;
-    top: 22px;
-    right: 20px;
+    top: 18px;
+    right: 13px;
+    z-index: 10;
 }
 
-.unidad .opciones .opcion-sonido a,
-.unidad .opciones .opcion-sonido a {
+.unidad .opciones .opcion-sonido button {
     color: #00965e;
 }
 
@@ -707,7 +708,7 @@ button.list-group-item:focus{
     margin-bottom: 37px;
 }
 
-.modal .calificacion .modal-body .mensaje a {
+.modal .calificacion .modal-body .mensaje .fa {
     color: #8e8e8e;
 }
 
@@ -761,7 +762,7 @@ button.list-group-item:focus{
     font-family: 'Raleway-Bold', sans-serif;
     font-size: 11pt;
     color: #ffffff;
-    padding-top: 17px;
+    padding-top: 6px;
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 5px;

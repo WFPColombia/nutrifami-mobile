@@ -1,5 +1,5 @@
 /*global angular*/
-nutrifamiMobile.controller('LeccionTerminadaController', ['$scope', '$routeParams', '$anchorScroll', 'ngAudio', 'bsLoadingOverlayService', '$timeout', function ($scope, $routeParams, $anchorScroll, ngAudio, bsLoadingOverlayService, $timeout) {
+nutrifamiMobile.controller('LeccionTerminadaController', ['$scope', '$routeParams', '$anchorScroll', 'ngAudio', 'bsLoadingOverlayService', '$timeout', '$location', function ($scope, $routeParams, $anchorScroll, ngAudio, bsLoadingOverlayService, $timeout, $location) {
         'use strict';
         'use strict';
         /* BEGIN CORDOVA FILES
@@ -18,7 +18,7 @@ nutrifamiMobile.controller('LeccionTerminadaController', ['$scope', '$routeParam
                 bsLoadingOverlayService.stop();
             }, 300);
         });
-        
+
         $scope.progressbar = 0;
 
         $timeout(function () {
@@ -30,8 +30,13 @@ nutrifamiMobile.controller('LeccionTerminadaController', ['$scope', '$routeParam
         $scope.leccionCompletada.audio = ngAudio.load("audios/muy-bien-leccion-completada.mp3");
 
         $scope.leccion = nutrifami.training.getLeccion($routeParams.leccion);
-        $scope.leccion.finalizado.audio.audio = ngAudio.load("assets/"+$scope.leccion.finalizado.audio.nombre);
-        $scope.leccion.finalizado.audio.audioPuntos = ngAudio.load("audios/"+$scope.leccion.finalizado.puntos+"-puntos-ganados.mp3");
+        console.log($scope.leccion);
+        $scope.leccion.finalizado.audio.audio = ngAudio.load("assets/" + $scope.leccion.finalizado.audio.nombre);
+        $scope.leccion.finalizado.audio.audioPuntos = ngAudio.load("audios/" + $scope.leccion.finalizado.puntos + "-puntos-ganados.mp3");
+
+        $scope.goTo = function (link) {
+            $location.path(link);
+        }
 
 
         /* BEGIN CORDOVA FILES

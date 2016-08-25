@@ -1,9 +1,9 @@
 <div class="col-xs-6" ng-show="leccion.activo">
-    <div class="leccion {{ leccion.class}}">
-        <button ng-click='leccion.titulo.audio.audio.paused ? leccion.titulo.audio.audio.play() : leccion.titulo.audio.audio.pause()' class="leccion-sonido fa fa-volume-up" aria-hidden="true"></button>
-        <img ng-src="assets/{{leccion.imagen.nombre}}" alt="ico-lección">
+    <button ng-click='leccion.titulo.audio.audio.paused ? leccion.titulo.audio.audio.play() : leccion.titulo.audio.audio.pause()' class="leccion-sonido fa fa-volume-up" aria-hidden="true" ng-show="leccion.titulo.audio.nombre != null"></button>
+    <div class="leccion {{ leccion.class}}" ng-click="click()" >
+        <img ng-src="img/icons/ico-leccion-{{leccion.icono}}.png" alt="ico-lección">
         <h2>{{ leccion.titulo.texto}}</h2>
-        <button ng-click="click()" class="leccion-comenzar" aria-hidden="true"> {{ leccion.class == 'leccion-terminada' ? 'Repetir' : 'Comenzar' }}</button>
+        <button class="leccion-comenzar" aria-hidden="true"> {{ leccion.class == 'leccion-terminada' ? 'Repetir' : 'Comenzar' }}</button>
 
     </div>
 </div>

@@ -28,7 +28,7 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope', '$locati
                 temp.push($scope.uids[i]);
             }
             $scope.unidad = nutrifami.training.getUnidad(temp[$routeParams.unidad - 1]);
-            console.log($scope.unidad);
+
             $scope.unidad.numeroUnidad = $routeParams.unidad;
             $scope.unidad.totalUnidades = temp.length;
 
@@ -55,7 +55,7 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope', '$locati
                     }
                 }
                 /* Se mezclan los arreglos */
-                console.log(tempOpciones);
+                console.log(tempOpciones);  
                 shuffle(tempImagenes);
                 shuffle(tempOpciones);
                 var opcionesUnidad = [];
@@ -106,7 +106,6 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope', '$locati
             if (typeof $scope.unidad.opciones[i].audio !== 'undefined') {
                 $scope.unidad.opciones[i].audio.audio = ngAudio.load("assets/" + $scope.unidad.opciones[i].audio.nombre);
             }
-            console.log("Respuestas correctas: " + respuestasCorrectas);
         }
 
         $scope.botonCalificar = false;
@@ -218,31 +217,39 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope', '$locati
         $scope.calificarUnidad = function () {
             /* Validar si acerto o fallo*/
             var respuestasAcertadas = 0;
-            $scope.feedback.feedbacks = []
+            var tempFeedbackAcierto = []; 
+            var tempFeedbackFallo = []; 
+            $scope.feedback.feedbacks = [];
             for (var i in $scope.unidad.opciones) {
                 if ($scope.unidad.opciones[i].selected) {
                     $scope.unidad.opciones[i].evaluacion = true;
                     if ($scope.unidad.opciones[i].selected == $scope.unidad.opciones[i].correcta) {
                         respuestasAcertadas++;
+                        var tempFeedback = {
+                            texto: $scope.unidad.opciones[i].feedback.texto,
+                            audio: ngAudio.load("assets/"+$scope.unidad.opciones[i].feedback.audio.nombre)
+                        };
+                        tempFeedbackAcierto.push(tempFeedback);
                     } else {
                         /* Almacena la respuesta incorrecta */
                         var tempFeedback = {
                             texto: $scope.unidad.opciones[i].feedback.texto,
-                            audio: ngAudio.load("audios/muy-bien-respuesta-correcta.mp3")
+                            audio: ngAudio.load("assets/"+$scope.unidad.opciones[i].feedback.audio.nombre)
                         };
-                        $scope.feedback.feedbacks.push(tempFeedback);
-                        console.log($scope.feedback.feedbacks);
+                        tempFeedbackFallo.push(tempFeedback);
                     }
                 }
             }
             if (respuestasAcertadas === respuestasCorrectas) {
                 $scope.estadoUnidad = 'acierto';
+                $scope.feedback.feedbacks = tempFeedbackAcierto;
                 $scope.feedback.mensaje = "Muy bien! respuesta correcta";
                 $scope.feedback.audio = ngAudio.load("audios/muy-bien-respuesta-correcta.mp3");
                 ngAudio.play("audios/muy-bien.mp3");
 
             } else {
                 $scope.estadoUnidad = 'fallo';
+                $scope.feedback.feedbacks = tempFeedbackFallo;
                 $scope.feedback.mensaje = "Intenta de nuevo! respuesta incorrecta";
                 $scope.feedback.audio = ngAudio.load("audios/intenta-de-nuevo.mp3");
                 ngAudio.play("audios/respuesta-incorrecta.mp3");

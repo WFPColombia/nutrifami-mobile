@@ -1,9 +1,8 @@
 <div class="col-xs-6">
     <div class="opcion-sonido" ng-show="info.audio.url != ''">
-        <a href><span ng-click='info.audio.audio.paused ? info.audio.audio.play() : info.audio.audio.pause()' class="fa fa-volume-up" aria-hidden="true"></span></a>
+        <button ng-click='info.audio.audio.paused ? info.audio.audio.play() : info.audio.audio.pause()' class="fa fa-volume-up" aria-hidden="true"></button>
     </div>
-    <div class="opcion-pareja" ng-click="click()" ng-class="[info.selected ? 'selected' : '', info.match ? 'pareja-match':'']">
-        <p>{{ info.texto}}</p>
-
-    </div>
+    <button class="opcion-pareja" ng-click="click()" ng-class="[info.selected ? 'selected' : '', info.match ? 'pareja-match':'']">
+        {{ info.texto}}
+    </button>
 </div>

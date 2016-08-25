@@ -1,5 +1,5 @@
 <div class="app">
-    <a class="navbar navbar-app navbar-absolute-bottom calificar habilitado"  ng-href="#/m/5">Continuar</a>
+    <button class="navbar navbar-app navbar-absolute-bottom calificar habilitado" ng-click="goTo('/m/5')">Continuar</button>
     <!-- App body -->
     <div class="scrollable">
         <div class='app-body scrollable-content'>
@@ -25,7 +25,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="badget">
-                                <img src="img/badgets/badget-manzana.png">
+                                <img src="img/badgets/badget-{{leccion.icono}}.png">
                                 <p>Más {{ leccion.finalizado.puntos}} puntos de experiencia <button ng-click='leccion.finalizado.audio.audioPuntos.paused ? leccion.finalizado.audio.audioPuntos.play() : leccion.finalizado.audio.audioPuntos.pause()' class="fa fa-volume-up" aria-hidden="true"></button></p>
                             </div>
                         </div>
