@@ -677,6 +677,10 @@ button.list-group-item:focus{
     color: #00965e;
 }
 
+.modal {
+    overflow: auto;
+}
+
 .modal .calificacion .modal-header .sticker {
     color: #ffffff;
     height: 86px;
