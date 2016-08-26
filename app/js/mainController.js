@@ -47,6 +47,11 @@ nutrifamiMobile.config(['$locationProvider', '$routeProvider', function ($locati
             controller: 'LeccionTerminadaController',
             templateUrl: 'views/leccionTerminada.html'
         });
+        
+         $routeProvider.when('/consumo', {
+            controller: 'ConsumoController',
+            templateUrl: 'views/consumo.html'
+        });
 
         $routeProvider.when('/perfil', {
             controller: 'PerfilController',
