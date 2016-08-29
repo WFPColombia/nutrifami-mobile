@@ -12,7 +12,7 @@ nutrifamiMobile.directive('moduloInfo', ['$location', function ($location) {
                     return (Object.keys($scope.info.lecciones).length);
                 };
                 $scope.porcentajeAvance = function () {
-                    return(100 / $scope.totalLecciones() * $scope.avance.leccionesTerminadas);
+                    return(100 / $scope.totalLecciones() * $scope.info.avance.leccionesFinalizadas);
                 };
                 $scope.irAlModulo = function () {
                     $location.path('/m/' + $scope.info.id);

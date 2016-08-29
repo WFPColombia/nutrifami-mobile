@@ -468,6 +468,8 @@ button.list-group-item:focus{
 
 .lecciones .lecciones-body .leccion img{
     margin-top: 15px;
+    -webkit-filter: grayscale(100%) opacity(100%);
+    filter: grayscale(100%) opacity(100%);
 }
 
 .lecciones .lecciones-body .leccion h2{
@@ -502,7 +504,13 @@ button.list-group-item:focus{
     color:#ffffff;
 }
 
-.lecciones .lecciones-body .leccion-terminada .leccion-comenzar{
+.lecciones .lecciones-body .leccion-terminada img{
+    -webkit-filter: none;
+    filter: none;
+}
+
+.lecciones .lecciones-body .leccion-terminada .leccion-comenzar,
+.lecciones .lecciones-body .leccion-terminada .leccion-sonido{
     background-color: #ffa400;
 }
 

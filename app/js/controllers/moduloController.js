@@ -13,9 +13,7 @@ nutrifamiMobile.controller('ModuloController', ['$rootScope', '$scope', '$locati
         $scope.$on('$viewContentLoaded', function () {
             /* Se le agrega 0,3 segundos para poder verlo ver inicialmente
              * cuando el contenido se demore mucho en cargar se puede quitar el timeout*/
-            $timeout(function () {
-                bsLoadingOverlayService.stop();
-            }, 300);
+            bsLoadingOverlayService.stop();
         });
 
         $scope.usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
@@ -33,8 +31,15 @@ nutrifamiMobile.controller('ModuloController', ['$rootScope', '$scope', '$locati
             console.log($scope.lids);
             for (var lid in $scope.lids) {
                 var tempLeccion = nutrifami.training.getLeccion($scope.lids[lid]);
+                tempLeccion.avance = {};
                 if (tempLeccion.titulo.audio.nombre !== null) {
                     tempLeccion.titulo.audio.audio = ngAudio.load("assets/" + tempLeccion.titulo.audio.nombre);
+                }
+                if (typeof $scope.avanceUsuario['3'] !== 'undefined' && typeof $scope.avanceUsuario['3'][$routeParams.modulo] !== 'undefined' && typeof $scope.avanceUsuario['3'][$routeParams.modulo][$scope.lids[lid]] !== 'undefined') {
+                    tempLeccion.avance.terminada = true;
+                }
+                else {
+                    tempLeccion.avance.terminada = false;
                 }
                 $scope.lecciones.push(tempLeccion);
             }
@@ -42,18 +47,6 @@ nutrifamiMobile.controller('ModuloController', ['$rootScope', '$scope', '$locati
             $location.path('/');
         }
 
-        console.log($scope.avanceUsuario);
-        for (var i = 0; i < $scope.avanceUsuario.lecciones.length; i++) {
-            console.log($scope.lecciones[i]);
-            if (typeof $scope.lecciones[i] !== 'undefined') {
-                if ($scope.avanceUsuario.lecciones[i] == 1) {
-                    $scope.lecciones[i].class = 'leccion-terminada';
-                    $scope.lecciones[i].terminada = true;
-                } else {
-                    $scope.lecciones[i].terminada = false;
-                }
-            }
-        }
         $scope.porcentajeAvance = function () {
             return(100 / $scope.modulo.totalLecciones * $scope.avanceUsuario.leccionesTerminadas);
         };

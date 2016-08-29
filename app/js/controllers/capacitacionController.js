@@ -15,9 +15,7 @@ nutrifamiMobile.controller('CapacitacionController', ['$scope', '$anchorScroll',
         $scope.$on('$viewContentLoaded', function () {
             /* Se le agrega 0,3 segundos para poder verlo ver inicialmente
              * cuando el contenido se demore mucho en cargar se puede quitar el timeout*/
-            $timeout(function () {
-                bsLoadingOverlayService.stop();
-            }, 300);
+            bsLoadingOverlayService.stop();
         });
         $scope.usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
         $scope.avanceUsuario = JSON.parse(localStorage.getItem('avanceUsuario'));
@@ -26,8 +24,20 @@ nutrifamiMobile.controller('CapacitacionController', ['$scope', '$anchorScroll',
         $scope.mids = nutrifami.training.getModulosId(3);
         /*Creamos un arreglo para poder recorerlo y mostrarlo a traves de directivas */
         for (var mid in $scope.mids) {
-            $scope.modulos.push(nutrifami.training.getModulo($scope.mids[mid]));
+            var tempModulo = nutrifami.training.getModulo($scope.mids[mid]);
+            tempModulo.avance = {};
+            if (tempModulo.activo == '1') {
+                tempModulo.activo = true;
+            } else {
+                tempModulo.activo = false;
+            }
 
+            if (typeof $scope.avanceUsuario['3'] !== 'undefined' && typeof $scope.avanceUsuario['3'][$scope.mids[mid]] !== 'undefined') {
+                tempModulo.avance.leccionesFinalizadas = Object.keys($scope.avanceUsuario['3'][$scope.mids[mid]]).length;
+            } else {
+                tempModulo.avance.leccionesFinalizadas = 0;
+            }
+            $scope.modulos.push(tempModulo);
         }
 
         /* BEGIN CORDOVA FILES

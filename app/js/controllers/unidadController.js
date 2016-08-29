@@ -55,7 +55,7 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope', '$locati
                     }
                 }
                 /* Se mezclan los arreglos */
-                console.log(tempOpciones);  
+                console.log(tempOpciones);
                 shuffle(tempImagenes);
                 shuffle(tempOpciones);
                 var opcionesUnidad = [];
@@ -68,7 +68,7 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope', '$locati
                         opcionesUnidad.push(tempOpciones[i]);
                     }
                 }
-                if (typeof opcionesUnidad !== 'undefined' && opcionesUnidad.length > 0 ) {
+                if (typeof opcionesUnidad !== 'undefined' && opcionesUnidad.length > 0) {
                     $scope.unidad.opciones = opcionesUnidad;
                 }
             } else {
@@ -185,10 +185,23 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope', '$locati
                             ngAudio.play("audios/muy-bien.mp3");
 
                             parejasCorrectas++;
+                            console.log(parejasCorrectas);
+
                             if (parejasCorrectas == ($scope.unidad.opciones.length / 2)) {
                                 /*Si las parejas correctas es igual a la mitad de la cantidad de opciones habilitar el botón de continuar*/
                                 $scope.estadoUnidad = 'acierto';
-                                $scope.feedback();
+                                var tempFeedbackAcierto = [];
+                                var tempFeedback = {
+                                    texto: $scope.unidad.opciones[i].feedback.texto,
+                                    audio: ngAudio.load("assets/" + $scope.unidad.opciones[i].feedback.audio.nombre)
+                                };
+                                tempFeedbackAcierto.push(tempFeedback);
+                                $scope.feedback.feedbacks = tempFeedbackAcierto;
+                                $scope.feedback.mensaje = "Muy bien! respuesta correcta";
+                                $scope.feedback.audio = ngAudio.load("audios/muy-bien-respuesta-correcta.mp3");
+                                ngAudio.play("audios/muy-bien.mp3");
+
+                                $rootScope.Ui.turnOn('feedback');
                             }
 
                         } else {
@@ -217,8 +230,8 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope', '$locati
         $scope.calificarUnidad = function () {
             /* Validar si acerto o fallo*/
             var respuestasAcertadas = 0;
-            var tempFeedbackAcierto = []; 
-            var tempFeedbackFallo = []; 
+            var tempFeedbackAcierto = [];
+            var tempFeedbackFallo = [];
             $scope.feedback.feedbacks = [];
             for (var i in $scope.unidad.opciones) {
                 if ($scope.unidad.opciones[i].selected) {
@@ -227,14 +240,14 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope', '$locati
                         respuestasAcertadas++;
                         var tempFeedback = {
                             texto: $scope.unidad.opciones[i].feedback.texto,
-                            audio: ngAudio.load("assets/"+$scope.unidad.opciones[i].feedback.audio.nombre)
+                            audio: ngAudio.load("assets/" + $scope.unidad.opciones[i].feedback.audio.nombre)
                         };
                         tempFeedbackAcierto.push(tempFeedback);
                     } else {
                         /* Almacena la respuesta incorrecta */
                         var tempFeedback = {
                             texto: $scope.unidad.opciones[i].feedback.texto,
-                            audio: ngAudio.load("assets/"+$scope.unidad.opciones[i].feedback.audio.nombre)
+                            audio: ngAudio.load("assets/" + $scope.unidad.opciones[i].feedback.audio.nombre)
                         };
                         tempFeedbackFallo.push(tempFeedback);
                     }
@@ -276,27 +289,25 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope', '$locati
             $scope.siguienteUnidad = parseInt($routeParams.unidad) + 1;
             if ($scope.siguienteUnidad > $scope.unidad.totalUnidades) {
                 var avanceUsuario = JSON.parse(localStorage.getItem('avanceUsuario'));
-                var lids = nutrifami.training.getLeccionesId($routeParams.modulo);
-                var indice = 0;
-
-                /*Busca el indice basado en el id de la lección para actualizar e avance*/
-                for (var i in lids) {
-                    if (lids[i] == $routeParams.leccion) {
-                        indice = i;
-                    }
+                if (typeof avanceUsuario['3'] === 'undefined') {
+                    avanceUsuario['3'] = {};
+                    avanceUsuario['3'][$routeParams.modulo] = {};
                 }
-                avanceUsuario.lecciones[indice] = 1;
-
-                /* Mira cuantas lecciones se han terminaddo para dar un resultado final */
-                var contador = 0;
-                for (var i in avanceUsuario.lecciones) {
-                    if (avanceUsuario.lecciones[i] == 1) {
-                        contador++;
-                    }
-                }
-                avanceUsuario.leccionesTerminadas = contador;
+                avanceUsuario['3'][$routeParams.modulo][$routeParams.leccion] = "true";
                 localStorage.setItem("avanceUsuario", JSON.stringify(avanceUsuario));
-                $location.path('/m/' + $routeParams.modulo + "/" + $routeParams.leccion + "/" + $routeParams.unidad + "/leccion-terminada");
+
+                var data = {
+                    'per_id': $scope.usuarioActivo.id,
+                    'cap_id': 3,
+                    'mod_id': $routeParams.modulo,
+                    'lec_id': $routeParams.leccion
+                };
+                nutrifami.avance.addAvance(data, function (response) {
+                    if (response.success) {
+                        $location.path('/m/' + $routeParams.modulo + "/" + $routeParams.leccion + "/" + $routeParams.unidad + "/leccion-terminada");
+                    }
+                });
+
             } else {
                 $location.path('/m/' + $routeParams.modulo + "/" + $routeParams.leccion + "/" + $scope.siguienteUnidad);
             }
