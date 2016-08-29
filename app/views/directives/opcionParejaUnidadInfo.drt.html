@@ -2,7 +2,7 @@
     <div class="opcion-sonido" ng-show="info.audio.url != ''">
         <button ng-click='info.audio.audio.paused ? info.audio.audio.play() : info.audio.audio.pause()' class="fa fa-volume-up" aria-hidden="true"></button>
     </div>
-    <button class="opcion-pareja" ng-click="click()" ng-class="[info.selected ? 'selected' : '', info.match ? 'pareja-match':'']">
+    <button class="opcion-pareja" ng-click="click()" ng-class="[info.selected ? 'selected' : '', info.match ? 'pareja-match':'', info.fallo ? 'pareja-mal':'']">
         {{ info.texto}}
     </button>
 </div>

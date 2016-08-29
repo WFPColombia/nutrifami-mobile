@@ -148,6 +148,10 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope', '$locati
         $scope.seleccionarPareja = function (index) {
             /* Verifica si es una opcion que no ha hecho match para poderla seleccionar*/
             if (!$scope.unidad.opciones[index].match) {
+                
+                for(var i in $scope.unidad.opciones){
+                    $scope.unidad.opciones[i].fallo = false;
+                }
 
                 /* Toggle para seleccionar y deseleccionar tarjeta*/
                 if ($scope.unidad.opciones[index].selected) {
@@ -160,7 +164,7 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope', '$locati
 
                     parejasContador++;
                     if (parejasContador === 1) {
-                        pareja1Orden = $scope.unidad.opciones[index].orden;
+                        pareja1Orden = $scope.unidad.opciones[index].orden;         
                         pareja1Pos = index;
                     } else if (parejasContador === 2) {
                         pareja2Orden = $scope.unidad.opciones[index].orden;
@@ -208,14 +212,18 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope', '$locati
                             $scope.unidad.opciones[pareja2Pos].pareja = '';
                             $scope.unidad.opciones[pareja2Pos].selected = false;
                             $scope.unidad.opciones[pareja2Pos].match = false;
+                            $scope.unidad.opciones[pareja2Pos].fallo = true;
                             $scope.unidad.opciones[pareja1Pos].pareja = '';
                             $scope.unidad.opciones[pareja1Pos].selected = false;
                             $scope.unidad.opciones[pareja1Pos].match = false;
+                            $scope.unidad.opciones[pareja1Pos].fallo = true;
+
                             parejasContador = 0;
                             pareja1Pos = 0;
                             pareja2Pos = 0;
                             pareja1Orden = 0;
                             pareja2Orden = 0;
+
                             if (navigator && navigator.vibrate) {
                                 navigator.vibrate([300, 100, 300]);
                             }
