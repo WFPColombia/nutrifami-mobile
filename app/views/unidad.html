@@ -22,7 +22,7 @@
                         <div class="col-xs-12">
                             <p class="unidad-instruccion"><a href><span ng-click='unidad.instruccion.audio.audio.paused ? unidad.instruccion.audio.audio.play() : unidad.instruccion.audio.audio.pause()' class="fa fa-volume-up" aria-hidden="true"></span></a>{{ unidad.instruccion.texto }}</p>
                             <p class="unidad-texto"><a href><span ng-click='unidad.titulo.audio.audio.paused ? unidad.titulo.audio.audio.play() : unidad.titulo.audio.audio.pause()' class="fa fa-volume-up" aria-hidden="true"></span></a>{{ unidad.titulo.texto}}</p>
-                            <img class="unidad-imagen"ng-src="assets/{{unidad.imagen.nombre}}" ng-hide="{{unidad.imagen === undefined}}"/>
+                            <img class="unidad-imagen"ng-src="assets/{{unidad.imagen.nombre}}" ng-hide="{{unidad.imagen === undefined || unidad.imagen.nombre === ''}}"/>
                         </div>
                     </div>
                 </div>

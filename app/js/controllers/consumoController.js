@@ -13,12 +13,10 @@ nutrifamiMobile.controller('ConsumoController', ['$rootScope', '$scope', '$locat
         $scope.$on('$viewContentLoaded', function () {
             /* Se le agrega 0,3 segundos para poder verlo ver inicialmente
              * cuando el contenido se demore mucho en cargar se puede quitar el timeout*/
-            $timeout(function () {
-                bsLoadingOverlayService.stop();
-            }, 300);
+            bsLoadingOverlayService.stop();
         });
 
-        
+
         /* BEGIN CORDOVA FILES
          }, false);
          END CORDOVA FILES */

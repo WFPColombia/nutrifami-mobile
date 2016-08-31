@@ -47,15 +47,18 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope', '$locati
                 var tempImagenes = [];
                 /* Recorre todo el objeto de las opciones para crear el arreglo*/
                 for (var i in $scope.unidad.opciones) {
-                    /* Si la opción tiene imagen, se almacena en un arreglo temporal para que las imagenes queden juntas*/
-                    if (typeof $scope.unidad.opciones[i].media === 'undefined') {
-                        tempOpciones.push($scope.unidad.opciones[i]);
-                    } else { /* Si no, se guardan en otro arreglo*/
+                    /* Si la opción tiene imagen, se activan los estilos de las imagenes*/
+                    if (typeof $scope.unidad.opciones[i].media !== 'undefined') {
+                        $scope.hayImagen = true;
+                    }
+                    /* Si el texto es corto (titulo se almacena en un arreglo temporal)*/
+                    if ($scope.unidad.opciones[i].texto.length <= 30) {
                         tempImagenes.push($scope.unidad.opciones[i]);
+                    } else { /* Si no, se guardan en otro arreglo*/
+                        tempOpciones.push($scope.unidad.opciones[i]);
                     }
                 }
                 /* Se mezclan los arreglos */
-                console.log(tempOpciones);
                 shuffle(tempImagenes);
                 shuffle(tempOpciones);
                 var opcionesUnidad = [];
@@ -148,8 +151,8 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope', '$locati
         $scope.seleccionarPareja = function (index) {
             /* Verifica si es una opcion que no ha hecho match para poderla seleccionar*/
             if (!$scope.unidad.opciones[index].match) {
-                
-                for(var i in $scope.unidad.opciones){
+
+                for (var i in $scope.unidad.opciones) {
                     $scope.unidad.opciones[i].fallo = false;
                 }
 
@@ -164,7 +167,7 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope', '$locati
 
                     parejasContador++;
                     if (parejasContador === 1) {
-                        pareja1Orden = $scope.unidad.opciones[index].orden;         
+                        pareja1Orden = $scope.unidad.opciones[index].orden;
                         pareja1Pos = index;
                     } else if (parejasContador === 2) {
                         pareja2Orden = $scope.unidad.opciones[index].orden;

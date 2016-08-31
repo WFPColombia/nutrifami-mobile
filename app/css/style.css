@@ -520,7 +520,7 @@ button.list-group-item:focus{
 /* UNIDADES */
 
 
-.app .unidad {
+.app .unidad{
     padding-top: 0px;
 }
 
@@ -646,6 +646,25 @@ button.list-group-item:focus{
     text-align: center;
     font-size: 10pt;
     width: 100%;
+    padding: 0;
+}
+
+.unidad .opciones .pareja-con-imagen{
+    height: 150px;
+}
+
+.unidad .opciones .opcion-sonido.sonido-con-imagen{
+    top:105px;
+}
+
+.unidad .opciones .pareja-con-imagen .titulo-con-imagen{
+    position: initial;
+    top: 0;
+    -ms-transform: translateY(0);
+    -webkit-transform: translateY(0); 
+    transform: translateY(0); 
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .unidad .opciones .selected {
@@ -680,8 +699,7 @@ button.list-group-item:focus{
     }
 }
 
-.unidad .opciones .opcion p,
-.unidad .opciones .opcion-pareja p {
+.unidad .opciones .opcion p {
     position: relative;
     top: 50%;
     -ms-transform: translateY(-50%);
@@ -1242,7 +1260,7 @@ button.list-group-item:focus{
 }
 
 .compras .compras-body .compras-porcentaje-tipo{
-    height: 45px;
+    height: 62px;
 }
 .compras .compras-body .compras-porcentaje-tipo p{
     text-align: right;
@@ -1260,7 +1278,7 @@ button.list-group-item:focus{
 .compras .compras-body .progress{
     background-color: #efefef;
     border: none;
-    height: 45px;
+    height: 62px;
     border-radius: 0px;
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
@@ -1291,14 +1309,14 @@ button.list-group-item:focus{
 .compras .compras-body .progress .cantidad{
     width: 100%;
     text-align: right;
-    font-size: 16pt;
-    padding-top: 5px;
+    font-size: 19pt;
+    padding-top: 15px;
     padding-right: 12px;   
 }
 
 .compras .compras-body .progress .fa{
     font-size: 24pt;
-    color: #bfbfbf;
+    color: rgba(0,0,0,0.4);
     width: 25px;
     height: 45px;
     position: relative;
@@ -1308,7 +1326,7 @@ button.list-group-item:focus{
 }
 
 .compras .compras-body .progress .cantidad span{
-    font-size: 10pt;
+    font-size: 11pt;
     position: relative;
     top: -5px;
 }
@@ -1371,12 +1389,14 @@ button.list-group-item:focus{
     border-radius: 0 0 10px 10px;
 }
 
-.canasta-body .panel .panel-body ul{
+.canasta-body .panel .panel-body ul,
+.compras-body .compra-ideal .panel-body ul{
     padding: 0;
     margin: 0;
 }
 
-.canasta-body .panel .panel-body li {
+.canasta-body .panel .panel-body li,
+.compras-body .compra-ideal .panel-body li{
     text-decoration: none;
     list-style: none;
     height: 50px;
@@ -1387,42 +1407,207 @@ button.list-group-item:focus{
     padding-top: 16px;
 }
 
-.canasta-body .panel .panel-body li:last-child {
+.canasta-body .panel .panel-body li:last-child,
+.compras-body .compra-ideal .panel-body li:last-child{
     border-radius: 0 0 10px 10px;
 }
 
-.canasta-body .panel .panel-body li:nth-child(even) {
+.canasta-body .panel .panel-body li:nth-child(even),
+.compras-body .compra-ideal .panel-body li:nth-child(even){
     background-color: #f5f5f5;
 }
 
-.compras .compras-body .progress .grupo-1,
-.canasta-body .panel .grupo-1{
-    background-color: #f2df00;
+.compras-header .compras-header-titulo {
+    font-family: 'Muli', sans-serif;
+    font-size: 12pt;
+    color: white;
+    width: 100%;
+    height: 64px;
+    padding-top: 17px;
+    border-bottom: 1px solid #ffffff;
 }
 
-.compras .compras-body .progress .grupo-2,
-.canasta-body .panel .grupo-2{
-    background-color: #ff9600;
+.compras-header .compras-header-titulo h1{
+    font-size: 15pt;
+    color: #ffffff;
+    text-align: center;
 }
 
-.compras .compras-body .progress .grupo-3,
-.canasta-body .panel .grupo-3{
+.compras-header .compras-header-titulo .btn{
+    border: none;
+    background-color: rgba(0,0,0,0);
+    padding: 0px 12px;
+}
+
+.compras-header  .compras-header-titulo button{
+    border: none;
+    background-color: rgba(0,0,0,0);
+}
+
+.compras-header .compras-header-resumen .left,
+.compras-header .compras-header-resumen .right{
+    width: 37%;
+    float: left;
+}
+
+.compras-header .compras-header-resumen .center{
+    width: 26%;
+    border-left: 1px solid;
+    border-right: 1px solid;
+    float: left;
+}
+
+.compras-header .compras-header-resumen{
+    height: 108px;
+    color: #ffffff;
+    text-align: center;
+    padding-top: 19px;
+}
+
+.compras-header .compras-header-resumen h2{
+    font-size: 25pt;
+    margin-bottom:2px;
+}
+
+.compras-header .compras-header-resumen h3{
+    font-size: 20pt;
+}
+
+.compras-porcentaje {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto;
+}
+
+.compras-header .compras-header-resumen .c100.small {
+    font-size: 60px;
+}
+
+.compras-header .compras-header-resumen .c100 {
+    background-color: #ffffff;
+}
+
+.compras-header .compras-header-resumen .c100 > span{
+    margin-top: 15px
+}
+
+.compras-header .compras-header-resumen .c100 .bar{
+    border: 5px solid #c8c8c6;
+}
+
+.compras-body .compras-productos{
+    color: #2f3e47;
+    font-size: 12pt;
+    margin-top: 20px;
+}
+
+.compras-body .compras-productos .total-productos{
+    color: #2f3e47;
+    font-size: 17pt;
+    border-top: 1px solid #2f3e47;
+    padding-top: 25px;
+}
+
+
+.compras-body .compras-productos .producto{
+    margin-bottom: 35px;
+}
+
+.compras-body .compras-productos .precio{
+    text-align: right;
+}
+
+.compras-body .compra-ideal{
+    margin-top: 70px;
+}
+
+.compras-body .compra-ideal .panel-group{
+    margin-bottom: 0px;
+}
+
+.compras-body .compra-ideal .panel-heading{
+    padding-top: 22px;
+    background-color: #ffffff;
+    height: 120px;
+    color: #2f3e47;
+}
+
+.compras-body .compra-ideal .panel-heading button{
+    border:none;
+    background-color: rgba(0,0,0,0);
+    font-size: 10pt;
+    position: relative;
+    top: -5px;
+}
+
+.compras-body .compra-ideal .panel-heading .compra-ideal-imagen{
+    float: left;
+    margin-right:12px;
+}
+
+.compras-body .compra-ideal .panel-heading .compra-ideal-descripcion{
+    font-size: 15pt;
+    margin-top: 6px;
+}
+
+.compras-body .compra-ideal .panel-heading h3{
+    font-size: 9pt;
+    color: #00c97e;
+    text-transform: uppercase;
+    font-family: 'Raleway-Bold', sans-serif;
+}
+
+.compras-body .compra-ideal .panel-heading .chevron{
+    float: right;
+    color: #cccccc;
+    font-size: 24pt;
+    margin-top: 20px;
+}
+
+.compras-body .compra-ideal .panel-body{
+    color: #2f3e47;
+}
+
+.compras-body .compra-ideal .panel-body button{
+    border:none;
+    background-color: rgba(0,0,0,0);
+}
+
+.compras-body .compra-ideal .panel-body p{
+    font-size: 12pt;
+    
+}
+
+.compras .compras-body .progress .grupo-cereales,
+.canasta-body .panel .grupo-cereales,
+.compras-header.grupo-cereales,
+.compras-header .compras-header-resumen .c100:after{
+    background-color: #f2df00 !important;
+}
+
+.compras .compras-body .progress .grupo-frutas,
+.canasta-body .panel .grupo-frutas{
     background-color: #7bd462;
 }
 
-.compras .compras-body .progress .grupo-4,
-.canasta-body .panel .grupo-4{
-    background-color: #ff037a;
-}
-
-.compras .compras-body .progress .grupo-5,
-.canasta-body .panel .grupo-5{
+.compras .compras-body .progress .grupo-leche,
+.canasta-body .panel .grupo-leche{
     background-color: #0fa7ff;
 }
 
-.compras .compras-body .progress .grupo-6,
-.canasta-body .panel .grupo-6{
-    background-color: #6e42ff;
+.compras .compras-body .progress .grupo-carne,
+.canasta-body .panel .grupo-carne{
+    background-color: #ff9600;
+}
+
+.compras .compras-body .progress .grupo-grasas,
+.canasta-body .panel .grupo-grasas{
+    background-color: #ff037a;
+}
+
+.compras .compras-body .progress .grupo-azucares,
+.canasta-body .panel .grupo-azucares{
+    background-color: #d360fe;
 }
 
 .compras .compras-body .progress .grupo-7,
