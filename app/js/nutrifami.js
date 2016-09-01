@@ -670,6 +670,66 @@ var nutrifami = {
             });
             callback(response);
         }
+    },
+    
+    consumo: {
+        /*
+         * nutrifami.consumo.getConsolidadoCompras(data, callback);
+         */
+        getConsolidadoCompras: function (data, callback) {
+            callback = callback || function () {
+            };
+            var serv = base_url + "app/api/get-consolidado-compras";
+            response = {
+                success: false,
+                message: ''
+            };
+            $.ajax({
+                url: serv,
+                type: 'GET',
+                async: false,
+                data: data,
+                success: function (data) {
+                    var objServ = JSON.parse(data);
+                    response.success = true;
+                    response.data = objServ;
+                },
+                error: function () {
+                    response.success = false;
+                    response.message = 'Ha ocurrido un error durante la ejecución';
+                }
+            });
+            callback(response);
+        },
+        
+        
+        /*
+         * nutrifami.consumo.getProductosPuntoVenta(data, callback);
+         */
+        getProductosPuntoVenta: function (data, callback) {
+            callback = callback || function () {
+            };
+            var serv = base_url + "app/api/get-productos-puntoventa";
+            response = {
+                success: false,
+                message: ''
+            };
+            $.ajax({
+                url: serv,
+                type: 'GET',
+                async: false,
+                data: data,
+                success: function (data) {
+                    var objServ = JSON.parse(data);
+                    response = objServ.response;
+                },
+                error: function () {
+                    response.success = false;
+                    response.message = 'Ha ocurrido un error durante la ejecución';
+                }
+            });
+            callback(response);
+        }
     }
 
 };
