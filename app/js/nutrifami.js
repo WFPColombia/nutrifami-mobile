@@ -721,7 +721,8 @@ var nutrifami = {
                 data: data,
                 success: function (data) {
                     var objServ = JSON.parse(data);
-                    response = objServ.response;
+                    response.success = true;
+                    response.data = objServ;
                 },
                 error: function () {
                     response.success = false;

@@ -19,7 +19,7 @@ nutrifamiMobile.factory('ConsumoService', ['$http', '$cookieStore', '$rootScope'
          * ConsumoService.getProductosPuntoVenta(puntoVenta, function (response){});
          */
         service.getProductosPuntoVenta = function (puntoVenta, callback) {
-            nutrifami.nutrifami.consumo.getProductosPuntoVenta(puntoVenta, function (response) {
+            nutrifami.consumo.getProductosPuntoVenta(puntoVenta, function (response) {
                 callback(response);
             });
 

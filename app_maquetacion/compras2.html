@@ -107,7 +107,7 @@
 
                         </div>
                         <div class="compra-ideal">
-                            <div class="panel-group" ui-state="myAccordion">
+                            <!--<div class="panel-group" ui-state="myAccordion">
                                 <div class="panel panel-default">
                                     <div class="panel-heading" ui-set="{'myAccordion': 1}">  
                                         <div class="chevron">
@@ -137,26 +137,39 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>-->
+
+                            <div class="panel-heading logro">
+                                <div class="container">
+                                    <img src="../app/img/icons/ico-compras-muy-bien.png" alt=""/>
+                                    <h2 class="compra-ideal-descripcion"> 
+                                                Muy bien! Este mes <br>lo hiciste estupendo!<button class="fa fa-volume-up" aria-hidden="true"></button>
+                                            </h2>
+                                    <p></p>
+                                </div>
+
                             </div>
+
                         </div>
                     </div>
                 </div>
-            </div> <!-- .app-body -->
+            </div>
+        </div> <!-- .app-body -->
 
-        </div><!-- ~ .app -->
-        <!-- Modals and Overlays -->
-        <div ui-yield-to="modals"></div>
-        <script>
-                    angular.module('myApp', ["ngRoute", "mobile-angular-ui", 'ui.swiper']).config(function ($routeProvider) {
-                        $routeProvider.when('/', {
-                            // ...
-                        });
-                        // ...
-                    }).controller('myController', AppController);
+    </div><!-- ~ .app -->
+    <!-- Modals and Overlays -->
+    <div ui-yield-to="modals"></div>
+    <script>
+        angular.module('myApp', ["ngRoute", "mobile-angular-ui", 'ui.swiper']).config(function ($routeProvider) {
+            $routeProvider.when('/', {
+                // ...
+            });
+            // ...
+        }).controller('myController', AppController);
 
-                    function AppController($scope, $timeout) {
-                    }
-                    ;
-        </script>
-    </body>
+        function AppController($scope, $timeout) {
+        }
+        ;
+    </script>
+</body>
 </html>

@@ -1250,7 +1250,11 @@ button.list-group-item:focus{
     font-size: 12pt;
     color: #2f3e47;
     text-align: center;
-    padding: 0 75px;
+    padding: 0 20px;
+}
+
+.compras .compras-body .compras-descripcion span{
+    text-transform: lowercase;
 }
 
 .compras .compras-body .compras-descripcion button{
@@ -1304,6 +1308,10 @@ button.list-group-item:focus{
     background-image: none;
     -webkit-box-shadow: none;
     box-shadow: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 62px;
 }
 
 .compras .compras-body .progress .cantidad{
@@ -1311,7 +1319,8 @@ button.list-group-item:focus{
     text-align: right;
     font-size: 19pt;
     padding-top: 15px;
-    padding-right: 12px;   
+    padding-right: 12px;  
+    position:relative;
 }
 
 .compras .compras-body .progress .fa{
@@ -1431,6 +1440,7 @@ button.list-group-item:focus{
     font-size: 15pt;
     color: #ffffff;
     text-align: center;
+    text-transform: lowercase;
 }
 
 .compras-header .compras-header-titulo .btn{
@@ -1487,11 +1497,8 @@ button.list-group-item:focus{
     background-color: #ffffff;
 }
 
-.compras-header .compras-header-resumen .c100 > span{
-    margin-top: 15px
-}
-
-.compras-header .compras-header-resumen .c100 .bar{
+.compras-header .compras-header-resumen .c100 .bar,
+.compras-header .compras-header-resumen .c100 .fill{
     border: 5px solid #c8c8c6;
 }
 
@@ -1511,6 +1518,7 @@ button.list-group-item:focus{
 
 .compras-body .compras-productos .producto{
     margin-bottom: 35px;
+    text-transform: lowercase;
 }
 
 .compras-body .compras-productos .precio{
@@ -1531,6 +1539,26 @@ button.list-group-item:focus{
     height: 120px;
     color: #2f3e47;
 }
+
+.compras-body .compra-ideal .panel-heading.logro{
+    padding-top: 10px;
+
+}
+
+.compras-body .compra-ideal .panel-heading.logro .compra-ideal-descripcion {
+    margin-left: 130px;
+    padding-top: 20px;
+}
+
+.compras-body .compra-ideal .panel-heading.logro button{
+    top: -30px;
+}
+
+.compras-body .compra-ideal .panel-heading.logro img{
+    float:left;
+
+}
+
 
 .compras-body .compra-ideal .panel-heading button{
     border:none;
@@ -1575,50 +1603,58 @@ button.list-group-item:focus{
 
 .compras-body .compra-ideal .panel-body p{
     font-size: 12pt;
-    
 }
 
-.compras .compras-body .progress .grupo-cereales,
-.canasta-body .panel .grupo-cereales,
-.compras-header.grupo-cereales,
-.compras-header .compras-header-resumen .c100:after{
+.compras-body .compra-ideal .panel-body ul li{
+    text-transform: lowercase;
+}
+
+.compras .compras-body .progress .grupo-CEREALES,
+.canasta-body .panel .grupo-CEREALES,
+.compras-header.grupo-CEREALES,
+.compras-header.grupo-CEREALES .compras-header-resumen .c100:after{
     background-color: #f2df00 !important;
 }
 
-.compras .compras-body .progress .grupo-frutas,
-.canasta-body .panel .grupo-frutas{
+.compras .compras-body .progress .grupo-VEGETALES,
+.canasta-body .panel .grupo-VEGETALES,
+.compras-header.grupo-VEGETALES,
+.compras-header.grupo-VEGETALES .compras-header-resumen .c100:after{
     background-color: #7bd462;
 }
 
-.compras .compras-body .progress .grupo-leche,
-.canasta-body .panel .grupo-leche{
+.compras .compras-body .progress .grupo-LECHELACTEOS,
+.canasta-body .panel .grupo-LECHELACTEOS,
+.compras-header.grupo-LECHELACTEOS,
+.compras-header.grupo-LECHELACTEOS .compras-header-resumen .c100:after{
     background-color: #0fa7ff;
 }
 
-.compras .compras-body .progress .grupo-carne,
-.canasta-body .panel .grupo-carne{
+.compras .compras-body .progress .grupo-CARNES,
+.canasta-body .panel .grupo-CARNES,
+.compras-header.grupo-CARNES,
+.compras-header.grupo-CARNES .compras-header-resumen .c100:after{
     background-color: #ff9600;
 }
 
-.compras .compras-body .progress .grupo-grasas,
-.canasta-body .panel .grupo-grasas{
+.compras .compras-body .progress .grupo-GRASAS,
+.canasta-body .panel .grupo-GRASAS,
+.compras-header.grupo-GRASAS,
+.compras-header.grupo-GRASAS .compras-header-resumen .c100:after{
     background-color: #ff037a;
 }
 
-.compras .compras-body .progress .grupo-azucares,
-.canasta-body .panel .grupo-azucares{
+.compras .compras-body .progress .grupo-AZUCAR,
+.canasta-body .panel .grupo-AZUCAR,
+.compras-header.grupo-AZUCAR,
+.compras-header.grupo-AZUCAR .compras-header-resumen .c100:after{
     background-color: #d360fe;
 }
 
-.compras .compras-body .progress .grupo-7,
-.canasta-body .panel .grupo-7{
-    background-color: #d360fe;
-}
-
-.compras .compras-body .progress .grupo-8,
-.canasta-body .panel .grupo-8{
+.compras .compras-body .progress .grupo-CONDIMENTOS,
+.canasta-body .panel .grupo-CONDIMENTOS,
+.compras-header.grupo-CONDIMENTOS,
+.compras-header.grupo-CONDIMENTOS .compras-header-resumen .c100:after{
     background-color: #bd8330;
 }
-
-
 /* END COMPRAS Y CANASTA IDEAL */ 
