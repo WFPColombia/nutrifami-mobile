@@ -18,7 +18,7 @@ nutrifamiMobile.controller('CapacitacionController', ['$scope', '$anchorScroll',
             bsLoadingOverlayService.stop();
         });
         $scope.usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
-        $scope.avanceUsuario = JSON.parse(localStorage.getItem('avanceUsuario'));
+        $scope.usuarioAvance = JSON.parse(localStorage.getItem('usuarioAvance'));
         $scope.modulos = [];
         /* Obtenemos los ids de los modulos de la capacitación 3 */
         $scope.mids = nutrifami.training.getModulosId(3);
@@ -32,8 +32,8 @@ nutrifamiMobile.controller('CapacitacionController', ['$scope', '$anchorScroll',
                 tempModulo.activo = false;
             }
 
-            if (typeof $scope.avanceUsuario['3'] !== 'undefined' && typeof $scope.avanceUsuario['3'][$scope.mids[mid]] !== 'undefined') {
-                tempModulo.avance.leccionesFinalizadas = Object.keys($scope.avanceUsuario['3'][$scope.mids[mid]]).length;
+            if (typeof $scope.usuarioAvance['3'] !== 'undefined' && typeof $scope.usuarioAvance['3'][$scope.mids[mid]] !== 'undefined') {
+                tempModulo.avance.leccionesFinalizadas = Object.keys($scope.usuarioAvance['3'][$scope.mids[mid]]).length;
             } else {
                 tempModulo.avance.leccionesFinalizadas = 0;
             }

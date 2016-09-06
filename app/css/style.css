@@ -1012,27 +1012,35 @@ button.list-group-item:focus{
     padding-bottom: 20px;
 }
 
+.perfil-panel.editar-perfil{
+    margin-top: 80px;
+}
+
 .perfil-header img {
-    margin-top: -35px;
+    margin-top: -70px;
     margin-bottom: 10px;
 }
 
 .perfil-panel .boton-flotante {
-    position: absolute;
-    right: 14px;
-    top: 68px;
+    position: relative;
+    right: -155px;
+    top: 10px;
     z-index: 1000;
 }
 
-.perfil-panel .boton-flotante a,
-.perfil-panel .boton-flotante a:hover{
+.perfil-panel .boton-flotante button,
+.perfil-panel .boton-flotante button:hover{
     height: 38px;
     background-color: #ffffff;
     background-image: none;
-    border: 1px solid #dcdcdc;
+    border: 2px solid #dcdcdc;
     border-radius: 7px;
     padding: 8px 14px;
     font-weight: normal;
+}
+
+.perfil-panel .boton-flotante button .fa{
+    color: #00c97e;
 
 }
 
@@ -1077,8 +1085,7 @@ button.list-group-item:focus{
 .modal-dialog .form-group p,
 .modal-dialog .form-group .sin-registro{
     font-size: 10pt;
-    padding: 6px 22px;
-    text-transform: capitalize;
+    padding: 3px 5px;
 }
 
 .perfil-body .form-group .sin-registro,
@@ -1092,13 +1099,13 @@ button.list-group-item:focus{
     -moz-appearance: none;
     background-position: 96% 50%;
     background-repeat: no-repeat;
-    background-image: url('../img/ico-selector.png');
+    background-image: url('../img/icons/ico-selector.png');
     padding: 6px 22px;
 }
 
 .perfil-body .form-group label,
 .modal-dialog .form-group label{
-    padding-left: 22px;
+    padding-left: 5px;
     font-size: 7pt;
     font-family: 'Raleway-Bold', sans-serif;
     color: rgba(0, 0, 0, 0.6);
@@ -1119,7 +1126,7 @@ button.list-group-item:focus{
     -moz-appearance: none;
     background-position: 96% 50%;
     background-repeat: no-repeat;
-    background-image: url('../img/ico-datepicker.png');
+    background-image: url('../img/icons/ico-datepicker.png');
     padding: 6px 22px;
 }
 

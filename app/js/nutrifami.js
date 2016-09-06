@@ -1,6 +1,7 @@
 var usuarioActivo = new Object();   /* Información del usuario logueado */
-var avanceUsuario = new Object();   /* Información de avance del usuario*/
-var familiaObj = new Object();      /* Datos de la familia del usuario logueado, incluidos miembros de la familia*/
+var usuarioAvance = new Object();   /* Información de avance del usuario*/
+var usuarioFamilia = new Object();  /* Datos de la familia del usuario logueado, incluidos miembros de la familia*/
+var usuarioFamiliaAvance = new Object();  /* Datos de avance de la familia*/
 
 
 
@@ -96,17 +97,27 @@ var nutrifami = {
                     $.extend(usuarioActivo, objServ);
 
                     /* Se copia la información de avance en un objeto independiente y se elimina la información de usuarioActivo*/
-                    avanceUsuario = usuarioActivo.avance[usuarioActivo.id];
+                    usuarioAvance = usuarioActivo.avance[usuarioActivo.id];
+                    
                     /* Se copia la informaciòn de avance de familia a un objeto independiente*/
-                    avanceFamilia = usuarioActivo.avance;
+                    usuarioFamiliaAvance = usuarioActivo.avance;
                     delete usuarioActivo["avance"];
-                    delete avanceFamilia[usuarioActivo.id];
+                    delete usuarioFamiliaAvance[usuarioActivo.id];
+                    
+                    /*Se copia información de familia de usuario Activo en objeto independiente*/
+                    usuarioFamilia = usuarioActivo.familia;
+                    delete usuarioActivo["familia"];
 
                     /* Se almacena usuario activo en el locaStorage para llamarlo más facilmente */
                     localStorage.setItem("usuarioActivo", JSON.stringify(usuarioActivo));
-
-                    localStorage.setItem("avanceUsuario", JSON.stringify(avanceUsuario));
-                    localStorage.setItem("avanceFamilia", JSON.stringify(avanceFamilia));
+                    localStorage.setItem("usuarioAvance", JSON.stringify(usuarioAvance));
+                    localStorage.setItem("usuarioFamiliaAvance", JSON.stringify(usuarioFamiliaAvance));
+                    localStorage.setItem("usuarioFamilia", JSON.stringify(usuarioFamilia));
+                    
+                    console.log(usuarioActivo);
+                    console.log(usuarioAvance);
+                    console.log(usuarioFamiliaAvance);
+                    console.log(usuarioFamilia);
 
                     this.isloginFlag = true;
                     response.success = true;

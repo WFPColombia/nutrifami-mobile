@@ -1,7 +1,10 @@
 /*global angular*/
 nutrifamiMobile.controller('PerfilController', ['$scope', '$rootScope', '$anchorScroll', 'PerfilService', 'bsLoadingOverlayService', '$timeout', '$route', function ($scope, $rootScope, $anchorScroll, PerfilService, bsLoadingOverlayService, $timeout, $route) {
         'use strict';
-
+        /* BEGIN CORDOVA FILES
+         document.addEventListener('deviceready', function () {
+         AndroidFullScreen.immersiveMode();
+         END CORDOVA FILES */
         $anchorScroll();
 
         /* Overloading*/
@@ -10,25 +13,18 @@ nutrifamiMobile.controller('PerfilController', ['$scope', '$rootScope', '$anchor
         $scope.$on('$viewContentLoaded', function () {
             /* Se le agrega 0,3 segundos para poder verlo ver inicialmente
              * cuando el contenido se demore mucho en cargar se puede quitar el timeout*/
-            $timeout(function () {
-                bsLoadingOverlayService.stop();
-            }, 300);
+            bsLoadingOverlayService.stop();
         });
 
-        /* Verifica si viene un mensaje, lo muestra cierta cantidad de tiempo y lo elimina*/
-        /*if ($rootScope.mensaje.estado !== null) {
-         $timeout(function () {
-         $rootScope.mensaje.estado = false;
-         }, $rootScope.mensaje.tiempo);
-         }*/
-
+        /* Cargamos la información del local storage*/
         $scope.usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
-
-        /* Creamos un arreglo para mostrar los miembros de la familia de forma dinamica */
+        $scope.usuarioFamilia = JSON.parse(localStorage.getItem('usuarioFamilia'));
 
         console.log($scope.usuarioActivo);
+        console.log($scope.usuarioFamilia);
 
-        $scope.usuarioActivo.miembrosPorRango = [
+        /* Creamos un arreglo para mostrar los miembros de la familia de forma dinamica */
+        $scope.usuarioFamilia.miembrosPorRango = [
             {
                 rango: '0 a 2 años',
                 cantidad: parseInt($scope.usuarioActivo.rango_0a2),
@@ -56,9 +52,9 @@ nutrifamiMobile.controller('PerfilController', ['$scope', '$rootScope', '$anchor
             }
         ];
 
-        $scope.usuarioActivo.totalMiembrosPorInscribir = 0;
-        for (var i in $scope.usuarioActivo.miembrosPorRango) {
-            $scope.usuarioActivo.totalMiembrosPorInscribir = $scope.usuarioActivo.totalMiembrosPorInscribir + $scope.usuarioActivo.miembrosPorRango[i].cantidad;
+        $scope.usuarioFamilia.totalMiembrosPorInscribir = 0;
+        for (var i in $scope.usuarioFamilia.miembrosPorRango) {
+            $scope.usuarioFamilia.totalMiembrosPorInscribir = $scope.usuarioFamilia.totalMiembrosPorInscribir + $scope.usuarioFamilia.miembrosPorRango[i].cantidad;
         }
 
         $scope.familiar = {};
@@ -73,7 +69,7 @@ nutrifamiMobile.controller('PerfilController', ['$scope', '$rootScope', '$anchor
             ]
         };
 
-        $scope.usuarioActivo.totalMiembrosInscritos = $scope.usuarioActivo.familia.length;
+        $scope.usuarioFamilia.totalMiembrosInscritos = $scope.usuarioFamilia.length;
 
         $scope.abrirModalEditarFamiliar = function (index) {
             $scope.indexFamiliar = index;
@@ -110,14 +106,17 @@ nutrifamiMobile.controller('PerfilController', ['$scope', '$rootScope', '$anchor
                         $scope.usuarioActivo.miembrosPorRango[index].cantidad--;
                         $scope.usuarioActivo['rango_' + familiar.rango] = familiar.cantidad;
                     }
-                    
+
                     $scope.usuarioActivo.familia.push(familiar);
-                    
+
                     localStorage.setItem("usuarioActivo", JSON.stringify($scope.usuarioActivo));
                     $rootScope.Ui.turnOff('editarFamiliar');
-                }else{
+                } else {
                     console.log(response.message);
                 }
             });
         };
+        /* BEGIN CORDOVA FILES
+         }, false);
+         END CORDOVA FILES */
     }]);
