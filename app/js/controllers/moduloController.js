@@ -11,17 +11,15 @@ nutrifamiMobile.controller('ModuloController', ['$rootScope', '$scope', '$locati
         bsLoadingOverlayService.start();
         /* Se apaga cuando el todo el contenido de la vista ha sido cargado*/
         $scope.$on('$viewContentLoaded', function () {
-            /* Se le agrega 0,3 segundos para poder verlo ver inicialmente
-             * cuando el contenido se demore mucho en cargar se puede quitar el timeout*/
             bsLoadingOverlayService.stop();
         });
 
         $scope.usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
-        $scope.avanceUsuario = JSON.parse(localStorage.getItem('avanceUsuario'));
+        $scope.usuarioAvance = JSON.parse(localStorage.getItem('usuarioAvance'));
         $scope.lecciones = [];
 
         /* Se hace un try por si el usuario intenta ingresar a la URL a otro modulo que lo lleve al home */
-        try {
+        //try {
             $scope.modulo = nutrifami.training.getModulo($routeParams.modulo);
             console.log($scope.modulo);
             $scope.modulo.titulo.audio.audio = ngAudio.load("assets/" + $scope.modulo.titulo.audio.nombre);
@@ -35,7 +33,7 @@ nutrifamiMobile.controller('ModuloController', ['$rootScope', '$scope', '$locati
                 if (tempLeccion.titulo.audio.nombre !== null) {
                     tempLeccion.titulo.audio.audio = ngAudio.load("assets/" + tempLeccion.titulo.audio.nombre);
                 }
-                if (typeof $scope.avanceUsuario['3'] !== 'undefined' && typeof $scope.avanceUsuario['3'][$routeParams.modulo] !== 'undefined' && typeof $scope.avanceUsuario['3'][$routeParams.modulo][$scope.lids[lid]] !== 'undefined') {
+                if (typeof $scope.usuarioAvance['3'] !== 'undefined' && typeof $scope.usuarioAvance['3'][$routeParams.modulo] !== 'undefined' && typeof $scope.usuarioAvance['3'][$routeParams.modulo][$scope.lids[lid]] !== 'undefined') {
                     tempLeccion.avance.terminada = true;
                 }
                 else {
@@ -43,12 +41,12 @@ nutrifamiMobile.controller('ModuloController', ['$rootScope', '$scope', '$locati
                 }
                 $scope.lecciones.push(tempLeccion);
             }
-        } catch (err) {
+        /*} catch (err) {
             $location.path('/');
-        }
+        }*/
 
         $scope.porcentajeAvance = function () {
-            return(100 / $scope.modulo.totalLecciones * $scope.avanceUsuario.leccionesTerminadas);
+            return(100 / $scope.modulo.totalLecciones * $scope.usuarioAvance.leccionesTerminadas);
         };
         $scope.irALeccion = function (index) {
             $location.path('/m/' + $routeParams.modulo + "/" + $scope.lids[index] + "/1");

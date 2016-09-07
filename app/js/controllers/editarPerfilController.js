@@ -49,11 +49,12 @@ nutrifamiMobile.controller('EditarPerfilController', ['$scope', '$location', 'Pe
             $scope.usuarioActivo.birthdate = $scope.usuarioActivo.birthdate.getFullYear() + "-" + tempMonth + "-" + $scope.usuarioActivo.birthdate.getDate();
             delete usuarioActivo["generos"];
             delete usuarioActivo["etnias"];
-            console.log(usuarioActivo);
+
             localStorage.setItem("usuarioActivo", JSON.stringify(usuarioActivo));
+            delete usuarioActivo["sesionId"];
+            delete usuarioActivo["isLogin"];
+            delete usuarioActivo["token"];
             PerfilService.editarUsuario(usuarioActivo, function (response) {
-                console.log("Entra a perfil service");
-                console.log(response);
                 if (response.success) {
                     $rootScope.mensaje = {
                         estado: true,

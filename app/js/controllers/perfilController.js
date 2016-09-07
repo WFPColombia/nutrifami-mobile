@@ -98,18 +98,16 @@ nutrifamiMobile.controller('PerfilController', ['$scope', '$rootScope', '$anchor
             delete familiar["parentescos"];
 
             PerfilService.agregarFamiliar(familiar, function (response) {
-                console.log("Usa el service");
-
                 if (response.success) {
-                    console.log(response.message);
                     if (familiar.rango !== false) {
-                        $scope.usuarioActivo.miembrosPorRango[index].cantidad--;
+                        $scope.usuarioFamilia.miembrosPorRango[index].cantidad--;
                         $scope.usuarioActivo['rango_' + familiar.rango] = familiar.cantidad;
                     }
 
-                    $scope.usuarioActivo.familia.push(familiar);
+                    $scope.usuarioFamilia.push(familiar);
 
                     localStorage.setItem("usuarioActivo", JSON.stringify($scope.usuarioActivo));
+                    localStorage.setItem("usuarioFamilia", JSON.stringify($scope.usuarioFamilia));
                     $rootScope.Ui.turnOff('editarFamiliar');
                 } else {
                     console.log(response.message);

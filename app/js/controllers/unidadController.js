@@ -11,11 +11,7 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope', '$locati
         bsLoadingOverlayService.start();
         /* Se apaga cuando el todo el contenido de la vista ha sido cargado*/
         $scope.$on('$viewContentLoaded', function () {
-            /* Se le agrega 0,3 segundos para poder verlo ver inicialmente
-             * cuando el contenido se demore mucho en cargar se puede quitar el timeout*/
-            $timeout(function () {
                 bsLoadingOverlayService.stop();
-            }, 300);
         });
 
         $scope.usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
@@ -299,13 +295,13 @@ nutrifamiMobile.controller('UnidadController', ['$scope', '$rootScope', '$locati
         $scope.irASiguienteUnidad = function () {
             $scope.siguienteUnidad = parseInt($routeParams.unidad) + 1;
             if ($scope.siguienteUnidad > $scope.unidad.totalUnidades) {
-                var avanceUsuario = JSON.parse(localStorage.getItem('avanceUsuario'));
-                if (typeof avanceUsuario['3'] === 'undefined') {
-                    avanceUsuario['3'] = {};
-                    avanceUsuario['3'][$routeParams.modulo] = {};
+                var usuarioAvance = JSON.parse(localStorage.getItem('usuarioAvance'));
+                if (typeof usuarioAvance['3'] === 'undefined') {
+                    usuarioAvance['3'] = {};
+                    usuarioAvance['3'][$routeParams.modulo] = {};
                 }
-                avanceUsuario['3'][$routeParams.modulo][$routeParams.leccion] = "true";
-                localStorage.setItem("avanceUsuario", JSON.stringify(avanceUsuario));
+                usuarioAvance['3'][$routeParams.modulo][$routeParams.leccion] = "true";
+                localStorage.setItem("usuarioAvance", JSON.stringify(usuarioAvance));
 
                 var data = {
                     'per_id': $scope.usuarioActivo.id,
