@@ -1,39 +1,38 @@
-<div class="login scrollable">
-    <div class="container scrollable-content">
-        <button ng-click='audio.paused ? audio.play() : audio.pause()' class="login-sonido fa fa-volume-up" aria-hidden="true"></button>
+<div class="login">
+    <div class="container">
+        <button ng-click="playAudio()" class="login-sonido icon ion-volume-high" aria-hidden="true" ion-ripple></button>
         <div class="row logo center-block">
-            <div class="col-xs-12">
+            <div class="col col-100">
                 <img src="img/logo-nutrifami.png" alt="Nutrifami"/>
             </div>
         </div>
         <form name="form" ng-submit="login()" role="form">
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col col-100">
                     <div class="form-group">
                         <input type="text" name="username" id="username" class="ldocumento" placeholder="Escriba su número de documento" autocomplete="off" ng-model="username" required />
-                        <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Número de Documento es necesario</span>
+                        <div ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Número de Documento es necesario</div>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col col-100">
                     <div class="form-group">
                         <input type="text" name="password" id="password" class="lcodigo" placeholder="Escriba su código" autocomplete="off" ng-model="password" required />
-                        <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Código es necesario</span>
+                        <div ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Código es necesario</div>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col col-100">
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-default center-block" ng-disabled="form.$invalid || dataLoading">Ingresar</button>
+                        <button type="submit" class="btn btn-default center-block" ng-disabled="form.$invalid" ion-ripple>Ingresar</button>
                         <div ng-show="error" class="help-block">{{error}}</div>
-                        <img ng-if="dataLoading" ng-src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
                     </div>
                 </div>
             </div>
             <div class="row logo-wfp center-block">
-                <div class="col-xs-12">
+                <div class="col col-100">
                     <img src="img/logo-wfp.png" alt="Logo Programa Mundial de Alimentos - Naciones Unidas"/>
                 </div>
             </div>

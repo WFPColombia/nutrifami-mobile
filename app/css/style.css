@@ -179,6 +179,11 @@ ripple { to {
     margin-top: 68px;
 }
 
+.login .btn-default[disabled] {
+    color: rgba(255,255,255,0.5);
+    border-color: rgba(255,255,255,0.5);
+}
+
 .login .btn-default:focus,
 .login .btn-default:active{
     outline:0;
@@ -205,25 +210,36 @@ ripple { to {
     width: 100%;
     color: #ffffff;
     font-family: 'Muli', sans-serif;
+    text-align: center;
 }
 
-.intro .swiper-slide{
-    background-color: #00c97e;
+.intro .slider{
+    height: 100%;;
+}
+
+.intro .slide-body{
+    padding-top: 30%;
 }
 
 .intro h1{
     font-size: 18pt;
     margin-bottom: 30px;
+    color: #ffffff;
+    font-family: 'Muli', sans-serif;
+
 }
 
 .intro h2{
     font-size: 16pt;
     margin-bottom: 45px;
+    color: #ffffff;
+    font-family: 'Muli', sans-serif;
 }
 
 .intro p{
     font-size: 12pt;
     margin-bottom: 50px;
+    font-family: 'Muli', sans-serif;
 }
 
 .intro img{
@@ -248,14 +264,8 @@ ripple { to {
 
 }
 
-.intro .btn-default:focus,
-.intro .btn-default:active{
-    outline:0;
-}
-
-.intro .swiper-pagination-bullet-active {
-    opacity: 1;
-    background: #fef418;
+.intro .slider-pager .slider-pager-page.active {
+    color: #fef418;
 }
 
 /* END LOGIN - INTRO*/

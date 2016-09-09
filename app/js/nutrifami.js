@@ -4,12 +4,8 @@ var usuarioFamilia = new Object();  /* Datos de la familia del usuario logueado,
 var usuarioFamiliaAvance = new Object();  /* Datos de avance de la familia*/
 
 
-
-var base_url = 'http://127.0.0.1:83/'; /* Direccion del servidor  BEGIN CORDOVA FILES */
-
-/* BEGIN CORDOVA FILES
  var base_url = 'http://nutrifami.org/';
- END CORDOVA FILES */
+
 var nutrifami = {
     /* nutrifami.usuarioActivoServerInfo */
     usuarioActivoServerInfo: new Object(),
@@ -88,7 +84,7 @@ var nutrifami = {
         $.ajax({
             url: serv,
             type: 'POST',
-            async: false,
+            async: true,
             success: function (data) {
                 var objServ = JSON.parse(data);
                 if (objServ.response === 1) {
@@ -113,11 +109,6 @@ var nutrifami = {
                     localStorage.setItem("usuarioAvance", JSON.stringify(usuarioAvance));
                     localStorage.setItem("usuarioFamiliaAvance", JSON.stringify(usuarioFamiliaAvance));
                     localStorage.setItem("usuarioFamilia", JSON.stringify(usuarioFamilia));
-                    
-                    console.log(usuarioActivo);
-                    console.log(usuarioAvance);
-                    console.log(usuarioFamiliaAvance);
-                    console.log(usuarioFamilia);
 
                     this.isloginFlag = true;
                     response.success = true;
@@ -127,13 +118,14 @@ var nutrifami = {
                     response.success = false;
                     response.message = 'Documento o Código incorrecto';
                 }
+                callback(response);
             },
             error: function () {
                 response.success = false;
                 response.message = 'Ha ocurrido un error durante la ejecución';
+                callback(response);
             }
         });
-        callback(response);
     },
     /*
      * nutrifami.editarUsuarioActivo(data, callback);

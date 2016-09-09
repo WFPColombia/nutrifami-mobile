@@ -1,71 +1,64 @@
-/*global require */
-var gulp = require("gulp");
-var webserver = require("gulp-webserver");
-var jshint = require("gulp-jshint");
-var jsmin = require('gulp-jsmin');
-var uglify = require('gulp-uglify');
-var minifyHTML = require('gulp-minify-html');
+var gulp = require('gulp');
+var gutil = require('gulp-util');
+var bower = require('bower');
 var concat = require('gulp-concat');
-var deleteLines = require('gulp-delete-lines');
+var sass = require('gulp-sass');
+var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
+var sh = require('shelljs');
+var webserver = require("gulp-webserver");
+var deleteLines = require('gulp-delete-lines');
 
-// Servidor web de desarrollo
-gulp.task("dev-server", function () {
+var paths = {
+    sass: ['./scss/**/*.scss']
+};
+
+gulp.task('default', ['dev-server']);
+
+gulp.task('sass', function(done) {
+    gulp.src('./scss/ionic.app.scss')
+        .pipe(sass())
+        .on('error', sass.logError)
+        .pipe(gulp.dest('./www/css/'))
+        .pipe(minifyCss({
+            keepSpecialComments: 0
+        }))
+        .pipe(rename({ extname: '.min.css' }))
+        .pipe(gulp.dest('./www/css/'))
+        .on('end', done);
+});
+
+gulp.task('watch', function() {
+    gulp.watch(paths.sass, ['sass']);
+});
+
+gulp.task('install', ['git-check'], function() {
+    return bower.commands.install()
+        .on('log', function(data) {
+            gutil.log('bower', gutil.colors.cyan(data.id), data.message);
+        });
+});
+
+gulp.task('git-check', function(done) {
+    if (!sh.which('git')) {
+        console.log(
+            '  ' + gutil.colors.red('Git is not installed.'),
+            '\n  Git, the version control system, is required to download Ionic.',
+            '\n  Download git here:', gutil.colors.cyan('http://git-scm.com/downloads') + '.',
+            '\n  Once git is installed, run \'' + gutil.colors.cyan('gulp install') + '\' again.'
+        );
+        process.exit(1);
+    }
+    done();
+});
+
+gulp.task("dev-server", function() {
     "use strict";
 
     gulp.src("./app").pipe(webserver({
         open: true,
         livereload: true
     }));
-});
-
-
-//Servidor web de producción
-gulp.task("prod-server", function () {
-    "use strict";
-    gulp.src("./dist")
-            .pipe(webserver({
-                open: true,
-                livereload: true
-            }));
-});
-
-gulp.task("publish", function () {
-    "use strict";
-    
-    //copiando librerias
-    gulp.src("./app/lib/**/*")
-            .pipe(gulp.dest("./dist/lib/"));
-
-    //Minimizando y fusión de archivos JavaScript
-    gulp.src("./app/js/**/*.js")
-            .pipe(concat("main.min.js"))
-            .pipe(jsmin())
-            .pipe(uglify())
-            .pipe(rename("main.min.js"))
-            .pipe(gulp.dest("dist/js/"));
-
-    //Minimizado y procesado de las plantillas HTML
-    gulp.src("./app/view/**/*.html")
-            .pipe(minifyHTML())
-            .pipe(gulp.dest("dist/view/"));
-
-    //Minimizado y procesado de archivo index.html
-    gulp.src("./app/index.html")
-            .pipe(deleteLines({
-                "filters": ["<!-- BEGIN PROD FILES"]
-            }))
-            .pipe(deleteLines({
-                "filters": ["END PROD FILES -->"]
-            }))
-            .pipe(deleteLines({
-                "filters": [new RegExp(".*DEVFILE.*")]
-            }))
-            .pipe(minifyHTML())
-            .pipe(gulp.dest("dist/"));
-
-
-
 });
 
 gulp.task("cordovaDev", function () {
@@ -92,17 +85,3 @@ gulp.task("cordovaDev", function () {
             }))
             .pipe(gulp.dest("www/js/controllers/"));
 });
-
-gulp.task("cordovaDist", function () {
-    "use strict";
-    gulp.src("./dist/**/**")
-            .pipe(gulp.dest("./www/"));
-
-    gulp.src("./app/res/**/**")
-            .pipe(gulp.dest("./www/res/"));
-});
-
-
-//gulp.task("default", ["jsHint", "dev-server"]);
-gulp.task("default", ["dev-server"]);
-gulp.task("compileCordova", ["publish", "cordovaDist"]);
