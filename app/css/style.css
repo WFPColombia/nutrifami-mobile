@@ -270,97 +270,109 @@ ripple { to {
 
 /* END LOGIN - INTRO*/
 
-/* HOME */
+/* MENU LEFT */
 
 .app {
     background-color: #f5f5f5;
 }
 
-header .navbar-app{
+
+
+.menu-left {
+    background-color: #00c97e;
+    -webkit-box-shadow: 5px 0px 15px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 0px 15px 0px rgba(0,0,0,0.75);
+    box-shadow: 5px 0px 15px 0px rgba(0,0,0,0.75);
+}
+
+.menu-left .item{
     border:none;
 }
-.sidebar-left {
-    background-color: #00c97e;
-    width: 300px;
-    left: 0;
-    right: auto;
-    -webkit-transition: width 400ms ease;
-    -o-transition: width 400ms ease;
-    transition: width 400ms ease;
-}
 
-.sidebar-left .app-name {
-    line-height: 0px;
-}
-
-.scrollable-header {
+.menu-left .bar.bar-stable {
+    background-color: rgba(0,0,0,0);
+    background-image: none;
     padding-top: 16px;
     padding-left: 16px;
     height: 57px;
-    top: 0;
 }
 
-list-group-item,
-a.list-group-item,
-button.list-group-item{
+.has-header {
+    top: 57px;
+}
+
+
+.menu-left .item-content{
     background-color: #00c97e;
     border: none;
-    height: 57px;
     font-size: 14pt;
     line-height: 35px;
     margin-bottom: 0;
     color: #ffffff;
 }
 
-.list-group-item.active,
-.list-group-item.active:focus,
-button.list-group-item:focus{
+.menu-left .item-content img{
+    position: relative;
+    top: 10px;
+}
+
+.item-complex .item-content,
+.item-radio .item-content{
+    padding: 3px 0 0 16px;
+    height: 57px;
+}
+
+.menu-left .item-content.active,
+.menu-left .item-content.active:focus,
+.menu-left button.item-content:focus{
     background-color: #2f6551;
     border-color: #2f6551;
     color: #ffffff;
 }
 
-.list-group-item .icono {
+.menu-left .item-content .icono {
     margin-right: 17px;
 }
 
-.app header .navbar-absolute-top {
+.bar.bar-stable {
     height: 64px;
     background-color: #00c97e;
     color: #ffffff;
-    padding-top: 17px;
+    padding-top: 12px;
 }
 
-.app header .navbar-absolute-top .navbar-brand-center {
-    margin-top: -18px;
+.bar-stable .button{
+    color: #ffffff;
 }
 
-.app header .navbar-absolute-top .btn-group .btn {
+.bar-stable .button.button-clear {
     color: #ffffff;
     padding: 0;
     padding-right: 5px;
+    margin-left: 12px;
 }
 
-.app header .navbar-absolute-top .btn-group .btn button {
-    background-color: rgba(0,0,0,0);
+
+
+.bar-stable .title{
+    margin-top: 19px;
+}
+
+.menu-right .popover{
+    height: 155px;
+    font-family: 'Muli', sans-serif;
+    font-size: 13pt;
+}
+
+.menu-right .popover .item{
+    padding: 13px 18px;
     border: none;
 }
 
-.app .app-body {
-    padding-top: 64px;
-}
 
-.app .app-body .modulos {
-    margin-top: 35px;
-}
+/* END - MENU-LEFT - HEADER*/
 
-.modulos .swiper-wrapper {
-    height: 439px;
-}
-
-.modulos .swiper-slide {
-    background-color: #f5f5f5;
-}
+/* HOME */
 
 .modulo {
     background-color: #0dcd71;

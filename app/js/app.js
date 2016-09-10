@@ -17,13 +17,31 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider) {
         controller: 'IntroController'
     });
     
+    $stateProvider.state('app', {
+    url: '/app',
+    abstract: true,
+    templateUrl: 'views/template/menu.tpl.html',
+    controller: 'NavController'
+  });
+    
+    $stateProvider.state('app.capacitacion', {
+        url: '/capacitacion',
+        views: {
+        'menuContent': {
+          templateUrl: 'views/capacitacion.html',
+          controller: 'CapacitacionController'
+        }
+      }
+       
+    });
+    
     $stateProvider.state('home', {
-        url: '/',
+        url: '/home',
         templateUrl: 'views/home.html',
         controller: 'HomeController'
     });
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/app/capacitacion');
 });
 
 nutrifamiMobile.run(function ($ionicPlatform, $rootScope, $location, $cookieStore) {
