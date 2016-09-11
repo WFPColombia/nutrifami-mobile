@@ -237,13 +237,13 @@ var nutrifami = {
         initClient: function (callback) {
             callback = callback || function () {
             };
-
+            
             nutrifami.training.cap_capacitacionesId = serv_capacitacionesId;
             nutrifami.training.cap_capacitaciones = serv_capacitaciones;
             nutrifami.training.cap_modulos = serv_modulos;
             nutrifami.training.cap_lecciones = serv_lecciones;
             nutrifami.training.cap_unidadesinformacion = serv_unidades;
-
+            
         },
         /*
          * nutrifami.training.downloadCapacitacion(cid, callback);

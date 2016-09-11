@@ -1,4 +1,4 @@
-dependencies = ['ionic', 'ngCordova', 'Authentication', 'ngCookies', 'ngRoute','ionMDRipple'];
+dependencies = ['ionic', 'ngCordova', 'Authentication', 'ngCookies', 'ngRoute', 'ionMDRipple'];
 
 var nutrifamiLogin = angular.module('Authentication', []);
 var nutrifamiMobile = angular.module('NutrifamiMobile', dependencies);
@@ -10,31 +10,41 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider) {
         templateUrl: 'views/login.html',
         controller: 'LoginController'
     });
-    
+
     $stateProvider.state('intro', {
         url: '/intro',
         templateUrl: 'views/intro.html',
         controller: 'IntroController'
     });
-    
+
     $stateProvider.state('app', {
-    url: '/app',
-    abstract: true,
-    templateUrl: 'views/template/menu.tpl.html',
-    controller: 'NavController'
-  });
-    
+        url: '/app',
+        abstract: true,
+        templateUrl: 'views/template/menu.tpl.html',
+        controller: 'NavController'
+    });
+
     $stateProvider.state('app.capacitacion', {
         url: '/capacitacion',
         views: {
-        'menuContent': {
-          templateUrl: 'views/capacitacion.html',
-          controller: 'CapacitacionController'
+            'menuContent': {
+                templateUrl: 'views/capacitacion.html',
+                controller: 'CapacitacionController'
+            }
         }
-      }
-       
+
     });
     
+    $stateProvider.state('app.modulo', {
+        url: '/capacitacion/:modulo',
+        views: {
+            'menuContent': {
+                templateUrl: 'views/modulo.html',
+                controller: 'ModuloController'
+            }
+        }
+
+    });
     $stateProvider.state('home', {
         url: '/home',
         templateUrl: 'views/home.html',

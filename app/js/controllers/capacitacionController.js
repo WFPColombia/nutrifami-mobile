@@ -1,5 +1,5 @@
 /*global angular*/
-nutrifamiMobile.controller('CapacitacionController', function ($ionicPlatform, $scope, $cordovaNativeAudio, $location, $ionicPopover) {
+nutrifamiMobile.controller('CapacitacionController', function ($ionicPlatform, $scope, $cordovaNativeAudio) {
     'use strict';
 
     /* BEGIN CORDOVA FILES
@@ -28,6 +28,10 @@ nutrifamiMobile.controller('CapacitacionController', function ($ionicPlatform, $
         }
         $scope.modulos.push(tempModulo);
     }
+    
+    $scope.playAudio = function (audio) {
+        $cordovaNativeAudio.play(audio);
+    };
 
     /* BEGIN CORDOVA FILES
      });
