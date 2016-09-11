@@ -548,65 +548,76 @@ button {
 
 /* UNIDADES */
 
-
-.app .unidad{
-    padding-top: 0px;
-}
-
-
-.app .unidad .leccion-avance {
+.unidad .leccion-avance {
     font-family: 'Muli', sans-serif;
     background-color: #75a8fe;
     font-size: 12pt;
     color: white;
     width: 100%;
     height: 64px;
-    padding-top: 17px;
+    padding-top: 10px;
 }
 
-.app .unidad .leccion-avance a {
+.unidad .leccion-avance .leccion-avance-cerrar{
+    float: left;
+
+    text-align: center;
+    padding-top: 10px;
+}
+
+.unidad .leccion-avance .leccion-avance-progreso {
+    padding-right: 30px;
+    position: relative;
+}
+
+.unidad .leccion-avance button {
     color: #ffffff;
+    font-size: 20px;
 }
 
-.app .unidad .leccion-avance .progress {
+.unidad .leccion-avance .leccion-avance-progreso .progress {
     height: 9px;
     border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
     width: auto;
     background-color: #ffffff;
     background-image: none;
     margin-bottom: 0px;
 }
 
-.app .unidad .leccion-avance .progress .progress-bar {
+.unidad .leccion-avance .leccion-avance-progreso .progress .progress-bar {
     background-color: #fdf418;
+    height: 100%;
     background-image: none;
     -webkit-box-shadow: none;
     box-shadow: none;
+    border-radius: inherit;
+    -webkit-border-radius: inherit;
+    -moz-border-radius: inherit;
 }
 
-.app .unidad .leccion-avance .complete {
+.unidad .leccion-avance .complete {
     background-color: #e5e5e5;
     width: 22px;
     height: 22px;
     position: absolute;
-    top: 16px;
-    right: 0px;
+    top: 19px;
+    right: 26px;
     border-radius: 11px;
+    -webkit-border-radius: 11px;
+    -moz-border-radius: 11px;
     border: solid 4px #ffffff;
 }
 
 .unidad .unidad-tipo {
     background-color: #ffffff;
-    height: 55px;
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    text-align: center;
+    height: 68px;
+    text-align: left;
     padding-top: 8px;
-    font-size: 10pt;
-    font-family: 'Muli-Italic', sans-serif;
+    font-size: 12pt;
+    font-family: 'Muli', sans-serif;
     color: #00965e;
-    margin-top: 13px;
 }
 
 .unidad .unidad-tipo.opciones {
@@ -615,12 +626,15 @@ button {
 
 .unidad .unidad-tipo img {
     margin-right: 15px;
+    float: left;
+    margin-left: 22px;
 }
 
 .unidad .unidad-tipo .sonido {
-    position: absolute;
-    top: -3px;
-    right: 20px;
+    float: right;
+    font-size: 20px;
+    margin-right: 23px;
+    margin-left: 23px;
 }
 
 .unidad .unidad-tipo.opciones .sonido {

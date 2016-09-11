@@ -34,7 +34,7 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider) {
         }
 
     });
-    
+
     $stateProvider.state('app.modulo', {
         url: '/capacitacion/:modulo',
         views: {
@@ -43,8 +43,14 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider) {
                 controller: 'ModuloController'
             }
         }
-
     });
+    
+    $stateProvider.state('unidad', {
+        url: '/capacitacion/:modulo/:leccion/:unidad',
+                templateUrl: 'views/unidad.html',
+                controller: 'UnidadController'
+    });
+
     $stateProvider.state('home', {
         url: '/home',
         templateUrl: 'views/home.html',

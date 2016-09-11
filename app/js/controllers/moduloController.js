@@ -50,7 +50,8 @@ nutrifamiMobile.controller('ModuloController', function ($ionicPlatform, $scope,
         return(100 / $scope.modulo.totalLecciones * $scope.usuarioAvance.leccionesTerminadas);
     };
     $scope.irALeccion = function (index) {
-        $location.path('/m/' + $stateParams.modulo + "/" + $scope.lids[index] + "/1");
+        console.log(('/capacitacion/' + $stateParams.modulo + "/" + $scope.lids[index] + "/1"));
+        $location.path('/capacitacion/' + $stateParams.modulo + "/" + $scope.lids[index] + "/1");
     };
     /* BEGIN CORDOVA FILES
      });
