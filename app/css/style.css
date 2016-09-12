@@ -573,6 +573,10 @@ button {
 .unidad .leccion-avance button {
     color: #ffffff;
     font-size: 20px;
+    background-color: rgba(0,0,0,0);
+    -moz-border: none;
+    -webkit-border: none;
+    border: none;
 }
 
 .unidad .leccion-avance .leccion-avance-progreso .progress {
@@ -614,14 +618,13 @@ button {
     background-color: #ffffff;
     height: 68px;
     text-align: left;
-    padding-top: 8px;
+    padding-top: 16px;
     font-size: 12pt;
     font-family: 'Muli', sans-serif;
     color: #00965e;
-}
-
-.unidad .unidad-tipo.opciones {
-    padding-top: 15px;
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.1);
+    -moz-box-shadow:  0px 2px 5px 0px rgba(0,0,0,0.1);
+    box-shadow:  0px 2px 5px 0px rgba(0,0,0,0.1);
 }
 
 .unidad .unidad-tipo img {
@@ -630,66 +633,97 @@ button {
     margin-left: 22px;
 }
 
-.unidad .unidad-tipo .sonido {
+.unidad .unidad-tipo .unidad-tipo-descripcion p{
+
+}
+
+.unidad .unidad-tipo .unidad-tipo-descripcion .sonido {
     float: right;
     font-size: 20px;
     margin-right: 23px;
     margin-left: 23px;
 }
 
-.unidad .unidad-tipo.opciones .sonido {
-    top: -10px;
-}
-
-.unidad .unidad-tipo .sonido a {
+.unidad .unidad-tipo .unidad-tipo-descripcion .sonido button{
+    background-color: rgba(0,0,0,0);
+    -moz-border: none;
+    -webkit-border: none;
+    border: none;
+    font-size: 20pt;
     color: #00965e;
+    position: relative;
+    top: 5px;
 }
 
-.unidad .unidad-descripcion,
-.unidad .unidad-descripcion a {
+.unidad .unidad-descripcion{
     color: #2f3e47;
     text-align: center;
-    margin-top: 30px;
     font-size: 12pt;
+
 }
 
 .unidad .unidad-descripcion .fa {
     margin-right: 7px;
 }
 
-.unidad .unidad-descripcion .unidad-instruccion,
-.unidad .unidad-descripcion .unidad-instruccion a {
-    font-family: 'Raleway-Bold', sans-serif;
-    color: rgba(0, 0, 0, 0.6);
-    font-size: 9pt;
-    text-transform: uppercase;
+.unidad .unidad-descripcion .unidad-instruccion {
+    margin-top: 20px;
+    font-family: 'Muli', sans-serif;
+    color: #2f3e47;
+    font-size: 14pt;
 }
 
-.unidad .unidad-descripcion .unidad-imagen {
+.unidad .unidad-descripcion .unidad-instruccion button{
+    background-color: rgba(0,0,0,0); 
+    border: none;
+    -moz-border: none;
+    -webkit-border: none;
+    font-size: 14pt;
+    color: #2f3e47;
+}
+
+.unidad .unidad-descripcion img {
     border-radius: 8px;
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
     border: solid 1px #dcdcdc;
-}
-
-.unidad .opciones {
-    margin-bottom: 20px;
+    width: 100%;
 }
 
 .unidad .opciones .opcion,
 .unidad .opciones .opcion-pareja {
-    margin-top: 17px;
     background-color: #ffffff;
     height: 100px;
     border: 1px solid #dcdcdc;
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
     color: #2f3e47;
     text-align: center;
-    font-size: 10pt;
-    width: 100%;
-    padding: 0;
+    font-size: 12pt;
+}
+
+.unidad .opciones .col{
+    position: relative;
+}
+
+.unidad .opciones .opcion-sonido {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 10;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+}
+
+.unidad .opciones .opcion-sonido button {
+    color: #00c97e;
+    border: none;
+    background-color: rgba(0,0,0,0);
+    width: 30px;
+    height: 30px;
+
 }
 
 .unidad .opciones .pareja-con-imagen{
@@ -710,10 +744,16 @@ button {
     margin-bottom: 30px;
 }
 
-.unidad .opciones .selected {
-    background-color: #09df78;
+.unidad .opciones .opcion.selected{
+    background-color: #75a8fe;
     color: #ffffff;
 }
+
+.unidad .opciones .opcion-sonido.selected button{
+    color: #75a8fe;
+}
+
+
 
 .unidad .opciones .wrong {
     background-color: #ff1244;
@@ -748,21 +788,11 @@ button {
     -ms-transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
-.unidad .opciones .opcion-sonido,
-.unidad .opciones .opcion-sonido {
-    position: absolute;
-    top: 18px;
-    right: 13px;
-    z-index: 10;
-}
 
-.unidad .opciones .opcion-sonido button {
-    color: #00965e;
-    border: none;
-    background-color: rgba(0,0,0,0);
-}
 
 .modal {
     overflow: auto;
@@ -855,39 +885,54 @@ button {
     height: 58px;
     background-color: #d0d0d0;
     font-family: 'Raleway-Bold', sans-serif;
-    font-size: 11pt;
+    font-size: 12pt;
     color: #ffffff;
-    padding-top: 6px;
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 5px;
     border: none;
+    text-align: center;
+    padding: 0px;
 }
-
 .habilitado {
     background-color: #00c97e;
 }
 
-.sonido-unidad {
-    height: 58px;
-    width: 58px;
-    border-radius: 29px;
-    -moz-border-radius: 29px;
-    -webkit-border-radius: 29px;
+.calificar p{
+    padding-top: 23px;
+    width: 100%;
+    height: 100%;
+}
+
+.mostrar-tip {
+    height: 60px;
+    width: 60px;
+    border-radius: 30px;
+    -moz-border-radius: 30px;
+    -webkit-border-radius: 30px;
     background-color: #d200ff;
     position: fixed;
     bottom: 70px;
     right: 15px;
     text-align: center;
     z-index: 2000;
-    padding-top: 14px;
     -moz-box-shadow: 0 0 10px #d200ff;
     -webkit-box-shadow: 0 0 10px #d200ff;
     box-shadow: 0px 0px 10px #d200ff;
 }
 
-.sonido-unidad a {
+.mostrar-tip div{
+    padding-top: 14px;
+    height: 100%;
+    width: 100%;
+    border-radius: 30px;
+    -moz-border-radius: 30px;
+    -webkit-border-radius: 30px;
+}
+
+.mostrar-tip span {
     color: #ffffff;
+    font-size: 31px;
 }
 
 
