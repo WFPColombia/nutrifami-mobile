@@ -17,7 +17,13 @@ nutrifamiLogin.factory('AuthenticationService', function (Base64, $http, $cookie
         });
     };
 
-
+    /**
+     * 
+     * @param {type} username
+     * @param {type} password
+     * @param {type} token
+     * @returns {undefined}
+     */
     service.SetCredentials = function (username, password, token) {
         var authdata = Base64.encode(username + ':' + password + ':' + token);
         $rootScope.globals = {

@@ -2,20 +2,24 @@ nutrifamiMobile.factory('ConsumoService', ['$http', '$cookieStore', '$rootScope'
     function () {
         var service = {};
 
-        /*
-         * @param {object} usuario
-         * @param {function} callback
+        /**
+         * 
+         * @param {type} usuario
+         * @param {type} callback
+         * @returns {undefined}
          * ConsumoService.agregarFamiliar(usuario, function (response){});
          */
         service.getConsolidadoCompras = function (usuario, callback) {
             nutrifami.consumo.getConsolidadoCompras(usuario, function (response) {
                 callback(response);
             });
-
         };
-        /*
-         * @param {object} puntoVenta
-         * @param {function} callback
+        
+        /**
+         * 
+         * @param {type} puntoVenta
+         * @param {type} callback
+         * @returns {undefined}
          * ConsumoService.getProductosPuntoVenta(puntoVenta, function (response){});
          */
         service.getProductosPuntoVenta = function (puntoVenta, callback) {

@@ -1,13 +1,15 @@
-nutrifamiLogin.controller('LoginController', function ($ionicPlatform, $scope, $ionicLoading, AuthenticationService, $timeout, $cordovaNativeAudio, $location) {
+nutrifamiLogin.controller('LoginController', function ($ionicPlatform, $scope, $ionicLoading, AuthenticationService, $timeout, AudioService, $location) {
     'use strict';
 
     /* BEGIN CORDOVA FILES
      $ionicPlatform.ready(function () {
-     AndroidFullScreen.immersiveMode();
-     $cordovaNativeAudio.preloadSimple('audiologin', 'audios/login.mp3');
      END CORDOVA FILES */
 
-
+    $scope.audios = {
+        'audiologin': 'audiologin/login.mp3'
+    };
+    
+    AudioService.preloadSimple($scope.audios);
 
     AuthenticationService.ClearCredentials();
     localStorage.clear();
@@ -32,6 +34,7 @@ nutrifamiLogin.controller('LoginController', function ($ionicPlatform, $scope, $
             if (response.success) {
                 AuthenticationService.SetCredentials($scope.username, $scope.password, response.message);
                 $ionicLoading.hide();
+                AudioService.stopAll($scope.audios);
                 $location.path('/intro');
             } else {
                 $scope.error = response.message;
@@ -43,8 +46,8 @@ nutrifamiLogin.controller('LoginController', function ($ionicPlatform, $scope, $
         });
     };
 
-    $scope.playAudio = function () {
-        $cordovaNativeAudio.play('audiologin');
+    $scope.playAudio = function (audio) {
+        AudioService.play(audio);
     };
     /* BEGIN CORDOVA FILES
      });

@@ -1,15 +1,13 @@
 /*global angular*/
-nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope, $rootScope, $location, $stateParams, $cordovaNativeAudio) {
+nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope, $rootScope, $location, $stateParams, AudioService, UsuarioService) {
     'use strict';
     /* BEGIN CORDOVA FILES
      $ionicPlatform.ready(function () {
-     AndroidFullScreen.immersiveMode();
      END CORDOVA FILES */
 
-    $scope.usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
+    $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
     $scope.estadoUnidad = 'espera';
 
-    //try {
     $scope.uids = nutrifami.training.getUnidadesId($stateParams.leccion);
     var temp = [];
     for (var i in $scope.uids) {
@@ -20,11 +18,10 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
     $scope.unidad.numeroUnidad = $stateParams.unidad;
     $scope.unidad.totalUnidades = temp.length;
 
-
-    /*$scope.unidad.tipo.audio.audio = ngAudio.load("audios/" + $scope.unidad.tipo.audio.nombre);
-     $scope.unidad.instruccion.audio.audio = ngAudio.load("assets/" + $scope.unidad.instruccion.audio.nombre);
-     $scope.unidad.titulo.audio.audio = ngAudio.load("assets/" + $scope.unidad.titulo.audio.nombre);*/
-
+    $scope.audios = {
+        tipo: "audios/" + $scope.unidad.tipo.audio.nombre,
+        titulo: "assets/" + $scope.unidad.titulo.audio.nombre
+    };
 
     var tempOpciones = [];
 
@@ -73,11 +70,7 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
     /*Verifica si la unidad tienen audio y lo carga*/
     console.log($scope.unidad);
     /*if (typeof $scope.unidad.audio !== 'undefined') {
-        $scope.unidad.audio.audio = ngAudio.load("assets/" + $scope.unidad.audio.nombre);
-    }*/
-    /*} catch (err) {
-     console.log(err);
-     $location.path('/');
+     $scope.unidad.audio.audio = ngAudio.load("assets/" + $scope.unidad.audio.nombre);
      }*/
 
     /* Obtenemos la cantidad de respuestas correctas*/
@@ -93,12 +86,14 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
         $scope.unidad.opciones[i].match = false;
 
         /*Verifica si la opcion tienen audio y lo carga*/
-        /*if (typeof $scope.unidad.opciones[i].audio !== 'undefined') {
-            $scope.unidad.opciones[i].audio.audio = ngAudio.load("assets/" + $scope.unidad.opciones[i].audio.nombre);
-        }*/
+        if (typeof $scope.unidad.opciones[i].audio !== 'undefined') {
+            $scope.audios[$scope.unidad.opciones[i].audio.nombre] = "assets/" + $scope.unidad.opciones[i].audio.nombre;
+        }
     }
 
     $scope.botonCalificar = false;
+    
+    AudioService.preloadSimple($scope.audios);
 
     $scope.seleccionarOpcion = function (index) {
         if ($scope.unidad.opciones[index].selected) {
@@ -194,7 +189,7 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
                             $scope.feedback.feedbacks = tempFeedbackAcierto;
                             $scope.feedback.mensaje = "Muy bien! respuesta correcta";
                             /*$scope.feedback.audio = ngAudio.load("audios/muy-bien-respuesta-correcta.mp3");
-                            ngAudio.play("audios/muy-bien.mp3");*/
+                             ngAudio.play("audios/muy-bien.mp3");*/
 
                             $rootScope.Ui.turnOn('feedback');
                         }
@@ -257,7 +252,7 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
             $scope.feedback.feedbacks = tempFeedbackAcierto;
             $scope.feedback.mensaje = "Muy bien! respuesta correcta";
             /*$scope.feedback.audio = ngAudio.load("audios/muy-bien-respuesta-correcta.mp3");
-            ngAudio.play("audios/muy-bien.mp3");*/
+             ngAudio.play("audios/muy-bien.mp3");*/
 
         } else {
             $scope.estadoUnidad = 'fallo';
@@ -324,6 +319,11 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
 
     $scope.porcentajeAvance = function () {
         return(100 / $scope.unidad.totalUnidades * ($scope.unidad.numeroUnidad - 1));
+    };
+
+    $scope.playAudio = function (audio) {
+        AudioService.stopAll($scope.audios);
+        AudioService.play(audio);
     };
 
     /**

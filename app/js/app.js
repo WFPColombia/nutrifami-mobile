@@ -78,7 +78,7 @@ nutrifamiMobile.run(function ($ionicPlatform, $rootScope, $location, $cookieStor
         // for form inputs)
         if (window.cordova && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-            /*cordova.plugins.Keyboard.disableScroll(true);*/
+            cordova.plugins.Keyboard.disableScroll(true);
 
         }
         if (window.StatusBar) {

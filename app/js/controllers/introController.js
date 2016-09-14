@@ -1,25 +1,28 @@
 /*global angular*/
-nutrifamiMobile.controller('IntroController', function ($ionicPlatform, $scope, $cordovaNativeAudio, $location) {
+nutrifamiMobile.controller('IntroController', function ($ionicPlatform, $scope, $location, AudioService, UsuarioService) {
     'use strict';
 
     /* BEGIN CORDOVA FILES
      $ionicPlatform.ready(function () {
-     AndroidFullScreen.immersiveMode();
-     $cordovaNativeAudio.preloadSimple('audio1', 'audios/intro-1.mp3');
-     $cordovaNativeAudio.preloadSimple('audio2', 'audios/intro-2.mp3');
-     $cordovaNativeAudio.preloadSimple('audio3', 'audios/intro-3.mp3');
-     $cordovaNativeAudio.preloadSimple('audio4', 'audios/intro-4.mp3');
      END CORDOVA FILES */
 
-    $scope.usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
-    console.log($scope.usuarioActivo);
+    $scope.audios = {
+        'audio1': 'audios/intro-1.mp3',
+        'audio2': 'audios/intro-2.mp3',
+        'audio3': 'audios/intro-3.mp3',
+        'audio4': 'audios/intro-4.mp3'
+    };
+    AudioService.preloadSimple($scope.audios);
+
+    $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
 
     $scope.playAudio = function (audio) {
-        $cordovaNativeAudio.play(audio);
+        AudioService.stopAll($scope.audios);
+        AudioService.play(audio);
     };
 
-
     $scope.comenzar = function () {
+        AudioService.stopAll($scope.audios);
         $location.path('/');
     };
     /* BEGIN CORDOVA FILES

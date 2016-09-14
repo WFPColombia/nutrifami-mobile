@@ -1,15 +1,15 @@
 <header>
     <div class="leccion-avance">
-        <div class="col-xs-2 btn-group">
-            <div class="btn btn-navbar" >
-                <a ng-href="#/"><i class="fa fa-times fa-2x" aria-hidden="true"></i></a>
+        <div class="row">
+            <div class="col leccion-avance-cerrar">
+                <button class="icon ion-close-round" aria-hidden="true" ion-ripple></button>
             </div>
-        </div>
-        <div class="col-xs-9 ">
-            <span>Paso {{unidad.numeroUnidad}} de {{unidad.totalUnidades}}</span>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: {{porcentajeAvance()}}%;"></div>
-                <div class="complete"></div>
+            <div class="col col-80 leccion-avance-progreso">
+                <span>Paso {{unidad.numeroUnidad}} de {{unidad.totalUnidades}}</span>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentajeAvance()}}%;"></div>
+                    <div class="complete"></div>
+                </div>
             </div>
         </div>
     </div>
