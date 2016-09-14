@@ -87,7 +87,8 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
 
         /*Verifica si la opcion tienen audio y lo carga*/
         if (typeof $scope.unidad.opciones[i].audio !== 'undefined') {
-            $scope.audios[$scope.unidad.opciones[i].audio.nombre] = "assets/" + $scope.unidad.opciones[i].audio.nombre;
+            $scope.unidad.opciones[i].audio.id = "opcion"+i;
+            $scope.audios[$scope.unidad.opciones[i].audio.id] = "assets/" + $scope.unidad.opciones[i].audio.nombre;
         }
     }
 
@@ -258,7 +259,7 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
             $scope.estadoUnidad = 'fallo';
             $scope.feedback.feedbacks = tempFeedbackFallo;
             $scope.feedback.mensaje = "Intenta de nuevo! respuesta incorrecta";
-            $scope.feedback.audio = ngAudio.load("audios/intenta-de-nuevo.mp3");
+            //$scope.feedback.audio = ngAudio.load("audios/intenta-de-nuevo.mp3");
             /*ngAudio.play("audios/respuesta-incorrecta.mp3");*/
             if (navigator && navigator.vibrate) {
                 navigator.vibrate(1000);

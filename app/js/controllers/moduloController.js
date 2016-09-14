@@ -21,9 +21,12 @@ nutrifamiMobile.controller('ModuloController', function ($ionicPlatform, $scope,
 
     for (var lid in $scope.lids) {
         var tempLeccion = nutrifami.training.getLeccion($scope.lids[lid]);
+        
         tempLeccion.avance = {};
         if (tempLeccion.titulo.audio.nombre !== null) {
-            $scope.audios[tempLeccion.titulo.audio.nombre] = "assets/" + tempLeccion.titulo.audio.nombre;
+            var id = parseInt(lid) + 1;
+            tempLeccion.titulo.audio.id = "paso"+id;
+            $scope.audios[tempLeccion.titulo.audio.id] = "assets/" + tempLeccion.titulo.audio.nombre;
         }
         if (typeof $scope.usuarioAvance['3'] !== 'undefined' && typeof $scope.usuarioAvance['3'][$stateParams.modulo] !== 'undefined' && typeof $scope.usuarioAvance['3'][$stateParams.modulo][$scope.lids[lid]] !== 'undefined') {
             tempLeccion.avance.terminada = true;

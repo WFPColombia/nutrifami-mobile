@@ -37,10 +37,12 @@ nutrifamiMobile.factory('AudioService', function ($cordovaNativeAudio) {
      * AudioService.stopAll(audios);
      */
     service.stopAll = function (audios) {
-        console.log("AudioService.stopAll(audio)" + audios);
+        console.log("AudioService.stopAll(audios)");
+        console.log(audios);
         for (var audio in audios) {
+            console.log(audio);
             if (window.plugins && window.plugins.NativeAudio) {
-                $cordovaNativeAudio.stop(audios[audio]);
+                $cordovaNativeAudio.stop(audio);
             }
         }
     };
