@@ -6,7 +6,7 @@ nutrifamiLogin.controller('LoginController', function ($ionicPlatform, $scope, $
      END CORDOVA FILES */
 
     $scope.audios = {
-        'audiologin': 'audiologin/login.mp3'
+        'audiologin': 'audios/login.mp3'
     };
     
     AudioService.preloadSimple($scope.audios);
@@ -34,7 +34,7 @@ nutrifamiLogin.controller('LoginController', function ($ionicPlatform, $scope, $
             if (response.success) {
                 AuthenticationService.SetCredentials($scope.username, $scope.password, response.message);
                 $ionicLoading.hide();
-                AudioService.stopAll($scope.audios);
+                AudioService.unload($scope.audios);
                 $location.path('/intro');
             } else {
                 $scope.error = response.message;
@@ -47,7 +47,7 @@ nutrifamiLogin.controller('LoginController', function ($ionicPlatform, $scope, $
     };
 
     $scope.playAudio = function (audio) {
-        AudioService.play(audio);
+        AudioService.play(audio,$scope.audios);
     };
     /* BEGIN CORDOVA FILES
      });

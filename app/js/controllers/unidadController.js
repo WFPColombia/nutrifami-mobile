@@ -20,7 +20,9 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
 
     $scope.audios = {
         tipo: "audios/" + $scope.unidad.tipo.audio.nombre,
-        titulo: "assets/" + $scope.unidad.titulo.audio.nombre
+        titulo: "assets/" + $scope.unidad.titulo.audio.nombre,
+        muyBien: 'audios/muy-bien.mp3',
+        respuestaIncorrecta: 'audios/respuesta-incorrecta.mp3'
     };
 
     var tempOpciones = [];
@@ -226,51 +228,59 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
         /* Validar si acerto o fallo*/
         var respuestasAcertadas = 0;
         var tempFeedbackAcierto = [];
+        var tempFeedbackAciertoAudios = {};
         var tempFeedbackFallo = [];
-        $scope.feedback.feedbacks = [];
+        var tempFeedbackFalloAudios = {};
+        $scope.feedback = {};
         for (var i in $scope.unidad.opciones) {
             if ($scope.unidad.opciones[i].selected) {
                 $scope.unidad.opciones[i].evaluacion = true;
                 if ($scope.unidad.opciones[i].selected == $scope.unidad.opciones[i].correcta) {
                     respuestasAcertadas++;
-                    var tempFeedback = {
-                        texto: $scope.unidad.opciones[i].feedback.texto,
-                        //audio: ngAudio.load("assets/" + $scope.unidad.opciones[i].feedback.audio.nombre)
-                    };
-                    tempFeedbackAcierto.push(tempFeedback);
+                    tempFeedbackAcierto.push(
+                            {
+                                texto:$scope.unidad.opciones[i].feedback.texto,
+                                nombre: 'feedback'+i
+                            });
+                    tempFeedbackAciertoAudios['feedback'+i] = "assets/" + $scope.unidad.opciones[i].feedback.audio.nombre;
                 } else {
-                    /* Almacena la respuesta incorrecta */
-                    var tempFeedback = {
-                        texto: $scope.unidad.opciones[i].feedback.texto,
-                        //audio: ngAudio.load("assets/" + $scope.unidad.opciones[i].feedback.audio.nombre)
-                    };
-                    tempFeedbackFallo.push(tempFeedback);
+                    tempFeedbackFallo.push({
+                                texto:$scope.unidad.opciones[i].feedback.texto,
+                                nombre: 'feedback'+i
+                            });
+                    tempFeedbackFalloAudios['feedback'+i] = "assets/" + $scope.unidad.opciones[i].feedback.audio.nombre;
                 }
             }
         }
         if (respuestasAcertadas === respuestasCorrectas) {
             $scope.estadoUnidad = 'acierto';
             $scope.feedback.feedbacks = tempFeedbackAcierto;
+            $scope.feedback.audios = tempFeedbackAciertoAudios;
+            $scope.feedback.audios.mensaje = "audios/muy-bien-respuesta-correcta.mp3";
             $scope.feedback.mensaje = "Muy bien! respuesta correcta";
-            /*$scope.feedback.audio = ngAudio.load("audios/muy-bien-respuesta-correcta.mp3");
-             ngAudio.play("audios/muy-bien.mp3");*/
+            $scope.playAudio('muyBien');
 
         } else {
             $scope.estadoUnidad = 'fallo';
             $scope.feedback.feedbacks = tempFeedbackFallo;
+            $scope.feedback.audios = tempFeedbackFalloAudios;
+            $scope.feedback.audios.mensaje = "audios/intenta-de-nuevo.mp3";
             $scope.feedback.mensaje = "Intenta de nuevo! respuesta incorrecta";
-            //$scope.feedback.audio = ngAudio.load("audios/intenta-de-nuevo.mp3");
-            /*ngAudio.play("audios/respuesta-incorrecta.mp3");*/
+            $scope.playAudio('respuestaIncorrecta');
+            
             if (navigator && navigator.vibrate) {
                 navigator.vibrate(1000);
             }
         }
+        console.log($scope.feedback);
 
         var textoBoton = 'Intentar de nuevo';
 
         if ($scope.estadoUnidad === 'acierto') {
             textoBoton = 'Continuar';
         }
+        
+        AudioService.preloadSimple($scope.feedback.audios);
 
         // An elaborate, custom popup
         var popUpFeedback = $ionicPopup.show({
@@ -281,16 +291,15 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
                     text: textoBoton,
                     type: 'button-positive',
                     onTap: function (e) {
-                        $scope.feedback();
+                        AudioService.unload($scope.feedback.audios);
+                        $scope.cerrarFeedback();
                     }
                 }
             ]
         });
-
-        //$scope.feedback();
     };
 
-    $scope.feedback = function () {
+    $scope.cerrarFeedback = function () {
         if ($scope.estadoUnidad === 'acierto') {
             $scope.irASiguienteUnidad();
         } else {
@@ -335,6 +344,7 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
 
 
         } else {
+            AudioService.unload($scope.audios);
             $location.path('/capacitacion/' + $stateParams.modulo + "/" + $stateParams.leccion + "/" + $scope.siguienteUnidad);
         }
     };
@@ -354,8 +364,11 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
     };
 
     $scope.playAudio = function (audio) {
-        AudioService.stopAll($scope.audios);
-        AudioService.play(audio);
+        AudioService.play(audio,$scope.audios);
+    };
+    
+    $scope.prueba = function(){
+        console.log("Hola");
     };
 
     /**

@@ -1,9 +1,9 @@
 <ion-scroll style="height: 100%">
     <div class='unidad'>
         <ng-include src="'views/template/leccionAvance.tpl.html'"></ng-include>
-        <div class="unidad-tipo">
+        <div class="unidad-tipo" ng-click="playAudio('tipo')" ion-ripple>
             <img ng-src="img/icons/{{unidad.tipo.icono}}"/>
-            <div class="unidad-tipo-descripcion" ng-click="playAudio('tipo')" ion-ripple>
+            <div class="unidad-tipo-descripcion">
                 <div class="sonido">
                     <button class="icon ion-volume-high" aria-hidden="true"></button>
                 </div>

@@ -3,9 +3,9 @@
         <span class="icon" ng-class="estadoUnidad == 'acierto' ? 'ion-checkmark-round':'ion-close-round wrong'"></span>
     </div>
     <div class="popup-body">
-        <p class="mensaje" ng-click="" ion-ripple>{{feedback.mensaje}} <i class="icon ion-volume-high"></i></p>
+        <p class="mensaje" ng-click="playAudio('mensaje')" ion-ripple>{{feedback.mensaje}} <i class="icon ion-volume-high"></i></p>
         <div class="feedback" ng-show="feedback.feedbacks !== undefined">
-            <p ng-repeat="fb in feedback.feedbacks" ion-ripple ng-click=''><i class="sonido icon ion-volume-high" aria-hidden="true"></i> {{ fb.texto}}</p>
+            <p ng-repeat="fb in feedback.feedbacks" ion-ripple ng-click='playAudio(fb.nombre)'><i class="sonido icon ion-volume-high" aria-hidden="true"></i> {{ fb.texto}}</p>
         </div>
     </div>
 </div>

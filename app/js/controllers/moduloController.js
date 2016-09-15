@@ -40,15 +40,14 @@ nutrifamiMobile.controller('ModuloController', function ($ionicPlatform, $scope,
     AudioService.preloadSimple($scope.audios);
 
     $scope.playAudio = function (audio) {
-        AudioService.stopAll($scope.audios);
-        AudioService.play(audio);
+        AudioService.play(audio,$scope.audios);
     };
 
     $scope.porcentajeAvance = function () {
         return(100 / $scope.modulo.totalLecciones * $scope.usuarioAvance.leccionesTerminadas);
     };
     $scope.irALeccion = function (index) {
-        AudioService.stopAll($scope.audios);
+        AudioService.unload($scope.audios);
         $location.path('/capacitacion/' + $stateParams.modulo + "/" + $scope.lids[index] + "/1");
     };
     /* BEGIN CORDOVA FILES
