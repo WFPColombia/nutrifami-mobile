@@ -3,8 +3,10 @@ dependencies = ['ionic', 'ngCordova', 'Authentication', 'ngCookies', 'ngRoute', 
 var nutrifamiLogin = angular.module('Authentication', []);
 var nutrifamiMobile = angular.module('NutrifamiMobile', dependencies);
 
-nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider) {
+nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
     'use strict';
+    $ionicConfigProvider.tabs.position('top');
+    
     $stateProvider.state('login', {
         url: '/login',
         templateUrl: 'views/login.html',
@@ -30,6 +32,17 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider) {
             'menuContent': {
                 templateUrl: 'views/capacitacion.html',
                 controller: 'CapacitacionController'
+            }
+        }
+
+    });
+    
+    $stateProvider.state('app.perfil', {
+        url: '/perfil',
+        views: {
+            'menuContent': {
+                templateUrl: 'views/perfil.html',
+                controller: 'PerfilController'
             }
         }
 
