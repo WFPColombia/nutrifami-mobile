@@ -1,5 +1,5 @@
 /*global angular*/
-nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope, $rootScope, $location, $stateParams, AudioService, UsuarioService) {
+nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope, $rootScope, $location, $stateParams, $ionicPopup, $ionicLoading, AudioService, UsuarioService) {
     'use strict';
     /* BEGIN CORDOVA FILES
      $ionicPlatform.ready(function () {
@@ -87,13 +87,13 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
 
         /*Verifica si la opcion tienen audio y lo carga*/
         if (typeof $scope.unidad.opciones[i].audio !== 'undefined') {
-            $scope.unidad.opciones[i].audio.id = "opcion"+i;
+            $scope.unidad.opciones[i].audio.id = "opcion" + i;
             $scope.audios[$scope.unidad.opciones[i].audio.id] = "assets/" + $scope.unidad.opciones[i].audio.nombre;
         }
     }
 
     $scope.botonCalificar = false;
-    
+
     AudioService.preloadSimple($scope.audios);
 
     $scope.seleccionarOpcion = function (index) {
@@ -266,7 +266,26 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
             }
         }
 
-        $rootScope.Ui.turnOn('feedback');
+        var textoBoton = 'Intentar de nuevo';
+
+        if ($scope.estadoUnidad === 'acierto') {
+            textoBoton = 'Continuar';
+        }
+
+        // An elaborate, custom popup
+        var popUpFeedback = $ionicPopup.show({
+            templateUrl: 'views/template/feedback.tpl.html',
+            scope: $scope,
+            buttons: [
+                {
+                    text: textoBoton,
+                    type: 'button-positive',
+                    onTap: function (e) {
+                        $scope.feedback();
+                    }
+                }
+            ]
+        });
 
         //$scope.feedback();
     };
@@ -283,13 +302,13 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
     $scope.irASiguienteUnidad = function () {
         $scope.siguienteUnidad = parseInt($stateParams.unidad) + 1;
         if ($scope.siguienteUnidad > $scope.unidad.totalUnidades) {
-            var usuarioAvance = JSON.parse(localStorage.getItem('usuarioAvance'));
+            var usuarioAvance = UsuarioService.getUsuarioAvance();
+            console.log(usuarioAvance);
             if (typeof usuarioAvance['3'] === 'undefined') {
                 usuarioAvance['3'] = {};
                 usuarioAvance['3'][$stateParams.modulo] = {};
             }
             usuarioAvance['3'][$stateParams.modulo][$stateParams.leccion] = "true";
-            localStorage.setItem("usuarioAvance", JSON.stringify(usuarioAvance));
 
             var data = {
                 'per_id': $scope.usuarioActivo.id,
@@ -297,14 +316,26 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
                 'mod_id': $stateParams.modulo,
                 'lec_id': $stateParams.leccion
             };
-            nutrifami.avance.addAvance(data, function (response) {
+
+            // Oberlay Cargando mientras se guarda el avance
+            $scope.loading = $ionicLoading.show({
+                template: 'Guardando Avance...',
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 40
+            });
+
+            UsuarioService.setUsuarioAvance(usuarioAvance, data, function (response) {
+                $ionicLoading.hide();
+                console.log("Guardando datos");
                 if (response.success) {
-                    $location.path('/m/' + $stateParams.modulo + "/" + $stateParams.leccion + "/" + $stateParams.unidad + "/leccion-terminada");
+                    $location.path('/capacitacion/' + $stateParams.modulo + "/" + $stateParams.leccion + "/" + $stateParams.unidad + "/leccion-terminada");
                 }
             });
 
+
         } else {
-            $location.path('/m/' + $stateParams.modulo + "/" + $stateParams.leccion + "/" + $scope.siguienteUnidad);
+            $location.path('/capacitacion/' + $stateParams.modulo + "/" + $stateParams.leccion + "/" + $scope.siguienteUnidad);
         }
     };
 

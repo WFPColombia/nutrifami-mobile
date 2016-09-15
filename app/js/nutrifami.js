@@ -4,7 +4,7 @@ var usuarioFamilia = new Object();  /* Datos de la familia del usuario logueado,
 var usuarioFamiliaAvance = new Object();  /* Datos de avance de la familia*/
 
 
- var base_url = 'http://nutrifami.org/';
+var base_url = 'http://nutrifami.org/';
 
 var nutrifami = {
     /* nutrifami.usuarioActivoServerInfo */
@@ -94,12 +94,12 @@ var nutrifami = {
 
                     /* Se copia la información de avance en un objeto independiente y se elimina la información de usuarioActivo*/
                     usuarioAvance = usuarioActivo.avance[usuarioActivo.id];
-                    
+
                     /* Se copia la informaciòn de avance de familia a un objeto independiente*/
                     usuarioFamiliaAvance = usuarioActivo.avance;
                     delete usuarioActivo["avance"];
                     delete usuarioFamiliaAvance[usuarioActivo.id];
-                    
+
                     /*Se copia información de familia de usuario Activo en objeto independiente*/
                     usuarioFamilia = usuarioActivo.familia;
                     delete usuarioActivo["familia"];
@@ -237,13 +237,13 @@ var nutrifami = {
         initClient: function (callback) {
             callback = callback || function () {
             };
-            
+
             nutrifami.training.cap_capacitacionesId = serv_capacitacionesId;
             nutrifami.training.cap_capacitaciones = serv_capacitaciones;
             nutrifami.training.cap_modulos = serv_modulos;
             nutrifami.training.cap_lecciones = serv_lecciones;
             nutrifami.training.cap_unidadesinformacion = serv_unidades;
-            
+
         },
         /*
          * nutrifami.training.downloadCapacitacion(cid, callback);
@@ -660,21 +660,22 @@ var nutrifami = {
             $.ajax({
                 url: serv,
                 type: 'GET',
-                async: false,
+                async: true,
                 data: data,
                 success: function (data) {
                     var objServ = JSON.parse(data);
                     response = objServ.response;
+                    callback(response);
                 },
                 error: function () {
                     response.success = true;
                     response.message = 'Ha ocurrido un error durante la ejecución';
+                    callback(response);
                 }
             });
-            callback(response);
+
         }
     },
-    
     consumo: {
         /*
          * nutrifami.consumo.getConsolidadoCompras(data, callback);
@@ -704,8 +705,6 @@ var nutrifami = {
             });
             callback(response);
         },
-        
-        
         /*
          * nutrifami.consumo.getProductosPuntoVenta(data, callback);
          */

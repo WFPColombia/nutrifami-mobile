@@ -1,6 +1,6 @@
-<div class='unidad'>
-    <ng-include src="'views/template/leccionAvance.tpl.html'"></ng-include>
-    <div>
+<ion-scroll style="height: 100%">
+    <div class='unidad'>
+        <ng-include src="'views/template/leccionAvance.tpl.html'"></ng-include>
         <div class="unidad-tipo">
             <img ng-src="img/icons/{{unidad.tipo.icono}}"/>
             <div class="unidad-tipo-descripcion" ng-click="playAudio('tipo')" ion-ripple>
@@ -23,7 +23,6 @@
                     <img ng-src="assets/{{unidad.imagen.nombre}}" ng-hide="{{unidad.imagen === undefined|| unidad.imagen.nombre === ''}}"/>
                 </div>
             </div>
-
         </div>
         <div class="opciones" ng-hide="unidad.tipo.id == 2">
             <opcion-unidad-info ng-repeat="opcion in unidad.opciones" info="opcion" index="{{$index}}" colspan="unidad.colspan" ng-click="validar()"></opcion-unidad-info>
@@ -31,13 +30,8 @@
         <div class="opciones"  ng-show="unidad.tipo.id == '2'">
             <opcion-pareja-unidad-info ng-repeat="opcion in unidad.opciones" info="opcion" index="{{$index}}"></opcion-pareja-unidad-info>
         </div>
-
-
-
     </div>
-</div>
-</div>
-
+</ion-scroll>
 
 <div class="bar bar-footer calificar" ng-class=" botonCalificar ? 'habilitado' : ''" >
     <button ng-click="calificarUnidad()" ng-disabled="!botonCalificar" ion-ripple>Calificar</button>

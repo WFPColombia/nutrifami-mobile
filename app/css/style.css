@@ -792,95 +792,6 @@ button {
     padding-right: 10px;
 }
 
-
-
-.modal {
-    overflow: auto;
-}
-
-.modal .calificacion .modal-header .sticker {
-    color: #ffffff;
-    height: 86px;
-    width: 86px;
-    background-color: #09df78;
-    border-radius: 43px;
-    text-align: center;
-    padding-top: 22px;
-}
-
-.modal .calificacion .modal-header {
-    border: none;
-    margin-top: 30px;
-}
-
-.modal .calificacion .modal-header .mensaje a {
-    color: #8e8e8e;
-}
-
-.modal .calificacion .modal-header .wrong {
-    background-color: #ff1244;
-}
-
-.modal .calificacion .modal-body .mensaje {
-    text-align: center;
-    color: #2f3e47;
-    font-size: 12pt;
-    margin-top: 10px;
-    margin-bottom: 37px;
-}
-
-.modal .calificacion .modal-body .mensaje .fa {
-    color: #8e8e8e;
-    border: none;
-    background-color: rgba(0,0,0,0);
-}
-
-.modal .calificacion .modal-body .feedback {
-    border: 9px;
-    -moz-border-radius: 9px;
-    -webkit-border-radius: 9px;
-    background-color: #f5f5f5;
-    font-family: 'Muli', sans-serif;
-    text-align: center;
-    color: #2f3e47;
-    padding: 10px;
-}
-
-.modal .calificacion .modal-body .feedback p {
-    font-size: 14pt;
-    padding-top: 15px;
-}
-
-.modal .calificacion .modal-body .feedback .sonido {
-    color: #00965e;
-    border: none;
-    background-color: rgba(0,0,0,0);
-}
-
-.modal .calificacion .modal-footer {
-    border: none;
-    margin-top: 10px;
-}
-
-.modal .calificacion .modal-footer .btn-default {
-    height: 57px;
-    background-color: #00c97e;
-    font-family: 'Raleway-Bold', sans-serif;
-    letter-spacing: 5px;
-    color: white;
-    text-transform: uppercase;
-    border: none;
-    border-radius: 26px;
-    -moz-border-radius: 26px;
-    -webkit-border-radius: 26px;
-    line-height: 26px;
-}
-
-.modal .calificacion .intentar-nuevo {
-    font-size: 10pt;
-    letter-spacing: 3px;
-}
-
 .calificar {
     height: 58px;
     background-color: #d0d0d0;
@@ -901,6 +812,8 @@ button {
     letter-spacing: 5px;
     width: 100%;
     height: 100%;
+    background-color: rgba(0,0,0,0);
+    border: none;
 }
 
 .mostrar-tip {
@@ -934,6 +847,95 @@ button {
     font-size: 31px;
 }
 
+/*MODAL FEEDBACK*/
+
+.popup-container .popup {
+    width: 95%;
+    min-height:450px; 
+    background-color: #ffffff;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    font-family: 'Muli', sans-serif;
+    color: #2f3e47;
+    text-align: center;
+
+}
+
+.popup-container .popup .popup-head{
+    padding: 0;
+    border: none;
+}
+.popup-container .popup .calificacion .popup-header {
+    text-align:center;
+    margin-top: 30px;
+}
+
+.popup-container .popup .calificacion .popup-header .icon{
+    display: inline-block;
+    color: #ffffff;
+    font-size: 30pt;
+    height: 86px;
+    width: 86px;
+    background-color: #09df78;
+    border-radius: 43px;
+    text-align: center;
+    padding-top: 22px;
+}
+.popup-container .popup .calificacion .popup-header .wrong {
+    background-color: #ff1244;
+}
+
+.popup-container .popup .calificacion .mensaje {
+    text-align: center;
+    color: #2f3e47;
+    font-size: 12pt;
+    margin-top: 20px;
+    margin-bottom: 37px;
+}
+
+.popup-container .popup .calificacion .mensaje  i {
+    color: #8e8e8e;
+}
+
+.popup-container .popup .calificacion .feedback {
+    border: 9px;
+    -moz-border-radius: 9px;
+    -webkit-border-radius: 9px;
+    background-color: #f5f5f5;
+    font-family: 'Muli', sans-serif;
+    text-align: center;
+    color: #2f3e47;
+    padding: 15px 35px;
+}
+
+.popup-container .popup .calificacion .feedback p {
+    font-size: 14pt;
+    padding-top: 10px;
+}
+
+.popup-container .popup .calificacion .feedback .sonido {
+    color: #00965e;    
+}
+
+.popup-container .popup .popup-buttons{
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+.popup-container .popup .popup-buttons .button {
+    height: 57px;
+    background-color: #00c97e;
+    font-family: 'Raleway-Bold', sans-serif;
+    letter-spacing: 5px;
+    color: white;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 26px;
+    -moz-border-radius: 26px;
+    -webkit-border-radius: 26px;
+    line-height: 26px;
+}
+/* END MODAL FEEDBACK*/
 
 /* LECCIÓN FINALIZADA */
 
@@ -1090,7 +1092,6 @@ button {
 
 /* PERFIL Y EDITAR PERFIL */
 
-
 .perfil-panel {
     margin-top: 45px;
     background-color: #ffffff;
@@ -1155,9 +1156,6 @@ button {
     text-transform: uppercase;
 }
 
-.modal-dialog .modal-header {
-    text-align:center;
-}
 
 .perfil-body .form-group .form-control,
 .modal-dialog .form-group .form-control{
