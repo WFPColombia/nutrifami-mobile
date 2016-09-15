@@ -1090,7 +1090,45 @@ button {
     background-color: rgba(0,0,0,0);
 }
 
+/* TABAS */
+
+.tabs-top > .tabs, .tabs.tabs-top {
+    top: 0px;
+    background-color: #ffffff;
+    padding-top: 25px;
+    height: 60px;        
+    background-position: initial;
+}
+
+.tab-item{
+    max-width: none;
+}
+
+.tabs .tab-item .tab-title{
+    font-size: 13pt;
+    color: rgba(0,0,0,0.6);
+    font-family: 'Muli', sans-serif;
+}
+
+.tab-item.tab-item-active,
+.tab-item.active, 
+.tab-item.activated {
+    border-bottom: 3px solid #00c97e;
+}
+
+.tabs .tab-item-active .tab-title{
+    color: #00c97e;
+}
+
+/* END - TABS*/
+
 /* PERFIL Y EDITAR PERFIL */
+
+.perfil .scroll{
+    height: 100%;
+}
+
+
 
 .perfil-panel {
     margin-top: 45px;
