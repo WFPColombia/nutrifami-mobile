@@ -1,4 +1,4 @@
-nutrifamiMobile.factory('ConsumoService', ['$http', '$cookieStore', '$rootScope', '$timeout',
+nutrifamiMobile.factory('ComprasService', ['$http', '$cookieStore', '$rootScope', '$timeout',
     function () {
         var service = {};
 
@@ -10,11 +10,20 @@ nutrifamiMobile.factory('ConsumoService', ['$http', '$cookieStore', '$rootScope'
          * ConsumoService.agregarFamiliar(usuario, function (response){});
          */
         service.getConsolidadoCompras = function (usuario, callback) {
-            nutrifami.consumo.getConsolidadoCompras(usuario, function (response) {
-                callback(response);
-            });
+            var misCompras = JSON.parse(localStorage.getItem('misCompras'));
+
+            if (misCompras === null) {
+                console.log("CargaTodo");
+                nutrifami.consumo.getConsolidadoCompras(usuario, function (response) {
+                    localStorage.setItem("misCompras", JSON.stringify(response.data));
+                    callback(response.data);
+                });
+            } else {
+                console.log("Ya no carga nada");
+                callback(misCompras);
+            }
         };
-        
+
         /**
          * 
          * @param {type} puntoVenta

@@ -1,0 +1,77 @@
+<ion-view>
+    <ion-content scroll='false'>
+        <div class='compras'>
+            <ion-tabs class="tabs-icon-top">
+                <ion-tab title="Mis compras">
+                    <ion-scroll style="height: 100%">
+                        <div class="compras-tab">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="compras-descripcion">
+                                        <p ng-click='' ng-show="noHayDatos" ion-ripple>
+                                            No se encontraron registros para este usuario
+                                        </p>
+                                        <p ng-click='' ng-hide="noHayDatos">
+                                            <i class="icon ion-volume-high"></i> Aquí encontrará el resumen de sus compras del último mes
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="compras-porcentajes">
+                                <div class="row" ng-repeat="grupo in consumoUltimoMes.grupo">
+                                    <div class="col col-40">
+                                        <div class="compras-porcentaje-tipo">
+                                            <p>{{ grupo.nombre}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col col-60 compras-porcentaje-barra">
+                                        <div class="progress" go-click="/consumo/{{grupo.alias}}" ion-ripple>
+                                            <div class="progress-bar grupo-{{grupo.alias}}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: {{grupo.porcentaje_visual}}%;"></div>
+                                            <div class="cantidad">{{grupo.porcentaje_compra}}<span>%</span></div>
+                                            <i class="icon ion-chevron-right" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ion-scroll>
+                </ion-tab>
+                <ion-tab title="Recomendados">
+                    <ion-scroll style="height: 100%">
+                        <div class="container">
+                            <div class="canasta-header">
+                                <img class="canasta-imagen" src="img/canasta-ideal.png" alt="Canasta ideal"/>
+                                <p class="canasta-descripcion-sonido"><button ng-click='dietaVariada.paused ? dietaVariada.play() : dietaVariada.pause()' class="fa fa-volume-up" aria-hidden="true"></button></p>
+                                <p class="canasta-descripcion"> 
+                                    Aquí encontrará recomendaciones para que su dieta sea más variada
+                                </p>
+                            </div>
+                            <div class="canasta-body">
+                                <div class="panel-group" ui-state="myAccordion" ui-default="1">
+                                    <div class="panel panel-default" ng-repeat="recomendado in recomendados">
+                                        <div class="panel-heading  grupo-{{recomendado.grupo_nombre}}" ui-set="{'myAccordion': {{$index + 1}}}">        
+                                            <h4 class="panel-title">
+                                                <img src="img/icons/ico-compras-{{recomendado.grupo_nombre}}.png" alt=""/>
+                                                Cereales, raices, tuberculos y platano
+                                            </h4>
+                                        </div>
+                                        <div ui-if="myAccordion == {{$index + 1}}" >
+                                            <div class="panel-body" >
+                                                <ul>
+                                                    <li>Nombre del producto vamus vestibulum purus</li>
+                                                    <li>Nombre del producto vamus vestibulum purus</li>
+                                                    <li>Nombre del producto vamus vestibulum purus</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ion-scroll>
+                </ion-tab>
+            </ion-tabs>
+        </div>
+    </ion-content>
+</ion-view>

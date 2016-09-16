@@ -6,7 +6,7 @@ var nutrifamiMobile = angular.module('NutrifamiMobile', dependencies);
 nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
     'use strict';
     $ionicConfigProvider.tabs.position('top');
-    
+
     $stateProvider.state('login', {
         url: '/login',
         templateUrl: 'views/login.html',
@@ -36,28 +36,6 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         }
 
     });
-    
-    $stateProvider.state('app.perfil', {
-        url: '/perfil',
-        views: {
-            'menuContent': {
-                templateUrl: 'views/perfil.html',
-                controller: 'PerfilController'
-            }
-        }
-
-    });
-    
-    $stateProvider.state('app.editarPerfil', {
-        url: '/editar-perfil',
-        views: {
-            'menuContent': {
-                templateUrl: 'views/editarPerfil.html',
-                controller: 'EditarPerfilController'
-            }
-        }
-
-    });
 
     $stateProvider.state('app.modulo', {
         url: '/capacitacion/:modulo',
@@ -68,11 +46,43 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
             }
         }
     });
-    
+
     $stateProvider.state('unidad', {
         url: '/capacitacion/:modulo/:leccion/:unidad',
-                templateUrl: 'views/unidad.html',
-                controller: 'UnidadController'
+        templateUrl: 'views/unidad.html',
+        controller: 'UnidadController'
+    });
+
+    $stateProvider.state('app.perfil', {
+        url: '/perfil',
+        views: {
+            'menuContent': {
+                templateUrl: 'views/perfil.html',
+                controller: 'PerfilController'
+            }
+        }
+
+    });
+
+    $stateProvider.state('app.editarPerfil', {
+        url: '/editar-perfil',
+        views: {
+            'menuContent': {
+                templateUrl: 'views/editarPerfil.html',
+                controller: 'EditarPerfilController'
+            }
+        }
+
+    });
+    
+    $stateProvider.state('app.compras', {
+        url: '/compras',
+        views: {
+            'menuContent': {
+                templateUrl: 'views/compras.html',
+                controller: 'ComprasController'
+            }
+        }
     });
 
     $stateProvider.state('home', {
