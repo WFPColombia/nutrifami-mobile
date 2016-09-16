@@ -1,4 +1,4 @@
-nutrifamiMobile.directive('goClick', function ($location) {
+nutrifamiMobile.directive('goClick', function ($location, $timeout) {
     return function (scope, element, attrs) {
         var path;
 
@@ -8,8 +8,11 @@ nutrifamiMobile.directive('goClick', function ($location) {
 
         element.bind('click', function () {
             scope.$apply(function () {
-                console.log(path);
-                $location.path(path);
+                
+                $timeout( function(){ 
+                    $location.path(path);
+                }, 1000);
+                
             });
         });
     };

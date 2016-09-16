@@ -47,6 +47,17 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         }
 
     });
+    
+    $stateProvider.state('app.editarPerfil', {
+        url: '/editar-perfil',
+        views: {
+            'menuContent': {
+                templateUrl: 'views/editarPerfil.html',
+                controller: 'EditarPerfilController'
+            }
+        }
+
+    });
 
     $stateProvider.state('app.modulo', {
         url: '/capacitacion/:modulo',

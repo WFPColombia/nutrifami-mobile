@@ -4,7 +4,7 @@ var usuarioFamilia = new Object();  /* Datos de la familia del usuario logueado,
 var usuarioFamiliaAvance = new Object();  /* Datos de avance de la familia*/
 
 
-var base_url = 'http://nutrifami.org/';
+var base_url = 'http://127.0.0.1:83/';
 
 var nutrifami = {
     /* nutrifami.usuarioActivoServerInfo */
@@ -144,7 +144,7 @@ var nutrifami = {
         $.ajax({
             url: serv,
             type: 'GET',
-            async: false,
+            async: true,
             data: data,
             success: function (data) {
                 var objServ = JSON.parse(data);
@@ -155,14 +155,16 @@ var nutrifami = {
                     response.success = false;
                     response.message = 'Los datos son errados';
                 }
+                callback(response);
             },
             error: function () {
                 response.success = true;
                 response.message = 'Ha ocurrido un error durante la ejecución';
+                callback(response);
             }
         });
 
-        callback(response);
+
     },
     /*
      * nutrifami.editarUsuarioActivo(data, callback);

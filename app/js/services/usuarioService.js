@@ -4,7 +4,9 @@ nutrifamiMobile.factory('UsuarioService', function () {
     /**
      * 
      * @returns {Array|Object}
-     *  UsuarioService.getUsuarioActivo()
+     * 
+     * UsuarioService.getUsuarioActivo()
+     *  
      */
     service.getUsuarioActivo = function () {
         return JSON.parse(localStorage.getItem('usuarioActivo'));
@@ -12,20 +14,34 @@ nutrifamiMobile.factory('UsuarioService', function () {
 
     /**
      * 
-     * @returns {Array|Object}
-     * UsuarioService.getUsuarioAvance()
+     * @param {type} usuario
+     * @param {type} callback
+     * @returns {undefined}
+     * 
+     * UsuarioService.setUsuarioActivo(usuario, function(response)){}
+     * 
      */
-    service.getUsuarioAvance = function () {
-        return JSON.parse(localStorage.getItem('usuarioAvance'));
+    service.setUsuarioActivo = function (usuario, callback) {
+        localStorage.setItem("usuarioActivo", JSON.stringify(usuario));
+        delete usuario["sesionId"];
+        delete usuario["isLogin"];
+        delete usuario["token"];
+        nutrifami.editarUsuarioActivo(usuario, function (response) {
+            callback(response);
+        });
+
     };
 
     /**
      * 
-     * @param {type} usuarioAvance
-     * @returns {undefined}
+     * @returns {Array|Object}
      * 
-     * UsuarioService.setUsuarioAvance(usuarioAvance)
+     * UsuarioService.getUsuarioAvance()
+     * 
      */
+    service.getUsuarioAvance = function () {
+        return JSON.parse(localStorage.getItem('usuarioAvance'));
+    };
 
     /**
      * 
@@ -35,6 +51,7 @@ nutrifamiMobile.factory('UsuarioService', function () {
      * @returns {undefined}
      * 
      * UsuarioService.setUsuarioAvance(usuarioAvance, data, function(response)){}
+     * 
      */
     service.setUsuarioAvance = function (usuarioAvance, data, callback) {
         callback = callback || function () {
