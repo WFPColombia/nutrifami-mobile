@@ -1422,8 +1422,6 @@ button {
     right: 10px;
 }
 
-
-
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-CEREALES,
 .canasta-body .panel .grupo-CEREALES,
 .compras-header.grupo-CEREALES,
@@ -1473,291 +1471,104 @@ button {
     background-color: #bd8330;
 }
 
-/*+++++++++++++++++++++*/
-
-.compras .compras-header .nav-justified > .active > a{
-    color: #00c97e;
-    border:none;
-    border-bottom: solid #00c97e 3px;
-}
-
-.compras .compras-header .nav-justified  a{
-    height: 55px;
-    color: #999999;
-    font-size: 14pt;
-    padding-top: 14px;
-}
-.compras .compras-body .row{
-    margin: 0px;
-}
-
-.canasta-header {
-    margin-top: 35px;   
-    margin-bottom: 45px;
-}
-
-.canasta-header .canasta-imagen {
-    float: left;
-}
-
-.canasta-header .canasta-descripcion{
-    font-size: 12pt;
-    color: #2f3e47;
-    text-align: center;
-}
-.canasta-header .canasta-descripcion-sonido{
-    text-align: right;
-}
-
-.canasta-header .canasta-descripcion-sonido button{
-    background-color: rgba(0,0,0,0);
-    background-image: none;
-    border: none;
-}
-
-.canasta-body .panel{
-    border-radius: 10px;
-    border: none;
-}
-
-.canasta-body .panel .panel-heading{
-    height: 48px;
-    border-radius: 10px;
-}
-
-.canasta-body .abieto,
-.canasta-body .abierto .panel-heading{
-    border-radius: 10px 10px 0 0;
-}
-
-.canasta-body .panel .panel-heading .panel-title{
-    color: #ffffff;
-    font-size: 9pt;
-    font-family: 'Raleway-Bold', sans-serif;
-    text-transform: uppercase; 
-}
-
-.canasta-body .panel .panel-heading .panel-title img{
-    margin-right: 15px;
-}
-
-.canasta-body .panel .panel-body{
-    padding: 0px;
-    border-left: 1px solid #dbdbdb;
-    border-right: 1px solid #dbdbdb;
-    border-bottom: 1px solid #dbdbdb;
-    border-radius: 0 0 10px 10px;
-}
-
-.canasta-body .panel .panel-body ul,
-.compras-body .compra-ideal .panel-body ul{
-    padding: 0;
-    margin: 0;
-}
-
-.canasta-body .panel .panel-body li,
-.compras-body .compra-ideal .panel-body li{
-    text-decoration: none;
-    list-style: none;
-    height: 50px;
-    background-color: #ffffff;
-    color: #374048;
-    font-size: 12pt;
-    padding-left: 14px;
-    padding-top: 16px;
-}
-
-.canasta-body .panel .panel-body li:last-child,
-.compras-body .compra-ideal .panel-body li:last-child{
-    border-radius: 0 0 10px 10px;
-}
-
-.canasta-body .panel .panel-body li:nth-child(even),
-.compras-body .compra-ideal .panel-body li:nth-child(even){
-    background-color: #f5f5f5;
-}
-
-.compras-header .compras-header-titulo {
-    font-family: 'Muli', sans-serif;
-    font-size: 12pt;
-    color: white;
-    width: 100%;
-    height: 64px;
-    padding-top: 17px;
-    border-bottom: 1px solid #ffffff;
-}
-
-.compras-header .compras-header-titulo h1{
-    font-size: 15pt;
-    color: #ffffff;
-    text-align: center;
-    text-transform: lowercase;
-}
-
-.compras-header .compras-header-titulo .btn{
-    border: none;
-    background-color: rgba(0,0,0,0);
-    padding: 0px 12px;
-}
-
-.compras-header  .compras-header-titulo button{
-    border: none;
-    background-color: rgba(0,0,0,0);
-}
-
-.compras-header .compras-header-resumen .left,
-.compras-header .compras-header-resumen .right{
-    width: 37%;
-    float: left;
-}
-
-.compras-header .compras-header-resumen .center{
-    width: 26%;
-    border-left: 1px solid;
-    border-right: 1px solid;
-    float: left;
-}
-
-.compras-header .compras-header-resumen{
-    height: 108px;
-    color: #ffffff;
-    text-align: center;
-    padding-top: 19px;
-}
-
-.compras-header .compras-header-resumen h2{
-    font-size: 25pt;
-    margin-bottom:2px;
-}
-
-.compras-header .compras-header-resumen h3{
-    font-size: 20pt;
-}
-
-.compras-porcentaje {
-    width: 60px;
-    height: 60px;
-    margin: 0 auto;
-}
-
-.compras-header .compras-header-resumen .c100.small {
-    font-size: 60px;
-}
-
-.compras-header .compras-header-resumen .c100 {
-    background-color: #ffffff;
-}
-
-.compras-header .compras-header-resumen .c100 .bar,
-.compras-header .compras-header-resumen .c100 .fill{
-    border: 5px solid #c8c8c6;
-}
-
-.compras-body .compras-productos{
+/* Recomendados */
+.compras-tab .recomendados-header{
+    margin-top: 25px;
     color: #2f3e47;
     font-size: 12pt;
-    margin-top: 20px;
-}
-
-.compras-body .compras-productos .total-productos{
-    color: #2f3e47;
-    font-size: 17pt;
-    border-top: 1px solid #2f3e47;
-    padding-top: 25px;
-}
-
-
-.compras-body .compras-productos .producto{
-    margin-bottom: 35px;
-    text-transform: lowercase;
-}
-
-.compras-body .compras-productos .precio{
-    text-align: right;
-}
-
-.compras-body .compra-ideal{
-    margin-top: 70px;
-}
-
-.compras-body .compra-ideal .panel-group{
-    margin-bottom: 0px;
-}
-
-.compras-body .compra-ideal .panel-heading{
-    padding-top: 22px;
-    background-color: #ffffff;
-    height: 120px;
-    color: #2f3e47;
-}
-
-.compras-body .compra-ideal .panel-heading.logro{
-    padding-top: 10px;
-
-}
-
-.compras-body .compra-ideal .panel-heading.logro .compra-ideal-descripcion {
-    margin-left: 130px;
-    padding-top: 20px;
-}
-
-.compras-body .compra-ideal .panel-heading.logro button{
-    top: -30px;
-}
-
-.compras-body .compra-ideal .panel-heading.logro img{
-    float:left;
-
-}
-
-
-.compras-body .compra-ideal .panel-heading button{
-    border:none;
-    background-color: rgba(0,0,0,0);
-    font-size: 10pt;
     position: relative;
-    top: -5px;
 }
 
-.compras-body .compra-ideal .panel-heading .compra-ideal-imagen{
+.compras-tab .recomendados-header img{
     float: left;
-    margin-right:12px;
+    margin-left: 15px;
+    margin-right: 10px;
 }
 
-.compras-body .compra-ideal .panel-heading .compra-ideal-descripcion{
+.compras-tab .recomendados-header p{
+    margin-top: 27px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.compras-tab .recomendados-header i{
+    position: absolute;
+    top:10px;
+    right: 10px;
+    font-size: 10pt;
+    color: #4d6675;
+}
+/* END COMPRAS Y CANASTA IDEAL */ 
+
+
+/* SOBRE */
+
+.sobre {
+    background-color: #ffffff;
+    height: 100%;
+}
+
+.sobre header{
+    height: 64px;
+    background-color: #00c97e;
     font-size: 15pt;
-    margin-top: 6px;
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Muli', sans-serif;
+    position: relative;
 }
 
-.compras-body .compra-ideal .panel-heading h3{
-    font-size: 9pt;
-    color: #00c97e;
-    text-transform: uppercase;
-    font-family: 'Raleway-Bold', sans-serif;
+.sobre header a{
+    position: absolute;
+    left: 0;
+    padding: 21PX;
+    top: 0;
+    font-size: 15pt;
+    color: #ffffff;
 }
 
-.compras-body .compra-ideal .panel-heading .chevron{
-    float: right;
-    color: #cccccc;
-    font-size: 24pt;
-    margin-top: 20px;
+.sobre header p{
+    margin-top: 15px;
 }
 
-.compras-body .compra-ideal .panel-body{
-    color: #2f3e47;
-}
-
-.compras-body .compra-ideal .panel-body button{
-    border:none;
-    background-color: rgba(0,0,0,0);
-}
-
-.compras-body .compra-ideal .panel-body p{
+.sobre .sobre-body{
+    text-align: center;
+    color:#2f3e47;
     font-size: 12pt;
 }
 
-.compras-body .compra-ideal .panel-body ul li{
-    text-transform: lowercase;
+.sobre .sobre-body .nf-logo img{
+    margin-top: 50px;
+    margin-bottom: 5px;
 }
 
-/* END COMPRAS Y CANASTA IDEAL */ 
+.sobre .sobre-body .descripcion p{
+    font-size: 14pt;
+    margin-top: 25pt;
+    padding: 0 35px;
+}
+
+.sobre .sobre-body .wfp-ia-logo img{
+    margin-top:25px;
+}
+
+.sobre .sobre-body .copyright{
+    margin-top: 35px;
+}
+
+/* END - SOBRE */
+
+
+.list .item.item-accordion {
+    line-height: 38px;
+    padding-top: 0;
+    padding-bottom: 0;
+    transition: 0.09s all linear;
+}
+.list .item.item-accordion.ng-hide {
+    line-height: 0px;
+}
+.list .item.item-accordion.ng-hide-add,
+.list .item.item-accordion.ng-hide-remove {
+    display: block !important;
+}

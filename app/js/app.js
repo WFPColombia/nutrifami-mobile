@@ -84,6 +84,12 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
             }
         }
     });
+    
+    $stateProvider.state('sobre', {
+        url: '/sobre',
+        templateUrl: 'views/sobre.html',
+        controller: 'SobreController'
+    });
 
     $stateProvider.state('home', {
         url: '/home',

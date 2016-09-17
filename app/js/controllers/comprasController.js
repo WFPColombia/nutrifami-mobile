@@ -1,4 +1,4 @@
-nutrifamiMobile.controller('ComprasController', function ($scope, $ionicLoading, ComprasService, UsuarioService) {
+nutrifamiMobile.controller('ComprasController', function ($ionicPlatform, $scope, $ionicLoading, ComprasService, UsuarioService) {
     'use strict';
     /* BEGIN CORDOVA FILES
      $ionicPlatform.ready(function () {
@@ -14,7 +14,7 @@ nutrifamiMobile.controller('ComprasController', function ($scope, $ionicLoading,
     usuario.did = 66976632;
 
     $scope.loading = $ionicLoading.show({
-        template: 'Cargando datos...',
+        //template: 'Cargando datos...',
         animation: 'fade-in',
         showBackdrop: true,
         maxWidth: 40
@@ -38,6 +38,28 @@ nutrifamiMobile.controller('ComprasController', function ($scope, $ionicLoading,
          console.log(response.message);
          }*/
     });
+
+    $scope.groups = [];
+    for (var i = 0; i < 10; i++) {
+        $scope.groups[i] = {
+            name: i,
+            items: []
+        };
+        for (var j = 0; j < 3; j++) {
+            $scope.groups[i].items.push(i + '-' + j);
+        }
+    }
+
+    $scope.toggleGroup = function (group) {
+        if ($scope.isGroupShown(group)) {
+            $scope.shownGroup = null;
+        } else {
+            $scope.shownGroup = group;
+        }
+    };
+    $scope.isGroupShown = function (group) {
+        return $scope.shownGroup === group;
+    };
 
 
 

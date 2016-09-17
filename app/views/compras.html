@@ -39,15 +39,35 @@
                 </ion-tab>
                 <ion-tab title="Recomendados">
                     <ion-scroll style="height: 100%">
-                        <div class="container">
-                            <div class="canasta-header">
-                                <img class="canasta-imagen" src="img/canasta-ideal.png" alt="Canasta ideal"/>
-                                <p class="canasta-descripcion-sonido"><button ng-click='dietaVariada.paused ? dietaVariada.play() : dietaVariada.pause()' class="fa fa-volume-up" aria-hidden="true"></button></p>
-                                <p class="canasta-descripcion"> 
-                                    Aquí encontrará recomendaciones para que su dieta sea más variada
-                                </p>
+                        <div class="compras-tab">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="recomendados-header" ng-click=''  ion-ripple>
+                                        <img src="img/canasta-ideal.png" alt="Canasta ideal"/>
+                                        
+                                        <p>Aquí encontrará recomendaciones para que su dieta sea más variada</p>
+                                        <i class="icon ion-volume-high"></i>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="canasta-body">
+
+                            <ion-list>
+                                <div ng-repeat="group in groups">
+                                    <ion-item class="item-stable"
+                                              ng-click="toggleGroup(group)"
+                                              ng-class="{active: isGroupShown(group)}">
+                                        <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion - plus'"></i>
+                                        &nbsp;
+                                        Group {{group.name}}
+                                    </ion-item>
+                                    <ion-item class="item-accordion"
+                                              ng-repeat="item in group.items"
+                                              ng-show="isGroupShown(group)">
+                                        {{item}}
+                                    </ion-item>
+                                </div>
+                            </ion-list>
+                            <!--<div class="canasta-body">
                                 <div class="panel-group" ui-state="myAccordion" ui-default="1">
                                     <div class="panel panel-default" ng-repeat="recomendado in recomendados">
                                         <div class="panel-heading  grupo-{{recomendado.grupo_nombre}}" ui-set="{'myAccordion': {{$index + 1}}}">        
@@ -68,7 +88,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </ion-scroll>
                 </ion-tab>
             </ion-tabs>
