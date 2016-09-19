@@ -1335,7 +1335,7 @@ button {
 /* END PERFIL Y EDITAR PERFIL */
 
 
-/* COMPRAS Y CANASTA IDEAL */ 
+/* COMPRAS*/ 
 
 .compras-tab{
     margin-top: 61px;
@@ -1513,6 +1513,7 @@ button {
     height: 48px;
     border-width: 0px;
     position: relative;
+    line-height: 35px;
 }
 
 .compras-tab .recomendados-body .item-stable.active {
@@ -1523,10 +1524,16 @@ button {
     border-color: #dcdcdc;
     background-color: #fff;
     color: #2f3e47;
-    padding: 14px;
+    padding: 7px;
     border-width: 1px;
     border-style: solid;
     font-size: 12pt;
+    padding-left: 10px;
+}
+
+.compras-tab .recomendados-body .item img{
+    float: left;
+    margin-right: 15px;
 }
 
 .compras-tab .recomendados-body .item i{
@@ -1557,8 +1564,184 @@ button {
 .compras-tab .recomendados-body .list .item.item-accordion:nth-child(odd){
     background-color: #f5f5f5;
 }
-/* END COMPRAS Y CANASTA IDEAL */ 
+/* END COMPRAS*/ 
 
+/* COMPRAS GRUPO */
+
+.compras-grupo{
+    background-color: #ffffff;
+}
+
+.compras-grupo header{
+    background-color: #ff9600;
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Muli', sans-serif;
+    position: relative; 
+}
+
+.compras-grupo header .titulo{
+    height: 64px;
+    border-bottom: rgba(255,255,255,0.4) 1px solid;
+}
+.compras-grupo header .titulo a{
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 21PX;
+    font-size: 15pt;
+    color: #ffffff;
+}
+
+.compras-grupo header .titulo h1{
+    margin-top: 15px;
+    font-size: 15pt;
+    color: #ffffff;
+}
+
+.compras-grupo header .sub-header {
+    height: 108px;
+    padding-top: 17px;
+    padding-bottom: 10px;
+}
+
+.compras-grupo header .sub-header .total-compra{
+    text-align: right;
+    font-size: 25pt;
+    border-right: rgba(255,255,255,0.4) 1px solid;
+    padding-bottom: 0px;
+    padding-right: 30px;
+}
+
+.compras-grupo header .sub-header .total-compra .valor{
+    font-size: 20pt;
+    margin-bottom: 0px;
+}
+
+.compras-grupo header .sub-header .estado{
+    text-align: left;
+    border-left: rgba(255,255,255,0.4) 1px solid;
+    padding-bottom: 0px;
+    padding-left: 30px;
+}
+
+
+.compras-grupo .compras-grupo-descripcion{
+    margin-top: 35px;
+    font-size: 13pt;
+    color: #2f3e47;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.compras-grupo .compras-grupo-descripcion i{
+    color: #2f3e47;
+}
+
+.compras-grupo .compras-resumen{
+    color: #2f3e47;
+    font-size: 12pt;
+    font-family: 'Muli', sans-serif;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 20px;
+}
+
+.compras-grupo .compras-resumen .nombre-producto{
+    margin-bottom: 25px;
+}
+
+.compras-grupo .compras-resumen .precio{
+    text-align: right;
+    font-size: 13pt;
+}
+
+.compras-grupo .compras-resumen .totales{
+    border-top: 1px solid #7f7f7f;
+    font-size: 17pt;
+    padding-top: 15px;
+}
+
+
+.compras-grupo .compra-ideal{
+    margin-top: 55px;
+    -webkit-box-shadow: 5px 0px 15px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 0px 15px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.25);
+}
+
+
+.compras-grupo .compra-ideal .list .item.item-accordion {
+    line-height: 50px;
+    padding-top: 0;
+    padding-bottom: 0;
+    transition: 0.09s all linear;
+}
+
+.compras-grupo .compra-ideal .list .item.item-accordion:nth-child(odd){
+    background-color: #ffffff;
+}
+.compras-grupo .compra-ideal .list .item.item-accordion.ng-hide {
+    line-height: 0px;
+}
+.compras-grupo .compra-ideal .list .item.item-accordion.ng-hide-add,
+.compras-grupo .compra-ideal .list .item.item-accordion.ng-hide-remove {
+    display: block !important;
+}
+
+
+.compras-grupo .compra-ideal .item{
+    border: none;
+    background-color: #f6f5f5;
+    color: #2f3e47;
+    padding: 7px;
+    font-size: 12pt;
+    padding-left: 27px;
+}
+
+
+
+.compras-grupo .compra-ideal .item img{
+    float: left;
+    margin-right: 20px;
+}
+
+.compras-grupo .compra-ideal .item h3{
+    font-size: 16px;
+    color: #2f3e47;
+    font-family: 'Muli', sans-serif;
+    padding-top: 10px;
+    margin-top: 12px;
+}
+
+.compras-grupo .compra-ideal .item h3 .icon{
+    font-size: 10pt;
+    color: #4d6675;
+    position: relative;
+    top: -5px;
+}
+
+.compras-grupo .compra-ideal .item h4{
+    color: #00c97e;
+    text-transform: uppercase;
+    font-size: 9pt;
+    font-family: 'Raleway-Bold', sans-serif;
+}
+.compras-grupo .compra-ideal .item.item-stable{
+    background-color: #ffffff;
+    position: relative;
+    border: none;
+}
+
+.compras-grupo .compra-ideal .item.item-stable>.icon{
+    font-size: 14pt;
+    color: rgba(0,0,0,0.2);
+    position: absolute;
+    top: 43px;
+    right: 16px;
+}
+
+/*  END - COMPRAS GRUPO */
 
 /* SOBRE */
 

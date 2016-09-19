@@ -11,7 +11,7 @@ nutrifamiMobile.controller('ComprasController', function ($ionicPlatform, $scope
 
     var usuario = {};
     var puntoVenta = {
-        'pid':0
+        'pid': 0
     };
     //usuario.did = $scope.usuarioActivo.login_documento;
     usuario.did = 66976632;
@@ -24,37 +24,15 @@ nutrifamiMobile.controller('ComprasController', function ($ionicPlatform, $scope
             maxWidth: 40
         });
 
-        ComprasService.getConsolidadoCompras(usuario, function (response) {
-            
-            $scope.consumo = response.data;
-            puntoVenta ['pid'] =  $scope.consumo.punto_venta_id;
+        ComprasService.getConsolidadoComprasUltimoMes(usuario, function (response) {
             $scope.noHayDatos = false;
-            
-            
-
             if (response.success) {
-                if (Object.keys($scope.consumo).length > 0) {
-                    $scope.consumoUltimoMes = ordenarGrupos(getLast(getLast($scope.consumo.redencion)));
-                    for (var i in $scope.consumoUltimoMes.grupo) {
-                        $scope.consumoUltimoMes.grupo[i].porcentaje_visual = calcularPorcentaje($scope.consumoUltimoMes.grupo[i].porcentaje_compra, $scope.consumoUltimoMes.grupo[i].porcentaje_recomendado);
-                    }
-                    
-                } else {
-                    $scope.noHayDatos = true;
-                }
+                $scope.consumoUltimoMes = response.data;
+                puntoVenta['pid'] = response.puntoVenta;
             } else {
+                $scope.noHayDatos = true;
+                console.log(response.message);
             }
-            
-            $scope.consumoOrganizado = [];
-            for (var i = 1 ; i<=9; i++){
-                for (var j in $scope.consumoUltimoMes.grupo){
-                    if ($scope.consumoUltimoMes.grupo[j].grupo_id == i){
-                        $scope.consumoOrganizado.push($scope.consumoUltimoMes.grupo[j]);
-                    }
-                }
-            }
-            console.log($scope.consumoOrganizado);
-            
             $ionicLoading.hide();
         });
     };
@@ -67,31 +45,20 @@ nutrifamiMobile.controller('ComprasController', function ($ionicPlatform, $scope
             showBackdrop: true,
             maxWidth: 40
         });
-        
-        ComprasService.getProductosPuntoVenta(puntoVenta, function (response){
+
+        ComprasService.getProductosPuntoVenta(puntoVenta, function (response) {
             $ionicLoading.hide();
-            if(response.success){
-                console.log(response.data);
-                $scope.groups = response.data;
-            }else{
+            if (response.success) {
+                $scope.gruposAlimenticios = response.data;
+            } else {
                 console.log(response.message);
             }
-            
+
         });
     };
 
+    $scope.gruposAlimenticios = [];
 
-
-    $scope.groups = [];
-    /*for (var i = 0; i < 6; i++) {
-        $scope.groups[i] = {
-            name: i,
-            items: []
-        };
-        for (var j = 1; j <= 3; j++) {
-            $scope.groups[i].items.push(j + '. Nombre de algún producto ' + i);
-        }
-    }*/
 
     $scope.toggleGroup = function (group) {
         if ($scope.isGroupShown(group)) {
@@ -103,35 +70,6 @@ nutrifamiMobile.controller('ComprasController', function ($ionicPlatform, $scope
     $scope.isGroupShown = function (group) {
         return $scope.shownGroup === group;
     };
-
-
-
-    function getLast(myObj) {
-        var keys = [];
-        for (var k in myObj) {
-            if (myObj.hasOwnProperty(k)) {
-                keys.push(myObj[k]);
-            }
-        }
-        keys.sort(); /*Organiza el arreglo*/
-        keys.reverse(); /*Lo invierte para obtener el ultimo*/
-        return keys[0];
-    }
-
-    function ordenarGrupos(myObj) {
-        return(myObj);
-    }
-
-    function calcularPorcentaje(valor, maximo) {
-        if (maximo === 0) {
-            maximo = 0.1;
-        }
-        var porcentaje = (100 / maximo) * valor;
-        if (porcentaje > 100) {
-            porcentaje = 100;
-        }
-        return porcentaje;
-    }
 
     /* BEGIN CORDOVA FILES
      });

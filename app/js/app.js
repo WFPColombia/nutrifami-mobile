@@ -85,6 +85,12 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         }
     });
     
+    $stateProvider.state('comprasGrupo', {
+        url: '/compras/:grupo',
+        templateUrl: 'views/comprasGrupo.html',
+        controller: 'ComprasGrupoController'
+    });
+    
     $stateProvider.state('sobre', {
         url: '/sobre',
         templateUrl: 'views/sobre.html',
