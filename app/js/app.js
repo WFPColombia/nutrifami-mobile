@@ -74,7 +74,7 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         }
 
     });
-    
+
     $stateProvider.state('app.compras', {
         url: '/compras',
         views: {
@@ -84,13 +84,24 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
             }
         }
     });
-    
+
     $stateProvider.state('comprasGrupo', {
         url: '/compras/:grupo',
         templateUrl: 'views/comprasGrupo.html',
         controller: 'ComprasGrupoController'
     });
-    
+
+    $stateProvider.state('app.tips', {
+        url: '/tips',
+        views: {
+            'menuContent': {
+                templateUrl: 'views/tips.html',
+                controller: 'TipsController'
+            }
+        }
+    });
+
+
     $stateProvider.state('sobre', {
         url: '/sobre',
         templateUrl: 'views/sobre.html',

@@ -420,23 +420,26 @@ button {
 
 /* END MODULOS*/
 
-/* LECCIONES */
+/* LECCIONES Y TIPS */
 
-.lecciones .lecciones-header{
+.lecciones .lecciones-header,
+.tips .tips-header{
     text-align: center;
     margin-top: 15px;
     color: #2f3e47;
     font-size: 12pt;
 }
 
-.lecciones .lecciones-header h1 {
+.lecciones .lecciones-header h1,
+.tips .tips-header h1{
     color: #00c97e;
     font-size: 18pt;
     padding: 10px;
     margin: 0 20px;
 }
 
-.lecciones .lecciones-header .lecciones-titulo-sonido{
+.lecciones .lecciones-header .lecciones-titulo-sonido,
+.tips .tips-header .tips-titulo-sonido{
     background-color: rgba(0,0,0,0);
     border:none;
     font-size: 12pt;
@@ -451,7 +454,14 @@ button {
     width: 100%;
 }
 
-.lecciones .lecciones-header .lecciones-descripcion-sonido{
+.tips .tips-header p{
+    margin-top: 5px;
+    padding: 5px;
+    width: 100%;
+}
+
+.lecciones .lecciones-header .lecciones-descripcion-sonido,
+.tips .tips-header .tips-descripcion-sonido{
     background-color: rgba(0,0,0,0);
     border:none;
     color: #4d6675;
@@ -459,7 +469,8 @@ button {
     top: -5px;
 }
 
-.lecciones .lecciones-body .leccion{
+.lecciones .lecciones-body .leccion,
+.tips .tips-body .tip{
     height: 200px;
     background-color: #ffffff;
     border-radius: 10px;
@@ -471,14 +482,21 @@ button {
     position: relative;
 }
 
-.lecciones .lecciones-body .col{
+.tips .tips-body .tip{
+    background-color: #00c97e;
+    border: none;
+}
+
+.lecciones .lecciones-body .col,
+.tips .tips-body .col{
     position: relative;
     float: left;
     padding-left: 10px;
     padding-right: 10px;
 }
 
-.lecciones .lecciones-body .leccion-sonido{
+.lecciones .lecciones-body .leccion-sonido,
+.tips .tips-body .tip-sonido{
     background-color: rgba(0,0,0,0);
     border:none;
     width: 50px;
@@ -494,16 +512,31 @@ button {
     -moz-border-radius: 25px;
 }
 
+.tips .tips-body .tip-sonido{
+    color: #ffffff;
+}
+
 .lecciones .lecciones-body .leccion img{
     margin-top: 15px;
     -webkit-filter: grayscale(100%) opacity(100%);
     filter: grayscale(100%) opacity(100%);
 }
 
-.lecciones .lecciones-body .leccion h2{
+.tips .tips-body .tip img{
+    margin-top: 7px;
+}
+
+.lecciones .lecciones-body .leccion h2,
+.tips .tips-body .tip h2{
     font-size: 12pt;
     color: #2f3e47;
     margin-top: 15px;
+}
+
+.tips .tips-body .tip h2{
+    color: #ffffff;
+    padding: 0 15px;
+    margin-top: 5px;
 }
 
 .lecciones .lecciones-body .leccion .leccion-comenzar{
