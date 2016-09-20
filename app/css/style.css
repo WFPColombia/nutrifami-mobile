@@ -578,6 +578,52 @@ button {
 
 /* END LECCIONES*/
 
+/* TIPS MODULO */
+
+.tips-modulo {
+    background-color: #ffffff;
+    height: 100%;
+}
+
+.tips-modulo header{
+    height: 64px;
+    background-color: #00c97e;
+    font-size: 15pt;
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Muli', sans-serif;
+    position: relative;
+}
+
+.tips-modulo header a{
+    position: absolute;
+    left: 0;
+    padding: 21PX;
+    top: 0;
+    font-size: 15pt;
+    color: #ffffff;
+}
+
+.tips-modulo header p{
+    margin-top: 15px;
+}
+
+.tips-modulo .list .item.item-accordion {
+  line-height: 38px;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: 0.09s all linear;
+}
+.tips-modulo .list .item.item-accordion.ng-hide {
+  line-height: 0px;
+}
+.tips-modulo .list .item.item-accordion.ng-hide-add,
+.tips-modulo .list .item.item-accordion.ng-hide-remove {
+  display: block !important;
+}
+
+/* END TIPS MODULO*/
+
 
 /* UNIDADES */
 

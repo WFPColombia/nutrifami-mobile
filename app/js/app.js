@@ -100,7 +100,12 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
             }
         }
     });
-
+    
+    $stateProvider.state('tipsModulo', {
+        url: '/tips/:modulo',
+        templateUrl: 'views/tipsModulo.html',
+        controller: 'TipsModuloController'
+    });
 
     $stateProvider.state('sobre', {
         url: '/sobre',
