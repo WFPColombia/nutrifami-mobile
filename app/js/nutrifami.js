@@ -3,8 +3,8 @@ var avanceUsuario = new Object();   /* Información de avance del usuario*/
 var familiaObj = new Object();      /* Datos de la familia del usuario logueado, incluidos miembros de la familia*/
 
 
-
-var base_url = 'http://127.0.0.1:83/'; /* Direccion del servidor  BEGIN CORDOVA FILES */
+var base_url = 'http://nutrifami.org/'; /* Direccion del servidor  BEGIN CORDOVA FILES */
+/* var base_url = 'http://127.0.0.1:83/'; /* Direccion del servidor  BEGIN CORDOVA FILES */
 
 /* BEGIN CORDOVA FILES
  var base_url = 'http://nutrifami.org/';
