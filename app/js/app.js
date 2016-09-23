@@ -106,6 +106,16 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         templateUrl: 'views/tipsModulo.html',
         controller: 'TipsModuloController'
     });
+    
+    $stateProvider.state('app.progreso', {
+        url: '/progreso',
+        views: {
+            'menuContent': {
+                templateUrl: 'views/progreso.html',
+                controller: 'ProgresoController'
+            }
+        }
+    });
 
     $stateProvider.state('sobre', {
         url: '/sobre',

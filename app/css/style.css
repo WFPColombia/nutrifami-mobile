@@ -1202,7 +1202,7 @@ button {
     background-color: rgba(0,0,0,0);
 }
 
-/* TABAS */
+/* TABS */
 
 .tabs-top > .tabs, .tabs.tabs-top {
     top: 0px;
@@ -1232,7 +1232,7 @@ button {
     color: #00c97e;
 }
 
-/* END - TABS*/
+/* FINAL - TABS*/
 
 /* PERFIL Y EDITAR PERFIL */
 
@@ -1854,6 +1854,140 @@ button {
 }
 
 /*  END - COMPRAS GRUPO */
+
+/* PROGRESO */
+
+.progreso .pane{
+    background-color: #6dffc9;
+}
+
+.progreso .progreso-tab{
+    margin-top: 61px;
+    padding: 30px 15px;
+    height: 100%;
+}
+
+.progreso .progreso-tab .progreso-panel{
+    background-color: #ffffff;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    padding: 12px 14px;
+    width: 100%
+}
+
+.progreso .progreso-tab .progreso-panel .progreso-puntos-experiencia{
+    border-bottom: 1px solid #cccccc;
+    padding-bottom: 10px;
+}
+
+
+.progreso .progreso-tab .progreso-panel .progreso-puntos-experiencia img{
+    margin-left:6px; 
+
+}
+
+.progreso .progreso-tab .progreso-panel .progreso-puntos-experiencia p{
+    font-size: 13pt;
+    color: #ff5400;
+    font-family: 'Muli-Italic', sans-serif; 
+    margin-top: 20px;
+}
+
+.progreso .progreso-tab .progreso-panel .progreso-puntos-experiencia p .icon{
+    background-color: rgba(0,0,0,0);
+    border: none;
+    font-size: 12px;
+    color: #ff5400;
+    height: 40px;
+    width: 40px;
+    z-index: 1;
+    position: relative;
+    top: -6px;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+}
+
+
+.progreso .progreso-tab .progreso-panel  .progreso-porcentaje {
+
+    padding: 25px 0px 20px 0px;
+    border-bottom: 1px solid #cccccc;
+}
+
+.progreso .progreso-tab .progreso-panel  .progreso-porcentaje .row{
+    margin: 0 auto;
+    width: 170px;
+}
+
+.progreso .progreso-tab .progreso-panel .progreso-resumen{
+    color: #2f3e47;
+    font-family: 'Raleway-Bold', sans-serif;
+    font-size: 9pt;
+    margin-bottom: 40px;
+}
+
+.progreso .progreso-tab .progreso-panel .progreso-resumen img{
+    float: left;
+    margin-right: 7px;
+    margin-top: 15px;
+}
+
+.progreso .progreso-tab .progreso-panel .progreso-resumen span{
+    font-size: 25pt;
+    font-family: 'Muli-Italic', sans-serif; 
+    line-height: 18pt;
+}
+
+.progreso .progreso-tab .progreso-panel .progreso-familia{
+    color: #2f3e47;
+    border-bottom: 1px #cccccc solid;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.progreso .progreso-tab .progreso-panel .progreso-familia .row{
+    position: relative;   
+}
+
+
+.progreso .progreso-tab .progreso-panel .progreso-familia .row .sonido{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    font-size: 10pt;
+    color: #ffa67a;
+}
+
+.progreso .progreso-tab .progreso-panel .progreso-familia .miembro-familia{
+    font-size: 11pt;
+    color: #2f3e47;
+    margin-top: 14px;
+}
+
+.progreso .progreso-tab .progreso-panel .progreso-familia .lider .miembro-familia{
+    font-size: 17pt;
+}
+
+.progreso .progreso-tab .progreso-panel .progreso-familia .medallas img{
+    float: left;
+    margin-right: 7px;
+}
+.progreso .progreso-tab .progreso-panel .progreso-familia .medallas{
+    font-size: 16pt;
+}
+
+.progreso .progreso-tab .progreso-panel .progreso-familia .lider .medallas{
+    color: #ff5400;
+}
+
+.progreso .progreso-tab .progreso-panel .progreso-familia .medallas span{
+    font-size: 9pt;
+    font-family: 'Raleway-Bold', sans-serif;
+    text-transform: uppercase;
+}
+/* FINAL - PROGRESO */
 
 /* SOBRE */
 
