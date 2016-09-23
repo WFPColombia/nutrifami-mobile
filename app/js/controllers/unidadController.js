@@ -307,6 +307,25 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
         }
 
     };
+    
+    $scope.salirUnidad = function(){
+        console.log("Cerrar unidad");
+        var popUpFeedback = $ionicPopup.show({
+            templateUrl: 'views/template/salirUnidad.tpl.html',
+            scope: $scope,
+            buttons: [
+                { text: 'Continuar capacitación' },
+                {
+                    text: 'Salir de la capacitacion',
+                    type: 'button-positive',
+                    onTap: function (e) {
+                        AudioService.unload($scope.feedback.audios);
+                        $scope.cerrarFeedback();
+                    }
+                }
+            ]
+        });
+    }
 
     $scope.irASiguienteUnidad = function () {
         $scope.siguienteUnidad = parseInt($stateParams.unidad) + 1;

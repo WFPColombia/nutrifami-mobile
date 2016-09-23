@@ -2,7 +2,9 @@ var serv_capacitacionesId = ["3"];
 var serv_capacitaciones = {"3": {"id": "3", "titulo": "Participantes PMA", "descripcion": "Capacitacion inicial, para participantes del PMA", "fecha": "2016-06-27 22:42:43", "activo": "1", "tipo": {"id": "1", "alias": "general", "nombre": "General", "descripcion": "Capacitacion para el publico en general"},
         "modulos": {
             "1": "5",
-            "2": "6"
+            "2": "6",
+            "3": "7",
+            "4": "8"
         }
     }, "completo": false};
 var serv_modulos = {
@@ -10,14 +12,28 @@ var serv_modulos = {
         "id": "5",
         "titulo": {"texto": "Alimentaci\u00f3n Saludable", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/M1_Intro.mp3","nombre": "training\/audios\/M1_Intro.mp3", "loaded": "empty"}}, 
         "descripcion": {"texto": "Alimentaci\u00f3n Saludable", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/M1_Intro.mp3", "nombre": "training\/audios\/M1_Intro.mp3", "loaded": "empty"}}, 
-        "imagen": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/images\/201671161247714.jpg", "nombre": "training\/images\/201671161247714.jpg", "loaded": "empty"}, 
-        "imagen2": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/images\/201671161247714.jpg", "nombre": "training\/images\/201671161247714.jpg", "loaded": "empty"}, "fecha": "2016-06-27 22:52:26", "activo": "1", "lecciones": ["16", "17", "18", "19"], "completo": false},
+        "imagen": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/images\/201671161247714.png", "nombre": "training\/images\/201671161247714.png", "loaded": "empty"}, 
+        "imagen2": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/images\/201671161247714.png", "nombre": "training\/images\/201671161247714.png", "loaded": "empty"}, "fecha": "2016-06-27 22:52:26", "activo": "1", "lecciones": ["16", "17", "18", "19"], "completo": false},
     "6": {
         "id": "6",
         "titulo": {"texto": "Alimentaci\u00f3n Saludable", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/M1_Intro.mp3", "nombre": "training\/audios\/M1_Intro.mp3", "loaded": "empty"}},
         "descripcion": {"texto": "Alimentaci\u00f3n Saludable", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/M1_Intro.mp3", "nombre": "training\/audios\/M1_Intro.mp3", "loaded": "empty"}},
-        "imagen": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/images\/201671161247714.jpg", "nombre": "training\/images\/201671161247714.jpg", "loaded": "empty"},
-        "imagen2": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/images\/201671161247714.jpg", "nombre": "training\/images\/201671161247714.jpg", "loaded": "empty"},
+        "imagen": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/images\/201671161247714.png", "nombre": "training\/images\/201671161247714.png", "loaded": "empty"},
+        "imagen2": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/images\/201671161247714.png", "nombre": "training\/images\/201671161247714.png", "loaded": "empty"},
+        "fecha": "2016-06-27 22:52:26", "activo": "1", "lecciones": ["16", "17", "18", "19"], "completo": false},
+    "7": {
+        "id": "6",
+        "titulo": {"texto": "Alimentaci\u00f3n Saludable", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/M1_Intro.mp3", "nombre": "training\/audios\/M1_Intro.mp3", "loaded": "empty"}},
+        "descripcion": {"texto": "Alimentaci\u00f3n Saludable", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/M1_Intro.mp3", "nombre": "training\/audios\/M1_Intro.mp3", "loaded": "empty"}},
+        "imagen": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/images\/201671161247714.png", "nombre": "training\/images\/201671161247714.png", "loaded": "empty"},
+        "imagen2": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/images\/201671161247714.png", "nombre": "training\/images\/201671161247714.png", "loaded": "empty"},
+        "fecha": "2016-06-27 22:52:26", "activo": "1", "lecciones": ["16", "17", "18", "19"], "completo": false},
+    "8": {
+        "id": "6",
+        "titulo": {"texto": "Alimentaci\u00f3n Saludable", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/M1_Intro.mp3", "nombre": "training\/audios\/M1_Intro.mp3", "loaded": "empty"}},
+        "descripcion": {"texto": "Alimentaci\u00f3n Saludable", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/M1_Intro.mp3", "nombre": "training\/audios\/M1_Intro.mp3", "loaded": "empty"}},
+        "imagen": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/images\/201671161247714.png", "nombre": "training\/images\/201671161247714.png", "loaded": "empty"},
+        "imagen2": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/images\/201671161247714.png", "nombre": "training\/images\/201671161247714.png", "loaded": "empty"},
         "fecha": "2016-06-27 22:52:26", "activo": "1", "lecciones": ["16", "17", "18", "19"], "completo": false}
 };
 var serv_lecciones = {"16": {"id": "16", "titulo": {"texto": "La Alimentaci\u00f3n", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L1_Intro.mp3", "nombre": "training\/audios\/L1_Intro.mp3", "loaded": "empty"}}, "descripcion": "La Alimentaci\u00f3n", "imagen": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/", "nombre": "", "loaded": "empty"}, "icono": "1", "fecha": "2016-06-27 22:55:40", "activo": "1", "unidades": ["1", "2", "3", "4", "5", "6", "34", "35"], "finalizado": {"texto": "\u00a1Muy bien! Incluya alimentos variados para lograr una alimentaci\u00f3n saludable.", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L1_MensajeFinal.mp3", "nombre": "training\/audios\/L1_MensajeFinal.mp3", "loaded": "empty"}}, "completo": false}, "17": {"id": "17", "titulo": {"texto": "Los Alimentos", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L2_Intro.mp3", "nombre": "training\/audios\/L2_Intro.mp3", "loaded": "empty"}}, "descripcion": "Los Alimentos", "imagen": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/", "nombre": "", "loaded": "empty"}, "icono": "2", "fecha": "2016-06-27 22:56:09", "activo": "1", "unidades": ["7", "8", "9", "10", "11", "12", "13", "15", "36"], "finalizado": {"texto": "\u00a1Muy bien!  Para lograr una alimentaci\u00f3n saludable incluya alimentos variados ricos en nutrientes.", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L2_MensajeFinal.mp3", "nombre": "training\/audios\/L2_MensajeFinal.mp3", "loaded": "empty"}}, "completo": false}, "18": {"id": "18", "titulo": {"texto": "El Plato Saludable", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L3_Intro.mp3", "nombre": "training\/audios\/L3_Intro.mp3", "loaded": "empty"}}, "descripcion": "El Plato Saludable", "imagen": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/", "nombre": "", "loaded": "empty"}, "icono": "3", "fecha": "2016-06-27 22:56:30", "activo": "1", "unidades": ["16", "17", "18", "19", "20", "21", "29", "30"], "finalizado": {"texto": "\u00a1Muy bien! Consuma diariamente alimentos frescos, variados y de todos los grupos de alimentos del Plato Saludable.", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L3_MensajeFinal.mp3", "nombre": "training\/audios\/L3_MensajeFinal.mp3", "loaded": "empty"}}, "completo": false}, "19": {"id": "19", "titulo": {"texto": "Los Colores de los Alimentos", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/", "nombre": null, "loaded": "empty"}}, "descripcion": "Los Colores de los Alimentos", "imagen": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/", "nombre": "", "loaded": "empty"}, "icono": "4", "fecha": "2016-06-27 22:56:43", "activo": "1", "unidades": ["22", "23", "24", "25", "26", "27", "28"], "finalizado": {"texto": "\u00a1Muy bien! Consuma alimentos de todos los colores para estar bien nutrido  y saludable.", "audio": {"url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/L4_MensajeFinal.mp3", "nombre": "training\/audios\/L4_MensajeFinal.mp3", "loaded": "empty"}}, "completo": false}};

@@ -1,6 +1,6 @@
     <div class="col col-50" ng-show="leccion.activo">
         <button ng-click='$parent.playAudio(leccion.titulo.audio.id)' class="leccion-sonido icon ion-volume-high" aria-hidden="true" ng-show="leccion.titulo.audio.nombre != null" ion-ripple></button>
-        <div class="leccion" ng-class="leccion.avance.terminada ? 'leccion-terminada':''" ng-click="click()" ion-ripple>
+        <div class="leccion" ng-class="leccion.avance.terminada ? 'leccion-terminada':''" ng-click="click()">
             <img ng-src="img/icons/ico-leccion-{{leccion.icono}}.png" alt=""/>
             <h2>{{ leccion.titulo.texto}}</h2>
             <button class="leccion-comenzar" aria-hidden="true">{{ leccion.avance.terminada ? 'Repetir' : 'Comenzar' }}</button>

@@ -6,63 +6,81 @@ NUTRIMAFI-MOBILE
 Instalación de de modulos con Node
 ----------------------------------
 
-1. Instalar Node global
-2. En el root del proyecto ejecutar el comando "npm install"
+1. Instalar NodeJS globalmente
 
+2. Navegar al root del proyecto
+
+3. Instalar dependencias.
+
+    $npm install
+    $npm install --save-dev
 
 Instalación de librerias con Bower.
 -----------------------------------
 
-Una vez instalados los modulos con node, se debe ejecutar:
+Una vez instalados los modulos con node, se debe:
 
-1. Instalar bower globalmente con "npm install -g bower"
-2. Instalar las librerias usadas en el prouecto con el comando "bower install"
+1. Instalar Bower goblamente
 
-Instalación de Cordova.
+    $npm install -g bower"
+
+2. Instalar librerias usadas en el proyecto.
+
+    $bower install
+
+Instalación de Ionic y Cordova.
 -----------------------------------
 
-1. Instalar cordava globalmente con 'npm install -g cordova'
+1. Instalar cordova y ionic globalmente
+
+    $npm install -g cordova ionic
+
 2. Crear una carpeta llamada 'www' en el root del proyecto
-3. Crear una carpeta llamada 'platforms' en el root del proyecto
-4. Instalar plataformas y plugin para el proyecto de cordova 'cordova prepare'
+
+3. Agregar plataforma android al proyecto
+
+    $cardova plarform add android
+
+4. IMPORTANTE: Crear una aplicación de ionic en una ubicación diferente a la de nuestro proyecto:
+
+    $ionic start IonicApp blank
+
+5. Del proyecto creado copiar la carpeta IonicApp/www/lib/ionic en /nutrifami-mobile/app/lib/ionic
+
 
 Tareas Gulp
 ------------
 
-En la consola de comandos (sin las comillas):
+Instalar gulp globalmente
 
-Instalar dependencias antes de los siguientes pasos
+    $npm install -g gulp
 
-    $npm install --save-dev
+Tareas configuradas con gulp
 
-1. 'gulp' -> Ejecutar servidor web de desarrollo
-2. 'gulp cordovaDev' -> Alistar los archivos rapidamente y sin comprimir para probarlos como aplicaciones mobiles
-3. 'gulp compileCordova' -> Alistar archivos comprimirdos para generar una versión para publicar
+1. Ejecutar servidor web de desarrollo [Tarea por defecto]
 
+    $gulp
 
-Probar aplicación móvil
+2. Alistar los archivos rapidamente y sin comprimir para probarlos como aplicaciones mobiles
+
+    $gulp cordovaDev
+
+Empaquetar aplicación móvil
 ------------------------
 
 Para dispositivos android ejecutar
 
 1. Preparar android
 
-    cordova prepare android
+    $ionic prepare android
 
-2. Pompilar cordodva
+2. Compilar cordodva
 
-    cordova compile android
+    $ionic compile android
 
 3. Correr la aplicación
 
-    cordova run android
-
-Caracterizticas tecnicas
-------------------------
-
- 1. AngularJS
- 2. Mobile Angular UI
- 3. Cordova
+    $ionic run android
 
 
 Distribución de Archivos
@@ -74,7 +92,7 @@ Distribución de Archivos
     /app/js/controllers                                ->  Controladores de angularjs
     /app/js/directives                                 ->  Archivos js de las directivas
     /app/js/services                                   ->  Servicios de angularjs
-    /app/lib                                           ->  Librerias usadas (angular, bootstrap, etc)
+    /app/lib                                           ->  Librerias usadas (angular, etc)
     /app/css/                                          ->  Hojas de estilo
     /app/img/                                          ->  Imagenes de la aplicación
     /app/views/                                        ->  Vistas de angular

@@ -294,6 +294,11 @@ button {
     color: #ffffff;
 }
 
+.menu-left .item-content.activated{
+    background-color: #2f6551;
+
+}
+
 .menu-left .item-content img{
     position: relative;
     top: 10px;
@@ -357,34 +362,62 @@ button {
 
 /* HOME */
 
+.modulos{
+    position: relative;
+}
+
 .modulo {
-    background-color: #0dcd71;
+    background-color: #ffffff;
     border-radius: 10px;
     padding-bottom: 8px;
     margin-top: 38px;
     margin-left: 10%;
     margin-right: 10%;
+    height: 455px;
+}
 
+.modulo.actual{
+    background-color: #0dcd71;
+}
+
+.modulo.terminado{
+    background-color: #ffba23;
+}
+
+.modulos .medalla{
+    position: absolute;
+    top: 29px;
+    right: 36px;
 }
 
 .modulo img {
     width: 100%;
     border-radius: 10px 10px 0 0;
+    margin-top: 20px;
 }
 
 .modulo h3,
 .modulo h4 {
-    color: #ffffff;
+    color: #0dcd71;
     text-align: center;
-    font-size: 15pt;
-    margin-top: 32px;
+    font-size: 17pt;
+    margin-top: 38px;
     margin-bottom: 36px;
+    padding: 0px 43px;
 }
 
 .modulo h4 {
+    color: #9eabb3;
     font-family: 'Raleway', sans-serif;
-    font-size: 11pt;
+    font-size: 14pt;
     font-weight: bold;
+}
+
+.modulo.actual h3,
+.modulo.actual h4,
+.modulo.terminado h3,
+.modulo.terminado h4{
+    color: #ffffff;
 }
 
 .modulo .progress {
@@ -393,8 +426,12 @@ button {
     border-radius: 4px;
     width: auto;
     margin: 0 8px 0 8px;
-    background-color: #ffffff;
+    background-color: #f5f5f5;
     background-image: none;
+}
+
+.modulo.actual .progress{
+    background-color: #ffffff;
 }
 
 .modulo .progress .progress-bar,
@@ -672,9 +709,8 @@ button {
 
 .unidad .leccion-avance .leccion-avance-cerrar{
     float: left;
-
     text-align: center;
-    padding-top: 10px;
+    padding-top: 0px;
 }
 
 .unidad .leccion-avance .leccion-avance-progreso {
@@ -689,6 +725,10 @@ button {
     -moz-border: none;
     -webkit-border: none;
     border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    z-index: 1;
 }
 
 .unidad .leccion-avance .leccion-avance-progreso .progress {
@@ -1214,6 +1254,7 @@ button {
 
 .tab-item{
     max-width: none;
+    line-height: 17px !important;
 }
 
 .tabs .tab-item .tab-title{
@@ -1225,7 +1266,7 @@ button {
 .tab-item.tab-item-active,
 .tab-item.active, 
 .tab-item.activated {
-    border-bottom: 3px solid #00c97e;
+    border-bottom: 3px solid #00c97e !important;
 }
 
 .tabs .tab-item-active .tab-title{
