@@ -1,0 +1,125 @@
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <link href="../app/lib/ionic/css/ionic.css" rel="stylesheet" type="text/css"/>
+        <link href="../app/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="../app/lib/ion-ripple/ion-ripple.css" rel="stylesheet" type="text/css"/>
+
+        <script src="../app/lib/ionic/js/ionic.bundle.js" type="text/javascript"></script>
+        <script src="../app/lib/angular-route/angular-route.js"></script>
+        <script src="../app/lib/ion-ripple/ion-ripple.js" type="text/javascript"></script>
+
+    </head>
+    <body ng-app="myApp" ng-controller="myController">
+
+    <ion-side-menus enable-menu-with-back-views="true">
+        <ion-side-menu-content>
+            <ion-nav-bar class="bar-stable">
+                <ion-nav-back-button>
+                </ion-nav-back-button>
+                <ion-nav-buttons side="left">
+                    <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+                    </button>
+                </ion-nav-buttons>
+                <ion-nav-title>
+                    <img src="../app/img/logo-nutrifami-header.png" alt="Nutrifami"/>
+                </ion-nav-title>
+                <ion-nav-buttons side="right">
+                    <button class="button button-icon ion-android-more-vertical" ng-click="popover.show($event)"></button>
+                </ion-nav-buttons>
+            </ion-nav-bar>
+            <ion-nav-view name="menuContent">
+                <ion-view>
+                    <ion-content>
+                        <div class='perfil has-header'>
+                            <ion-tabs class="tabs-positive tabs-icon-top">
+
+                                <ion-tab title="Home" icon-on="ion-ios-filing" icon-off="ion-ios-filing-outline">
+                                    <h1>Hola Mundo</h1>
+
+                                </ion-tab>
+
+                                <ion-tab title="About" icon-on="ion-ios-clock" icon-off="ion-ios-clock-outline">
+                                    <h1>Hola Mundo 2</h1>
+                                </ion-tab>
+
+                            </ion-tabs>
+                        </div>
+                    </ion-content>
+                </ion-view>
+            </ion-nav-view>
+        </ion-side-menu-content>
+        <ion-side-menu side="left" width="300">
+            <ion-header-bar class="bar-stable">
+                <img src="../app/img/logo-nutrifami-sidebar.png" alt="Nutrifami" height="28" width="127"/>
+            </ion-header-bar>
+            <ion-content>
+                <ion-list>
+                    <ion-item menu-close href="#/app/capacitacion">
+                        <img class="icono" src="../app/img/icons/ico-menu-capacitacion.png" alt="Capacitación"/><span>Capacitación</span>
+                    </ion-item>
+                    <ion-item menu-close href="#/app/consumos">
+                        <img class="icono" src="../app/img/icons/ico-menu-compras.png" alt="Consumo"/>Mis Compras
+                    </ion-item>
+                    <ion-item menu-close href="#/app/progreso">
+                        <img class="icono" src="../app/img/icons/ico-menu-progreso.png" alt="Consumo"/>Progreso
+                    </ion-item>
+                    <ion-item menu-close href="#/app/perfil">
+                        <img class="icono" src="../app/img/icons/ico-menu-perfil.png" alt="Perfil"/>Perfil
+                    </ion-item>
+                    <ion-item menu-close href="#/login">
+                        <img class="icono" src="../app/img/icons/ico-menu-salir.png" alt="Cerrar Sesion"/>Cerrar Sesión
+                    </ion-item>
+                </ion-list>
+            </ion-content>
+        </ion-side-menu>
+    </ion-side-menus>
+
+
+    <script>
+                angular.module('myApp', ["ionic", 'ionMDRipple']).config(function ($stateProvider) {
+                    $stateProvider.state('home', {
+                        url: '/'
+                    });
+                }).controller('myController', AppController);
+
+                function AppController($scope, $ionicPopover, $ionicConfig) {
+
+                    $ionicConfig.tabs.position('top'); //bottom
+
+                    $scope.click = function () {
+                        console.log("Click");
+                    };
+
+                    $ionicPopover.fromTemplateUrl('templates/popover.html', {
+                        scope: $scope,
+                    }).then(function (popover) {
+                        $scope.popover = popover;
+                    });
+                }
+                ;
+    </script>
+
+    <script id="templates/popover.html" type="text/ng-template">
+        <div class="menu-right">
+        <ion-popover-view>
+        <ion-content>
+        <div class="list">
+        <a class="item" href="http://learn.ionicframework.com/" target="_blank">
+        Ver Perfil
+        </a>
+        <a class="item" href="http://ionicframework.com/docs/" target="_blank">
+        Configuración
+        </a>
+        <a class="item" href="http://showcase.ionicframework.com/" target="_blank">
+        Cerrar Sesión
+        </a>
+        </div>
+        </ion-content>
+        </ion-popover-view>
+        </div>
+    </script>
+</body>
+</html>

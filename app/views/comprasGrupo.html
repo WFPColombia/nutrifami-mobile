@@ -1,0 +1,83 @@
+<div class='compras-grupo'>
+    <ion-scroll style="height: 100%;">
+        <header>
+            <div class="titulo">
+                <div class="row">
+                    <div class="col">
+                        <a nav-direction="back" href="#/app/compras"><i class="icon ion-close-round"></i></a>
+                        <h1>Carnes y Huevos</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="sub-header">
+
+                <div class="row">
+                    <div class="col total-compra">
+                        <p>4%</p>
+                        <p class="valor">$3.600</p>
+                    </div>
+                    <div class="col">
+                        Icono
+                    </div>
+                    <div class="col estado">
+                        <img src="img/icons/ico-compras-triste.png"/>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="compras-grupo-descripcion">
+            <div class="row">
+                <div class="col">
+                    <p ng-click='' ng-hide="noHayDatos" ion-ripple>
+                        <i class="icon ion-volume-high"></i> Este es  el resumen de sus compras en carnes y huevos
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="compras-resumen">
+            <div class="row">
+                <div class="col col-75 nombre-producto">Nombre del producto Nombre del producto</div>
+                <div class="col precio">$ 1.200</div>
+            </div>
+            <div class="row">
+                <div class="col col-75 nombre-producto">Nombre del producto</div>
+                <div class="col precio">$ 1.200</div>
+            </div>
+            <div class="row">
+                <div class="col col-75 nombre-producto">Nombre del producto</div>
+                <div class="col precio">$ 1.200</div>
+            </div>
+            <div class="totales">
+                <div class="row">
+                    <div class="col col-75">Total</div>
+                    <div class="col precio">$ 1.200</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="compra-ideal">
+            <ion-list>
+                <div ng-repeat="group in groups">
+                    <ion-item class="item-stable"
+                              ng-click="toggleGroup(group)"
+                              ng-class="{active: isGroupShown(group)}">
+                        <i class="icon" ng-class="isGroupShown(group) ? 'ion-chevron-up' : 'ion-chevron-down'"></i>
+                        
+                        <img src="img/canasta-ideal.png" alt="Canasta ideal"/>
+                        <h3>Para una compra ideal <i class="icon ion-volume-high"></i></h3>
+                        <h4>podria comprar</h4>
+                        
+                    </ion-item>
+                    <ion-item class="item-accordion"
+                              ng-repeat="item in group.items"
+                              ng-show="isGroupShown(group)">
+                        {{item}}
+                    </ion-item>
+                </div>
+            </ion-list>
+        </div>
+
+
+    </ion-scroll> 
+</div>

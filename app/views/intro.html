@@ -1,39 +1,39 @@
 <div class="intro">
-
-    <swiper>
-        <slides>
-            <slide>
-                <button ng-click='audio1.paused ? audio1.play() : audio1.pause()' class="intro-sonido fa fa-volume-up" aria-hidden="true"></button>
-                <div class="container">
-                    <h1>¡Bienvenido {{ usuarioActivo.nombre }}!</h1>
-                    <p>Nutrifami es una guía que le ayudará a lograr una nutrición sana. Usted aprenderá sobre:</p>
-                    <img src="img/intro-01.png" style="margin-left: 45px;"/>
-                    <h1>Alimentación Saludable</h1>
+    <ion-slide-box on-slide-changed="slideHasChanged($index)">
+        <ion-slide>
+            <button ng-click="playAudio('audio1')" class="intro-sonido icon ion-volume-high" aria-hidden="true" ion-ripple></button>
+            <div class="slide-body">
+                <h1>¡Bienvenido Alejandro!</h1>
+                <p>Nutrifami es una guía que le ayudará a lograr una nutrición sana. Usted aprenderá sobre:</p>
+                <img src="img/intro-01.png" style="margin-left: 45px;"/>
+                <h1>Alimentación Saludable</h1>
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <button ng-click="playAudio('audio2')" class="intro-sonido icon ion-volume-high" aria-hidden="true" ion-ripple></button>
+            <div class="slide-body">
+                <h2>Combinaciones de alimentos <br>variados y de todos los colores</h2>
+                <img src="img/intro-02.png" />
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <button ng-click="playAudio('audio3')" class="intro-sonido icon ion-volume-high" aria-hidden="true" ion-ripple></button>
+            <div class="slide-body">
+                <h2>Alimentación en mujeres <br>gestantes y lactantes</h2>
+                <img src="img/intro-03.png" />
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <button ng-click="playAudio('audio4')" class="intro-sonido icon ion-volume-high" aria-hidden="true" ion-ripple></button>
+            <div class="slide-body">
+                <h2>Manejo de alimentos y <br>hábitos saludables</h2>
+                <img src="img/intro-02.png"/>
+                <div class="row">
+                    <div class="col">
+                        <button type="submit" class="btn btn-default" class="comenzar" ng-click="comenzar()" ion-ripple>Comenzar</button>
+                    </div>
                 </div>
-            </slide>
-            <slide>
-                <button ng-click='audio2.paused ? audio2.play() : audio2.pause()' class="intro-sonido fa fa-volume-up" aria-hidden="true"></button>
-                <div class="container">
-                    <h2>Combinaciones de alimentos <br>variados y de todos los colores</h2>
-                    <img src="img/intro-02.png" />
-                </div>
-            </slide>
-            <slide>
-                <button ng-click='audio3.paused ? audio3.play() : audio3.pause()' class="intro-sonido fa fa-volume-up" aria-hidden="true"></button>
-                <div class="container">
-                    <h2>Alimentación en mujeres <br>gestantes y lactantes</h2>
-                    <img src="img/intro-03.png" />
-                </div>
-            </slide>
-            <slide>
-                <button ng-click='audio4.paused ? audio4.play() : audio4.pause()' class="intro-sonido fa fa-volume-up" aria-hidden="true"></button>
-                <div class="container">
-                    <h2>Manejo de alimentos y <br>hábitos saludables</h2>
-                    <img src="img/intro-02.png"/>
-                    <button type="submit" class="btn btn-default" class="comenzar" ng-click="comenzar()">Comenzar</button>
-                </div>
-            </slide>
-        </slides>
-        <pagination></pagination>
-    </swiper>
+            </div>
+        </ion-slide>
+    </ion-slide-box>
 </div>

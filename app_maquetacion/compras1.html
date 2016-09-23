@@ -3,385 +3,326 @@
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-        <link href="../app/lib/mobile-angular-ui/dist/css/mobile-angular-ui-base.css" rel="stylesheet" type="text/css"/>
-        <link href="../app/lib/angular-ui-swiper/dist/angular-ui-swiper.css" rel="stylesheet" type="text/css"/>
+        <link href="../app/lib/ionic/css/ionic.css" rel="stylesheet" type="text/css"/>
         <link href="../app/css/style.css" rel="stylesheet" type="text/css"/>
-        <script src="../app/js/ripple.js" type="text/javascript"></script>
+        <link href="../app/lib/ion-ripple/ion-ripple.css" rel="stylesheet" type="text/css"/>
 
-
-        <script src="../app/lib/angular/angular.js" ></script>
+        <script src="../app/lib/ionic/js/ionic.bundle.js" type="text/javascript"></script>
         <script src="../app/lib/angular-route/angular-route.js"></script>
-        <script src="../app/lib/mobile-angular-ui/dist/js/mobile-angular-ui.js" type="text/javascript"></script>
-        <script src="../app/lib/angular-ui-swiper/dist/angular-ui-swiper.js" type="text/javascript"></script>
+        <script src="../app/lib/ion-ripple/ion-ripple.js" type="text/javascript"></script>
 
     </head>
     <body ng-app="myApp" ng-controller="myController">
 
-        <!-- Sidebars -->
-        <div class="sidebar sidebar-left">
-            <div class="scrollable">
-                <h1 class="scrollable-header app-name"><a href="#"><img src="../app/img/logo-nutrifami-sidebar.png" alt="Nutrifami"/></a></h1>  
-                <div class="scrollable-content">
-                    <div class="list-group" ui-turn-off='uiSidebarLeft'>
-                        <a class="list-group-item" href="#"><img class="icono" src="../app/img/icons/ico-capacitacion.png" alt="Capacitación"/>Capacitación</a>
-                        <a class="list-group-item" href="#"><img class="icono" src="../app/img/icons/ico-consumos.png" alt="Consumo"/>Consumos</a>
-                        <a class="list-group-item active" href="#"><img class="icono" src="../app/img/icons/ico-progreso.png" alt="Progreso"/>Progresos</a>
-                        <a class="list-group-item" href="#"><img class="icono" src="../app/img/icons/ico-perfil.png" alt="Perfil"/>Perfil</a>
-                        <a class="list-group-item" href="#"><img class="icono" src="../app/img/icons/ico-cerrar-sesion.png" alt="Cerrar Sesion"/>Cerrar sesión</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <ion-side-menus enable-menu-with-back-views="true">
+        <ion-side-menu-content>
+            <ion-nav-bar class="bar-stable">
+                <ion-nav-back-button>
+                </ion-nav-back-button>
+                <ion-nav-buttons side="left">
+                    <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+                    </button>
+                </ion-nav-buttons>
+                <ion-nav-title>
+                    <img src="../app/img/logo-nutrifami-header.png" alt="Nutrifami"/>
+                </ion-nav-title>
+                <ion-nav-buttons side="right">
+                    <button class="button button-icon ion-android-more-vertical" ng-click="popover.show($event)"></button>
+                </ion-nav-buttons>
+            </ion-nav-bar>
+            <ion-nav-view name="menuContent">
+                <ion-view>
+                    <ion-content scroll="false">
+                        <div class='perfil has-header'>
+                            <ion-tabs class="tabs-positive tabs-icon-top">
+                                <ion-tab title="Mis compras" icon-on="ion-ios-filing" icon-off="ion-ios-filing-outline">
+                                    <p class="compras-descripcion"> <button class="fa fa-volume-up" aria-hidden="true"></button>Aquí encontrará el resumen de sus compras del último mes</p>
+                                    <div class="compras-porcentajes">
+                                        <div class="row">
+                                            <div class="col-xs-5 compras-porcentaje-tipo">
+                                                <p>Cereales, raices, tuberculos y platano</p>
+                                            </div>
+                                            <div class="col-xs-7 compras-porcentaje-barra">
+                                                <div class="progress">
+                                                    <button></button> <!-- Necesario para el efecto ripple -->
+                                                    <div class="progress-bar grupo-cereales" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 30%;"></div>
+                                                    <div class="cantidad">30<span>%</span><i class="fa fa-angle-right" aria-hidden="true"></i></div>
 
-        <div class="app">
-            <header>
-                <div class="navbar navbar-app navbar-absolute-top">
-                    <div class="navbar-brand navbar-brand-center">
-                        <a href="#"><img src="../app/img/logo-nutrifami-header.png" alt="Nutrifami"/></a>
-                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
+                                        <div class="row">
+                                            <div class="col-xs-5 compras-porcentaje-tipo">
+                                                <p>frutas y verduras</p>
+                                            </div>
+                                            <div class="col-xs-7 compras-porcentaje-barra">
+                                                <div class="progress">
+                                                    <button></button> <!-- Necesario para el efecto ripple -->
+                                                    <div class="progress-bar grupo-frutas" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 20%;"></div>
+                                                    <div class="cantidad">20<span>%</span><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                    <div class="btn-group pull-left">
-                        <div class="btn btn-navbar" >
-                            <button href ui-toggle='uiSidebarLeft' class="fa fa-bars fa-2x"></button>
+                                        <div class="row">
+                                            <div class="col-xs-5 compras-porcentaje-tipo">
+                                                <p>Leche y productos lácteos</p>
+                                            </div>
+                                            <div class="col-xs-7 compras-porcentaje-barra">
+                                                <div class="progress">
+                                                    <button></button> <!-- Necesario para el efecto ripple -->
+                                                    <div class="progress-bar grupo-leche" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 4%;"></div>
+                                                    <div class="cantidad">4<span>%</span><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-5 compras-porcentaje-tipo">
+                                                <p>Carnes y Huevos</p>
+                                            </div>
+                                            <div class="col-xs-7 compras-porcentaje-barra">
+                                                <div class="progress">
+                                                    <button></button> <!-- Necesario para el efecto ripple -->
+                                                    <div class="progress-bar grupo-carne role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 14%;"></div>
+                                                    <div class="cantidad">14<span>%</span><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-xs-5 compras-porcentaje-tipo">
+                                                <p>grasas</p>
+                                            </div>
+                                            <div class="col-xs-7 compras-porcentaje-barra">
+                                                <div class="progress">
+                                                    <button></button> <!-- Necesario para el efecto ripple -->
+                                                    <div class="progress-bar grupo-grasas" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 12%;"></div>
+                                                    <div class="cantidad">12<span>%</span><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-5 compras-porcentaje-tipo">
+                                                <p>azucares</p>
+                                            </div>
+                                            <div class="col-xs-7 compras-porcentaje-barra">
+                                                <div class="progress">
+                                                    <button></button> <!-- Necesario para el efecto ripple -->
+                                                    <div class="progress-bar grupo-azucares" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 7%;"></div>
+                                                    <div class="cantidad">7<span>%</span><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </ion-tab>
+
+                                <ion-tab title="Recomendados" icon-on="ion-ios-clock" icon-off="ion-ios-clock-outline">
+                                    <div class="container">
+                                        <div class="canasta-header">
+                                            <img class="canasta-imagen" src="../app/img/canasta-ideal.png" alt="Canasta ideal"/>
+                                            <p class="canasta-descripcion-sonido"><button class="fa fa-volume-up" aria-hidden="true"></button></p>
+                                            <p class="canasta-descripcion"> 
+                                                Aquí encontrará recomendaciones para que su dieta sea más variada
+                                            </p>
+                                        </div>
+                                        <div class="canasta-body">
+                                            <div class="panel-group" ui-state="myAccordion" ui-default="1">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading  grupo-cereales" ui-set="{'myAccordion': 1}">        
+                                                        <h4 class="panel-title">
+                                                            <img src="../app/img/icons/ico-compras-cereales.png" alt=""/>
+                                                            Cereales, raices, tuberculos y platano
+                                                        </h4>
+                                                    </div>
+                                                    <div ui-if="myAccordion == 1" >
+                                                        <div class="panel-body" >
+                                                            <ul>
+                                                                <li>Nombre del producto vamus vestibulum purus</li>
+                                                                <li>Nombre del producto vamus vestibulum purus</li>
+                                                                <li>Nombre del producto vamus vestibulum purus</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading  grupo-frutas" ui-set="{'myAccordion': 2}">        
+                                                        <h4 class="panel-title">
+                                                            <img src="../app/img/icons/ico-compras-frutas.png" alt=""/>
+                                                            frutas y verduras
+                                                        </h4>
+                                                    </div>
+                                                    <div ui-if="myAccordion == 2" >
+                                                        <div class="panel-body" >
+                                                            <ul>
+                                                                <li>Nombre del producto vamus vestibulum purus</li>
+                                                                <li>Nombre del producto vamus vestibulum purus</li>
+                                                                <li>Nombre del producto vamus vestibulum purus</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading  grupo-leche" ui-set="{'myAccordion': 3}">        
+                                                        <h4 class="panel-title">
+                                                            <img src="../app/img/icons/ico-compras-leche.png" alt=""/>
+                                                            Leches y productos lácteos
+                                                        </h4>
+                                                    </div>
+                                                    <div ui-if="myAccordion == 3" >
+                                                        <div class="panel-body" >
+                                                            <ul>
+                                                                <li>Nombre del producto vamus vestibulum purus</li>
+                                                                <li>Nombre del producto vamus vestibulum purus</li>
+                                                                <li>Nombre del producto vamus vestibulum purus</li>
+
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading  grupo-carne" ui-set="{'myAccordion': 4}">        
+                                                        <h4 class="panel-title">
+                                                            <img src="../app/img/icons/ico-compras-carnes.png" alt=""/>
+                                                            Carnes y huevos
+                                                        </h4>
+                                                    </div>
+                                                    <div ui-if="myAccordion == 4" >
+                                                        <div class="panel-body" >
+                                                            <ul>
+                                                                <li>Nombre del producto vamus vestibulum purus</li>
+                                                                <li>Nombre del producto vamus vestibulum purus</li>
+                                                                <li>Nombre del producto vamus vestibulum purus</li>
+                                                                <li>Nombre del producto vamus vestibulum purus</li>
+                                                                <li>Nombre del producto vamus vestibulum purus</li>
+                                                                <li>Nombre del producto vamus vestibulum purus</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading  grupo-grasas" ui-set="{'myAccordion': 5}">        
+                                                        <h4 class="panel-title">
+                                                            <img src="../app/img/icons/ico-compras-grasas.png" alt=""/>
+                                                            Grasas
+                                                        </h4>
+                                                    </div>
+                                                    <div ui-if="myAccordion == 5" >
+                                                        <div class="panel-body" >
+                                                            <ul>
+                                                                <li>Nombre del producto vamus vestibulum purus</li>
+                                                                <li>Nombre del producto vamus vestibulum purus</li>
+                                                                <li>Nombre del producto vamus vestibulum purus</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading  grupo-azucares" ui-set="{'myAccordion': 6}">        
+                                                        <h4 class="panel-title">
+                                                            <img src="../app/img/icons/ico-compras-azucares.png" alt=""/>
+                                                            Azúcares
+                                                        </h4>
+                                                    </div>
+                                                    <div ui-if="myAccordion == 6" >
+                                                        <div class="panel-body" >
+                                                            <ul>
+                                                                <li>Nombre del producto vamus vestibulum purus</li>
+                                                                <li>Nombre del producto vamus vestibulum purus</li>
+                                                                <li>Nombre del producto vamus vestibulum purus</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ion-tab>
+
+                            </ion-tabs>
                         </div>
-                    </div>
-                    <div class="btn-group pull-right">
-                        <div class="btn btn-navbar" >
-                            <button href="#" class="fa fa-bell-o fa-2x" aria-hidden="true"></button>
-                        </div>
-                        <div class="btn btn-navbar" >
-                            <button ui-turn-on='myDropdown' class="fa fa-ellipsis-v fa-2x"></button>
-                        </div>
-                        <ul class="dropdown-menu" ui-outer-click="Ui.turnOff('myDropdown')" ui-outer-click-if="Ui.active('myDropdown')" role="menu" ui-show="myDropdown" ui-state="myDropdown" ui-turn-off="myDropdown">
-                            <li><a>Ver perfil</a></li>
-                            <li><a>Configuración</a></li>
-                            <li><a>Cerrar Sesión</a></li>
-                        </ul>
-                    </div>
+                    </ion-content>
+                </ion-view>
+            </ion-nav-view>
+        </ion-side-menu-content>
+        <ion-side-menu side="left" width="300">
+            <ion-header-bar class="bar-stable">
+                <img src="../app/img/logo-nutrifami-sidebar.png" alt="Nutrifami" height="28" width="127"/>
+            </ion-header-bar>
+            <ion-content>
+                <ion-list>
+                    <ion-item menu-close href="#/app/capacitacion">
+                        <img class="icono" src="../app/img/icons/ico-menu-capacitacion.png" alt="Capacitación"/><span>Capacitación</span>
+                    </ion-item>
+                    <ion-item menu-close href="#/app/consumos">
+                        <img class="icono" src="../app/img/icons/ico-menu-compras.png" alt="Consumo"/>Mis Compras
+                    </ion-item>
+                    <ion-item menu-close href="#/app/progreso">
+                        <img class="icono" src="../app/img/icons/ico-menu-progreso.png" alt="Consumo"/>Progreso
+                    </ion-item>
+                    <ion-item menu-close href="#/app/perfil">
+                        <img class="icono" src="../app/img/icons/ico-menu-perfil.png" alt="Perfil"/>Perfil
+                    </ion-item>
+                    <ion-item menu-close href="#/login">
+                        <img class="icono" src="../app/img/icons/ico-menu-salir.png" alt="Cerrar Sesion"/>Cerrar Sesión
+                    </ion-item>
+                </ion-list>
+            </ion-content>
+        </ion-side-menu>
+    </ion-side-menus>
 
-                </div>
-            </header>
-            <!-- App body -->
-            <div class='app-body scrollable compras'>
-                <div class="scrollable-content">
 
-                    <div ui-state="activeTab" default="1">
-                        <div class="compras-header">
-                            <ul class="nav nav-tabs nav-justified">
-                                <li ui-class="{'active': activeTab == 1}">
-                                    <a ui-set="{'activeTab': 1}">Mis compras</a>
-                                </li>
-                                <li ui-class="{'active': activeTab == 2}">
-                                    <a ui-set="{'activeTab': 2}">Canasta Ideal</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="compras-body">
-                            <div ui-if="activeTab == 1">
-                                <p class="compras-descripcion"> <button class="fa fa-volume-up" aria-hidden="true"></button>Aquí encontrará el resumen de sus compras del último mes</p>
-                                <div class="compras-porcentajes">
-                                    <div class="row">
-                                        <div class="col-xs-5 compras-porcentaje-tipo">
-                                            <p>Cereales, raices, tuberculos y platano</p>
-                                        </div>
-                                        <div class="col-xs-7 compras-porcentaje-barra">
-                                            <div class="progress">
-                                                <button></button> <!-- Necesario para el efecto ripple -->
-                                                <div class="progress-bar grupo-1" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 30%;"></div>
-                                                <div class="cantidad">30<span>%</span><i class="fa fa-angle-right" aria-hidden="true"></i></div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-xs-5 compras-porcentaje-tipo">
-                                            <p>carnes y huevos</p>
-                                        </div>
-                                        <div class="col-xs-7 compras-porcentaje-barra">
-                                            <div class="progress">
-                                                <button></button> <!-- Necesario para el efecto ripple -->
-                                                <div class="progress-bar grupo-2" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 20%;"></div>
-                                                <div class="cantidad">20<span>%</span><i class="fa fa-angle-right" aria-hidden="true"></i></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-5 compras-porcentaje-tipo">
-                                            <p>hortalizas y verduras</p>
-                                        </div>
-                                        <div class="col-xs-7 compras-porcentaje-barra">
-                                            <div class="progress">
-                                                <button></button> <!-- Necesario para el efecto ripple -->
-                                                <div class="progress-bar grupo-3" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 14%;"></div>
-                                                <div class="cantidad">14<span>%</span><i class="fa fa-angle-right" aria-hidden="true"></i></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-5 compras-porcentaje-tipo">
-                                            <p>frutas</p>
-                                        </div>
-                                        <div class="col-xs-7 compras-porcentaje-barra">
-                                            <div class="progress">
-                                                <button></button> <!-- Necesario para el efecto ripple -->
-                                                <div class="progress-bar grupo-4" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 4%;"></div>
-                                                <div class="cantidad">4<span>%</span><i class="fa fa-angle-right" aria-hidden="true"></i></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-5 compras-porcentaje-tipo">
-                                            <p>lacteos</p>
-                                        </div>
-                                        <div class="col-xs-7 compras-porcentaje-barra">
-                                            <div class="progress">
-                                                <button></button> <!-- Necesario para el efecto ripple -->
-                                                <div class="progress-bar grupo-5" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 12%;"></div>
-                                                <div class="cantidad">12<span>%</span><i class="fa fa-angle-right" aria-hidden="true"></i></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-5 compras-porcentaje-tipo">
-                                            <p>leguiminosas</p>
-                                        </div>
-                                        <div class="col-xs-7 compras-porcentaje-barra">
-                                            <div class="progress">
-                                                <button></button> <!-- Necesario para el efecto ripple -->
-                                                <div class="progress-bar grupo-6" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 7%;"></div>
-                                                <div class="cantidad">7<span>%</span><i class="fa fa-angle-right" aria-hidden="true"></i></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-5 compras-porcentaje-tipo">
-                                            <p>grasas y azucares</p>
-                                        </div>
-                                        <div class="col-xs-7 compras-porcentaje-barra">
-                                            <div class="progress">
-                                                <button></button> <!-- Necesario para el efecto ripple -->
-                                                <div class="progress-bar grupo-7" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 3%;"></div>
-                                                <div class="cantidad">3<span>%</span><i class="fa fa-angle-right" aria-hidden="true"></i></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-5 compras-porcentaje-tipo">
-                                            <p>condimentos</p>
-                                        </div>
-                                        <div class="col-xs-7 compras-porcentaje-barra">
-                                            <div class="progress">
-                                                <button></button> <!-- Necesario para el efecto ripple -->
-                                                <div class="progress-bar grupo-8" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 10%;"></div>
-                                                <div class="cantidad">10<span>%</span><i class="fa fa-angle-right" aria-hidden="true"></i></div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div ui-if="activeTab == 2">
-                                <div class="container">
-                                    <div class="canasta-header">
-                                        <img class="canasta-imagen" src="../app/img/canasta-ideal.png" alt="Canasta ideal"/>
-                                        <p class="canasta-descripcion-sonido"><button class="fa fa-volume-up" aria-hidden="true"></button></p>
-                                        <p class="canasta-descripcion"> 
-                                            Aquí encontrará recomendaciones para que su dieta sea más variada
-                                        </p>
-                                    </div>
-                                    <div class="canasta-body">
-                                        <div class="panel-group" ui-state="myAccordion" ui-default="1">
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading  grupo-1" ui-set="{'myAccordion': 1}">        
-                                                    <h4 class="panel-title">
-                                                        <img src="../app/img/icons/ico-compras-1.png" alt=""/>
-                                                        Cereales, raices, tuberculos y platano
-                                                    </h4>
-                                                </div>
-                                                <div ui-if="myAccordion == 1" >
-                                                    <div class="panel-body" >
-                                                        <ul>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading  grupo-2" ui-set="{'myAccordion': 2}">        
-                                                    <h4 class="panel-title">
-                                                        <img src="../app/img/icons/ico-compras-2.png" alt=""/>
-                                                        Carnes y huevos
-                                                    </h4>
-                                                </div>
-                                                <div ui-if="myAccordion == 2" >
-                                                    <div class="panel-body" >
-                                                        <ul>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading  grupo-3" ui-set="{'myAccordion': 3}">        
-                                                    <h4 class="panel-title">
-                                                        <img src="../app/img/icons/ico-compras-3.png" alt=""/>
-                                                        Hortalizas y verduras
-                                                    </h4>
-                                                </div>
-                                                <div ui-if="myAccordion == 3" >
-                                                    <div class="panel-body" >
-                                                        <ul>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading  grupo-4" ui-set="{'myAccordion': 4}">        
-                                                    <h4 class="panel-title">
-                                                        <img src="../app/img/icons/ico-compras-4.png" alt=""/>
-                                                        Frutas
-                                                    </h4>
-                                                </div>
-                                                <div ui-if="myAccordion == 4" >
-                                                    <div class="panel-body" >
-                                                        <ul>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading  grupo-5" ui-set="{'myAccordion': 5}">        
-                                                    <h4 class="panel-title">
-                                                        <img src="../app/img/icons/ico-compras-5.png" alt=""/>
-                                                        Lacteos
-                                                    </h4>
-                                                </div>
-                                                <div ui-if="myAccordion == 5" >
-                                                    <div class="panel-body" >
-                                                        <ul>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading  grupo-6" ui-set="{'myAccordion': 6}">        
-                                                    <h4 class="panel-title">
-                                                        <img src="../app/img/icons/ico-compras-6.png" alt=""/>
-                                                        Leguiminosas
-                                                    </h4>
-                                                </div>
-                                                <div ui-if="myAccordion == 6" >
-                                                    <div class="panel-body" >
-                                                        <ul>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading  grupo-7" ui-set="{'myAccordion': 7}">        
-                                                    <h4 class="panel-title">
-                                                        <img src="../app/img/icons/ico-compras-7.png" alt=""/>
-                                                        Grasas y azucares
-                                                    </h4>
-                                                </div>
-                                                <div ui-if="myAccordion == 7" >
-                                                    <div class="panel-body" >
-                                                        <ul>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading  grupo-8" ui-set="{'myAccordion': 8}">        
-                                                    <h4 class="panel-title">
-                                                        <img src="../app/img/icons/ico-compras-8.png" alt=""/>
-                                                        condimentos 
-                                                    </h4>
-                                                </div>
-                                                <div ui-if="myAccordion == 8" >
-                                                    <div class="panel-body" >
-                                                        <ul>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                            <li>Nombre del producto vamus vestibulum purus</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div><!-- ~ .app -->
-        <!-- Modals and Overlays -->
-        <div ui-yield-to="modals"></div>
-        <script>
-                    angular.module('myApp', ["ngRoute", "mobile-angular-ui", 'ui.swiper']).config(function ($routeProvider) {
-                        $routeProvider.when('/', {
-                            // ...
+    <script>
+                angular.module('myApp', ["ionic", 'ionMDRipple']).config(function ($stateProvider) {
+                    $stateProvider.state('home', {
+                        url: '/'
+                    });
+                })
+                        .controller('myController', AppController)
+                        .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+                            $ionicConfigProvider.tabs.position('top');
                         });
-                        // ...
-                    }).controller('myController', AppController);
 
-                    function AppController($scope, $timeout) {
+                function AppController($scope, $ionicPopover) {
+
+
+                    $scope.click = function () {
+                        console.log("Click");
                     };
-        </script>
-    </body>
+
+                    $ionicPopover.fromTemplateUrl('templates/popover.html', {
+                        scope: $scope,
+                    }).then(function (popover) {
+                        $scope.popover = popover;
+                    });
+                }
+                ;
+    </script>
+
+    <script id="templates/popover.html" type="text/ng-template">
+        <div class="menu-right">
+        <ion-popover-view>
+        <ion-content>
+        <div class="list">
+        <a class="item" href="http://learn.ionicframework.com/" target="_blank">
+        Ver Perfil
+        </a>
+        <a class="item" href="http://ionicframework.com/docs/" target="_blank">
+        Configuración
+        </a>
+        <a class="item" href="http://showcase.ionicframework.com/" target="_blank">
+        Cerrar Sesión
+        </a>
+        </div>
+        </ion-content>
+        </ion-popover-view>
+        </div>
+    </script>
+</body>
 </html>

@@ -1,35 +1,22 @@
-<ng-include src="'views/template/sidebarleft.tpl.html'"></ng-include>
-<div class="app">
-    <ng-include src="'views/template/header.tpl.html'"></ng-include>
-    <!--<div class="navbar navbar-app navbar-absolute-bottom"><h4>FOOTER</h4></div>-->
-
-    <!-- App body -->
-    <div class='app-body scrollable lecciones'>
-        <div class="container scrollable-content">
+<ion-view>
+    <ion-content>
+        <div class='lecciones'>
             <div class="lecciones-header">
-                <div class="row">
-                    <h1><button ng-click='modulo.titulo.audio.audio.paused ? modulo.titulo.audio.audio.play() : modulo.titulo.audio.audio.pause()' class="lecciones-titulo-sonido fa fa-volume-up" aria-hidden="true"></button>{{modulo.titulo.texto}}</h1>
+                <div class="col">
+                    <h1 ng-click="playAudio('audioTitulo')" ion-ripple><i class="lecciones-titulo-sonido icon ion-volume-high" aria-hidden="true"></i> Alimentación Saludable</h1>
                 </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <img ng-src="assets/{{modulo.imagen2.nombre}}">
-                    </div>
+                <div class="col">
+                    <img ng-src="assets/{{modulo.imagen2.nombre}}"/>
                 </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <p><button ng-click='modulo.descripcion.audio.audio.paused ? modulo.descripcion.audio.audio.play() : modulo.descripcion.audio.audio.pause()' class="lecciones-descripcion-sonido fa fa-volume-up" aria-hidden="true"></button> {{ modulo.descripcion.texto}}</p>
-                    </div>
+                <div class="col">
+                    <p ng-click="playAudio('audioDescripcion')" ion-ripple><i class="lecciones-descripcion-sonido icon ion-volume-high" aria-hidden="true"></i> {{ modulo.descripcion.texto}}</p>
                 </div>
             </div>
-
             <div class="lecciones-body">
-                <div class="row">
-                    <ng-repeat ng-repeat="leccion in lecciones">
-                        <leccion-info leccion="leccion" modulo="modulo" index="{{$index + 1}}"></leccion-info>
-                    </ng-repeat>
-                </div>
-
+                <ng-repeat ng-repeat="leccion in lecciones">
+                    <leccion-info leccion="leccion" modulo="modulo" index="{{$index}}"></leccion-info>
+                </ng-repeat>
             </div>
         </div>
-    </div>
-</div><!-- ~ .app -->
+    </ion-content>
+</ion-view>

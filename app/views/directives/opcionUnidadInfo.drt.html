@@ -1,8 +1,10 @@
-<div class="col-xs-12">
-    <div class="opcion-sonido" ng-show="info.audio.url != ''">
-        <button ng-click='info.audio.audio.paused ? info.audio.audio.play() : info.audio.audio.pause()' class="fa fa-volume-up" aria-hidden="true"></button>
+<div class="row">
+    <div class="col">
+        <div class="opcion" ng-click="click()" ng-class="info.selected ? 'selected' : 'no-selected'" ion-ripple>
+            <p>{{ info.texto}}</p>
+        </div>
+        <div class="opcion-sonido" ng-click='$parent.playAudio(info.audio.id)'  ng-class="info.selected ? 'selected' : 'no-selected'" ng-show="info.audio.url != ''" ion-ripple>
+            <button class="icon ion-volume-high"></button>
+        </div>
     </div>
-    <button class="opcion" ng-click="click()" ng-class="info.selected ? 'selected' : 'no-selected'">
-        {{ info.texto}}
-    </button>
 </div>

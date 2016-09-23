@@ -1,12 +1,12 @@
-nutrifamiMobile.factory('PerfilService', ['$http', '$cookieStore', '$rootScope', '$timeout',
-    function () {
+nutrifamiMobile.factory('PerfilService', function () {
         var service = {};
-        service.editarUsuario = function (usuario, callback) {
-            nutrifami.editarUsuarioActivo(usuario, function (response) {
-                callback(response);
-            });
-
-        };
+        /**
+         * 
+         * @param {type} usuario
+         * @param {type} callback
+         * @returns {undefined}
+         */
+        
 
         service.agregarFamiliar = function (familiar, callback) {
             nutrifami.agregarFamiliar(familiar, function (response) {
@@ -15,4 +15,4 @@ nutrifamiMobile.factory('PerfilService', ['$http', '$cookieStore', '$rootScope',
 
         };
         return service;
-    }]);
+    });

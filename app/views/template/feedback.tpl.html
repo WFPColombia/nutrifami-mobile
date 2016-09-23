@@ -1,24 +1,11 @@
-<div class="modal" ui-if="feedback" ui-state='feedback'>
-    <div class="calificacion">
-        <div class="modal-backdrop in"></div>
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <!--<span class="center-block fa fa-check fa-3x" aria-hidden="true"></span>-->
-                    <span class="center-block fa  fa-3x sticker" ng-class="estadoUnidad == 'acierto' ? 'fa-check':'fa-times wrong'" aria-hidden="true"></span>
-                </div>
-                <div class="modal-body">
-                    <p class="mensaje">{{feedback.mensaje}} <button ng-click='feedback.audio.paused ? feedback.audio.play() : feedback.audio.pause()' class="fa fa-volume-up" aria-hidden="true"></button></p>
-                    <div class="feedback" ng-show="feedback.feedbacks !== undefined">
-                        <p ng-repeat="fb in feedback.feedbacks ">{{ fb.texto }} <button class="fa fa-volume-up sonido" ng-click='fb.audio.paused ? fb.audio.play() : fb.audio.pause()' class="f" aria-hidden="true"></button></p>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <div class="activo"> 
-                        <button href class="btn btn-default center-block" role="button" ui-turn-off="feedback" ng-click="feedback()">{{ estadoUnidad == 'acierto' ? 'Continuar':'Intentar de nuevo'}}</button>
-                    </div>
-                </div>
-            </div>
+<div class="calificacion">
+    <div class="popup-header">
+        <span class="icon" ng-class="estadoUnidad == 'acierto' ? 'ion-checkmark-round':'ion-close-round wrong'"></span>
+    </div>
+    <div class="popup-body">
+        <p class="mensaje" ng-click="playAudio('mensaje')" ion-ripple>{{feedback.mensaje}} <i class="icon ion-volume-high"></i></p>
+        <div class="feedback" ng-show="feedback.feedbacks !== undefined">
+            <p ng-repeat="fb in feedback.feedbacks" ion-ripple ng-click='playAudio(fb.nombre)'><i class="sonido icon ion-volume-high" aria-hidden="true"></i> {{ fb.texto}}</p>
         </div>
     </div>
 </div>

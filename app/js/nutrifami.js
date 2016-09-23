@@ -1,14 +1,12 @@
 var usuarioActivo = new Object();   /* Información del usuario logueado */
-var avanceUsuario = new Object();   /* Información de avance del usuario*/
-var familiaObj = new Object();      /* Datos de la familia del usuario logueado, incluidos miembros de la familia*/
+var usuarioAvance = new Object();   /* Información de avance del usuario*/
+var usuarioFamilia = new Object();  /* Datos de la familia del usuario logueado, incluidos miembros de la familia*/
+var usuarioFamiliaAvance = new Object();  /* Datos de avance de la familia*/
 
 
-var base_url = 'http://nutrifami.org/'; /* Direccion del servidor  BEGIN CORDOVA FILES */
-/* var base_url = 'http://127.0.0.1:83/'; /* Direccion del servidor  BEGIN CORDOVA FILES */
 
-/* BEGIN CORDOVA FILES
- var base_url = 'http://nutrifami.org/';
- END CORDOVA FILES */
+var base_url = 'http://www.nutrifami.org/';
+
 var nutrifami = {
     /* nutrifami.usuarioActivoServerInfo */
     usuarioActivoServerInfo: new Object(),
@@ -87,7 +85,7 @@ var nutrifami = {
         $.ajax({
             url: serv,
             type: 'POST',
-            async: false,
+            async: true,
             success: function (data) {
                 var objServ = JSON.parse(data);
                 if (objServ.response === 1) {
@@ -96,17 +94,22 @@ var nutrifami = {
                     $.extend(usuarioActivo, objServ);
 
                     /* Se copia la información de avance en un objeto independiente y se elimina la información de usuarioActivo*/
-                    avanceUsuario = usuarioActivo.avance[usuarioActivo.id];
+                    usuarioAvance = usuarioActivo.avance[usuarioActivo.id];
+
                     /* Se copia la informaciòn de avance de familia a un objeto independiente*/
-                    avanceFamilia = usuarioActivo.avance;
+                    usuarioFamiliaAvance = usuarioActivo.avance;
                     delete usuarioActivo["avance"];
-                    delete avanceFamilia[usuarioActivo.id];
+                    delete usuarioFamiliaAvance[usuarioActivo.id];
+
+                    /*Se copia información de familia de usuario Activo en objeto independiente*/
+                    usuarioFamilia = usuarioActivo.familia;
+                    delete usuarioActivo["familia"];
 
                     /* Se almacena usuario activo en el locaStorage para llamarlo más facilmente */
                     localStorage.setItem("usuarioActivo", JSON.stringify(usuarioActivo));
-
-                    localStorage.setItem("avanceUsuario", JSON.stringify(avanceUsuario));
-                    localStorage.setItem("avanceFamilia", JSON.stringify(avanceFamilia));
+                    localStorage.setItem("usuarioAvance", JSON.stringify(usuarioAvance));
+                    localStorage.setItem("usuarioFamiliaAvance", JSON.stringify(usuarioFamiliaAvance));
+                    localStorage.setItem("usuarioFamilia", JSON.stringify(usuarioFamilia));
 
                     this.isloginFlag = true;
                     response.success = true;
@@ -116,13 +119,14 @@ var nutrifami = {
                     response.success = false;
                     response.message = 'Documento o Código incorrecto';
                 }
+                callback(response);
             },
             error: function () {
                 response.success = false;
                 response.message = 'Ha ocurrido un error durante la ejecución';
+                callback(response);
             }
         });
-        callback(response);
     },
     /*
      * nutrifami.editarUsuarioActivo(data, callback);
@@ -141,7 +145,7 @@ var nutrifami = {
         $.ajax({
             url: serv,
             type: 'GET',
-            async: false,
+            async: true,
             data: data,
             success: function (data) {
                 var objServ = JSON.parse(data);
@@ -152,14 +156,16 @@ var nutrifami = {
                     response.success = false;
                     response.message = 'Los datos son errados';
                 }
+                callback(response);
             },
             error: function () {
                 response.success = true;
                 response.message = 'Ha ocurrido un error durante la ejecución';
+                callback(response);
             }
         });
 
-        callback(response);
+
     },
     /*
      * nutrifami.editarUsuarioActivo(data, callback);
@@ -657,18 +663,82 @@ var nutrifami = {
             $.ajax({
                 url: serv,
                 type: 'GET',
-                async: false,
+                async: true,
                 data: data,
                 success: function (data) {
                     var objServ = JSON.parse(data);
                     response = objServ.response;
+                    callback(response);
                 },
                 error: function () {
                     response.success = true;
                     response.message = 'Ha ocurrido un error durante la ejecución';
+                    callback(response);
                 }
             });
-            callback(response);
+
+        }
+    },
+    consumo: {
+        /*
+         * nutrifami.consumo.getConsolidadoCompras(data, callback);
+         */
+        getConsolidadoCompras: function (data, callback) {
+            callback = callback || function () {
+            };
+            var serv = base_url + "app/api/get-consolidado-compras";
+            response = {
+                success: false,
+                message: ''
+            };
+            $.ajax({
+                url: serv,
+                type: 'GET',
+                async: true,
+                data: data,
+                success: function (data) {
+                    var objServ = JSON.parse(data);
+                    response.success = true;
+                    response.data = objServ;
+                    callback(response);
+                },
+                error: function () {
+                    response.success = false;
+                    response.message = 'Ha ocurrido un error durante la ejecución';
+                    callback(response);
+                }
+            });
+
+        },
+        /*
+         * nutrifami.consumo.getProductosPuntoVenta(data, callback);
+         */
+        getProductosPuntoVenta: function (data, callback) {
+            callback = callback || function () {
+            };
+            var serv = base_url + "app/api/get-productos-puntoventa";
+            response = {
+                success: false,
+                message: ''
+            };
+            $.ajax({
+                url: serv,
+                type: 'GET',
+                async: true,
+                data: data,
+                success: function (data) {
+                    var objServ = JSON.parse(data);
+                    response.success = true;
+                    response.data = objServ;
+                    callback(response);
+                },
+                error: function () {
+                    response.success = false;
+                    response.message = 'Ha ocurrido un error durante la ejecución';
+                    callback(response);
+                }
+            });
+
         }
     }
 
