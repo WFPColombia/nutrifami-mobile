@@ -4,6 +4,7 @@ var usuarioFamilia = new Object();  /* Datos de la familia del usuario logueado,
 var usuarioFamiliaAvance = new Object();  /* Datos de avance de la familia*/
 
 
+
 var base_url = 'http://www.nutrifami.org/';
 
 var nutrifami = {
