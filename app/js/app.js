@@ -1,4 +1,4 @@
-dependencies = ['ionic', 'ngCordova', 'Authentication', 'ngCookies', 'ngRoute', 'ionMDRipple'];
+dependencies = ['ionic', 'ngCordova', 'Authentication', 'ngCookies', 'ngRoute', 'ionMDRipple', 'ionicLazyLoad'];
 
 var nutrifamiLogin = angular.module('Authentication', []);
 var nutrifamiMobile = angular.module('NutrifamiMobile', dependencies);

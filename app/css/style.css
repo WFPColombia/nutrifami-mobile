@@ -23,13 +23,38 @@ body {
     background-color: #f5f5f5;
 }
 
-.pane, .view {
+.pane,
+.view {
     background-color: #f5f5f5;
 }
 
 ng-view {
     height: 100%;
 }
+
+
+/* LAZY LOADING IMAGENES*/
+
+.image-loader-container {
+    margin: 9px;
+    max-width: 81px;
+    max-height: 81px;
+    width: 100%;
+    height: 100%;
+    top: calc(110px - 50px);
+    /*Ajustar estaas lineas para cada una de las imagenes*/
+    left: calc(50% - 50px);
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: stretch;
+    align-items: center;
+}
+
 
 /* RIPPLE EFFECT */
 
@@ -39,17 +64,21 @@ button {
     overflow: hidden;
 }
 
-
-.ion-ripple{
-    background-color:#000000 !important;
-
+.ion-ripple {
+    background-color: #000000 !important;
 }
-.ion-ripple_animate{
-    -webkit-animation-duration:1s !important;
-    animation-duration:1s !important}
+
+.ion-ripple_animate {
+    -webkit-animation-duration: 1s !important;
+    animation-duration: 1s !important
+}
+
+
 /* END RIPPLE EFFECT*/
 
+
 /* LOGIN - INTRO*/
+
 .login {
     background-color: #00c97e;
     background-image: url('../img/login-bg.png');
@@ -64,7 +93,7 @@ button {
 }
 
 .login .login-sonido,
-.intro .intro-sonido{
+.intro .intro-sonido {
     background-color: #ffffff;
     width: 58px;
     height: 58px;
@@ -77,8 +106,7 @@ button {
     font-size: 19pt;
     color: #00c97e;
     border: none;
-}   
-
+}
 
 .login .login-sonido a {
     text-decoration: none;
@@ -124,7 +152,7 @@ button {
 
 .login form .form-group textarea:focus,
 .login form .form-group input:focus,
-.login form button:focus{
+.login form button:focus {
     outline: none;
 }
 
@@ -163,13 +191,13 @@ button {
 }
 
 .login .btn-default[disabled] {
-    color: rgba(255,255,255,0.5);
-    border-color: rgba(255,255,255,0.5);
+    color: rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 255, 255, 0.5);
 }
 
 .login .btn-default:focus,
-.login .btn-default:active{
-    outline:0;
+.login .btn-default:active {
+    outline: 0;
 }
 
 .login .help-block {
@@ -196,40 +224,40 @@ button {
     text-align: center;
 }
 
-.intro .slider{
-    height: 100%;;
+.intro .slider {
+    height: 100%;
+    ;
 }
 
-.intro .slide-body{
+.intro .slide-body {
     padding-top: 30%;
 }
 
-.intro h1{
+.intro h1 {
     font-size: 18pt;
     margin-bottom: 30px;
     color: #ffffff;
     font-family: 'Muli', sans-serif;
-
 }
 
-.intro h2{
+.intro h2 {
     font-size: 16pt;
     margin-bottom: 45px;
     color: #ffffff;
     font-family: 'Muli', sans-serif;
 }
 
-.intro p{
+.intro p {
     font-size: 12pt;
     margin-bottom: 50px;
     font-family: 'Muli', sans-serif;
 }
 
-.intro img{
+.intro img {
     margin-bottom: 30px;
 }
 
-.intro .btn-default{
+.intro .btn-default {
     margin-top: 28px;
     text-transform: uppercase;
     text-shadow: none;
@@ -244,14 +272,15 @@ button {
     margin-bottom: 10px;
     width: 100%;
     letter-spacing: 5px;
-
 }
 
 .intro .slider-pager .slider-pager-page.active {
     color: #fef418;
 }
 
+
 /* END LOGIN - INTRO*/
+
 
 /* MENU LEFT */
 
@@ -259,21 +288,19 @@ button {
     background-color: #f5f5f5;
 }
 
-
-
 .menu-left {
     background-color: #00c97e;
-    -webkit-box-shadow: 5px 0px 15px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 5px 0px 15px 0px rgba(0,0,0,0.75);
-    box-shadow: 5px 0px 15px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 5px 0px 15px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 5px 0px 15px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 5px 0px 15px 0px rgba(0, 0, 0, 0.75);
 }
 
-.menu-left .item{
-    border:none;
+.menu-left .item {
+    border: none;
 }
 
 .menu-left .bar.bar-stable {
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
     background-image: none;
     padding-top: 16px;
     padding-left: 16px;
@@ -284,8 +311,7 @@ button {
     top: 64px;
 }
 
-
-.menu-left .item-content{
+.menu-left .item-content {
     background-color: #00c97e;
     border: none;
     font-size: 14pt;
@@ -294,25 +320,24 @@ button {
     color: #ffffff;
 }
 
-.menu-left .item-content.activated{
+.menu-left .item-content.activated {
     background-color: #2f6551;
-
 }
 
-.menu-left .item-content img{
+.menu-left .item-content img {
     position: relative;
     top: 10px;
 }
 
 .item-complex .item-content,
-.item-radio .item-content{
+.item-radio .item-content {
     padding: 3px 0 0 16px;
     height: 57px;
 }
 
 .menu-left .item-content.active,
 .menu-left .item-content.active:focus,
-.menu-left button.item-content:focus{
+.menu-left button.item-content:focus {
     background-color: #2f6551;
     border-color: #2f6551;
     color: #ffffff;
@@ -329,7 +354,7 @@ button {
     padding-top: 12px;
 }
 
-.bar-stable .button{
+.bar-stable .button {
     color: #ffffff;
 }
 
@@ -340,19 +365,17 @@ button {
     margin-left: 12px;
 }
 
-
-
-.bar-stable .title{
+.bar-stable .title {
     margin-top: 19px;
 }
 
-.menu-right .popover{
+.menu-right .popover {
     height: 155px;
     font-family: 'Muli', sans-serif;
     font-size: 13pt;
 }
 
-.menu-right .popover .item{
+.menu-right .popover .item {
     padding: 13px 18px;
     border: none;
 }
@@ -360,9 +383,10 @@ button {
 
 /* END - MENU-LEFT - HEADER*/
 
+
 /* HOME */
 
-.modulos{
+.modulos {
     position: relative;
 }
 
@@ -374,17 +398,18 @@ button {
     margin-left: 10%;
     margin-right: 10%;
     height: 455px;
+    position: relative;
 }
 
-.modulo.actual{
+.modulo.actual {
     background-color: #0dcd71;
 }
 
-.modulo.terminado{
+.modulo.terminado {
     background-color: #ffba23;
 }
 
-.modulos .medalla{
+.modulos .medalla {
     position: absolute;
     top: 29px;
     right: 36px;
@@ -394,6 +419,12 @@ button {
     width: 100%;
     border-radius: 10px 10px 0 0;
     margin-top: 20px;
+    min-height: 220px;
+}
+
+.image-loader-container {
+    top: calc(110px - 50px);
+    left: calc(50% - 50px);
 }
 
 .modulo h3,
@@ -416,7 +447,7 @@ button {
 .modulo.actual h3,
 .modulo.actual h4,
 .modulo.terminado h3,
-.modulo.terminado h4{
+.modulo.terminado h4 {
     color: #ffffff;
 }
 
@@ -430,7 +461,7 @@ button {
     background-image: none;
 }
 
-.modulo.actual .progress{
+.modulo.actual .progress {
     background-color: #ffffff;
 }
 
@@ -455,12 +486,14 @@ button {
     color: #000000;
 }
 
+
 /* END MODULOS*/
+
 
 /* LECCIONES Y TIPS */
 
 .lecciones .lecciones-header,
-.tips .tips-header{
+.tips .tips-header {
     text-align: center;
     margin-top: 15px;
     color: #2f3e47;
@@ -468,7 +501,7 @@ button {
 }
 
 .lecciones .lecciones-header h1,
-.tips .tips-header h1{
+.tips .tips-header h1 {
     color: #00c97e;
     font-size: 18pt;
     padding: 10px;
@@ -476,38 +509,38 @@ button {
 }
 
 .lecciones .lecciones-header .lecciones-titulo-sonido,
-.tips .tips-header .tips-titulo-sonido{
-    background-color: rgba(0,0,0,0);
-    border:none;
+.tips .tips-header .tips-titulo-sonido {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
     font-size: 12pt;
     position: relative;
     top: -5px;
 }
 
 .lecciones .lecciones-header p,
-.lecciones .lecciones-header img{
+.lecciones .lecciones-header img {
     margin-top: 10px;
     padding: 10px;
     width: 100%;
 }
 
-.tips .tips-header p{
+.tips .tips-header p {
     margin-top: 5px;
     padding: 5px;
     width: 100%;
 }
 
 .lecciones .lecciones-header .lecciones-descripcion-sonido,
-.tips .tips-header .tips-descripcion-sonido{
-    background-color: rgba(0,0,0,0);
-    border:none;
+.tips .tips-header .tips-descripcion-sonido {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
     color: #4d6675;
     position: relative;
     top: -5px;
 }
 
 .lecciones .lecciones-body .leccion,
-.tips .tips-body .tip{
+.tips .tips-body .tip {
     height: 200px;
     background-color: #ffffff;
     border-radius: 10px;
@@ -519,13 +552,13 @@ button {
     position: relative;
 }
 
-.tips .tips-body .tip{
+.tips .tips-body .tip {
     background-color: #00c97e;
     border: none;
 }
 
 .lecciones .lecciones-body .col,
-.tips .tips-body .col{
+.tips .tips-body .col {
     position: relative;
     float: left;
     padding-left: 10px;
@@ -533,9 +566,9 @@ button {
 }
 
 .lecciones .lecciones-body .leccion-sonido,
-.tips .tips-body .tip-sonido{
-    background-color: rgba(0,0,0,0);
-    border:none;
+.tips .tips-body .tip-sonido {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
     width: 50px;
     height: 50px;
     color: #00c97e;
@@ -549,45 +582,45 @@ button {
     -moz-border-radius: 25px;
 }
 
-.tips .tips-body .tip-sonido{
+.tips .tips-body .tip-sonido {
     color: #ffffff;
 }
 
-.lecciones .lecciones-body .leccion img{
+.lecciones .lecciones-body .leccion img {
     margin-top: 15px;
     -webkit-filter: grayscale(100%) opacity(100%);
     filter: grayscale(100%) opacity(100%);
 }
 
-.tips .tips-body .tip img{
+.tips .tips-body .tip img {
     margin-top: 7px;
 }
 
 .lecciones .lecciones-body .leccion h2,
-.tips .tips-body .tip h2{
+.tips .tips-body .tip h2 {
     font-size: 12pt;
     color: #2f3e47;
     margin-top: 15px;
 }
 
-.tips .tips-body .tip h2{
+.tips .tips-body .tip h2 {
     color: #ffffff;
     padding: 0 15px;
     margin-top: 5px;
 }
 
-.lecciones .lecciones-body .leccion .leccion-comenzar{
+.lecciones .lecciones-body .leccion .leccion-comenzar {
     height: 45px;
     width: 100%;
     color: #ffffff;
     background-color: #09df78;
     border-radius: 0 0 10px 10px;
     font-family: 'Raleway-Bold', sans-serif;
-    -moz-border-radius:0 0 10px 10px;
+    -moz-border-radius: 0 0 10px 10px;
     -webkit-border-radius: 0 0 10px 10px;
     text-transform: uppercase;
     letter-spacing: 3px;
-    border:none;
+    border: none;
     position: absolute;
     left: 0;
     bottom: 0px;
@@ -595,25 +628,27 @@ button {
 
 .lecciones .lecciones-body .leccion-terminada,
 .lecciones .lecciones-body .leccion-terminada h2,
-.lecciones .lecciones-body .leccion-terminada button{
+.lecciones .lecciones-body .leccion-terminada button {
     background-color: #ffba23;
-    color:#ffffff;
+    color: #ffffff;
 }
 
-.lecciones .lecciones-body .leccion-terminada img{
+.lecciones .lecciones-body .leccion-terminada img {
     -webkit-filter: none;
     filter: none;
 }
 
-.lecciones .lecciones-body .leccion-terminada .leccion-comenzar{
+.lecciones .lecciones-body .leccion-terminada .leccion-comenzar {
     background-color: #ffa400;
 }
 
-.lecciones .lecciones-body .leccion-terminada .leccion-sonido{
-    background-color: rgba(0,0,0,0);
+.lecciones .lecciones-body .leccion-terminada .leccion-sonido {
+    background-color: rgba(0, 0, 0, 0);
 }
 
+
 /* END LECCIONES*/
+
 
 /* TIPS MODULO */
 
@@ -622,7 +657,7 @@ button {
     height: 100%;
 }
 
-.tips-modulo header{
+.tips-modulo header {
     height: 64px;
     background-color: #00c97e;
     font-size: 15pt;
@@ -632,7 +667,7 @@ button {
     position: relative;
 }
 
-.tips-modulo header a{
+.tips-modulo header a {
     position: absolute;
     left: 0;
     padding: 21PX;
@@ -641,7 +676,7 @@ button {
     color: #ffffff;
 }
 
-.tips-modulo header p{
+.tips-modulo header p {
     margin-top: 15px;
 }
 
@@ -654,7 +689,7 @@ button {
     position: relative;
 }
 
-.tips-modulo .item.item-stable .icon{
+.tips-modulo .item.item-stable .icon {
     position: absolute;
     right: 0px;
     font-size: 17px;
@@ -676,21 +711,23 @@ button {
     padding: 18px 20px 18px 54px;
 }
 
-.tips-modulo .list .item.item-accordion:nth-child(even){
+.tips-modulo .list .item.item-accordion:nth-child(even) {
     background-color: #f6f5f5;
 }
 
-.tips-modulo .list .item.item-accordion i{
+.tips-modulo .list .item.item-accordion i {
     color: #00c97e;
 }
 
 .tips-modulo .list .item.item-accordion.ng-hide {
     line-height: 0px;
 }
+
 .tips-modulo .list .item.item-accordion.ng-hide-add,
 .tips-modulo .list .item.item-accordion.ng-hide-remove {
     display: block !important;
 }
+
 
 /* END TIPS MODULO*/
 
@@ -707,7 +744,7 @@ button {
     padding-top: 10px;
 }
 
-.unidad .leccion-avance .leccion-avance-cerrar{
+.unidad .leccion-avance .leccion-avance-cerrar {
     float: left;
     text-align: center;
     padding-top: 0px;
@@ -721,7 +758,7 @@ button {
 .unidad .leccion-avance button {
     color: #ffffff;
     font-size: 20px;
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
     -moz-border: none;
     -webkit-border: none;
     border: none;
@@ -774,9 +811,9 @@ button {
     font-size: 12pt;
     font-family: 'Muli', sans-serif;
     color: #00965e;
-    -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.1);
-    -moz-box-shadow:  0px 2px 5px 0px rgba(0,0,0,0.1);
-    box-shadow:  0px 2px 5px 0px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
 }
 
 .unidad .unidad-tipo img {
@@ -785,9 +822,7 @@ button {
     margin-left: 22px;
 }
 
-.unidad .unidad-tipo .unidad-tipo-descripcion p{
-
-}
+.unidad .unidad-tipo .unidad-tipo-descripcion p {}
 
 .unidad .unidad-tipo .unidad-tipo-descripcion .sonido {
     float: right;
@@ -796,8 +831,8 @@ button {
     margin-left: 23px;
 }
 
-.unidad .unidad-tipo .unidad-tipo-descripcion .sonido button{
-    background-color: rgba(0,0,0,0);
+.unidad .unidad-tipo .unidad-tipo-descripcion .sonido button {
+    background-color: rgba(0, 0, 0, 0);
     -moz-border: none;
     -webkit-border: none;
     border: none;
@@ -807,11 +842,10 @@ button {
     top: 5px;
 }
 
-.unidad .unidad-descripcion{
+.unidad .unidad-descripcion {
     color: #2f3e47;
     text-align: center;
     font-size: 12pt;
-
 }
 
 .unidad .unidad-descripcion .fa {
@@ -825,8 +859,8 @@ button {
     font-size: 14pt;
 }
 
-.unidad .unidad-descripcion .unidad-instruccion button{
-    background-color: rgba(0,0,0,0); 
+.unidad .unidad-descripcion .unidad-instruccion button {
+    background-color: rgba(0, 0, 0, 0);
     border: none;
     -moz-border: none;
     -webkit-border: none;
@@ -855,7 +889,7 @@ button {
     font-size: 12pt;
 }
 
-.unidad .opciones .col{
+.unidad .opciones .col {
     position: relative;
 }
 
@@ -872,40 +906,37 @@ button {
 .unidad .opciones .opcion-sonido button {
     color: #00c97e;
     border: none;
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
     width: 30px;
     height: 30px;
-
 }
 
-.unidad .opciones .pareja-con-imagen{
+.unidad .opciones .pareja-con-imagen {
     height: 150px;
 }
 
-.unidad .opciones .opcion-sonido.sonido-con-imagen{
-    top:105px;
+.unidad .opciones .opcion-sonido.sonido-con-imagen {
+    top: 105px;
 }
 
-.unidad .opciones .pareja-con-imagen .titulo-con-imagen{
+.unidad .opciones .pareja-con-imagen .titulo-con-imagen {
     position: initial;
     top: 0;
     -ms-transform: translateY(0);
-    -webkit-transform: translateY(0); 
-    transform: translateY(0); 
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
     margin-top: 20px;
     margin-bottom: 30px;
 }
 
-.unidad .opciones .opcion.selected{
+.unidad .opciones .opcion.selected {
     background-color: #75a8fe;
     color: #ffffff;
 }
 
-.unidad .opciones .opcion-sonido.selected button{
+.unidad .opciones .opcion-sonido.selected button {
     color: #75a8fe;
 }
-
-
 
 .unidad .opciones .wrong {
     background-color: #ff1244;
@@ -918,20 +949,18 @@ button {
     filter: grayscale(100%) opacity(40%);
 }
 
-.unidad .opciones .pareja-mal{
+.unidad .opciones .pareja-mal {
     animation-name: pareja-mal-animation;
-    animation-duration: 2s;  
+    animation-duration: 2s;
 }
 
 @keyframes pareja-mal-animation {
-    0%{
-    }
-    25%{
+    0% {}
+    25% {
         background-color: #ff1244;
         color: #ffffff;
     }
-    100% {
-    }
+    100% {}
 }
 
 .unidad .opciones .opcion p {
@@ -951,11 +980,12 @@ button {
     text-align: center;
     padding: 0px;
 }
+
 .habilitado {
     background-color: #00c97e;
 }
 
-.calificar button{
+.calificar button {
     font-family: 'Raleway-Bold', sans-serif;
     font-size: 12pt;
     color: #ffffff;
@@ -964,7 +994,7 @@ button {
     letter-spacing: 5px;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
     border: none;
 }
 
@@ -985,7 +1015,7 @@ button {
     box-shadow: 0px 0px 10px #d200ff;
 }
 
-.mostrar-tip div{
+.mostrar-tip div {
     padding-top: 14px;
     height: 100%;
     width: 100%;
@@ -999,11 +1029,12 @@ button {
     font-size: 31px;
 }
 
+
 /*MODAL FEEDBACK*/
 
 .popup-container .popup {
     width: 95%;
-    min-height:450px; 
+    min-height: 450px;
     background-color: #ffffff;
     border-radius: 10px;
     -moz-border-radius: 10px;
@@ -1011,19 +1042,19 @@ button {
     font-family: 'Muli', sans-serif;
     color: #2f3e47;
     text-align: center;
-
 }
 
-.popup-container .popup .popup-head{
+.popup-container .popup .popup-head {
     padding: 0;
     border: none;
 }
+
 .popup-container .popup .calificacion .popup-header {
-    text-align:center;
+    text-align: center;
     margin-top: 30px;
 }
 
-.popup-container .popup .calificacion .popup-header .icon{
+.popup-container .popup .calificacion .popup-header .icon {
     display: inline-block;
     color: #ffffff;
     font-size: 30pt;
@@ -1034,6 +1065,7 @@ button {
     text-align: center;
     padding-top: 22px;
 }
+
 .popup-container .popup .calificacion .popup-header .wrong {
     background-color: #ff1244;
 }
@@ -1046,7 +1078,7 @@ button {
     margin-bottom: 37px;
 }
 
-.popup-container .popup .calificacion .mensaje  i {
+.popup-container .popup .calificacion .mensaje i {
     color: #8e8e8e;
 }
 
@@ -1067,13 +1099,14 @@ button {
 }
 
 .popup-container .popup .calificacion .feedback .sonido {
-    color: #00965e;    
+    color: #00965e;
 }
 
-.popup-container .popup .popup-buttons{
+.popup-container .popup .popup-buttons {
     margin-top: 25px;
     margin-bottom: 10px;
 }
+
 .popup-container .popup .popup-buttons .button {
     height: 57px;
     background-color: #00c97e;
@@ -1087,7 +1120,10 @@ button {
     -webkit-border-radius: 26px;
     line-height: 26px;
 }
+
+
 /* END MODAL FEEDBACK*/
+
 
 /* LECCIÓN FINALIZADA */
 
@@ -1101,7 +1137,7 @@ button {
 .leccion-finalizada h1 button {
     color: #2f3e47;
     border: none;
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .leccion-finalizada .progreso .progress {
@@ -1138,27 +1174,26 @@ button {
     animation-duration: 2.3s;
 }
 
-.leccion-finalizada .progreso .sticker span{
+.leccion-finalizada .progreso .sticker span {
     animation-name: sticker-span-size;
     animation-duration: 2.3s;
 }
 
 @keyframes sticker-size {
-    0%{
+    0% {
         height: 0px;
         width: 0px;
         border: 0px;
         right: 8px;
         top: 18px;
     }
-    66%{
+    66% {
         height: 0px;
         width: 0px;
         border: 0px;
         right: 8px;
         top: 18px;
     }
-
     100% {
         height: 30px;
         width: 30px;
@@ -1169,15 +1204,14 @@ button {
 }
 
 @keyframes sticker-span-size {
-    0%{
-        font-size:0px;
+    0% {
+        font-size: 0px;
     }
-    66%{
-        font-size:0px;
+    66% {
+        font-size: 0px;
     }
-
     100% {
-        font-size:inherit;
+        font-size: inherit;
     }
 }
 
@@ -1197,21 +1231,21 @@ button {
     animation-name: badget-img;
     animation-duration: 2s;
     animation-delay: 1s;
-    animation-iteration-count:infinite;
+    animation-iteration-count: infinite;
 }
 
 @keyframes badget-img {
-    0%   {
+    0% {
         height: 228px;
-        margin:0px;
+        margin: 0px;
     }
-    50%  {
+    50% {
         height: 240px;
-        margin:-6px;
+        margin: -6px;
     }
-    100%  {
+    100% {
         height: 228px;
-        margin:0px;
+        margin: 0px;
     }
 }
 
@@ -1219,7 +1253,7 @@ button {
     color: #ffa67a;
     font-size: 11pt;
     border: none;
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .leccion-finalizada .feedback p {
@@ -1238,46 +1272,48 @@ button {
 .leccion-finalizada .feedback .feedback-sonido button {
     font-size: 10pt;
     color: #00c97e;
-    border:none;
-    background-color: rgba(0,0,0,0);
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
 }
+
 
 /* TABS */
 
-.tabs-top > .tabs, .tabs.tabs-top {
+.tabs-top > .tabs,
+.tabs.tabs-top {
     top: 0px;
     background-color: #ffffff;
     padding-top: 25px;
-    height: 60px;        
+    height: 60px;
     background-position: initial;
 }
 
-.tab-item{
+.tab-item {
     max-width: none;
     line-height: 17px !important;
 }
 
-.tabs .tab-item .tab-title{
+.tabs .tab-item .tab-title {
     font-size: 13pt;
-    color: rgba(0,0,0,0.6);
+    color: rgba(0, 0, 0, 0.6);
     font-family: 'Muli', sans-serif;
 }
 
 .tab-item.tab-item-active,
-.tab-item.active, 
+.tab-item.active,
 .tab-item.activated {
     border-bottom: 3px solid #00c97e !important;
 }
 
-.tabs .tab-item-active .tab-title{
+.tabs .tab-item-active .tab-title {
     color: #00c97e;
 }
 
+
 /* FINAL - TABS*/
 
+
 /* PERFIL Y EDITAR PERFIL */
-
-
 
 .perfil-panel {
     margin-top: 80px;
@@ -1286,23 +1322,21 @@ button {
     margin-bottom: 30px;
     padding-bottom: 20px;
     width: 100%;
-
 }
 
-.perfil-panel .perfil-header{
+.perfil-panel .perfil-header {
     text-align: center;
     position: relative;
     margin-top: 5px;
 }
 
-.perfil-panel .perfil-header h1{
+.perfil-panel .perfil-header h1 {
     font-family: 'Muli', sans-serif;
     color: #2f3e47;
     text-align: center;
     font-size: 17pt;
     margin-top: 10px;
 }
-
 
 .perfil-panel .boton-flotante {
     position: absolute;
@@ -1311,14 +1345,12 @@ button {
     z-index: 1000;
 }
 
-.perfil-panel.editar-perfil{
+.perfil-panel.editar-perfil {
     margin-top: 0px;
 }
 
-
-
 .perfil-panel .boton-flotante button,
-.perfil-panel .boton-flotante button:hover{
+.perfil-panel .boton-flotante button:hover {
     height: 38px;
     background-color: #ffffff;
     background-image: none;
@@ -1328,7 +1360,7 @@ button {
     font-weight: normal;
 }
 
-.perfil-panel .boton-flotante button .icon{
+.perfil-panel .boton-flotante button .icon {
     color: #00c97e;
 }
 
@@ -1336,8 +1368,7 @@ button {
     margin-bottom: 0;
 }
 
-
-.perfil-panel .perfil-header h3{
+.perfil-panel .perfil-header h3 {
     font-size: 7pt;
     font-family: 'Raleway-Bold', sans-serif;
     color: rgba(0, 0, 0, 0.6);
@@ -1350,26 +1381,23 @@ button {
 .perfil-body .form-group p,
 .perfil-body .form-group .sin-registro,
 .modal-dialog .form-group p,
-.modal-dialog .form-group .sin-registro{
+.modal-dialog .form-group .sin-registro {
     font-size: 10pt;
     padding: 0px 5px;
 }
 
-
 .perfil-body .form-group .form-control,
-.modal-dialog .form-group .form-control{
+.modal-dialog .form-group .form-control {
     height: 38px !important;
     border: 1px solid #dcdcdc;
     border-radius: 18px;
     font-size: 10pt;
     width: 100%;
-    padding-left:15px;
+    padding-left: 15px;
 }
 
-
-
 .perfil-body .form-group .sin-registro,
-.modal-dialog  .form-group .sin-registro{
+.modal-dialog .form-group .sin-registro {
     color: #c2c5c7;
 }
 
@@ -1384,7 +1412,7 @@ button {
 }
 
 .perfil-body .form-group label,
-.modal-dialog .form-group label{
+.modal-dialog .form-group label {
     padding-left: 5px;
     font-size: 7pt;
     font-family: 'Raleway-Bold', sans-serif;
@@ -1395,7 +1423,7 @@ button {
 .perfil-body .form-group .error,
 .perfil-body form .message,
 .modal-dialog .form-group .error,
-.modal-dialog form .message{
+.modal-dialog form .message {
     font-size: 10px;
     color: #fc4cab;
     text-align: center;
@@ -1411,7 +1439,7 @@ button {
 }
 
 .perfil-body .btn-default,
-.modal-dialog .btn-default{
+.modal-dialog .btn-default {
     margin-top: 28px;
     text-transform: uppercase;
     text-shadow: none;
@@ -1442,11 +1470,11 @@ button {
     font-weight: bold;
 }
 
-.perfil-body .miembros-body{
+.perfil-body .miembros-body {
     text-align: center;
 }
 
-.perfil-body .miembros-body .row{
+.perfil-body .miembros-body .row {
     padding: 10px 0;
 }
 
@@ -1458,7 +1486,7 @@ button {
     font-size: 12pt;
 }
 
-.perfil-body .panel-group .panel-first{
+.perfil-body .panel-group .panel-first {
     margin-top: 0px;
     margin-bottom: 0px;
     padding: 0;
@@ -1480,21 +1508,22 @@ button {
     padding: 0;
 }
 
-.perfil-body .panel-group .panel .editar-miembro a{
+.perfil-body .panel-group .panel .editar-miembro a {
     color: #fc4cab;
     text-decoration: underline;
 }
 
+
 /* END PERFIL Y EDITAR PERFIL */
 
 
-/* COMPRAS*/ 
+/* COMPRAS*/
 
-.compras-tab{
+.compras-tab {
     margin-top: 61px;
 }
 
-.compras-tab .compras-descripcion{
+.compras-tab .compras-descripcion {
     margin-top: 35px;
     font-size: 13pt;
     color: #2f3e47;
@@ -1502,25 +1531,25 @@ button {
     padding: 0 20px;
 }
 
-.compras-tab .compras-descripcion i{
+.compras-tab .compras-descripcion i {
     color: #2f3e47;
 }
 
-.compras-tab .compras-porcentajes{
+.compras-tab .compras-porcentajes {
     margin-top: 10px;
 }
 
 .compras-tab .compras-porcentajes .col,
-.compras-tab .compras-porcentajes .row{
+.compras-tab .compras-porcentajes .row {
     padding-left: 0px;
     padding-right: 0px;
 }
 
-.compras-tab .compras-porcentajes .compras-porcentaje-tipo{
+.compras-tab .compras-porcentajes .compras-porcentaje-tipo {
     height: 62px;
 }
 
-.compras-tab .compras-porcentajes .compras-porcentaje-tipo p{
+.compras-tab .compras-porcentajes .compras-porcentaje-tipo p {
     text-align: right;
     color: #2f3e47;
     text-transform: uppercase;
@@ -1533,11 +1562,11 @@ button {
     transform: translateY(-50%);
 }
 
-.compras-tab .compras-porcentajes .compras-porcentaje-barra{
+.compras-tab .compras-porcentajes .compras-porcentaje-barra {
     padding-left: 15px;
 }
 
-.compras-tab .compras-porcentajes .compras-porcentaje-barra .progress{
+.compras-tab .compras-porcentajes .compras-porcentaje-barra .progress {
     background-color: #efefef;
     height: 62px;
     position: relative;
@@ -1553,23 +1582,23 @@ button {
     height: 62px;
 }
 
-.compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .cantidad{
+.compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .cantidad {
     text-align: right;
     font-size: 19pt;
-    position:absolute;
+    position: absolute;
     top: 22px;
     right: 50px;
 }
 
-.compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .cantidad span{
+.compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .cantidad span {
     font-size: 11pt;
     position: relative;
     top: -5px;
 }
 
-.compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .icon{
+.compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .icon {
     font-size: 24pt;
-    color: rgba(0,0,0,0.3);
+    color: rgba(0, 0, 0, 0.3);
     position: absolute;
     top: 16px;
     right: 10px;
@@ -1577,82 +1606,92 @@ button {
 
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-CEREALES,
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-1,
-.compras-tab .recomendados-body .item.item-stable.grupo-1{
+.compras-tab .recomendados-body .item.item-stable.grupo-1,
+.compras-grupo header.grupo-1 {
     background-color: #f2df00 !important;
 }
 
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-LECHELACTEOS,
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-3,
-.compras-tab .recomendados-body .item.item-stable.grupo-3{
+.compras-tab .recomendados-body .item.item-stable.grupo-3,
+.compras-grupo header.grupo-3 {
     background-color: #0fa7ff;
 }
 
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-CARNES,
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-4,
-.compras-tab .recomendados-body .item.item-stable.grupo-4{
+.compras-tab .recomendados-body .item.item-stable.grupo-4,
+.compras-grupo header.grupo-4 {
     background-color: #ff9600;
 }
 
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-VEGETALES,
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-5,
-.compras-tab .recomendados-body .item.item-stable.grupo-5{
+.compras-tab .recomendados-body .item.item-stable.grupo-5,
+.compras-grupo header.grupo-5 {
     background-color: #7bd462;
 }
 
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-GRASAS,
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-7,
-.compras-tab .recomendados-body .item.item-stable.grupo-7{
+.compras-tab .recomendados-body .item.item-stable.grupo-7,
+.compras-grupo header.grupo-7 {
     background-color: #ff037a;
 }
 
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-AZUCAR,
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-8,
-.compras-tab .recomendados-body .item.item-stable.grupo-8{
+.compras-tab .recomendados-body .item.item-stable.grupo-8,
+.compras-grupo header.grupo-8 {
     background-color: #d360fe;
 }
 
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-CONDIMENTOS,
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-9,
-.compras-tab .recomendados-body .item.item-stable.grupo-9{
+.compras-tab .recomendados-body .item.item-stable.grupo-9,
+.compras-grupo header.grupo-9 {
     background-color: #bd8330;
 }
 
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-NOGRUPO,
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-0,
-.compras-tab .recomendados-body .item.item-stable.grupo-0{
+.compras-tab .recomendados-body .item.item-stable.grupo-0,
+.compras-grupo header.grupo-0 {
     background-color: #000000;
 }
 
+
 /* Recomendados */
-.compras-tab .recomendados-header{
+
+.compras-tab .recomendados-header {
     margin-top: 25px;
     color: #2f3e47;
     font-size: 12pt;
     position: relative;
 }
 
-.compras-tab .recomendados-header img{
+.compras-tab .recomendados-header img {
     float: left;
     margin-left: 15px;
     margin-right: 10px;
 }
 
-.compras-tab .recomendados-header p{
+.compras-tab .recomendados-header p {
     margin-top: 27px;
     text-align: right;
     margin-right: 10px;
 }
 
-.compras-tab .recomendados-header i{
+.compras-tab .recomendados-header i {
     position: absolute;
-    top:10px;
+    top: 10px;
     right: 10px;
     font-size: 10pt;
     color: #4d6675;
 }
 
-.compras-tab .recomendados-body{
-    margin-top: 5px;   
+.compras-tab .recomendados-body {
+    margin-top: 5px;
 }
 
 .compras-tab .recomendados-body .item.item-stable {
@@ -1684,14 +1723,14 @@ button {
     padding-left: 10px;
 }
 
-.compras-tab .recomendados-body .item img{
+.compras-tab .recomendados-body .item img {
     float: left;
     margin-right: 15px;
 }
 
-.compras-tab .recomendados-body .item i{
+.compras-tab .recomendados-body .item i {
     font-size: 14pt;
-    color: rgba(0,0,0,0.2);
+    color: rgba(0, 0, 0, 0.2);
     position: absolute;
     right: 12px;
 }
@@ -1702,42 +1741,47 @@ button {
     padding-bottom: 0;
     transition: 0.09s all linear;
 }
-.compras-tab .recomendados-body  .list .item.item-accordion.ng-hide {
+
+.compras-tab .recomendados-body .list .item.item-accordion.ng-hide {
     line-height: 0px;
 }
-.compras-tab .recomendados-body  .list .item.item-accordion.ng-hide-add,
-.compras-tab .recomendados-body  .list .item.item-accordion.ng-hide-remove {
+
+.compras-tab .recomendados-body .list .item.item-accordion.ng-hide-add,
+.compras-tab .recomendados-body .list .item.item-accordion.ng-hide-remove {
     display: block !important;
 }
 
-.compras-tab .recomendados-body .list .item.item-accordion:last-child{
+.compras-tab .recomendados-body .list .item.item-accordion:last-child {
     border-radius: 0 0 7px 7px;
 }
 
-.compras-tab .recomendados-body .list .item.item-accordion:nth-child(odd){
+.compras-tab .recomendados-body .list .item.item-accordion:nth-child(odd) {
     background-color: #f5f5f5;
 }
-/* END COMPRAS*/ 
+
+
+/* END COMPRAS*/
+
 
 /* COMPRAS GRUPO */
 
-.compras-grupo{
+.compras-grupo {
     background-color: #ffffff;
 }
 
-.compras-grupo header{
-    background-color: #ff9600;
+.compras-grupo header {
     color: #ffffff;
     text-align: center;
     font-family: 'Muli', sans-serif;
-    position: relative; 
+    position: relative;
 }
 
-.compras-grupo header .titulo{
+.compras-grupo header .titulo {
     height: 64px;
-    border-bottom: rgba(255,255,255,0.4) 1px solid;
+    border-bottom: rgba(255, 255, 255, 0.4) 1px solid;
 }
-.compras-grupo header .titulo a{
+
+.compras-grupo header .titulo a {
     position: absolute;
     left: 0;
     top: 0;
@@ -1746,7 +1790,7 @@ button {
     color: #ffffff;
 }
 
-.compras-grupo header .titulo h1{
+.compras-grupo header .titulo h1 {
     margin-top: 15px;
     font-size: 15pt;
     color: #ffffff;
@@ -1758,28 +1802,27 @@ button {
     padding-bottom: 10px;
 }
 
-.compras-grupo header .sub-header .total-compra{
+.compras-grupo header .sub-header .total-compra {
     text-align: right;
     font-size: 25pt;
-    border-right: rgba(255,255,255,0.4) 1px solid;
+    border-right: rgba(255, 255, 255, 0.4) 1px solid;
     padding-bottom: 0px;
     padding-right: 30px;
 }
 
-.compras-grupo header .sub-header .total-compra .valor{
+.compras-grupo header .sub-header .total-compra .valor {
     font-size: 20pt;
     margin-bottom: 0px;
 }
 
-.compras-grupo header .sub-header .estado{
+.compras-grupo header .sub-header .estado {
     text-align: left;
-    border-left: rgba(255,255,255,0.4) 1px solid;
+    border-left: rgba(255, 255, 255, 0.4) 1px solid;
     padding-bottom: 0px;
     padding-left: 30px;
 }
 
-
-.compras-grupo .compras-grupo-descripcion{
+.compras-grupo .compras-grupo-descripcion {
     margin-top: 35px;
     font-size: 13pt;
     color: #2f3e47;
@@ -1787,11 +1830,11 @@ button {
     padding: 0 20px;
 }
 
-.compras-grupo .compras-grupo-descripcion i{
+.compras-grupo .compras-grupo-descripcion i {
     color: #2f3e47;
 }
 
-.compras-grupo .compras-resumen{
+.compras-grupo .compras-resumen {
     color: #2f3e47;
     font-size: 12pt;
     font-family: 'Muli', sans-serif;
@@ -1800,29 +1843,27 @@ button {
     margin-top: 20px;
 }
 
-.compras-grupo .compras-resumen .nombre-producto{
+.compras-grupo .compras-resumen .nombre-producto {
     margin-bottom: 25px;
 }
 
-.compras-grupo .compras-resumen .precio{
+.compras-grupo .compras-resumen .precio {
     text-align: right;
     font-size: 13pt;
 }
 
-.compras-grupo .compras-resumen .totales{
+.compras-grupo .compras-resumen .totales {
     border-top: 1px solid #7f7f7f;
     font-size: 17pt;
     padding-top: 15px;
 }
 
-
-.compras-grupo .compra-ideal{
+.compras-grupo .compra-ideal {
     margin-top: 55px;
-    -webkit-box-shadow: 5px 0px 15px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 5px 0px 15px 0px rgba(0,0,0,0.75);
-    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.25);
+    -webkit-box-shadow: 5px 0px 15px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 5px 0px 15px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.25);
 }
-
 
 .compras-grupo .compra-ideal .list .item.item-accordion {
     line-height: 50px;
@@ -1831,19 +1872,20 @@ button {
     transition: 0.09s all linear;
 }
 
-.compras-grupo .compra-ideal .list .item.item-accordion:nth-child(odd){
+.compras-grupo .compra-ideal .list .item.item-accordion:nth-child(odd) {
     background-color: #ffffff;
 }
+
 .compras-grupo .compra-ideal .list .item.item-accordion.ng-hide {
     line-height: 0px;
 }
+
 .compras-grupo .compra-ideal .list .item.item-accordion.ng-hide-add,
 .compras-grupo .compra-ideal .list .item.item-accordion.ng-hide-remove {
     display: block !important;
 }
 
-
-.compras-grupo .compra-ideal .item{
+.compras-grupo .compra-ideal .item {
     border: none;
     background-color: #f6f5f5;
     color: #2f3e47;
@@ -1852,14 +1894,12 @@ button {
     padding-left: 27px;
 }
 
-
-
-.compras-grupo .compra-ideal .item img{
+.compras-grupo .compra-ideal .item img {
     float: left;
     margin-right: 20px;
 }
 
-.compras-grupo .compra-ideal .item h3{
+.compras-grupo .compra-ideal .item h3 {
     font-size: 16px;
     color: #2f3e47;
     font-family: 'Muli', sans-serif;
@@ -1867,48 +1907,51 @@ button {
     margin-top: 12px;
 }
 
-.compras-grupo .compra-ideal .item h3 .icon{
+.compras-grupo .compra-ideal .item h3 .icon {
     font-size: 10pt;
     color: #4d6675;
     position: relative;
     top: -5px;
 }
 
-.compras-grupo .compra-ideal .item h4{
+.compras-grupo .compra-ideal .item h4 {
     color: #00c97e;
     text-transform: uppercase;
     font-size: 9pt;
     font-family: 'Raleway-Bold', sans-serif;
 }
-.compras-grupo .compra-ideal .item.item-stable{
+
+.compras-grupo .compra-ideal .item.item-stable {
     background-color: #ffffff;
     position: relative;
     border: none;
 }
 
-.compras-grupo .compra-ideal .item.item-stable>.icon{
+.compras-grupo .compra-ideal .item.item-stable>.icon {
     font-size: 14pt;
-    color: rgba(0,0,0,0.2);
+    color: rgba(0, 0, 0, 0.2);
     position: absolute;
     top: 43px;
     right: 16px;
 }
 
+
 /*  END - COMPRAS GRUPO */
+
 
 /* PROGRESO */
 
-.progreso .pane{
+.progreso .pane {
     background-color: #6dffc9;
 }
 
-.progreso .progreso-tab{
+.progreso .progreso-tab {
     margin-top: 61px;
     padding: 30px 15px;
     height: 100%;
 }
 
-.progreso .progreso-tab .progreso-panel{
+.progreso .progreso-tab .progreso-panel {
     background-color: #ffffff;
     border-radius: 10px;
     -moz-border-radius: 10px;
@@ -1917,26 +1960,24 @@ button {
     width: 100%
 }
 
-.progreso .progreso-tab .progreso-panel .progreso-puntos-experiencia{
+.progreso .progreso-tab .progreso-panel .progreso-puntos-experiencia {
     border-bottom: 1px solid #cccccc;
     padding-bottom: 10px;
 }
 
-
-.progreso .progreso-tab .progreso-panel .progreso-puntos-experiencia img{
-    margin-left:6px; 
-
+.progreso .progreso-tab .progreso-panel .progreso-puntos-experiencia img {
+    margin-left: 6px;
 }
 
-.progreso .progreso-tab .progreso-panel .progreso-puntos-experiencia p{
+.progreso .progreso-tab .progreso-panel .progreso-puntos-experiencia p {
     font-size: 13pt;
     color: #ff5400;
-    font-family: 'Muli-Italic', sans-serif; 
+    font-family: 'Muli-Italic', sans-serif;
     margin-top: 20px;
 }
 
-.progreso .progreso-tab .progreso-panel .progreso-puntos-experiencia p .icon{
-    background-color: rgba(0,0,0,0);
+.progreso .progreso-tab .progreso-panel .progreso-puntos-experiencia p .icon {
+    background-color: rgba(0, 0, 0, 0);
     border: none;
     font-size: 12px;
     color: #ff5400;
@@ -1950,50 +1991,47 @@ button {
     -moz-border-radius: 20px;
 }
 
-
-.progreso .progreso-tab .progreso-panel  .progreso-porcentaje {
-
+.progreso .progreso-tab .progreso-panel .progreso-porcentaje {
     padding: 25px 0px 20px 0px;
     border-bottom: 1px solid #cccccc;
 }
 
-.progreso .progreso-tab .progreso-panel  .progreso-porcentaje .row{
+.progreso .progreso-tab .progreso-panel .progreso-porcentaje .row {
     margin: 0 auto;
     width: 170px;
 }
 
-.progreso .progreso-tab .progreso-panel .progreso-resumen{
+.progreso .progreso-tab .progreso-panel .progreso-resumen {
     color: #2f3e47;
     font-family: 'Raleway-Bold', sans-serif;
     font-size: 9pt;
     margin-bottom: 40px;
 }
 
-.progreso .progreso-tab .progreso-panel .progreso-resumen img{
+.progreso .progreso-tab .progreso-panel .progreso-resumen img {
     float: left;
     margin-right: 7px;
     margin-top: 15px;
 }
 
-.progreso .progreso-tab .progreso-panel .progreso-resumen span{
+.progreso .progreso-tab .progreso-panel .progreso-resumen span {
     font-size: 25pt;
-    font-family: 'Muli-Italic', sans-serif; 
+    font-family: 'Muli-Italic', sans-serif;
     line-height: 18pt;
 }
 
-.progreso .progreso-tab .progreso-panel .progreso-familia{
+.progreso .progreso-tab .progreso-panel .progreso-familia {
     color: #2f3e47;
     border-bottom: 1px #cccccc solid;
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
-.progreso .progreso-tab .progreso-panel .progreso-familia .row{
-    position: relative;   
+.progreso .progreso-tab .progreso-panel .progreso-familia .row {
+    position: relative;
 }
 
-
-.progreso .progreso-tab .progreso-panel .progreso-familia .row .sonido{
+.progreso .progreso-tab .progreso-panel .progreso-familia .row .sonido {
     position: absolute;
     right: 0px;
     top: 0px;
@@ -2001,34 +2039,38 @@ button {
     color: #ffa67a;
 }
 
-.progreso .progreso-tab .progreso-panel .progreso-familia .miembro-familia{
+.progreso .progreso-tab .progreso-panel .progreso-familia .miembro-familia {
     font-size: 11pt;
     color: #2f3e47;
     margin-top: 14px;
 }
 
-.progreso .progreso-tab .progreso-panel .progreso-familia .lider .miembro-familia{
+.progreso .progreso-tab .progreso-panel .progreso-familia .lider .miembro-familia {
     font-size: 17pt;
 }
 
-.progreso .progreso-tab .progreso-panel .progreso-familia .medallas img{
+.progreso .progreso-tab .progreso-panel .progreso-familia .medallas img {
     float: left;
     margin-right: 7px;
 }
-.progreso .progreso-tab .progreso-panel .progreso-familia .medallas{
+
+.progreso .progreso-tab .progreso-panel .progreso-familia .medallas {
     font-size: 16pt;
 }
 
-.progreso .progreso-tab .progreso-panel .progreso-familia .lider .medallas{
+.progreso .progreso-tab .progreso-panel .progreso-familia .lider .medallas {
     color: #ff5400;
 }
 
-.progreso .progreso-tab .progreso-panel .progreso-familia .medallas span{
+.progreso .progreso-tab .progreso-panel .progreso-familia .medallas span {
     font-size: 9pt;
     font-family: 'Raleway-Bold', sans-serif;
     text-transform: uppercase;
 }
+
+
 /* FINAL - PROGRESO */
+
 
 /* SOBRE */
 
@@ -2037,7 +2079,7 @@ button {
     height: 100%;
 }
 
-.sobre header{
+.sobre header {
     height: 64px;
     background-color: #00c97e;
     font-size: 15pt;
@@ -2047,7 +2089,7 @@ button {
     position: relative;
 }
 
-.sobre header a{
+.sobre header a {
     position: absolute;
     left: 0;
     padding: 21PX;
@@ -2056,35 +2098,34 @@ button {
     color: #ffffff;
 }
 
-.sobre header p{
+.sobre header p {
     margin-top: 15px;
 }
 
-.sobre .sobre-body{
+.sobre .sobre-body {
     text-align: center;
-    color:#2f3e47;
+    color: #2f3e47;
     font-size: 12pt;
 }
 
-.sobre .sobre-body .nf-logo img{
+.sobre .sobre-body .nf-logo img {
     margin-top: 50px;
     margin-bottom: 5px;
 }
 
-.sobre .sobre-body .descripcion p{
+.sobre .sobre-body .descripcion p {
     font-size: 14pt;
     margin-top: 25pt;
     padding: 0 35px;
 }
 
-.sobre .sobre-body .wfp-ia-logo img{
-    margin-top:25px;
+.sobre .sobre-body .wfp-ia-logo img {
+    margin-top: 25px;
 }
 
-.sobre .sobre-body .copyright{
+.sobre .sobre-body .copyright {
     margin-top: 35px;
 }
 
+
 /* END - SOBRE */
-
-

@@ -5,8 +5,7 @@ nutrifamiMobile.controller('EditarPerfilController', function ($ionicPlatform, $
      $ionicPlatform.ready(function () {
      END CORDOVA FILES */
 
-    var usuarioActivo = UsuarioService.getUsuarioActivo();
-    $scope.usuarioActivo = usuarioActivo;
+    $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
     $scope.usuarioActivo.generos = {
         availableOptions: [
             {id: 'F', name: 'Femenino'},
@@ -26,6 +25,7 @@ nutrifamiMobile.controller('EditarPerfilController', function ($ionicPlatform, $
     };
     $scope.usuarioActivo.birthdate = new Date($scope.usuarioActivo.birthdate);
     $scope.update = function () {
+        console.log("Guardar cambios")
         $scope.dataLoading = true;
         usuarioActivo = $scope.usuarioActivo;
         usuarioActivo.genero = $scope.usuarioActivo.generos.selectedOption.id;
@@ -48,7 +48,7 @@ nutrifamiMobile.controller('EditarPerfilController', function ($ionicPlatform, $
         UsuarioService.setUsuarioActivo(usuarioActivo, function (response) {
             if (response.success) {
                 $ionicLoading.hide();
-                $location.path('/app/perfil');
+                //$location.path('/app/perfil');
             }
             $scope.dataLoading = false;
         });

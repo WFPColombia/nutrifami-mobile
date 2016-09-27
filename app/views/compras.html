@@ -11,13 +11,12 @@
                                         <p ng-click='' ng-show="noHayDatos" ion-ripple>
                                             No se encontraron registros para este usuario
                                         </p>
-                                        <p ng-click='' ng-hide="noHayDatos" ion-ripple>
+                                        <p ng-click="playAudio('audio1')" ng-hide="noHayDatos" ion-ripple>
                                             <i class="icon ion-volume-high"></i> Aquí encontrará el resumen de sus compras del último mes
                                         </p>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="compras-porcentajes">
                                 <div class="row" ng-repeat="grupo in consumoUltimoMes">
                                     <div class="col col-40">
@@ -42,15 +41,13 @@
                         <div class="compras-tab">
                             <div class="row">
                                 <div class="col">
-                                    <div class="recomendados-header" ng-click=''  ion-ripple>
-                                        <img src="img/canasta-ideal.png" alt="Canasta ideal"/>
-
+                                    <div class="recomendados-header" ng-click="playAudio('audio2')" ion-ripple>
+                                        <img src="img/canasta-ideal.png" alt="Canasta ideal" />
                                         <p>Aquí encontrará recomendaciones para que su dieta sea más variada</p>
                                         <i class="icon ion-volume-high"></i>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="recomendados-body">
                                 <div class="row">
                                     <div class="col">
@@ -58,22 +55,16 @@
                                             <div ng-repeat="group in gruposAlimenticios">
                                                 <ion-item class="item-stable" ng-click="toggleGroup(group)" ng-class="[{active: isGroupShown(group)}, 'grupo-'+group.grupo_id]">
                                                     <i class="icon" ng-class="isGroupShown(group) ? 'ion-chevron-up' : 'ion-chevron-down'"></i>
-                                                    <img src="img/icons/ico-compras-{{group.grupo_id}}.png" ng-hide="group.grupo_nombre === null"/>
-                                                    {{group.grupo_nombre !== null ? group.grupo_nombre : 'Sin categoria'}}
+                                                    <img src="img/icons/ico-compras-{{group.grupo_id}}.png" ng-hide="group.grupo_nombre === null" /> {{group.grupo_nombre !== null ? group.grupo_nombre : 'Sin categoria'}}
                                                 </ion-item>
-                                                <ion-item class="item-accordion"
-                                                          ng-repeat="item in group.productos"
-                                                          ng-show="isGroupShown(group)">
+                                                <ion-item class="item-accordion" ng-repeat="item in group.productos" ng-show="isGroupShown(group)">
                                                     {{item.nombre}}
                                                 </ion-item>
                                             </div>
                                         </ion-list>
                                     </div>
                                 </div>
-
                             </div>
-
-
                             <!--<div class="canasta-body">
                                 <div class="panel-group" ui-state="myAccordion" ui-default="1">
                                     <div class="panel panel-default" ng-repeat="recomendado in recomendados">
@@ -99,6 +90,6 @@
                     </ion-scroll>
                 </ion-tab>
             </ion-tabs>
-        </div>
+            </div>
     </ion-content>
 </ion-view>

@@ -1,77 +1,84 @@
-nutrifamiMobile.controller('ComprasController', function ($ionicPlatform, $scope, $ionicLoading, ComprasService, UsuarioService) {
+nutrifamiMobile.controller('ComprasController', function($ionicPlatform, $scope, $ionicLoading, ComprasService, UsuarioService, AudioService) {
     'use strict';
-    /* BEGIN CORDOVA FILES
-     $ionicPlatform.ready(function () {
-     END CORDOVA FILES */
+    $ionicPlatform.ready(function() {
 
-    $scope.usuarioActivo = UsuarioService.getUsuarioActivo()
-    console.log($scope.usuarioActivo);
-    /*$scope.audio = ngAudio.load("audios/compras-intro.mp3");
-     $scope.dietaVariada = ngAudio.load("audios/compras-dieta-variada.mp3");*/
+        $scope.usuarioActivo = UsuarioService.getUsuarioActivo()
+        console.log($scope.usuarioActivo);
 
-    var usuario = {};
-    var puntoVenta = {
-        'pid': 0
-    };
-    //usuario.did = $scope.usuarioActivo.login_documento;
-    usuario.did = 66976632;
+        $scope.audios = {
+            'audio1': 'audios/compras-intro.mp3',
+            'audio2': 'audios/compras-dieta-variada.mp3'
+        };
+        AudioService.preloadSimple($scope.audios);
 
-    $scope.cargarCompras = function () {
-        $scope.loading = $ionicLoading.show({
-            //template: 'Cargando datos...',
-            animation: 'fade-in',
-            showBackdrop: true,
-            maxWidth: 40
-        });
+        var usuario = {};
+        var puntoVenta = {
+            'pid': 0
+        };
+        //usuario.did = $scope.usuarioActivo.login_documento;
+        usuario.did = 66976632;
 
-        ComprasService.getConsolidadoComprasUltimoMes(usuario, function (response) {
-            $scope.noHayDatos = false;
-            if (response.success) {
-                $scope.consumoUltimoMes = response.data;
-                puntoVenta['pid'] = response.puntoVenta;
+        $scope.cargarCompras = function() {
+            $scope.loading = $ionicLoading.show({
+                //template: 'Cargando datos...',
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 40
+            });
+
+            ComprasService.getConsolidadoComprasUltimoMes(usuario, function(response) {
+                $scope.noHayDatos = false;
+                if (response.success) {
+                    $scope.consumoUltimoMes = response.data;
+                    puntoVenta['pid'] = response.puntoVenta;
+                } else {
+                    $scope.noHayDatos = true;
+                    console.log(response.message);
+                }
+                $ionicLoading.hide();
+            });
+        };
+
+        $scope.cargarRecomendados = function() {
+            console.log(puntoVenta);
+            $scope.loading = $ionicLoading.show({
+                //template: 'Cargando datos...',
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 40
+            });
+
+            ComprasService.getProductosPuntoVenta(puntoVenta, function(response) {
+                $ionicLoading.hide();
+                if (response.success) {
+                    $scope.gruposAlimenticios = response.data;
+                } else {
+                    console.log(response.message);
+                }
+
+            });
+        };
+
+        $scope.gruposAlimenticios = [];
+
+
+        $scope.toggleGroup = function(group) {
+            if ($scope.isGroupShown(group)) {
+                $scope.shownGroup = null;
             } else {
-                $scope.noHayDatos = true;
-                console.log(response.message);
+                $scope.shownGroup = group;
             }
-            $ionicLoading.hide();
-        });
-    };
+        };
+        $scope.isGroupShown = function(group) {
+            return $scope.shownGroup === group;
+        };
 
-    $scope.cargarRecomendados = function () {
-        console.log(puntoVenta);
-        $scope.loading = $ionicLoading.show({
-            //template: 'Cargando datos...',
-            animation: 'fade-in',
-            showBackdrop: true,
-            maxWidth: 40
-        });
-
-        ComprasService.getProductosPuntoVenta(puntoVenta, function (response) {
-            $ionicLoading.hide();
-            if (response.success) {
-                $scope.gruposAlimenticios = response.data;
-            } else {
-                console.log(response.message);
-            }
-
-        });
-    };
-
-    $scope.gruposAlimenticios = [];
+        $scope.playAudio = function(audio) {
+            AudioService.stopAll($scope.audios);
+            AudioService.play(audio);
+        };
 
 
-    $scope.toggleGroup = function (group) {
-        if ($scope.isGroupShown(group)) {
-            $scope.shownGroup = null;
-        } else {
-            $scope.shownGroup = group;
-        }
-    };
-    $scope.isGroupShown = function (group) {
-        return $scope.shownGroup === group;
-    };
 
-    /* BEGIN CORDOVA FILES
-     });
-     END CORDOVA FILES */
+    });
 });

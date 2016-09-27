@@ -2,10 +2,8 @@
 nutrifamiMobile.controller('CapacitacionController', function ($ionicPlatform, $scope, UsuarioService) {
     'use strict';
 
-    /* BEGIN CORDOVA FILES
      $ionicPlatform.ready(function () {
-     AndroidFullScreen.immersiveMode();
-     END CORDOVA FILES */
+
     $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
     $scope.usuarioAvance = UsuarioService.getUsuarioAvance();
 
@@ -53,8 +51,6 @@ nutrifamiMobile.controller('CapacitacionController', function ($ionicPlatform, $
     }
 
 
-    /* BEGIN CORDOVA FILES
      });
-     END CORDOVA FILES */
 
 });
