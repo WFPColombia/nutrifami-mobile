@@ -55,7 +55,6 @@ nutrifamiMobile.factory('ComprasService', ['$http', '$cookieStore', '$rootScope'
         };
 
         service.getConsolidadoComprasUltimoMesByGroup = function(usuario, grupo_id, callback) {
-            console.log(grupo_id);
             this.getConsolidadoComprasUltimoMes(usuario, function(response) {
                 var response2 = response;
                 var dataBygroup = {};
@@ -66,6 +65,7 @@ nutrifamiMobile.factory('ComprasService', ['$http', '$cookieStore', '$rootScope'
                         }
                     }
                     response2.data = dataBygroup;
+                    response2.tienda = response.puntoVenta;
                 }
                 callback(response2);
             });
@@ -79,6 +79,7 @@ nutrifamiMobile.factory('ComprasService', ['$http', '$cookieStore', '$rootScope'
          * ComprasService.getProductosPuntoVenta(puntoVenta, function (response){});
          */
         service.getProductosPuntoVenta = function(puntoVenta, callback) {
+            console.log(puntoVenta);
             var miPuntoVenta = JSON.parse(localStorage.getItem('puntoVenta'));
             if (miPuntoVenta === null) {
                 nutrifami.consumo.getProductosPuntoVenta(puntoVenta, function(response) {
@@ -92,6 +93,22 @@ nutrifamiMobile.factory('ComprasService', ['$http', '$cookieStore', '$rootScope'
                 };
                 callback(response);
             }
+        };
+
+        service.getProductosPuntoVentaByGroup = function(puntoVenta, grupo_id, callback) {
+            this.getProductosPuntoVenta(puntoVenta, function(response) {
+                var response2 = response;
+                var dataBygroup = {};
+                if (response.success) {
+                    for (var i in response.data) {
+                        if (response.data[i].grupo_id == grupo_id) {
+                            dataBygroup = response.data[i]
+                        }
+                    }
+                    response2.data = dataBygroup;
+                }
+                callback(response2);
+            });
         };
 
         function getLast(myObj) {
@@ -122,7 +139,7 @@ nutrifamiMobile.factory('ComprasService', ['$http', '$cookieStore', '$rootScope'
             if (maximo === 0) {
                 maximo = 0.1;
             }
-            var porcentaje = (100 / maximo) * valor;
+            var porcentaje = parseInt((100 / maximo) * valor);
             if (porcentaje > 100) {
                 porcentaje = 100;
             }

@@ -25,8 +25,8 @@
                                         </div>
                                     </div>
                                     <div class="col col-60 compras-porcentaje-barra">
-                                        <div class="progress" go-click="/compras/{{grupo.grupo_id}}" ion-ripple>
-                                            <div class="progress-bar grupo-{{grupo.grupo_id}}" style="width: {{grupo.porcentaje_visual}}%;"></div>
+                                        <div class="progress" go-click="/compras/{{grupo.grupo_id}}" ng-click="stopAudio()">
+                                            <div class="progress-bar grupo-{{grupo.grupo_id}}" style="width: {{grupo.porcentaje_compra}}%;"></div>
                                             <div class="cantidad">{{grupo.porcentaje_compra}}<span>%</span></div>
                                             <i class="icon ion-chevron-right" aria-hidden="true"></i>
                                         </div>

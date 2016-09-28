@@ -1607,56 +1607,64 @@ button {
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-CEREALES,
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-1,
 .compras-tab .recomendados-body .item.item-stable.grupo-1,
-.compras-grupo header.grupo-1 {
+.compras-grupo header.grupo-1,
+.compras-grupo .progress-radial .overlay.grupo-1 {
     background-color: #f2df00 !important;
 }
 
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-LECHELACTEOS,
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-3,
 .compras-tab .recomendados-body .item.item-stable.grupo-3,
-.compras-grupo header.grupo-3 {
+.compras-grupo header.grupo-3,
+.compras-grupo .progress-radial .overlay.grupo-3 {
     background-color: #0fa7ff;
 }
 
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-CARNES,
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-4,
 .compras-tab .recomendados-body .item.item-stable.grupo-4,
-.compras-grupo header.grupo-4 {
+.compras-grupo header.grupo-4,
+.compras-grupo .progress-radial .overlay.grupo-4 {
     background-color: #ff9600;
 }
 
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-VEGETALES,
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-5,
 .compras-tab .recomendados-body .item.item-stable.grupo-5,
-.compras-grupo header.grupo-5 {
+.compras-grupo header.grupo-5,
+.compras-grupo .progress-radial .overlay.grupo-5 {
     background-color: #7bd462;
 }
 
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-GRASAS,
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-7,
 .compras-tab .recomendados-body .item.item-stable.grupo-7,
-.compras-grupo header.grupo-7 {
+.compras-grupo header.grupo-7,
+.compras-grupo .progress-radial .overlay.grupo-7 {
     background-color: #ff037a;
 }
 
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-AZUCAR,
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-8,
 .compras-tab .recomendados-body .item.item-stable.grupo-8,
-.compras-grupo header.grupo-8 {
+.compras-grupo header.grupo-8,
+.compras-grupo .progress-radial .overlay.grupo-8 {
     background-color: #d360fe;
 }
 
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-CONDIMENTOS,
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-9,
 .compras-tab .recomendados-body .item.item-stable.grupo-9,
-.compras-grupo header.grupo-9 {
+.compras-grupo header.grupo-9,
+.compras-grupo .progress-radial .overlay.grupo-9 {
     background-color: #bd8330;
 }
 
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-NOGRUPO,
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-0,
 .compras-tab .recomendados-body .item.item-stable.grupo-0,
-.compras-grupo header.grupo-0 {
+.compras-grupo header.grupo-0,
+.compras-grupo .progress-radial .overlay.grupo-0 {
     background-color: #000000;
 }
 
@@ -1791,9 +1799,10 @@ button {
 }
 
 .compras-grupo header .titulo h1 {
-    margin-top: 15px;
+    margin-top: 0px;
     font-size: 15pt;
     color: #ffffff;
+    margin-left: 45px;
 }
 
 .compras-grupo header .sub-header {

@@ -4,7 +4,7 @@
             <div class="titulo">
                 <div class="row">
                     <div class="col">
-                        <a nav-direction="back" href="#/app/compras"><i class="icon ion-close-round"></i></a>
+                        <a nav-direction="back" href="#/app/compras" ng-click="stopAudio()"><i class="icon ion-close-round"></i></a>
                         <h1>{{grupo.nombre}}</h1>
                     </div>
                 </div>
@@ -16,10 +16,12 @@
                         <p class="valor">${{grupo.totalCompra}}</p>
                     </div>
                     <div class="col">
-                        Icono
+                        <div class="progress-radial progress-{{grupo.porcentaje_visual}}">
+                            <div class="overlay grupo-{{grupo.grupo_id}}"><img src="img/icons/ico-compras-{{grupo.grupo_id}}.png" /> </div>
+                        </div>
                     </div>
                     <div class="col estado">
-                        <img src="img/icons/ico-compras-triste.png" />
+                        <img src="img/icons/ico-compras-{{carita}}.png" />
                     </div>
                 </div>
             </div>
@@ -27,43 +29,35 @@
         <div class="compras-grupo-descripcion">
             <div class="row">
                 <div class="col">
-                    <p ng-click='' ng-hide="noHayDatos" ion-ripple>
-                        <i class="icon ion-volume-high"></i> Este es el resumen de sus compras en carnes y huevos
+                    <p ng-click="playAudio('resumenCompras')" ng-hide="noHayDatos" ion-ripple>
+                        <i class="icon ion-volume-high"></i> Este es el resumen de sus compras en {{grupo.alias}}
                     </p>
                 </div>
             </div>
         </div>
         <div class="compras-resumen">
-            <div class="row">
-                <div class="col col-75 nombre-producto">Nombre del producto Nombre del producto</div>
-                <div class="col precio">$ 1.200</div>
-            </div>
-            <div class="row">
-                <div class="col col-75 nombre-producto">Nombre del producto</div>
-                <div class="col precio">$ 1.200</div>
-            </div>
-            <div class="row">
-                <div class="col col-75 nombre-producto">Nombre del producto</div>
-                <div class="col precio">$ 1.200</div>
+            <div ng-repeat="compra in grupo.compra" class="row">
+                <div class="col col-75 nombre-producto">{{compra.nombre}}</div>
+                <div class="col precio">$ {{compra.total}}</div>
             </div>
             <div class="totales">
                 <div class="row">
                     <div class="col col-75">Total</div>
-                    <div class="col precio">$ 1.200</div>
+                    <div class="col precio">$ {{ grupo.totalCompra}}</div>
                 </div>
             </div>
         </div>
         <div class="compra-ideal">
             <ion-list>
                 <div ng-repeat="group in groups">
-                    <ion-item class="item-stable" ng-click="toggleGroup(group)" ng-class="{active: isGroupShown(group)}">
+                    <ion-item class="item-stable" ng-click="toggleGroup(group,'compraIdeal')" ng-class="{active: isGroupShown(group)}">
                         <i class="icon" ng-class="isGroupShown(group) ? 'ion-chevron-up' : 'ion-chevron-down'"></i>
                         <img src="img/canasta-ideal.png" alt="Canasta ideal" />
                         <h3>Para una compra ideal <i class="icon ion-volume-high"></i></h3>
                         <h4>podria comprar</h4>
                     </ion-item>
                     <ion-item class="item-accordion" ng-repeat="item in group.items" ng-show="isGroupShown(group)">
-                        {{item}}
+                        {{item.nombre}}
                     </ion-item>
                 </div>
             </ion-list>

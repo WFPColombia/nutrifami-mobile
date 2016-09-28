@@ -1,4 +1,4 @@
-nutrifamiMobile.controller('ComprasController', function($ionicPlatform, $scope, $ionicLoading, ComprasService, UsuarioService, AudioService) {
+nutrifamiMobile.controller('ComprasController', function($ionicPlatform, $scope, $ionicLoading, $ionicViewSwitcher, $state, ComprasService, UsuarioService, AudioService) {
     'use strict';
     $ionicPlatform.ready(function() {
 
@@ -10,6 +10,7 @@ nutrifamiMobile.controller('ComprasController', function($ionicPlatform, $scope,
             'audio2': 'audios/compras-dieta-variada.mp3'
         };
         AudioService.preloadSimple($scope.audios);
+
 
         var usuario = {};
         var puntoVenta = {
@@ -39,6 +40,8 @@ nutrifamiMobile.controller('ComprasController', function($ionicPlatform, $scope,
             });
         };
 
+
+
         $scope.cargarRecomendados = function() {
             console.log(puntoVenta);
             $scope.loading = $ionicLoading.show({
@@ -60,6 +63,10 @@ nutrifamiMobile.controller('ComprasController', function($ionicPlatform, $scope,
         };
 
         $scope.gruposAlimenticios = [];
+
+        $scope.stopAudio = function() {
+            AudioService.stopAll($scope.audios);
+        }
 
 
         $scope.toggleGroup = function(group) {
