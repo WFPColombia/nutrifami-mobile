@@ -1,4 +1,4 @@
-nutrifamiMobile.factory('AudioService', function ($cordovaNativeAudio) {
+nutrifamiMobile.factory('AudioService', function($cordovaNativeAudio) {
     var service = {};
 
     /**
@@ -9,16 +9,13 @@ nutrifamiMobile.factory('AudioService', function ($cordovaNativeAudio) {
      * AudioService.preloadSimple(audios)
      * 
      */
-    service.preloadSimple = function (audios) {
-        console.log("preloadSimple");
+    service.preloadSimple = function(audios) {
         if (window.plugins && window.plugins.NativeAudio) {
             for (var audio in audios) {
                 $cordovaNativeAudio.preloadSimple(audio, audios[audio])
-                        .then(function (msg) {
-                            console.log(msg);
-                        }, function (error) {
-                            console.log(error);
-                        });
+                    .then(function(msg) {}, function(error) {
+                        console.log(error);
+                    });
 
             }
         }
@@ -33,15 +30,16 @@ nutrifamiMobile.factory('AudioService', function ($cordovaNativeAudio) {
      * AudioService.play(audio, audios)
      * 
      */
-    service.play = function (audio, audios) {
-        console.log("play");
+    service.play = function(audio, audios) {
+        console
+.log(audio);
         if (window.plugins && window.plugins.NativeAudio) {
             this.stopAll(audios);
             $cordovaNativeAudio.play(audio);
         }
 
     };
-    
+
     /**
      * 
      * @param {type} audios
@@ -50,8 +48,7 @@ nutrifamiMobile.factory('AudioService', function ($cordovaNativeAudio) {
      * AudioService.stopAll(audios);
      * 
      */
-    service.stopAll = function (audios) {
-        console.log("stopAll");
+    service.stopAll = function(audios) {
         if (window.plugins && window.plugins.NativeAudio) {
             for (var audio in audios) {
                 $cordovaNativeAudio.stop(audio);
@@ -67,8 +64,7 @@ nutrifamiMobile.factory('AudioService', function ($cordovaNativeAudio) {
      * AudioService.unload(audios);
      * 
      */
-    service.unload = function (audios) {
-        console.log("unload");
+    service.unload = function(audios) {
         if (window.plugins && window.plugins.NativeAudio) {
             this.stopAll(audios);
             for (var audio in audios) {

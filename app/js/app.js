@@ -3,7 +3,7 @@ dependencies = ['ionic', 'ngCordova', 'Authentication', 'ngCookies', 'ngRoute', 
 var nutrifamiLogin = angular.module('Authentication', []);
 var nutrifamiMobile = angular.module('NutrifamiMobile', dependencies);
 
-nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
     'use strict';
     $ionicConfigProvider.tabs.position('top');
 
@@ -49,6 +49,7 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
 
     $stateProvider.state('unidad', {
         url: '/capacitacion/:modulo/:leccion/:unidad',
+        cache: false,
         templateUrl: 'views/unidad.html',
         controller: 'UnidadController'
     });
@@ -100,13 +101,13 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
             }
         }
     });
-    
+
     $stateProvider.state('tipsModulo', {
         url: '/tips/:modulo',
         templateUrl: 'views/tipsModulo.html',
         controller: 'TipsModuloController'
     });
-    
+
     $stateProvider.state('app.progreso', {
         url: '/progreso',
         views: {
@@ -132,20 +133,20 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
     $urlRouterProvider.otherwise('/app/capacitacion');
 });
 
-nutrifamiMobile.run(function ($ionicPlatform, $rootScope, $location, $cookieStore) {
+nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cookieStore) {
     // keep user logged in after page refresh
     $rootScope.globals = $cookieStore.get('globals') || {};
 
     nutrifami.getSessionId();
     nutrifami.training.initClient();
 
-    $rootScope.$on('$locationChangeStart', function (event, next, current) {
+    $rootScope.$on('$locationChangeStart', function(event, next, current) {
         // redirect to login page if not logged in
         if ($location.path() !== '/login' && !$rootScope.globals.currentUser) {
             $location.path('/login');
         }
     });
-    $ionicPlatform.ready(function () {
+    $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if (window.cordova && window.cordova.plugins.Keyboard) {

@@ -1,9 +1,11 @@
-<div class="col-xs-6">
-    <div class="opcion-sonido" ng-class="info.media !== undefined ? 'sonido-con-imagen':''" ng-show="info.audio.url != ''">
-        <button ng-click='info.audio.audio.paused ? info.audio.audio.play() : info.audio.audio.pause()' class="fa fa-volume-up" aria-hidden="true"></button>
+<div class="row">
+    <div class="col">
+        <div class="opcion-sonido" ng-class="info.media !== undefined ? 'sonido-con-imagen':''" ng-show="info.audio.url != ''">
+            <button ng-click='info.audio.audio.paused ? info.audio.audio.play() : info.audio.audio.pause()' class="fa fa-volume-up" aria-hidden="true"></button>
+        </div>
+        <button class="opcion-pareja" ng-click="click()" ng-class="[info.selected ? 'selected' : '', info.match ? 'pareja-match':'', info.fallo ? 'pareja-mal':'', $parent.hayImagen ? 'pareja-con-imagen':'']">
+            <img data-ng-src="assets/{{info.media.nombre}}" alt="{{ info.titulo}}" ng-hide="{{info.media === undefined}}" />
+            <p ng-class="info.media === undefined ? 'titulo-con-imagen':''">{{ info.texto}}</p>
+        </button>
     </div>
-    <button class="opcion-pareja" ng-click="click()" ng-class="[info.selected ? 'selected' : '', info.match ? 'pareja-match':'', info.fallo ? 'pareja-mal':'', $parent.hayImagen ? 'pareja-con-imagen':'']">
-        <img data-ng-src="assets/{{info.media.nombre}}" alt="{{ info.titulo}}" ng-hide="{{info.media === undefined}}" />
-        <p ng-class="info.media === undefined ? 'titulo-con-imagen':''">{{ info.texto}}</p>
-    </button>
 </div>

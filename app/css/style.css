@@ -744,7 +744,37 @@ button {
     padding-top: 10px;
 }
 
-.unidad .leccion-avance .leccion-avance-cerrar {
+.unidad .leccion-avance-fixed {
+    font-family: 'Muli', sans-serif;
+    /*background-color: #2f4366;*/
+    background-color: #000000;
+    font-size: 12pt;
+    color: white;
+    width: 100%;
+    min-height: 85px;
+    padding-top: 10px;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+}
+
+.unidad .leccion-avance-fixed::after {
+    content: "";
+    /*background-image: url("../assets/training/images/P1_1.png");*/
+    background-size: 110%;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+.unidad .leccion-avance .leccion-avance-cerrar,
+.unidad .leccion-avance-fixed .leccion-avance-cerrar {
     float: left;
     text-align: center;
     padding-top: 0px;
@@ -755,7 +785,12 @@ button {
     position: relative;
 }
 
-.unidad .leccion-avance button {
+.unidad .leccion-avance-fixed .leccion-avance-cerrar {
+    padding-top: 8px;
+}
+
+.unidad .leccion-avance button,
+.unidad .leccion-avance-fixed button {
     color: #ffffff;
     font-size: 20px;
     background-color: rgba(0, 0, 0, 0);
@@ -766,6 +801,19 @@ button {
     height: 40px;
     border-radius: 50%;
     z-index: 1;
+}
+
+.unidad .leccion-avance-fixed .instruccion {
+    font-size: 9pt;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    font-family: 'Raleway-Bold', sans-serif;
+}
+
+.unidad .leccion-avance-fixed .texto {
+    font-size: 9pt;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
 }
 
 .unidad .leccion-avance .leccion-avance-progreso .progress {
@@ -874,6 +922,15 @@ button {
     -webkit-border-radius: 8px;
     border: solid 1px #dcdcdc;
     width: 100%;
+}
+
+.unidad .opciones {
+    margin-bottom: 100px;
+}
+
+.unidad .opciones.scrolled {
+    margin-top: 80px;
+    margin-bottom: 150px;
 }
 
 .unidad .opciones .opcion,
@@ -1049,12 +1106,14 @@ button {
     border: none;
 }
 
-.popup-container .popup .calificacion .popup-header {
+.popup-container .popup .calificacion .popup-header,
+.salir-unidad .popup .popup-header {
     text-align: center;
     margin-top: 30px;
 }
 
-.popup-container .popup .calificacion .popup-header .icon {
+.popup-container .popup .calificacion .popup-header .icon,
+.salir-unidad .popup .popup-header .icon {
     display: inline-block;
     color: #ffffff;
     font-size: 30pt;
@@ -1066,11 +1125,16 @@ button {
     padding-top: 22px;
 }
 
+.salir-unidad .popup .popup-header .icon {
+    background-color: #ffba23;
+}
+
 .popup-container .popup .calificacion .popup-header .wrong {
     background-color: #ff1244;
 }
 
-.popup-container .popup .calificacion .mensaje {
+.popup-container .popup .calificacion .mensaje,
+.salir-unidad .popup .mensaje {
     text-align: center;
     color: #2f3e47;
     font-size: 12pt;
@@ -1078,8 +1142,33 @@ button {
     margin-bottom: 37px;
 }
 
+.salir-unidad .popup .mensaje {
+    font-size: 16pt;
+    padding: 0 30px;
+}
+
 .popup-container .popup .calificacion .mensaje i {
     color: #8e8e8e;
+}
+
+.salir-unidad .popup .mensaje i {
+    color: #00c97e;
+}
+
+.salir-unidad .popup .popup-body .button {
+    height: 57px;
+    background-color: #00c97e;
+    font-family: 'Raleway-Bold', sans-serif;
+    letter-spacing: 5px;
+    color: white;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 26px;
+    -moz-border-radius: 26px;
+    -webkit-border-radius: 26px;
+    line-height: 26px;
+    width: 100%;
+    margin-top: 20px;
 }
 
 .popup-container .popup .calificacion .feedback {
@@ -1119,6 +1208,25 @@ button {
     -moz-border-radius: 26px;
     -webkit-border-radius: 26px;
     line-height: 26px;
+}
+
+.salir-unidad .popup .popup-buttons {
+    margin: 0;
+    padding: 0;
+}
+
+.salir-unidad .popup .popup-buttons .button {
+    height: 30px;
+    background-color: #ffffff;
+    letter-spacing: 3px;
+    color: #00c97e;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 26px;
+    -moz-border-radius: 26px;
+    -webkit-border-radius: 26px;
+    line-height: 26px;
+    font-size: 11pt;
 }
 
 

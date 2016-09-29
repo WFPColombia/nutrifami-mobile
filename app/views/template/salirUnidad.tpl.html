@@ -1,12 +1,10 @@
-
-<div class="calificacion">
-    <div class="popup-header">
-        <span class="icon ion-checkmark-round"></span>
+<div class="popup-header">
+    <span class="icon ion-alert"></span>
+</div>
+<div class="popup-body">
+    <div ng-click="playAudio('salir')" ion-ripple>
+        <p class="mensaje">¿Estás seguro de salir? <i class="icon ion-volume-high"></i></p>
+        <p class="mensaje">Si sales perderás los avances en esta lección.</p>
     </div>
-    <div class="popup-body">
-        <p class="mensaje" ng-click="playAudio('mensaje')" ion-ripple>{{feedback.mensaje}} <i class="icon ion-volume-high"></i></p>
-        <div class="feedback" ng-show="feedback.feedbacks !== undefined">
-            <p ng-repeat="fb in feedback.feedbacks" ion-ripple ng-click='playAudio(fb.nombre)'><i class="sonido icon ion-volume-high" aria-hidden="true"></i> {{ fb.texto}}</p>
-        </div>
-    </div>
+    <button ng-click="$buttonTapped({}, $event)" class="button">Continuar lección</button>
 </div>
