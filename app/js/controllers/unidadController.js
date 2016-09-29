@@ -65,8 +65,11 @@ nutrifamiMobile.controller('UnidadController', function($ionicPlatform, $scope, 
                 }
             }
             if (typeof opcionesUnidad !== 'undefined' && opcionesUnidad.length > 0) {
+                console.log("Entra al if");
                 $scope.unidad.opciones = opcionesUnidad;
             }
+            
+            console.log($scope.unidad.opciones);
         } else {
             for (var i in $scope.unidad.opciones) {
                 tempOpciones.push($scope.unidad.opciones[i]);
@@ -234,6 +237,7 @@ nutrifamiMobile.controller('UnidadController', function($ionicPlatform, $scope, 
             var tempFeedbackFallo = [];
             var tempFeedbackFalloAudios = {};
             var tempFeedbackFalloUltimoAudio = '';
+            var tempFeedbackUltimoAudio = '';
             $scope.feedback = {};
             for (var i in $scope.unidad.opciones) {
                 if ($scope.unidad.opciones[i].selected) {
@@ -262,7 +266,7 @@ nutrifamiMobile.controller('UnidadController', function($ionicPlatform, $scope, 
                 $scope.feedback.audios = tempFeedbackAciertoAudios;
                 $scope.feedback.audios.mensaje = "audios/muy-bien-respuesta-correcta.mp3";
                 $scope.feedback.mensaje = "Muy bien! respuesta correcta";
-                $scope.playAudio(tempFeedbackAciertoUltimoAudio);
+                tempFeedbackUltimoAudio = tempFeedbackAciertoUltimoAudio;
 
             } else {
                 $scope.estadoUnidad = 'fallo';
@@ -270,7 +274,7 @@ nutrifamiMobile.controller('UnidadController', function($ionicPlatform, $scope, 
                 $scope.feedback.audios = tempFeedbackFalloAudios;
                 $scope.feedback.audios.mensaje = "audios/intenta-de-nuevo.mp3";
                 $scope.feedback.mensaje = "Intenta de nuevo! respuesta incorrecta";
-                $scope.playAudio(tempFeedbackFalloUltimoAudio);
+                tempFeedbackUltimoAudio = tempFeedbackFalloUltimoAudio;
 
                 if (navigator && navigator.vibrate) {
                     navigator.vibrate(1000);
@@ -283,7 +287,10 @@ nutrifamiMobile.controller('UnidadController', function($ionicPlatform, $scope, 
                 textoBoton = 'Continuar';
             }
 
-            AudioService.preloadSimple($scope.feedback.audios);
+            AudioService.preloadSimple($scope.feedback.audios,function(){
+                $scope.playAudio(tempFeedbackUltimoAudio);
+            });
+            
 
             // An elaborate, custom popup
             var popUpFeedback = $ionicPopup.show({

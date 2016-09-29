@@ -3,7 +3,7 @@
         <div class='perfil'>
             <ion-tabs class="tabs-icon-top">
                 <ion-tab title="Mi información">
-                    <ion-scroll style="height: 100%">
+                    <ion-content class="has-header" overflow-scroll="true">
                         <div class="row">
                             <div class="perfil-panel">
                                 <div class="perfil-header">
@@ -14,7 +14,6 @@
                                     <h1>Mi información</h1>
                                 </div>
                                 <div class="perfil-body">
-                                    <form>
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
@@ -116,15 +115,13 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                    </form>
                                 </div>
                             </div>
                         </div>
-                    </ion-scroll>
+                    </ion-content>
                 </ion-tab>
                 <ion-tab title="Mi familia" >
-                    <ion-scroll style="height: 100%">
+                    <ion-content class="has-header" overflow-scroll="true">
                         <div class="row">
                             <div class="perfil-panel">
                                 <div class="perfil-header">
@@ -170,7 +167,7 @@
                                 </div>
                             </div>
                         </div>
-                    </ion-scroll>
+                    </ion-content>
                 </ion-tab>
             </ion-tabs>
         </div>

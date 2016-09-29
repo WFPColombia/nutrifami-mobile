@@ -1,4 +1,4 @@
-nutrifamiMobile.factory('AudioService', function($cordovaNativeAudio) {
+nutrifamiMobile.factory('AudioService', function ($cordovaNativeAudio) {
     var service = {};
 
     /**
@@ -9,16 +9,22 @@ nutrifamiMobile.factory('AudioService', function($cordovaNativeAudio) {
      * AudioService.preloadSimple(audios)
      * 
      */
-    service.preloadSimple = function(audios) {
+    service.preloadSimple = function (audios, callback) {
+        callback = callback || function () {
+        };
+        console.log("Preloadsimple");
+        console.log(audios);
         if (window.plugins && window.plugins.NativeAudio) {
             for (var audio in audios) {
                 $cordovaNativeAudio.preloadSimple(audio, audios[audio])
-                    .then(function(msg) {}, function(error) {
-                        console.log(error);
-                    });
+                        .then(function (msg) {
+                        }, function (error) {
+                            console.log(error);
+                        });
 
             }
         }
+        callback();
     };
 
     /**
@@ -30,14 +36,14 @@ nutrifamiMobile.factory('AudioService', function($cordovaNativeAudio) {
      * AudioService.play(audio, audios)
      * 
      */
-    service.play = function(audio, audios) {
-        console
-.log(audio);
-        if (window.plugins && window.plugins.NativeAudio) {
-            this.stopAll(audios);
-            $cordovaNativeAudio.play(audio);
-        }
+    service.play = function (audio, audios) {
 
+        this.stopAll(audios, function () {
+            console.log(audio);
+            if (window.plugins && window.plugins.NativeAudio) {
+                $cordovaNativeAudio.play(audio);
+            }
+        });
     };
 
     /**
@@ -48,12 +54,14 @@ nutrifamiMobile.factory('AudioService', function($cordovaNativeAudio) {
      * AudioService.stopAll(audios);
      * 
      */
-    service.stopAll = function(audios) {
-        if (window.plugins && window.plugins.NativeAudio) {
-            for (var audio in audios) {
+    service.stopAll = function (audios, callback) {
+        console.log("stopAll");
+        for (var audio in audios) {
+            if (window.plugins && window.plugins.NativeAudio) {
                 $cordovaNativeAudio.stop(audio);
             }
         }
+        callback();
     };
 
     /**
@@ -64,13 +72,15 @@ nutrifamiMobile.factory('AudioService', function($cordovaNativeAudio) {
      * AudioService.unload(audios);
      * 
      */
-    service.unload = function(audios) {
-        if (window.plugins && window.plugins.NativeAudio) {
-            this.stopAll(audios);
+    service.unload = function (audios) {
+        console.log("unload");
+        this.stopAll(audios, function () {
             for (var audio in audios) {
-                $cordovaNativeAudio.unload(audio);
+                if (window.plugins && window.plugins.NativeAudio) {
+                    $cordovaNativeAudio.unload(audio);
+                }
             }
-        }
+        });
     };
 
     return service;

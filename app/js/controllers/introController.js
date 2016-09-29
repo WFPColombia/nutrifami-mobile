@@ -17,12 +17,11 @@ nutrifamiMobile.controller('IntroController', function ($ionicPlatform, $scope, 
     $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
 
     $scope.playAudio = function (audio) {
-        AudioService.stopAll($scope.audios);
         AudioService.play(audio);
     };
 
     $scope.comenzar = function () {
-        AudioService.stopAll($scope.audios);
+        AudioService.unload($scope.audios);
         $location.path('/');
     };
     /* BEGIN CORDOVA FILES

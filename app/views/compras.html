@@ -3,7 +3,7 @@
         <div class='compras'>
             <ion-tabs class="tabs-icon-top">
                 <ion-tab title="Mis compras" on-select="cargarCompras()">
-                    <ion-scroll style="height: 100%">
+                    <ion-content class="has-header has-footer" overflow-scroll="true">
                         <div class="compras-tab">
                             <div class="row">
                                 <div class="col">
@@ -34,10 +34,10 @@
                                 </div>
                             </div>
                         </div>
-                    </ion-scroll>
+                    </ion-content>
                 </ion-tab>
                 <ion-tab title="Recomendados" on-select="cargarRecomendados()">
-                    <ion-scroll style="height: 100%">
+                    <ion-content class="has-header has-footer" overflow-scroll="true">
                         <div class="compras-tab">
                             <div class="row">
                                 <div class="col">
@@ -53,7 +53,7 @@
                                     <div class="col">
                                         <ion-list>
                                             <div ng-repeat="group in gruposAlimenticios">
-                                                <ion-item class="item-stable" ng-click="toggleGroup(group)" ng-class="[{active: isGroupShown(group)}, 'grupo-'+group.grupo_id]">
+                                                <ion-item class="item-stable" ng-click="toggleGroup(group)" ng-class="[{active: isGroupShown(group)}, 'grupo-' + group.grupo_id]">
                                                     <i class="icon" ng-class="isGroupShown(group) ? 'ion-chevron-up' : 'ion-chevron-down'"></i>
                                                     <img src="img/icons/ico-compras-{{group.grupo_id}}.png" ng-hide="group.grupo_nombre === null" /> {{group.grupo_nombre !== null ? group.grupo_nombre : 'Sin categoria'}}
                                                 </ion-item>
@@ -65,31 +65,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--<div class="canasta-body">
-                                <div class="panel-group" ui-state="myAccordion" ui-default="1">
-                                    <div class="panel panel-default" ng-repeat="recomendado in recomendados">
-                                        <div class="panel-heading  grupo-{{recomendado.grupo_nombre}}" ui-set="{'myAccordion': {{$index + 1}}}">        
-                                            <h4 class="panel-title">
-                                                <img src="img/icons/ico-compras-{{recomendado.grupo_nombre}}.png" alt=""/>
-                                                Cereales, raices, tuberculos y platano
-                                            </h4>
-                                        </div>
-                                        <div ui-if="myAccordion == {{$index + 1}}" >
-                                            <div class="panel-body" >
-                                                <ul>
-                                                    <li>Nombre del producto vamus vestibulum purus</li>
-                                                    <li>Nombre del producto vamus vestibulum purus</li>
-                                                    <li>Nombre del producto vamus vestibulum purus</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>-->
-                    </ion-scroll>
+                        </div>
+                    </ion-content>
                 </ion-tab>
             </ion-tabs>
-            </div>
+        </div>
     </ion-content>
 </ion-view>

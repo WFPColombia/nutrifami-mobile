@@ -751,8 +751,7 @@ button {
     font-size: 12pt;
     color: white;
     width: 100%;
-    min-height: 85px;
-    padding-top: 10px;
+    height: 85px;
     position: fixed;
     top: 0;
     z-index: 10;
@@ -805,7 +804,7 @@ button {
 
 .unidad .leccion-avance-fixed .instruccion {
     font-size: 9pt;
-    color: rgba(255, 255, 255, 0.6);
+    color: #ffffff;
     text-transform: uppercase;
     font-family: 'Raleway-Bold', sans-serif;
 }
@@ -944,6 +943,11 @@ button {
     color: #2f3e47;
     text-align: center;
     font-size: 12pt;
+    width: 100%;
+}
+
+.unidad .opciones .opcion-pareja{
+    font-size: 11pt;
 }
 
 .unidad .opciones .col {
@@ -986,7 +990,8 @@ button {
     margin-bottom: 30px;
 }
 
-.unidad .opciones .opcion.selected {
+.unidad .opciones .opcion.selected,
+.unidad .opciones .opcion-pareja.selected{
     background-color: #75a8fe;
     color: #ffffff;
 }
@@ -1424,7 +1429,6 @@ button {
 /* PERFIL Y EDITAR PERFIL */
 
 .perfil-panel {
-    margin-top: 80px;
     background-color: #ffffff;
     border-radius: 10px;
     margin-bottom: 30px;
@@ -1626,10 +1630,6 @@ button {
 
 
 /* COMPRAS*/
-
-.compras-tab {
-    margin-top: 61px;
-}
 
 .compras-tab .compras-descripcion {
     margin-top: 35px;

@@ -1,11 +1,22 @@
-<div class="row">
+<div class="row" ng-if="index1%2==0" >
     <div class="col">
-        <div class="opcion-sonido" ng-class="info.media !== undefined ? 'sonido-con-imagen':''" ng-show="info.audio.url != ''">
-            <button ng-click='info.audio.audio.paused ? info.audio.audio.play() : info.audio.audio.pause()' class="fa fa-volume-up" aria-hidden="true"></button>
+        <div class="opcion-sonido" ng-class="[opc1.selected ? 'selected' : '',opc1.media !== undefined ? 'sonido-con-imagen':'']" ng-click='$parent.playAudio(opc1.audio.id)' ion-ripple>
+            <button class="icon ion-volume-high"></button>
         </div>
-        <button class="opcion-pareja" ng-click="click()" ng-class="[info.selected ? 'selected' : '', info.match ? 'pareja-match':'', info.fallo ? 'pareja-mal':'', $parent.hayImagen ? 'pareja-con-imagen':'']">
-            <img data-ng-src="assets/{{info.media.nombre}}" alt="{{ info.titulo}}" ng-hide="{{info.media === undefined}}" />
-            <p ng-class="info.media === undefined ? 'titulo-con-imagen':''">{{ info.texto}}</p>
+        <button class="opcion-pareja" ng-click="click(index1)" ng-class="[opc1.selected ? 'selected' : '', opc1.match ? 'pareja-match':'', opc1.fallo ? 'pareja-mal':'', $parent.hayImagen ? 'pareja-con-imagen':'']" ion-ripple>
+            <img data-ng-src="assets/{{opc1.media.nombre}}"ng-hide="{{opc1.media === undefined}}" />
+            <p ng-class="opc1.media === undefined ? 'titulo-con-imagen':''">{{ opc1.texto}}</p>
+        </button>
+    </div>
+    
+    <div class="col">
+        <div class="opcion-sonido" ng-class="[opc2.selected ? 'selected' : '',opc2.media !== undefined ? 'sonido-con-imagen':'']" ng-click='$parent.playAudio(opc2.audio.id)' ion-ripple>
+            <button class="icon ion-volume-high"></button>
+        </div>
+        <button class="opcion-pareja" ng-click="click(index2)" ng-class="[opc2.selected ? 'selected' : '', opc2.match ? 'pareja-match':'', opc2.fallo ? 'pareja-mal':'', $parent.hayImagen ? 'pareja-con-imagen':'']" ion-ripple>
+            <img data-ng-src="assets/{{opc2.media.nombre}}"ng-hide="{{opc2.media === undefined}}" />
+            <p ng-class="opc2.media === undefined ? 'titulo-con-imagen':''">{{ opc2.texto}}</p>
         </button>
     </div>
 </div>
+    
