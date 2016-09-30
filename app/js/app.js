@@ -39,6 +39,7 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
 
     $stateProvider.state('app.modulo', {
         url: '/capacitacion/:modulo',
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: 'views/modulo.html',
@@ -53,9 +54,17 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
         templateUrl: 'views/unidad.html',
         controller: 'UnidadController'
     });
+    
+    $stateProvider.state('leccionTerminada', {
+        url: '/capacitacion/:modulo/:leccion/:unidad/leccion-terminada',
+        cache: false,
+        templateUrl: 'views/leccionTerminada.html',
+        controller: 'LeccionTerminadaController'
+    });
 
     $stateProvider.state('app.perfil', {
         url: '/perfil',
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: 'views/perfil.html',
@@ -67,6 +76,7 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
 
     $stateProvider.state('app.editarPerfil', {
         url: '/editar-perfil',
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: 'views/editarPerfil.html',
@@ -110,6 +120,7 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
 
     $stateProvider.state('app.progreso', {
         url: '/progreso',
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: 'views/progreso.html',

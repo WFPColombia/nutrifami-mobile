@@ -64,6 +64,15 @@ nutrifamiMobile.factory('UsuarioService', function () {
             }
         });
     };
+    
+    
+    service.getUsuarioFamiliaAvance = function(){
+        return JSON.parse(localStorage.getItem('usuarioFamiliaAvance'));
+    }
+    
+    service.getUsuarioFamilia = function(){
+        return JSON.parse(localStorage.getItem('usuarioFamilia'));
+    }
 
 
     return service;

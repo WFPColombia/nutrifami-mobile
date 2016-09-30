@@ -12,6 +12,10 @@ nutrifamiMobile.directive('opcionParejaUnidadInfo', function () {
             $scope.click = function (index) {
                 $scope.$parent.seleccionarPareja(index);
             };
+            
+            $scope.playAudio = function (audio){
+                $scope.$parent.playAudio(audio);
+            }
         }
     };
 });

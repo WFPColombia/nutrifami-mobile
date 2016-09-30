@@ -1,45 +1,43 @@
 /*global angular*/
-nutrifamiMobile.controller('LeccionTerminadaController', ['$scope', '$routeParams', '$anchorScroll', 'ngAudio', 'bsLoadingOverlayService', '$timeout', '$location', function ($scope, $routeParams, $anchorScroll, ngAudio, bsLoadingOverlayService, $timeout, $location) {
-        'use strict';
-        'use strict';
-        /* BEGIN CORDOVA FILES
-         document.addEventListener('deviceready', function () {
-         AndroidFullScreen.immersiveMode();
-         END CORDOVA FILES */
-        $anchorScroll();
+nutrifamiMobile.controller('LeccionTerminadaController', function ($ionicPlatform, $scope, $stateParams, $timeout, $location, AudioService) {
+    'use strict';
 
-        /* Overloading*/
-        bsLoadingOverlayService.start();
-        /* Se apaga cuando el todo el contenido de la vista ha sido cargado*/
-        $scope.$on('$viewContentLoaded', function () {
-            /* Se le agrega 0,3 segundos para poder verlo ver inicialmente
-             * cuando el contenido se demore mucho en cargar se puede quitar el timeout*/
-            $timeout(function () {
-                bsLoadingOverlayService.stop();
-            }, 300);
-        });
+    $ionicPlatform.ready(function () {
+        
+        $scope.leccion = nutrifami.training.getLeccion($stateParams.leccion);
+        $scope.audios = {
+            'leccionCompletada': 'audios/muy-bien-leccion-completada.mp3',
+            'audioPuntos': 'audios/' + $scope.leccion.finalizado.puntos + '-puntos-ganados.mp3',
+            'audioFinalizado': 'assets/' + $scope.leccion.finalizado.audio.nombre,
+        };
+        AudioService.preloadSimple($scope.audios);
 
-        $scope.progressbar = 0;
+
 
         $timeout(function () {
-            ngAudio.play("audios/muy-bien-leccion-completada.mp3");
-            $scope.progressbar = 100;
+            AudioService.play('leccionCompletada');
         }, 1000);
 
         $scope.leccionCompletada = {};
-        $scope.leccionCompletada.audio = ngAudio.load("audios/muy-bien-leccion-completada.mp3");
+        //$scope.leccionCompletada.audio = ngAudio.load("audios/muy-bien-leccion-completada.mp3");
 
-        $scope.leccion = nutrifami.training.getLeccion($routeParams.leccion);
+        
+
         console.log($scope.leccion);
-        $scope.leccion.finalizado.audio.audio = ngAudio.load("assets/" + $scope.leccion.finalizado.audio.nombre);
-        $scope.leccion.finalizado.audio.audioPuntos = ngAudio.load("audios/" + $scope.leccion.finalizado.puntos + "-puntos-ganados.mp3");
 
-        $scope.goTo = function (link) {
-            $location.path(link);
-        }
+        //$scope.leccion.finalizado.audio.audio = ngAudio.load("assets/" + $scope.leccion.finalizado.audio.nombre);
+        //$scope.leccion.finalizado.audio.audioPuntos = ngAudio.load("audios/" + $scope.leccion.finalizado.puntos + "-puntos-ganados.mp3");
+
+        $scope.playAudio = function (audio) {
+            AudioService.play(audio);
+        };
+
+        $scope.continuar = function () {
+            AudioService.unload($scope.audios);
+            $location.path("/app/capacitacion/" + $stateParams.modulo);
+        };
+    });
 
 
-        /* BEGIN CORDOVA FILES
-         }, false);
-         END CORDOVA FILES */
-    }]);
+
+});
