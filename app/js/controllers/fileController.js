@@ -1,35 +1,44 @@
 /*global angular*/
-nutrifamiMobile.controller('FileController', function ($scope, $timeout, $cordovaFileTransfer) {
+nutrifamiMobile.controller('FileController', function($ionicPlatform, $http, $scope, $timeout, $cordovaFileTransfer) {
     'use strict';
-    document.addEventListener("deviceready", function () {
+    $ionicPlatform.ready(function() {
+
 
         console.log("El dispositivo está listo");
-        var url = "http://cdn.wall-pix.net/albums/art-space/00030109.jpg";
-        var targetPath = cordova.file.documentsDirectory + "testImage.png";
+        var url = "http://nutrifami.org/js/capacitacion.JSON";
+        var targetPath = cordova.file.applicationStorageDirectory + "capacitacion.JSON";
         var trustHosts = true;
         var options = {};
-        
+
         $scope.url = url;
         $scope.targetPath = targetPath;
         $scope.trustHosts = trustHosts;
         $scope.response = "";
 
+
+
         $cordovaFileTransfer.download(url, targetPath, options, trustHosts)
-                .then(function (result) {
-                    // Success!
-                    console.log("Success");
-                    $scope.response = "Success";
-                }, function (err) {
-                    // Error
-                    console.log("Error");
-                    $scope.response = err;
-                }, function (progress) {
-                    $timeout(function () {
-                        $scope.downloadProgress = (progress.loaded / progress.total) * 100;
-                    });
+            .then(function(result) {
+                // Success!
+                console.log("Success");
+                $scope.response = "Success";
+
+                $http.get("js/capacitacion.JSON").then(function(response) {
+                    $scope.myData = response.data;
+
+                    console.log($scope.myData);
                 });
 
-
-    }, true);
+                console.log(result);
+            }, function(err) {
+                // Error
+                console.log("Error");
+                $scope.response = err;
+            }, function(progress) {
+                $timeout(function() {
+                    $scope.downloadProgress = (progress.loaded / progress.total) * 100;
+                });
+            });
+    });
 
 });
