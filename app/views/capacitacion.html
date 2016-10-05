@@ -1,7 +1,7 @@
 <ion-view>
     <ion-content lazy-scroll>
         <div class="modulos">
-            <ion-slide-box on-slide-changed="slideHasChanged($index)" show-pager="true">
+            <ion-slide-box on-slide-changed="slideHasChanged($index)" show-pager="false">
                 <ion-slide ng-repeat="modulo in modulos">
                     <modulo-info info="modulo" avance="avanceUsuario"></modulo-info>
                 </ion-slide>

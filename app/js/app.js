@@ -150,8 +150,7 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
     $urlRouterProvider.otherwise('/app/capacitacion');
 });
 
-nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cookieStore) {
-    console.log("Run");
+nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cookieStore, $cordovaFileTransfer) {
     // keep user logged in after page refresh
     $rootScope.globals = $cookieStore.get('globals') || {};
 
@@ -167,7 +166,16 @@ nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cookieStore
             $location.path('/login');
         }
     });
+
+
+
     $ionicPlatform.ready(function() {
+        console.log("Entra");
+        if (window.cordova) {
+            $rootScope.TARGETPATH = cordova.file.applicationStorageDirectory;
+        } else {
+            $rootScope.TARGETPATH = "assets/";
+        }
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if (window.cordova && window.cordova.plugins.Keyboard) {

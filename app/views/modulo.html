@@ -6,7 +6,7 @@
                     <h1 ng-click="playAudio('audioTitulo')" ion-ripple><i class="lecciones-titulo-sonido icon ion-volume-high" aria-hidden="true"></i> Alimentación Saludable</h1>
                 </div>
                 <div class="col">
-                    <img ng-src="assets/{{modulo.imagen2.nombre}}"/>
+                    <img ng-src="{{TARGETPATH}}{{modulo.imagen2.nombre}}" />
                 </div>
                 <div class="col">
                     <p ng-click="playAudio('audioDescripcion')" ion-ripple><i class="lecciones-descripcion-sonido icon ion-volume-high" aria-hidden="true"></i> {{ modulo.descripcion.texto}}</p>
