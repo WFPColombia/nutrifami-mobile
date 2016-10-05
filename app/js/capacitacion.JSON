@@ -5,7 +5,17 @@
         "completo": false
     },
     "serv_modulos": {
-        "5": { "id": "5", "titulo": { "texto": "Alimentaci\u00f3n Saludable", "audio": { "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/20168117224050.mp3", "nombre": "training\/audios\/20168117224050.mp3", "loaded": "empty" } }, "descripcion": { "texto": "Alimentaci\u00f3n Saludable", "audio": { "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/201683153545537.mp3", "nombre": "training\/audios\/201683153545537.mp3", "loaded": "empty" } }, "imagen": { "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/images\/20168316114676.png", "nombre": "training\/images\/20168316114676.png", "loaded": "empty" }, "imagen2": { "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/images\/20168316114676.png", "nombre": "training\/images\/20168316114676.png", "loaded": "empty" }, "fecha": "2016-06-27 22:52:26", "activo": "1", "lecciones": ["16", "17", "18", "19", "23"], "completo": false }
+        "5": {
+            "id": "5",
+            "titulo": { "texto": "Alimentaci\u00f3n Saludable", "audio": { "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/20168117224050.mp3", "nombre": "training\/audios\/20168117224050.mp3", "loaded": "empty" } },
+            "descripcion": { "texto": "Alimentaci\u00f3n Saludable", "audio": { "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/201683153545537.mp3", "nombre": "training\/audios\/201683153545537.mp3", "loaded": "empty" } },
+            "imagen": { "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/images\/20168316114676.png", "nombre": "training\/images\/20168316114676.png", "loaded": "empty" },
+            "imagen2": { "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/images\/20168316114676.png", "nombre": "training\/images\/20168316114676.png", "loaded": "empty" },
+            "fecha": "2016-06-27 22:52:26",
+            "activo": "1",
+            "lecciones": ["16", "17", "18", "19", "23"],
+            "completo": false
+        }
     },
     "serv_lecciones": {
         "16": { "id": "16", "titulo": { "texto": "La Alimentaci\u00f3n", "audio": { "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/201684111222482.mp3", "nombre": "training\/audios\/201684111222482.mp3", "loaded": "empty" } }, "descripcion": "La Alimentaci\u00f3n", "imagen": { "url": "https:\/\/s3.amazonaws.com\/nutrifami\/", "nombre": "", "loaded": "empty" }, "icono": "1", "fecha": "2016-06-27 22:55:40", "activo": "1", "unidades": ["1", "2", "3", "4", "5", "6", "34", "35", "46", "47"], "finalizado": { "texto": "\u00a1Muy bien! Incluya alimentos variados para lograr una alimentaci\u00f3n saludable.", "audio": { "url": "https:\/\/s3.amazonaws.com\/nutrifami\/training\/audios\/201684111223784.mp3", "nombre": "training\/audios\/201684111223784.mp3", "loaded": "empty" } }, "completo": false },

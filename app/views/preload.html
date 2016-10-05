@@ -1,0 +1,13 @@
+<ion-scroll style="height: 100%;">
+    <h1>Descarga de archivos</h1>
+    <div class='app-body' style="margin-top: 50px;">
+        <div class='app-content'>
+            <p>Url: {{url}}</p>
+            <p>Destino: {{targetPath}}</p>
+            <p>% Descarga: {{downloadProgress}}</p>
+            <p>Estado: ..{{response}}..</p>
+            <pre>..{{myData.serv_unidades
+ | json}} </pre>
+        </div>
+    </div>
+</ion-scroll>

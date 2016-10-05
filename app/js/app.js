@@ -135,10 +135,10 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
         controller: 'SobreController'
     });
 
-    $stateProvider.state('file', {
-        url: '/ft',
-        templateUrl: 'views/file.html',
-        controller: 'FileController'
+    $stateProvider.state('preload', {
+        url: '/preload',
+        templateUrl: 'views/preload.html',
+        controller: 'PreloadController'
     });
 
     $stateProvider.state('home', {
@@ -151,15 +151,19 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
 });
 
 nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cookieStore) {
+    console.log("Run");
     // keep user logged in after page refresh
     $rootScope.globals = $cookieStore.get('globals') || {};
 
     nutrifami.getSessionId();
-    nutrifami.training.initClient();
 
     $rootScope.$on('$locationChangeStart', function(event, next, current) {
+
+        if ($location.path() === "") {
+            $location.path('/preload');
+        }
         // redirect to login page if not logged in
-        if ($location.path() !== '/login' && !$rootScope.globals.currentUser) {
+        if ($location.path() !== '/login' && !$rootScope.globals.currentUser && $location.path() !== '/preload') {
             $location.path('/login');
         }
     });
