@@ -1,7 +1,7 @@
 <style type="text/css">
-    .unidad .leccion-avance-fixed::after {
-        background-image: url("assets/{{unidad.imagen.nombre}}");
-    }
+.unidad .leccion-avance-fixed::after {
+    background-image: url("{{TARGETPATH}}{{unidad.imagen.nombre}}");
+}
 </style>
 <div class='unidad'>
     <header ng-show="scrolled">
@@ -40,7 +40,8 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <img ng-src="assets/{{unidad.imagen.nombre}}" ng-hide="{{unidad.imagen === undefined|| unidad.imagen.nombre === ''}}" />
+                    <img ng-src="{{TARGETPATH}}
+{{unidad.imagen.nombre}}" ng-hide="{{unidad.imagen === undefined|| unidad.imagen.nombre === ''}}" />
                 </div>
             </div>
         </div>
@@ -55,7 +56,6 @@
 <div class="bar bar-footer calificar" ng-class=" botonCalificar ? 'habilitado' : ''">
     <button ng-click="calificarUnidad()" ng-disabled="!botonCalificar" ion-ripple>Calificar</button>
 </div>
-
 <!--
 <div class="mostrar-tip">
     <div ion-ripple ng-click="showConfirm()">

@@ -2,12 +2,12 @@
     <h1>Descarga de archivos</h1>
     <div class='app-body' style="margin-top: 50px;">
         <div class='app-content'>
+            <h3>{{archivosDescargados}}/{{totalArchivos}} (Arhivos Descargados / Archivos totales)</h3>
             <p>Url: {{url}}</p>
             <p>Destino: {{targetPath}}</p>
-            <p>% Descarga: {{downloadProgress}}</p>
-            <p>Estado: ..{{response}}..</p>
+            <p>Estado: {{response}}</p>
+            <p>Progreso: {{downloadProgress}}%</p>
             <!--<pre>..{{recursos| json}}..</pre>-->
-            <p>TARGETPATH: {{TARGETPATH}}</p>
             <img ng-src="{{imagenPrueba}}" alt="Cargando...">
         </div>
     </div>

@@ -10,6 +10,8 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
         $scope.trustHosts = trustHosts;
         $scope.response = "";
         $scope.imagenPrueba = '';
+        $scope.totalArchivos = 0;
+        $scope.archivosDescargados = 0;
 
 
 
@@ -41,7 +43,6 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
                     cargarArchivo(targetPath, function() {
                         console.log("Descargar assets");
                         predescargaAssets();
-                        //$location.path('/login');
                     });
                 }, function(err) {
                     // Error
@@ -53,10 +54,7 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
                 });
         } else {
             cargarArchivo(targetPath, function() {
-
-
                 predescargaAssets();
-                //$location.path('/login');
             });
         }
 
@@ -124,7 +122,7 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
 
             /*Descargar unidades */
 
-            /*var serv_unidades = $scope.myData.serv_unidades;
+            var serv_unidades = $scope.myData.serv_unidades;
 
             assets = ['titulo', 'instruccion', 'imagen', 'audio'];
             var assets_opciones = ['feedback', 'audio'];
@@ -140,91 +138,76 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
                             var asset = serv_unidades[i][assets[j]];
                         }
                     }
-                    for (var k in serv_unidades[i].opciones) {
-                        //console.log("Opción");
-                        for (var l in assets_opciones) {
-                            if (l < 1) {
-                                if (typeof serv_unidades[i].opciones[k][assets_opciones[l]] !== 'undefined' && serv_unidades[i].opciones[k][assets_opciones[l]].audio.nombre != "") {
-                                    var asset = serv_unidades[i].opciones[k][assets_opciones[l]].audio;
-                                }
-                            } else {
-                                if (typeof serv_unidades[i].opciones[k][assets_opciones[l]] !== 'undefined' && serv_unidades[i].opciones[k][assets_opciones[l]].nombre != "") {
-                                    var asset = serv_unidades[i].opciones[k][assets_opciones[l]];
-                                }
+                    recursos.push(asset);
+                }
+
+                for (var k in serv_unidades[i].opciones) {
+                    //console.log("Opción");
+                    for (var l in assets_opciones) {
+                        if (l < 1) {
+                            if (typeof serv_unidades[i].opciones[k][assets_opciones[l]] !== 'undefined' && serv_unidades[i].opciones[k][assets_opciones[l]].audio.nombre != "") {
+                                var asset = serv_unidades[i].opciones[k][assets_opciones[l]].audio;
                             }
-                            recursos.push(asset);
+                        } else {
+                            if (typeof serv_unidades[i].opciones[k][assets_opciones[l]] !== 'undefined' && serv_unidades[i].opciones[k][assets_opciones[l]].nombre != "") {
+                                var asset = serv_unidades[i].opciones[k][assets_opciones[l]];
+                            }
                         }
+                        //recursos.push(asset);
                     }
                 }
-            }*/
+            }
 
             $scope.recursos = recursos;
-
+            console.log(recursos);
             descargarArchivos(recursos);
 
         }
 
         function descargarArchivos(recursos) {
-            console.log(recursos);
+
+
+            $scope.totalArchivos = recursos.length;
+            var archivosDescargados = 0;
+
 
             var promises = [];
 
             recursos.forEach(function(i, x) {
-                url = i.url;
-                targetPath = "" + i.nombre;
+                var url = i.url;
+                var targetPath = cordova.file.applicationStorageDirectory + i.nombre;
                 $scope.url = url;
                 $scope.targetPath = targetPath;
-                if (window.cordova) {
-                    var targetPath = cordova.file.applicationStorageDirectory + i.nombre;
-                    promises.push($cordovaFileTransfer.download(url, targetPath, {}, true).then(function(result) {
-                        $scope.response = "Descarga archivo completada";
 
-                    }, function(err) {
-                        $scope.response = err;
-                    }, function(progress) {
-                        $timeout(function() {
-                            $scope.url = url;
-                            $scope.response = "Archivo descargado";
-                            $scope.targetPath = targetPath;
-                            $scope.downloadProgress = (progress.loaded / progress.total) * 100;
+                promises.push($http.get(targetPath).then(function(response) {}, function errorCallback(response) {
+                    console.log("Archivo no existe: " + targetPath);
+                    if (window.cordova) {
+                        $cordovaFileTransfer.download(url, targetPath, {}, true).then(function(result) {
+                            console.log("Descarga archivo: " + targetPath);
+                            $scope.response = "Descarga archivo completada";
+                            archivosDescargados++;
+                            $scope.archivosDescargados = archivosDescargados;
+
+                        }, function(err) {
+                            $scope.response = err;
+                        }, function(progress) {
+                            $timeout(function() {
+                                $scope.response = "Descargando Archivo";
+                                $scope.downloadProgress = (progress.loaded / progress.total) * 100;
+                            });
                         });
-                    }));
-                }
+                    }
+                }));
+
             });
 
             $q.all(promises).then(function(res) {
                 console.log("in theory, all done");
                 if (window.cordova) {
                     $scope.imagenPrueba = cordova.file.applicationStorageDirectory + "training/images/20168316114676.png";
-
                 }
                 $location.path('/login');
-
-
             });
-
-            /*
-                        if (window.cordova) {
-
-                            url = asset.url;
-                            targetPath = cordova.file.applicationStorageDirectory + asset.nombre;
-                            $scope.url = url;
-                            $scope.targetPath = targetPath;
-                            console.log(url);
-                            $cordovaFileTransfer.download(url, targetPath, options, trustHosts).then(function(result) {
-                                $scope.response = "Archivo descargado";
-                                console.log(url + ": Archivo descargado");
-                            }, function(err) {
-                                $scope.response = err;
-                            }, function(progress) {
-                                $timeout(function() {
-                                    $scope.downloadProgress = (progress.loaded / progress.total) * 100;
-                                });
-                            });
-                        }
-            */
-
-
         }
     });
 });
