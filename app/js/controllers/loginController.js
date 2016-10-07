@@ -1,4 +1,4 @@
-nutrifamiLogin.controller('LoginController', function ($ionicPlatform, $scope, $ionicLoading, AuthenticationService, $timeout, AudioService, $location) {
+nutrifamiLogin.controller('LoginController', function($ionicPlatform, $scope, $ionicLoading, AuthenticationService, $timeout, AudioService, $location) {
     'use strict';
 
     /* BEGIN CORDOVA FILES
@@ -8,13 +8,13 @@ nutrifamiLogin.controller('LoginController', function ($ionicPlatform, $scope, $
     $scope.audios = {
         'audiologin': 'audios/login.mp3'
     };
-    
+
     AudioService.preloadSimple($scope.audios);
 
     AuthenticationService.ClearCredentials();
     localStorage.clear();
 
-    $scope.login = function () {
+    $scope.login = function() {
 
         // Show the loading overlay and text
         $scope.loading = $ionicLoading.show({
@@ -30,7 +30,7 @@ nutrifamiLogin.controller('LoginController', function ($ionicPlatform, $scope, $
         });
 
         $scope.dataLoading = true;
-        AuthenticationService.Login($scope.username, $scope.password, function (response) {
+        AuthenticationService.Login($scope.username, $scope.password, function(response) {
             if (response.success) {
                 AuthenticationService.SetCredentials($scope.username, $scope.password, response.message);
                 $ionicLoading.hide();
@@ -38,7 +38,7 @@ nutrifamiLogin.controller('LoginController', function ($ionicPlatform, $scope, $
                 $location.path('/intro');
             } else {
                 $scope.error = response.message;
-                $timeout(function () {
+                $timeout(function() {
                     $scope.error = "";
                 }, 3000);
                 $ionicLoading.hide();
@@ -46,8 +46,8 @@ nutrifamiLogin.controller('LoginController', function ($ionicPlatform, $scope, $
         });
     };
 
-    $scope.playAudio = function (audio) {
-        AudioService.play(audio,$scope.audios);
+    $scope.playAudio = function(audio) {
+        AudioService.play(audio, $scope.audios);
     };
     /* BEGIN CORDOVA FILES
      });

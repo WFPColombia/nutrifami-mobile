@@ -1,4 +1,4 @@
-nutrifamiMobile.controller('ModuloController', function($ionicPlatform, $scope, $location, $stateParams, $ionicViewSwitcher, AudioService, UsuarioService) {
+nutrifamiMobile.controller('ModuloController', function($ionicPlatform, $scope, $rootScope, $location, $stateParams, $ionicViewSwitcher, AudioService, UsuarioService) {
     'use strict';
     $ionicPlatform.ready(function() {
 
@@ -9,8 +9,8 @@ nutrifamiMobile.controller('ModuloController', function($ionicPlatform, $scope, 
         $scope.modulo = nutrifami.training.getModulo($stateParams.modulo);
 
         $scope.audios = {
-            'audioTitulo': "assets/" + $scope.modulo.titulo.audio.nombre,
-            'audioDescripcion': "assets/" + $scope.modulo.titulo.audio.nombre
+            'audioTitulo': $rootScope.TARGETPATH + $scope.modulo.titulo.audio.nombre,
+            'audioDescripcion': $rootScope.TARGETPATH + $scope.modulo.titulo.audio.nombre
         };
 
         $scope.modulo.totalLecciones = Object.keys($scope.modulo.lecciones).length;
@@ -24,7 +24,7 @@ nutrifamiMobile.controller('ModuloController', function($ionicPlatform, $scope, 
             if (tempLeccion.titulo.audio.nombre !== null) {
                 var id = parseInt(lid) + 1;
                 tempLeccion.titulo.audio.id = "paso" + id;
-                $scope.audios[tempLeccion.titulo.audio.id] = "assets/" + tempLeccion.titulo.audio.nombre;
+                $scope.audios[tempLeccion.titulo.audio.id] = $rootScope.TARGETPATH + tempLeccion.titulo.audio.nombre;
             }
             if (typeof $scope.usuarioAvance['3'] !== 'undefined' && typeof $scope.usuarioAvance['3'][$stateParams.modulo] !== 'undefined' && typeof $scope.usuarioAvance['3'][$stateParams.modulo][$scope.lids[lid]] !== 'undefined') {
                 tempLeccion.avance.terminada = true;

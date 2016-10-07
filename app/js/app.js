@@ -135,10 +135,10 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
         controller: 'SobreController'
     });
 
-    $stateProvider.state('file', {
-        url: '/ft',
-        templateUrl: 'views/file.html',
-        controller: 'FileController'
+    $stateProvider.state('preload', {
+        url: '/preload',
+        templateUrl: 'views/preload.html',
+        controller: 'PreloadController'
     });
 
     $stateProvider.state('home', {
@@ -150,20 +150,32 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
     $urlRouterProvider.otherwise('/app/capacitacion');
 });
 
-nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cookieStore) {
+nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cookieStore, $cordovaFileTransfer) {
     // keep user logged in after page refresh
     $rootScope.globals = $cookieStore.get('globals') || {};
 
     nutrifami.getSessionId();
-    nutrifami.training.initClient();
 
     $rootScope.$on('$locationChangeStart', function(event, next, current) {
+
+        if ($location.path() === "") {
+            $location.path('/preload');
+        }
         // redirect to login page if not logged in
-        if ($location.path() !== '/login' && !$rootScope.globals.currentUser) {
+        if ($location.path() !== '/login' && !$rootScope.globals.currentUser && $location.path() !== '/preload') {
             $location.path('/login');
         }
     });
+
+
+
     $ionicPlatform.ready(function() {
+        console.log("Entra");
+        if (window.cordova) {
+            $rootScope.TARGETPATH = cordova.file.applicationStorageDirectory;
+        } else {
+            $rootScope.TARGETPATH = "assets/";
+        }
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if (window.cordova && window.cordova.plugins.Keyboard) {
