@@ -1,8 +1,8 @@
 /*global angular*/
-nutrifamiMobile.controller('CapacitacionController', function($ionicPlatform, $scope, $rootScope, UsuarioService) {
+nutrifamiMobile.controller('CapacitacionController', function ($ionicPlatform, $scope, UsuarioService) {
     'use strict';
 
-    $ionicPlatform.ready(function() {
+    $ionicPlatform.ready(function () {
 
         $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
         $scope.usuarioAvance = UsuarioService.getUsuarioAvance();
@@ -36,7 +36,7 @@ nutrifamiMobile.controller('CapacitacionController', function($ionicPlatform, $s
             }
             $scope.modulos.push(tempModulo);
         }
-
+        
         console.log($scope.modulos);
 
         $scope.modulos[0].disponible = true;
@@ -47,7 +47,8 @@ nutrifamiMobile.controller('CapacitacionController', function($ionicPlatform, $s
                     $scope.modulos[i].disponible = true;
                 } else if ($scope.modulos[i].avance.leccionesFinalizadas > 0) {
                     $scope.modulos[i].disponible = true;
-                } else if ($scope.modulos[temp].avance.finalizado) {
+                }
+                else if ($scope.modulos[temp].avance.finalizado) {
                     $scope.modulos[i].disponible = true;
                 }
             }

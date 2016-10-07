@@ -1,4 +1,4 @@
-nutrifamiMobile.directive('moduloInfo', function($location, $rootScope) {
+nutrifamiMobile.directive('moduloInfo', function ($location) {
     return {
         restrict: 'E',
         scope: {
@@ -6,17 +6,15 @@ nutrifamiMobile.directive('moduloInfo', function($location, $rootScope) {
             avance: '='
         },
         templateUrl: 'views/directives/moduloInfo.drt.html',
-        link: function($scope, $element, $attrs) {
-            $scope.TARGETPATH = $rootScope.TARGETPATH;
-
+        link: function ($scope, $element, $attrs) {
             $scope.cargando = false;
-            $scope.totalLecciones = function() {
+            $scope.totalLecciones = function () {
                 return (Object.keys($scope.info.lecciones).length);
             };
-            $scope.porcentajeAvance = function() {
-                return (100 / $scope.totalLecciones() * $scope.info.avance.leccionesFinalizadas);
+            $scope.porcentajeAvance = function () {
+                return(100 / $scope.totalLecciones() * $scope.info.avance.leccionesFinalizadas);
             };
-            $scope.irAlModulo = function() {
+            $scope.irAlModulo = function () {
                 $location.path('/app/capacitacion/' + $scope.info.id);
             };
         }

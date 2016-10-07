@@ -1,4 +1,4 @@
-nutrifamiMobile.factory('AudioService', function($cordovaNativeAudio) {
+nutrifamiMobile.factory('AudioService', function ($cordovaNativeAudio) {
     var service = {};
 
     /**
@@ -9,17 +9,18 @@ nutrifamiMobile.factory('AudioService', function($cordovaNativeAudio) {
      * AudioService.preloadSimple(audios)
      * 
      */
-    service.preloadSimple = function(audios, callback) {
-        callback = callback || function() {};
+    service.preloadSimple = function (audios, callback) {
+        callback = callback || function () {
+        };
         console.log("Preloadsimple");
         console.log(audios);
         if (window.plugins && window.plugins.NativeAudio) {
             for (var audio in audios) {
-                console.log(audios[audio]);
                 $cordovaNativeAudio.preloadSimple(audio, audios[audio])
-                    .then(function(msg) {}, function(error) {
-                        console.log(error);
-                    });
+                        .then(function (msg) {
+                        }, function (error) {
+                            console.log(error);
+                        });
 
             }
         }
@@ -35,9 +36,9 @@ nutrifamiMobile.factory('AudioService', function($cordovaNativeAudio) {
      * AudioService.play(audio, audios)
      * 
      */
-    service.play = function(audio, audios) {
+    service.play = function (audio, audios) {
 
-        this.stopAll(audios, function() {
+        this.stopAll(audios, function () {
             console.log(audio);
             if (window.plugins && window.plugins.NativeAudio) {
                 $cordovaNativeAudio.play(audio);
@@ -53,7 +54,7 @@ nutrifamiMobile.factory('AudioService', function($cordovaNativeAudio) {
      * AudioService.stopAll(audios);
      * 
      */
-    service.stopAll = function(audios, callback) {
+    service.stopAll = function (audios, callback) {
         console.log("stopAll");
         for (var audio in audios) {
             if (window.plugins && window.plugins.NativeAudio) {
@@ -71,9 +72,9 @@ nutrifamiMobile.factory('AudioService', function($cordovaNativeAudio) {
      * AudioService.unload(audios);
      * 
      */
-    service.unload = function(audios) {
+    service.unload = function (audios) {
         console.log("unload");
-        this.stopAll(audios, function() {
+        this.stopAll(audios, function () {
             for (var audio in audios) {
                 if (window.plugins && window.plugins.NativeAudio) {
                     $cordovaNativeAudio.unload(audio);
