@@ -1470,7 +1470,8 @@ button {
     margin-top: 5px;
 }
 
-.perfil-panel .perfil-header h1 {
+.perfil-panel .perfil-header h1,
+.agregar-familiar .popup-header h1{
     font-family: 'Muli', sans-serif;
     color: #2f3e47;
     text-align: center;
@@ -1508,7 +1509,8 @@ button {
     margin-bottom: 0;
 }
 
-.perfil-panel .perfil-header h3 {
+.perfil-panel .perfil-header h3,
+.agregar-familiar .popup-header h3{
     font-size: 7pt;
     font-family: 'Raleway-Bold', sans-serif;
     color: rgba(0, 0, 0, 0.6);
@@ -1518,16 +1520,21 @@ button {
     padding-top: 10px;
 }
 
+.agregar-familiar .popup-body{
+    margin: 0px;
+    padding: 10px 0px;
+}
+
 .perfil-body .form-group p,
 .perfil-body .form-group .sin-registro,
-.modal-dialog .form-group p,
-.modal-dialog .form-group .sin-registro {
+.agregar-familiar .form-group p,
+.agregar-familiar .form-group .sin-registro {
     font-size: 10pt;
     padding: 0px 5px;
 }
 
 .perfil-body .form-group .form-control,
-.modal-dialog .form-group .form-control {
+.agregar-familiar .form-group .form-control {
     height: 38px !important;
     border: 1px solid #dcdcdc;
     border-radius: 18px;
@@ -1537,12 +1544,12 @@ button {
 }
 
 .perfil-body .form-group .sin-registro,
-.modal-dialog .form-group .sin-registro {
+.agregar-familiar .form-group .sin-registro {
     color: #c2c5c7;
 }
 
 .perfil-body .form-group select.form-control:not([multiple]),
-.modal-dialog .form-group select.form-control:not([multiple]) {
+.agregar-familiar .form-group select.form-control:not([multiple]) {
     -webkit-appearance: none;
     -moz-appearance: none;
     background-position: 96% 50%;
@@ -1552,7 +1559,7 @@ button {
 }
 
 .perfil-body .form-group label,
-.modal-dialog .form-group label {
+.agregar-familiar .form-group label {
     padding-left: 5px;
     font-size: 7pt;
     font-family: 'Raleway-Bold', sans-serif;
@@ -1562,8 +1569,8 @@ button {
 
 .perfil-body .form-group .error,
 .perfil-body form .message,
-.modal-dialog .form-group .error,
-.modal-dialog form .message {
+.agregar-familiar .form-group .error,
+.agregar-familiar form .message {
     font-size: 10px;
     color: #fc4cab;
     text-align: center;
@@ -1579,8 +1586,7 @@ button {
 }
 
 .perfil-body .btn-default,
-.modal-dialog .btn-default {
-    margin-top: 28px;
+.agregar-familiar .popup .btn-default {
     text-transform: uppercase;
     text-shadow: none;
     color: white;
@@ -1596,6 +1602,30 @@ button {
     letter-spacing: 3px;
     font-family: 'Raleway-Bold';
 }
+
+.agregar-familiar .popup .btn-default[disabled]{
+    -webkit-filter: opacity(50%);
+    -moz-filter: opacity(50%);
+    filter: opacity(50%);
+}
+
+.agregar-familiar .popup .popup-buttons{
+    margin: 0px;
+}
+
+.agregar-familiar .popup .cancelar {
+    background-color: #ffffff;
+    letter-spacing: 3px;
+    color: #fc4cab;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 26px;
+    -moz-border-radius: 26px;
+    -webkit-border-radius: 26px;
+    font-size: 10pt;
+}
+
+
 
 .perfil-body .form-group .form-control[disabled],
 .perfil-body .form-group.form-control[readonly],
