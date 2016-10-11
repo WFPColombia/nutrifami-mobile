@@ -19,7 +19,7 @@ nutrifamiMobile.controller('ModuloController', function($ionicPlatform, $scope, 
 
         for (var lid in $scope.lids) {
             var tempLeccion = nutrifami.training.getLeccion($scope.lids[lid]);
-
+            
             tempLeccion.avance = {};
             if (tempLeccion.titulo.audio.nombre !== null) {
                 var id = parseInt(lid) + 1;

@@ -160,7 +160,7 @@
                                         </div>
                                     </div>
                                     <div class="miembros-body">
-                                        <div class="row" ng-repeat="familiar in usuarioFamilia">
+                                        <div class="row" ng-repeat="familiar in usuarioFamilia track by $index">
                                             <div class="col">{{familiar.FAM_PER_NOMBRE}}</div>
                                             <div class="col">{{familiar.FAM_PER_PARENTESCO}}</div>
                                             <div class="col">{{familiar.FAM_PER_DOCUMENTO}}</div>

@@ -1,5 +1,5 @@
 /*global angular*/
-nutrifamiMobile.controller('PerfilController', function ($ionicPlatform, $scope, $rootScope, $ionicPopup, PerfilService, UsuarioService) {
+nutrifamiMobile.controller('PerfilController', function ($ionicPlatform, $scope, $ionicPopup, $ionicLoading, PerfilService, UsuarioService) {
     'use strict';
     $ionicPlatform.ready(function () {
 
@@ -61,7 +61,8 @@ nutrifamiMobile.controller('PerfilController', function ($ionicPlatform, $scope,
         $scope.abrirModalEditarFamiliar = function (index) {
             console.log(index);
             $scope.indexFamiliar = index;
-            var popUpAgregarFamiliar = $ionicPopup.show({
+            $scope.miembro = $scope.usuarioFamilia.miembrosPorRango[index];
+            $scope.popUpAgregarFamiliar = $ionicPopup.show({
                 templateUrl: 'views/template/agregarFamiliar.tpl.html',
                 scope: $scope,
                 cssClass: 'agregar-familiar'
@@ -69,7 +70,15 @@ nutrifamiMobile.controller('PerfilController', function ($ionicPlatform, $scope,
         };
 
         $scope.agregarFamiliar = function () {
+
+            $scope.loading = $ionicLoading.show({
+                template: 'Guardando Familiar...',
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 40
+            });
             var index = $scope.indexFamiliar;
+
             var familiar = $scope.familiar;
             familiar.FAM_PER_PARENTESCO = 'otros';
             familiar.FAM_PER_JEFE = $scope.usuarioActivo.id;
@@ -79,6 +88,8 @@ nutrifamiMobile.controller('PerfilController', function ($ionicPlatform, $scope,
 
             console.log($scope.miembro);
             /* If para verificar si es usuario nuevo o miembro de la familia */
+
+
             if (typeof $scope.miembro === 'undefined') {
                 familiar.rango = false;
                 familiar.cantidad = 0;
@@ -87,24 +98,32 @@ nutrifamiMobile.controller('PerfilController', function ($ionicPlatform, $scope,
                 familiar.cantidad = $scope.miembro.cantidad - 1;
             }
 
-            delete familiar["parentescos"];
+            console.log(familiar);
 
-            /*PerfilService.agregarFamiliar(familiar, function (response) {
-             if (response.success) {
-             if (familiar.rango !== false) {
-             $scope.usuarioFamilia.miembrosPorRango[index].cantidad--;
-             $scope.usuarioActivo['rango_' + familiar.rango] = familiar.cantidad;
-             }
-             
-             $scope.usuarioFamilia.push(familiar);
-             
-             localStorage.setItem("usuarioActivo", JSON.stringify($scope.usuarioActivo));
-             localStorage.setItem("usuarioFamilia", JSON.stringify($scope.usuarioFamilia));
-             //$rootScope.Ui.turnOff('editarFamiliar');
-             } else {
-             console.log(response.message);
-             }
-             });*/
+            delete familiar["parentescos"];
+            PerfilService.agregarFamiliar(familiar, function (response) {
+                if (response.success) {
+                    if (familiar.rango !== false) {
+                        $scope.usuarioFamilia.miembrosPorRango[index].cantidad--;
+                        $scope.usuarioActivo['rango_' + familiar.rango] = familiar.cantidad;
+                    }
+
+                    $scope.usuarioFamilia.push(familiar);
+
+                    localStorage.setItem("usuarioActivo", JSON.stringify($scope.usuarioActivo));
+                    localStorage.setItem("usuarioFamilia", JSON.stringify($scope.usuarioFamilia));
+                    $ionicLoading.hide();
+                    $scope.popUpAgregarFamiliar.close();
+                    var alertPopup = $ionicPopup.alert({
+                        template: 'Familiar Guardado con éxito',
+                        cssClass: 'confirmacion'
+                    });
+
+
+                } else {
+                    console.log(response.message);
+                }
+            });
         };
     });
 });

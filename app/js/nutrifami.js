@@ -178,19 +178,21 @@ var nutrifami = {
         $.ajax({
             url: serv,
             type: 'GET',
-            async: false,
+            async: true,
             data: data,
             success: function(data) {
                 var objServ = JSON.parse(data);
                 response = objServ.response;
+                callback(response);
             },
             error: function() {
                 response.success = true;
                 response.message = 'Ha ocurrido un error durante la ejecución';
+                callback(response);
             }
         });
 
-        callback(response);
+        
     },
     /*
      * nutrifami.subirUsuarioActivo(callback);

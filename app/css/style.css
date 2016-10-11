@@ -1625,6 +1625,10 @@ button {
     font-size: 10pt;
 }
 
+.confirmacion .popup{
+    min-height: 150px;
+}
+
 
 
 .perfil-body .form-group .form-control[disabled],
