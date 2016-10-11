@@ -1613,7 +1613,8 @@ button {
     margin: 0px;
 }
 
-.agregar-familiar .popup .cancelar {
+.agregar-familiar .popup .cancelar,
+.editar-perfil .cancelar{
     background-color: #ffffff;
     letter-spacing: 3px;
     color: #fc4cab;
@@ -1623,6 +1624,10 @@ button {
     -moz-border-radius: 26px;
     -webkit-border-radius: 26px;
     font-size: 10pt;
+}
+
+.editar-perfil .botones{
+    text-align: center;
 }
 
 .confirmacion .popup{
