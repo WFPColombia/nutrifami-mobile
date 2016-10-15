@@ -16,8 +16,8 @@ nutrifamiMobile.controller('ComprasController', function($ionicPlatform, $scope,
         var puntoVenta = {
             'pid': 0
         };
-        //usuario.did = $scope.usuarioActivo.login_documento;
-        usuario.did = 66976632;
+        usuario.did = $scope.usuarioActivo.login_documento;
+        //usuario.did = 66976632;
 
         $scope.cargarCompras = function() {
             $scope.loading = $ionicLoading.show({
