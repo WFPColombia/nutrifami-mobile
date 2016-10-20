@@ -17,6 +17,7 @@ nutrifamiMobile.controller('CapacitacionController', function($ionicPlatform, $s
         /*Creamos un arreglo para poder recorerlo y mostrarlo a traves de directivas */
         for (var mid in $scope.mids) {
             var tempModulo = nutrifami.training.getModulo($scope.mids[mid]);
+            console.log(tempModulo);
             tempModulo.avance = {};
             tempModulo.avance.finalizado = false;
             tempModulo.disponible = false;
@@ -35,6 +36,8 @@ nutrifamiMobile.controller('CapacitacionController', function($ionicPlatform, $s
                 tempModulo.avance.leccionesFinalizadas = 0;
             }
             $scope.modulos.push(tempModulo);
+            
+            console.log($scope.modulos);
         }
 
         console.log($scope.modulos);

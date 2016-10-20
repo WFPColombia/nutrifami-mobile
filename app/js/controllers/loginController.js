@@ -12,11 +12,13 @@ nutrifamiLogin.controller('LoginController', function ($ionicPlatform, $scope, $
         AuthenticationService.ClearCredentials();
         localStorage.clear();
 
-        $rootScope.$watch(function () {
-            return $cordovaKeyboard.isVisible();
+        $scope.$watch(function () {
+            if (window.cordova && window.cordova.plugins.Keyboard) {
+                return $cordovaKeyboard.isVisible();
+            }
             console.log("Si1");
         }, function (value) {
-            $rootScope.keyboardOpen = value;
+            $scope.keyboardOpen = value;
             console.log(value);
         });
 
