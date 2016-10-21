@@ -7,31 +7,36 @@ nutrifamiMobile.controller('ModuloController', function($ionicPlatform, $scope, 
         $scope.lecciones = [];
 
         $scope.modulo = nutrifami.training.getModulo($stateParams.modulo);
+        console.log($scope.modulo);
+        $scope.modulo.totalLecciones = 0;
 
         $scope.audios = {
             'audioTitulo': $rootScope.TARGETPATH + $scope.modulo.titulo.audio.nombre,
             'audioDescripcion': $rootScope.TARGETPATH + $scope.modulo.titulo.audio.nombre
         };
 
-        $scope.modulo.totalLecciones = Object.keys($scope.modulo.lecciones).length;
+
         $scope.lids = nutrifami.training.getLeccionesId($stateParams.modulo);
-        console.log($scope.lids);
 
         for (var lid in $scope.lids) {
             var tempLeccion = nutrifami.training.getLeccion($scope.lids[lid]);
-            
-            tempLeccion.avance = {};
-            if (tempLeccion.titulo.audio.nombre !== null) {
-                var id = parseInt(lid) + 1;
-                tempLeccion.titulo.audio.id = "paso" + id;
-                $scope.audios[tempLeccion.titulo.audio.id] = $rootScope.TARGETPATH + tempLeccion.titulo.audio.nombre;
+
+            if (tempLeccion.activo == 1) {
+                tempLeccion.avance = {};
+
+                if (tempLeccion.titulo.audio.nombre !== null) {
+                    var id = parseInt(lid) + 1;
+                    tempLeccion.titulo.audio.id = "paso" + id;
+                    $scope.audios[tempLeccion.titulo.audio.id] = $rootScope.TARGETPATH + tempLeccion.titulo.audio.nombre;
+                }
+                if (typeof $scope.usuarioAvance['3'] !== 'undefined' && typeof $scope.usuarioAvance['3'][$stateParams.modulo] !== 'undefined' && typeof $scope.usuarioAvance['3'][$stateParams.modulo][$scope.lids[lid]] !== 'undefined') {
+                    tempLeccion.avance.terminada = true;
+                } else {
+                    tempLeccion.avance.terminada = false;
+                }
+                $scope.modulo.totalLecciones++;
+                $scope.lecciones.push(tempLeccion);
             }
-            if (typeof $scope.usuarioAvance['3'] !== 'undefined' && typeof $scope.usuarioAvance['3'][$stateParams.modulo] !== 'undefined' && typeof $scope.usuarioAvance['3'][$stateParams.modulo][$scope.lids[lid]] !== 'undefined') {
-                tempLeccion.avance.terminada = true;
-            } else {
-                tempLeccion.avance.terminada = false;
-            }
-            $scope.lecciones.push(tempLeccion);
         }
 
         AudioService.preloadSimple($scope.audios);

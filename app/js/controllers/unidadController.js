@@ -1,20 +1,14 @@
 /*global angular*/
-nutrifamiMobile.controller('UnidadController', function($ionicPlatform, $scope, $rootScope, $location, $stateParams, $ionicPopup, $ionicLoading, $ionicViewSwitcher, $ionicScrollDelegate, AudioService, UsuarioService) {
+nutrifamiMobile.controller('UnidadController', function($ionicPlatform, $scope, $rootScope, $location, $stateParams, $ionicPopup, $ionicLoading, $ionicViewSwitcher, $ionicScrollDelegate, AudioService, UsuarioService, CapacitacionService) {
     'use strict';
     $ionicPlatform.ready(function() {
 
         $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
         $scope.estadoUnidad = 'espera';
 
-        $scope.uids = nutrifami.training.getUnidadesId($stateParams.leccion);
-        var temp = [];
-        for (var i in $scope.uids) {
-            temp.push($scope.uids[i]);
-        }
-        $scope.unidad = nutrifami.training.getUnidad(temp[$stateParams.unidad - 1]);
-
+        $scope.unidad = CapacitacionService.getUnidad($stateParams.leccion, $stateParams.unidad);
         $scope.unidad.numeroUnidad = $stateParams.unidad;
-        $scope.unidad.totalUnidades = temp.length;
+        $scope.unidad.totalUnidades = CapacitacionService.getUnidadesActivas($stateParams.leccion).length;
         $scope.scrolled = false;
 
         $scope.audios = {

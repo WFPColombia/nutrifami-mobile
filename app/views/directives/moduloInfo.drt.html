@@ -1,5 +1,5 @@
 <div class="modulo" ng-class="info.avance.finalizado ? 'terminado' : (info.disponible ? 'actual':'')" ng-show="info.activo" ng-click="!info.disponible || irAlModulo()">
-    <img image-lazy-src="{{TARGETPATH}}{{info.imagen.nombre}}" image-lazy-loader="android">
+    <img src="{{TARGETPATH}}{{info.imagen.nombre}}">
     <div class="caption">
         <h3>{{ info.titulo.texto}}</h3>
         <h4>{{ info.avance.leccionesFinalizadas}} / {{ totalLecciones()}}</h4>

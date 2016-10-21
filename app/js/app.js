@@ -155,6 +155,7 @@ nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cookieStore
     $rootScope.globals = $cookieStore.get('globals') || {};
 
     nutrifami.getSessionId();
+    nutrifami.training.initClient();
 
     $rootScope.$on('$locationChangeStart', function(event, next, current) {
 
@@ -170,7 +171,6 @@ nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cookieStore
 
 
     $ionicPlatform.ready(function() {
-        console.log("Entra");
         if (window.cordova) {
             $rootScope.TARGETPATH = cordova.file.applicationStorageDirectory;
         } else {

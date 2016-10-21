@@ -192,7 +192,7 @@ var nutrifami = {
             }
         });
 
-        
+
     },
     /*
      * nutrifami.subirUsuarioActivo(callback);
@@ -238,13 +238,30 @@ var nutrifami = {
          */
         initClient: function(capacitacion, callback) {
             callback = callback || function() {};
+            capacitacion = capacitacion || '';
 
-            nutrifami.training.cap_capacitacionesId = capacitacion["serv_capacitacionesId"];
-            nutrifami.training.cap_capacitaciones = capacitacion["serv_capacitaciones"];
-            nutrifami.training.cap_modulos = capacitacion["serv_modulos"];
-            nutrifami.training.cap_lecciones = capacitacion["serv_lecciones"];
-            nutrifami.training.cap_unidadesinformacion = capacitacion["serv_unidades"];
-
+            if (window.cordova) {
+                nutrifami.training.cap_capacitacionesId = capacitacion["serv_capacitacionesId"];
+                nutrifami.training.cap_capacitaciones = capacitacion["serv_capacitaciones"];
+                nutrifami.training.cap_modulos = capacitacion["serv_modulos"];
+                nutrifami.training.cap_lecciones = capacitacion["serv_lecciones"];
+                nutrifami.training.cap_unidadesinformacion = capacitacion["serv_unidades"];
+                console.log("Carga para móvil");
+            } else {
+                console.log("Carga para web");
+                $.getJSON("js/capacitacion.JSON", function(data) {
+                    nutrifami.training.cap_capacitacionesId = data['serv_capacitacionesId'];
+                    nutrifami.training.cap_capacitaciones = data['serv_capacitaciones'];
+                    nutrifami.training.cap_modulos = data['serv_modulos'];
+                    nutrifami.training.cap_lecciones = data['serv_lecciones'];
+                    nutrifami.training.cap_unidadesinformacion = data['serv_unidades'];
+                    console.log(data);
+                }).fail(function(jqxhr, textStatus, error) {
+                    console.log(jqxhr);
+                    var err = textStatus + ", " + error;
+                    console.log("Request Failed: " + err);
+                });
+            }
         },
         /*
          * nutrifami.training.downloadCapacitacion(cid, callback);
