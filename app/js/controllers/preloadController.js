@@ -1,10 +1,10 @@
 /*global angular*/
-nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, $scope, $ionicLoading, $rootScope, $timeout, $q, $location, $cordovaFileTransfer) {
+nutrifamiMobile.controller('PreloadController', function ($ionicPlatform, $http, $scope, $ionicLoading, $rootScope, $timeout, $q, $location, $cordovaFileTransfer) {
     'use strict';
-    $ionicPlatform.ready(function() {
+    $ionicPlatform.ready(function () {
 
 
-        // Show the loading overlay and text
+        // Abrimos el overlay de mientras se descargan los archivos
         $scope.loading = $ionicLoading.show({
             template: 'Descargando archivos',
             animation: 'fade-in',
@@ -17,53 +17,51 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
         var trustHosts = true;
         var options = {};
 
-        if (window.cordova) {
-            targetPath = cordova.file.applicationStorageDirectory + "capacitacion.JSON";
-        } else {
-            targetPath = "js/capacitacion.JSON";
-        }
-
         $scope.url = url;
         $scope.targetPath = targetPath;
         $scope.trustHosts = trustHosts;
         $scope.response = "";
-        $scope.imagenPrueba = '';
         $scope.totalArchivos = 0;
         $scope.archivosDescargados = 0;
         $scope.archivosError = 0;
         $scope.errores = [];
 
-        /* Descargamos el archivo json de capacitaciones*/
+        //Descargamos el archivo json de capacitaciones
         if (window.cordova) {
+            targetPath = cordova.file.applicationStorageDirectory + "capacitacion.JSON";
             $cordovaFileTransfer.download(url, targetPath, options, trustHosts)
-                .then(function(result) {
-                    // Success!
-                    $scope.response = "capacitación cargada con éxito!! :)";
-                    cargarCapacitacion(targetPath, function() {
-                        predescargaAssets();
+                    .then(function (result) {
+                        // Success!
+                        $scope.response = "capacitación cargada con éxito!! :)";
+                        cargarCapacitacion(targetPath, function () {
+                            predescargaAssets();
+                        });
+                    }, function (err) {
+                        $scope.response = err;
+                    }, function (progress) {
+                        $timeout(function () {
+                            $scope.downloadProgress = (progress.loaded / progress.total) * 100;
+                        });
                     });
-                }, function(err) {
-                    // Error
-                    $scope.response = err;
-                }, function(progress) {
-                    $timeout(function() {
-                        $scope.downloadProgress = (progress.loaded / progress.total) * 100;
-                    });
-                });
         } else {
-            cargarCapacitacion(targetPath, function() {
+            targetPath = "js/capacitacion.JSON";
+            cargarCapacitacion(targetPath, function () {
                 predescargaAssets();
             });
         }
 
 
         function cargarCapacitacion(archivo, callback) {
-            callback = callback || function() {};
-            /* Intentamos cargar el archivo json */
-            $http.get(archivo).then(function(response) {
+            callback = callback || function () {
+            };
+            
+            // Intentamos cargar el archivo json 
+            $http.get(archivo).then(function (response) {
                 $scope.myData = response.data;
-                nutrifami.training.initClient(response.data);
-                callback();
+                nutrifami.training.initClient(response.data, function(){
+                    callback();
+                });
+                
 
             }, function errorCallback(response) {
                 $scope.response = response.statusText;
@@ -73,7 +71,8 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
 
         function predescargaAssets() {
 
-            var recursos1 = [];
+            //Definimos varios lotes de descarga para que no se bloquee la app
+            var modulos = [];
             var recursos2 = [];
             var recursos3 = [];
             var recursos4 = [];
@@ -85,24 +84,22 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
             var opciones6 = [];
             var opciones7 = [];
 
-
-
             /* Preparar modulos*/
             var serv_modulos = $scope.myData.serv_modulos;
             var assets = ['titulo', 'descripcion', 'imagen', 'imagen2'];
             var asset = '';
             for (var i in serv_modulos) {
                 for (var j in assets) {
-                    if (j < 2) {
+                    if (j < 2) { //Descargamos titulos y descripcion
                         if (serv_modulos[i][assets[j]].audio.nombre != "") {
                             asset = serv_modulos[i][assets[j]].audio;
                         }
-                    } else {
+                    } else { // Descargamos imagen y imagen2
                         if (serv_modulos[i][assets[j]].nombre != "") {
                             asset = serv_modulos[i][assets[j]];
                         }
                     }
-                    recursos1.push(asset);
+                    modulos.push(asset);
                 }
             }
 
@@ -181,48 +178,48 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
                     }
                 }
             }
-            comprobarArchivosExistentes(recursos1).then(function(response) {
-                descargarArchivosFaltantes(response).then(function(msg) {
+            comprobarArchivosExistentes(modulos).then(function (response) {
+                descargarArchivosFaltantes(response).then(function (msg) {
                     console.log('Lote 01 descargado');
 
-                    comprobarArchivosExistentes(recursos2).then(function(response) {
-                        descargarArchivosFaltantes(response).then(function(msg) {
+                    comprobarArchivosExistentes(recursos2).then(function (response) {
+                        descargarArchivosFaltantes(response).then(function (msg) {
                             console.log('Lote 02 descargado');
 
-                            comprobarArchivosExistentes(recursos3).then(function(response) {
-                                descargarArchivosFaltantes(response).then(function(msg) {
+                            comprobarArchivosExistentes(recursos3).then(function (response) {
+                                descargarArchivosFaltantes(response).then(function (msg) {
                                     console.log('Lote 03 descargado');
 
-                                    comprobarArchivosExistentes(recursos4).then(function(response) {
-                                        descargarArchivosFaltantes(response).then(function(msg) {
+                                    comprobarArchivosExistentes(recursos4).then(function (response) {
+                                        descargarArchivosFaltantes(response).then(function (msg) {
                                             console.log('Lote 03 descargado');
 
-                                            comprobarArchivosExistentes(opciones1).then(function(response) {
-                                                descargarArchivosFaltantes(response).then(function(msg) {
+                                            comprobarArchivosExistentes(opciones1).then(function (response) {
+                                                descargarArchivosFaltantes(response).then(function (msg) {
                                                     console.log('Lote 2 descargado');
 
-                                                    comprobarArchivosExistentes(opciones2).then(function(response) {
-                                                        descargarArchivosFaltantes(response).then(function(msg) {
+                                                    comprobarArchivosExistentes(opciones2).then(function (response) {
+                                                        descargarArchivosFaltantes(response).then(function (msg) {
                                                             console.log('Lote 3 descargado');
 
-                                                            comprobarArchivosExistentes(opciones3).then(function(response) {
-                                                                descargarArchivosFaltantes(response).then(function(msg) {
+                                                            comprobarArchivosExistentes(opciones3).then(function (response) {
+                                                                descargarArchivosFaltantes(response).then(function (msg) {
                                                                     console.log('Lote 4 descargado');
 
-                                                                    comprobarArchivosExistentes(opciones4).then(function(response) {
-                                                                        descargarArchivosFaltantes(response).then(function(msg) {
+                                                                    comprobarArchivosExistentes(opciones4).then(function (response) {
+                                                                        descargarArchivosFaltantes(response).then(function (msg) {
                                                                             console.log('Lote 5 descargado');
 
-                                                                            comprobarArchivosExistentes(opciones5).then(function(response) {
-                                                                                descargarArchivosFaltantes(response).then(function(msg) {
+                                                                            comprobarArchivosExistentes(opciones5).then(function (response) {
+                                                                                descargarArchivosFaltantes(response).then(function (msg) {
                                                                                     console.log('Lote 6 descargado');
 
-                                                                                    comprobarArchivosExistentes(opciones6).then(function(response) {
-                                                                                        descargarArchivosFaltantes(response).then(function(msg) {
+                                                                                    comprobarArchivosExistentes(opciones6).then(function (response) {
+                                                                                        descargarArchivosFaltantes(response).then(function (msg) {
                                                                                             console.log('Lote 7 descargado');
 
-                                                                                            comprobarArchivosExistentes(opciones7).then(function(response) {
-                                                                                                descargarArchivosFaltantes(response).then(function(msg) {
+                                                                                            comprobarArchivosExistentes(opciones7).then(function (response) {
+                                                                                                descargarArchivosFaltantes(response).then(function (msg) {
                                                                                                     $ionicLoading.hide();
                                                                                                     console.log('Lote 8 descargado');
                                                                                                     console.log($scope.errores);
@@ -261,9 +258,9 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
             var promises = [];
 
 
-            recursos.forEach(function(i, x) {
+            recursos.forEach(function (i, x) {
                 //console.log($rootScope.TARGETPATH + i.nombre);
-                promises.push($http.get($rootScope.TARGETPATH + i.nombre).then(function(response) {
+                promises.push($http.get($rootScope.TARGETPATH + i.nombre).then(function (response) {
                     //onsole.log("Archivo existe: " + x);
                     archivosExistentes++;
                     recursos[x].loaded = true;
@@ -278,7 +275,7 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
 
             });
 
-            $q.all(promises).then(function(res) {
+            $q.all(promises).then(function (res) {
                 $scope.archivosExistentes = archivosExistentes;
                 deferred.resolve(recursos);
             });
@@ -294,24 +291,24 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
             var archivosError = 0;
             var promises = [];
 
-            recursos.forEach(function(i, x) {
+            recursos.forEach(function (i, x) {
                 var url = i.url;
                 var targetPath = $rootScope.TARGETPATH + i.nombre;
 
                 if (window.cordova) {
                     if (!i.loaded) {
-                        promises.push($cordovaFileTransfer.download(url, targetPath, {}, true).then(function(result) {
+                        promises.push($cordovaFileTransfer.download(url, targetPath, {}, true).then(function (result) {
                             console.log("Descarga archivo: " + targetPath);
                             $scope.response = "Descarga archivo completada";
                             archivosDescargados++;
                             $scope.archivosDescargados = archivosDescargados;
-                        }, function(err) {
+                        }, function (err) {
                             $scope.response = err.http_status;
                             $scope.errores.push(err);
                             archivosError++;
                             $scope.archivosError = archivosError;
-                        }, function(progress) {
-                            $timeout(function() {
+                        }, function (progress) {
+                            $timeout(function () {
                                 $scope.url = url;
                                 $scope.targetPath = targetPath;
                                 $scope.response = "Descargando Archivo";
@@ -322,7 +319,7 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
                 }
             });
 
-            $q.all(promises).then(function(res) {
+            $q.all(promises).then(function (res) {
                 deferred.resolve("Archivos descargados");
             });
 

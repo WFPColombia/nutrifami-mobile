@@ -155,8 +155,6 @@ nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cookieStore
     $rootScope.globals = $cookieStore.get('globals') || {};
 
     nutrifami.getSessionId();
-    nutrifami.training.initClient();
-
     $rootScope.$on('$locationChangeStart', function(event, next, current) {
 
         if ($location.path() === "") {

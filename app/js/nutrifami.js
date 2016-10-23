@@ -237,6 +237,7 @@ var nutrifami = {
          *  
          */
         initClient: function(capacitacion, callback) {
+            console.log("Init Client");
             callback = callback || function() {};
             capacitacion = capacitacion || '';
 
@@ -246,20 +247,18 @@ var nutrifami = {
                 nutrifami.training.cap_modulos = capacitacion["serv_modulos"];
                 nutrifami.training.cap_lecciones = capacitacion["serv_lecciones"];
                 nutrifami.training.cap_unidadesinformacion = capacitacion["serv_unidades"];
-                console.log("Carga para móvil");
+                callback();
             } else {
-                console.log("Carga para web");
                 $.getJSON("js/capacitacion.JSON", function(data) {
                     nutrifami.training.cap_capacitacionesId = data['serv_capacitacionesId'];
                     nutrifami.training.cap_capacitaciones = data['serv_capacitaciones'];
                     nutrifami.training.cap_modulos = data['serv_modulos'];
                     nutrifami.training.cap_lecciones = data['serv_lecciones'];
                     nutrifami.training.cap_unidadesinformacion = data['serv_unidades'];
-                    console.log(data);
+                    callback();
                 }).fail(function(jqxhr, textStatus, error) {
-                    console.log(jqxhr);
-                    var err = textStatus + ", " + error;
-                    console.log("Request Failed: " + err);
+                    console.log(jqxhr+": "+textStatus + ", " + error);
+                    callback();
                 });
             }
         },

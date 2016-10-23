@@ -1,7 +1,7 @@
 <style type="text/css">
-.unidad .leccion-avance-fixed::after {
-    background-image: url("{{TARGETPATH}}{{unidad.imagen.nombre}}");
-}
+    .unidad .leccion-avance-fixed::after {
+        background-image: url("{{TARGETPATH}}{{unidad.imagen.nombre}}");
+    }
 </style>
 <div class='unidad'>
     <header ng-show="scrolled">
@@ -28,6 +28,7 @@
                     <button class="icon ion-volume-high" aria-hidden="true"></button>
                 </div>
                 <p> {{ unidad.instruccion.texto}}</p>
+
             </div>
         </div>
         <div class="unidad-descripcion" ng-hide="scrolled">
@@ -41,16 +42,34 @@
             <div class="row">
                 <div class="col">
                     <img ng-src="{{TARGETPATH}}
-{{unidad.imagen.nombre}}" ng-hide="{{unidad.imagen === undefined|| unidad.imagen.nombre === ''}}" />
+                         {{unidad.imagen.nombre}}" ng-hide="{{unidad.imagen === undefined|| unidad.imagen.nombre === ''}}" />
+                </div>
+            </div>
+            <div class="row" ng-hide="unidad.texto == undefined || unidad.tipo.id == 1">
+                <div class="col">
+                    <p>{{ unidad.texto}}</p>
                 </div>
             </div>
         </div>
-        <div class="opciones" ng-hide="unidad.tipo.id == 2" ng-class=" scrolled ? 'scrolled':''">
-            <opcion-unidad-info ng-repeat="opcion in unidad.opciones" info="opcion" index="{{$index}}" colspan="unidad.colspan" ng-click="validar()"></opcion-unidad-info>
+
+        <div class="row">
+            <div class="col">
+                <div class="unidad-informativa" ng-show="unidad.tipo.id == 1">
+                    <p>{{ unidad.texto}}</p>
+                    <ul ng-repeat="opcion in unidad.opciones">
+                        <li>{{opcion.texto}}</li>
+                    </ul>
+                </div>
+            </div>
         </div>
+
         <div class="opciones" ng-show="unidad.tipo.id == 2">
             <opcion-pareja-unidad-info ng-repeat="opcion in unidad.opciones" opc1="unidad.opciones[$index]" opc2="unidad.opciones[$index+1]" index1="$index" index2="$index + 1"></opcion-pareja-unidad-info>
         </div>
+        <div class="opciones" ng-show="unidad.tipo.id == 3 || unidad.tipo.id == 4" ng-class=" scrolled ? 'scrolled':''">
+            <opcion-unidad-info ng-repeat="opcion in unidad.opciones" info="opcion" index="{{$index}}" colspan="unidad.colspan" ng-click="validar()"></opcion-unidad-info>
+        </div>
+
     </div>
 </ion-scroll>
 <div class="bar bar-footer calificar" ng-class=" botonCalificar ? 'habilitado' : ''">

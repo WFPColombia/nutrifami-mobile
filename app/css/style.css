@@ -1095,6 +1095,36 @@ button {
     font-size: 31px;
 }
 
+/* UNIDAD INFORMATIVA */
+
+.unidad .unidad-informativa{
+    background-color: #ffffff;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    color: #2f3e47;
+    text-align: left;
+    font-size: 12pt;
+    width: 100%;
+    padding: 20px 15px;
+}
+
+.unidad .unidad-informativa p{
+    margin-bottom: 30px;
+}
+
+.unidad .unidad-informativa ul{
+    padding-left: 10px;
+}
+
+.unidad .unidad-informativa ul li{
+    list-style: circle;
+    list-style-position: inside;
+}
+
+/* FINAL - UNIDAD INFORMATIVA */
+
 
 /*MODAL FEEDBACK*/
 
