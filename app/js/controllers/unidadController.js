@@ -1,9 +1,9 @@
 /*global angular*/
-nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope, $rootScope, $location, $stateParams, $ionicPopup, $ionicLoading, $ionicViewSwitcher, $ionicScrollDelegate, AudioService, UsuarioService, CapacitacionService) {
+nutrifamiMobile.controller('UnidadController', function($ionicPlatform, $scope, $rootScope, $location, $stateParams, $ionicPopup, $ionicLoading, $ionicViewSwitcher, $timeout, $ionicScrollDelegate, AudioService, UsuarioService, CapacitacionService) {
     'use strict';
-    $ionicPlatform.ready(function () {
+    $ionicPlatform.ready(function() {
 
-        nutrifami.training.initClient('', function () { //BEGIN CORDOVA FILES.
+        nutrifami.training.initClient('', function() { //BEGIN CORDOVA FILES.
             $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
             $scope.estadoUnidad = 'espera';
 
@@ -20,11 +20,14 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
                 'salir': 'audios/unidad-salir.mp3'
             };
 
+            $scope.textoBoton = 'Calificar';
+
             var tempOpciones = [];
 
-            /* Validamos si la unidad actual es de parejas o de otra 
+            /* Validamos el tipo de actividad
              * if - Si es parejas ponemos las imagenes de primeras y los textos abajo
              * else - Si es otro tipo de unidad, desorganizamos las opciones */
+
             if ($scope.unidad.tipo.id == 2) {
 
                 var tempImagenes = [];
@@ -45,9 +48,6 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
                 /* Se mezclan los arreglos */
                 shuffle(tempImagenes);
                 shuffle(tempOpciones);
-
-                console.log(tempImagenes);
-                console.log(tempOpciones);
 
                 var opcionesUnidad = [];
                 /* Se concatenan los arreglos elemento por elemento, con las imagenes primero y las opciones despues */
@@ -71,6 +71,16 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
                 }
                 shuffle(tempOpciones);
                 $scope.unidad.opciones = tempOpciones;
+
+                //Si es unidad informativa se crea el timer para habilitar el botón de seguir
+
+                if ($scope.unidad.tipo.id == 1) {
+                    $timeout(function() {
+                        $scope.botonCalificar = true;
+                        $scope.textoBoton = 'continuar';
+                    }, 10000);
+
+                }
             }
 
             /* Obtenemos la cantidad de respuestas correctas*/
@@ -96,7 +106,7 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
 
             AudioService.preloadSimple($scope.audios);
 
-            $scope.seleccionarOpcion = function (index) {
+            $scope.seleccionarOpcion = function(index) {
                 if ($scope.unidad.opciones[index].selected) {
                     $scope.unidad.opciones[index].selected = false;
                     respuestasSeleccionadas--;
@@ -131,7 +141,7 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
             var pareja2Pos = 0;
             var parejasCorrectas = 0;
 
-            $scope.seleccionarPareja = function (index) {
+            $scope.seleccionarPareja = function(index) {
                 /* Verifica si es una opcion que no ha hecho match para poderla seleccionar*/
                 if (!$scope.unidad.opciones[index].match) {
 
@@ -176,7 +186,7 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
 
                                 parejasCorrectas++;
                                 console.
-                                        log(parejasCorrectas);
+                                log(parejasCorrectas);
 
                                 if (parejasCorrectas == ($scope.unidad.opciones.length / 2)) {
                                     /*Si las parejas correctas es igual a la mitad de la cantidad de opciones habilitar el botón de continuar*/
@@ -184,10 +194,10 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
                                     $scope.feedback = {};
                                     var tempFeedbackAudios = {};
                                     var tempFeedback = [{
-                                            texto: $scope.unidad.opciones[i].feedback.texto,
-                                            nombre: 'feedback' + i
-                                                    /*audio: ngAudio.load($rootScope.TARGETPATH + $scope.unidad.opciones[i].feedback.audio.nombre)*/
-                                        }];
+                                        texto: $scope.unidad.opciones[i].feedback.texto,
+                                        nombre: 'feedback' + i
+                                            /*audio: ngAudio.load($rootScope.TARGETPATH + $scope.unidad.opciones[i].feedback.audio.nombre)*/
+                                    }];
 
                                     tempFeedbackAudios['feedback' + i] = $rootScope.TARGETPATH + $scope.unidad.opciones[i].feedback.audio.nombre;
                                     $scope.feedback.feedbacks = tempFeedback;
@@ -202,13 +212,13 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
                                         templateUrl: 'views/template/feedback.tpl.html',
                                         scope: $scope,
                                         buttons: [{
-                                                text: 'Continuar',
-                                                type: 'button-positive',
-                                                onTap: function (e) {
-                                                    AudioService.unload($scope.feedback.audios);
-                                                    $scope.cerrarFeedback();
-                                                }
-                                            }]
+                                            text: 'Continuar',
+                                            type: 'button-positive',
+                                            onTap: function(e) {
+                                                AudioService.unload($scope.feedback.audios);
+                                                $scope.cerrarFeedback();
+                                            }
+                                        }]
                                     });
                                 }
 
@@ -239,8 +249,14 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
                 }
             };
 
-            $scope.calificarUnidad = function () {
+            $scope.calificarUnidad = function() {
                 /* Validar si acerto o fallo*/
+
+                if ($scope.unidad.tipo.id == 1) {
+                    $scope.irASiguienteUnidad();
+                    return;
+                }
+
                 var respuestasAcertadas = 0;
                 var tempFeedbackAcierto = [];
                 var tempFeedbackAciertoAudios = {};
@@ -298,7 +314,7 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
                     textoBoton = 'Continuar';
                 }
 
-                AudioService.preloadSimple($scope.feedback.audios, function () {
+                AudioService.preloadSimple($scope.feedback.audios, function() {
                     $scope.playAudio(tempFeedbackUltimoAudio);
                 });
 
@@ -308,17 +324,17 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
                     templateUrl: 'views/template/feedback.tpl.html',
                     scope: $scope,
                     buttons: [{
-                            text: textoBoton,
-                            type: 'button-positive',
-                            onTap: function (e) {
-                                AudioService.unload($scope.feedback.audios);
-                                $scope.cerrarFeedback();
-                            }
-                        }]
+                        text: textoBoton,
+                        type: 'button-positive',
+                        onTap: function(e) {
+                            AudioService.unload($scope.feedback.audios);
+                            $scope.cerrarFeedback();
+                        }
+                    }]
                 });
             };
 
-            $scope.cerrarFeedback = function () {
+            $scope.cerrarFeedback = function() {
                 if ($scope.estadoUnidad === 'acierto') {
                     $scope.irASiguienteUnidad();
                 } else {
@@ -327,24 +343,24 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
 
             };
 
-            $scope.salirUnidad = function () {
+            $scope.salirUnidad = function() {
                 var popUpFeedback = $ionicPopup.show({
                     templateUrl: 'views/template/salirUnidad.tpl.html',
                     scope: $scope,
                     cssClass: 'salir-unidad',
                     buttons: [{
-                            text: 'Salir de la lección',
-                            type: 'button-positive',
-                            onTap: function (e) {
-                                AudioService.unload($scope.audios);
-                                $ionicViewSwitcher.nextDirection('back'); // 'forward', 'back', etc.
-                                $location.path('/app/capacitacion/' + $stateParams.modulo);
-                            }
-                        }]
+                        text: 'Salir de la lección',
+                        type: 'button-positive',
+                        onTap: function(e) {
+                            AudioService.unload($scope.audios);
+                            $ionicViewSwitcher.nextDirection('back'); // 'forward', 'back', etc.
+                            $location.path('/app/capacitacion/' + $stateParams.modulo);
+                        }
+                    }]
                 });
             }
 
-            $scope.irASiguienteUnidad = function () {
+            $scope.irASiguienteUnidad = function() {
                 $scope.siguienteUnidad = parseInt($stateParams.unidad) + 1;
 
                 if ($scope.siguienteUnidad > $scope.unidad.totalUnidades) {
@@ -375,7 +391,7 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
                         maxWidth: 40
                     });
 
-                    UsuarioService.setUsuarioAvance(usuarioAvance, data, function (response) {
+                    UsuarioService.setUsuarioAvance(usuarioAvance, data, function(response) {
                         $ionicLoading.hide();
                         if (response.success) {
                             $location.path('/capacitacion/' + $stateParams.modulo + "/" + $stateParams.leccion + "/" + $stateParams.unidad + "/leccion-terminada");
@@ -389,7 +405,7 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
                 }
             };
 
-            $scope.reiniciarUnidad = function () {
+            $scope.reiniciarUnidad = function() {
                 for (var i in $scope.unidad.opciones) {
                     $scope.unidad.opciones[i].selected = false;
                     $scope.unidad.opciones[i].evaluacion = false;
@@ -399,20 +415,20 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
                 $scope.botonCalificar = false;
             };
 
-            $scope.porcentajeAvance = function () {
+            $scope.porcentajeAvance = function() {
                 return (100 / $scope.unidad.totalUnidades * ($scope.unidad.numeroUnidad - 1));
             };
 
-            $scope.playAudio = function (audio) {
+            $scope.playAudio = function(audio) {
                 AudioService.play(audio, $scope.audios);
             };
 
-            $scope.getScrollPosition = function () {
+            $scope.getScrollPosition = function() {
 
                 if ($ionicScrollDelegate.getScrollPosition().top > 50) {
                     if (!$scope.scrolled) {
 
-                        $scope.$apply(function () {
+                        $scope.$apply(function() {
                             $scope.scrolled = true;
                         });
                     }
@@ -420,7 +436,7 @@ nutrifamiMobile.controller('UnidadController', function ($ionicPlatform, $scope,
                 } else {
                     if ($scope.scrolled) {
 
-                        $scope.$apply(function () {
+                        $scope.$apply(function() {
                             $scope.scrolled = false;
                         });
                     }

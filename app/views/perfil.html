@@ -14,115 +14,113 @@
                                     <h1>Mi información</h1>
                                 </div>
                                 <div class="perfil-body">
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label>Nombres</label>
-                                                    <p ng-class="usuarioActivo.nombre != undefined && usuarioActivo.nombre!='' ? '' : 'sin-registro'">{{ usuarioActivo.nombre!=undefined && usuarioActivo.nombre!=''  ? usuarioActivo.nombre:'Nombre no ingresado'}}</p>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label>Apellidos</label>
-                                                    <p ng-class="usuarioActivo.apellido != undefined && usuarioActivo.apellido!='' ? '' : 'sin-registro'">{{ usuarioActivo.apellido!=undefined && usuarioActivo.apellido!=''  ? usuarioActivo.apellido: 'Apellido no ingresado'}}</p>
-                                                </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label>Nombres</label>
+                                                <p ng-class="usuarioActivo.nombre != undefined && usuarioActivo.nombre!='' ? '' : 'sin-registro'">{{ usuarioActivo.nombre!=undefined && usuarioActivo.nombre!='' ? usuarioActivo.nombre:'Nombre no ingresado'}}</p>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label>Documento de Identidad</label>
-                                                    <p ng-class="usuarioActivo.login_documento != undefined && usuarioActivo.login_documento!='' ? '' : 'sin-registro'">{{ usuarioActivo.login_documento!=undefined && usuarioActivo.login_documento!=''  ? usuarioActivo.login_documento: 'Documento no ingresado'}}</p>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label>Genero</label>
-                                                    <p ng-class="usuarioActivo.genero != undefined && usuarioActivo.genero!='' ? '' : 'sin-registro'">{{ usuarioActivo.genero != undefined && usuarioActivo.genero != '' ? (usuarioActivo.genero == 'F' ? 'Femenino' : 'Masculino') : 'Genero no ingresado'}}</p>
-                                                </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label>Apellidos</label>
+                                                <p ng-class="usuarioActivo.apellido != undefined && usuarioActivo.apellido!='' ? '' : 'sin-registro'">{{ usuarioActivo.apellido!=undefined && usuarioActivo.apellido!='' ? usuarioActivo.apellido: 'Apellido no ingresado'}}</p>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label>Correo electrónico</label>
-                                                    <p ng-class="usuarioActivo.email != undefined && usuarioActivo.email!='' ? '' : 'sin-registro'">{{ usuarioActivo.email!=undefined && usuarioActivo.email!=''   ? usuarioActivo.email: 'Documento no ingresado'}}</p>
-                                                </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label>Documento de Identidad</label>
+                                                <p ng-class="usuarioActivo.login_documento != undefined && usuarioActivo.login_documento!='' ? '' : 'sin-registro'">{{ usuarioActivo.login_documento!=undefined && usuarioActivo.login_documento!='' ? usuarioActivo.login_documento: 'Documento no ingresado'}}</p>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label>Dirección</label>
-                                                    <p ng-class="usuarioActivo.direccion != undefined && usuarioActivo.direccion!='' ? '' : 'sin-registro'">{{ usuarioActivo.direccion!=undefined && usuarioActivo.direccion!=''  ? usuarioActivo.direccion: 'Direccion no ingresada'}}</p>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label>Teléfono</label>
-                                                    <p ng-class="usuarioActivo.telefono != undefined && usuarioActivo.telefono!='' ? '' : 'sin-registro'">{{ usuarioActivo.telefono!=undefined && usuarioActivo.telefono!=''  ? usuarioActivo.telefono: 'Teléfono no ingresado'}}</p>
-                                                </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label>Genero</label>
+                                                <p ng-class="usuarioActivo.genero != undefined && usuarioActivo.genero!='' ? '' : 'sin-registro'">{{ usuarioActivo.genero != undefined && usuarioActivo.genero != '' ? (usuarioActivo.genero == 'F' ? 'Femenino' : 'Masculino') : 'Genero no ingresado'}}</p>
                                             </div>
                                         </div>
-
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label>Fecha de Nacimiento</label>
-                                                    <p ng-class="usuarioActivo.birthdate != undefined && usuarioActivo.birthdate!='' ? '' : 'sin-registro'">{{ usuarioActivo.birthdate!=undefined && usuarioActivo.birthdate!=''  ? usuarioActivo.birthdate: 'Fecha no ingresada'}}</p>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label>Edad</label>
-                                                    <p ng-class="usuarioActivo.edad != undefined && usuarioActivo.edad!='' ? '' : 'sin-registro'">{{ usuarioActivo.edad!=undefined && usuarioActivo.edad!=''  ? usuarioActivo.edad: 'Edad no ingresada'}}</p>
-                                                </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label>Correo electrónico</label>
+                                                <p ng-class="usuarioActivo.email != undefined && usuarioActivo.email!='' ? '' : 'sin-registro'">{{ usuarioActivo.email!=undefined && usuarioActivo.email!='' ? usuarioActivo.email: 'Documento no ingresado'}}</p>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label>Departamento</label>
-                                                    <p ng-class="usuarioActivo.departamento != undefined && usuarioActivo.departamento!='' ? '' : 'sin-registro'">{{ usuarioActivo.departamento!=undefined && usuarioActivo.departamento!=''  ? usuarioActivo.departamento: 'Departamento no ingresado'}}</p>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label>Municipio</label>
-                                                    <p ng-class="usuarioActivo.municipio != undefined && usuarioActivo.municipio!='' ? '' : 'sin-registro'">{{ usuarioActivo.municipio!=undefined && usuarioActivo.municipio!=''  ? usuarioActivo.municipio: 'Municipio no ingresado'}}</p>
-                                                </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label>Dirección</label>
+                                                <p ng-class="usuarioActivo.direccion != undefined && usuarioActivo.direccion!='' ? '' : 'sin-registro'">{{ usuarioActivo.direccion!=undefined && usuarioActivo.direccion!='' ? usuarioActivo.direccion: 'Direccion no ingresada'}}</p>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label>Comunidad</label>
-                                                    <p ng-class="usuarioActivo.comunidad != undefined && usuarioActivo.comunidad!='' ? '' : 'sin-registro'">{{ usuarioActivo.comunidad!=undefined && usuarioActivo.comunidad!=''  ? usuarioActivo.comunidad: 'Comunidad no ingresada'}}</p>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label>Zona</label>
-                                                    <p ng-class="usuarioActivo.zona != undefined && usuarioActivo.zona!='' ? '' : 'sin-registro'">{{ usuarioActivo.zona!=undefined && usuarioActivo.zona!=''  ? usuarioActivo.zona: 'Zona no ingresada'}}</p>
-                                                </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label>Teléfono</label>
+                                                <p ng-class="usuarioActivo.telefono != undefined && usuarioActivo.telefono!='' ? '' : 'sin-registro'">{{ usuarioActivo.telefono!=undefined && usuarioActivo.telefono!='' ? usuarioActivo.telefono: 'Teléfono no ingresado'}}</p>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label>Etnia</label>
-                                                    <p ng-class="usuarioActivo.etnia != undefined && usuarioActivo.etnia!='' ? '' : 'sin-registro'">{{ usuarioActivo.etnia!=undefined && usuarioActivo.etnia!=''  ? usuarioActivo.etnia: 'Etina no ingresada'}}</p>
-                                                </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label>Fecha de Nacimiento</label>
+                                                <p ng-class="usuarioActivo.birthdate != undefined && usuarioActivo.birthdate!='' ? '' : 'sin-registro'">{{ usuarioActivo.birthdate!=undefined && usuarioActivo.birthdate!='' ? usuarioActivo.birthdate: 'Fecha no ingresada'}}</p>
                                             </div>
                                         </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label>Edad</label>
+                                                <p ng-class="usuarioActivo.edad != undefined && usuarioActivo.edad!='' ? '' : 'sin-registro'">{{ usuarioActivo.edad!=undefined && usuarioActivo.edad!='' ? usuarioActivo.edad: 'Edad no ingresada'}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label>Departamento</label>
+                                                <p ng-class="usuarioActivo.departamento != undefined && usuarioActivo.departamento!='' ? '' : 'sin-registro'">{{ usuarioActivo.departamento!=undefined && usuarioActivo.departamento!='' ? usuarioActivo.departamento: 'Departamento no ingresado'}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label>Municipio</label>
+                                                <p ng-class="usuarioActivo.municipio != undefined && usuarioActivo.municipio!='' ? '' : 'sin-registro'">{{ usuarioActivo.municipio!=undefined && usuarioActivo.municipio!='' ? usuarioActivo.municipio: 'Municipio no ingresado'}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label>Comunidad</label>
+                                                <p ng-class="usuarioActivo.comunidad != undefined && usuarioActivo.comunidad!='' ? '' : 'sin-registro'">{{ usuarioActivo.comunidad!=undefined && usuarioActivo.comunidad!='' ? usuarioActivo.comunidad: 'Comunidad no ingresada'}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label>Zona</label>
+                                                <p ng-class="usuarioActivo.zona != undefined && usuarioActivo.zona!='' ? '' : 'sin-registro'">{{ usuarioActivo.zona!=undefined && usuarioActivo.zona!='' ? usuarioActivo.zona: 'Zona no ingresada'}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label>Etnia</label>
+                                                <p ng-class="usuarioActivo.etnia != undefined && usuarioActivo.etnia!='' ? '' : 'sin-registro'">{{ usuarioActivo.etnia!=undefined && usuarioActivo.etnia!='' ? usuarioActivo.etnia: 'Etina no ingresada'}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="zona-segura"></div>
                             </div>
-                            
                         </div>
                     </ion-content>
                 </ion-tab>
-                <ion-tab title="Mi familia" >
+                <ion-tab title="Mi familia">
                     <ion-content class="has-header" overflow-scroll="true">
                         <div class="row">
                             <div class="perfil-panel">
@@ -132,12 +130,11 @@
                                     <h3>{{ usuarioFamilia.totalMiembrosPorInscribir}} miembros no inscritos</h3>
                                 </div>
                                 <div class="perfil-body">
-
                                     <div class="miembros-header">
                                         <div class="row">
-                                            <div class="col">Cantidad</div>
+                                            <div class="col">Miembros</div>
                                             <div class="col">Rango edad</div>
-                                            <div class="col">Editar info</div>  
+                                            <div class="col">Editar info</div>
                                         </div>
                                     </div>
                                     <div class="miembros-body">
@@ -156,7 +153,7 @@
                                         <div class="row">
                                             <div class="col">Nombres</div>
                                             <div class="col">Parentesco</div>
-                                            <div class="col">Documento</div>  
+                                            <div class="col">Documento</div>
                                         </div>
                                     </div>
                                     <div class="miembros-body">
@@ -169,7 +166,6 @@
                                 </div>
                                 <div class="zona-segura"></div>
                             </div>
-                            
                         </div>
                     </ion-content>
                 </ion-tab>
