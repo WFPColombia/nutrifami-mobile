@@ -11,11 +11,8 @@ nutrifamiMobile.factory('AudioService', function($cordovaNativeAudio) {
      */
     service.preloadSimple = function(audios, callback) {
         callback = callback || function() {};
-        console.log("Preloadsimple");
-        console.log(audios);
         if (window.plugins && window.plugins.NativeAudio) {
             for (var audio in audios) {
-                console.log(audios[audio]);
                 $cordovaNativeAudio.preloadSimple(audio, audios[audio])
                     .then(function(msg) {}, function(error) {
                         console.log(error);
@@ -38,7 +35,6 @@ nutrifamiMobile.factory('AudioService', function($cordovaNativeAudio) {
     service.play = function(audio, audios) {
 
         this.stopAll(audios, function() {
-            console.log(audio);
             if (window.plugins && window.plugins.NativeAudio) {
                 $cordovaNativeAudio.play(audio);
             }
@@ -54,7 +50,6 @@ nutrifamiMobile.factory('AudioService', function($cordovaNativeAudio) {
      * 
      */
     service.stopAll = function(audios, callback) {
-        console.log("stopAll");
         for (var audio in audios) {
             if (window.plugins && window.plugins.NativeAudio) {
                 $cordovaNativeAudio.stop(audio);
@@ -72,7 +67,6 @@ nutrifamiMobile.factory('AudioService', function($cordovaNativeAudio) {
      * 
      */
     service.unload = function(audios) {
-        console.log("unload");
         this.stopAll(audios, function() {
             for (var audio in audios) {
                 if (window.plugins && window.plugins.NativeAudio) {
