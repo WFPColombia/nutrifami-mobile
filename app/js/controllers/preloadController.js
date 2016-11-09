@@ -1,14 +1,7 @@
 /*global angular*/
-nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, $scope, $ionicLoading, $rootScope, $timeout, $q, $location, $cordovaFileTransfer) {
+nutrifamiMobile.controller('PreloadController', function ($ionicPlatform, $http, $scope, $ionicLoading, $rootScope, $timeout, $q, $location, $cordovaFileTransfer) {
     'use strict';
-    $ionicPlatform.ready(function() {
-
-        var test = 0;
-        var test2 = 0;
-        var test3 = 0;
-
-
-
+    $ionicPlatform.ready(function () {
 
         // Abrimos el overlay de mientras se descargan los archivos
         $scope.loading = $ionicLoading.show({
@@ -22,6 +15,9 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
         var url = "http://nutrifami.org/js/capacitacion.JSON";
         var trustHosts = true;
         var options = {};
+        var archivosFaltantes = [];
+        var archivosDescargados = 0;
+        var archivosError = 0;
 
         $scope.url = url;
         $scope.targetPath = targetPath;
@@ -36,38 +32,36 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
         if (window.cordova) {
             targetPath = cordova.file.applicationStorageDirectory + "capacitacion.JSON";
             $cordovaFileTransfer.download(url, targetPath, options, trustHosts)
-                .then(function(result) {
-                    // Success!
-                    $scope.response = "capacitación cargada con éxito!! :)";
-                    cargarCapacitacion(targetPath, function() {
-                        predescargaAssets();
+                    .then(function (result) {
+                        // Success!
+                        $scope.response = "capacitación cargada con éxito!! :)";
+                        cargarCapacitacion(targetPath, function () {
+                            predescargaAssets();
+                        });
+                    }, function (err) {
+                        $scope.response = err;
+                    }, function (progress) {
+                        $timeout(function () {
+                            $scope.downloadProgress = (progress.loaded / progress.total) * 100;
+                        });
                     });
-                }, function(err) {
-                    $scope.response = err;
-                }, function(progress) {
-                    $timeout(function() {
-                        $scope.downloadProgress = (progress.loaded / progress.total) * 100;
-                    });
-                });
         } else {
             targetPath = "js/capacitacion.JSON";
-            cargarCapacitacion(targetPath, function() {
+            cargarCapacitacion(targetPath, function () {
                 predescargaAssets();
             });
         }
 
 
         function cargarCapacitacion(archivo, callback) {
-            callback = callback || function() {};
-
+            callback = callback || function () {
+            };
             // Intentamos cargar el archivo json 
-            $http.get(archivo).then(function(response) {
+            $http.get(archivo).then(function (response) {
                 $scope.myData = response.data;
-                nutrifami.training.initClient(response.data, function() {
+                nutrifami.training.initClient(response.data, function () {
                     callback();
                 });
-
-
             }, function errorCallback(response) {
                 $scope.response = response.statusText;
                 callback();
@@ -77,17 +71,7 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
         function predescargaAssets() {
 
             //Definimos varios lotes de descarga para que no se bloquee la app
-            var modulos = [];
-            var recursos2 = [];
-            var recursos3 = [];
-            var recursos4 = [];
-            var opciones1 = [];
-            var opciones2 = [];
-            var opciones3 = [];
-            var opciones4 = [];
-            var opciones5 = [];
-            var opciones6 = [];
-            var opciones7 = [];
+            var recursos = [];
 
             /* Preparar modulos*/
             var serv_modulos = $scope.myData.serv_modulos;
@@ -97,16 +81,13 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
                 for (var j in assets) {
                     if (j < 2) { //Descargamos titulos y descripcion
                         if (serv_modulos[i][assets[j]].audio.nombre) {
-                            test++;
                             asset = serv_modulos[i][assets[j]].audio;
-                            modulos.push(asset);
+                            recursos.push(asset);
                         }
                     } else { // Descargamos imagen y imagen2
                         if (serv_modulos[i][assets[j]].nombre) {
-                            test++;
-
                             asset = serv_modulos[i][assets[j]];
-                            modulos.push(asset);
+                            recursos.push(asset);
                         }
                     }
                 }
@@ -119,16 +100,14 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
                 for (var j in assets) {
                     if (j < 2) {
                         if (serv_lecciones[i][assets[j]].audio.nombre) {
-                            test++;
                             asset = serv_lecciones[i][assets[j]].audio;
-                            recursos2.push(asset);
+                            recursos.push(asset);
 
                         }
                     } else {
                         if (serv_lecciones[i][assets[j]].nombre) {
-                            test++;
                             asset = serv_lecciones[i][assets[j]];
-                            recursos2.push(asset);
+                            recursos.push(asset);
 
                         }
                     }
@@ -146,16 +125,14 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
                 for (var j in assets) {
                     if (j < 2) {
                         if (serv_unidades[i][assets[j]] && serv_unidades[i][assets[j]].audio.nombre) {
-                            test++;
                             asset1 = serv_unidades[i][assets[j]].audio;
-                            recursos3.push(asset1);
+                            recursos.push(asset1);
 
                         }
                     } else {
                         if (serv_unidades[i][assets[j]] && serv_unidades[i][assets[j]].nombre) {
-                            test++;
                             asset2 = serv_unidades[i][assets[j]];
-                            recursos4.push(asset2);
+                            recursos.push(asset2);
                         }
                     }
                 }
@@ -164,43 +141,17 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
                     for (var l in assets_opciones) {
                         if (l < 1) {
                             if (serv_unidades[i].opciones[k][assets_opciones[l]] && serv_unidades[i].opciones[k][assets_opciones[l]].audio.nombre) {
-                                test++;
                                 var asset = serv_unidades[i].opciones[k][assets_opciones[l]].audio;
-                                if (k < 50) {
-                                    opciones1.push(asset);
-                                } else if (k < 100) {
-                                    opciones2.push(asset);
-                                } else if (k < 150) {
-                                    opciones3.push(asset);
-                                } else if (k < 200) {
-                                    opciones4.push(asset);
-                                } else if (k < 250) {
-                                    opciones5.push(asset);
-                                } else if (k < 300) {
-                                    opciones6.push(asset);
-                                } else if (k < 350) {
-                                    opciones7.push(asset);
-                                }
+
+                                recursos.push(asset);
+
                             }
                         } else {
                             if (serv_unidades[i].opciones[k][assets_opciones[l]] && serv_unidades[i].opciones[k][assets_opciones[l]].nombre) {
-                                test++;
                                 var asset = serv_unidades[i].opciones[k][assets_opciones[l]];
-                                if (k < 50) {
-                                    opciones1.push(asset);
-                                } else if (k < 100) {
-                                    opciones2.push(asset);
-                                } else if (k < 150) {
-                                    opciones3.push(asset);
-                                } else if (k < 200) {
-                                    opciones4.push(asset);
-                                } else if (k < 250) {
-                                    opciones5.push(asset);
-                                } else if (k < 300) {
-                                    opciones6.push(asset);
-                                } else if (k < 350) {
-                                    opciones7.push(asset);
-                                }
+
+                                recursos.push(asset);
+
                             }
                         }
 
@@ -208,75 +159,20 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
                     }
                 }
             }
-            comprobarArchivosExistentes(modulos).then(function(response) {
-                descargarArchivosFaltantes(response).then(function(msg) {
-                    console.log('Lote 01 descargado');
+            console.log("Recursos completos:");
+            console.log(recursos);
 
-                    comprobarArchivosExistentes(recursos2).then(function(response) {
-                        descargarArchivosFaltantes(response).then(function(msg) {
-                            console.log('Lote 02 descargado');
-
-                            comprobarArchivosExistentes(recursos3).then(function(response) {
-                                descargarArchivosFaltantes(response).then(function(msg) {
-                                    console.log('Lote 03 descargado');
-
-                                    comprobarArchivosExistentes(recursos4).then(function(response) {
-                                        descargarArchivosFaltantes(response).then(function(msg) {
-                                            console.log('Lote 04 descargado');
-
-                                            comprobarArchivosExistentes(opciones1).then(function(response) {
-                                                descargarArchivosFaltantes(response).then(function(msg) {
-                                                    console.log('Lote 05 descargado');
-
-                                                    comprobarArchivosExistentes(opciones2).then(function(response) {
-                                                        descargarArchivosFaltantes(response).then(function(msg) {
-                                                            console.log('Lote 06 descargado');
-
-                                                            comprobarArchivosExistentes(opciones3).then(function(response) {
-                                                                descargarArchivosFaltantes(response).then(function(msg) {
-                                                                    console.log('Lote 07 descargado');
-
-                                                                    comprobarArchivosExistentes(opciones4).then(function(response) {
-                                                                        descargarArchivosFaltantes(response).then(function(msg) {
-                                                                            console.log('Lote 08 descargado');
-
-                                                                            comprobarArchivosExistentes(opciones5).then(function(response) {
-                                                                                descargarArchivosFaltantes(response).then(function(msg) {
-                                                                                    console.log('Lote 09 descargado');
-
-                                                                                    comprobarArchivosExistentes(opciones6).then(function(response) {
-                                                                                        descargarArchivosFaltantes(response).then(function(msg) {
-                                                                                            console.log('Lote 10 descargado');
-
-                                                                                            comprobarArchivosExistentes(opciones7).then(function(response) {
-                                                                                                descargarArchivosFaltantes(response).then(function(msg) {
-                                                                                                    $ionicLoading.hide();
-                                                                                                    console.log('Lote 8 descargado');
-                                                                                                    console.log($scope.errores);
-                                                                                                    console.log("Descarga finalizada");
-                                                                                                    $location.path('/login');
-
-                                                                                                });
-                                                                                            });
-                                                                                        });
-                                                                                    });
-                                                                                });
-                                                                            });
-                                                                        });
-                                                                    });
-                                                                });
-                                                            });
-                                                        });
-                                                    });
-                                                });
-                                            });
-                                        });
-                                    });
-                                });
-                            });
-                        });
-                    });
-                });
+            comprobarArchivosExistentes(recursos).then(function (response) {
+                console.log("Recursos faltantes");
+                console.log(response);
+                archivosFaltantes = response;
+                $scope.totalArchivos = archivosFaltantes.length;
+                descargarArchivo(0);
+                /*descargarArchivosFaltantes(response).then(function (msg) {
+                 console.log('Lote 01 descargado');
+                 
+                 
+                 });*/
             });
         }
 
@@ -288,23 +184,18 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
 
             var promises = [];
 
-
-            recursos.forEach(function(i, x) {
-                test2++;
-                promises.push($http.get($rootScope.TARGETPATH + i.nombre).then(function(response) {
+            recursos.forEach(function (i, x) {
+                promises.push($http.get($rootScope.TARGETPATH + i.nombre).then(function (response) {
                     archivosExistentes++;
                     recursos[x].loaded = true;
-
                 }, function errorCallback(response) {
                     if (typeof recursos[x] !== 'undefined' || recursos[x] !== '') {
                         recursos[x].loaded = false;
                     }
-
                 }));
-
             });
 
-            $q.all(promises).then(function(res) {
+            $q.all(promises).then(function (res) {
                 $scope.archivosExistentes = archivosExistentes;
                 deferred.resolve(recursos);
             });
@@ -312,47 +203,93 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
 
         }
 
-        function descargarArchivosFaltantes(recursos) {
+        /*function descargarArchivo(recursos) {
+         
+         var deferred = $q.defer();
+         $scope.totalArchivos = recursos.length;
+         var archivosDescargados = 0;
+         var archivosError = 0;
+         var promises = [];
+         
+         recursos.forEach(function (i, x) {
+         test3++;
+         var url = i.url;
+         var targetPath = $rootScope.TARGETPATH + i.nombre;
+         
+         if (window.cordova) {
+         if (!i.loaded) {
+         promises.push($cordovaFileTransfer.download(url, targetPath, {}, true).then(function (result) {
+         $scope.response = "Descarga archivo completada";
+         archivosDescargados++;
+         $scope.archivosDescargados = archivosDescargados;
+         }, function (err) {
+         $scope.response = err.http_status;
+         $scope.errores.push(err);
+         archivosError++;
+         $scope.archivosError = archivosError;
+         }, function (progress) {
+         $timeout(function () {
+         $scope.url = url;
+         $scope.targetPath = targetPath;
+         $scope.response = "Descargando Archivo";
+         $scope.downloadProgress = (progress.loaded / progress.total) * 100;
+         });
+         }));
+         }
+         }
+         });
+         
+         $q.all(promises).then(function (res) {
+         deferred.resolve("Archivos descargados");
+         });
+         
+         return deferred.promise;
+         }*/
 
-            var deferred = $q.defer();
-            $scope.totalArchivos = recursos.length;
-            var archivosDescargados = 0;
-            var archivosError = 0;
-            var promises = [];
-
-            recursos.forEach(function(i, x) {
-                test3++;
-                var url = i.url;
-                var targetPath = $rootScope.TARGETPATH + i.nombre;
-
+        function descargarArchivo(id) {
+            if (archivosFaltantes[id]) {
+                console.log(!archivosFaltantes[id].loaded);
                 if (window.cordova) {
-                    if (!i.loaded) {
-                        promises.push($cordovaFileTransfer.download(url, targetPath, {}, true).then(function(result) {
-                            $scope.response = "Descarga archivo completada";
-                            archivosDescargados++;
-                            $scope.archivosDescargados = archivosDescargados;
-                        }, function(err) {
-                            $scope.response = err.http_status;
-                            $scope.errores.push(err);
-                            archivosError++;
-                            $scope.archivosError = archivosError;
-                        }, function(progress) {
-                            $timeout(function() {
-                                $scope.url = url;
-                                $scope.targetPath = targetPath;
-                                $scope.response = "Descargando Archivo";
-                                $scope.downloadProgress = (progress.loaded / progress.total) * 100;
-                            });
-                        }));
+                    if (!archivosFaltantes[id].loaded) {
+                        var url = encodeURI(archivosFaltantes[id].url);
+                        var targetPath = cordova.file.applicationStorageDirectory + archivosFaltantes[id].nombre;
+                        $cordovaFileTransfer.download(url, targetPath, options, trustHosts)
+                                .then(function (entry) {
+                                    // Success!
+                                    console.log("download complete: " + entry.toURL());
+                                    $scope.response = "Descarga archivo completada";
+                                    archivosDescargados++;
+                                    $scope.archivosDescargados = archivosDescargados;
+                                    descargarArchivo(id + 1);
+                                }, function (error) {
+                                    console.log("download error source " + error.source);
+                                    console.log("download error target " + error.target);
+                                    console.log("download error code" + error.code);
+                                    $scope.response = error.http_status;
+                                    $scope.errores.push(error);
+                                    archivosError++;
+                                    $scope.archivosError = archivosError;
+                                    descargarArchivo(id + 1);
+                                }, function (progress) {
+                                    $timeout(function () {
+                                        $scope.url = url;
+                                        $scope.targetPath = targetPath;
+                                        $scope.response = "Descargando Archivo";
+                                        $scope.downloadProgress = (progress.loaded / progress.total) * 100;
+                                    });
+                                });
+                    }
+                    else {
+                        descargarArchivo(id + 1);
                     }
                 }
-            });
-
-            $q.all(promises).then(function(res) {
-                deferred.resolve("Archivos descargados");
-            });
-
-            return deferred.promise;
+            } else {
+                $ionicLoading.hide();
+                console.log('Lote 8 descargado');
+                console.log($scope.errores);
+                console.log("Descarga finalizada");
+                $location.path('/login');
+            }
         }
     });
 });
