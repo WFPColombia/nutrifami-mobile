@@ -9,9 +9,10 @@ Instalación de de modulos con Node
   - Instalar node.js (Agregar al path)
   - Navegar al root del proyecto
   - Instalar dependencias.
-  -     $npm install
-        $npm install --save-dev
-
+```bash
+[sudo] npm install 
+[sudo] npm install --save-dev
+```
 
 
 Instalación de librerias con Bower.
@@ -28,15 +29,22 @@ Instalación de Ionic y Cordova.
 -----------------------------------
 
   - Instalar cordova y ionic globalmente
-  -     $npm install -g cordova ionic
+```bash
+[sudo] npm install -g cordova ionic
+```
   - Crear una carpeta llamada 'www' en el root del proyecto.
-  - Copiar y remplazar el contenido de la carpeta plugins_ en puglins
-  - IMPORTANTE: Remover plataforma android del proyecto 
-  -     $cordova plarform remove android     
-  - IMPORTANTE: Agregar plataforma android al proyecto (El paso anterior y este es para actualiar el plugin de audio y que funcione el sonido dentro de la aplicación)
-  -     $cordova plarform add android
+```bash
+[sudo] ionic plarform add android
+```
+  - Generar los 'resources'
+```bash
+[sudo] ionic resources
+```
+  - Copiar la carpeta generada /res en plataforms/android y remplazar todo lo existente
   - IMPORTANTE: Crear una aplicación de ionic en una ubicación diferente a la de nuestro proyecto:
-  -     $ionic start IonicApp blank
+```bash
+[sudo] ionic start IonicApp blank
+```
   - Del proyecto creado copiar la carpeta IonicApp/www/lib/ionic en /nutrifami-mobile/app/lib/ionic
 
 
@@ -44,25 +52,37 @@ Tareas Gulp
 ------------
 
 - Instalar gulp globalmente
--       $npm install -g gulp
+```bash
+[sudo] npm install -g gulp
+```
 
-Tareas configuradas con gulp
+Tareas configuradas con gulp:
 
 - Ejecutar servidor web de desarrollo [Tarea por defecto]
--       $gulp
+```bash
+[sudo] gulp
+```
 -   Alistar los archivos rapidamente y sin comprimir para probarlos como aplicaciones mobiles
--       $gulp cordovaDev
+```bash
+[sudo] gulp cordovaDev
+```
 
 Empaquetar aplicación móvil
 ------------------------
 
 Para dispositivos android ejecutar
 - Preparar android
--       $ionic prepare android
+```bash
+[sudo] ionic prepare android
+```
 -   Compilar cordodva
--       $ionic compile android
+```bash
+[sudo] ionic compile android
+```
 -   Correr la aplicación
--       $ionic run android
+```bash
+[sudo] ionic run android
+```
 
 
 Distribución de Archivos

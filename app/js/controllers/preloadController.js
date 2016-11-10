@@ -1,7 +1,7 @@
 /*global angular*/
-nutrifamiMobile.controller('PreloadController', function ($ionicPlatform, $http, $scope, $ionicLoading, $rootScope, $timeout, $q, $location, $cordovaFileTransfer) {
+nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, $scope, $ionicLoading, $rootScope, $timeout, $q, $location, $cordovaFileTransfer) {
     'use strict';
-    $ionicPlatform.ready(function () {
+    $ionicPlatform.ready(function() {
 
         // Abrimos el overlay de mientras se descargan los archivos
         $scope.loading = $ionicLoading.show({
@@ -32,34 +32,35 @@ nutrifamiMobile.controller('PreloadController', function ($ionicPlatform, $http,
         if (window.cordova) {
             targetPath = cordova.file.applicationStorageDirectory + "capacitacion.JSON";
             $cordovaFileTransfer.download(url, targetPath, options, trustHosts)
-                    .then(function (result) {
-                        // Success!
-                        $scope.response = "capacitación cargada con éxito!! :)";
-                        cargarCapacitacion(targetPath, function () {
-                            predescargaAssets();
-                        });
-                    }, function (err) {
-                        $scope.response = err;
-                    }, function (progress) {
-                        $timeout(function () {
-                            $scope.downloadProgress = (progress.loaded / progress.total) * 100;
-                        });
+                .then(function(result) {
+                    // Success!
+                    $scope.response = "capacitación cargada con éxito!! :)";
+                    cargarCapacitacion(targetPath, function() {
+                        predescargaAssets();
                     });
+                }, function(err) {
+                    $scope.response = err;
+                }, function(progress) {
+                    $timeout(function() {
+                        $scope.downloadProgress = (progress.loaded / progress.total) * 100;
+                    });
+                });
         } else {
             targetPath = "js/capacitacion.JSON";
-            cargarCapacitacion(targetPath, function () {
-                predescargaAssets();
+            cargarCapacitacion(targetPath, function() {
+                //predescargaAssets();
+                $ionicLoading.hide();
+                $location.path('/login');
             });
         }
 
 
         function cargarCapacitacion(archivo, callback) {
-            callback = callback || function () {
-            };
+            callback = callback || function() {};
             // Intentamos cargar el archivo json 
-            $http.get(archivo).then(function (response) {
+            $http.get(archivo).then(function(response) {
                 $scope.myData = response.data;
-                nutrifami.training.initClient(response.data, function () {
+                nutrifami.training.initClient(response.data, function() {
                     callback();
                 });
             }, function errorCallback(response) {
@@ -162,7 +163,7 @@ nutrifamiMobile.controller('PreloadController', function ($ionicPlatform, $http,
             console.log("Recursos completos:");
             console.log(recursos);
 
-            comprobarArchivosExistentes(recursos).then(function (response) {
+            comprobarArchivosExistentes(recursos).then(function(response) {
                 console.log("Recursos faltantes");
                 console.log(response);
                 archivosFaltantes = response;
@@ -184,8 +185,8 @@ nutrifamiMobile.controller('PreloadController', function ($ionicPlatform, $http,
 
             var promises = [];
 
-            recursos.forEach(function (i, x) {
-                promises.push($http.get($rootScope.TARGETPATH + i.nombre).then(function (response) {
+            recursos.forEach(function(i, x) {
+                promises.push($http.get($rootScope.TARGETPATH + i.nombre).then(function(response) {
                     archivosExistentes++;
                     recursos[x].loaded = true;
                 }, function errorCallback(response) {
@@ -195,7 +196,7 @@ nutrifamiMobile.controller('PreloadController', function ($ionicPlatform, $http,
                 }));
             });
 
-            $q.all(promises).then(function (res) {
+            $q.all(promises).then(function(res) {
                 $scope.archivosExistentes = archivosExistentes;
                 deferred.resolve(recursos);
             });
@@ -254,32 +255,31 @@ nutrifamiMobile.controller('PreloadController', function ($ionicPlatform, $http,
                         var url = encodeURI(archivosFaltantes[id].url);
                         var targetPath = cordova.file.applicationStorageDirectory + archivosFaltantes[id].nombre;
                         $cordovaFileTransfer.download(url, targetPath, options, trustHosts)
-                                .then(function (entry) {
-                                    // Success!
-                                    console.log("download complete: " + entry.toURL());
-                                    $scope.response = "Descarga archivo completada";
-                                    archivosDescargados++;
-                                    $scope.archivosDescargados = archivosDescargados;
-                                    descargarArchivo(id + 1);
-                                }, function (error) {
-                                    console.log("download error source " + error.source);
-                                    console.log("download error target " + error.target);
-                                    console.log("download error code" + error.code);
-                                    $scope.response = error.http_status;
-                                    $scope.errores.push(error);
-                                    archivosError++;
-                                    $scope.archivosError = archivosError;
-                                    descargarArchivo(id + 1);
-                                }, function (progress) {
-                                    $timeout(function () {
-                                        $scope.url = url;
-                                        $scope.targetPath = targetPath;
-                                        $scope.response = "Descargando Archivo";
-                                        $scope.downloadProgress = (progress.loaded / progress.total) * 100;
-                                    });
+                            .then(function(entry) {
+                                // Success!
+                                console.log("download complete: " + entry.toURL());
+                                $scope.response = "Descarga archivo completada";
+                                archivosDescargados++;
+                                $scope.archivosDescargados = archivosDescargados;
+                                descargarArchivo(id + 1);
+                            }, function(error) {
+                                console.log("download error source " + error.source);
+                                console.log("download error target " + error.target);
+                                console.log("download error code" + error.code);
+                                $scope.response = error.http_status;
+                                $scope.errores.push(error);
+                                archivosError++;
+                                $scope.archivosError = archivosError;
+                                descargarArchivo(id + 1);
+                            }, function(progress) {
+                                $timeout(function() {
+                                    $scope.url = url;
+                                    $scope.targetPath = targetPath;
+                                    $scope.response = "Descargando Archivo";
+                                    $scope.downloadProgress = (progress.loaded / progress.total) * 100;
                                 });
-                    }
-                    else {
+                            });
+                    } else {
                         descargarArchivo(id + 1);
                     }
                 }

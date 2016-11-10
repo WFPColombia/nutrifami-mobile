@@ -1,8 +1,9 @@
-nutrifamiMobile.controller('ModuloController', function ($ionicPlatform, $scope, $rootScope, $location, $stateParams, $ionicViewSwitcher, AudioService, UsuarioService) {
+nutrifamiMobile.controller('ModuloController', function($ionicPlatform, $scope, $rootScope, $location, $stateParams, $ionicViewSwitcher, MediaService, UsuarioService) {
     'use strict';
-    $ionicPlatform.ready(function () {
+    $ionicPlatform.ready(function() {
 
-        nutrifami.training.initClient('', function () { //BEGIN CORDOVA FILES.
+        nutrifami.training.initClient('', function() { //BEGIN CORDOVA FILES.
+            var media = [];
             $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
             $scope.usuarioAvance = UsuarioService.getUsuarioAvance();
             $scope.lecciones = [];
@@ -39,18 +40,22 @@ nutrifamiMobile.controller('ModuloController', function ($ionicPlatform, $scope,
                 }
             }
 
-            AudioService.preloadSimple($scope.audios);
+            MediaService.preloadSimple($scope.audios, function(response) {
+                media = response;
+            });
 
-            $scope.playAudio = function (audio) {
-                AudioService.play(audio, $scope.audios);
+            console.log(media);
+
+            $scope.playAudio = function(audio) {
+                MediaService.play(audio, $scope.audios);
             };
 
-            $scope.porcentajeAvance = function () {
+            $scope.porcentajeAvance = function() {
                 return (100 / $scope.modulo.totalLecciones * $scope.usuarioAvance.leccionesTerminadas);
             };
-            $scope.irALeccion = function (index) {
+            $scope.irALeccion = function(index) {
                 $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
-                AudioService.unload($scope.audios);
+                //MediaService.unload($scope.audios);
                 $location.path('/capacitacion/' + $stateParams.modulo + "/" + $scope.lids[index] + "/1");
             };
         });

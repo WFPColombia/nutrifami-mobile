@@ -5,10 +5,10 @@ nutrifamiMobile.controller('IntroController', function($ionicPlatform, $scope, $
     $ionicPlatform.ready(function() {
 
         $scope.audios = {
-            'audio1': 'www/audios/intro-1.mp3',
-            'audio2': 'www/audios/intro-2.mp3',
-            'audio3': 'www/audios/intro-3.mp3',
-            'audio4': 'www/audios/intro-4.mp3'
+            'audio1': 'audios/intro-1.mp3',
+            'audio2': 'audios/intro-2.mp3',
+            'audio3': 'audios/intro-3.mp3',
+            'audio4': 'audios/intro-4.mp3'
         };
         AudioService.preloadSimple($scope.audios);
 
