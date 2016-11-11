@@ -1,8 +1,8 @@
 nutrifamiMobile.filter("trust", ['$sce', function($sce) {
     return function(htmlCode) {
-        return $sce.trustAsHtml(htmlCode);
-    }
-}]);
+            return $sce.trustAsHtml(htmlCode);
+        }
+    }]);
 
 nutrifamiMobile.filter('format', function() {
     return function(input) {

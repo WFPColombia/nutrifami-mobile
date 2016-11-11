@@ -1229,8 +1229,13 @@ button {
     font-family: 'Muli', sans-serif;
     text-align: center;
     color: #2f3e47;
-    padding: 15px 35px;
+    padding: 15px 25px;
 }
+
+.popup-container .popup .calificacion .feedback div {
+    padding: 0px 10px;
+}
+
 
 .popup-container .popup .calificacion .feedback p {
     font-size: 14pt;
@@ -1239,6 +1244,9 @@ button {
 
 .popup-container .popup .calificacion .feedback .sonido {
     color: #00965e;
+    position: absolute;
+    left: 10px;
+    top: 10px;
 }
 
 .popup-container .popup .popup-buttons {
