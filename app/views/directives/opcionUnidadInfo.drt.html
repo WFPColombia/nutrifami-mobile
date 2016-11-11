@@ -1,9 +1,7 @@
 <div class="row">
     <div class="col">
-        <div class="opcion" ng-click="click()" ng-class="info.selected ? 'selected' : 'no-selected'" ion-ripple>
-            <p>{{ info.texto}}</p>
-        </div>
-        <div class="opcion-sonido" ng-click='$parent.playAudio(info.audio.id)'  ng-class="info.selected ? 'selected' : 'no-selected'" ng-show="info.audio.url != ''" ion-ripple>
+        <div class="opcion" ng-click="click()" ng-class="info.selected ? 'selected' : 'no-selected'" ion-ripple ng-bind-html="info.texto | format | trust"></div>
+        <div class="opcion-sonido" ng-click='$parent.playAudio(info.audio.id)' ng-class="info.selected ? 'selected' : 'no-selected'" ng-show="info.audio.url != ''" ion-ripple>
             <button class="icon ion-volume-high"></button>
         </div>
     </div>

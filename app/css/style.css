@@ -512,6 +512,10 @@ button {
     margin: 0 20px;
 }
 
+.lecciones .descripcion-modulo {
+    position: relative;
+}
+
 .lecciones .lecciones-header .lecciones-titulo-sonido,
 .tips .tips-header .tips-titulo-sonido {
     background-color: rgba(0, 0, 0, 0);
@@ -539,8 +543,9 @@ button {
     background-color: rgba(0, 0, 0, 0);
     border: none;
     color: #4d6675;
-    position: relative;
-    top: -5px;
+    position: absolute;
+    top: 20px;
+    left: 22px;
 }
 
 .lecciones .lecciones-body .leccion,
@@ -1095,9 +1100,10 @@ button {
     font-size: 31px;
 }
 
+
 /* UNIDAD INFORMATIVA */
 
-.unidad .unidad-informativa{
+.unidad .unidad-informativa {
     background-color: #ffffff;
     border: 1px solid #dcdcdc;
     border-radius: 8px;
@@ -1109,24 +1115,24 @@ button {
     width: 100%;
     padding: 20px 15px;
     font-size: 11pt;
-
 }
 
-.unidad .unidad-informativa p{
+.unidad .unidad-informativa p {
     margin-bottom: 30px;
 }
 
-.unidad .unidad-informativa ul{
+.unidad .unidad-informativa ul {
     padding-left: 10px;
 }
 
-.unidad .unidad-informativa ul li{
+.unidad .unidad-informativa ul li {
     list-style-position: outside;
     padding-left: 10px;
     margin-bottom: 15px;
     margin-left: 15px;
     list-style-image: url(../img/list-unidad-informativa.png);
 }
+
 
 /* FINAL - UNIDAD INFORMATIVA */
 

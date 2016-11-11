@@ -13,7 +13,7 @@ nutrifamiMobile.controller('ModuloController', function($ionicPlatform, $scope, 
 
             $scope.audios = {
                 'audioTitulo': $rootScope.TARGETPATH + $scope.modulo.titulo.audio.nombre,
-                'audioDescripcion': $rootScope.TARGETPATH + $scope.modulo.titulo.audio.nombre
+                'audioDescripcion': $rootScope.TARGETPATH + $scope.modulo.descripcion.audio.nombre
             };
 
 
@@ -40,11 +40,12 @@ nutrifamiMobile.controller('ModuloController', function($ionicPlatform, $scope, 
                 }
             }
 
+
             MediaService.preloadSimple($scope.audios, function(response) {
-                media = response;
+                $scope.audios = response;
             });
 
-            console.log(media);
+            console.log($scope.audios);
 
             $scope.playAudio = function(audio) {
                 MediaService.play(audio, $scope.audios);

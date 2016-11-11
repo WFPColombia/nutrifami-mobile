@@ -21,9 +21,13 @@ Instalación de librerias con Bower.
 Una vez instalados los modulos con node, se debe:
 
   - Instalar Bower goblamente
-  -     $npm install -g bower"
+```bash
+[sudo] npm install -g bower
+```
   - Instalar librerias usadas en el proyecto.
-  -     $bower install
+```bash
+[sudo] bower install
+```
 
 Instalación de Ionic y Cordova.
 -----------------------------------

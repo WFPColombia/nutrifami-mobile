@@ -3,13 +3,16 @@
         <div class='lecciones'>
             <div class="lecciones-header">
                 <div class="col">
-                    <h1 ng-click="playAudio('audioTitulo')" ion-ripple><i class="lecciones-titulo-sonido icon ion-volume-high" aria-hidden="true"></i> Alimentación Saludable</h1>
+                    <h1 ng-click="playAudio('audioTitulo')" ion-ripple><i class="lecciones-titulo-sonido icon ion-volume-high" aria-hidden="true"></i> {{ modulo.titulo.texto }}</h1>
                 </div>
                 <div class="col">
                     <img ng-src="{{TARGETPATH}}{{modulo.imagen2.nombre}}" />
                 </div>
                 <div class="col">
-                    <p ng-click="playAudio('audioDescripcion')" ion-ripple><i class="lecciones-descripcion-sonido icon ion-volume-high" aria-hidden="true"></i> {{ modulo.descripcion.texto}}</p>
+                    <div class="descripcion-modulo" ng-click="playAudio('audioDescripcion')" ion-ripple>
+                        <i class="lecciones-descripcion-sonido icon ion-volume-high" aria-hidden="true"></i>
+                        <div ng-bind-html="modulo.descripcion.texto | format | trust"></div>
+                    </div>
                 </div>
             </div>
             <div class="lecciones-body">

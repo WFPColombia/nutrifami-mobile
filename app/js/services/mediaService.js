@@ -10,15 +10,20 @@ nutrifamiMobile.factory('MediaService', function($cordovaMedia) {
      * 
      */
     service.preloadSimple = function(audios, callback) {
+        console.log("MediaService.preloadSimple");
         callback = callback || function() {};
 
-        var media = [];
         if (window.cordova) {
             for (audio in audios) {
-                media.push($cordovaMedia.newMedia(audios[audio]))
+                audios[audio] = $cordovaMedia.newMedia(audios[audio], function() {
+                        console.log("playAudio():Audio Success");
+                    },
+                    function(err) {
+                        console.log("playAudio():Audio Error: " + err);
+                    });
             }
         }
-        callback(media);
+        callback(audios);
     };
 
     /**
@@ -32,9 +37,11 @@ nutrifamiMobile.factory('MediaService', function($cordovaMedia) {
      */
     service.play = function(audio, audios) {
 
+        console.log("MediaService.play: " + audio);
         this.stopAll(audios, function() {
-            if (window.plugins && window.plugins.NativeAudio) {
-                $cordovaNativeAudio.play(audio);
+            if (window.plugins) {
+                audios[audio].setVolume(1);
+                audios[audio].play();
             }
         });
     };
@@ -48,9 +55,10 @@ nutrifamiMobile.factory('MediaService', function($cordovaMedia) {
      * 
      */
     service.stopAll = function(audios, callback) {
+        console.log("MediaService.stopAll: " + audios);
         for (var audio in audios) {
-            if (window.plugins && window.plugins.NativeAudio) {
-                $cordovaNativeAudio.stop(audio);
+            if (window.plugins) {
+                audios[audio].stop(); // Android*/
             }
         }
         callback();
@@ -65,10 +73,11 @@ nutrifamiMobile.factory('MediaService', function($cordovaMedia) {
      * 
      */
     service.unload = function(audios) {
+        console.log("MediaService.unload:");
         this.stopAll(audios, function() {
             for (var audio in audios) {
-                if (window.plugins && window.plugins.NativeAudio) {
-                    $cordovaNativeAudio.unload(audio);
+                if (window.plugins) {
+                    audios[audio].release();
                 }
             }
         });
