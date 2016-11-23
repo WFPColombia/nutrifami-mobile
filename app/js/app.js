@@ -175,7 +175,7 @@ nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cookieStore
             console.log($rootScope.TARGETPATH);
 
         } else {
-            $rootScope.TARGETPATH = "assets/";
+            $rootScope.TARGETPATH = "https://s3.amazonaws.com/nutrifami/";
         }
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)

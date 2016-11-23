@@ -12,7 +12,7 @@
             <div class="sub-header">
                 <div class="row">
                     <div class="col total-compra">
-                        <p>{{grupo.porcentaje_compra}}%</p>
+                        <p style="font-size: 12pt;">Total Compra</p>
                         <p class="valor">${{grupo.totalCompra}}</p>
                     </div>
                     <div class="col">
@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="col estado">
-                        <img src="img/icons/ico-compras-{{carita}}.png" />
+                        <img src="img/icons/ico-compras-{{grupo.carita}}.png" />
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col">
                     <p ng-click="playAudio('resumenCompras')" ng-hide="noHayDatos" ion-ripple>
-                        <i class="icon ion-volume-high"></i> Este es el resumen de sus compras en {{grupo.alias}}
+                        <i class="icon ion-volume-high"></i> Este es el resumen de sus compras en {{grupo.nombre}}
                     </p>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                 </div>
             </div>
         </div>
-        <div class="compra-ideal">
+        <!--<div class="compra-ideal">
             <ion-list>
                 <div ng-repeat="group in groups">
                     <ion-item class="item-stable" ng-click="toggleGroup(group,'compraIdeal')" ng-class="{active: isGroupShown(group)}">
@@ -61,6 +61,6 @@
                     </ion-item>
                 </div>
             </ion-list>
-        </div>
+        </div>-->
     </ion-scroll>
 </div>

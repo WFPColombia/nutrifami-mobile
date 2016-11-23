@@ -45,7 +45,7 @@
             </div>
             <div class="row" ng-hide="unidad.texto == undefined || unidad.tipo.id == 1">
                 <div class="col">
-                    <p>{{ unidad.texto}}</p>
+                    <div ng-bind-html="unidad.texto | format | trust"></div>
                 </div>
             </div>
         </div>
@@ -53,10 +53,11 @@
             <div class="col">
                 <div class="unidad-informativa" ng-show="unidad.tipo.id == 1">
                     <p ng-click="playAudio('texto')" ion-ripple>
-                        <button class="icon ion-volume-high" aria-hidden="true"></button> {{ unidad.texto}}</p>
-                    <ul ng-repeat="opcion in unidad.opciones">
-                        <li ng-click="playAudio(opcion.audio.id)">{{opcion.texto}}</li>
-                    </ul>
+                        <!--<button class="icon ion-volume-high" aria-hidden="true"></button> {{ unidad.texto}}</p>-->
+                        <div ng-bind-html="unidad.texto | format | trust"></div>
+                        <ul ng-repeat="opcion in unidad.opciones">
+                            <li ng-click="playAudio(opcion.audio.id)">{{opcion.texto}}</li>
+                        </ul>
                 </div>
             </div>
         </div>

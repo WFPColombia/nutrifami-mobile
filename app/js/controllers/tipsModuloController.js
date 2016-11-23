@@ -1,71 +1,70 @@
-nutrifamiMobile.controller('TipsModuloController', function ($ionicPlatform, $scope, $location, $stateParams, AudioService, UsuarioService) {
+nutrifamiMobile.controller('TipsModuloController', function($ionicPlatform, $scope, $location, $stateParams, AudioService, UsuarioService, TipsService) {
     'use strict';
-    /* BEGIN CORDOVA FILES
-     $ionicPlatform.ready(function () {
-     END CORDOVA FILES */
+    $ionicPlatform.ready(function() {
 
-    $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
+        $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
+
+        $scope.lecciones = [];
 
 
-    $scope.groups = [
-        {
-            name: "La Alimentación",
-            items: [
-                'Prevenga deficiencias de nutrientes consumiendo una alimentación variada y colorida.',
-                'Modere el consumo de alimentos con grasas para tener una buena salud. Prefiera aceites vegetales.',
-                'Prevenga deficiencias de nutrientes con el consumo de una alimentación variada y colorida.',
-                'Consuma alimentos de todos los grupos, prefiera los de cosecha ya que serán más frescos, económicos y disponibles.'
-            ]
-        },
-        {
-            name: "Los Alimentos",
-            items: [
-                'Prevenga deficiencias de nutrientes consumiendo una alimentación variada y colorida.',
-                'Modere el consumo de alimentos con grasas para tener una buena salud. Prefiera aceites vegetales.',
-                'Prevenga deficiencias de nutrientes con el consumo de una alimentación variada y colorida.',
-                'Consuma alimentos de todos los grupos, prefiera los de cosecha ya que serán más frescos, económicos y disponibles.'
-            ]
-        },
-        {
-            name: "El plato saludable",
-            items: [
-                'Prevenga deficiencias de nutrientes consumiendo una alimentación variada y colorida.',
-                'Modere el consumo de alimentos con grasas para tener una buena salud. Prefiera aceites vegetales.',
-                'Prevenga deficiencias de nutrientes con el consumo de una alimentación variada y colorida.',
-                'Consuma alimentos de todos los grupos, prefiera los de cosecha ya que serán más frescos, económicos y disponibles.'
-            ]
-        },
-        {
-            name: "Los colores de los alimentos",
-            items: [
-                'Prevenga deficiencias de nutrientes consumiendo una alimentación variada y colorida.',
-                'Modere el consumo de alimentos con grasas para tener una buena salud. Prefiera aceites vegetales.',
-                'Prevenga deficiencias de nutrientes con el consumo de una alimentación variada y colorida.',
-                'Consuma alimentos de todos los grupos, prefiera los de cosecha ya que serán más frescos, económicos y disponibles.'
-            ]
+        /* Se hace un try por si el usuario intenta ingresar a la URL a otro modulo que lo  lleve al home */
+        $scope.modulo = nutrifami.training.getModulo($stateParams.modulo);
+        $scope.modulo.totalLecciones = 0;
+
+        $scope.lids = nutrifami.training.getLeccionesId($stateParams.modulo);
+        for (var lid in $scope.lids) {
+            var tempLeccion = nutrifami.training.getLeccion($scope.lids[lid]);
+
+            if (tempLeccion.activo == 1) {
+                $scope.lecciones.push(tempLeccion);
+            }
+
         }
-    ];
-    
-    $scope.clickTip = function (){
-        console.log("Click Tip");
-    };
 
-    /*
-     * if given group is the selected group, deselect it
-     * else, select the given group
-     */
-    $scope.toggleGroup = function (group) {
-        if ($scope.isGroupShown(group)) {
-            $scope.shownGroup = null;
-        } else {
-            $scope.shownGroup = group;
+        //$scope.modulo.titulo.audio.audio = ngAudio.load($scope.modulo.titulo.audio.url);
+
+        console.log($scope.lecciones);
+        console.log($scope.modulo);
+
+
+        $scope.grupos = [];
+
+        for (var i in $scope.lecciones) {
+
+            var tempGrupo = {
+                name: $scope.lecciones[i].titulo.texto,
+                items: []
+            };
+
+            tempGrupo.items = TipsService.getTipsByLeccion($scope.lecciones[i].id);
+
+            $scope.grupos.push(tempGrupo);
+
         }
-    };
-    $scope.isGroupShown = function (group) {
-        return $scope.shownGroup === group;
-    };
 
-    /* BEGIN CORDOVA FILES
-     });
-     END CORDOVA FILES */
+        console.log($scope.grupos);
+
+
+
+
+        $scope.clickTip = function() {
+            console.log("Click Tip");
+        };
+
+        /*
+         * if given group is the selected group, deselect it
+         * else, select the given group
+         */
+        $scope.toggleGroup = function(group) {
+            if ($scope.isGroupShown(group)) {
+                $scope.shownGroup = null;
+            } else {
+                $scope.shownGroup = group;
+            }
+        };
+        $scope.isGroupShown = function(group) {
+            return $scope.shownGroup === group;
+        };
+
+    });
 });

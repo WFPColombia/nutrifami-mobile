@@ -5,7 +5,7 @@ var usuarioFamiliaAvance = new Object(); /* Datos de avance de la familia*/
 
 
 
-var base_url = 'http://www.nutrifami.org/';
+var base_url = 'http://dev.nutrifami.org/';
 
 var nutrifami = {
     /* nutrifami.usuarioActivoServerInfo */
@@ -30,6 +30,8 @@ var nutrifami = {
             }
         });
     },
+
+    //Modificacion
     /*
      * nutrifami.buildToken(callback)
      */
@@ -88,6 +90,7 @@ var nutrifami = {
 
                     /* Combinamos la información de usuarioActivo existente con la nueva */
                     $.extend(usuarioActivo, objServ);
+                    usuarioActivo.narrador = true;
 
                     /* Se copia la información de avance en un objeto independiente y se elimina la información de usuarioActivo*/
                     usuarioAvance = usuarioActivo.avance[usuarioActivo.id];
@@ -237,7 +240,6 @@ var nutrifami = {
          *  
          */
         initClient: function(capacitacion, callback) {
-            console.log("Init Client");
             callback = callback || function() {};
             capacitacion = capacitacion || '';
 
@@ -247,6 +249,7 @@ var nutrifami = {
                 nutrifami.training.cap_modulos = capacitacion["serv_modulos"];
                 nutrifami.training.cap_lecciones = capacitacion["serv_lecciones"];
                 nutrifami.training.cap_unidadesinformacion = capacitacion["serv_unidades"];
+                nutrifami.training.cap_unidadestips = capacitacion["serv_tips"];
                 callback();
             } else {
                 $.getJSON("js/capacitacion.JSON", function(data) {
@@ -255,10 +258,11 @@ var nutrifami = {
                     nutrifami.training.cap_modulos = data['serv_modulos'];
                     nutrifami.training.cap_lecciones = data['serv_lecciones'];
                     nutrifami.training.cap_unidadesinformacion = data['serv_unidades'];
+                    nutrifami.training.cap_unidadestips = data["serv_tips"];
                     callback();
                 }).fail(function(jqxhr, textStatus, error) {
-                    console.log(jqxhr+": "+textStatus + ", " + error);
-                    callback();
+                    console.log(jqxhr);
+                    var err = textStatus + ", " + error;
                 });
             }
         },
@@ -650,6 +654,16 @@ var nutrifami = {
         getUnidad: function(uid) {
             if (typeof nutrifami.training.cap_unidadesinformacion[uid] !== 'undefined') {
                 return nutrifami.training.cap_unidadesinformacion[uid];
+            } else {
+                return false;
+            }
+        },
+        /*
+         * nutrifami.training.getUnidad(uid);
+         */
+        getTips: function() {
+            if (typeof nutrifami.training.cap_unidadestips !== 'undefined') {
+                return nutrifami.training.cap_unidadestips;
             } else {
                 return false;
             }

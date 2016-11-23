@@ -16,8 +16,30 @@ nutrifamiMobile.controller('ComprasController', function($ionicPlatform, $scope,
         var puntoVenta = {
             'pid': 0
         };
+
+        $scope.consumoUltimoMes = [{
+            'nombre': "Cereales, raíces, tubérculos y plátanos.",
+            'porcentaje_compra': 0,
+        }, {
+            'nombre': "Carnes, huevos y leguminosas secas.",
+            'porcentaje_compra': 0
+
+        }, {
+            'nombre': "Leches y otros productos lácteos.",
+            'porcentaje_compra': 0
+        }, {
+            'nombre': "Frutas y verduras.",
+            'porcentaje_compra': 0
+        }, {
+            'nombre': "Grasas.",
+            'porcentaje_compra': 0
+        }, {
+            'nombre': "Azucar.",
+            'porcentaje_compra': 0
+        }];
+
         usuario.did = $scope.usuarioActivo.login_documento;
-        //usuario.did = 66976632;
+        //usuario.did = '1006330568';
 
         $scope.cargarCompras = function() {
             $scope.loading = $ionicLoading.show({

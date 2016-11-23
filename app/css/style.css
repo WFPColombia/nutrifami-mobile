@@ -401,7 +401,7 @@ button {
     margin-top: 38px;
     margin-left: 10%;
     margin-right: 10%;
-    height: 455px;
+    min-height: 455px;
     position: relative;
 }
 
@@ -603,6 +603,7 @@ button {
 
 .tips .tips-body .tip img {
     margin-top: 7px;
+    width: 65%;
 }
 
 .lecciones .lecciones-body .leccion h2,
@@ -959,6 +960,10 @@ button {
     font-size: 11pt;
 }
 
+.unidad .opciones .opcion-pareja img {
+    width: 100%;
+}
+
 .unidad .opciones .col {
     position: relative;
 }
@@ -982,11 +987,11 @@ button {
 }
 
 .unidad .opciones .pareja-con-imagen {
-    height: 150px;
+    /*height: 150px;*/
 }
 
 .unidad .opciones .opcion-sonido.sonido-con-imagen {
-    top: 105px;
+    /*top: 105px;*/
 }
 
 .unidad .opciones .pareja-con-imagen .titulo-con-imagen {
@@ -1235,7 +1240,6 @@ button {
 .popup-container .popup .calificacion .feedback div {
     padding: 0px 10px;
 }
-
 
 .popup-container .popup .calificacion .feedback p {
     font-size: 14pt;
@@ -1754,6 +1758,7 @@ button {
     color: #2f3e47;
     text-align: center;
     padding: 0 20px;
+    margin-bottom: 50px;
 }
 
 .compras-tab .compras-descripcion i {
@@ -1762,6 +1767,39 @@ button {
 
 .compras-tab .compras-porcentajes {
     margin-top: 10px;
+}
+
+.compras-tab .compras-porcentajes .col-60 {
+    position: relative;
+}
+
+.compras .compras-porcentajes .compras-ideal,
+.compras .compras-porcentajes .compras-ideal-min,
+.compras .compras-porcentajes .compras-ideal-max {
+    border-left: 2px solid;
+    height: 520px;
+    position: absolute;
+    right: 20%;
+    z-index: 1;
+    top: -25px;
+}
+
+.compras .compras-porcentajes .compras-ideal-max {
+    border-left: 1px dotted;
+    right: 10%;
+}
+
+.compras .compras-porcentajes .compras-ideal-min {
+    border-left: 1px dotted;
+    right: 30%;
+}
+
+.compras .compras-porcentajes .compra-ideal-convencion {
+    position: absolute;
+    top: -55px;
+    right: 20%;
+    text-align: center;
+    line-height: 1em;
 }
 
 .compras-tab .compras-porcentajes .col,
@@ -1837,6 +1875,14 @@ button {
     background-color: #f2df00 !important;
 }
 
+.compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-CARNES,
+.compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-2,
+.compras-tab .recomendados-body .item.item-stable.grupo-2,
+.compras-grupo header.grupo-2,
+.compras-grupo .progress-radial .overlay.grupo-2 {
+    background-color: #ff9600;
+}
+
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-LECHELACTEOS,
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-3,
 .compras-tab .recomendados-body .item.item-stable.grupo-3,
@@ -1845,35 +1891,27 @@ button {
     background-color: #0fa7ff;
 }
 
-.compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-CARNES,
+.compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-VEGETALES,
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-4,
 .compras-tab .recomendados-body .item.item-stable.grupo-4,
 .compras-grupo header.grupo-4,
 .compras-grupo .progress-radial .overlay.grupo-4 {
-    background-color: #ff9600;
-}
-
-.compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-VEGETALES,
-.compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-5,
-.compras-tab .recomendados-body .item.item-stable.grupo-5,
-.compras-grupo header.grupo-5,
-.compras-grupo .progress-radial .overlay.grupo-5 {
     background-color: #7bd462;
 }
 
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-GRASAS,
-.compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-7,
-.compras-tab .recomendados-body .item.item-stable.grupo-7,
-.compras-grupo header.grupo-7,
-.compras-grupo .progress-radial .overlay.grupo-7 {
+.compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-5,
+.compras-tab .recomendados-body .item.item-stable.grupo-5,
+.compras-grupo header.grupo-5,
+.compras-grupo .progress-radial .overlay.grupo-5 {
     background-color: #ff037a;
 }
 
 .compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-AZUCAR,
-.compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-8,
-.compras-tab .recomendados-body .item.item-stable.grupo-8,
-.compras-grupo header.grupo-8,
-.compras-grupo .progress-radial .overlay.grupo-8 {
+.compras-tab .compras-porcentajes .compras-porcentaje-barra .progress .grupo-6,
+.compras-tab .recomendados-body .item.item-stable.grupo-6,
+.compras-grupo header.grupo-6,
+.compras-grupo .progress-radial .overlay.grupo-6 {
     background-color: #d360fe;
 }
 
@@ -2037,11 +2075,10 @@ button {
 }
 
 .compras-grupo header .sub-header .total-compra {
-    text-align: right;
+    text-align: center;
     font-size: 25pt;
     border-right: rgba(255, 255, 255, 0.4) 1px solid;
     padding-bottom: 0px;
-    padding-right: 30px;
 }
 
 .compras-grupo header .sub-header .total-compra .valor {
@@ -2050,10 +2087,9 @@ button {
 }
 
 .compras-grupo header .sub-header .estado {
-    text-align: left;
+    text-align: center;
     border-left: rgba(255, 255, 255, 0.4) 1px solid;
     padding-bottom: 0px;
-    padding-left: 30px;
 }
 
 .compras-grupo .compras-grupo-descripcion {

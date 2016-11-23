@@ -7,7 +7,7 @@ nutrifamiMobile.controller('ComprasGrupoController', function($ionicPlatform, $l
 
 
         var usuario = {};
-        usuario.did = 66976632;
+        //usuario.did = '1006330568';
         $scope.groups = [];
 
         var puntoVenta = {
@@ -24,25 +24,17 @@ nutrifamiMobile.controller('ComprasGrupoController', function($ionicPlatform, $l
         ComprasService.getConsolidadoComprasUltimoMesByGroup(usuario, $stateParams.grupo, function(response) {
             $ionicLoading.hide();
             $scope.grupo = response.data;
+
             console.log($scope.grupo);
+
             puntoVenta['pid'] = response.puntoVenta;
-            var totalCompra = 0;
-            for (var i in $scope.grupo.compra) {
-                totalCompra = totalCompra + parseInt($scope.grupo.compra[i].total);
-            }
-
-            $scope.grupo.totalCompra = totalCompra;
-
-            $scope.carita = 'triste';
-            if ($scope.grupo.porcentaje_visual >= 75 && $scope.grupo.porcentaje_visual <= 125) {
-                $scope.carita = 'feliz';
-            }
 
 
             $scope.audios = {
                 'resumenCompras': 'audios/compras-resumen-' + $scope.grupo.grupo_id + '.mp3',
                 'compraIdeal': 'audios/compra-ideal.mp3'
             };
+
             AudioService.preloadSimple($scope.audios);
             $scope.loading = $ionicLoading.show({
                 //template: 'Cargando datos...',
