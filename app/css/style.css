@@ -945,14 +945,15 @@ button {
 .unidad .opciones .opcion,
 .unidad .opciones .opcion-pareja {
     background-color: #ffffff;
-    height: 100px;
     border: 1px solid #dcdcdc;
     border-radius: 8px;
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
     color: #2f3e47;
-    text-align: center;
     font-size: 12pt;
+    height: 100px;
+    padding: 0px;
+    text-align: center;
     width: 100%;
 }
 
@@ -962,6 +963,22 @@ button {
 
 .unidad .opciones .opcion-pareja img {
     width: 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.unidad .opciones .opcion-pareja.pareja-con-imagen p {
+    position: absolute;
+    color: #ffffff;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px 0;
 }
 
 .unidad .opciones .col {
@@ -1008,6 +1025,7 @@ button {
 .unidad .opciones .opcion-pareja.selected {
     background-color: #75a8fe;
     color: #ffffff;
+    filter: sepia(1);
 }
 
 .unidad .opciones .opcion-sonido.selected button {

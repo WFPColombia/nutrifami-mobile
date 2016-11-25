@@ -11,9 +11,6 @@ nutrifamiMobile.directive('opcionParejaUnidadInfo', function($rootScope) {
         link: function($scope, $rootScope, $element, $attrs) {
             $scope.tp = $scope.$parent.TARGETPATH;
 
-            console.log($scope.opc1.media.nombre);
-            console.log($scope.opc2.media.nombre);
-
             $scope.click = function(index) {
                 $scope.$parent.seleccionarPareja(index);
             };

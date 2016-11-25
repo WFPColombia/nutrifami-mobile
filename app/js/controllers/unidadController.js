@@ -4,6 +4,8 @@ nutrifamiMobile.controller('UnidadController', function($ionicPlatform, $scope, 
     $ionicPlatform.ready(function() {
 
         nutrifami.training.initClient('', function() { //BEGIN CORDOVA FILES.
+
+            console.log($rootScope.TARGETPATH);
             $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
             $scope.estadoUnidad = 'espera';
 
@@ -12,13 +14,15 @@ nutrifamiMobile.controller('UnidadController', function($ionicPlatform, $scope, 
             $scope.unidad.totalUnidades = CapacitacionService.getUnidadesActivas($stateParams.leccion).length;
             $scope.scrolled = false;
 
-            /*$scope.audios = {
+            $scope.audios = {
                 'tipo': MediaService.getMediaURL("audios/" + $scope.unidad.tipo.audio.nombre),
                 'titulo': $rootScope.TARGETPATH + $scope.unidad.titulo.audio.nombre,
                 'muyBien': MediaService.getMediaURL('audios/muy-bien.mp3'),
                 'respuestaIncorrecta': MediaService.getMediaURL('audios/respuesta-incorrecta.mp3'),
                 'salir': MediaService.getMediaURL('audios/unidad-salir.mp3')
-            };*/
+            };
+
+            console.log($scope.unidad);
 
             $scope.audios = {};
 
@@ -42,17 +46,13 @@ nutrifamiMobile.controller('UnidadController', function($ionicPlatform, $scope, 
                 var tempImagenes = [];
                 /* Recorre todo el objeto de las opciones para crear el arreglo*/
                 for (var i in $scope.unidad.opciones) {
-                    /* Si la opción tiene imagen, se activan los estilos de las imagenes*/
-                    if (typeof $scope.unidad.opciones[i].media !== 'undefined') {
-                        $scope.hayImagen = true;
-                    }
-                    /* Si el texto es corto (titulo se almacena en un arreglo temporal)*/
-                    if ($scope.unidad.opciones[i].texto.length <= 30) {
+                    if ($scope.unidad.opciones[i].columna == 1) {
                         tempImagenes.push($scope.unidad.opciones[i]);
-                    } else { /* Si no, se guardan en otro arreglo*/
+                    } else {
                         tempOpciones.push($scope.unidad.opciones[i]);
                     }
                 }
+
 
                 /* Se mezclan los arreglos */
                 shuffle(tempImagenes);
@@ -60,17 +60,11 @@ nutrifamiMobile.controller('UnidadController', function($ionicPlatform, $scope, 
 
                 var opcionesUnidad = [];
                 /* Se concatenan los arreglos elemento por elemento, con las imagenes primero y las opciones despues */
-                for (var i = 0; i < 10; i++) { /* CAMBIO DE FORMA DE LLENADO DEL ARREGLO */
-                    if (typeof tempImagenes[i] !== 'undefined') {
-                        opcionesUnidad.push(tempImagenes[i]);
-                    }
-                    if (typeof tempOpciones[i] !== 'undefined') {
-                        opcionesUnidad.push(tempOpciones[i]);
-                    }
+                for (var i = 0; i < tempImagenes.length; i++) { /* CAMBIO DE FORMA DE LLENADO DEL ARREGLO */
+                    opcionesUnidad.push(tempImagenes[i]);
+                    opcionesUnidad.push(tempOpciones[i]);
                 }
-                if (typeof opcionesUnidad !== 'undefined' && opcionesUnidad.length > 0) {
-                    $scope.unidad.opciones = opcionesUnidad;
-                }
+                $scope.unidad.opciones = opcionesUnidad;
 
             } else {
                 for (var i in $scope.unidad.opciones) {
