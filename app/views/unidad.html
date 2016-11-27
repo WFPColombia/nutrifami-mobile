@@ -40,18 +40,18 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <img ng-src="{{TARGETPATH}}{{unidad.imagen.nombre}}" ng-hide="{{unidad.imagen === undefined|| unidad.imagen.nombre === ''}}" />
+                    <img ng-src="{{TARGETPATH}}{{unidad.imagen.nombre}}" ng-hide="unidad.imagen === undefined|| unidad.imagen.nombre === ''" />
                 </div>
             </div>
-            <div class="row" ng-hide="unidad.texto == undefined || unidad.tipo.id == 1">
+            <div class="row" ng-hide="unidad.texto == undefined || unidad.texto == '' || unidad.tipo.id == 1">
                 <div class="col">
                     <div ng-bind-html="unidad.texto | format | trust"></div>
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" ng-show="unidad.tipo.id == 1">
             <div class="col">
-                <div class="unidad-informativa" ng-show="unidad.tipo.id == 1">
+                <div class="unidad-informativa">
                     <p ng-click="playAudio('texto')" ion-ripple>
                         <!--<button class="icon ion-volume-high" aria-hidden="true"></button> {{ unidad.texto}}</p>-->
                         <div ng-bind-html="unidad.texto | format | trust"></div>

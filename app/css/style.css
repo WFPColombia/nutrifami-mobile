@@ -862,30 +862,46 @@ button {
 
 .unidad .unidad-tipo {
     background-color: #ffffff;
-    height: 68px;
+    height: 60px;
     text-align: left;
-    padding-top: 16px;
+    padding-top: 10px;
     font-size: 12pt;
     font-family: 'Muli', sans-serif;
     color: #00965e;
     -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
     box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
 .unidad .unidad-tipo img {
-    margin-right: 15px;
-    float: left;
-    margin-left: 22px;
+    left: 10px;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
-.unidad .unidad-tipo .unidad-tipo-descripcion p {}
+.unidad .unidad-tipo .unidad-tipo-descripcion p {
+    font-size: 11pt;
+    padding-left: 105px;
+    padding-right: 40px;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
 
 .unidad .unidad-tipo .unidad-tipo-descripcion .sonido {
-    float: right;
     font-size: 20px;
-    margin-right: 23px;
-    margin-left: 23px;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
 .unidad .unidad-tipo .unidad-tipo-descripcion .sonido button {
@@ -896,7 +912,7 @@ button {
     font-size: 20pt;
     color: #00965e;
     position: relative;
-    top: 5px;
+    padding: 0;
 }
 
 .unidad .unidad-descripcion {
@@ -909,8 +925,13 @@ button {
     margin-right: 7px;
 }
 
+.unidad .unidad-descripcion .col {
+    padding: 0 5px;
+}
+
 .unidad .unidad-descripcion .unidad-instruccion {
-    margin-top: 20px;
+    margin-top: 0px;
+    margin-bottom: 5px;
     font-family: 'Muli', sans-serif;
     color: #2f3e47;
     font-size: 14pt;
@@ -935,6 +956,11 @@ button {
 
 .unidad .opciones {
     margin-bottom: 100px;
+}
+
+.unidad .opciones .col {
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .unidad .opciones.scrolled {
@@ -1025,6 +1051,9 @@ button {
 .unidad .opciones .opcion-pareja.selected {
     background-color: #75a8fe;
     color: #ffffff;
+}
+
+.unidad .opciones .opcion-pareja.selected {
     filter: sepia(1);
 }
 
