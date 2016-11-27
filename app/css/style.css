@@ -401,7 +401,7 @@ button {
     margin-top: 38px;
     margin-left: 10%;
     margin-right: 10%;
-    min-height: 455px;
+    height: 460px;
     position: relative;
 }
 
@@ -435,17 +435,20 @@ button {
 .modulo h4 {
     color: #0dcd71;
     text-align: center;
-    font-size: 17pt;
-    margin-top: 38px;
-    margin-bottom: 36px;
-    padding: 0px 43px;
+    font-size: 16pt;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding: 0px 10px;
 }
 
 .modulo h4 {
     color: #9eabb3;
     font-family: 'Raleway', sans-serif;
-    font-size: 14pt;
+    font-size: 12pt;
     font-weight: bold;
+    position: absolute;
+    width: 100%;
+    bottom: 20px;
 }
 
 .modulo.actual h3,
@@ -459,10 +462,12 @@ button {
     height: 11px;
     margin-bottom: 0px;
     border-radius: 4px;
-    width: auto;
-    margin: 0 8px 0 8px;
+    width: 90%;
+    margin: 0 5%;
     background-color: #f5f5f5;
     background-image: none;
+    position: absolute;
+    bottom: 10px;
 }
 
 .modulo.actual .progress {
@@ -499,7 +504,7 @@ button {
 .lecciones .lecciones-header,
 .tips .tips-header {
     text-align: center;
-    margin-top: 15px;
+    margin-top: 0px;
     color: #2f3e47;
     font-size: 12pt;
 }
@@ -508,7 +513,7 @@ button {
 .tips .tips-header h1 {
     color: #00c97e;
     font-size: 18pt;
-    padding: 10px;
+    padding: 5px;
     margin: 0 20px;
 }
 
@@ -527,9 +532,14 @@ button {
 
 .lecciones .lecciones-header p,
 .lecciones .lecciones-header img {
-    margin-top: 10px;
-    padding: 10px;
-    width: 100%;
+    margin-top: 0px;
+    padding: 0px;
+    width: 90%;
+    margin: 0 5%;
+}
+
+.lecciones .lecciones-header img {
+    width: 60%;
 }
 
 .tips .tips-header p {
@@ -544,8 +554,8 @@ button {
     border: none;
     color: #4d6675;
     position: absolute;
-    top: 20px;
-    left: 22px;
+    top: -4px;
+    left: 2px;
 }
 
 .lecciones .lecciones-body .leccion,
@@ -557,7 +567,7 @@ button {
     -webkit-border-radius: 10px;
     text-align: center;
     border: 1px solid #dcdcdc;
-    margin-bottom: 18px;
+    margin-bottom: 0px;
     position: relative;
 }
 
@@ -934,7 +944,7 @@ button {
     margin-bottom: 5px;
     font-family: 'Muli', sans-serif;
     color: #2f3e47;
-    font-size: 14pt;
+    font-size: 13pt;
 }
 
 .unidad .unidad-descripcion .unidad-instruccion button {
@@ -952,6 +962,7 @@ button {
     -webkit-border-radius: 8px;
     border: solid 1px #dcdcdc;
     width: 100%;
+    min-height: 60px;
 }
 
 .unidad .opciones {
@@ -977,17 +988,33 @@ button {
     -webkit-border-radius: 8px;
     color: #2f3e47;
     font-size: 12pt;
-    height: 100px;
+    height: 80px;
     padding: 0px;
     text-align: center;
     width: 100%;
+}
+
+.unidad .opciones .opcion-pareja p {
+    font-size: 9pt;
+    padding: 5px;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 100%;
+}
+
+.unidad .opciones .opcion-pareja.titulo p {
+    font-weight: bold;
 }
 
 .unidad .opciones .opcion-pareja {
     font-size: 11pt;
 }
 
-.unidad .opciones .opcion-pareja img {
+.unidad .opciones .opcion-pareja img,
+.unidad .opciones .opcion img {
     width: 100%;
     position: absolute;
     left: 50%;
@@ -1007,14 +1034,26 @@ button {
     padding: 10px 0;
 }
 
+.unidad .opciones .opcion.opcion-con-imagen p {
+    position: absolute;
+    color: #ffffff;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px 0;
+    top: inherit;
+    margin: 0;
+}
+
 .unidad .opciones .col {
     position: relative;
 }
 
 .unidad .opciones .opcion-sonido {
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: -5px;
+    right: 2px;
     z-index: 10;
     border-radius: 15px;
     -webkit-border-radius: 15px;
@@ -1087,13 +1126,15 @@ button {
 }
 
 .unidad .opciones .opcion p {
-    position: relative;
+    position: absolute;
     top: 50%;
     -ms-transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
     padding-left: 10px;
     padding-right: 10px;
+    width: 100%;
+    text-align: center;
 }
 
 .calificar {
@@ -1165,12 +1206,12 @@ button {
     text-align: left;
     font-size: 12pt;
     width: 100%;
-    padding: 20px 15px;
+    padding: 5px 15px;
     font-size: 11pt;
 }
 
 .unidad .unidad-informativa p {
-    margin-bottom: 30px;
+    /*margin-bottom: 30px;*/
 }
 
 .unidad .unidad-informativa ul {
@@ -1281,7 +1322,7 @@ button {
     font-family: 'Muli', sans-serif;
     text-align: center;
     color: #2f3e47;
-    padding: 15px 25px;
+    padding: 15px 10px;
 }
 
 .popup-container .popup .calificacion .feedback div {
@@ -1345,7 +1386,7 @@ button {
 /* LECCIÓN FINALIZADA */
 
 .leccion-finalizada .header {
-    margin: 55px 50px 0 50px;
+    margin-top: 25px;
     border-radius: 20px;
     z-index: 1;
 }
@@ -1452,7 +1493,7 @@ button {
 
 .leccion-finalizada .badget {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .leccion-finalizada .badget p {
@@ -1493,11 +1534,11 @@ button {
 
 .leccion-finalizada .feedback {
     position: relative;
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 .leccion-finalizada .feedback p {
-    margin: 0 20px;
+    margin: 0 5px;
     font-size: 14pt;
     color: #2f3e47;
     text-align: center;

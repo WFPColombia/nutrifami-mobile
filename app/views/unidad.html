@@ -52,22 +52,22 @@
         <div class="row" ng-show="unidad.tipo.id == 1">
             <div class="col">
                 <div class="unidad-informativa">
-                    <p ng-click="playAudio('texto')" ion-ripple>
-                        <!--<button class="icon ion-volume-high" aria-hidden="true"></button> {{ unidad.texto}}</p>-->
-                        <div ng-bind-html="unidad.texto | format | trust"></div>
-                        <ul ng-repeat="opcion in unidad.opciones">
-                            <li ng-click="playAudio(opcion.audio.id)">{{opcion.texto}}</li>
-                        </ul>
+                    <!--<button class="icon ion-volume-high" aria-hidden="true"></button> {{ unidad.texto}}</p>-->
+                    <div ng-bind-html="unidad.texto | format | trust"></div>
+                    <!--<ul ng-repeat="opcion in unidad.opciones">
+                        <li ng-click="playAudio(opcion.audio.id)">{{opcion.texto}}</li>
+                    </ul>-->
                 </div>
             </div>
         </div>
         <div class="opciones" ng-show="unidad.tipo.id == 2">
             <opcion-pareja-unidad-info ng-repeat="opcion in unidad.opciones" opc1="unidad.opciones[$index]" opc2="unidad.opciones[$index+1]" index1="$index" index2="$index + 1"></opcion-pareja-unidad-info>
         </div>
-        <div class="opciones" ng-show="unidad.tipo.id == 3 || unidad.tipo.id == 4" ng-class=" scrolled ? 'scrolled':''">
+        <div class="opciones" ng-show="unidad.tipo.id == 3 || unidad.tipo.id == 4 ||unidad.tipo.id == 5" ng-class=" scrolled ? 'scrolled':''">
             <opcion-unidad-info ng-repeat="opcion in unidad.opciones" info="opcion" index="{{$index}}" colspan="unidad.colspan" ng-click="validar()"></opcion-unidad-info>
         </div>
     </div>
+    <div class="zona-segura"></div>
 </ion-scroll>
 <div class="bar bar-footer calificar" ng-class=" botonCalificar ? 'habilitado' : ''">
     <button ng-click="calificarUnidad()" ng-disabled="!botonCalificar" ion-ripple>{{textoBoton}}</button>

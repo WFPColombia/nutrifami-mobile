@@ -1,4 +1,4 @@
-nutrifamiMobile.directive('opcionUnidadInfo', function () {
+nutrifamiMobile.directive('opcionUnidadInfo', function($rootScope) {
     return {
         restrict: 'E',
         scope: {
@@ -7,8 +7,10 @@ nutrifamiMobile.directive('opcionUnidadInfo', function () {
             index: '@'
         },
         templateUrl: 'views/directives/opcionUnidadInfo.drt.html',
-        link: function ($scope, $element, $attrs) {
-            $scope.click = function () {
+        link: function($scope, $rootScope, $element, $attrs) {
+            $scope.tp = $scope.$parent.TARGETPATH;
+
+            $scope.click = function() {
                 $scope.$parent.seleccionarOpcion($scope.index);
             };
         }
