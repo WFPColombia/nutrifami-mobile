@@ -1234,7 +1234,7 @@ button {
 
 .popup-container .popup {
     width: 95%;
-    min-height: 450px;
+    /*min-height: 450px;*/
     background-color: #ffffff;
     border-radius: 10px;
     -moz-border-radius: 10px;
@@ -1342,12 +1342,12 @@ button {
 }
 
 .popup-container .popup .popup-buttons {
-    margin-top: 25px;
-    margin-bottom: 10px;
+    /*margin-top: 25px;
+    margin-bottom: 10px;*/
 }
 
 .popup-container .popup .popup-buttons .button {
-    height: 57px;
+    /*height: 57px;*/
     background-color: #00c97e;
     font-family: 'Raleway-Bold', sans-serif;
     letter-spacing: 5px;
@@ -1775,7 +1775,7 @@ button {
 }
 
 .confirmacion .popup {
-    min-height: 150px;
+    /*min-height: 150px;*/
 }
 
 .perfil-body .form-group .form-control[disabled],

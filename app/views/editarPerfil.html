@@ -35,7 +35,6 @@
                                     <input type="text" class="form-control" id="documento" name="documento" ng-value="usuarioActivo.login_documento" disabled>
                                 </div>
                             </div>
-
                             <div class="col">
                                 <div class="form-group">
                                     <label for="genero">Genero</label>
@@ -79,16 +78,16 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="nacimiento">Fecha de Nacimiento</label>  
-                                    <input type="date" class="form-control" placeholder="dd-MM-yyyy" id="nacimiento" name="nacimiento" ng-model="usuarioActivo.birthdate" ng-model-options="{ updateOn: 'blur' }">
-                                    <span class="messages" ng-show="userForm.$submitted || userForm.birthdate.$touched">
-                                        <span ng-show="userForm.birthdate.$error.required">La fecha de nacimiento es obligatoria</span>
+                                    <label for="nacimiento">Fecha de Nacimiento</label>
+                                    <input type="date" class="form-control" placeholder="dd-MM-yyyy" id="nacimiento" name="nacimiento" ng-model="usuarioActivo.nacimiento" ng-model-options="{ updateOn: 'blur' }">
+                                    <span class="messages" ng-show="userForm.$submitted || userForm.nacimiento.$touched">
+                                        <span ng-show="userForm.nacimiento.$error.required">La fecha de nacimiento es obligatoria</span>
                                     </span>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="edad">Edad</label>  
+                                    <label for="edad">Edad</label>
                                     <input type="text" class="form-control" id="edad" name="edad" ng-model="usuarioActivo.edad" ng-model-options="{ updateOn: 'blur' }">
                                     <span class="messages" ng-show="userForm.$submitted || userForm.nacimiento.$touched">
                                         <span ng-show="userForm.edad.$error.required">La edad es obligatoria</span>
@@ -120,7 +119,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="comunidad">Comunidad</label>
-                                    <input type="text" class="form-control" id="comunidad" name="comunidad" placeholder="Escrba la comunidad a la que pertenece" ng-model="usuarioActivo.comunidad" ng-model-options="{ updateOn: 'blur' }" >
+                                    <input type="text" class="form-control" id="comunidad" name="comunidad" placeholder="Escrba la comunidad a la que pertenece" ng-model="usuarioActivo.comunidad" ng-model-options="{ updateOn: 'blur' }">
                                     <span class="messages" ng-show="userForm.$submitted || userForm.comunidad.$touched">
                                         <span ng-show="userForm.comunidad.$error.required">La comunidad es obligatoria</span>
                                     </span>
@@ -150,7 +149,7 @@
                             <div class="botones">
                                 <div class="col">
                                     <button type="submit" class="btn btn-default center-block" ng-click="update()" ng-disabled="userForm.$invalid || dataLoading" ion-ripple>Guardar Cambios</button>
-                                    <a class='cancelar' href="/#/app/perfil" class="button">Cancelar</a>
+                                    <a class='cancelar' href="#/app/perfil" class="button">Cancelar</a>
                                 </div>
                             </div>
                         </div>

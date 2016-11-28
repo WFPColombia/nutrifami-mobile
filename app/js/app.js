@@ -172,6 +172,7 @@ nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cookieStore
         if (window.cordova) {
             var tp = cordova.file.applicationStorageDirectory;
             $rootScope.TARGETPATH = tp.replace("file://", "");
+            //$rootScope.TARGETPATH = tp;
             console.log($rootScope.TARGETPATH);
 
         } else {

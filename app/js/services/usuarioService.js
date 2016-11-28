@@ -1,4 +1,4 @@
-nutrifamiMobile.factory('UsuarioService', function () {
+nutrifamiMobile.factory('UsuarioService', function() {
     var service = {};
 
     /**
@@ -8,7 +8,7 @@ nutrifamiMobile.factory('UsuarioService', function () {
      * UsuarioService.getUsuarioActivo()
      *  
      */
-    service.getUsuarioActivo = function () {
+    service.getUsuarioActivo = function() {
         return JSON.parse(localStorage.getItem('usuarioActivo'));
     };
 
@@ -21,12 +21,12 @@ nutrifamiMobile.factory('UsuarioService', function () {
      * UsuarioService.setUsuarioActivo(usuario, function(response)){}
      * 
      */
-    service.setUsuarioActivo = function (usuario, callback) {
+    service.setUsuarioActivo = function(usuario, callback) {
         localStorage.setItem("usuarioActivo", JSON.stringify(usuario));
         delete usuario["sesionId"];
         delete usuario["isLogin"];
         delete usuario["token"];
-        nutrifami.editarUsuarioActivo(usuario, function (response) {
+        nutrifami.editarUsuarioActivo(usuario, function(response) {
             callback(response);
         });
 
@@ -39,7 +39,7 @@ nutrifamiMobile.factory('UsuarioService', function () {
      * UsuarioService.getUsuarioAvance()
      * 
      */
-    service.getUsuarioAvance = function () {
+    service.getUsuarioAvance = function() {
         return JSON.parse(localStorage.getItem('usuarioAvance'));
     };
 
@@ -53,25 +53,34 @@ nutrifamiMobile.factory('UsuarioService', function () {
      * UsuarioService.setUsuarioAvance(usuarioAvance, data, function(response)){}
      * 
      */
-    service.setUsuarioAvance = function (usuarioAvance, data, callback) {
-        callback = callback || function () {
-        };
+    service.setUsuarioAvance = function(usuarioAvance, data, callback) {
+        callback = callback || function() {};
 
-        nutrifami.avance.addAvance(data, function (response) {
+        nutrifami.avance.addAvance(data, function(response) {
             if (response.success) {
                 localStorage.setItem("usuarioAvance", JSON.stringify(usuarioAvance));
                 callback(response);
             }
         });
     };
-    
-    
-    service.getUsuarioFamiliaAvance = function(){
+
+
+    service.getUsuarioFamiliaAvance = function() {
         return JSON.parse(localStorage.getItem('usuarioFamiliaAvance'));
     };
-    
-    service.getUsuarioFamilia = function(){
+
+    /* 
+     * 
+     */
+    service.getUsuarioFamilia = function() {
         return JSON.parse(localStorage.getItem('usuarioFamilia'));
+    };
+
+    /* 
+     * 
+     */
+    service.setUsuarioFamilia = function(usuarioFamilia) {
+        localStorage.setItem("usuarioFamilia", JSON.stringify(usuarioFamilia));
     };
 
 

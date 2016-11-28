@@ -31,11 +31,11 @@
                     <input type="number" min="0" maxx="999999999999" class="form-control" name="documento" id="documento" placeholder="Ingresa el documento del familiar" ng-model="familiar.FAM_PER_DOCUMENTO" ng-model-options="{updateOn: 'blur'}" required>
                     <span class="messages" ng-show="userForm.$submitted || userForm.documento.$touched">
                         <span ng-show="userForm.documento.$error.required" class="error">El campo es obligatorio y debe ser númerico</span>
-                        <span ng-show="userForm.documento.$error.number" class="error"> El documento debe ser un número</span>
+                    <span ng-show="userForm.documento.$error.number" class="error"> El documento debe ser un número</span>
                     </span>
                 </div>
             </div>
-            <!--<div class="col">
+            <div class="col">
                 <div class="form-group">
                     <label for="parentesco">Parentesco <span class="message">*</span></label>
                     <select class="form-control" ng-options="option.name for option in familiar.parentescos.availableOptions track by option.id" ng-model="familiar.parentescos.selectedOption" ng-model-options="{updateOn: 'blur'}" required>
@@ -45,9 +45,8 @@
                         <span ng-show="userForm.parentesco.$error.required" class="error">El paretesco es obligatorio</span>
                     </span>
                 </div>
-            </div>-->
+            </div>
         </div>
-
         <div class="row">
             <div class="col">
                 <div class="form-group">
@@ -55,16 +54,15 @@
                     <input type="email" class="form-control" name="email" id="email" placeholder="Ingresa el correo electrónico" ng-model="familiar.FAM_PER_EMAIL" ng-model-options="{updateOn: 'blur'}" required>
                     <span class="messages" ng-show="userForm.$submitted || userForm.email.$touched">
                         <span ng-show="userForm.email.$error.email" class="error">El formato de correo no es válido</span>
-                        <span ng-show="userForm.email.$error.required" class="error">El correo es obligatorio.</span>
+                    <span ng-show="userForm.email.$error.required" class="error">El correo es obligatorio.</span>
                     </span>
                 </div>
             </div>
         </div>
-
         <div class="modal-footer">
             <p class="message">(*) Todos los campos son obligatorios</p>
             <div class="row">
-                <button class="btn btn-default center-block" ng-click="agregarFamiliar()" ng-disabled="userForm.$invalid || dataLoading" >Guardar Familiar</button>
+                <button class="btn btn-default center-block" ng-click="agregarFamiliar()" ng-disabled="userForm.$invalid || dataLoading">Guardar Familiar</button>
             </div>
             <button class='cancelar' ng-click="$buttonTapped({}, $event)" class="button">Cancelar</button>
         </div>

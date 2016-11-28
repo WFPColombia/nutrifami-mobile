@@ -1,40 +1,56 @@
 /*global angular*/
-nutrifamiMobile.controller('EditarPerfilController', function ($ionicPlatform, $scope, $location, $ionicLoading, UsuarioService) {
+nutrifamiMobile.controller('EditarPerfilController', function($ionicPlatform, $scope, $location, $ionicLoading, $ionicPopup, UsuarioService) {
     'use strict';
-    $ionicPlatform.ready(function () {
+    $ionicPlatform.ready(function() {
 
-        var usuarioActivo = UsuarioService.getUsuarioActivo();
-        $scope.usuarioActivo = usuarioActivo;
+        $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
         $scope.usuarioActivo.generos = {
             availableOptions: [
-                {id: 'F', name: 'Femenino'},
-                {id: 'M', name: 'Masculino'}
+                { id: 'F', name: 'Femenino' },
+                { id: 'M', name: 'Masculino' }
             ],
-            selectedOption: {id: usuarioActivo.genero, name: $scope.usuarioActivo.genero}
+            selectedOption: { id: $scope.usuarioActivo.genero, name: $scope.usuarioActivo.genero }
         };
         $scope.usuarioActivo.etnias = {
             availableOptions: [
-                {id: 'AFROCOLOMBIANOS', name: 'Afrocolombianos'},
-                {id: 'INDIGENA', name: 'Indigenas'},
-                {id: 'MESTIZO', name: 'Mestizo'},
-                {id: 'OTROS', name: 'Otros'},
-                {id: 'NINGUNO', name: 'Ninguno'}
+                { id: 'AFROCOLOMBIANOS', name: 'Afrocolombianos' },
+                { id: 'INDIGENA', name: 'Indigenas' },
+                { id: 'MESTIZO', name: 'Mestizo' },
+                { id: 'OTROS', name: 'Otros' },
+                { id: 'NINGUNO', name: 'Ninguno' }
             ],
-            selectedOption: {id: usuarioActivo.etnia, name: usuarioActivo.etnia}
+            selectedOption: { id: $scope.usuarioActivo.etnia, name: $scope.usuarioActivo.etnia }
         };
-        $scope.usuarioActivo.birthdate = new Date($scope.usuarioActivo.birthdate);
-        $scope.update = function () {
-            console.log("Guardar cambios")
+
+        var nacimiento = $scope.usuarioActivo.birthdate;
+        var n_ano = nacimiento.slice(0, 4);
+        var n_mes = nacimiento.slice(5, 7) - 1;
+        var n_dia = nacimiento.slice(8, 10);
+
+        $scope.usuarioActivo.nacimiento = new Date(n_ano, n_mes, n_dia);
+
+        $scope.update = function() {
+
+
             $scope.dataLoading = true;
-            usuarioActivo = $scope.usuarioActivo;
-            usuarioActivo.genero = $scope.usuarioActivo.generos.selectedOption.id;
-            usuarioActivo.etnia = $scope.usuarioActivo.etnias.selectedOption.id;
-            var tempMonth = $scope.usuarioActivo.birthdate.getMonth() + 1;
+
+            var usuarioActivo = Object.assign({}, $scope.usuarioActivo);
+
+            usuarioActivo.genero = $scope.usuarioActivo.generos.selectedOption.id || '';
+            usuarioActivo.etnia = $scope.usuarioActivo.etnias.selectedOption.id || '';
+            var tempMonth = usuarioActivo.nacimiento.getMonth() + 1;
+            var tempDay = usuarioActivo.nacimiento.getDate();
+
             if (tempMonth < 10) {
                 tempMonth = "0" + tempMonth;
             }
-            $scope.usuarioActivo.birthdate = $scope.usuarioActivo.birthdate.getFullYear() + "-" + tempMonth + "-" + $scope.usuarioActivo.birthdate.getDate();
-            console.log(usuarioActivo)
+
+
+            usuarioActivo.birthdate = usuarioActivo.nacimiento.getFullYear() + "-" + tempMonth + "-" + tempDay;
+
+            delete usuarioActivo["generos"];
+            delete usuarioActivo["etnias"];
+            delete usuarioActivo["nacimiento"];
 
             // Oberlay Cargando mientras se guarda el avance
             $scope.loading = $ionicLoading.show({
@@ -43,12 +59,28 @@ nutrifamiMobile.controller('EditarPerfilController', function ($ionicPlatform, $
                 showBackdrop: true,
                 maxWidth: 40
             });
-            UsuarioService.setUsuarioActivo(usuarioActivo, function (response) {
+
+            UsuarioService.setUsuarioActivo(usuarioActivo, function(response) {
                 if (response.success) {
-                    $ionicLoading.hide();
-                    //$location.path('/app/perfil');
+                    $scope.mensaje = {
+                        texto: "Los datos han sido guardado con éxito",
+                    };
+                    UsuarioService.setUsuarioActivo(usuarioActivo, function(response) {});
+                } else {
+
+                    $scope.mensaje = {
+                        texto: "Ops!! Hubo un error y los datos no fueron guardados. Por favor intenta más tarde."
+
+                    };
                 }
+
+                $ionicLoading.hide();
                 $scope.dataLoading = false;
+
+                var alertPopup = $ionicPopup.alert({
+                    template: $scope.mensaje.texto
+                });
+
             });
 
         };

@@ -125,14 +125,17 @@
                         <div class="row">
                             <div class="perfil-panel">
                                 <div class="perfil-header">
+                                    <div class="boton-flotante">
+                                        <button class="btn btn-default" ng-click="abrirModalEditarFamiliar(0)" ion-ripple><span class="icon ion-person-add" aria-hidden="true"></span> Agregar </button>
+                                    </div>
                                     <img ng-src="img/icons/ico-familia.png">
                                     <h1>Mi familia</h1>
-                                    <h3>{{ usuarioFamilia.totalMiembrosPorInscribir}} miembros no inscritos</h3>
+                                    <h3>{{ usuarioActivo.totalMiembrosPorInscribir}} familiares no inscritos</h3>
                                 </div>
                                 <div class="perfil-body">
                                     <div class="miembros-header">
                                         <div class="row">
-                                            <div class="col">Miembros</div>
+                                            <div class="col">Personas</div>
                                             <div class="col">Rango edad</div>
                                             <div class="col">Editar info</div>
                                         </div>
@@ -146,7 +149,7 @@
                                     </div>
                                 </div>
                                 <div class="perfil-header">
-                                    <h3>{{ usuarioFamilia.totalMiembrosInscritos}} miembros inscritos</h3>
+                                    <h3>{{ usuarioActivo.totalMiembrosInscritos}} familiares inscritos</h3>
                                 </div>
                                 <div class="perfil-body">
                                     <div class="miembros-header">
