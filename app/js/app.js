@@ -3,9 +3,12 @@ dependencies = ['ionic', 'ngCordova', 'Authentication', 'ngCookies', 'ngRoute', 
 var nutrifamiLogin = angular.module('Authentication', []);
 var nutrifamiMobile = angular.module('NutrifamiMobile', dependencies);
 
-nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $compileProvider) {
     'use strict';
     $ionicConfigProvider.tabs.position('top');
+
+    //$compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|file|blob|cdvfile):|data:image\//);
+    $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|file):/);
 
     $stateProvider.state('login', {
         url: '/login',
@@ -170,9 +173,9 @@ nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cookieStore
 
     $ionicPlatform.ready(function() {
         if (window.cordova) {
-            var tp = cordova.file.applicationStorageDirectory;
-            $rootScope.TARGETPATH = tp.replace("file://", "");
-            //$rootScope.TARGETPATH = tp;
+            var tp = cordova.file.externalApplicationStorageDirectory;
+            //$rootScope.TARGETPATH = tp.replace("file://", "");
+            $rootScope.TARGETPATH = tp;
             console.log($rootScope.TARGETPATH);
 
         } else {
