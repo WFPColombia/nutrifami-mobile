@@ -3,7 +3,7 @@
         <button ng-click="playAudio('audiologin')" class="login-sonido icon ion-volume-high" aria-hidden="true" ion-ripple></button>
         <div class="row logo center-block">
             <div class="col col-100">
-                <img src="img/logo-nutrifami.png" alt="Nutrifami"/>
+                <img src="img/logo-nutrifami.png" alt="Nutrifami" />
             </div>
         </div>
         <form name="form" ng-submit="login()" role="form">
@@ -15,14 +15,14 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <!--<div class="row">
                 <div class="col col-100">
                     <div class="form-group">
                         <input type="text" name="password" id="password" class="lcodigo" placeholder="Escriba su código" autocomplete="off" ng-model="password" required />
                         <div ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Código es necesario</div>
                     </div>
                 </div>
-            </div>
+            </div>-->
             <div class="row">
                 <div class="col col-100">
                     <div class="form-actions">
@@ -31,9 +31,17 @@
                     </div>
                 </div>
             </div>
-            <div class="row logo-wfp center-block">
-                <div class="col col-100">
-                    <img src="img/logo-wfp.png" alt="Logo Programa Mundial de Alimentos - Naciones Unidas"/>
+            <div class="row">
+                <div class="col">
+                    <div class="registrarse">
+                        <p ng-click="abrirRegistro()" "><a href>¿No tienes cuenta? Regístrate</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row logo-wfp center-block ">
+                <div class="col col-100 ">
+                    <img src="img/logo-wfp.png " alt="Logo Programa Mundial de Alimentos - Naciones Unidas " />
                 </div>
             </div>
         </form>
