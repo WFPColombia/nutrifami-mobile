@@ -22,12 +22,18 @@ nutrifamiMobile.controller('EditarPerfilController', function($ionicPlatform, $s
             selectedOption: { id: $scope.usuarioActivo.etnia, name: $scope.usuarioActivo.etnia }
         };
 
-        var nacimiento = $scope.usuarioActivo.birthdate;
-        var n_ano = nacimiento.slice(0, 4);
-        var n_mes = nacimiento.slice(5, 7) - 1;
-        var n_dia = nacimiento.slice(8, 10);
 
-        $scope.usuarioActivo.nacimiento = new Date(n_ano, n_mes, n_dia);
+
+        if ($scope.usuarioActivo.birthdate !== null) {
+            var nacimiento = $scope.usuarioActivo.birthdate;
+            var n_ano = nacimiento.slice(0, 4);
+            var n_mes = nacimiento.slice(5, 7) - 1;
+            var n_dia = nacimiento.slice(8, 10);
+
+            $scope.usuarioActivo.nacimiento = new Date(n_ano, n_mes, n_dia);
+        } else {
+            $scope.usuarioActivo.nacimiento = new Date(0, 0, 0);
+        }
 
         $scope.update = function() {
 

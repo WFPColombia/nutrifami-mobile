@@ -1,11 +1,26 @@
-<ion-scroll style="height: 100%;">
-    
-    <h3>Descarga de archivos</h3>
-    <p>Archivos existentes:{{archivosExistentes}} </p>
-    <h4>{{archivosDescargados}}/{{totalArchivos}} (Arhivos Descargados / Archivos totales)</h4>
-    <h4>{{archivosError}} (Errores)</h4>
-    <p>Url: {{url}}</p>
-    <p>Destino: {{targetPath}}</p>
-    <p>Estado: {{response}}</p>
-    <p>Progreso: {{downloadProgress}}%</p>
-</ion-scroll>
+<div class="preload">
+    <div class="container">
+        <div class="row logo center-block">
+            <div class="col col-100">
+                <img src="img/logo-nutrifami.png" alt="Nutrifami" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="progress">
+                    <div class="progress-bar" style="width: {{downloadProgress}}%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p>{{response}}</p>
+            </div>
+        </div>
+        <div class="row logo-wfp center-block ">
+            <div class="col col-100 ">
+                <img src="img/logo-wfp.png " alt="Logo Programa Mundial de Alimentos - Naciones Unidas " />
+            </div>
+        </div>
+    </div>
+</div>

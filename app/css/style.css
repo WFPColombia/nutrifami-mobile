@@ -81,9 +81,42 @@ button {
 /* END RIPPLE EFFECT*/
 
 
+/* PRELOADING*/
+
+.preload .progress {
+    height: 11px;
+    margin-bottom: 0px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 200px;
+    border-radius: 4px;
+    width: 90%;
+    background-color: #f5f5f5;
+    background-image: none;
+}
+
+.preload .progress .progress-bar {
+    background-color: #feea45;
+    background-image: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    height: 100%;
+    border-radius: 4px;
+}
+
+.preload p {
+    text-align: center;
+    color: #ffffff;
+}
+
+
+/* FINAL - PRELOADING*/
+
+
 /* LOGIN - INTRO*/
 
-.login {
+.login,
+.preload {
     background-color: #00c97e;
     background-image: url('../img/login-bg.png');
     background-position: center center;
@@ -96,7 +129,8 @@ button {
     margin: 0 auto;
 }
 
-.login .logo {
+.login .logo,
+.preload .logo {
     margin-top: 6em;
     text-align: center;
 }
@@ -226,7 +260,8 @@ button {
     text-decoration: none;
 }
 
-.login .logo-wfp {
+.login .logo-wfp,
+.preload .logo-wfp {
     text-align: center;
     width: 100%;
     position: absolute;
@@ -2597,13 +2632,14 @@ button {
 }
 
 .sobre .sobre-body .descripcion p {
-    font-size: 14pt;
-    margin-top: 25pt;
+    font-size: 12pt;
+    margin-top: 10pt;
     padding: 0 35px;
 }
 
 .sobre .sobre-body .wfp-ia-logo img {
     margin-top: 25px;
+    width: 90%;
 }
 
 .sobre .sobre-body .copyright {
