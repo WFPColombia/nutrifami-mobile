@@ -89,20 +89,30 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
 
     });
 
-    $stateProvider.state('app.compras', {
-        url: '/compras',
+    $stateProvider.state('app.misComprasIntro', {
+        url: '/mis-compras/intro',
         views: {
             'menuContent': {
-                templateUrl: 'views/compras.html',
-                controller: 'ComprasController'
+                templateUrl: 'views/misComprasIntro.html',
+                controller: 'misComprasIntroController'
+            }
+        }
+    });
+
+    $stateProvider.state('app.compras', {
+        url: '/mis-compras',
+        views: {
+            'menuContent': {
+                templateUrl: 'views/misCompras.html',
+                controller: 'misComprasController'
             }
         }
     });
 
     $stateProvider.state('comprasGrupo', {
-        url: '/compras/:grupo',
-        templateUrl: 'views/comprasGrupo.html',
-        controller: 'ComprasGrupoController'
+        url: '/mis-compras/:grupo',
+        templateUrl: 'views/misComprasGrupo.html',
+        controller: 'misComprasGrupoController'
     });
 
     $stateProvider.state('app.tips', {
@@ -153,8 +163,20 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
     $urlRouterProvider.otherwise('/app/capacitacion');
 });
 
-nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cookieStore, $cordovaFileTransfer) {
+nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cookieStore, $cordovaFileTransfer, $ionicHistory) {
     // keep user logged in after page refresh
+
+    console.log($ionicHistory.currentStateName());
+    $ionicPlatform.registerBackButtonAction(function(event) {
+        console.log($ionicHistory.currentStateName());
+        if ($ionicHistory.currentStateName() === 'someStateName') {
+            event.preventDefault();
+        } else {
+            $ionicHistory.goBack();
+        }
+    }, 100);
+
+
     $rootScope.globals = $cookieStore.get('globals') || {};
 
     nutrifami.getSessionId();
