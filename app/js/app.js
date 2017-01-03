@@ -166,7 +166,6 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
 nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cookieStore, $cordovaFileTransfer, $ionicHistory) {
     // keep user logged in after page refresh
 
-    console.log($ionicHistory.currentStateName());
     $ionicPlatform.registerBackButtonAction(function(event) {
         console.log($ionicHistory.currentStateName());
         if ($ionicHistory.currentStateName() === 'someStateName') {
@@ -198,7 +197,6 @@ nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cookieStore
             var tp = cordova.file.externalApplicationStorageDirectory;
             //$rootScope.TARGETPATH = tp.replace("file://", "");
             $rootScope.TARGETPATH = tp;
-            console.log($rootScope.TARGETPATH);
 
         } else {
             $rootScope.TARGETPATH = "https://s3.amazonaws.com/nutrifami/";

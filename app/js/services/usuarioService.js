@@ -40,7 +40,43 @@ nutrifamiMobile.factory('UsuarioService', function() {
      * 
      */
     service.getUsuarioAvance = function() {
-        return JSON.parse(localStorage.getItem('usuarioAvance'));
+        usuarioAvance = JSON.parse(localStorage.getItem('usuarioAvance'));
+        if (typeof usuarioAvance.totalUnidades == 'undefined') {
+            usuarioAvance.totalUnidades = Object.keys(nutrifami.training.cap_lecciones).length;
+            localStorage.setItem("usuarioAvance", JSON.stringify(usuarioAvance));
+        }
+
+
+        usuarioAvance.medallas = 0;
+        usuarioAvance.nivel = 0;
+        usuarioAvance.leccion = 0;
+        usuarioAvance.puntos = 0;
+        usuarioAvance.porcentaje = 0;
+        usuarioAvance.diplomas = [];
+        var modulo = {};
+
+        for (var i in usuarioAvance[3]) {
+            usuarioAvance.medallas = usuarioAvance.medallas + Object.keys(usuarioAvance[3][i]).length;
+            usuarioAvance.nivel = usuarioAvance.nivel + 1;
+            usuarioAvance.leccion = Object.keys(usuarioAvance[3][i]).length;
+
+            modulo = nutrifami.training.getModulo(i);
+
+            if (Object.keys(usuarioAvance[3][i]).length == modulo.lecciones.length) {
+                usuarioAvance.diplomas.push(modulo.titulo.texto);
+            }
+
+        }
+
+        usuarioAvance.puntos = usuarioAvance.medallas * 100;
+
+        usuarioAvance.porcentaje = parseInt((100 / usuarioAvance.totalUnidades) * usuarioAvance.medallas);
+
+
+
+
+
+        return usuarioAvance;
     };
 
     /**
@@ -73,7 +109,25 @@ nutrifamiMobile.factory('UsuarioService', function() {
      * 
      */
     service.getUsuarioFamilia = function() {
-        return JSON.parse(localStorage.getItem('usuarioFamilia'));
+
+        var usuarioFamilia = JSON.parse(localStorage.getItem('usuarioFamilia'));
+        var avanceFamilia = this.getUsuarioFamiliaAvance();
+
+        for (var i in usuarioFamilia) {
+            if (typeof avanceFamilia[usuarioFamilia[i]['FAM_PER_ID']] == 'undefined') {
+                usuarioFamilia[i]['medallas'] = 0;
+
+            } else {
+                usuarioFamilia[i]['medallas'] = 0;
+                for (var j in avanceFamilia[usuarioFamilia[i]['FAM_PER_ID']][3]) {
+                    usuarioFamilia[i]['medallas'] = usuarioFamilia[i]['medallas'] + Object.keys(avanceFamilia[usuarioFamilia[i]['FAM_PER_ID']][3][j]).length;
+                }
+
+
+            }
+        }
+
+        return usuarioFamilia;
     };
 
     /* 
@@ -82,6 +136,9 @@ nutrifamiMobile.factory('UsuarioService', function() {
     service.setUsuarioFamilia = function(usuarioFamilia) {
         localStorage.setItem("usuarioFamilia", JSON.stringify(usuarioFamilia));
     };
+
+
+
 
 
     return service;

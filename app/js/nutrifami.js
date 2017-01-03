@@ -271,21 +271,28 @@ var nutrifami = {
             capacitacion = capacitacion || '';
 
             if (window.cordova) {
+                console.log("Mobile");
+                localStorage.setItem("capacitacion", JSON.stringify(capacitacion));
                 nutrifami.training.cap_capacitacionesId = capacitacion["serv_capacitacionesId"];
                 nutrifami.training.cap_capacitaciones = capacitacion["serv_capacitaciones"];
                 nutrifami.training.cap_modulos = capacitacion["serv_modulos"];
                 nutrifami.training.cap_lecciones = capacitacion["serv_lecciones"];
                 nutrifami.training.cap_unidadesinformacion = capacitacion["serv_unidades"];
                 nutrifami.training.cap_unidadestips = capacitacion["serv_tips"];
+                console.log(nutrifami);
                 callback();
             } else {
-                $.getJSON("js/capacitacion.JSON", function(data) {
+                console.log("Web");
+                var ran = Math.floor((Math.random() * 100) + 1);
+                $.getJSON("js/capacitacion.JSON?" + ran, function(data) {
+                    localStorage.setItem("capacitacion", JSON.stringify(data));
                     nutrifami.training.cap_capacitacionesId = data['serv_capacitacionesId'];
                     nutrifami.training.cap_capacitaciones = data['serv_capacitaciones'];
                     nutrifami.training.cap_modulos = data['serv_modulos'];
                     nutrifami.training.cap_lecciones = data['serv_lecciones'];
                     nutrifami.training.cap_unidadesinformacion = data['serv_unidades'];
                     nutrifami.training.cap_unidadestips = data["serv_tips"];
+                    console.log(nutrifami);
                     callback();
                 }).fail(function(jqxhr, textStatus, error) {
                     console.log(jqxhr);

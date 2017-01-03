@@ -1,34 +1,17 @@
-nutrifamiMobile.controller('ProgresoController', function ($ionicPlatform, $scope, $ionicLoading, UsuarioService) {
+nutrifamiMobile.controller('ProgresoController', function($ionicPlatform, $ionicPopup, $scope, $ionicLoading, UsuarioService) {
     'use strict';
-    $ionicPlatform.ready(function () {
+    $ionicPlatform.ready(function() {
 
         $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
         $scope.usuarioAvance = UsuarioService.getUsuarioAvance();
-        $scope.usuarioFamiliaAvance = UsuarioService.getUsuarioFamiliaAvance();
         $scope.usuarioFamilia = UsuarioService.getUsuarioFamilia();
-        //console.log($scope.usuarioActivo);
+
+        console.log($scope.usuarioActivo);
         console.log($scope.usuarioAvance);
-        console.log($scope.usuarioFamiliaAvance);
         console.log($scope.usuarioFamilia);
-        /*$scope.audio = ngAudio.load("audios/compras-intro.mp3");
-         $scope.dietaVariada = ngAudio.load("audios/compras-dieta-variada.mp3");*/
-        
-        $scope.medallas = 0;
-        $scope.nivel = 0;
-        $scope.leccion = 0;
-        for (var i in $scope.usuarioAvance[3]){
-            $scope.medallas = $scope.medallas + Object.keys($scope.usuarioAvance[3][i]).length;
-            $scope.nivel = $scope.nivel +1;
-            $scope.leccion = Object.keys($scope.usuarioAvance[3][i]).length;
-        }
-        
-        var totalUnidades = Object.keys(nutrifami.training.cap_unidadesinformacion).length;
-        
-        $scope.puntos = $scope.medallas * 100;
-        
-        $scope.porcentaje = parseInt((100 / totalUnidades ) * $scope.medallas);
-        
-        $scope.cargarMiProgreso = function () {
+
+
+        $scope.cargarMiProgreso = function() {
             $scope.loading = $ionicLoading.show({
                 //template: 'Cargando datos...',
                 animation: 'fade-in',
@@ -36,22 +19,76 @@ nutrifamiMobile.controller('ProgresoController', function ($ionicPlatform, $scop
                 maxWidth: 40
             });
 
-            
-                $ionicLoading.hide();
+
+            $ionicLoading.hide();
         };
 
-        $scope.cargarMiFamiliaProgreso = function () {
+        $scope.cargarMiFamiliaProgreso = function() {
             $scope.loading = $ionicLoading.show({
-             //template: 'Cargando datos...',
-             animation: 'fade-in',
-             showBackdrop: true,
-             maxWidth: 40
-             });
-             
-             
-             $ionicLoading.hide();
-             
+                //template: 'Cargando datos...',
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 40
+            });
+
+
+            $ionicLoading.hide();
+
         };
+
+        $scope.verDiploma = function(index) {
+
+            $scope.diplomaTitulo = $scope.usuarioAvance.diplomas[index];
+
+            var popUpDiploma = $ionicPopup.show({
+                templateUrl: 'views/modals/diploma.modal.html',
+                scope: $scope,
+                cssClass: 'diploma',
+                buttons: [
+                    /*{
+                                            text: 'Descargar',
+                                            type: 'button-positive',
+                                            onTap: function(e) {
+                                                $scope.descargar();
+                                            }
+                                        }
+                                        , */
+                    {
+                        text: 'Continuar',
+                        type: 'button-positive',
+                        onTap: function(e) {
+                            //MediaService.unload($scope.audios);
+
+                        }
+                    }
+                ]
+            });
+
+
+        };
+
+        $scope.descargar = function() {
+            console.log("Imprimir");
+            html2canvas(document.getElementById('prueba'), {
+
+                onrendered: function(canvas) {
+                    var data = canvas.toDataURL();
+                    var docDefinition = {
+                        content: [{
+                            image: data,
+                            width: 798
+                        }],
+                        pageSize: {
+                            width: 800,
+                            height: 500
+                        },
+                        pageMargins: [1, 1, 1, 1]
+
+                    };
+                    pdfMake.createPdf(docDefinition).download("Diploma - " + $scope.diplomaTitulo + ".pdf");
+                }
+            });
+        }
 
 
     });

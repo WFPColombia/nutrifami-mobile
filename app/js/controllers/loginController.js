@@ -12,7 +12,12 @@ nutrifamiLogin.controller('LoginController', function($ionicPlatform, $scope, $r
         AudioService.preloadSimple($scope.audios);
 
         AuthenticationService.ClearCredentials();
-        localStorage.clear();
+        //localStorage.clear();
+
+        localStorage.removeItem("usuarioActivo");
+        localStorage.removeItem("usuarioAvance");
+        localStorage.removeItem("usuarioFamilia");
+        localStorage.removeItem("usuarioFamiliaAvance");
 
         $scope.$watch(function() {
             if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -43,9 +48,13 @@ nutrifamiLogin.controller('LoginController', function($ionicPlatform, $scope, $r
             AuthenticationService.Login($scope.username, 'no-pass', function(response) {
                 if (response.success) {
                     AuthenticationService.SetCredentials($scope.username, $scope.password, response.message);
-                    $ionicLoading.hide();
+
                     AudioService.unload($scope.audios);
+                    //nutrifami.training.initClient('', function() {
+                    $ionicLoading.hide();
                     $location.path('/intro');
+                    //});
+
                 } else {
                     $scope.error = response.message;
                     $timeout(function() {

@@ -1,5 +1,5 @@
 /*global angular*/
-nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, $scope, $ionicLoading, $cordovaZip, $rootScope, $timeout, $q, $location, $cordovaFileTransfer) {
+nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $ionicLoading, $ionicPopup, $http, $scope, $cordovaZip, $rootScope, $timeout, $q, $location, $cordovaFileTransfer, $cordovaNetwork, UsuarioService) {
     'use strict';
     $ionicPlatform.ready(function() {
 
@@ -30,6 +30,56 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
         $scope.archivosDescargados = 0;
         $scope.archivosError = 0;
         $scope.errores = [];
+
+        //Verificar el destino
+
+        var destino = "/login";
+        var acceso = false;
+
+
+
+
+
+        if (UsuarioService.getUsuarioActivo() != null) {
+            acceso = true;
+            destino = '/app/capacitacion';
+        }
+
+
+        //Comprobamos la conexión a Internet    
+        if (window.cordova) {
+            var isOnline = $cordovaNetwork.isOnline();
+            var isOffline = $cordovaNetwork.isOffline()
+            if (isOffline) {
+
+                if (!acceso) {
+                    $ionicPopup.alert({
+                            title: "Sin conexión a Internet",
+                            content: "Para usar Nutrifami sin Conexión a Internet, debe al menos haber iniciado con Internet una vez",
+                            buttons: [
+                                { text: 'Salir' }
+                            ]
+                        })
+                        .then(function(res) {
+                            ionic.Platform.exitApp();
+                        });
+
+                } else {
+                    $ionicPopup.alert({
+                            title: "Sin conexión a Internet",
+                            content: "Actualmente su dispositivo se encuentra desconectado de Internet. Usted podrá usar Nutrifami, pero el avance no será guardado.",
+                            buttons: [
+                                { text: 'Continuar' }
+                            ]
+                        })
+                        .then(function(res) {
+                            $location.path('/app/capacitacion');
+                        });
+
+                }
+            }
+
+        }
 
 
         //Comprobar si existe el archivo de version.JSON
@@ -86,7 +136,7 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
                 $http.get(zipTargetPath + ".ok").then(function(response) { //Intenta cargar el archivo zip.ok, si existe es que la descarga ya se hizo con éxito anteriormente entonces salta este proceso
                     console.log("La descarga se había hecho con éxito anteriormente")
                     cargarCapacitacion(capacitacionTargetPath, function() {
-                        $location.path('/login');
+                        $location.path(destino);
 
                     });
                 }, function errorCallback(response) {
@@ -198,7 +248,6 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
                                         $scope.downloadProgress = (progress.loaded / progress.total) * 100;
                                     });
 
-
                             },
                             function(err) {
                                 console.log("Error al descargar el zip");
@@ -240,8 +289,8 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
                     });
             } else {
                 cargarCapacitacion("js/capacitacion.JSON", function() {
-                    console.log("ir al login");
-                    $location.path('/login');
+
+                    $location.path(destino);
                 });
             }
 
@@ -502,7 +551,7 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $http, 
                     }, function(progress) {
                         $scope.downloadProgress = (progress.loaded / progress.total) * 100;
                     });
-                $location.path('/login');
+                $location.path(destino);
             }
         }
     });

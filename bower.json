@@ -30,6 +30,8 @@
     "angular-route": "^1.5.8",
     "ngCordova": "^0.1.27-alpha",
     "ion-ripple": "^1.0.8",
-    "ionic-image-lazy-load": "ion-image-lazy-load#*"
+    "ionic-image-lazy-load": "ion-image-lazy-load#*",
+    "html2canvas": "^0.4.1",
+    "pdfmake": "^0.1.23"
   }
 }
