@@ -154,11 +154,56 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
         controller: 'PreloadController'
     });
 
+
+    $stateProvider.state('nc', {
+        url: '/nutricompra',
+        cache: false,
+        templateUrl: 'views/nutricompra/nc_home.html',
+        controller: 'nc_homeController'
+    });
+
+    $stateProvider.state('nc_como', {
+        url: '/nutricompra/como-jugar',
+        cache: false,
+        templateUrl: 'views/nutricompra/nc_comoJugar.html',
+        controller: 'nc_comoJugarController'
+    });
+
+    $stateProvider.state('nc_jugar', {
+        url: '/nutricompra/jugar',
+        cache: false,
+        templateUrl: 'views/nutricompra/nc_jugar.html',
+        controller: 'nc_jugarController'
+    });
+
+
+    $stateProvider.state('nc_resumen', {
+        url: '/nutricompra/jugar/resumen',
+        cache: false,
+        templateUrl: 'views/nutricompra/nc_resumen.html',
+        controller: 'nc_jugarResumenController'
+    });
+
+
+    $stateProvider.state('nc_terminar', {
+        url: '/nutricompra/jugar/terminar',
+        cache: false,
+        templateUrl: 'views/nutricompra/nc_terminar.html',
+        controller: 'nc_jugarTerminarController'
+    });
+
+
     $stateProvider.state('home', {
         url: '/home',
         templateUrl: 'views/home.html',
         controller: 'HomeController'
     });
+
+
+
+
+
+
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/capacitacion');
 });
