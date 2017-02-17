@@ -1,13 +1,12 @@
-<div class="modal-header">
-    <span class="center-block glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+<div class="popup-header">
+    <span class="icon ion-alert"></span>
 </div>
-<div class="modal-body">
+<div class="popup-body">
     <div>
-        <p>{{data.texto1}}</p>
-        <p>{{data.texto2}}</p>
+        <p class="mensaje">{{data.texto1}}</p>
+        <p class="mensaje">{{data.texto2}}</p>
     </div>
 </div>
-<div class="modal-footer">
-    <div><a href class="btn btn-default" role="button" ng-click="boton1()">{{data.boton1}}</a></div>
-    <div><a href class="btn btn-default salir" role="button" ng-click="boton2()">{{data.boton2}}</a></div>
-</div>
+<!--<div class="popup-footer">
+    <button ng-click="$buttonTapped({}, $event)" class="button">{{data.boton1}}</button>
+</div>-->

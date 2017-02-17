@@ -1,21 +1,13 @@
 /*global angular*/
-nutrifamiMobile.controller('nc_jugarTerminarController', function($scope, $anchorScroll, $location, $uibModal, bsLoadingOverlayService, UsuarioService, NutricompraService) {
+nutrifamiMobile.controller('nc_jugarTerminarController', function($scope, $location, $ionicPopup, $ionicViewSwitcher, UsuarioService, NutricompraService) {
     'use strict';
 
-    $anchorScroll();
+
 
 
     $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
     $scope.feedbacks = {}
 
-    /* Overloading*/
-    bsLoadingOverlayService.start();
-    /* Se apaga cuando el todo el contenido de la vista ha sido cargado*/
-    $scope.$on('$viewContentLoaded', function() {
-        /* Se le agrega 0,3 segundos para poder verlo ver inicialmente
-         * cuando el contenido se demore mucho en cargar se puede quitar el timeout*/
-        bsLoadingOverlayService.stop();
-    });
 
     NutricompraService.getFeedback(function(response) {
 
@@ -55,5 +47,48 @@ nutrifamiMobile.controller('nc_jugarTerminarController', function($scope, $ancho
 
 
     };
+
+    $scope.salir = function() {
+        $scope.data = {
+            ttexto1: '¿Quiere jugar de Nuevo?',
+            texto2: 'Podrá seguir practicando para hacer una compra saludable',
+            boton1: 'Jugar',
+            enlace1: 'nutricompra',
+            boton2: 'Salir',
+            enlace2: 'capacitacion'
+        };
+
+
+        var popUpFeedback = $ionicPopup.show({
+            templateUrl: 'views/nutricompra/nc_salir.modal.html',
+            scope: $scope,
+            cssClass: 'salir-unidad',
+            buttons: [{
+                text: $scope.data.boton1,
+                type: 'button-positive',
+                onTap: function(e) {
+
+                    $ionicViewSwitcher.nextDirection('back'); // 'forward', 'back', etc.
+                    if ($scope.data.enlace1 != '') {
+                        NutricompraService.clearProductos(function(response) {
+                            $location.path('/' + $scope.data.enlace1);
+                        });
+                    }
+                }
+            }, {
+                text: $scope.data.boton2,
+                type: 'button-positive',
+                onTap: function(e) {
+
+                    $ionicViewSwitcher.nextDirection('back'); // 'forward', 'back', etc.
+                    if ($scope.data.enlace2 != '') {
+                        NutricompraService.clearProductos(function(response) {
+                            $location.path('/' + $scope.data.enlace2);
+                        });
+                    }
+                }
+            }]
+        });
+    }
 
 });

@@ -1,5 +1,5 @@
 /*global angular*/
-nutrifamiMobile.controller('nc_jugarController', function($scope, $location, UsuarioService, NutricompraService) {
+nutrifamiMobile.controller('nc_jugarController', function($scope, $location, $ionicPopup, $ionicViewSwitcher, UsuarioService, NutricompraService) {
     'use strict';
 
 
@@ -42,7 +42,7 @@ nutrifamiMobile.controller('nc_jugarController', function($scope, $location, Usu
         $scope.pagina--;
     }
 
-    $scope.salir = function() {
+    /*$scope.salir = function() {
         var data = {
             texto1: '¿Está seguro de salir?',
             texto2: 'Si sale perderá todo el progreso del juego',
@@ -69,7 +69,49 @@ nutrifamiMobile.controller('nc_jugarController', function($scope, $location, Usu
         });
 
 
-    };
+    };*/
+
+    $scope.salir = function() {
+        $scope.data = {
+            texto1: '¿Está seguro de salir?',
+            texto2: 'Si sale perderá todo el progreso del juego',
+            boton1: 'Continuar',
+            enlace1: '',
+            boton2: 'Salir',
+            enlace2: 'nutricompra'
+        };
+
+
+        var popUpFeedback = $ionicPopup.show({
+            templateUrl: 'views/nutricompra/nc_salir.modal.html',
+            scope: $scope,
+            cssClass: 'salir-unidad',
+            buttons: [{
+                text: $scope.data.boton1,
+                type: 'button-positive',
+                onTap: function(e) {
+
+                    $ionicViewSwitcher.nextDirection('back'); // 'forward', 'back', etc.
+                    if ($scope.data.enlace1 != '') {
+                        NutricompraService.clearProductos(function(response) {
+                            $location.path('/' + $scope.data.enlace1);
+                        });
+                    }
+                }
+            }, {
+                text: $scope.data.boton2,
+                type: 'button-positive',
+                onTap: function(e) {
+                    $ionicViewSwitcher.nextDirection('back'); // 'forward', 'back', etc.
+                    if ($scope.data.enlace2 != '') {
+                        NutricompraService.clearProductos(function(response) {
+                            $location.path('/' + $scope.data.enlace2);
+                        });
+                    }
+                }
+            }]
+        });
+    }
 
     function actualizarProductos() {
         NutricompraService.getProductos(function(response) {
