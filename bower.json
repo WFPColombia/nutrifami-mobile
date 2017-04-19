@@ -1,37 +1,37 @@
 {
-  "name": "Nutrifami",
-  "version": "0.0.1",
-  "homepage": "http://www.nutrifami.org",
-  "description": "Aplicación móvil multiplataforma para Nutrifami",
-  "main": "app/index.html",
-  "moduleType": [
-    "globals"
-  ],
-  "keywords": [
-    "PMA",
-    "Nutrifami"
-  ],
-  "authors": [
-    "Alejandro Tunaroza<alejandro.tunaroza@gmail.com>",
-    "Abel Moreno<abel.moreno@wfp.org>"
-  ],
-  "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "angular-cookies": "^1.5.8",
-    "jquery": "^3.1.0",
-    "js-md5": "md5#^0.4.1",
-    "angular-route": "^1.5.8",
-    "ngCordova": "^0.1.27-alpha",
-    "ion-ripple": "^1.0.8",
-    "ionic-image-lazy-load": "ion-image-lazy-load#*",
-    "html2canvas": "^0.4.1",
-    "pdfmake": "^0.1.23"
-  }
+    "name": "Nutrifami",
+    "version": "1.1.0",
+    "homepage": "http://www.nutrifami.org",
+    "description": "Aplicación móvil multiplataforma para Nutrifami",
+    "main": "app/index.html",
+    "moduleType": [
+        "globals"
+    ],
+    "keywords": [
+        "PMA",
+        "Nutrifami"
+    ],
+    "authors": [
+        "Alejandro Tunaroza<alejandro.tunaroza@gmail.com>",
+        "Abel Moreno<abel.moreno@wfp.org>"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "angular-cookies": "^1.5.8",
+        "jquery": "^3.1.0",
+        "js-md5": "md5#^0.4.1",
+        "angular-route": "^1.5.8",
+        "ngCordova": "^0.1.27-alpha",
+        "ion-ripple": "^1.0.8",
+        "ionic-image-lazy-load": "ion-image-lazy-load#*",
+        "html2canvas": "^0.4.1",
+        "pdfmake": "^0.1.23"
+    }
 }
