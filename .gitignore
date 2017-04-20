@@ -7,12 +7,10 @@ nbproject/*
 debug.log
 
 /node_modules
-/app/lib
 /nbproject
 /platforms
 /plugins
 /hooks
-/www
 /xdk
 /scss
 /res
