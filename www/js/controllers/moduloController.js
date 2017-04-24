@@ -54,7 +54,7 @@ nutrifamiMobile.controller('ModuloController', function($ionicPlatform, $scope, 
         };
         $scope.irALeccion = function(index) {
             $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
-            //MediaService.unload($scope.audios);
+            MediaService.unload($scope.audios);
             $location.path('/capacitacion/' + $stateParams.modulo + "/" + $scope.lids[index] + "/1");
         };
     });

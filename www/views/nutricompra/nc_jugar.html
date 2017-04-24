@@ -29,7 +29,7 @@
                 <div ng-repeat="producto in productosVitrina track by $index">
                     <div class="selector" ng-class="producto.seleccionado ? 'seleccionado':''" ng-hide="producto.pagina != pagina">
                         <div class="producto">
-                            <a href ng-click="agregarProductoAlCarrito(producto.grupo, producto.id_producto, $index)" ng-mouseover="sombra = 'sombra/'" ng-mouseout="sombra = ''"><img src="/img/nutricompra/icons/{{producto.imagen}}.png" ng-src="/img/nutricompra/icons/{{sombra}}{{producto.imagen}}.png"></a>
+                            <a href ng-click="agregarProductoAlCarrito(producto.grupo, producto.id_producto, $index)" ng-mouseover="sombra = 'sombra/'" ng-mouseout="sombra = ''"><img src="img/nutricompra/icons/{{producto.imagen}}.png" ng-src="img/nutricompra/icons/{{sombra}}{{producto.imagen}}.png"></a>
                         </div>
                     </div>
                 </div>

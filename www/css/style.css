@@ -1023,7 +1023,7 @@ button {
     width: 22px;
     height: 22px;
     position: absolute;
-    top: 19px;
+    top: 15px;
     right: 26px;
     border-radius: 11px;
     -webkit-border-radius: 11px;
@@ -1426,7 +1426,7 @@ button {
     background-color: #09df78;
     border-radius: 43px;
     text-align: center;
-    padding-top: 22px;
+    padding-top: 27px;
 }
 
 .salir-unidad .popup .popup-header .icon {
@@ -1609,7 +1609,7 @@ button {
     height: 30px;
     width: 30px;
     text-align: center;
-    padding-top: 0.2em;
+    padding-top: 5px;
     position: absolute;
     right: -1px;
     top: -7px;

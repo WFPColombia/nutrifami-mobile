@@ -224,7 +224,7 @@ nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cordovaFile
 
     $rootScope.globals = JSON.parse(localStorage.getItem('globals')) || {};
 
-    console.log("App");
+    //console.log("App");
     //console.log(JSON.parse(localStorage.getItem('globals')));
 
     nutrifami.getSessionId();

@@ -303,6 +303,8 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $ionicL
                 }
             }
 
+            console.log(recursos);
+
             comprobarArchivosExistentes(recursos).then(function(response) {
                 archivosFaltantes = response;
                 $scope.totalArchivos = archivosFaltantes.length;

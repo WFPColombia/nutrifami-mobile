@@ -10,16 +10,16 @@ nutrifamiMobile.factory('MediaService', function($cordovaMedia) {
      * 
      */
     service.preloadSimple = function(audios, callback) {
-        console.log("MediaService.preloadSimple");
+        //console.log("MediaService.preloadSimple");
         callback = callback || function() {};
 
         if (window.cordova) {
             for (audio in audios) {
                 audios[audio] = $cordovaMedia.newMedia(audios[audio], function() {
-                        console.log("playAudio():Audio Success");
+                        //console.log("playAudio():Audio Success");
                     },
                     function(err) {
-                        console.log("playAudio():Audio Error: " + err);
+                        //console.log("playAudio():Audio Error: " + err);
                     });
             }
         }
@@ -37,10 +37,10 @@ nutrifamiMobile.factory('MediaService', function($cordovaMedia) {
      */
     service.play = function(audio, audios) {
 
-        console.log("MediaService.play: " + audio);
+        //console.log("MediaService.play: " + audio);
         this.stopAll(audios, function() {
             if (window.plugins) {
-                console.log(audios);
+                //console.log(audios);
                 console.log(audio);
                 audios[audio].setVolume(1);
                 audios[audio].play();
@@ -57,10 +57,10 @@ nutrifamiMobile.factory('MediaService', function($cordovaMedia) {
      * 
      */
     service.stopAll = function(audios, callback) {
-        console.log("MediaService.stopAll: " + audios);
+        //console.log("MediaService.stopAll: " + audios);
         for (var audio in audios) {
             if (window.plugins) {
-                //audios[audio].stop(); // Android*/
+                audios[audio].stop(); // Android*/
             }
         }
         callback();
@@ -76,6 +76,7 @@ nutrifamiMobile.factory('MediaService', function($cordovaMedia) {
      */
     service.unload = function(audios) {
         console.log("MediaService.unload:");
+        console.log(audios);
         this.stopAll(audios, function() {
             for (var audio in audios) {
                 if (window.plugins) {
