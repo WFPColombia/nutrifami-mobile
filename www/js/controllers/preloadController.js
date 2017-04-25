@@ -95,11 +95,11 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $ionicL
             callback = callback || function() {};
             $cordovaFileTransfer.download(objeto.url, objeto.path, options, trustHosts).then(function(result) {
                 console.log(objeto.nombre + " descargado con éxito");
-                callback();
+                callback(true);
             }, function(err) {
                 console.log("Error al descargar " + objeto.nombre);
-                console.log(err);
-                callback();
+                $scope.errorDescarga();
+                callback(false);
             }, function(progress) {
                 $timeout(function() {
                     console.log("Descargando archivo " + objeto.nombre);
@@ -148,8 +148,8 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $ionicL
         };
 
         var descargarLeerCapacitacion = function() {
-            descargarArchivo(capacitacionInfo, function() {
-                capacitacionInfo.descargado = true;
+            descargarArchivo(capacitacionInfo, function(response) {
+                capacitacionInfo.descargado = response;
                 leerArchivo(capacitacionInfo, function(obj) {
                     console.log(obj);
                     $scope.myData = obj.data;
@@ -178,8 +178,8 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $ionicL
                     });
                 } else {
                     $scope.response = "Descargando archivos de capacitación";
-                    descargarArchivo(assetsInfo, function() {
-                        assetsInfo.descargado = true;
+                    descargarArchivo(assetsInfo, function(response) {
+                        assetsInfo.descargado = response;
                         localStorage.setItem("assetsInfo", JSON.stringify(assetsInfo));
                         descomprimirArchivo(assetsInfo, function() {
                             assetsInfo.descomprimido = true;
@@ -205,8 +205,8 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $ionicL
                         });
                     }
                 } else {
-                    descargarArchivo(assetsInfo, function() {
-                        assetsInfo.descargado = true;
+                    descargarArchivo(assetsInfo, function(response) {
+                        assetsInfo.descargado = response;
                         localStorage.setItem("assetsInfo", JSON.stringify(assetsInfo));
                         $scope.response = "Descomprimiendo archivos de capacitación";
                         descomprimirArchivo(assetsInfo, function() {
@@ -389,11 +389,24 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $ionicL
             }
         }
 
+        // A confirm dialog
+        $scope.errorDescarga = function() {
+            var alertPopup = $ionicPopup.alert({
+                title: 'Error en la desarga',
+                template: 'Hubo un error en la descarga de archivos, verifique la conexión a Internet e inténtelo más tarde!',
+                okText: 'Salir'
+            });
+
+            alertPopup.then(function(res) {
+                ionic.Platform.exitApp();
+            });
+        };
+
         if (window.cordova) {
             console.log("Versión móvil");
             $scope.response = "Consultado la versión más reciente";
-            descargarArchivo(version, function() { //Descargamos la version.json
-                version.descargado = true;
+            descargarArchivo(version, function(response) { //Descargamos la version.json
+                version.descargado = response;
                 leerArchivo(version, function(obj) {
                     version.web = obj.data.Capacitacion.ID;
                     comprobarVersion();
