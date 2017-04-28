@@ -43,7 +43,6 @@ nutrifamiMobile.controller('UnidadController', function($ionicPlatform, $scope, 
          * else - Si es otro tipo de unidad, desorganizamos las opciones */
 
         if ($scope.unidad.tipo.id == 2) {
-
             var tempImagenes = [];
             /* Recorre todo el objeto de las opciones para crear el arreglo*/
             for (var i in $scope.unidad.opciones) {
@@ -53,7 +52,6 @@ nutrifamiMobile.controller('UnidadController', function($ionicPlatform, $scope, 
                     tempOpciones.push($scope.unidad.opciones[i]);
                 }
             }
-
 
             /* Se mezclan los arreglos */
             shuffle(tempImagenes);
@@ -66,7 +64,6 @@ nutrifamiMobile.controller('UnidadController', function($ionicPlatform, $scope, 
                 opcionesUnidad.push(tempOpciones[i]);
             }
             $scope.unidad.opciones = opcionesUnidad;
-
         } else {
             for (var i in $scope.unidad.opciones) {
                 tempOpciones.push($scope.unidad.opciones[i]);
@@ -193,18 +190,22 @@ nutrifamiMobile.controller('UnidadController', function($ionicPlatform, $scope, 
                             if (parejasCorrectas == ($scope.unidad.opciones.length / 2)) {
                                 /*Si las parejas correctas es igual a la mitad de la cantidad de opciones habilitar el botón de continuar*/
                                 $scope.estadoUnidad = 'acierto';
-                                var tempFeedbackAudios = {};
-                                var tempFeedback = [{
-                                    texto: $scope.unidad.opciones[i].feedback.texto,
-                                    nombre: 'feedback' + i
-                                        /*audio: ngAudio.load($rootScope.TARGETPATH + $scope.unidad.opciones[i].feedback.audio.nombre)*/
-                                }];
 
-                                tempFeedbackAudios['feedback' + i] = $rootScope.TARGETPATH + $scope.unidad.opciones[i].feedback.audio.nombre;
-                                $scope.feedback.feedbacks = tempFeedback;
-                                $scope.feedback.audios = tempFeedbackAudios;
+                                //$scope.feedback.feedbacks = [];
+                                $scope.feedback.audios = {
+                                    'feedback': $rootScope.TARGETPATH + $scope.unidad.opciones[i].feedback.audio.nombre
+                                };
                                 $scope.feedback.audios.mensaje = MediaService.getMediaURL("audios/muy-bien-respuesta-correcta.mp3");
                                 $scope.feedback.mensaje = "Muy bien! respuesta correcta";
+
+                                console.log($scope.feedback);
+
+
+
+                                MediaService.preloadSimple($scope.feedback.audios, function(response) {
+                                    $scope.feedback.audios = response;
+                                    $scope.playAudioFeedback('feedback');
+                                });
 
 
                                 var popUpFeedback = $ionicPopup.show({
@@ -314,8 +315,9 @@ nutrifamiMobile.controller('UnidadController', function($ionicPlatform, $scope, 
             }
 
             MediaService.preloadSimple($scope.feedback.audios, function(response) {
-                console.log("preloadSimple feedback");
+
                 $scope.feedback.audios = response;
+                console.log($scope.feedback.audios)
                 $scope.playAudioFeedback(tempFeedbackUltimoAudio);
             });
 
