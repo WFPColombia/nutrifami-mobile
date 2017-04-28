@@ -200,17 +200,14 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
         controller: 'HomeController'
     });
 
-
-
-
-
-
-    // if none of the above states are matched, use this as the fallback
+    // Redirecciona a la capacitación si la URL solicitada no existe
     $urlRouterProvider.otherwise('/app/capacitacion');
 });
 
 nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cordovaFileTransfer, $ionicHistory) {
-    // keep user logged in after page refresh
+
+
+    console.log("run");
 
     $ionicPlatform.registerBackButtonAction(function(event) {
         console.log($ionicHistory.currentStateName());
@@ -224,42 +221,41 @@ nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cordovaFile
 
     $rootScope.globals = JSON.parse(localStorage.getItem('globals')) || {};
 
-    //console.log("App");
-    //console.log(JSON.parse(localStorage.getItem('globals')));
-
     nutrifami.getSessionId();
     $rootScope.$on('$locationChangeStart', function(event, next, current) {
 
+        console.log($location.path());
+
+        //Redirecciona a la pagina de preload si estaba la app cerrada
         if ($location.path() === "") {
             $location.path('/preload');
         }
-        // redirect to login page if not logged in
+        // Redirecciona a la pagina de login si el usuario no está logeado
         if ($location.path() !== '/login' && !$rootScope.globals.currentUser && $location.path() !== '/preload') {
             $location.path('/login');
         }
+
     });
 
-
-
     $ionicPlatform.ready(function() {
+
         if (window.cordova) {
             var tp = cordova.file.externalApplicationStorageDirectory;
-            //$rootScope.TARGETPATH = tp.replace("file://", "");
             $rootScope.TARGETPATH = tp;
 
         } else {
             $rootScope.TARGETPATH = "https://s3.amazonaws.com/nutrifami/";
         }
-        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-        // for form inputs)
-        if (window.cordova && window.cordova.plugins.Keyboard) {
-            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-            cordova.plugins.Keyboard.disableScroll(true);
 
-        }
         if (window.StatusBar) {
-            // org.apache.cordova.statusbar required
             StatusBar.styleDefault();
+        }
+
+        if (ionic.Platform.isAndroid()) {
+            window.addEventListener("native.hidekeyboard", function() {
+                StatusBar.hide();
+                window.AndroidFullScreen.immersiveMode(false, false);
+            });
         }
     });
 });
