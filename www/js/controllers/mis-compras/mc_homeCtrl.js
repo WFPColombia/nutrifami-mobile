@@ -1,14 +1,15 @@
-nutrifamiMobile.controller('misComprasController', function($ionicPlatform, $scope, $rootScope, $ionicHistory, $ionicLoading, $ionicPopup, $ionicViewSwitcher, $state, $location, $timeout, ComprasService, UsuarioService, MediaService) {
+nutrifamiMobile.controller('mc_homeCtrl', function($ionicPlatform, $scope, $rootScope, $ionicHistory, $ionicLoading, $ionicPopup, $ionicViewSwitcher, $state, $location, $timeout, ComprasService, UsuarioService, MediaService) {
     'use strict';
     $ionicPlatform.ready(function() {
 
+        $scope.audios = {};
         $scope.usuarioActivo = UsuarioService.getUsuarioActivo()
         $scope.animar = false;
-        $scope.preloadAudios = {};
-
-
 
         var usuario = {};
+
+        usuario.did = $scope.usuarioActivo.login_documento;
+        //usuario.did = '1006330568';
 
         $scope.consumoUltimoMes = [{
             'nombre': "Cereales, raíces, tubérculos y plátanos.",
@@ -37,9 +38,6 @@ nutrifamiMobile.controller('misComprasController', function($ionicPlatform, $sco
             'grupo_id': '6'
         }];
 
-        usuario.did = $scope.usuarioActivo.login_documento;
-        //usuario.did = '1006330568';
-
         $scope.cargarCompras = function() {
             $scope.loading = $ionicLoading.show({
                 //template: 'Cargando datos...',
@@ -64,52 +62,37 @@ nutrifamiMobile.controller('misComprasController', function($ionicPlatform, $sco
         };
 
         $scope.negarAcceso = function() {
-
             var negarPopUp = $ionicPopup.alert({
                 title: '',
                 template: 'No hay información de compras para este usuario',
                 buttons: [
                     { text: 'Salir' }
                 ]
-
             });
-
             negarPopUp.then(function(res) {
                 $location.path('/app/mis-compras/intro');
             });
 
         };
 
-        $scope.cargarCompras();
-
-        $scope.stopAudio = function() {
-            MediaService.unload($scope.preloadAudios, function() {
-                $scope.preloadAudios = {};
-            });
-        }
-
         $scope.playAudio = function(audio) {
+            MediaService.play(audio, $scope.audios);
+        };
+
+        $scope.$on("$ionicView.enter", function(event, data) {
+            console.log("Enter View");
             $scope.audios = {
                 'audio3': MediaService.getMediaURL('audios/compras-intro-3.wav'),
             };
+            MediaService.preloadSimple($scope.audios);
+        });
 
-            if (typeof $scope.preloadAudios[audio] == 'undefined') {
-                MediaService.preloadSimple($scope.audios, function(response) {
-                    $scope.preloadAudios = response;
-                    MediaService.play(audio, $scope.preloadAudios);
-                });
-            } else {
-                MediaService.play(audio, $scope.preloadAudios);
+        $scope.$on("$ionicView.beforeLeave", function(event, data) {
+            console.log("BeforeLeave view");
+            MediaService.unload($scope.audios);
+        });
 
-            }
-        };
+        $scope.cargarCompras();
 
-        $rootScope.$ionicGoBack = function(backCount) {
-            MediaService.unload($scope.preloadAudios, function() {
-                $scope.preloadAudios = {};
-                $ionicHistory.goBack(backCount);
-
-            });
-        };
     });
 });

@@ -11,9 +11,7 @@ nutrifamiMobile.factory('MediaService', function($cordovaMedia) {
      */
     service.preloadSimple = function(audios, callback) {
         console.log("MediaService.preloadSimple");
-        console.log(audios);
         callback = callback || function() {};
-
         if (window.cordova) {
             for (audio in audios) {
                 audios[audio] = $cordovaMedia.newMedia(audios[audio], function() {
@@ -77,7 +75,6 @@ nutrifamiMobile.factory('MediaService', function($cordovaMedia) {
      */
     service.unload = function(audios, callback) {
         console.log("MediaService.unload:");
-        console.log(audios);
         callback = callback || function() {};
         this.stopAll(audios, function() {
             for (var audio in audios) {

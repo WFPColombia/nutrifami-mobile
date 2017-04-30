@@ -94,8 +94,8 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
         url: '/mis-compras/intro',
         views: {
             'menuContent': {
-                templateUrl: 'views/misComprasIntro.html',
-                controller: 'misComprasIntroController'
+                templateUrl: 'views/mis-compras/mc_intro.html',
+                controller: 'mc_introCtrl'
             }
         }
     });
@@ -104,16 +104,16 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
         url: '/mis-compras',
         views: {
             'menuContent': {
-                templateUrl: 'views/misCompras.html',
-                controller: 'misComprasController'
+                templateUrl: 'views/mis-compras/mc_home.html',
+                controller: 'mc_homeCtrl'
             }
         }
     });
 
     $stateProvider.state('comprasGrupo', {
         url: '/mis-compras/:grupo',
-        templateUrl: 'views/misComprasGrupo.html',
-        controller: 'misComprasGrupoController'
+        templateUrl: 'views/mis-compras/mc_grupo.html',
+        controller: 'mc_grupoCtrl'
     });
 
     $stateProvider.state('app.tips', {
