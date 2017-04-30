@@ -10,7 +10,8 @@ nutrifamiMobile.factory('MediaService', function($cordovaMedia) {
      * 
      */
     service.preloadSimple = function(audios, callback) {
-        //console.log("MediaService.preloadSimple");
+        console.log("MediaService.preloadSimple");
+        console.log(audios);
         callback = callback || function() {};
 
         if (window.cordova) {
@@ -74,9 +75,10 @@ nutrifamiMobile.factory('MediaService', function($cordovaMedia) {
      * MediaService.unload(audios);
      * 
      */
-    service.unload = function(audios) {
+    service.unload = function(audios, callback) {
         console.log("MediaService.unload:");
         console.log(audios);
+        callback = callback || function() {};
         this.stopAll(audios, function() {
             for (var audio in audios) {
                 if (window.plugins) {
@@ -84,6 +86,7 @@ nutrifamiMobile.factory('MediaService', function($cordovaMedia) {
                 }
             }
         });
+        callback();
     };
 
     service.getMediaURL = function(s) {

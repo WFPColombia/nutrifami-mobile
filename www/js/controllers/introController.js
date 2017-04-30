@@ -1,25 +1,29 @@
 /*global angular*/
-nutrifamiMobile.controller('IntroController', function($ionicPlatform, $scope, $location, AudioService, UsuarioService) {
+nutrifamiMobile.controller('IntroController', function($ionicPlatform, $scope, $location, MediaService, UsuarioService) {
     'use strict';
 
     $ionicPlatform.ready(function() {
 
         $scope.audios = {
-            'audio1': 'audios/intro-1.mp3',
-            'audio2': 'audios/intro-2.mp3',
-            'audio3': 'audios/intro-3.mp3',
-            'audio4': 'audios/intro-4.mp3'
+            'audio1': MediaService.getMediaURL('audios/intro-1.wav'),
+            'audio2': MediaService.getMediaURL('audios/intro-2.wav'),
+            'audio3': MediaService.getMediaURL('audios/intro-3.wav'),
+            'audio4': MediaService.getMediaURL('audios/intro-4.wav'),
         };
-        AudioService.preloadSimple($scope.audios);
+
+
+        MediaService.preloadSimple($scope.audios, function(response) {
+            $scope.audios = response;
+        });
 
         $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
 
         $scope.playAudio = function(audio) {
-            AudioService.play(audio);
+            MediaService.play(audio, $scope.audios);
         };
 
         $scope.comenzar = function() {
-            AudioService.unload($scope.audios);
+            MediaService.unload($scope.audios);
             $location.path('/');
         };
 

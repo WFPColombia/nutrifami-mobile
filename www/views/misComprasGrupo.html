@@ -22,10 +22,14 @@
         </div>
         <div class="compras-grupo-recomendacion">
             <div class="row">
-                <div class="col">
+                <div class="col" ng-click="playAudio('audio4')" ion-ripple>
                     <img height="50px" src="img/icons/ico_canasta.png">
-                    <h2>Aquí encontrara recomendaciones para que su dieta sea mas variada</h2>
-                    <p>{{data.feedback}}</p>
+                    <h2><i class="icon ion-volume-high" aria-hidden="true"></i> Aquí encontrara recomendaciones para que su dieta sea mas variada </h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col" ng-click="playAudio('feedback')" ion-ripple>
+                    <p><i class="icon ion-volume-high" aria-hidden="true"></i> {{data.feedback.texto}}</p>
                 </div>
             </div>
         </div>

@@ -206,17 +206,11 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
 
 nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cordovaFileTransfer, $ionicHistory) {
 
-
-    console.log("run");
-
-    $ionicPlatform.registerBackButtonAction(function(event) {
-        console.log($ionicHistory.currentStateName());
-        if ($ionicHistory.currentStateName() === 'someStateName') {
-            event.preventDefault();
-        } else {
-            $ionicHistory.goBack();
-        }
-    }, 100);
+    //Deshabilitamos el boton de ir atrás del Hardware de Android
+    $ionicPlatform.registerBackButtonAction(function(e) {
+        //do your stuff
+        e.preventDefault();
+    }, 101);
 
 
     $rootScope.globals = JSON.parse(localStorage.getItem('globals')) || {};

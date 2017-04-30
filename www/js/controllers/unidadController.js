@@ -15,9 +15,9 @@ nutrifamiMobile.controller('UnidadController', function($ionicPlatform, $scope, 
         $scope.audios = {
             'tipo': $rootScope.TARGETPATH + $scope.unidad.instruccion.audio.nombre,
             'titulo': $rootScope.TARGETPATH + $scope.unidad.titulo.audio.nombre,
-            'muyBien': MediaService.getMediaURL('audios/muy-bien.mp3'),
-            'respuestaIncorrecta': MediaService.getMediaURL('audios/respuesta-incorrecta.mp3'),
-            'salir': MediaService.getMediaURL('audios/unidad-salir.mp3')
+            /*'muyBien': MediaService.getMediaURL('audios/muy-bien.mp3'),
+            'respuestaIncorrecta': MediaService.getMediaURL('audios/respuesta-incorrecta.mp3'),*/
+            'salir': MediaService.getMediaURL('audios/unidad-salir.wav')
         };
 
         $scope.feedback = {};

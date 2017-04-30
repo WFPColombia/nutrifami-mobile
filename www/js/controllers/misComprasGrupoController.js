@@ -1,8 +1,27 @@
-nutrifamiMobile.controller('misComprasGrupoController', function($ionicPlatform, $location, $scope, $ionicLoading, $ionicPopup, $stateParams, ComprasService, UsuarioService, AudioService) {
+nutrifamiMobile.controller('misComprasGrupoController', function($ionicPlatform, $location, $scope, $ionicLoading, $ionicPopup, $stateParams, ComprasService, UsuarioService, MediaService) {
     'use strict';
     $ionicPlatform.ready(function() {
 
+        $scope.$on('$ionicView.enter', function() {
+            $scope.audios = {
+                'audio4': MediaService.getMediaURL('audios/compras-intro-4.wav'),
+                'feedback': MediaService.getMediaURL($scope.data.feedback.audio)
+            };
+            if (typeof $scope.preloadAudios[audio] == 'undefined') {
+                MediaService.preloadSimple($scope.audios, function(response) {
+                    $scope.preloadAudios = response;
+                    MediaService.play(audio, $scope.preloadAudios);
+                });
+            }
+        });
+
         $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
+
+        $scope.audios = {
+            'audio4': MediaService.getMediaURL('audios/compras-intro-4.wav'),
+        };
+
+        $scope.preloadAudios = {};
 
 
 
@@ -44,19 +63,26 @@ nutrifamiMobile.controller('misComprasGrupoController', function($ionicPlatform,
             });
 
             negarPopUp.then(function(res) {
-                AudioService.unload($scope.audios);
                 $location.path('/app/mis-compras/intro');
             });
 
         };
 
+
         ComprasService.getConsolidadoComprasUltimoMes(usuario, function(response) {
             if (response.success) {
                 $scope.consumoUltimoMes = response.data;
-                console.log($scope.consumoUltimoMes);
                 puntoVenta['pid'] = response.puntoVenta;
 
                 $scope.data = $scope.consumoUltimoMes[$stateParams.grupo - 1];
+
+                $scope.audios['feedback'] = MediaService.getMediaURL($scope.data.feedback.audio);
+
+                MediaService.preloadSimple($scope.audios, function(response) {
+                    $scope.preloadAudios = response;
+                    MediaService.play(audio, $scope.preloadAudios);
+                });
+
 
                 /*$scope.audios = {
                     'resumenCompras': 'audios/compras-resumen-' + $scope.grupo.grupo_id + '.mp3',
@@ -69,17 +95,16 @@ nutrifamiMobile.controller('misComprasGrupoController', function($ionicPlatform,
         });
 
 
-
-
-
-
         $scope.stopAudio = function() {
-            AudioService.stopAll($scope.audios);
+            MediaService.unload($scope.preloadAudios, function() {
+                $scope.preloadAudios = {};
+            });
         }
 
         $scope.playAudio = function(audio) {
-            AudioService.stopAll($scope.audios);
-            AudioService.play(audio);
+
+            MediaService.play(audio, $scope.preloadAudios);
+
         };
 
 

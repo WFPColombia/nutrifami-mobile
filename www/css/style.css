@@ -2020,7 +2020,7 @@ button {
 }
 
 .mis-compras-intro h1,
-.mis-compras-intro .titulo .icon {
+.mis-compras-intro .icon {
     color: #00c97e;
     font-family: 'Muli', sans-serif;
     font-size: 15pt;
@@ -2046,11 +2046,15 @@ button {
     margin: 0px;
 }
 
-.mis-compras-intro .titulo .icon {
+.mis-compras-intro .icon {
     position: absolute;
-    font-size: 20pt;
+    font-size: 15pt;
     right: 0px;
-    top: 0px;
+    top: 7px;
+}
+
+.mis-compras-intro h1 .icon {
+    position: initial;
 }
 
 .mis-compras-intro .descripcion {
@@ -2226,6 +2230,8 @@ button {
     position: absolute;
     top: 15px;
     left: 15px;
+    width: 40px;
+    height: 40px;
 }
 
 .compras-grupo header h1 {
@@ -2292,7 +2298,7 @@ button {
 }
 
 .compras-grupo .compras-grupo-recomendacion img {
-    margin-top: 30px;
+    margin-top: 15px;
 }
 
 .compras-grupo .compras-grupo-recomendacion h2 {
@@ -2303,14 +2309,15 @@ button {
     text-align: center;
 }
 
-.compras-grupo .compras-grupo-recomendacion h2 span {
+.compras-grupo .compras-grupo-recomendacion h2 i,
+.compras-grupo .compras-grupo-recomendacion p i {
     color: #00c97e;
 }
 
 .compras-grupo .compras-grupo-recomendacion p {
     font-size: 11pt;
-    margin-top: 35px;
     text-align: left;
+    color: #2f3e47;
 }
 
 .compras-grupo .compras-grupo-nombre-recomendado {

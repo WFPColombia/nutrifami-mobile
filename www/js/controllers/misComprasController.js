@@ -1,18 +1,14 @@
-nutrifamiMobile.controller('misComprasController', function($ionicPlatform, $scope, $ionicLoading, $ionicPopup, $ionicViewSwitcher, $state, $location, $timeout, ComprasService, UsuarioService, AudioService) {
+nutrifamiMobile.controller('misComprasController', function($ionicPlatform, $scope, $rootScope, $ionicHistory, $ionicLoading, $ionicPopup, $ionicViewSwitcher, $state, $location, $timeout, ComprasService, UsuarioService, MediaService) {
     'use strict';
     $ionicPlatform.ready(function() {
 
         $scope.usuarioActivo = UsuarioService.getUsuarioActivo()
         $scope.animar = false;
+        $scope.preloadAudios = {};
 
-        $scope.audios = {
-            'audio1': 'audios/compras-intro.mp3',
-        };
-        AudioService.preloadSimple($scope.audios);
 
 
         var usuario = {};
-
 
         $scope.consumoUltimoMes = [{
             'nombre': "Cereales, raíces, tubérculos y plátanos.",
@@ -67,9 +63,6 @@ nutrifamiMobile.controller('misComprasController', function($ionicPlatform, $sco
             });
         };
 
-
-
-
         $scope.negarAcceso = function() {
 
             var negarPopUp = $ionicPopup.alert({
@@ -82,7 +75,6 @@ nutrifamiMobile.controller('misComprasController', function($ionicPlatform, $sco
             });
 
             negarPopUp.then(function(res) {
-                AudioService.unload($scope.audios);
                 $location.path('/app/mis-compras/intro');
             });
 
@@ -91,15 +83,33 @@ nutrifamiMobile.controller('misComprasController', function($ionicPlatform, $sco
         $scope.cargarCompras();
 
         $scope.stopAudio = function() {
-            AudioService.unload($scope.audios);
+            MediaService.unload($scope.preloadAudios, function() {
+                $scope.preloadAudios = {};
+            });
         }
 
-
         $scope.playAudio = function(audio) {
-            AudioService.play(audio, $scope.audios);
+            $scope.audios = {
+                'audio3': MediaService.getMediaURL('audios/compras-intro-3.wav'),
+            };
+
+            if (typeof $scope.preloadAudios[audio] == 'undefined') {
+                MediaService.preloadSimple($scope.audios, function(response) {
+                    $scope.preloadAudios = response;
+                    MediaService.play(audio, $scope.preloadAudios);
+                });
+            } else {
+                MediaService.play(audio, $scope.preloadAudios);
+
+            }
         };
 
+        $rootScope.$ionicGoBack = function(backCount) {
+            MediaService.unload($scope.preloadAudios, function() {
+                $scope.preloadAudios = {};
+                $ionicHistory.goBack(backCount);
 
-
+            });
+        };
     });
 });

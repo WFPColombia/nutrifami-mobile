@@ -18,6 +18,7 @@ nutrifamiLogin.controller('LoginController', function($ionicPlatform, $scope, $r
         localStorage.removeItem("usuarioAvance");
         localStorage.removeItem("usuarioFamilia");
         localStorage.removeItem("usuarioFamiliaAvance");
+        localStorage.removeItem("misCompras");
 
         $scope.$watch(function() {
             if (window.cordova && window.cordova.plugins.Keyboard) {

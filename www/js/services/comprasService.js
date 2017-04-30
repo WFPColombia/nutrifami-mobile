@@ -95,7 +95,7 @@ nutrifamiMobile.factory('ComprasService', ['$http', '$rootScope', '$timeout',
 
                 ],
                 'bajo': [
-                    'Recuerde que una alimentación saludable debe incluir alimentos de todos los  grupos: (Anexar imagen Plato Saludable)'
+                    'Recuerde que una alimentación saludable debe incluir alimentos de todos los  grupos'
 
                 ]
             },
@@ -452,9 +452,16 @@ nutrifamiMobile.factory('ComprasService', ['$http', '$rootScope', '$timeout',
         function seleccionarFeedbackAleatorio(grupo, estado) {
 
             var alt = Math.floor((Math.random() * feedbacks[grupo][estado].length));
-            var fb = feedbacks[grupo][estado][alt];
 
-            return fb.replace("______", nombreUsuario);
+            var texto = feedbacks[grupo][estado][alt];
+
+
+            var fb = {
+                'texto': texto.replace("______", nombreUsuario),
+                'audio': "audios/mis-compras/grupo-" + grupo + "-" + estado + "-" + alt + ".wav"
+            }
+
+            return fb;
         }
 
         return service;
