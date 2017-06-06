@@ -6,13 +6,16 @@
         "Alejandro Tunaroza<alejandro.tunaroza@gmail.com>",
         "Abel Moreno<abel.moreno@wfp.org>"
     ],
-    "contributors": [{
-        "name": "Alejandro Tunaroza",
-        "email": "alejandro.tunaroza@gmail.com"
-    }, {
-        "name": "Abel Moreno",
-        "email": "abel.moreno@wfp.org"
-    }],
+    "contributors": [
+        {
+            "name": "Alejandro Tunaroza",
+            "email": "alejandro.tunaroza@gmail.com"
+        },
+        {
+            "name": "Abel Moreno",
+            "email": "abel.moreno@wfp.org"
+        }
+    ],
     "scripts": {},
     "repository": {
         "type": "git",
@@ -33,9 +36,24 @@
         "gulp-sass": "^2.0.4",
         "gulp-concat": "^2.2.0",
         "gulp-minify-css": "^0.3.0",
-        "gulp-rename": "^1.2.0"
+        "gulp-rename": "^1.2.0",
+        "cordova-android": "~6.1.2",
+        "cordova-plugin-console": "~1.0.4",
+        "cordova-plugin-device": "~1.1.3",
+        "cordova-plugin-file": "~4.3.0",
+        "cordova-plugin-file-transfer": "~1.6.0",
+        "cordova-plugin-media": "~2.4.0",
+        "cordova-plugin-nativeaudio": "~3.0.7",
+        "cordova-plugin-network-information": "~1.3.1",
+        "cordova-plugin-splashscreen": "~4.0.0",
+        "cordova-plugin-statusbar": "~2.2.0",
+        "cordova-plugin-whitelist": "~1.3.0",
+        "cordova-plugin-zip": "~3.1.0",
+        "ionic-plugin-keyboard": "~2.2.1"
     },
     "devDependencies": {
+        "@ionic/cli-plugin-cordova": "1.3.0",
+        "@ionic/cli-plugin-ionic1": "1.3.0",
         "bower": "^1.3.3",
         "gulp-util": "^2.2.14",
         "shelljs": "^0.3.0"
@@ -49,10 +67,30 @@
         "ionic-plugin-keyboard"
     ],
     "cordovaPlatforms": [
-        "ios", {
+        "ios",
+        {
             "platform": "ios",
             "version": "",
             "locator": "ios"
         }
-    ]
+    ],
+    "cordova": {
+        "platforms": [
+            "android"
+        ],
+        "plugins": {
+            "cordova-plugin-console": {},
+            "cordova-plugin-device": {},
+            "cordova-plugin-file": {},
+            "cordova-plugin-file-transfer": {},
+            "cordova-plugin-media": {},
+            "cordova-plugin-nativeaudio": {},
+            "cordova-plugin-network-information": {},
+            "cordova-plugin-splashscreen": {},
+            "cordova-plugin-statusbar": {},
+            "cordova-plugin-whitelist": {},
+            "cordova-plugin-zip": {},
+            "ionic-plugin-keyboard": {}
+        }
+    }
 }
