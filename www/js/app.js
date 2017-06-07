@@ -233,23 +233,21 @@ nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cordovaFile
 
     $ionicPlatform.ready(function() {
 
-        if (window.cordova) {
-            var tp = cordova.file.externalApplicationStorageDirectory;
-            $rootScope.TARGETPATH = tp;
-
-        } else {
-            $rootScope.TARGETPATH = "https://s3.amazonaws.com/nutrifami/";
-        }
-
         if (window.StatusBar) {
             StatusBar.styleDefault();
         }
 
         if (ionic.Platform.isAndroid()) {
+            $rootScope.TARGETPATH = cordova.file.externalApplicationStorageDirectory;
             window.addEventListener("native.hidekeyboard", function() {
                 StatusBar.hide();
                 window.AndroidFullScreen.immersiveMode(false, false);
             });
+        } else if (ionic.Platform.isIPad() || ionic.Platform.isIOS()) {
+            console.log("Is iPad or iOS");
+            $rootScope.TARGETPATH = cordova.file.dataDirectory;;
+        } else {
+            $rootScope.TARGETPATH = "https://s3.amazonaws.com/nutrifami/";
         }
     });
 });

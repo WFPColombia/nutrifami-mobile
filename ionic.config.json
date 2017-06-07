@@ -1,4 +1,5 @@
 {
-    "name": "nutrifami",
-    "app_id": ""
+  "name": "nutrifami",
+  "app_id": "",
+  "type": "ionic1"
 }

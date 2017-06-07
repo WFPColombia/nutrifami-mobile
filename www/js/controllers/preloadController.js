@@ -14,21 +14,33 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $ionicL
         $scope.archivosError = 0;
         $scope.errores = [];
 
+        // CHECK
+        $cordovaFile.createDir(cordova.file.dataDirectory, "new_dir", false)
+            .then(function(success) {
+                console.log(success);
+            }, function(error) {
+                console.log(error)
+            });
+
+
+
         var version = {
             'alias': 'version',
-            'nombre': 'version.json',
+            'nombre': 'version.JSON',
             'movil': '',
             'web': '',
             'url': 'http://nutrifami.org/js/version.JSON',
-            'path': $rootScope.TARGETPATH + "version.JSON",
+            'path': encodeURI($rootScope.TARGETPATH + "version.JSON"),
             'descargado': false,
         };
 
+        console.log(version);
+
         var capacitacionInfo = {
             'alias': 'capacitacion',
-            'nombre': 'capacitacion.json',
+            'nombre': 'capacitacion.JSON',
             'url': 'http://nutrifami.org/js/capacitacion.JSON',
-            'path': $rootScope.TARGETPATH + "capacitacion.JSON",
+            'path': encodeURI($rootScope.TARGETPATH + "capacitacion.JSON"),
             'descargado': false,
         };
 
@@ -36,7 +48,7 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $ionicL
             'alias': 'training',
             'nombre': 'training.zip',
             'url': 'https://s3.amazonaws.com/nutrifami/training.zip',
-            'path': $rootScope.TARGETPATH + "training.zip",
+            'path': encodeURI($rootScope.TARGETPATH + "training.zip"),
             'descargado': false,
             'descomprimido': false
         };
@@ -95,9 +107,12 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $ionicL
             callback = callback || function() {};
             $cordovaFileTransfer.download(objeto.url, objeto.path, options, trustHosts).then(function(result) {
                 console.log(objeto.nombre + " descargado con éxito");
+                console.log(result.nativeURL);
                 callback(true);
             }, function(err) {
                 console.log("Error al descargar " + objeto.nombre);
+                console.log(err);
+                console.log(err.body);
                 $scope.errorDescarga();
                 callback(false);
             }, function(progress) {
@@ -112,10 +127,12 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $ionicL
         var leerArchivo = function(objeto, callback) {
             var obj = objeto;
             callback = callback || function() {};
+            console.log("Leer archivo " + $rootScope.TARGETPATH);
             $cordovaFile.readAsText($rootScope.TARGETPATH, objeto.nombre)
                 .then(function(response) {
                     obj.data = JSON.parse(response);
                     console.log(objeto.nombre + " leido con éxito");
+                    console.log(response);
                     callback(obj);
                 }, function(error) {
                     console.log("Error al leer " + objeto.nombre);
@@ -424,7 +441,12 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $ionicL
                 console.log(err);
 
             });
-
         }
+
+        /* PreloadService.comprobarVersion(function() {
+            console.log("Pasa algo");
+        })
+*/
+
     });
 });
