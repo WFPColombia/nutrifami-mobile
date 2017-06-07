@@ -6,13 +6,16 @@
         "Alejandro Tunaroza<alejandro.tunaroza@gmail.com>",
         "Abel Moreno<abel.moreno@wfp.org>"
     ],
-    "contributors": [{
-        "name": "Alejandro Tunaroza",
-        "email": "alejandro.tunaroza@gmail.com"
-    }, {
-        "name": "Abel Moreno",
-        "email": "abel.moreno@wfp.org"
-    }],
+    "contributors": [
+        {
+            "name": "Alejandro Tunaroza",
+            "email": "alejandro.tunaroza@gmail.com"
+        },
+        {
+            "name": "Abel Moreno",
+            "email": "abel.moreno@wfp.org"
+        }
+    ],
     "scripts": {},
     "repository": {
         "type": "git",
@@ -58,15 +61,6 @@
         "gulp-util": "^2.2.14",
         "shelljs": "^0.3.0"
     },
-    "cordovaPlugins": [
-        "cordova-plugin-whitelist",
-        "cordova-plugin-statusbar",
-        "cordova-plugin-console",
-        "cordova-plugin-device",
-        "cordova-plugin-splashscreen",
-        "ionic-plugin-keyboard"
-    ],
-    "cordovaPlatforms": [],
     "cordova": {
         "platforms": [
             "android",

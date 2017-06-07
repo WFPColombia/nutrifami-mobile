@@ -16,11 +16,11 @@
                     <div class="tips-modulo-body">
                         <ion-list>
                             <div ng-repeat="group in grupos">
-                                <ion-item class="item-stable" ng-click="toggleGroup(group)" ng-class="{active: isGroupShown(group)}" ion-ripple>
+                                <ion-item class="item-stable" ng-click="toggleGroup(group)" ng-class="{active: isGroupShown(group)}">
                                     {{group.name}}
                                     <i class="icon ion-volume-high"></i>
                                 </ion-item>
-                                <ion-item class="item-accordion item-icon-left" ng-click="clickTip()" ng-repeat="item in group.items" ng-show="isGroupShown(group)" ion-ripple>
+                                <ion-item class="item-accordion item-icon-left" ng-click="clickTip()" ng-repeat="item in group.items" ng-show="isGroupShown(group)">
                                     <i class="icon ion-android-share-alt"></i>
                                     <div ng-bind-html="item.texto | format | trust"></div>
                                 </ion-item>
