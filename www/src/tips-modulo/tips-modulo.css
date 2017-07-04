@@ -1,0 +1,82 @@
+.tips-modulo {
+    background-color: #ffffff;
+    height: 100%;
+}
+
+.tips-modulo header {
+    height: 64px;
+    background-color: #00c97e;
+    font-size: 15pt;
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Muli', sans-serif;
+    position: relative;
+}
+
+.tips-modulo header a {
+    position: absolute;
+    left: 0;
+    padding: 21PX;
+    top: 0;
+    font-size: 15pt;
+    color: #ffffff;
+}
+
+.tips-modulo header p {
+    margin-top: 15px;
+}
+
+.tips-modulo .item.item-stable {
+    background-color: white;
+    font-size: 17pt;
+    color: #00c97e;
+    line-height: 1.5em;
+    padding: 15px 30px;
+    position: relative;
+}
+
+.tips-modulo .item.item-stable .icon {
+    position: absolute;
+    right: 0px;
+    font-size: 17px;
+    width: 76px;
+    height: 76px;
+    text-align: center;
+    border-radius: 38px;
+}
+
+.tips-modulo .item p,
+.tips-modulo .item {
+    overflow: initial;
+    text-overflow: initial;
+    white-space: initial;
+}
+
+.tips-modulo .list .item.item-accordion {
+    line-height: 38px;
+    padding-top: 0;
+    padding-bottom: 0;
+    transition: 0.09s all linear;
+    font-size: 12pt;
+    color: #2f3e47;
+    white-space: normal;
+    line-height: normal;
+    padding: 18px 20px 18px 54px;
+}
+
+.tips-modulo .list .item.item-accordion:nth-child(even) {
+    background-color: #f6f5f5;
+}
+
+.tips-modulo .list .item.item-accordion i {
+    color: #00c97e;
+}
+
+.tips-modulo .list .item.item-accordion.ng-hide {
+    line-height: 0px;
+}
+
+.tips-modulo .list .item.item-accordion.ng-hide-add,
+.tips-modulo .list .item.item-accordion.ng-hide-remove {
+    display: block !important;
+}

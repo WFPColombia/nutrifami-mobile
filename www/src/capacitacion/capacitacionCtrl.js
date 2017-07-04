@@ -1,5 +1,5 @@
 /*global angular*/
-nutrifamiMobile.controller('CapacitacionController', function($ionicPlatform, $scope, $rootScope, UsuarioService, CapacitacionService) {
+nutrifamiMobile.controller('CapacitacionCtrl', function($ionicPlatform, $scope, $rootScope, UsuarioService, CapacitacionService) {
     'use strict';
 
     $ionicPlatform.ready(function() {
@@ -17,7 +17,7 @@ nutrifamiMobile.controller('CapacitacionController', function($ionicPlatform, $s
             var tempModulo = CapacitacionService.getModulo($scope.mids[mid]);
             tempModulo.avance = {};
             tempModulo.avance.finalizado = false;
-            tempModulo.disponible = false;
+            tempModulo.disponible = true;
             if (tempModulo.activo == '1') {
                 tempModulo.activo = true;
             } else {

@@ -98,24 +98,30 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="departamento">Departamento</label>
-                                    <input type="text" class="form-control" id="departamento" name="departamento" ng-value="usuarioActivo.departamento" ng-model-options="{ updateOn: 'blur' }">
-                                    <span class="messages" ng-show="userForm.$submitted || userForm.departamento.$touched">
-                                        <span ng-show="userForm.departamento.$error.required">El departamento es obligatorio</span>
-                                    </span>
+                                    <label for="pais">País</label>
+                                    <select name="pais" id="pais" class="form-control" ng-disabled="!paises" ng-model="usuarioActivo.pais_id" ng-options="pais.id as pais.name for pais in paises track by pais.sortname" ng-change="updateDropDownDepartamentos(usuarioActivo.pais_id)">
+                                        <option disabled value="">Seleccione su país</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="municipio">Muncipio</label>
-                                    <input type="text" class="form-control" id="municipio" name="municipio" ng-value="usuarioActivo.municipio" ng-model-options="{ updateOn: 'blur' }">
-                                    <span class="messages" ng-show="userForm.$submitted || userForm.municipio.$touched">
-                                        <span ng-show="userForm.municipio.$error.required">El municipio es obligatorio</span>
-                                    </span>
+                                    <label for="departamento">Departamento</label>
+                                    <select name="departamento" id="departamento" class="form-control" ng-disabled="!usuarioActivo.pais_id" ng-model="usuarioActivo.departamento_id" ng-options="departamento.id as departamento.name for departamento in departamentos_filter track by departamento.name" ng-change="updateDropDownCiudades(usuarioActivo.departamento_id)">
+                                        <option disabled value="">Seleccione su departamento</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="municipio">Muncipio</label>
+                                    <select name="municipio" id="municipio" class="form-control" ng-disabled="!usuarioActivo.departamento_id" ng-model="usuarioActivo.municipio_id" ng-options="ciudad.id as ciudad.name for ciudad in ciudades_filter track by ciudad.name">
+                                        <option disabled value="">Seleccione su ciudad o municipio</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="comunidad">Comunidad</label>
@@ -125,6 +131,8 @@
                                     </span>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col">
                                 <div class="form-group">
                                     <label for="zona">Zona</label>
@@ -134,8 +142,6 @@
                                     </span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col">
                                 <div class="form-group">
                                     <label for="etnia">Etnia</label>

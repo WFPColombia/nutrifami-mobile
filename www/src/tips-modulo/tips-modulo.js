@@ -1,4 +1,4 @@
-nutrifamiMobile.controller('TipsModuloController', function($ionicPlatform, $scope, $location, $stateParams, AudioService, UsuarioService, TipsService) {
+nutrifamiMobile.controller('TipsModuloCtrl', function($ionicPlatform, $scope, $location, $stateParams, AudioService, UsuarioService, TipsService) {
     'use strict';
     $ionicPlatform.ready(function() {
 
@@ -47,9 +47,31 @@ nutrifamiMobile.controller('TipsModuloController', function($ionicPlatform, $sco
 
 
 
-        $scope.clickTip = function() {
-            console.log("Click Tip");
+        $scope.clickTip = function(tip) {
+            var options = {
+                message: tip, // not supported on some apps (Facebook, Instagram)
+                subject: 'Consejo Saludable Nutrifami', // fi. for email
+                files: ['', ''], // an array of filenames either locally or remotely
+                url: 'https://www.nutrifami.org/',
+                chooserTitle: 'Eliga una aplicación para compartir' // Android only, you can override the default share sheet title
+            }
+
+            window.plugins.socialsharing.shareWithOptions(options, onSuccess, onError);
+
         };
+
+        // this is the complete list of currently supported params you can pass to the plugin (all optional)
+
+
+        var onSuccess = function(result) {
+            console.log("Share completed? " + result.completed); // On Android apps mostly return false even while it's true
+            console.log("Shared to app: " + result.app); // On Android result.app is currently empty. On iOS it's empty when sharing is cancelled (result.completed=false)
+        }
+
+        var onError = function(msg) {
+            console.log("Sharing failed with message: " + msg);
+        }
+
 
         /*
          * if given group is the selected group, deselect it

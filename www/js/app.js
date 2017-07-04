@@ -11,6 +11,12 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
     //$compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|file|blob|cdvfile):|data:image\//);
     $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|file):/);
 
+    $stateProvider.state('preload', {
+        url: '/preload',
+        templateUrl: 'src/preload/preload.html',
+        controller: 'PreloadCtrl'
+    });
+
     $stateProvider.state('login', {
         url: '/login',
         templateUrl: 'views/login.html',
@@ -19,8 +25,8 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
 
     $stateProvider.state('intro', {
         url: '/intro',
-        templateUrl: 'views/intro.html',
-        controller: 'IntroController'
+        templateUrl: 'src/intro/intro.html',
+        controller: 'IntroCtrl'
     });
 
     $stateProvider.state('app', {
@@ -34,8 +40,8 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
         url: '/capacitacion',
         views: {
             'menuContent': {
-                templateUrl: 'views/capacitacion.html',
-                controller: 'CapacitacionController'
+                templateUrl: 'src/capacitacion/capacitacion.html',
+                controller: 'CapacitacionCtrl'
             }
         }
 
@@ -120,16 +126,16 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
         url: '/tips',
         views: {
             'menuContent': {
-                templateUrl: 'views/tips.html',
-                controller: 'TipsController'
+                templateUrl: 'src/tips/tips.html',
+                controller: 'TipsCtrl'
             }
         }
     });
 
     $stateProvider.state('tipsModulo', {
         url: '/tips/:modulo',
-        templateUrl: 'views/tipsModulo.html',
-        controller: 'TipsModuloController'
+        templateUrl: 'src/tips-modulo/tips-modulo.html',
+        controller: 'TipsModuloCtrl'
     });
 
     $stateProvider.state('app.progreso', {
@@ -149,11 +155,7 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
         controller: 'SobreController'
     });
 
-    $stateProvider.state('preload', {
-        url: '/preload',
-        templateUrl: 'views/preload.html',
-        controller: 'PreloadController'
-    });
+
 
 
     $stateProvider.state('nc', {
@@ -237,15 +239,19 @@ nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cordovaFile
             StatusBar.styleDefault();
         }
 
-        if (ionic.Platform.isAndroid()) {
-            $rootScope.TARGETPATH = cordova.file.externalApplicationStorageDirectory;
-            window.addEventListener("native.hidekeyboard", function() {
-                StatusBar.hide();
-                window.AndroidFullScreen.immersiveMode(false, false);
-            });
-        } else if (ionic.Platform.isIPad() || ionic.Platform.isIOS()) {
-            console.log("Is iPad or iOS");
-            $rootScope.TARGETPATH = cordova.file.dataDirectory;;
+        if (window.cordova) {
+
+            if (ionic.Platform.isAndroid()) {
+                $rootScope.TARGETPATH = cordova.file.externalApplicationStorageDirectory;
+                window.addEventListener("native.hidekeyboard", function() {
+                    StatusBar.hide();
+                    window.AndroidFullScreen.immersiveMode(false, false);
+                });
+            } else if (ionic.Platform.isIPad() || ionic.Platform.isIOS()) {
+                console.log("Is iPad or iOS");
+                $rootScope.TARGETPATH = cordova.file.dataDirectory;;
+            }
+
         } else {
             $rootScope.TARGETPATH = "https://s3.amazonaws.com/nutrifami/";
         }

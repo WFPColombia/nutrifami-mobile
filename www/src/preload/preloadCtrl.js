@@ -1,5 +1,5 @@
 /*global angular*/
-nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $ionicLoading, $ionicPopup, $http, $scope, $cordovaZip, $rootScope, $timeout, $q, $location, $cordovaFile, $cordovaFileTransfer, $cordovaNetwork, UsuarioService) {
+nutrifamiMobile.controller('PreloadCtrl', function($ionicPlatform, $ionicLoading, $ionicPopup, $http, $scope, $cordovaZip, $rootScope, $timeout, $q, $location, $cordovaFile, $cordovaFileTransfer, $cordovaNetwork, UsuarioService) {
     'use strict';
     $ionicPlatform.ready(function() {
 
@@ -14,16 +14,6 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $ionicL
         $scope.archivosError = 0;
         $scope.errores = [];
 
-        // CHECK
-        $cordovaFile.createDir(cordova.file.dataDirectory, "new_dir", false)
-            .then(function(success) {
-                console.log(success);
-            }, function(error) {
-                console.log(error)
-            });
-
-
-
         var version = {
             'alias': 'version',
             'nombre': 'version.JSON',
@@ -33,8 +23,6 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $ionicL
             'path': encodeURI($rootScope.TARGETPATH + "version.JSON"),
             'descargado': false,
         };
-
-        console.log(version);
 
         var capacitacionInfo = {
             'alias': 'capacitacion',
@@ -71,37 +59,7 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $ionicL
             destino = '/app/capacitacion';
         }
 
-        //Comprobamos la conexión a Internet   
-        if (window.cordova) {
-            //var isOnline = $cordovaNetwork.isOnline();
-            var isOffline = $cordovaNetwork.isOffline()
-            if (isOffline) {
-                if (!acceso) {
-                    $ionicPopup.alert({
-                            title: "Sin conexión a Internet",
-                            content: "Actualmente tu equipo no tiene conexión a Internet. Para poder usar Nutrifami en modo Offline debe al menos ingresar una vez con conexión a Internet ",
-                            buttons: [
-                                { text: 'Salir' }
-                            ]
-                        })
-                        .then(function(res) {
-                            ionic.Platform.exitApp();
-                        });
 
-                } else {
-                    $ionicPopup.alert({
-                            title: "Sin conexión a Internet",
-                            content: "Actualmente su dispositivo se encuentra desconectado de Internet. Usted podrá usar Nutrifami, pero el avance no será guardado.",
-                            buttons: [
-                                { text: 'Continuar' }
-                            ]
-                        })
-                        .then(function(res) {
-                            $location.path('/app/capacitacion');
-                        });
-                }
-            }
-        }
 
         var descargarArchivo = function(objeto, callback) {
             callback = callback || function() {};
@@ -419,34 +377,63 @@ nutrifamiMobile.controller('PreloadController', function($ionicPlatform, $ionicL
             });
         };
 
-        if (window.cordova) {
-            console.log("Versión móvil");
-            $scope.response = "Consultado la versión más reciente";
-            descargarArchivo(version, function(response) { //Descargamos la version.json
-                version.descargado = response;
-                leerArchivo(version, function(obj) {
-                    version.web = obj.data.Capacitacion.ID;
-                    comprobarVersion();
+        function initClient() {
+
+            //Comprobamos la conexión a Internet   
+            if (window.cordova) {
+                //var isOnline = $cordovaNetwork.isOnline();
+                $rootScope.isOffline = $cordovaNetwork.isOffline()
+                if ($rootScope.isOffline) {
+                    if (!acceso) {
+                        $ionicPopup.alert({
+                                title: "Sin conexión a Internet",
+                                content: "Actualmente tu equipo no tiene conexión a Internet. Para poder usar Nutrifami en modo Offline debe al menos ingresar una vez con conexión a Internet ",
+                                buttons: [
+                                    { text: 'Salir' }
+                                ]
+                            })
+                            .then(function(res) {
+                                ionic.Platform.exitApp();
+                            });
+
+                    } else {
+                        $ionicPopup.alert({
+                                title: "Sin conexión a Internet",
+                                content: "Actualmente su dispositivo se encuentra desconectado de Internet. Usted podrá usar Nutrifami, pero el avance no será guardado.",
+                                buttons: [
+                                    { text: 'Continuar' }
+                                ]
+                            })
+                            .then(function(res) {
+                                $location.path('/app/capacitacion');
+                            });
+                    }
+                } else {
+                    console.log("Versión móvil");
+                    $scope.response = "Consultado la versión más reciente";
+                    descargarArchivo(version, function(response) { //Descargamos la version.json
+                        version.descargado = response;
+                        leerArchivo(version, function(obj) {
+                            version.web = obj.data.Capacitacion.ID;
+                            comprobarVersion();
+                        });
+                    });
+
+
+                }
+
+            } else {
+                console.log("Versión web");
+                $http.get('js/version.JSON').then(function(response) {
+                    nutrifami.training.initClient(response.data, function() {
+                        $location.path(destino);
+                    });
+                }, function errorCallback(err) {
+                    console.log(err);
+
                 });
-            });
-
-
-        } else {
-            console.log("Versión web");
-            $http.get('js/version.JSON').then(function(response) {
-                nutrifami.training.initClient(response.data, function() {
-                    $location.path(destino);
-                });
-            }, function errorCallback(err) {
-                console.log(err);
-
-            });
+            }
         }
-
-        /* PreloadService.comprobarVersion(function() {
-            console.log("Pasa algo");
-        })
-*/
-
+        initClient();
     });
 });

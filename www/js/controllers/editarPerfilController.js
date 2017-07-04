@@ -1,7 +1,20 @@
 /*global angular*/
-nutrifamiMobile.controller('EditarPerfilController', function($ionicPlatform, $scope, $location, $ionicLoading, $ionicPopup, UsuarioService) {
+nutrifamiMobile.controller('EditarPerfilController', function($ionicPlatform, $filter, $scope, $rootScope, $location, $ionicLoading, $ionicPopup, UsuarioService, PerfilService) {
     'use strict';
     $ionicPlatform.ready(function() {
+
+        if ($rootScope.isOffline) {
+            $ionicPopup.alert({
+                    title: "Sin conexión a Internet",
+                    content: "Actualmente su equipo no tiene conexión a Internet. Para ver esta sección debe estár conectado a Internet ",
+                    buttons: [
+                        { text: 'Salir' }
+                    ]
+                })
+                .then(function(res) {
+                    $location.path('/app/capacitacion');
+                });
+        }
 
         $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
         $scope.usuarioActivo.generos = {
@@ -35,6 +48,50 @@ nutrifamiMobile.controller('EditarPerfilController', function($ionicPlatform, $s
             $scope.usuarioActivo.nacimiento = new Date(0, 0, 0);
         }
 
+        PerfilService.getLocation(function(response) {
+            $scope.paises = response.paises;
+
+            $scope.departamentos = response.estados;
+            $scope.ciudades = response.ciudades;
+
+            for (var pais in response.paises) {
+                if ($scope.usuarioActivo.pais == response.paises[pais].name) {
+                    $scope.usuarioActivo.pais_id = {
+                        id: response.paises[pais].id,
+                        name: response.paises[pais].name,
+                        phonecode: response.paises[pais].phonecode,
+                        sortname: response.paises[pais].sortname,
+                    }
+
+                }
+            }
+
+            for (var departamento in response.estados) {
+                if ($scope.usuarioActivo.departamento == response.estados[departamento].name) {
+                    console.log(response.estados[departamento])
+                    $scope.usuarioActivo.departamento_id = {
+                        id: response.estados[departamento].id,
+                        name: response.estados[departamento].name,
+                        country_id: response.estados[departamento].country_id,
+                    };
+                    $scope.departamentos_filter = [$scope.usuarioActivo.departamento_id];
+
+                }
+            }
+
+            for (var ciudad in response.ciudades) {
+                if ($scope.usuarioActivo.municipio == response.ciudades[ciudad].name) {
+                    console.log(response.ciudades[ciudad]);
+                    $scope.usuarioActivo.municipio_id = {
+                        id: response.ciudades[ciudad].id,
+                        name: response.ciudades[ciudad].name,
+                        state_id: response.ciudades[ciudad].state_id,
+                    };
+                    $scope.ciudades_filter = [$scope.usuarioActivo.municipio_id];
+                }
+            }
+        });
+
         $scope.update = function() {
 
 
@@ -51,12 +108,36 @@ nutrifamiMobile.controller('EditarPerfilController', function($ionicPlatform, $s
                 tempMonth = "0" + tempMonth;
             }
 
+            for (var pais in $scope.paises) {
+                if ($scope.paises[pais].id == usuarioActivo.pais_id) {
+                    usuarioActivo.pais = $scope.paises[pais].name;
+
+                }
+            }
+
+            for (var departamento in $scope.departamentos) {
+                if ($scope.departamentos[departamento].id == usuarioActivo.departamento_id) {
+                    usuarioActivo.departamento = $scope.departamentos[departamento].name;
+
+                }
+            }
+
+            for (var ciudad in $scope.ciudades) {
+                if ($scope.ciudades[ciudad].id == usuarioActivo.municipio_id) {
+                    usuarioActivo.municipio = $scope.ciudades[ciudad].name;
+
+                }
+            }
+
 
             usuarioActivo.birthdate = usuarioActivo.nacimiento.getFullYear() + "-" + tempMonth + "-" + tempDay;
 
             delete usuarioActivo["generos"];
             delete usuarioActivo["etnias"];
             delete usuarioActivo["nacimiento"];
+            delete usuarioActivo["pais_id"];
+            delete usuarioActivo["departamento_id"];
+            delete usuarioActivo["municipio_id"];
 
             // Oberlay Cargando mientras se guarda el avance
             $scope.loading = $ionicLoading.show({
@@ -65,6 +146,8 @@ nutrifamiMobile.controller('EditarPerfilController', function($ionicPlatform, $s
                 showBackdrop: true,
                 maxWidth: 40
             });
+
+            console.log(usuarioActivo);
 
             UsuarioService.setUsuarioActivo(usuarioActivo, function(response) {
                 if (response.success) {
@@ -90,5 +173,17 @@ nutrifamiMobile.controller('EditarPerfilController', function($ionicPlatform, $s
             });
 
         };
+
+        $scope.updateDropDownDepartamentos = function(pais) {
+            console.log(pais)
+            $scope.departamentos_filter = $filter('filter')($scope.departamentos, { country_id: pais });
+        }
+
+        $scope.updateDropDownCiudades = function(estado) {
+            console.log(estado);
+            $scope.ciudades_filter = $filter('filter')($scope.ciudades, { state_id: estado });
+            console.log($scope.ciudades_filter);
+        }
+
     }, false);
 });

@@ -59,6 +59,42 @@ ng-view {
     align-items: center;
 }
 
+@keyframes swipe-animation {
+    0% {
+        left: calc(50% - 150px);
+        visibility: visible;
+    }
+    10% {
+        left: calc(50% - 100px);
+    }
+    30% {
+        left: calc(50% - 200px);
+    }
+    50% {
+        left: calc(50% - 100px);
+    }
+    70% {
+        left: calc(50% - 200px);
+    }
+    90% {
+        left: calc(50% - 100px);
+    }
+    100% {
+        left: calc(50% - 150px);
+        visibility: hidden;
+    }
+}
+
+.swipe-ayuda {
+    position: fixed;
+    top: calc(70% - 150px);
+    left: calc(50% - 150px);
+    animation-name: swipe-animation;
+    animation-duration: 4s;
+    animation-delay: 1s;
+    visibility: hidden;
+}
+
 
 /* RIPPLE EFFECT */
 
@@ -141,12 +177,12 @@ button {
     width: 58px;
     height: 58px;
     position: absolute;
-    top: 1em;
+    top: 14px;
     right: 14px;
     border-radius: 29px;
     text-align: center;
     font-weight: normal;
-    font-size: 19pt;
+    font-size: 22px;
     color: #00c97e;
     border: none;
 }
@@ -371,71 +407,6 @@ button {
 
 /*END REGISTRO*/
 
-.intro {
-    background-color: #00c97e;
-    height: 100%;
-    width: 100%;
-    color: #ffffff;
-    font-family: 'Muli', sans-serif;
-    text-align: center;
-}
-
-.intro .slider {
-    height: 100%;
-    ;
-}
-
-.intro .slide-body {
-    padding-top: 30%;
-}
-
-.intro h1 {
-    font-size: 18pt;
-    margin-bottom: 30px;
-    color: #ffffff;
-    font-family: 'Muli', sans-serif;
-}
-
-.intro h2 {
-    font-size: 16pt;
-    margin-bottom: 45px;
-    color: #ffffff;
-    font-family: 'Muli', sans-serif;
-}
-
-.intro p {
-    font-size: 12pt;
-    margin-bottom: 50px;
-    font-family: 'Muli', sans-serif;
-}
-
-.intro img {
-    margin-bottom: 30px;
-}
-
-.intro .btn-default {
-    text-transform: uppercase;
-    text-shadow: none;
-    color: #005d3a;
-    background-color: #fef418;
-    background-image: none;
-    border-radius: 23px;
-    border: none;
-    height: 50px;
-    padding: 17px 57px;
-    font-size: 12pt;
-    margin-bottom: 10px;
-    width: 100%;
-    letter-spacing: 5px;
-}
-
-.intro .slider-pager .slider-pager-page.active {
-    color: #fef418;
-}
-
-
-/* END LOGIN - INTRO*/
-
 
 /* MENU LEFT */
 
@@ -524,6 +495,21 @@ button {
     margin-top: 19px;
 }
 
+.bar-stable .badge,
+.menu-left .badge {
+    position: absolute;
+    right: -4px;
+    border-radius: 50%;
+    top: 0px;
+    padding: 1px 6px;
+}
+
+.menu-left .badge {
+    right: initial;
+    left: 42px;
+    top: 4px;
+}
+
 .menu-right .popover {
     height: 155px;
     font-family: 'Muli', sans-serif;
@@ -537,127 +523,6 @@ button {
 
 
 /* END - MENU-LEFT - HEADER*/
-
-
-/* HOME */
-
-.modulos {
-    position: relative;
-}
-
-.modulos .caja {
-    max-width: 400px;
-    margin: 0 auto;
-}
-
-.modulo {
-    background-color: #ffffff;
-    border-radius: 10px;
-    padding-bottom: 8px;
-    margin-top: 38px;
-    margin-left: 10%;
-    margin-right: 10%;
-    height: 460px;
-    position: relative;
-}
-
-.modulo.actual {
-    background-color: #0dcd71;
-}
-
-.modulo.terminado {
-    background-color: #ffba23;
-}
-
-.modulos .modulo .medalla {
-    position: absolute;
-    top: -15px;
-    right: -15px;
-}
-
-.modulos .modulo .medalla img {
-    margin: 0px;
-    padding: 0px;
-}
-
-.modulo img {
-    width: 100%;
-    border-radius: 10px 10px 0 0;
-    margin-top: 20px;
-    /*min-height: 220px;*/
-}
-
-.image-loader-container {
-    top: calc(110px - 50px);
-    left: calc(50% - 50px);
-}
-
-.modulo h3,
-.modulo h4 {
-    color: #0dcd71;
-    text-align: center;
-    font-size: 16pt;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    padding: 0px 10px;
-}
-
-.modulo h4 {
-    color: #9eabb3;
-    font-family: 'Raleway', sans-serif;
-    font-size: 12pt;
-    font-weight: bold;
-    position: absolute;
-    width: 100%;
-    bottom: 20px;
-}
-
-.modulo.actual h3,
-.modulo.actual h4,
-.modulo.terminado h3,
-.modulo.terminado h4 {
-    color: #ffffff;
-}
-
-.modulo .progress {
-    height: 11px;
-    margin-bottom: 0px;
-    border-radius: 4px;
-    width: 90%;
-    margin: 0 5%;
-    background-color: #f5f5f5;
-    background-image: none;
-    position: absolute;
-    bottom: 10px;
-}
-
-.modulo.actual .progress {
-    background-color: #ffffff;
-}
-
-.modulo .progress .progress-bar,
-.modulo-avance .progress .progress-bar {
-    background-color: #feea45;
-    background-image: none;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    height: 100%;
-    border-radius: 4px;
-}
-
-.modulo-no-disponible {
-    -webkit-filter: grayscale(100%) opacity(40%);
-    /* Chrome, Safari, Opera */
-    filter: grayscale(100%) opacity(40%);
-}
-
-.modulo-no-disponible h3,
-.modulo-no-disponible h4 {
-    color: #000000;
-}
-
-
-/* END MODULOS*/
 
 
 /* LECCIONES Y TIPS */
@@ -829,88 +694,6 @@ button {
 
 
 /* END LECCIONES*/
-
-
-/* TIPS MODULO */
-
-.tips-modulo {
-    background-color: #ffffff;
-    height: 100%;
-}
-
-.tips-modulo header {
-    height: 64px;
-    background-color: #00c97e;
-    font-size: 15pt;
-    color: #ffffff;
-    text-align: center;
-    font-family: 'Muli', sans-serif;
-    position: relative;
-}
-
-.tips-modulo header a {
-    position: absolute;
-    left: 0;
-    padding: 21PX;
-    top: 0;
-    font-size: 15pt;
-    color: #ffffff;
-}
-
-.tips-modulo header p {
-    margin-top: 15px;
-}
-
-.tips-modulo .item.item-stable {
-    background-color: white;
-    font-size: 17pt;
-    color: #00c97e;
-    line-height: 76px;
-    padding: 0px 30px;
-    position: relative;
-}
-
-.tips-modulo .item.item-stable .icon {
-    position: absolute;
-    right: 0px;
-    font-size: 17px;
-    width: 76px;
-    height: 76px;
-    text-align: center;
-    border-radius: 38px;
-}
-
-.tips-modulo .list .item.item-accordion {
-    line-height: 38px;
-    padding-top: 0;
-    padding-bottom: 0;
-    transition: 0.09s all linear;
-    font-size: 12pt;
-    color: #2f3e47;
-    white-space: normal;
-    line-height: normal;
-    padding: 18px 20px 18px 54px;
-}
-
-.tips-modulo .list .item.item-accordion:nth-child(even) {
-    background-color: #f6f5f5;
-}
-
-.tips-modulo .list .item.item-accordion i {
-    color: #00c97e;
-}
-
-.tips-modulo .list .item.item-accordion.ng-hide {
-    line-height: 0px;
-}
-
-.tips-modulo .list .item.item-accordion.ng-hide-add,
-.tips-modulo .list .item.item-accordion.ng-hide-remove {
-    display: block !important;
-}
-
-
-/* END TIPS MODULO*/
 
 
 /* UNIDADES */

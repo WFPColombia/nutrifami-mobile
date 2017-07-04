@@ -1,4 +1,4 @@
-nutrifamiMobile.controller('mc_introCtrl', function($ionicLoading, $ionicPlatform, $ionicViewSwitcher, $location, $scope, $state, ComprasService, UsuarioService, MediaService) {
+nutrifamiMobile.controller('mc_introCtrl', function($ionicLoading, $ionicPlatform, $ionicViewSwitcher, $location, $scope, $rootScope, $ionicPopup, $state, ComprasService, UsuarioService, MediaService) {
     'use strict';
     $ionicPlatform.ready(function() {
 
@@ -29,6 +29,19 @@ nutrifamiMobile.controller('mc_introCtrl', function($ionicLoading, $ionicPlatfor
         $scope.$on("$ionicView.unloaded", function(event, data) {
             console.log("Unload State Params: ", data);
         });
+
+        if ($rootScope.isOffline) {
+            $ionicPopup.alert({
+                    title: "Sin conexión a Internet",
+                    content: "Actualmente su equipo no tiene conexión a Internet. Para ver esta sección debe estár conectado a Internet ",
+                    buttons: [
+                        { text: 'Salir' }
+                    ]
+                })
+                .then(function(res) {
+                    $location.path('/app/capacitacion');
+                });
+        }
 
     });
 });

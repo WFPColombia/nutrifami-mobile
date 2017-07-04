@@ -1,5 +1,5 @@
 /*global angular*/
-nutrifamiMobile.controller('IntroController', function($ionicPlatform, $scope, $location, MediaService, UsuarioService) {
+nutrifamiMobile.controller('IntroCtrl', function($ionicPlatform, $scope, $location, MediaService, UsuarioService) {
     'use strict';
 
     $ionicPlatform.ready(function() {
