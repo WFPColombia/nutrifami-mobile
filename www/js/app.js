@@ -234,6 +234,13 @@ nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cordovaFile
     });
 
     $ionicPlatform.ready(function() {
+        ionic.Platform.fullScreen(true, false); //Fullscreen en ios, verificar para Android
+
+        if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+            cordova.plugins.Keyboard.disableScroll(true);
+
+        }
 
         if (window.StatusBar) {
             StatusBar.styleDefault();
