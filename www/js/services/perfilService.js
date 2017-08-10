@@ -26,7 +26,7 @@ nutrifamiMobile.factory('PerfilService', function($http) {
 
 
 
-        $http.get('../js/location.json').then(function(response) {
+        $http.get('js/location.json').then(function(response) {
             console.log(response);
             callback(response.data);
 

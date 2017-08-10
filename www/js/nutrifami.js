@@ -75,6 +75,7 @@ var nutrifami = {
      */
     login: function(callback) {
         callback = callback || function() {};
+        console.log(usuarioActivo);
         var serv = base_url + "app/api/login?d=" + usuarioActivo.login_documento + "&c=" + usuarioActivo.login_codigo + "&t=" + usuarioActivo.token;
         response = {
             success: false,
@@ -292,7 +293,6 @@ var nutrifami = {
                     nutrifami.training.cap_lecciones = data['serv_lecciones'];
                     nutrifami.training.cap_unidadesinformacion = data['serv_unidades'];
                     nutrifami.training.cap_unidadestips = data["serv_tips"];
-                    console.log(nutrifami);
                     callback();
                 }).fail(function(jqxhr, textStatus, error) {
                     console.log(jqxhr);

@@ -4,6 +4,18 @@ nutrifamiMobile.controller('CapacitacionCtrl', function($ionicPlatform, $scope, 
 
     $ionicPlatform.ready(function() {
 
+        if($rootScope.RELOAD){
+           var username = UsuarioService.getUsuarioActivo();
+           console.log(username)
+            nutrifami.setLoginData(username.login_documento, username.login_codigo, function() {
+                nutrifami.login(function(response) {
+                    $rootScope.RELOAD = false;
+                });
+            });
+
+        }    
+
+
         $scope.mids = CapacitacionService.getModulosId(3)
         $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
         $scope.usuarioAvance = UsuarioService.getUsuarioAvance();
@@ -11,8 +23,7 @@ nutrifamiMobile.controller('CapacitacionCtrl', function($ionicPlatform, $scope, 
         $scope.modulos = [];
         /* Obtenemos los ids de los modulos de la capacitación 3 */
 
-
-        /*Creamos un arreglo para poder recorerlo y mostrarlo a traves de directivas */
+            /*Creamos un arreglo para poder recorerlo y mostrarlo a traves de directivas */
         for (var mid in $scope.mids) {
             var tempModulo = CapacitacionService.getModulo($scope.mids[mid]);
             tempModulo.avance = {};
@@ -50,6 +61,10 @@ nutrifamiMobile.controller('CapacitacionCtrl', function($ionicPlatform, $scope, 
             }
 
         }
+
+        
+
+        
 
 
     });

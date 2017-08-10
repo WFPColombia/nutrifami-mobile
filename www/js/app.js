@@ -38,6 +38,7 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
 
     $stateProvider.state('app.capacitacion', {
         url: '/capacitacion',
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: 'src/capacitacion/capacitacion.html',
@@ -224,6 +225,7 @@ nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cordovaFile
 
         //Redirecciona a la pagina de preload si estaba la app cerrada
         if ($location.path() === "") {
+            $rootScope.RELOAD = true; //Variable usada para recargar la información de usuario 
             $location.path('/preload');
         }
         // Redirecciona a la pagina de login si el usuario no está logeado

@@ -416,9 +416,6 @@ button {
 
 .menu-left {
     background-color: #00c97e;
-    -webkit-box-shadow: 5px 0px 15px 0px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 5px 0px 15px 0px rgba(0, 0, 0, 0.75);
-    box-shadow: 5px 0px 15px 0px rgba(0, 0, 0, 0.75);
 }
 
 .menu-left .item {
@@ -495,19 +492,18 @@ button {
     margin-top: 19px;
 }
 
-.bar-stable .badge,
-.menu-left .badge {
+.bar-stable .ion-ios-information,
+.menu-left .ion-ios-information {
+    color: red;
+
     position: absolute;
-    right: -4px;
-    border-radius: 50%;
+    right: 0px;
     top: 0px;
-    padding: 1px 6px;
 }
 
-.menu-left .badge {
+.menu-left .ion-ios-information {
     right: initial;
     left: 42px;
-    top: 4px;
 }
 
 .menu-right .popover {
@@ -1578,6 +1574,8 @@ button {
     margin-top: 0px;
 }
 
+
+
 .perfil-panel .boton-flotante button,
 .perfil-panel .boton-flotante button:hover {
     height: 38px;
@@ -1588,6 +1586,15 @@ button {
     padding: 8px 14px;
     font-weight: normal;
 }
+
+.perfil-panel .boton-flotante .ion-ios-information {
+    color: red;
+    position: absolute;
+    right: 4px;
+    top: 0px;
+    font-size: 17px;
+}
+
 
 .perfil-panel .boton-flotante button .icon {
     color: #00c97e;

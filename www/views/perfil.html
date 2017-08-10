@@ -8,7 +8,7 @@
                             <div class="perfil-panel">
                                 <div class="perfil-header">
                                     <div class="boton-flotante">
-                                        <button class="btn btn-default" go-click="app/editar-perfil" ion-ripple><span class="icon ion-edit" aria-hidden="true"></span> Editar </button>
+                                        <button class="btn btn-default" go-click="app/editar-perfil" ion-ripple><span class="icon ion-edit" aria-hidden="true"></span> Editar <i ng-show="usuarioActivo.municipio == '' || usuarioActivo.municipio == null" class="ion-ios-information"></i> </button>
                                     </div>
                                     <img ng-src="img/icons/ico-{{usuarioActivo.genero=='F'? 'femenino' : 'masculino'}}.png">
                                     <h1>Mi información</h1>
