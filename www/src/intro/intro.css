@@ -1,0 +1,71 @@
+.intro {
+    background-color: #00c97e;
+    height: 100%;
+    width: 100%;
+    color: #ffffff;
+    font-family: 'Muli', sans-serif;
+    text-align: center;
+}
+
+.intro .slider {
+    height: 100%;
+}
+
+.intro .slide-body {
+    padding-top: 75px;
+}
+
+.intro h1 {
+    font-size: 24px;
+    margin-bottom: 22px;
+    color: #ffffff;
+    font-family: 'Muli', sans-serif;
+}
+
+.intro h2 {
+    font-size: 20px;
+    margin-bottom: 30px;
+    color: #ffffff;
+    font-family: 'Muli', sans-serif;
+    width: 90%;
+    margin-left: 5%;
+}
+
+.intro h2.last {
+    font-size: 19px;
+    margin-bottom: 30px;
+    color: #ffffff;
+    font-family: 'Muli', sans-serif;
+    width: 100%;
+    margin-left: 0%;
+}
+
+.intro p {
+    font-size: 14px;
+    margin-bottom: 30px;
+    font-family: 'Muli', sans-serif;
+}
+
+.intro img {
+    margin-bottom: 30px;
+}
+
+.intro .btn-default {
+    text-transform: uppercase;
+    text-shadow: none;
+    color: #005d3a;
+    background-color: #fef418;
+    background-image: none;
+    border-radius: 23px;
+    border: none;
+    height: 50px;
+    padding: 17px 57px;
+    font-size: 12pt;
+    margin-bottom: 10px;
+    width: 100%;
+    letter-spacing: 5px;
+}
+
+.intro .slider-pager .slider-pager-page.active {
+    color: #fef418;
+}

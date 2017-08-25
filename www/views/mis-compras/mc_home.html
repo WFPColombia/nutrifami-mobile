@@ -1,0 +1,28 @@
+<ion-view>
+    <ion-content overflow-scroll="true">
+        <div class='mis-compras'>
+            <div class="row">
+                <div class="col titulo" ng-click="playAudio('audio3')" ion-ripple>
+                    <h1>Aquí encontrara el resumen de sus compras del último mes</h1>
+                    <i class="icon ion-volume-high" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="row" ng-repeat="grupo in consumoUltimoMes">
+                <div class="compras-porcentajes" go-click="/mis-compras/{{grupo.grupo_id}}">
+                    <div class="col col-100">
+                        <div class="compras-porcentaje-tipo">
+                            <img src="img/icons/ico-compras-{{grupo.grupo_id}}-color.png" title="Icono grupo" />
+                            <p>{{ grupo.nombre}}</p>
+                        </div>
+                    </div>
+                    <div class="col col-100 compras-porcentaje-barra">
+                        <div class="progress">
+                            <div class="progress-bar grupo-{{grupo.grupo_id}}" style="width: {{animar ?  grupo.porcentaje_visual: '0'}}%;"></div>
+                        </div>
+                        <i class="icon ion-chevron-right" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

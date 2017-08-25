@@ -6,63 +6,87 @@ NUTRIMAFI-MOBILE
 Instalación de de modulos con Node
 ----------------------------------
 
-1. Instalar Node global
-2. En el root del proyecto ejecutar el comando "npm install"
+  - Instalar node.js (Agregar al path)
+  - Navegar al root del proyecto
+  - Instalar dependencias.
+```bash
+[sudo] npm install 
+[sudo] npm install --save-dev
+```
 
 
 Instalación de librerias con Bower.
 -----------------------------------
 
-Una vez instalados los modulos con node, se debe ejecutar:
+Una vez instalados los modulos con node, se debe:
 
-1. Instalar bower globalmente con "npm install -g bower"
-2. Instalar las librerias usadas en el prouecto con el comando "bower install"
+  - Instalar Bower goblamente
+```bash
+[sudo] npm install -g bower
+```
+  - Instalar librerias usadas en el proyecto.
+```bash
+[sudo] bower install
+```
 
-Instalación de Cordova.
+Instalación de Ionic y Cordova.
 -----------------------------------
 
-1. Instalar cordava globalmente con 'npm install -g cordova'
-2. Crear una carpeta llamada 'www' en el root del proyecto
-3. Crear una carpeta llamada 'platforms' en el root del proyecto
-4. Instalar plataformas y plugin para el proyecto de cordova 'cordova prepare'
+  - Instalar cordova y ionic globalmente
+```bash
+[sudo] npm install -g cordova ionic
+```
+  - Crear una carpeta llamada 'www' en el root del proyecto.
+```bash
+[sudo] ionic plarform add android
+```
+  - Generar los 'resources'
+```bash
+[sudo] ionic resources
+```
+  - Copiar la carpeta generada /res en plataforms/android y remplazar todo lo existente
+  - IMPORTANTE: Crear una aplicación de ionic en una ubicación diferente a la de nuestro proyecto:
+```bash
+[sudo] ionic start IonicApp blank
+```
+  - Del proyecto creado copiar la carpeta IonicApp/www/lib/ionic en /nutrifami-mobile/app/lib/ionic
+
 
 Tareas Gulp
 ------------
 
-En la consola de comandos (sin las comillas):
+- Instalar gulp globalmente
+```bash
+[sudo] npm install -g gulp
+```
 
-Instalar dependencias antes de los siguientes pasos
+Tareas configuradas con gulp:
 
-    $npm install --save-dev
+- Ejecutar servidor web de desarrollo [Tarea por defecto]
+```bash
+[sudo] gulp
+```
+-   Alistar los archivos rapidamente y sin comprimir para probarlos como aplicaciones mobiles
+```bash
+[sudo] gulp cordovaDev
+```
 
-1. 'gulp' -> Ejecutar servidor web de desarrollo
-2. 'gulp cordovaDev' -> Alistar los archivos rapidamente y sin comprimir para probarlos como aplicaciones mobiles
-3. 'gulp compileCordova' -> Alistar archivos comprimirdos para generar una versión para publicar
-
-
-Probar aplicación móvil
+Empaquetar aplicación móvil
 ------------------------
 
 Para dispositivos android ejecutar
-
-1. Preparar android
-
-    cordova prepare android
-
-2. Pompilar cordodva
-
-    cordova compile android
-
-3. Correr la aplicación
-
-    cordova run android
-
-Caracterizticas tecnicas
-------------------------
-
- 1. AngularJS
- 2. Mobile Angular UI
- 3. Cordova
+- Preparar android
+```bash
+[sudo] ionic prepare android
+```
+-   Compilar cordodva
+```bash
+[sudo] ionic compile android
+```
+-   Correr la aplicación
+```bash
+[sudo] ionic run android
+```
 
 
 Distribución de Archivos
@@ -74,7 +98,7 @@ Distribución de Archivos
     /app/js/controllers                                ->  Controladores de angularjs
     /app/js/directives                                 ->  Archivos js de las directivas
     /app/js/services                                   ->  Servicios de angularjs
-    /app/lib                                           ->  Librerias usadas (angular, bootstrap, etc)
+    /app/lib                                           ->  Librerias usadas (angular, etc)
     /app/css/                                          ->  Hojas de estilo
     /app/img/                                          ->  Imagenes de la aplicación
     /app/views/                                        ->  Vistas de angular

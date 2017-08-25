@@ -1,0 +1,49 @@
+<ion-side-menus enable-menu-with-back-views="false">
+    <ion-side-menu-content drag-content="false">
+        <ion-nav-bar class="bar-stable">
+            <ion-nav-back-button>
+            </ion-nav-back-button>
+            <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="left"><i ng-show="usuarioActivo.municipio == '' || usuarioActivo.municipio == null" class="ion-ios-information"></i></button>
+            </ion-nav-buttons>
+            <ion-nav-title>
+                <img src="img/logo-nutrifami-header.png" alt="Nutrifami" />
+            </ion-nav-title>
+            <ion-nav-buttons side="right">
+                <button class="button button-icon ion-android-more-vertical" ng-click="popover.show($event)"></button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view name="menuContent" animation="slide-left-right">
+        </ion-nav-view>
+    </ion-side-menu-content>
+    <ion-side-menu side="left" width="300">
+        <ion-header-bar class="bar-stable">
+            <img src="img/logo-nutrifami-sidebar.png" alt="Nutrifami" height="28" width="127" />
+        </ion-header-bar>
+        <ion-content>
+            <ion-list>
+                <ion-item menu-close href="#/app/capacitacion">
+                    <img class="icono" src="img/icons/ico-menu-capacitacion.png" alt="Capacitación" /><span>Capacitación</span>
+                </ion-item>
+                <ion-item menu-close href="#/app/mis-compras/intro">
+                    <img class="icono" src="img/icons/ico-menu-compras.png" />Mis Compras
+                </ion-item>
+                <ion-item menu-close href="#/app/progreso">
+                    <img class="icono" src="img/icons/ico-menu-progreso.png" alt="Consumo" />Progreso
+                </ion-item>
+                <ion-item menu-close href="#/app/tips">
+                    <img class="icono" src="img/icons/ico-menu-tips.png" alt="Tips" />Consejos Saludables
+                </ion-item>
+                <ion-item menu-close href="#/nutricompra">
+                    <img class="icono" src="img/icons/ico-menu-nutricompra.png" alt="Cerrar Sesion" />Nutricompra
+                </ion-item>
+                <ion-item menu-close href="#/app/perfil">
+                    <img class="icono" src="img/icons/ico-menu-perfil.png" alt="Perfil" />Perfil <i ng-show="usuarioActivo.municipio == '' || usuarioActivo.municipio == null" class="ion-ios-information"></i>
+                </ion-item>
+                <ion-item menu-close href="#/login">
+                    <img class="icono" src="img/icons/ico-menu-salir.png" alt="Cerrar Sesion" />Cerrar Sesión
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>

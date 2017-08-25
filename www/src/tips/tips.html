@@ -1,0 +1,25 @@
+<ion-view>
+    <ion-content>
+        <div class='tips'>
+            <div class="tips-header">
+                <div class="col">
+                    <h1><!--<i class="tips-titulo-sonido icon ion-volume-high" aria-hidden="true"></i>-->Consejos Saludables</h1>
+                </div>
+                <div class="col">
+                    <p>
+                        <!--<i class="lecciones-descripcion-sonido icon ion-volume-high" aria-hidden="true"></i>-->Encuentra consejos relacionados de cada una de las lecciones de Nutrifami.
+                    </p>
+                </div>
+            </div>
+            <div class="tips-body">
+                <div class="col col-50" ng-repeat="m in modulos">
+                    <button ng-click='playAudio("modulo"+m.id)' class="tip-sonido icon ion-volume-high" aria-hidden="true" ion-ripple></button>
+                    <div class="tip" ng-click="ir(m.id)" nav-direction="forward" ion-ripple>
+                        <img ng-src="{{TARGETPATH}}{{m.imagen.nombre}}" />
+                        <h2>{{m.titulo.texto}}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
