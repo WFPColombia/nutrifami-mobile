@@ -1,0 +1,44 @@
+<div class="leccion-finalizada">
+    <ion-scroll style="height: 100%;">
+        <div class="header">
+            <div class="row">
+                <div class="col">
+                    <h1>Muy bien!<br>Lección Completada</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="progreso">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="sticker">
+                        <span class="icon ion-checkmark-round" aria-hidden="true"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="badget">
+                    <img src="img/badgets/flags/ico_flag_{{leccion.icono}}.png">
+                    <p ng-click="playAudio('audioPuntos')" ion-ripple>Más {{ leccion.finalizado.puntos}} puntos de experiencia <i class="fa fa-volume-up"></i></p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="feedback" ng-click="playAudio('audioFinalizado')" ion-ripple>
+                    <div ng-bind-html="leccion.finalizado.texto | format | trust"></div>
+                    <div class="feedback-sonido">
+                        <i class="icon ion-volume-high" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-scroll>
+</div>
+<div class="bar bar-footer calificar habilitado">
+    <button ng-click="continuar()" ion-ripple>Continuar</button>
+</div>

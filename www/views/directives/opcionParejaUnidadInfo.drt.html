@@ -1,0 +1,20 @@
+<div class="row" ng-if="index1%2==0">
+    <div class="col">
+        <div class="opcion-sonido" ng-class="[opc1.selected ? 'selected' : '',opc1.media !== undefined ? 'sonido-con-imagen':'']" ion-ripple>
+            <button ng-click='playAudio(opc1.audio.id)' class="icon ion-volume-high"></button>
+        </div>
+        <button class="opcion-pareja titulo" ng-click="click(index1)" ng-class="[opc1.selected ? 'selected' : '', opc1.match ? 'pareja-match':'', opc1.fallo ? 'pareja-mal':'', opc1.media.nombre != '' ? 'pareja-con-imagen':'']" ion-ripple>
+            <img ng-src="{{tp}}{{opc1.media.nombre}}" ng-hide="{{opc1.media.nombre ==''}}" />
+            <div ng-class="opc1.media === undefined ? 'titulo-con-imagen':''" ng-bind-html="opc1.texto | format | trust" ng-hide=opc1.texto==""></div>
+        </button>
+    </div>
+    <div class="col">
+        <div class="opcion-sonido" ng-class="[opc2.selected ? 'selected' : '',opc2.media !== undefined ? 'sonido-con-imagen':'']" ion-ripple>
+            <button class="icon ion-volume-high" ng-click='playAudio(opc2.audio.id)'></button>
+        </div>
+        <button class="opcion-pareja" ng-click="click(index2)" ng-class="[opc2.selected ? 'selected' : '', opc2.match ? 'pareja-match':'', opc2.fallo ? 'pareja-mal':'', opc2.media.nombre != '' ? 'pareja-con-imagen':'']" ion-ripple>
+            <img ng-src="{{opc2.media.url}}" ng-hide="{{opc2.media.nombre == ''}}" />
+            <div ng-class="opc2.media === undefined ? 'titulo-con-imagen':''" ng-bind-html="opc2.texto | format | trust" ng-hide=opc2.texto==""></div>
+        </button>
+    </div>
+</div>
