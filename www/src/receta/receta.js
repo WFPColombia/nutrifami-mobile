@@ -1,4 +1,4 @@
-nutrifamiMobile.controller('RecetasCtrl', function($ionicPlatform, $scope, $ionicLoading, $location, RecetasService) {
+nutrifamiMobile.controller('RecetaCtrl', function($ionicPlatform, $scope, $ionicLoading, RecetasService) {
     'use strict';
 
 
@@ -24,9 +24,9 @@ nutrifamiMobile.controller('RecetasCtrl', function($ionicPlatform, $scope, $ioni
             $ionicLoading.hide();
         });
 
-        $scope.abrirReceta = function(id) {
-            $location.path('/app/recetas/receta/' + id);
-        }
+        $scope.myGoBack = function() {
+            $ionicHistory.goBack();
+        };
 
 
 

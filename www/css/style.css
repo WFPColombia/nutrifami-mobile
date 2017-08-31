@@ -37,6 +37,8 @@ ng-view {
 }
 
 
+
+
 /* LAZY LOADING IMAGENES*/
 
 .image-loader-container {
@@ -96,6 +98,8 @@ ng-view {
 }
 
 
+
+
 /* RIPPLE EFFECT */
 
 button {
@@ -112,6 +116,8 @@ button {
     -webkit-animation-duration: 1s !important;
     animation-duration: 1s !important
 }
+
+
 
 
 /* END RIPPLE EFFECT*/
@@ -144,6 +150,8 @@ button {
     text-align: center;
     color: #ffffff;
 }
+
+
 
 
 /* FINAL - PRELOADING*/
@@ -306,6 +314,8 @@ button {
 }
 
 
+
+
 /*REGISTRO */
 
 .registro .logo h1 {
@@ -403,6 +413,8 @@ button {
 .registro .cerrar button:active {
     outline: 0;
 }
+
+
 
 
 /*END REGISTRO*/
@@ -516,6 +528,8 @@ button {
     padding: 13px 18px;
     border: none;
 }
+
+
 
 
 /* END - MENU-LEFT - HEADER*/
@@ -687,6 +701,8 @@ button {
 .lecciones .lecciones-body .leccion-terminada .leccion-sonido {
     background-color: rgba(0, 0, 0, 0);
 }
+
+
 
 
 /* END LECCIONES*/
@@ -1134,6 +1150,8 @@ button {
 }
 
 
+
+
 /* UNIDAD INFORMATIVA */
 
 .unidad .unidad-informativa {
@@ -1165,6 +1183,8 @@ button {
     margin-left: 15px;
     list-style-image: url(../img/list-unidad-informativa.png);
 }
+
+
 
 
 /* FINAL - UNIDAD INFORMATIVA */
@@ -1318,6 +1338,8 @@ button {
     line-height: 26px;
     font-size: 11pt;
 }
+
+
 
 
 /* END MODAL FEEDBACK*/
@@ -1498,9 +1520,11 @@ button {
 }
 
 
+
+
 /* TABS */
 
-.tabs-top > .tabs,
+.tabs-top>.tabs,
 .tabs.tabs-top {
     top: 0px;
     background-color: #ffffff;
@@ -1533,6 +1557,8 @@ button {
 .zona-segura {
     height: 100px;
 }
+
+
 
 
 /* FINAL - TABS*/
@@ -1786,6 +1812,8 @@ button {
 }
 
 
+
+
 /* END PERFIL Y EDITAR PERFIL */
 
 
@@ -1999,6 +2027,8 @@ button {
 }
 
 
+
+
 /* END COMPRAS*/
 
 
@@ -2120,6 +2150,8 @@ button {
 .compras-grupo .compras-grupo-nombre-recomendado:nth-child(odd) {
     background-color: #ffffff;
 }
+
+
 
 
 /*  END - COMPRAS GRUPO */
@@ -2289,6 +2321,8 @@ button {
 }
 
 
+
+
 /* FINAL - PROGRESO */
 
 
@@ -2423,67 +2457,9 @@ div#imprimirDiploma {
 }
 
 
+
+
 /* FINAL -DIPLOMA*/
-
-
-/* SOBRE */
-
-.sobre {
-    background-color: #ffffff;
-    height: 100%;
-}
-
-.sobre header {
-    height: 64px;
-    background-color: #00c97e;
-    font-size: 15pt;
-    color: #ffffff;
-    text-align: center;
-    font-family: 'Muli', sans-serif;
-    position: relative;
-}
-
-.sobre header a {
-    position: absolute;
-    left: 0;
-    padding: 21PX;
-    top: 0;
-    font-size: 15pt;
-    color: #ffffff;
-}
-
-.sobre header p {
-    margin-top: 15px;
-}
-
-.sobre .sobre-body {
-    text-align: center;
-    color: #2f3e47;
-    font-size: 12pt;
-}
-
-.sobre .sobre-body .nf-logo img {
-    margin-top: 50px;
-    margin-bottom: 5px;
-}
-
-.sobre .sobre-body .descripcion p {
-    font-size: 12pt;
-    margin-top: 10pt;
-    padding: 0 35px;
-}
-
-.sobre .sobre-body .wfp-ia-logo img {
-    margin-top: 25px;
-    width: 90%;
-}
-
-.sobre .sobre-body .copyright {
-    margin-top: 35px;
-}
-
-
-/* END - SOBRE */
 
 
 /* Nutricompra*/
@@ -2925,6 +2901,8 @@ div#imprimirDiploma {
     box-shadow: none;
     color: #00c97e;
 }
+
+
 
 
 /* Final - Nutricompra*/

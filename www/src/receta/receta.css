@@ -1,0 +1,41 @@
+.receta .bar-header {
+    height: 64px;
+    border-bottom: 1px solid #00c97e;
+}
+
+.receta .bar-header .back-button {
+    position: relative;
+    font-size: 200%;
+    color: #00c97e;
+    width: 60px;
+    text-align: center;
+    padding-top: 15px;
+}
+
+.receta .bar-header .buttons {
+    margin-top: 15px;
+    right: 10px;
+    position: absolute;
+}
+
+.receta .bar-header .buttons div {
+    float: left;
+    font-size: 100%;
+    margin-left: 25px;
+}
+
+.receta .bar-header .buttons div i {
+    color: #00c97e;
+    font-size: 200%;
+    margin-right: 9px;
+}
+
+.receta .bar-header .buttons div .numero {
+    position: relative;
+    top: -6px;
+}
+
+.receta .imagen {
+    width: 100%;
+    border-bottom: 1px solid #e8e8e8;
+}

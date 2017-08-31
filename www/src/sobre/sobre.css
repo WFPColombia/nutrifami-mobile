@@ -1,0 +1,53 @@
+.sobre {
+    background-color: #ffffff;
+    height: 100%;
+}
+
+.sobre header {
+    height: 64px;
+    background-color: #00c97e;
+    font-size: 15pt;
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Muli', sans-serif;
+    position: relative;
+}
+
+.sobre header a {
+    position: absolute;
+    left: 0;
+    padding: 21PX;
+    top: 0;
+    font-size: 15pt;
+    color: #ffffff;
+}
+
+.sobre header p {
+    margin-top: 15px;
+}
+
+.sobre .sobre-body {
+    text-align: center;
+    color: #2f3e47;
+    font-size: 12pt;
+}
+
+.sobre .sobre-body .nf-logo img {
+    margin-top: 50px;
+    margin-bottom: 5px;
+}
+
+.sobre .sobre-body .descripcion p {
+    font-size: 12pt;
+    margin-top: 10pt;
+    padding: 0 35px;
+}
+
+.sobre .sobre-body .wfp-ia-logo img {
+    margin-top: 25px;
+    width: 90%;
+}
+
+.sobre .sobre-body .copyright {
+    margin-top: 35px;
+}

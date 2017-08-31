@@ -1,0 +1,93 @@
+.recetas {}
+
+.recetas .recetas-header {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.recetas .recetas-header h1 {
+    color: #00c97e;
+    font-size: 150%;
+    text-align: center;
+    margin: 10px auto;
+}
+
+.recetas h1 i {
+    margin-right: 12px;
+    font-size: 14px;
+}
+
+
+.recetas .busqueda .item-input-wrapper {
+
+    background-color: white;
+    border: solid 1px #e8e8e8;
+    height: 50px;
+    margin: 0px;
+    width: 100%;
+}
+
+.recetas .busqueda .item-input-wrapper input[type="search"] {
+    width: 100%;
+    font-size: 120%;
+}
+
+.recetas .busqueda .item-input-wrapper .icon {
+    color: #00c97e;
+    font-size: 190%;
+}
+
+.recetas .receta {
+    background-color: #ffffff;
+    border: 1px solid #e8e8e8;
+    border-radius: 5px;
+    color: #2f3e47;
+    position: relative;
+}
+
+.recetas .receta img {
+    width: 100%;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.recetas .receta .sonido {
+    border-radius: 50%;
+    color: #00c97e;
+    font-size: 200%;
+    height: 40px;
+    padding-top: 8px;
+    position: absolute;
+    right: 10px;
+    text-align: center;
+    width: 40px;
+}
+
+.recetas .receta p {
+    font-size: 120%;
+    margin-bottom: 30px;
+    padding: 35px 30px;
+    width: 100%;
+}
+
+.recetas .receta .buttons {
+    bottom: 20px;
+    left: 30px;
+    position: absolute;
+}
+
+.recetas .receta .buttons div {
+    float: left;
+    font-size: 100%;
+    margin-right: 25px;
+}
+
+.recetas .receta .buttons div i {
+    color: #00c97e;
+    font-size: 200%;
+    margin-right: 9px;
+}
+
+.recetas .receta .buttons div .numero {
+    position: relative;
+    top: -6px;
+}

@@ -11,11 +11,6 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
     //$compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|file|blob|cdvfile):|data:image\//);
     $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|file):/);
 
-    $stateProvider.state('preload', {
-        url: '/preload',
-        templateUrl: 'src/preload/preload.html',
-        controller: 'PreloadCtrl'
-    });
 
     $stateProvider.state('login', {
         url: '/login',
@@ -23,11 +18,7 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
         controller: 'LoginController'
     });
 
-    $stateProvider.state('intro', {
-        url: '/intro',
-        templateUrl: 'src/intro/intro.html',
-        controller: 'IntroCtrl'
-    });
+
 
     $stateProvider.state('app', {
         url: '/app',
@@ -36,17 +27,7 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
         controller: 'NavController'
     });
 
-    $stateProvider.state('app.capacitacion', {
-        url: '/capacitacion',
-        cache: false,
-        views: {
-            'menuContent': {
-                templateUrl: 'src/capacitacion/capacitacion.html',
-                controller: 'CapacitacionCtrl'
-            }
-        }
 
-    });
 
     $stateProvider.state('app.modulo', {
         url: '/capacitacion/:modulo',
@@ -123,21 +104,7 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
         controller: 'mc_grupoCtrl'
     });
 
-    $stateProvider.state('app.tips', {
-        url: '/tips',
-        views: {
-            'menuContent': {
-                templateUrl: 'src/tips/tips.html',
-                controller: 'TipsCtrl'
-            }
-        }
-    });
 
-    $stateProvider.state('tipsModulo', {
-        url: '/tips/:modulo',
-        templateUrl: 'src/tips-modulo/tips-modulo.html',
-        controller: 'TipsModuloCtrl'
-    });
 
     $stateProvider.state('app.progreso', {
         url: '/progreso',
@@ -150,22 +117,7 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
         }
     });
 
-    $stateProvider.state('app.recetas', {
-        url: '/recetas',
-        cache: true,
-        views: {
-            'menuContent': {
-                templateUrl: 'src/recetas/recetas.html',
-                controller: 'RecetasCtrl'
-            }
-        }
-    });
 
-    $stateProvider.state('sobre', {
-        url: '/sobre',
-        templateUrl: 'views/sobre.html',
-        controller: 'SobreController'
-    });
 
 
 
@@ -213,6 +165,81 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
         templateUrl: 'views/home.html',
         controller: 'HomeController'
     });
+
+
+
+    // Organizados :)
+
+    $stateProvider.state('preload', {
+        url: '/preload',
+        templateUrl: 'src/preload/preload.html',
+        controller: 'PreloadCtrl'
+    });
+
+    $stateProvider.state('intro', {
+        url: '/intro',
+        templateUrl: 'src/intro/intro.html',
+        controller: 'IntroCtrl'
+    });
+
+    $stateProvider.state('sobre', {
+        url: '/sobre',
+        templateUrl: 'src/sobre/sobre.html',
+        controller: 'SobreCtrl'
+    });
+
+    $stateProvider.state('app.capacitacion', {
+        url: '/capacitacion',
+        cache: false,
+        views: {
+            'menuContent': {
+                templateUrl: 'src/capacitacion/capacitacion.html',
+                controller: 'CapacitacionCtrl'
+            }
+        }
+
+    });
+
+
+
+    $stateProvider.state('app.tips', {
+        url: '/tips',
+        views: {
+            'menuContent': {
+                templateUrl: 'src/tips/tips.html',
+                controller: 'TipsCtrl'
+            }
+        }
+    });
+
+    $stateProvider.state('tipsModulo', {
+        url: '/tips/:modulo',
+        templateUrl: 'src/tips-modulo/tips-modulo.html',
+        controller: 'TipsModuloCtrl'
+    });
+
+    $stateProvider.state('app.recetas', {
+        url: '/recetas',
+        cache: true,
+        views: {
+            'menuContent': {
+                templateUrl: 'src/recetas/recetas.html',
+                controller: 'RecetasCtrl'
+            }
+        }
+    });
+
+    $stateProvider.state('receta', {
+        url: '/app/recetas/receta/:id',
+        templateUrl: 'src/receta/receta.html',
+        controller: 'RecetaCtrl'
+    });
+
+
+
+
+
+
 
     // Redirecciona a la capacitación si la URL solicitada no existe
     $urlRouterProvider.otherwise('/app/capacitacion');
