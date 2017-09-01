@@ -1,3 +1,15 @@
+.receta,
+.receta h2 {
+    color: #2f3e47;
+
+    font-family: 'Muli', sans-serif;
+}
+
+.receta .pane,
+.receta .view {
+    background-color: #ffffff;
+}
+
 .receta .bar-header {
     height: 64px;
     border-bottom: 1px solid #00c97e;
@@ -38,4 +50,61 @@
 .receta .imagen {
     width: 100%;
     border-bottom: 1px solid #e8e8e8;
+}
+
+.receta h2 {
+    font-size: 150%;
+}
+
+.receta .detalles {
+    border-bottom: 1px solid #e8e8e8;
+    padding-bottom: 20px;
+}
+
+.receta .detalles div {
+    float: left;
+    margin-right: 16px;
+}
+
+.receta .detalles .icon {
+    margin-right: 6px;
+}
+
+.receta h3 {
+    position: relative;
+    color: #00c97e;
+    font-size: 150%;
+    margin: 10px 0px;
+    padding: 10px 0px;
+}
+
+.receta h3 i {
+    position: absolute;
+    font-size: 155%;
+    top: 5px;
+    margin-left: 10px;
+}
+
+.ingredientes {
+    border-bottom: 1px solid #e8e8e8;
+}
+
+
+.ingredientes ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ingredientes li {
+    font-size: 105%;
+    margin-bottom: 10px;
+    padding-left: 1em;
+    text-indent: -.7em;
+}
+
+.ingredientes li::before {
+    content: "• ";
+    color: #00c97e;
+    /* or whatever color you prefer */
 }

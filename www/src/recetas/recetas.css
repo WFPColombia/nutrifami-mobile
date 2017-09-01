@@ -1,4 +1,6 @@
-.recetas {}
+.recetas {
+    font-family: 'Muli', sans-serif;
+}
 
 .recetas .recetas-header {
     margin-top: 10px;
@@ -7,6 +9,7 @@
 
 .recetas .recetas-header h1 {
     color: #00c97e;
+    font-family: 'Muli', sans-serif;
     font-size: 150%;
     text-align: center;
     margin: 10px auto;
