@@ -1,4 +1,4 @@
-nutrifamiMobile.controller('RecetaCtrl', function($ionicPlatform, $scope, $ionicLoading, RecetasService) {
+nutrifamiMobile.controller('RecetaCtrl', function($ionicPlatform, $scope, $ionicLoading, $location, $ionicViewSwitcher, RecetasService) {
     'use strict';
 
 
@@ -41,13 +41,16 @@ nutrifamiMobile.controller('RecetaCtrl', function($ionicPlatform, $scope, $ionic
 
 
 
+
+
         RecetasService.actualizar(function(response) {
             console.log(response);
             $ionicLoading.hide();
         });
 
         $scope.myGoBack = function() {
-            $ionicHistory.goBack();
+            $ionicViewSwitcher.nextDirection('back'); // 'forward', 'back', etc.
+            $location.path('/app/recetas');
         };
 
 

@@ -1,6 +1,6 @@
 <div class="receta">
     <div class="bar bar-header bar-light">
-        <a class="back-button icon ion-android-arrow-back" ion-ripple></a>
+        <a class="back-button icon ion-android-arrow-back" ng-click="myGoBack()"></a>
         <div class="buttons">
             <div ion-ripple><i class="icon ion-android-favorite-outline" aria-hidden="true"></i><span class="numero">10</span></div>
             <div ion-ripple><i class="icon ion-android-share" aria-hidden="true"></i><span class="numero">234</span></div>
@@ -52,9 +52,63 @@
             <div class="row">
                 <div class="col">
                     <ion-slide-box>
-                        <ion-slide>1</ion-slide>
-                        <ion-slide>2</ion-slide>
+                        <ion-slide>
+                            <div class="paso" ion-ripple>
+                                <div class="icono">
+                                    <img src="img/recetas/img-paso.png">
+                                </div>
+                                <div class="numero">
+                                    <h4>1</h4>
+                                    <i class="icon ion-volume-high" aria-hidden="true"></i>
+                                </div>
+                                <p>Retire la punta del plátano, divídalo en dos y cocínelo en agua con un poco de sal. Una vez esté tierno en el centro retire el agua, remueva la cáscara, córtelo en rodajas y después en triángulos.</p>
+                            </div>
+                        </ion-slide>
+                        <ion-slide>
+                            <div class="paso">
+                                <div class="icono">
+                                    <img src="img/recetas/img-paso.png">
+                                </div>
+                                <div class="numero">
+                                    <h4>2</h4>
+                                    <i class="icon ion-volume-high" aria-hidden="true"></i>
+                                </div>
+                                <p>Retire la punta del plátano, divídalo en dos y cocínelo en agua con un poco de sal. Una vez esté tierno en el centro retire el agua, remueva la cáscara, córtelo en rodajas y después en triángulos.</p>
+                            </div>
+                        </ion-slide>
+                        <ion-slide>
+                            <div class="paso">
+                                <div class="icono">
+                                    <img src="img/recetas/img-paso.png">
+                                </div>
+                                <div class="numero">
+                                    <h4>3</h4>
+                                    <i class="icon ion-volume-high" aria-hidden="true"></i>
+                                </div>
+                                <p>Retire la punta del plátano, divídalo en dos y cocínelo en agua con un poco de sal. Una vez esté tierno en el centro retire el agua, remueva la cáscara, córtelo en rodajas y después en triángulos.</p>
+                            </div>
+                        </ion-slide>
+                        <ion-slide>
+                            <div class="paso">
+                                <div class="icono">
+                                    <img src="img/recetas/img-paso.png">
+                                </div>
+                                <div class="numero">
+                                    <h4>4</h4>
+                                    <i class="icon ion-volume-high" aria-hidden="true"></i>
+                                </div>
+                                <p>Retire la punta del plátano, divídalo en dos y cocínelo en agua con un poco de sal. Una vez esté tierno en el centro retire el agua, remueva la cáscara, córtelo en rodajas y después en triángulos.</p>
+                            </div>
+                        </ion-slide>
                     </ion-slide-box>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col sugerencia" ion-ripple>
+                    <hr>
+                    <h3>Sugerencia</h3>
+                    <i class="icon ion-volume-high" aria-hidden="true"></i>
+                    <p>En caso de no tener semillas de cacao tostado, utilice granos de café o café molido para dar sabor amargo a la vinagreta. El amargor se ve contrarrestado con el dulzor de la panela, el plátano y las mandarinas.</p>
                 </div>
             </div>
         </ion-content>

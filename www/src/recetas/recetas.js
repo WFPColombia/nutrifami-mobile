@@ -1,4 +1,4 @@
-nutrifamiMobile.controller('RecetasCtrl', function($ionicPlatform, $scope, $ionicLoading, $location, RecetasService) {
+nutrifamiMobile.controller('RecetasCtrl', function($ionicPlatform, $scope, $ionicLoading, $location, $ionicViewSwitcher, RecetasService) {
     'use strict';
 
 
@@ -25,6 +25,7 @@ nutrifamiMobile.controller('RecetasCtrl', function($ionicPlatform, $scope, $ioni
         });
 
         $scope.abrirReceta = function(id) {
+            $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
             $location.path('/app/recetas/receta/' + id);
         }
 

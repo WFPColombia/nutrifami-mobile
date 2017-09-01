@@ -73,6 +73,7 @@
 .receta h3 {
     position: relative;
     color: #00c97e;
+    font-family: 'Muli', sans-serif;
     font-size: 150%;
     margin: 10px 0px;
     padding: 10px 0px;
@@ -85,26 +86,91 @@
     margin-left: 10px;
 }
 
-.ingredientes {
+.receta .ingredientes {
     border-bottom: 1px solid #e8e8e8;
 }
 
 
-.ingredientes ul {
+.receta .ingredientes ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.ingredientes li {
+.receta .ingredientes li {
     font-size: 105%;
     margin-bottom: 10px;
     padding-left: 1em;
     text-indent: -.7em;
 }
 
-.ingredientes li::before {
+.receta .ingredientes li::before {
     content: "• ";
     color: #00c97e;
     /* or whatever color you prefer */
+}
+
+.receta .paso {
+    height: 300px;
+    font-size: 105%;
+}
+
+.receta .paso .icono {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.receta .paso .numero {
+    padding: 0 10px;
+    float: left;
+    color: #00c97e;
+}
+
+.receta .paso .numero h4 {
+    font-family: 'Muli', sans-serif;
+    font-size: 500%;
+    color: #00c97e;
+    margin: 0px 0px 10px 0px;
+    line-height: 0.8em;
+}
+
+.receta .paso .numero i {
+    font-size: 250%;
+}
+
+.receta .slider-pager .slider-pager-page {
+    color: #00c97e;
+}
+
+.receta .sugerencia {
+    font-size: 105%;
+    text-align: center;
+    padding: 5% 10%;
+    border-bottom: 1px solid #00c97e;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.receta .sugerencia hr {
+    position: absolute;
+    width: 96%;
+    left: 2%;
+    top: 59px;
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #00c97e;
+}
+
+.receta .sugerencia h3 {
+    background: url('../../img/recetas/fondo-sugerencia.png') no-repeat center;
+    color: #ffffff;
+    font-size: 100%;
+    height: 55px;
+    padding-top: 18px;
+}
+
+.receta .sugerencia i {
+    color: #00c97e;
+    font-size: 200%;
 }
