@@ -1,35 +1,131 @@
-nutrifamiMobile.controller('RecetasCtrl', function($ionicPlatform, $scope, $ionicLoading, $location, $ionicViewSwitcher, RecetasService) {
+nutrifamiMobile.controller('RecetasCtrl', function($ionicPlatform, $scope, $ionicLoading, $location, $ionicViewSwitcher, $ionicFilterBar, RecetasService, UsuarioService) {
     'use strict';
+
+    $scope.recetas = {};
+    $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
+    var filterBarInstance;
+
+    $scope.search = { text: '' };
+
 
 
     $ionicPlatform.ready(function() {
 
-        $scope.loading = $ionicLoading.show({
-            // The text to display in the loading indicator
-            //template: 'Cargando...',
-            // The animation to use
-            animation: 'fade-in',
-            // Will a dark overlay or backdrop cover the entire view
-            showBackdrop: true,
-            // The maximum width of the loading indicator
-            // Text will be wrapped if longer than maxWidth
-            maxWidth: 40
-        });
 
-        //$ionicLoading.hide();
-
-
-        RecetasService.actualizar(function(response) {
-            console.log(response);
-            $ionicLoading.hide();
-        });
 
         $scope.abrirReceta = function(id) {
             $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
             $location.path('/app/recetas/receta/' + id);
         }
 
+        $scope.refreshRecetas = function() {
+            $scope.$broadcast('scroll.refreshComplete');
+            init();
+        };
+
+        $scope.compartirReceta = function(receta_id, receta_nombre) {
+            //RecetasService.sumarCompartir(receta_id, usuario_id);
+
+
+
+            var options = {
+                message: receta_nombre, // not supported on some apps (Facebook, Instagram)
+                subject: 'Mira esta receta saludable de Nutrifami', // fi. for email
+                files: ['', ''], // an array of filenames either locally or remotely
+                url: 'https://www.nutrifami.org/',
+                chooserTitle: 'Eliga una aplicación para compartir' // Android only, you can override the default share sheet title
+            }
+            window.plugins.socialsharing.shareWithOptions(options, function(result) {
+                RecetasService.sumarCompartir(receta_id, $scope.usuarioActivo.id);
+
+                for (var receta in $scope.recetas) {
+                    if ($scope.recetas[receta].id == receta_id) {
+                        $scope.recetas[receta].compartidos++;
+                    }
+                }
+                console.log("Share completed? " + result.completed); // On Android apps mostly return false even while it's true
+                console.log("Shared to app: " + result.app); // On Android result.app is currently empty. On iOS it's empty when sharing is cancelled (result.completed=false)
+
+            }, function(msg) {
+                console.log("Sharing failed with message: " + msg);
+            });
+
+        };
+
+        $scope.meGusta = function(receta_id) {
+            for (var receta in $scope.recetas) {
+                if ($scope.recetas[receta].id == receta_id) {
+                    //$scope.recetas[receta].compartidos++;
+                    if ($scope.recetas[receta].me_gusta) {
+                        $scope.recetas[receta].me_gustas--;
+                        $scope.recetas[receta].me_gusta = false;
+                        RecetasService.restarMeGusta(receta_id, $scope.usuarioActivo.id);
+                    } else {
+                        $scope.recetas[receta].me_gustas++;
+                        $scope.recetas[receta].me_gusta = true;
+                        RecetasService.sumarMeGusta(receta_id, $scope.usuarioActivo.id);
+                    }
+
+                }
+            }
+        }
+
+        $scope.showFilterBar = function() {
+            filterBarInstance = $ionicFilterBar.show({
+                items: $scope.recetas,
+                cancelText: 'Cancelar',
+                update: function(filteredItems, filterText) {
+                    $scope.recetas = filteredItems;
+                    if (filterText) {
+                        console.log(filterText);
+                    }
+                }
+            });
+        };
+
+        $scope.onSearchChange = function() {
+            console.log($scope.search.text)
+        }
+
+        function init() {
+
+            $scope.loading = $ionicLoading.show({
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 40
+            });
+
+            RecetasService.actualizar(function(response) {
+                console.log(response['data']);
+                $scope.recetas = response['data'];
+                $ionicLoading.hide();
+            });
+
+        }
+
+        init();
+
 
 
     });
+});
+
+nutrifamiMobile.filter('buscarRecetas', function() {
+    return function(recetas, query) {
+        var filtered = [];
+        var letterMatch = new RegExp(query, 'i');
+        for (var i = 0; i < recetas.length; i++) {
+            var item = recetas[i];
+            if (query) {
+                console.log(letterMatch)
+                console.log(item.nombre.substring(0, query.length))
+                if (letterMatch.test(item.nombre.substring(0, query.length))) {
+                    filtered.push(item);
+                }
+            } else {
+                filtered.push(item);
+            }
+        }
+        return filtered;
+    };
 });

@@ -1,4 +1,4 @@
-dependencies = ['ionic', 'Authentication', 'ngCordova', 'ionMDRipple', 'ionicLazyLoad'];
+dependencies = ['ionic', 'Authentication', 'ngCordova', 'ionMDRipple', 'ionicLazyLoad', 'jett.ionic.filter.bar'];
 
 
 var nutrifamiLogin = angular.module('Authentication', []);
