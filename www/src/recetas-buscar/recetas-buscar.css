@@ -3,9 +3,72 @@
     background-color: #ffffff;
 }
 
+.filter-bar .bar.bar-stable,
+.filter-bar .bar.bar-light,
+.recetas-buscar .bar-header {
+    height: 64px;
+    background-color: #ffffff;
+    padding-top: 12px;
+    border-bottom: 1px solid #00c97e;
+}
+
+.filter-bar .bar-stable .button.button-clear,
+.filter-bar .bar-light .button.button-clear {
+    color: #00c97e;
+    padding: 0;
+    padding-right: 5px;
+    margin-left: 12px;
+}
+
+.filter-bar .placeholder-icon {
+    color: #00c97e;
+}
+
+.filter-bar .filter-bar-wrapper .item-input-inset .icon.placeholder-icon:before {
+    font-size: 26px;
+}
+
+.bar.item-input-inset .item-input-wrapper input {
+    font-size: 125%;
+    color: #2f3e47;
+    font-family: 'Muli', sans-serif;
+}
+
+.recetas-buscar .filtros {
+    background-color: #f5f5f5;
+}
+
+.recetas-buscar .filtros .col-25 {
+    padding: 8px;
+}
+
+.recetas-buscar .filtros h4 {
+    font-family: 'Muli', sans-serif;
+    color: #00c97e;
+}
+
+.recetas-buscar .filtros h4 .icon {
+    position: relative;
+    font-size: 150%;
+    top: 3px;
+}
+
+.recetas-buscar .filtros button {
+    background-color: #ebebeb;
+    border: none;
+    height: 40px;
+    border-radius: 5px;
+    color: #2f3e47;
+    font-family: 'Muli-bold', sans-serif;
+    padding: 0 20px;
+    margin-bottom: 15px;
+    margin-right: 10px;
+}
+
 .recetas-buscar .receta {
     padding: 17px 0px 10px 0px;
     border-bottom: 1px solid #e8e8e8;
+    background-color: #ffffff;
 }
 
 .recetas-buscar .receta img {
@@ -37,19 +100,19 @@
 }
 
 
-.filter-bar .bar.bar-stable,
-.filter-bar .bar.bar-light,
-.recetas-buscar .bar-header {
-    height: 64px;
-    background-color: #ffffff;
-    padding-top: 12px;
-    border-bottom: 1px solid #00c97e;
+
+
+
+.recetas-buscar .no-results {
+    padding-top: 80px;
+    text-align: center;
 }
 
-.filter-bar .bar-stable .button.button-clear,
-.filter-bar .bar-light .button.button-clear {
-    color: #00c97e;
-    padding: 0;
-    padding-right: 5px;
-    margin-left: 12px;
+
+.recetas-buscar .no-results p {
+    font-size: 120%;
+    color: #2f3e47;
+    padding: 0 10%;
+    line-height: 1.5em;
+    margin-top: 20px;
 }

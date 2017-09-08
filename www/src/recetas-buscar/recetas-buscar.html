@@ -3,10 +3,35 @@
     </div>
     <ion-view>
         <ion-content class="has-header">
-            <div class="row">
-                <div class="col">
-                    <button ng-click="prueba()">Click :) </button>
+            <div class="filtros" ng-show="mostrarFiltros">
+                <ng-repeat ng-repeat="filtro in filtros">
+                    <div class="row">
+                        <div class="col">
+                            <h4><i ng-class="filtro.clase" aria-hidden="true"></i> {{filtro.nombre}}</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button ng-click="filtrar(elementos.valor)" ng-repeat="elementos in filtro.elementos">{{elementos.label}}</button>
+                        </div>
+                    </div>
+                </ng-repeat>
+                <!--<div class="row">
+                    <div class="col">
+                        <h4><i class="icon ion-soup-can" aria-hidden="true"></i> Ingredientes</h4>
+                    </div>
                 </div>
+                <div class="row">
+                    <div class="col">
+                        <button ng-click="prueba()">10 min</button>
+                        <button ng-click="prueba()">20 min</button>
+                        <button ng-click="prueba()">30 min</button>
+                        <button ng-click="prueba()">40 min</button>
+                        <button ng-click="prueba()">50 min</button>
+                        <button ng-click="prueba()">60 min</button>
+                        <button ng-click="prueba()">70 min</button>
+                    </div>
+                </div>-->
             </div>
             <div class="receta" ng-repeat="receta in recetas" ng-click="abrirReceta(receta.id)">
                 <div class="row">
@@ -18,6 +43,14 @@
                             <!--<div><i class="icon ion-volume-high" aria-hidden="true"></i></div>-->
                             <div><i ng-class="receta.me_gusta == true ? 'icon ion-android-favorite' : 'icon ion-android-favorite-outline'" aria-hidden="true"></i><span class="numero">{{receta.me_gustas}}</span></div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="recetas !== undefined && !recetas.length" class="no-results">
+                <div class="row">
+                    <div class="col">
+                        <img src="img/icons/ico-compras-triste.png">
+                        <p>No se encuentraron resultados para esta búsqueda</p>
                     </div>
                 </div>
             </div>
