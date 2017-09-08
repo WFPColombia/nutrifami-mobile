@@ -2,102 +2,54 @@
     <div class="bar bar-header bar-light">
         <a class="back-button icon ion-android-arrow-back" ng-click="myGoBack()"></a>
         <div class="buttons">
-            <div ion-ripple><i class="icon ion-android-favorite-outline" aria-hidden="true"></i><span class="numero">10</span></div>
-            <div ion-ripple><i class="icon ion-android-share" aria-hidden="true"></i><span class="numero">234</span></div>
+            <div ion-ripple ng-click="meGusta(receta.id)"><i ng-class="receta.me_gusta == true ? 'icon ion-android-favorite' : 'icon ion-android-favorite-outline'" aria-hidden="true"></i><span class="numero">{{receta.me_gustas}}</span></div>
+            <div ion-ripple ng-click="compartirReceta(receta.id, receta.nombre)"><i class="icon ion-android-share" aria-hidden="true"></i><span class="numero">{{receta.compartidos}}</span></div>
         </div>
     </div>
     <ion-view>
-        <ion-content class="has-header"><img class="imagen" src="img/recetas/img-receta.png">
+        <ion-content class="has-header"><img class="imagen" ng-src="{{receta.imagen != null ? receta.imagen : 'img/recetas/receta-no-imagen.png'}}">
             <div class="row">
                 <div class="col">
-                    <h2>Ensalada de plátano maduro con cacao tostado y mandarina</h2>
+                    <h2>{{receta.nombre}}</h2>
                 </div>
             </div>
             <div class="row">
                 <div class="col detalles">
-                    <div><i class="icon ion-ios-stopwatch-outline" aria-hidden="true"></i><span class="texro">25 min</span></div>
-                    <div><i class="icon ion-ios-location-outline" aria-hidden="true"></i><span class="texro">La Ceja del tambo</span></div>
-                    <div><i class="icon ion-ios-pie-outline" aria-hidden="true"></i><span class="texro">6 porciones</span></div>
+                    <div><i class="icon ion-ios-stopwatch-outline" aria-hidden="true"></i><span class="texro">{{receta.tiempo_preparacion}} min</span></div>
+                    <div><i class="icon ion-ios-location-outline" aria-hidden="true"></i><span class="texro">{{receta.region}}</span></div>
+                    <div><i class="icon ion-ios-pie-outline" aria-hidden="true"></i><span class="texro">{{receta.porciones}} porciones</span></div>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <h3 ion-ripple>Ingredientes <i class="icon ion-volume-high" aria-hidden="true"></i></h3>
+                    <h3 ion-ripple>Ingredientes <!--<i class="icon ion-volume-high" aria-hidden="true"></i>--></h3>
                 </div>
             </div>
             <div class="row ingredientes">
                 <div class="col">
                     <ul>
-                        <li>Plátano hartón maduro 1 unidad grande</li>
-                        <li>Espinaca 1/2 atado mediano</li>
-                        <li>Plátano hartón maduro 1 unidad grande</li>
-                        <li>Plátano hartón maduro 1 unidad grande</li>
-                        <li>Plátano hartón maduro 1 unidad grande</li>
-                        <li>Plátano hartón maduro 1 unidad grande</li>
-                        <li>Plátano hartón maduro 1 unidad grande</li>
-                        <li>Plátano hartón maduro 1 unidad grande</li>
-                        <li>Plátano hartón maduro 1 unidad grande</li>
-                        <li>Plátano hartón maduro 1 unidad grande</li>
-                        <li>Plátano hartón maduro 1 unidad grande</li>
-                        <li>Plátano hartón maduro 1 unidad grande</li>
-                        <li>Plátano hartón maduro 1 unidad grande</li>
+                        <li ng-repeat="ingrediente in receta.ingredientes">{{ingrediente.nombre}} - {{ingrediente.cantidad}} {{ingrediente.unidad}}</li>
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <h3 class="text-center" ion-ripple>Preparación <i class="icon ion-volume-high" aria-hidden="true"></i></h3>
+                    <h3 class="text-center" ion-ripple>Preparación <!--<i class="icon ion-volume-high" aria-hidden="true"></i>--></h3>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <ion-slide-box>
-                        <ion-slide>
+                    <ion-slide-box ng-if="receta.pasos">
+                        <ion-slide ng-repeat="paso in receta.pasos">
                             <div class="paso" ion-ripple>
                                 <div class="icono">
                                     <img src="img/recetas/img-paso.png">
                                 </div>
                                 <div class="numero">
-                                    <h4>1</h4>
-                                    <i class="icon ion-volume-high" aria-hidden="true"></i>
+                                    <h4>{{paso.orden}}</h4>
+                                    <!--<i class="icon ion-volume-high" aria-hidden="true"></i>-->
                                 </div>
-                                <p>Retire la punta del plátano, divídalo en dos y cocínelo en agua con un poco de sal. Una vez esté tierno en el centro retire el agua, remueva la cáscara, córtelo en rodajas y después en triángulos.</p>
-                            </div>
-                        </ion-slide>
-                        <ion-slide>
-                            <div class="paso">
-                                <div class="icono">
-                                    <img src="img/recetas/img-paso.png">
-                                </div>
-                                <div class="numero">
-                                    <h4>2</h4>
-                                    <i class="icon ion-volume-high" aria-hidden="true"></i>
-                                </div>
-                                <p>Retire la punta del plátano, divídalo en dos y cocínelo en agua con un poco de sal. Una vez esté tierno en el centro retire el agua, remueva la cáscara, córtelo en rodajas y después en triángulos.</p>
-                            </div>
-                        </ion-slide>
-                        <ion-slide>
-                            <div class="paso">
-                                <div class="icono">
-                                    <img src="img/recetas/img-paso.png">
-                                </div>
-                                <div class="numero">
-                                    <h4>3</h4>
-                                    <i class="icon ion-volume-high" aria-hidden="true"></i>
-                                </div>
-                                <p>Retire la punta del plátano, divídalo en dos y cocínelo en agua con un poco de sal. Una vez esté tierno en el centro retire el agua, remueva la cáscara, córtelo en rodajas y después en triángulos.</p>
-                            </div>
-                        </ion-slide>
-                        <ion-slide>
-                            <div class="paso">
-                                <div class="icono">
-                                    <img src="img/recetas/img-paso.png">
-                                </div>
-                                <div class="numero">
-                                    <h4>4</h4>
-                                    <i class="icon ion-volume-high" aria-hidden="true"></i>
-                                </div>
-                                <p>Retire la punta del plátano, divídalo en dos y cocínelo en agua con un poco de sal. Una vez esté tierno en el centro retire el agua, remueva la cáscara, córtelo en rodajas y después en triángulos.</p>
+                                <p>{{paso.paso}}</p>
                             </div>
                         </ion-slide>
                     </ion-slide-box>
@@ -107,8 +59,8 @@
                 <div class="col sugerencia" ion-ripple>
                     <hr>
                     <h3>Sugerencia</h3>
-                    <i class="icon ion-volume-high" aria-hidden="true"></i>
-                    <p>En caso de no tener semillas de cacao tostado, utilice granos de café o café molido para dar sabor amargo a la vinagreta. El amargor se ve contrarrestado con el dulzor de la panela, el plátano y las mandarinas.</p>
+                    <!--<i class="icon ion-volume-high" aria-hidden="true"></i>-->
+                    <p>{{receta.sugerencia}}</p>
                 </div>
             </div>
         </ion-content>

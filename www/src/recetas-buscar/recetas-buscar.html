@@ -1,0 +1,26 @@
+<div class="recetas-buscar">
+    <div class="bar bar-header bar-light">
+    </div>
+    <ion-view>
+        <ion-content class="has-header">
+            <div class="row">
+                <div class="col">
+                    <button ng-click="prueba()">Click :) </button>
+                </div>
+            </div>
+            <div class="receta" ng-repeat="receta in recetas" ng-click="abrirReceta(receta.id)">
+                <div class="row">
+                    <div class="col">
+                        <img ng-src="{{receta.imagen != null ? receta.imagen : 'img/recetas/receta-no-imagen.png'}}">
+                        <!--<div class="sonido" ng-click="playAudio('audio2')" ion-ripple><i class="icon ion-volume-high" aria-hidden="true"></i></div>-->
+                        <p>{{receta.nombre}}</p>
+                        <div class="buttons">
+                            <!--<div><i class="icon ion-volume-high" aria-hidden="true"></i></div>-->
+                            <div><i ng-class="receta.me_gusta == true ? 'icon ion-android-favorite' : 'icon ion-android-favorite-outline'" aria-hidden="true"></i><span class="numero">{{receta.me_gustas}}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ion-content>
+    </ion-view>
+</div>

@@ -1,0 +1,55 @@
+.recetas-buscar .pane,
+.recetas-buscar .view {
+    background-color: #ffffff;
+}
+
+.recetas-buscar .receta {
+    padding: 17px 0px 10px 0px;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.recetas-buscar .receta img {
+    float: left;
+    width: 45%;
+    padding: 0px 18px 0px 10px;
+}
+
+.recetas-buscar .receta p {
+    font-size: 120%;
+}
+
+
+.recetas-buscar .receta .buttons div {
+    float: left;
+    font-size: 100%;
+    margin-right: 20px;
+}
+
+.recetas-buscar .receta .buttons div i {
+    color: #00c97e;
+    font-size: 220%;
+    margin-right: 9px;
+}
+
+.recetas-buscar .receta .buttons div .numero {
+    position: relative;
+    top: -6px;
+}
+
+
+.filter-bar .bar.bar-stable,
+.filter-bar .bar.bar-light,
+.recetas-buscar .bar-header {
+    height: 64px;
+    background-color: #ffffff;
+    padding-top: 12px;
+    border-bottom: 1px solid #00c97e;
+}
+
+.filter-bar .bar-stable .button.button-clear,
+.filter-bar .bar-light .button.button-clear {
+    color: #00c97e;
+    padding: 0;
+    padding-right: 5px;
+    margin-left: 12px;
+}

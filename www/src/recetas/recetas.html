@@ -9,7 +9,7 @@
         <div class="row busqueda">
             <div class="col">
                 <label class="item-input-wrapper">
-                    <input type="search" placeholder="Buscar recetas" ng-model="search.text" ng-change="onSearchChange()">
+                    <input type="search" placeholder="Buscar recetas" ng-model="search.text" ng-click="irABuscar()">
                     <i class="icon ion-ios-search placeholder-icon"></i>
                 </label>
             </div>
@@ -19,7 +19,7 @@
                 <h1><!--<i class="icon ion-volume-high" aria-hidden="true"></i>-->Recetas Destacadas</h1>
             </div>
         </div>
-        <div class="row" ng-repeat="receta in recetas | buscarRecetas:search.text">
+        <div class="row" ng-repeat="receta in recetas">
             <div class="col">
                 <div class="receta">
                     <img ng-src="{{receta.imagen != null ? receta.imagen : 'img/recetas/receta-no-imagen.png'}}" ng-click="abrirReceta(receta.id)">

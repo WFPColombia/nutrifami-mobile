@@ -83,8 +83,9 @@ nutrifamiMobile.controller('RecetasCtrl', function($ionicPlatform, $scope, $ioni
             });
         };
 
-        $scope.onSearchChange = function() {
-            console.log($scope.search.text)
+        $scope.irABuscar = function() {
+            $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
+            $location.path('/app/recetas/buscar');
         }
 
         function init() {
@@ -100,7 +101,6 @@ nutrifamiMobile.controller('RecetasCtrl', function($ionicPlatform, $scope, $ioni
                 $scope.recetas = response['data'];
                 $ionicLoading.hide();
             });
-
         }
 
         init();
@@ -108,24 +108,4 @@ nutrifamiMobile.controller('RecetasCtrl', function($ionicPlatform, $scope, $ioni
 
 
     });
-});
-
-nutrifamiMobile.filter('buscarRecetas', function() {
-    return function(recetas, query) {
-        var filtered = [];
-        var letterMatch = new RegExp(query, 'i');
-        for (var i = 0; i < recetas.length; i++) {
-            var item = recetas[i];
-            if (query) {
-                console.log(letterMatch)
-                console.log(item.nombre.substring(0, query.length))
-                if (letterMatch.test(item.nombre.substring(0, query.length))) {
-                    filtered.push(item);
-                }
-            } else {
-                filtered.push(item);
-            }
-        }
-        return filtered;
-    };
 });

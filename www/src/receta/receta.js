@@ -1,28 +1,12 @@
-nutrifamiMobile.controller('RecetaCtrl', function($ionicPlatform, $scope, $ionicLoading, $location, $ionicViewSwitcher, RecetasService) {
+nutrifamiMobile.controller('RecetaCtrl', function($ionicPlatform, $scope, $ionicLoading, $location, $stateParams, $ionicViewSwitcher, $ionicHistory, UsuarioService, RecetasService) {
     'use strict';
 
 
     $ionicPlatform.ready(function() {
 
-        $scope.loading = $ionicLoading.show({
-            // The text to display in the loading indicator
-            //template: 'Cargando...',
-            // The animation to use
-            animation: 'fade-in',
-            // Will a dark overlay or backdrop cover the entire view
-            showBackdrop: true,
-            // The maximum width of the loading indicator
-            // Text will be wrapped if longer than maxWidth
-            maxWidth: 40
-        });
 
-        //$ionicLoading.hide();
-
-        $scope.options = {
-            loop: false,
-            effect: 'fade',
-            speed: 500,
-        }
+        var receta_id = $stateParams.receta_id;
+        $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
 
         $scope.$on("$ionicSlides.sliderInitialized", function(event, data) {
             // data.slider is the instance of Swiper
@@ -40,18 +24,64 @@ nutrifamiMobile.controller('RecetaCtrl', function($ionicPlatform, $scope, $ionic
         });
 
 
+        $scope.compartirReceta = function(receta_id, receta_nombre) {
+            var options = {
+                message: receta_nombre, // not supported on some apps (Facebook, Instagram)
+                subject: 'Mira esta receta saludable de Nutrifami', // fi. for email
+                files: ['', ''], // an array of filenames either locally or remotely
+                url: 'https://www.nutrifami.org/',
+                chooserTitle: 'Eliga una aplicación para compartir' // Android only, you can override the default share sheet title
+            }
+            window.plugins.socialsharing.shareWithOptions(options, function(result) {
+                RecetasService.sumarCompartir(receta_id, $scope.usuarioActivo.id);
+
+                $scope.receta.compartidos++;
+
+                console.log("Share completed? " + result.completed); // On Android apps mostly return false even while it's true
+                console.log("Shared to app: " + result.app); // On Android result.app is currently empty. On iOS it's empty when sharing is cancelled (result.completed=false)
+
+            }, function(msg) {
+                console.log("Sharing failed with message: " + msg);
+            });
+
+        };
 
 
+        $scope.meGusta = function(receta_id) {
+            if ($scope.receta.me_gusta) {
+                $scope.receta.me_gustas--;
+                $scope.receta.me_gusta = false;
+                RecetasService.restarMeGusta(receta_id, $scope.usuarioActivo.id);
+            } else {
+                $scope.receta.me_gustas++;
+                $scope.receta.me_gusta = true;
+                RecetasService.sumarMeGusta(receta_id, $scope.usuarioActivo.id);
+            }
 
-        RecetasService.actualizar(function(response) {
-            console.log(response);
-            $ionicLoading.hide();
-        });
+        }
 
         $scope.myGoBack = function() {
             $ionicViewSwitcher.nextDirection('back'); // 'forward', 'back', etc.
-            $location.path('/app/recetas');
+            $ionicHistory.goBack()
         };
+
+        function init() {
+
+            $scope.loading = $ionicLoading.show({
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 40
+            });
+
+            RecetasService.verReceta(receta_id, function(response) {
+                $scope.receta = response;
+                console.log($scope.receta);
+                $ionicLoading.hide();
+            });
+
+        }
+
+        init();
 
 
 

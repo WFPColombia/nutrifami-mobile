@@ -2,8 +2,8 @@ nutrifamiMobile.factory('RecetasService', function($http) {
 
     var service = {};
     var token = ''
-    var URL = 'http://127.0.0.1:8000/';
-    //var URL = 'http://recetas.nutrifami.org/';
+    //var URL = 'http://127.0.0.1:8000/';
+    var URL = 'http://recetas.nutrifami.org/';
 
     service.Login = function(username, password, callback) {
         callback = callback || function() {};
@@ -188,6 +188,27 @@ nutrifamiMobile.factory('RecetasService', function($http) {
         });
 
 
+    }
+
+    service.verReceta = function(receta_id, callback) {
+        var callback = callback || function() {};
+
+        var receta = 0;
+        var recetas = [];
+
+        service.actualizar(function(response) {
+
+            recetas = response.data;
+
+            for (var item in recetas) {
+
+                if (recetas[item].id == receta_id) {
+                    receta = recetas[item];
+                    callback(receta);
+                }
+            }
+
+        });
     }
 
 

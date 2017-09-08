@@ -4,7 +4,7 @@ dependencies = ['ionic', 'Authentication', 'ngCordova', 'ionMDRipple', 'ionicLaz
 var nutrifamiLogin = angular.module('Authentication', []);
 var nutrifamiMobile = angular.module('NutrifamiMobile', dependencies);
 
-nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $compileProvider) {
+nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $ionicFilterBarConfigProvider, $compileProvider) {
     'use strict';
     $ionicConfigProvider.tabs.position('top');
 
@@ -220,7 +220,7 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
 
     $stateProvider.state('app.recetas', {
         url: '/recetas',
-        cache: true,
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: 'src/recetas/recetas.html',
@@ -229,16 +229,22 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
         }
     });
 
+    $stateProvider.state('recetas-buscar', {
+        url: '/app/recetas/buscar',
+        cahe: false,
+        templateUrl: 'src/recetas-buscar/recetas-buscar.html',
+        controller: 'RecetasBuscarCtrl'
+    });
+
     $stateProvider.state('receta', {
-        url: '/app/recetas/receta/:id',
+        url: '/app/recetas/receta/:receta_id',
+        cahe: false,
         templateUrl: 'src/receta/receta.html',
         controller: 'RecetaCtrl'
     });
 
-
-
-
-
+    $ionicFilterBarConfigProvider.backdrop(false);
+    $ionicFilterBarConfigProvider.placeholder('Buscar receta');
 
 
     // Redirecciona a la capacitación si la URL solicitada no existe

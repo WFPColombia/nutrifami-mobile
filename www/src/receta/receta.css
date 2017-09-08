@@ -126,6 +126,10 @@
     color: #00c97e;
 }
 
+.receta .paso p {
+    text-align: justify;
+}
+
 .receta .paso .numero h4 {
     font-family: 'Muli', sans-serif;
     font-size: 500%;
