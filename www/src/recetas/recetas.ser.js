@@ -211,6 +211,53 @@ nutrifamiMobile.factory('RecetasService', function($http) {
         });
     }
 
+    service.compartirReceta = function(rec, usuario_id) {
+        if (!rec.imagen) {
+            rec.imagen = '';
+        }
+
+        var tempMensaje = "Mira esta receta rica y saludable de Nutrifami 😋😋 \n\n";
+        tempMensaje += "===>🥙🥗🥘" + rec.nombre + " 🍝🍜🍲<===\n\n";
+        tempMensaje += "=>🌽🥕🥒 Ingredientes 🍆🍅🥑<=\n\n";
+
+
+
+        for (var i in rec.ingredientes) {
+            tempMensaje += "🍴 " + rec.ingredientes[i].nombre + " (" + rec.ingredientes[i].cantidad + " " + rec.ingredientes[i].unidad + ")\n"
+        }
+
+        tempMensaje += "\n\n=>👩‍🍳👨‍🌾 Pasos 👩‍🌾👨‍🍳<=\n\n";
+        for (var paso in rec.pasos) {
+            tempMensaje += rec.pasos[paso].orden + ". " + rec.pasos[paso].paso + "\n\n";
+        }
+
+        tempMensaje += "¿Quieres ver más recetas saludades? Encuentralas en Nutrifami \n\n";
+
+        console.log(tempMensaje);
+
+        console.log(rec)
+
+        var options = {
+            message: tempMensaje, // not supported on some apps (Facebook, Instagram)
+            subject: 'Mira esta receta saludable de Nutrifami', // fi. for email
+            files: [rec.imagen], // an array of filenames either locally or remotely
+            url: 'https://www.nutrifami.org/',
+            chooserTitle: 'Eliga una aplicación para compartir' // Android only, you can override the default share sheet title
+        }
+        window.plugins.socialsharing.shareWithOptions(options, function(result) {
+            service.sumarCompartir(rec.id, usuario_id);
+
+
+
+            console.log("Share completed? " + result.completed); // On Android apps mostly return false even while it's true
+            console.log("Shared to app: " + result.app); // On Android result.app is currently empty. On iOS it's empty when sharing is cancelled (result.completed=false)
+
+        }, function(msg) {
+            console.log("Sharing failed with message: " + msg);
+        });
+
+    }
+
 
     return service;
 

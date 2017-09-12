@@ -27,7 +27,7 @@
                     <p ng-click="abrirReceta(receta.id)">{{receta.nombre}}</p>
                     <div class="buttons">
                         <div ion-ripple ng-click="meGusta(receta.id)"><i ng-class="receta.me_gusta == true ? 'icon ion-android-favorite' : 'icon ion-android-favorite-outline'" aria-hidden="true"></i><span class="numero">{{receta.me_gustas}}</span></div>
-                        <div ion-ripple ng-click="compartirReceta(receta.id, receta.nombre)"><i class="icon ion-android-share" aria-hidden="true"></i><span class="numero">{{receta.compartidos}}</span></div>
+                        <div ion-ripple ng-click="compartirReceta(receta)"><i class="icon ion-android-share" aria-hidden="true"></i><span class="numero">{{receta.compartidos}}</span></div>
                     </div>
                 </div>
             </div>
