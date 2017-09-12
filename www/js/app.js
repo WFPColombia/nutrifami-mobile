@@ -246,7 +246,6 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
     $ionicFilterBarConfigProvider.backdrop(false);
     $ionicFilterBarConfigProvider.placeholder('Buscar receta');
 
-    $ionicFilterBarConfigProvider.clear('ion-close');
     $ionicFilterBarConfigProvider.search('ion-search');
 
 

@@ -7,7 +7,7 @@
     <author email="alejandro.tunaroza@gmail.com" href="http://www.nutrifami.org">
         PMA
     </author>
-    <content original-src="index.html" src="http://192.168.0.14:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />

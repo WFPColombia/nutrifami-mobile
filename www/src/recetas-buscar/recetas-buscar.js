@@ -42,9 +42,11 @@ nutrifamiMobile.controller('RecetasBuscarCtrl', function($ionicPlatform, $scope,
             });
 
 
+
         };
 
         $scope.filtrar = function(texto) {
+
             $scope.mostrarFiltros = false;
             var event = new Event('change');
             var input_filtro = document.getElementsByClassName("filter-bar-search")[0];
@@ -81,7 +83,7 @@ nutrifamiMobile.controller('RecetasBuscarCtrl', function($ionicPlatform, $scope,
             RecetasService.actualizar(function(response) {
                 $scope.recetas = response['data'];
 
-
+                dynamicSort
                 var ingredientes = {};
                 var region = {};
                 var duracion = {}
@@ -101,47 +103,29 @@ nutrifamiMobile.controller('RecetasBuscarCtrl', function($ionicPlatform, $scope,
                     if (region[receta_temp.region]) {
                         region[receta_temp.region]++;
                     } else {
-                        region[receta_temp.region] = 1; //VOY AQUÍ
+                        region[receta_temp.region] = 1;
                     }
+
+                    if (duracion[receta_temp.tiempo_preparacion]) {
+                        duracion[receta_temp.tiempo_preparacion]++;
+                    } else {
+                        duracion[receta_temp.tiempo_preparacion] = 1; //VOY AQUÍ
+                    }
+
 
 
                 }
 
-                console.log(ingredientes);
-                console.log(region);
-
                 $scope.filtros = [{
                     'nombre': 'Tiempo de preparación',
                     'clase': 'icon ion-android-alarm-clock',
-                    'elementos': [{
-                        'label': '10 min',
-                        'valor': '10'
-                    }, {
-                        'label': '20 min',
-                        'valor': '20'
-                    }, {
-                        'label': '30 min',
-                        'valor': '30'
-                    }, {
-                        'label': '40 min',
-                        'valor': '40'
-                    }, ]
+                    'elementos': filtrarElementos(duracion),
+                    'label': 'min.'
                 }, {
                     'nombre': 'Ingredientes',
                     'clase': 'icon ion-soup-can',
-                    'elementos': [{
-                        'label': '10 min',
-                        'valor': '10'
-                    }, {
-                        'label': '20 min',
-                        'valor': '20'
-                    }, {
-                        'label': '30 min',
-                        'valor': '30'
-                    }, {
-                        'label': '40 min',
-                        'valor': '40'
-                    }, ]
+                    'elementos': filtrarElementos(ingredientes),
+                    'label': '',
                 }];
 
 
@@ -153,6 +137,34 @@ nutrifamiMobile.controller('RecetasBuscarCtrl', function($ionicPlatform, $scope,
                 $scope.showFilterBar();
 
             });
+        }
+
+        function filtrarElementos(obj) {
+
+            var array = [];
+            for (var item in obj) {
+
+                array.push({
+                    'valor': item,
+                    'cantidad': obj[item]
+                })
+            }
+            array.sort(dynamicSort('-cantidad'));
+
+            return array.slice(0, 5);;
+
+        }
+
+        function dynamicSort(property) {
+            var sortOrder = 1;
+            if (property[0] === "-") {
+                sortOrder = -1;
+                property = property.substr(1);
+            }
+            return function(a, b) {
+                var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+                return result * sortOrder;
+            }
         }
 
     });
