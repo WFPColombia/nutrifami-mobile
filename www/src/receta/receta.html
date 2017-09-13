@@ -3,7 +3,7 @@
         <a class="back-button icon ion-android-arrow-back" ng-click="myGoBack()"></a>
         <div class="buttons">
             <div ion-ripple ng-click="meGusta(receta.id)"><i ng-class="receta.me_gusta == true ? 'icon ion-android-favorite' : 'icon ion-android-favorite-outline'" aria-hidden="true"></i><span class="numero">{{receta.me_gustas}}</span></div>
-            <div ion-ripple ng-click="compartirReceta(receta.id, receta.nombre)"><i class="icon ion-android-share" aria-hidden="true"></i><span class="numero">{{receta.compartidos}}</span></div>
+            <div ion-ripple ng-click="compartirReceta(receta)"><i class="icon ion-android-share" aria-hidden="true"></i><span class="numero">{{receta.compartidos}}</span></div>
         </div>
     </div>
     <ion-view>
@@ -28,7 +28,7 @@
             <div class="row ingredientes">
                 <div class="col">
                     <ul>
-                        <li ng-repeat="ingrediente in receta.ingredientes">{{ingrediente.nombre}} - {{ingrediente.cantidad}} {{ingrediente.unidad}}</li>
+                        <li ng-repeat="ingrediente in receta.ingredientes">{{ingrediente.nombre}} - {{ingrediente.cantidad}} {{ingrediente.unidad.unidad}} {{ingrediente.estado}}</li>
                     </ul>
                 </div>
             </div>
