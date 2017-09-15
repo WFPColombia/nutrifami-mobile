@@ -2,8 +2,8 @@ nutrifamiMobile.factory('RecetasService', function($http) {
 
     var service = {};
     var token = ''
-    var URL = 'http://127.0.0.1:8000/';
-    //var URL = 'http://recetas.nutrifami.org/';
+    //var URL = 'http://127.0.0.1:8000/';
+    var URL = 'http://recetas.nutrifami.org/';
 
     service.Login = function(username, password, callback) {
         callback = callback || function() {};
