@@ -1,0 +1,59 @@
+<div class="auth auth-login">
+    <!--<button ng-click="playAudio('audiologin')" class="login-sonido icon ion-volume-high" aria-hidden="true" ion-ripple></button>-->
+    <div class="row logo center-block">
+        <div class="col col-100">
+            <img src="img/logo-nutrifami.png" alt="Nutrifami" />
+        </div>
+    </div>
+    <div class="row pestanas">
+        <p><a ng-click="irAPestana(0)">Usuario o correo</a> o <a ng-click="irAPestana(1)">Documento de Identidad</a></p>
+    </div>
+    <ion-slides options="options" slider="data.slider">
+        <ion-slide-page>
+            <form name="form" ng-submit="login()" role="form">
+                <div class="list">
+                    <label class="item item-input">
+                        <input type="text" placeholder="Usuario o correo electrónico">
+                    </label>
+                    <label class="item item-input">
+                        <input type="text" placeholder="Escriba su contraseña">
+                    </label>
+                    <div class="item">
+                        <a href>¿Ha olvidado la contraseña?</a>
+                    </div>
+                    <label class="item">
+                        <button class="button button-block button-balanced" ng-click="abrir('registro')">Ingresar</button>
+                    </label>
+                </div>
+            </form>
+        </ion-slide-page>
+        <ion-slide-page>
+            <form name="form" ng-submit="login()" role="form">
+                <div class="list">
+                    <label class="item item-input">
+                        <input type="text" placeholder="Escriba su número de Documento">
+                    </label>
+                    <label class="item">
+                        <button class="button button-block button-balanced" ng-click="abrir('registro')">Ingresar</button>
+                    </label>
+                </div>
+            </form>
+        </ion-slide-page>
+    </ion-slides>
+    <div class="redes-sociales">
+        <div class="row">
+            <div class="col"><p>Puedes ingresar con: </p></div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="button button-block button-positive" ng-click="authenticate('facebook')">Facebook
+            </div>
+            <div class="col">
+                <button class="button button-block button-assertive" ng-click="authenticate('google')">Google +</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

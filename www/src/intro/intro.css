@@ -7,6 +7,21 @@
     text-align: center;
 }
 
+.intro .intro-sonido {
+    background-color: #ffffff;
+    width: 58px;
+    height: 58px;
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    border-radius: 29px;
+    text-align: center;
+    font-weight: normal;
+    font-size: 22px;
+    color: #00c97e;
+    border: none;
+}
+
 .intro .slider {
     height: 100%;
 }

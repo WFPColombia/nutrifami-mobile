@@ -1,0 +1,76 @@
+.auth{
+    background-color: #00c97e;
+    background-image: url('../../img/login-bg.png');
+    background-position: center center;
+    height: 100%;
+    width: 100%;
+}
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.auth .logo{
+    margin-top: 6em;
+    text-align: center;
+}
+
+.auth h2{
+    color: #ffffff;
+    font-size: 26px;
+    margin: 30px 0;
+    text-align: center;
+
+}
+
+.auth .sonido{
+    background-color: #ffffff;
+    width: 58px;
+    height: 58px;
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    border-radius: 29px;
+    text-align: center;
+    font-weight: normal;
+    font-size: 22px;
+    color: #00c97e;
+    border: none;
+}
+
+.auth .sonido a {
+    text-decoration: none;
+}
+
+.auth .btn-default {
+    background-color: #fef418;
+    border: solid 3px #fef418;
+    border-radius: 29px;
+    color: #00c97e;
+    font-family: 'Muli', sans-serif;
+    font-size: 16pt;
+    height: 58px;
+    width: 100%;
+}
+
+.auth .registro p{
+    color: #ffffff;
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+.auth .registro .btn-default{
+    background-color: #00c97e;
+    border-color: #ffffff;
+    color: #ffffff;
+}
+
+.auth .logo-wfp {
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    bottom: 15px;
+    left: 0px;
+}

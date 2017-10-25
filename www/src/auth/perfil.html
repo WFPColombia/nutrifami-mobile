@@ -1,0 +1,22 @@
+<ion-view view-title="Perfil">
+    <ion-content>
+        <div class="list card">
+
+            <div class="item item-avatar">
+                <img src="{{user.social_thumb}}">
+                <h2>{{user.first_name}} {{user.last_name}} ({{user.username}})</h2>
+                <p>{{user.email}}</p>
+            </div>
+
+            <div class="item item-body">
+                <p>Tipo de Documento: {{user.tipo_documento}}</p>
+                <p>No de Documento: {{user.documento}}</p>
+                <p>Comunidad: {{user.comunidad}}</p>
+                <p>Teléfono: {{user.telefono}}</p>
+                <p>
+                    <a href="#/app/editar-perfil" class="subdued">Editar</a>
+                </p>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
