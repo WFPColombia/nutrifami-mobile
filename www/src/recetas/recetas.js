@@ -23,32 +23,13 @@ nutrifamiMobile.controller('RecetasCtrl', function($ionicPlatform, $scope, $ioni
             init();
         };
 
-        $scope.compartirReceta = function(receta_id, receta_nombre) {
-            //RecetasService.sumarCompartir(receta_id, usuario_id);
+        $scope.compartirReceta = function(rec) {
+            RecetasService.compartirReceta(rec, $scope.usuarioActivo.id);
+            $scope.receta.compartidos++;
 
 
 
-            var options = {
-                message: receta_nombre, // not supported on some apps (Facebook, Instagram)
-                subject: 'Mira esta receta saludable de Nutrifami', // fi. for email
-                files: ['', ''], // an array of filenames either locally or remotely
-                url: 'https://www.nutrifami.org/',
-                chooserTitle: 'Eliga una aplicación para compartir' // Android only, you can override the default share sheet title
-            }
-            window.plugins.socialsharing.shareWithOptions(options, function(result) {
-                RecetasService.sumarCompartir(receta_id, $scope.usuarioActivo.id);
 
-                for (var receta in $scope.recetas) {
-                    if ($scope.recetas[receta].id == receta_id) {
-                        $scope.recetas[receta].compartidos++;
-                    }
-                }
-                console.log("Share completed? " + result.completed); // On Android apps mostly return false even while it's true
-                console.log("Shared to app: " + result.app); // On Android result.app is currently empty. On iOS it's empty when sharing is cancelled (result.completed=false)
-
-            }, function(msg) {
-                console.log("Sharing failed with message: " + msg);
-            });
 
         };
 
