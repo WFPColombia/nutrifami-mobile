@@ -1,19 +1,28 @@
 /*global angular*/
-nutrifamiMobile.controller('CapacitacionCtrl', function($ionicPlatform, $scope, $rootScope, UsuarioService, CapacitacionService) {
+nutrifamiMobile.controller('HomeCtrl', function($ionicPlatform, $scope, $rootScope, UsuarioService, CapacitacionService, $ionicViewSwitcher, $location) {
     'use strict';
 
     $ionicPlatform.ready(function() {
 
-        if($rootScope.RELOAD){
-           var username = UsuarioService.getUsuarioActivo();
-           console.log(username)
+        $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
+
+
+
+        $scope.abrirCapacitacion = function(capacitacion) {
+            //$location.path('/' + enlace);
+            $location.path('/app/' + capacitacion);
+        };
+
+        /*if ($rootScope.RELOAD) {
+            var username = UsuarioService.getUsuarioActivo();
+            console.log(username)
             nutrifami.setLoginData(username.login_documento, username.login_codigo, function() {
                 nutrifami.login(function(response) {
                     $rootScope.RELOAD = false;
                 });
             });
 
-        }    
+        }
 
 
         $scope.mids = CapacitacionService.getModulosId(3)
@@ -21,9 +30,9 @@ nutrifamiMobile.controller('CapacitacionCtrl', function($ionicPlatform, $scope, 
         $scope.usuarioAvance = UsuarioService.getUsuarioAvance();
 
         $scope.modulos = [];
-        /* Obtenemos los ids de los modulos de la capacitación 3 */
+        //Obtenemos los ids de los modulos de la capacitación 3
 
-            /*Creamos un arreglo para poder recorerlo y mostrarlo a traves de directivas */
+        //Creamos un arreglo para poder recorerlo y mostrarlo a traves de directivas 
         for (var mid in $scope.mids) {
             var tempModulo = CapacitacionService.getModulo($scope.mids[mid]);
             tempModulo.avance = {};
@@ -60,11 +69,11 @@ nutrifamiMobile.controller('CapacitacionCtrl', function($ionicPlatform, $scope, 
                 }
             }
 
-        }
+        }*/
 
-        
 
-        
+
+
 
 
     });

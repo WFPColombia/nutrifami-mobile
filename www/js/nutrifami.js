@@ -36,6 +36,7 @@ var nutrifami = {
      * nutrifami.buildToken(callback)
      */
     buildToken: function(callback) {
+        console.log("nutrifami.buildToken")
         callback = callback || function() {};
         if (usuarioActivo.sesionId && usuarioActivo.sesionId != '' && usuarioActivo.login_documento && usuarioActivo.login_documento != '' && usuarioActivo.login_codigo && usuarioActivo.login_codigo != '') {
             var tempSid = usuarioActivo.sesionId;
@@ -54,6 +55,7 @@ var nutrifami = {
      * nutrifami.setLoginData(documento, codigo, callback)
      */
     setLoginData: function(documento, codigo, callback) {
+        console.log("nutrifami.setLoginData");
         documento = documento || '';
         codigo = codigo || '';
         callback = callback || function() {};
@@ -285,7 +287,7 @@ var nutrifami = {
             } else {
                 console.log("Web");
                 var ran = Math.floor((Math.random() * 100) + 1);
-                $.getJSON("js/capacitacion.JSON?" + ran, function(data) {
+                $.getJSON("js/capacitacion.json?" + ran, function(data) {
                     localStorage.setItem("capacitacion", JSON.stringify(data));
                     nutrifami.training.cap_capacitacionesId = data['serv_capacitacionesId'];
                     nutrifami.training.cap_capacitaciones = data['serv_capacitaciones'];

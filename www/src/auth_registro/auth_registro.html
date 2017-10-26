@@ -1,0 +1,57 @@
+<ion-view>
+    <ion-content overflow-scroll="true" class="auth auth-login auth-registro">
+        <div>
+            <div class="container">
+                <!--<button ng-click="playAudio('audiologin')" class="login-sonido icon ion-volume-high" aria-hidden="true" ion-ripple></button>-->
+                <div class="row logo center-block">
+                    <div class="col col-100">
+                        <img src="img/logo-nutrifami.png" alt="Nutrifami" />
+                    </div>
+                </div>
+                <form name="form" ng-submit="login()" role="form">
+                    <div class="row">
+                        <div class="col col-100">
+                            <label class="item item-input">
+                                <input type="text" placeholder="Usuario o correo electrónico">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-100">
+                            <label class="item item-input">
+                                <input type="password" placeholder="Escriba su contraseña">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-100">
+                            <label class="item item-input">
+                                <input type="password" placeholder="Repita su contraseña">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-100">
+                            <button class="btn btn-default center-block" ng-click="abrir('registro')">INGRESAR</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="redes-sociales">
+                    <div class="row">
+                        <div class="col">
+                            <p>Puedes ingresar con: </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button class="button button-block facebook" ng-click="authenticate('facebook')"><i class="icon ion-social-facebook"></i> Facebook
+                        </div>
+                        <div class="col">
+                            <button class="button button-block google" ng-click="authenticate('google')"><i class="icon ion-social-google"></i> Google</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

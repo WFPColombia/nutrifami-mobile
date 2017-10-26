@@ -1,4 +1,4 @@
-nutrifamiMobile.controller('RegistroCtrl', function($ionicPlatform, $scope, $rootScope, $ionicViewSwitcher, $location, UserService) {
+nutrifamiMobile.controller('AuthRegistroCtrl', function($ionicPlatform, $scope, $rootScope, $ionicViewSwitcher, $location, UserService) {
     'use strict';
 
     $ionicPlatform.ready(function() {
@@ -8,9 +8,9 @@ nutrifamiMobile.controller('RegistroCtrl', function($ionicPlatform, $scope, $roo
 
         console.log(UserService.isAuthenticated());
 
-        if (UserService.isAuthenticated()) {
+        /*if (UserService.isAuthenticated()) {
             $location.path('/app/search');
-        }
+        }*/
 
         $scope.authenticate = function(provider) {
             UserService.authenticate(provider);

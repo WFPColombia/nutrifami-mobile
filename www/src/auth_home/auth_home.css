@@ -1,4 +1,4 @@
-.auth{
+.auth {
     background-color: #00c97e;
     background-image: url('../../img/login-bg.png');
     background-position: center center;
@@ -11,20 +11,19 @@
     margin: 0 auto;
 }
 
-.auth .logo{
-    margin-top: 6em;
+.auth .logo {
+    padding-top: 6em;
     text-align: center;
 }
 
-.auth h2{
+.auth h2 {
     color: #ffffff;
     font-size: 26px;
     margin: 30px 0;
     text-align: center;
-
 }
 
-.auth .sonido{
+.auth .sonido {
     background-color: #ffffff;
     width: 58px;
     height: 58px;
@@ -52,16 +51,17 @@
     font-size: 16pt;
     height: 58px;
     width: 100%;
+    margin-top: 20px;
 }
 
-.auth .registro p{
+.auth .registro p {
     color: #ffffff;
     margin-top: 20px;
     text-align: center;
 }
 
 
-.auth .registro .btn-default{
+.auth .registro .btn-default {
     background-color: #00c97e;
     border-color: #ffffff;
     color: #ffffff;

@@ -1,0 +1,180 @@
+.recetas,
+.home {
+    font-family: 'Muli', sans-serif;
+}
+
+.recetas .recetas-header,
+.home .home-header {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.recetas .recetas-header h1,
+.home .home-header h1 {
+    color: #00c97e;
+    font-family: 'Muli', sans-serif;
+    font-size: 150%;
+    text-align: center;
+    margin: 10px auto;
+}
+
+.home .home-header p {
+    color: #2f3e47;
+    font-family: 'Muli', sans-serif;
+    font-size: 110%;
+    text-align: center;
+    margin: 10px auto;
+}
+
+.recetas h1 i,
+.home h1 i {
+    margin-right: 12px;
+    font-size: 14px;
+}
+
+.recetas .busqueda .item-input-wrapper,
+.home .busqueda .item-input-wrapper {
+
+    background-color: white;
+    border: solid 1px #e8e8e8;
+    height: 50px;
+    margin: 0px;
+    width: 100%;
+}
+
+.recetas .busqueda .item-input-wrapper input[type="search"],
+.home .busqueda .item-input-wrapper input[type="search"] {
+    width: 100%;
+    font-size: 120%;
+}
+
+.recetas .busqueda .item-input-wrapper .icon,
+.home .busqueda .item-input-wrapper .icon {
+    color: #00c97e;
+    font-size: 190%;
+}
+
+.home .tarjeta {
+    background-color: #00c97e;
+    border-radius: 4px;
+    border: 1px solid #dcdcdc;
+    -webkit-box-shadow: 0px 0px 7px 1px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0px 0px 7px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 7px 1px rgba(0, 0, 0, 0.1);
+    height: 200px;
+    position: relative;
+}
+
+.home .tarjeta.terminada {
+    background-color: #ffba23;
+}
+
+.home .medalla {
+    position: absolute;
+    top: -13px;
+    right: -11px;
+}
+
+.home .audio {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+
+
+.home .tarjeta .img {
+    float: left;
+    height: 85px;
+    margin: 15px 0 0 15px;
+    text-align: center;
+    width: 130px;
+}
+
+.home .tarjeta img {
+    height: 100%;
+}
+
+.home .tarjeta .titulo {
+    height: 85px;
+    display: table;
+    margin: 15px 15px 0 0px;
+    text-align: left;
+}
+
+.home .tarjeta h2 {
+    color: #ffffff;
+    font-family: 'Muli', sans-serif;
+    font-size: 20px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.home .progress-text {
+    bottom: 60px;
+    color: #ffffff;
+    font-family: 'Muli-bold', sans-serif;
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin-left: 6px;
+    position: absolute;
+}
+
+.home .progress {
+    background-color: rgba(255, 255, 255, 0.5);
+    background-image: none;
+    border-radius: 3px;
+    bottom: 60px;
+    height: 6px;
+    margin: 0 6px;
+    position: absolute;
+    width: calc(100% - 12px);
+}
+
+.home .progress .progress-bar {
+    background-color: #fdf418;
+    background-image: none;
+    border-radius: 4px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    height: 100%;
+}
+
+.home .tarjeta .button {
+    bottom: 0px;
+    background-color: #09df78;
+    font-family: 'Raleway-bold', sans-serif;
+    letter-spacing: 5px;
+    position: absolute;
+    margin: 0px;
+}
+
+.home .tarjeta.terminada .button {
+    background-color: #ffa400;
+}
+
+.home .capacitaciones-otras .tarjeta {
+    background-color: #ffffff;
+}
+
+.home .capacitaciones-otras .tarjeta p {
+    color: #2f3e47;
+    text-align: center;
+}
+
+.home .capacitaciones-otras .audio {
+    color: #09df78;
+    font-size: 18px;
+}
+
+
+
+.home .capacitaciones-otras .tarjeta .img {
+    height: 75px;
+    margin: 12px 0;
+    text-align: center;
+    width: 100%;
+}

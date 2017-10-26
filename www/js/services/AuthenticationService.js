@@ -10,6 +10,8 @@ nutrifamiLogin.factory('AuthenticationService', function(Base64, $http, $rootSco
      * AuthenticationService.Login(username, password, function (response){});
      */
     service.Login = function(username, password, callback) {
+        console.log("AuthenticationService.Login");
+        console.log(username, password);
         nutrifami.setLoginData(username, password, function() {
             nutrifami.login(function(response) {
                 callback(response);

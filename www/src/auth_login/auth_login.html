@@ -6,54 +6,68 @@
         </div>
     </div>
     <div class="row pestanas">
-        <p><a ng-click="irAPestana(0)">Usuario o correo</a> o <a ng-click="irAPestana(1)">Documento de Identidad</a></p>
+        <p><a ng-class="activeIndex == 0 ? 'active': ''" ng-click="irAPestana(0)">Usuario o correo</a> <span>o</span> <a ng-class="activeIndex == 1 ? 'active': ''" ng-click="irAPestana(1)">Documento de Identidad</a></p>
     </div>
     <ion-slides options="options" slider="data.slider">
         <ion-slide-page>
             <form name="form" ng-submit="login()" role="form">
-                <div class="list">
-                    <label class="item item-input">
-                        <input type="text" placeholder="Usuario o correo electrónico">
-                    </label>
-                    <label class="item item-input">
-                        <input type="text" placeholder="Escriba su contraseña">
-                    </label>
-                    <div class="item">
+                <div class="row">
+                    <div class="col col-100">
+                        <label class="item item-input">
+                            <input type="text" placeholder="Usuario o correo electrónico">
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-100">
+                        <label class="item item-input">
+                            <input type="text" placeholder="Escriba su contraseña">
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-100">
                         <a href>¿Ha olvidado la contraseña?</a>
                     </div>
-                    <label class="item">
-                        <button class="button button-block button-balanced" ng-click="abrir('registro')">Ingresar</button>
-                    </label>
+                </div>
+                <div class="row">
+                    <div class="col col-100">
+                        <button class="btn btn-default center-block" ng-click="abrir('registro')">INGRESAR</button>
+                    </div>
                 </div>
             </form>
         </ion-slide-page>
         <ion-slide-page>
             <form name="form" ng-submit="login()" role="form">
-                <div class="list">
-                    <label class="item item-input">
-                        <input type="text" placeholder="Escriba su número de Documento">
-                    </label>
-                    <label class="item">
-                        <button class="button button-block button-balanced" ng-click="abrir('registro')">Ingresar</button>
-                    </label>
+                <div class="row">
+                    <div class="col col-100">
+                        <label class="item item-input">
+                            <input type="text" name="username" id="username" class="ldocumento" placeholder="Escriba su número de documento" autocomplete="off" ng-model="formDoc.username" required>
+                            <div ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Número de Documento es necesario</div>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-100">
+                        <button type="submit" class="btn btn-default center-block" ng-disabled="form.$invalid" ion-ripple>INGRESAR</button>
+                    </div>
                 </div>
             </form>
         </ion-slide-page>
     </ion-slides>
     <div class="redes-sociales">
         <div class="row">
-            <div class="col"><p>Puedes ingresar con: </p></div>
+            <div class="col">
+                <p>Puedes ingresar con: </p>
+            </div>
         </div>
         <div class="row">
             <div class="col">
-                <button class="button button-block button-positive" ng-click="authenticate('facebook')">Facebook
+                <button class="button button-block facebook" ng-click="authenticate('facebook')"><i class="icon ion-social-facebook"></i> Facebook
             </div>
             <div class="col">
-                <button class="button button-block button-assertive" ng-click="authenticate('google')">Google +</button>
+                <button class="button button-block google" ng-click="authenticate('google')"><i class="icon ion-social-google"></i> Google</button>
             </div>
         </div>
     </div>
 </div>
-
-
-

@@ -4,12 +4,41 @@ dependencies = ['ionic', 'Authentication', 'ngCordova', 'ionMDRipple', 'ionicLaz
 var nutrifamiLogin = angular.module('Authentication', []);
 var nutrifamiMobile = angular.module('NutrifamiMobile', dependencies);
 
-nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $ionicFilterBarConfigProvider, $compileProvider) {
+nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $ionicFilterBarConfigProvider, $compileProvider, $authProvider) {
     'use strict';
+
     $ionicConfigProvider.tabs.position('top');
 
     //$compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|file|blob|cdvfile):|data:image\//);
     $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|file):/);
+
+    var commonConfig = {
+        popupOptions: {
+            location: 'no',
+            toolbar: 'yes',
+            width: window.screen.width,
+            height: window.screen.height
+        }
+    };
+
+    if (ionic.Platform.isIOS() || ionic.Platform.isAndroid()) {
+        console.log("Is app!!")
+        commonConfig.redirectUri = 'http://localhost:8100/';
+    }
+
+    $authProvider.facebook(angular.extend({}, commonConfig, {
+        clientId: '277975186032137',
+        url: 'http://localhost:8000/api/login/social/token_user/facebook'
+
+    }));
+
+    $authProvider.google({
+        url: "http://localhost:8000/api/login/social/token_user/google-oauth2",
+        clientId: '898085701705-07ja94k2e3r3b81oqg2baih6q63ih8i3.apps.googleusercontent.com',
+        redirectUri: "http://localhost:8100/"
+    });
+
+    $authProvider.authToken = 'Token';
 
 
     $stateProvider.state('app', {
@@ -17,31 +46,6 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         abstract: true,
         templateUrl: 'views/template/menu.tpl.html',
         controller: 'NavController'
-    });
-
-    $stateProvider.state('app.modulo', {
-        url: '/capacitacion/:modulo',
-        cache: false,
-        views: {
-            'menuContent': {
-                templateUrl: 'views/modulo.html',
-                controller: 'ModuloController'
-            }
-        }
-    });
-
-    $stateProvider.state('unidad', {
-        url: '/capacitacion/:modulo/:leccion/:unidad',
-        cache: false,
-        templateUrl: 'views/unidad.html',
-        controller: 'UnidadController'
-    });
-
-    $stateProvider.state('leccionTerminada', {
-        url: '/capacitacion/:modulo/:leccion/:unidad/leccion-terminada',
-        cache: false,
-        templateUrl: 'views/leccionTerminada.html',
-        controller: 'LeccionTerminadaController'
     });
 
     $stateProvider.state('app.perfil', {
@@ -53,7 +57,6 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
                 controller: 'PerfilController'
             }
         }
-
     });
 
     $stateProvider.state('app.editarPerfil', {
@@ -65,7 +68,6 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
                 controller: 'EditarPerfilController'
             }
         }
-
     });
 
     $stateProvider.state('app.misComprasIntro', {
@@ -106,11 +108,6 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
             }
         }
     });
-
-
-
-
-
 
     $stateProvider.state('nc', {
         url: '/nutricompra',
@@ -177,29 +174,41 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         templateUrl: 'src/auth_home/auth_home.html',
         controller: 'AuthHomeCtrl'
     });
-    
+
     $stateProvider.state('login', {
         url: '/login',
+        cache: false,
         templateUrl: 'src/auth_login/auth_login.html',
         controller: 'AuthLoginCtrl'
     });
 
-    /*$stateProvider.state('registro', {
+    $stateProvider.state('registro', {
         url: '/registro',
         templateUrl: 'src/auth_registro/auth_registro.html',
         controller: 'AuthRegistroCtrl'
-    });*/
+    });
 
-    
+    $stateProvider.state('registro2', {
+        url: '/registro/2',
+        templateUrl: 'src/auth_registro2/auth_registro2.html',
+        controller: 'AuthRegistro2Ctrl'
+    });
 
-    $stateProvider.state('sobre', {
-        url: '/sobre',
-        templateUrl: 'src/sobre/sobre.html',
-        controller: 'SobreCtrl'
+
+
+    $stateProvider.state('app.home', {
+        url: '/',
+        cache: false,
+        views: {
+            'menuContent': {
+                templateUrl: 'src/home/home.html',
+                controller: 'HomeCtrl'
+            }
+        }
     });
 
     $stateProvider.state('app.capacitacion', {
-        url: '/capacitacion',
+        url: '/:capacitacion',
         cache: false,
         views: {
             'menuContent': {
@@ -207,7 +216,37 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
                 controller: 'CapacitacionCtrl'
             }
         }
+    });
 
+    $stateProvider.state('app.modulo', {
+        url: '/capacitacion/:modulo',
+        cache: false,
+        views: {
+            'menuContent': {
+                templateUrl: 'views/modulo.html',
+                controller: 'ModuloController'
+            }
+        }
+    });
+
+    $stateProvider.state('unidad', {
+        url: '/capacitacion/:modulo/:leccion/:unidad',
+        cache: false,
+        templateUrl: 'views/unidad.html',
+        controller: 'UnidadController'
+    });
+
+    $stateProvider.state('leccionTerminada', {
+        url: '/capacitacion/:modulo/:leccion/:unidad/leccion-terminada',
+        cache: false,
+        templateUrl: 'views/leccionTerminada.html',
+        controller: 'LeccionTerminadaController'
+    });
+
+    $stateProvider.state('sobre', {
+        url: '/sobre',
+        templateUrl: 'src/sobre/sobre.html',
+        controller: 'SobreCtrl'
     });
 
     $stateProvider.state('app.tips', {
@@ -257,13 +296,13 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
 
 
     // Redirecciona a la capacitación si la URL solicitada no existe
-    $urlRouterProvider.otherwise('/app/capacitacion');
+    $urlRouterProvider.otherwise('/app/');
 });
 
-nutrifamiMobile.run(function ($ionicPlatform, $rootScope, $location, $cordovaFileTransfer, $ionicHistory) {
+nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cordovaFileTransfer, $ionicHistory) {
 
     //Deshabilitamos el boton de ir atrás del Hardware de Android
-    $ionicPlatform.registerBackButtonAction(function (e) {
+    $ionicPlatform.registerBackButtonAction(function(e) {
         //do your stuff
         e.preventDefault();
     }, 101);
@@ -274,7 +313,7 @@ nutrifamiMobile.run(function ($ionicPlatform, $rootScope, $location, $cordovaFil
     console.log($rootScope.globals);
 
     nutrifami.getSessionId();
-    $rootScope.$on('$locationChangeStart', function (event, next, current) {
+    $rootScope.$on('$locationChangeStart', function(event, next, current) {
 
         console.log($location.path());
 
@@ -284,16 +323,16 @@ nutrifamiMobile.run(function ($ionicPlatform, $rootScope, $location, $cordovaFil
             $location.path('/preload');
         }
         // Redirecciona a la pagina de auth si el usuario no está logeado
-        if (!$rootScope.globals.currentUser) {
+        /*if (!$rootScope.globals.currentUser) {
             if ($location.path() !== '/auth' && $location.path() !== '/preload' && $location.path() !== '/login') {
                 $location.path('/auth');
             }
-        }
+        }*/
 
 
     });
 
-    $ionicPlatform.ready(function () {
+    $ionicPlatform.ready(function() {
         ionic.Platform.fullScreen(true, false); //Fullscreen en ios, verificar para Android
 
         if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -310,14 +349,13 @@ nutrifamiMobile.run(function ($ionicPlatform, $rootScope, $location, $cordovaFil
 
             if (ionic.Platform.isAndroid()) {
                 $rootScope.TARGETPATH = cordova.file.externalApplicationStorageDirectory;
-                window.addEventListener("native.hidekeyboard", function () {
+                window.addEventListener("native.hidekeyboard", function() {
                     StatusBar.hide();
                     window.AndroidFullScreen.immersiveMode(false, false);
                 });
             } else if (ionic.Platform.isIPad() || ionic.Platform.isIOS()) {
                 console.log("Is iPad or iOS");
-                $rootScope.TARGETPATH = cordova.file.dataDirectory;
-                ;
+                $rootScope.TARGETPATH = cordova.file.dataDirectory;;
             }
 
         } else {

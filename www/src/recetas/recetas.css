@@ -1,44 +1,4 @@
-.recetas {
-    font-family: 'Muli', sans-serif;
-}
-
-.recetas .recetas-header {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.recetas .recetas-header h1 {
-    color: #00c97e;
-    font-family: 'Muli', sans-serif;
-    font-size: 150%;
-    text-align: center;
-    margin: 10px auto;
-}
-
-.recetas h1 i {
-    margin-right: 12px;
-    font-size: 14px;
-}
-
-
-.recetas .busqueda .item-input-wrapper {
-
-    background-color: white;
-    border: solid 1px #e8e8e8;
-    height: 50px;
-    margin: 0px;
-    width: 100%;
-}
-
-.recetas .busqueda .item-input-wrapper input[type="search"] {
-    width: 100%;
-    font-size: 120%;
-}
-
-.recetas .busqueda .item-input-wrapper .icon {
-    color: #00c97e;
-    font-size: 190%;
-}
+/* Algunos estilos están en home.css*/
 
 .recetas .receta {
     background-color: #ffffff;
