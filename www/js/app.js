@@ -20,22 +20,25 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
             height: window.screen.height
         }
     };
+    
+    console.log(location.origin + location.pathname);
 
-    if (ionic.Platform.isIOS() || ionic.Platform.isAndroid()) {
-        console.log("Is app!!")
-        commonConfig.redirectUri = 'http://localhost:8100/';
+    if (ionic.Platform.isIOS() || ionic.Platform.isAndroid() || ionic.Platform.platform() == 'linux') {
+        commonConfig.redirectUri = 'http://usuarios.nutrifami.org';
     }
 
+    $authProvider.loginUrl = 'http://usuarios.nutrifami.org/api-token-auth/';
+
     $authProvider.facebook(angular.extend({}, commonConfig, {
-        clientId: '277975186032137',
-        url: 'http://localhost:8000/api/login/social/token_user/facebook'
+        clientId: '126883721233688',
+        url: 'http://usuarios.nutrifami.org/api/login/social/token_user/facebook'
 
     }));
 
     $authProvider.google({
-        url: "http://localhost:8000/api/login/social/token_user/google-oauth2",
+        url: "http://usuarios.nutrifami.org/api/login/social/token_user/google-oauth2",
         clientId: '898085701705-07ja94k2e3r3b81oqg2baih6q63ih8i3.apps.googleusercontent.com',
-        redirectUri: "http://localhost:8100/"
+        redirectUri: "http://usuarios.nutrifami.org/"
     });
 
     $authProvider.authToken = 'Token';
@@ -48,16 +51,7 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
         controller: 'NavController'
     });
 
-    $stateProvider.state('app.perfil', {
-        url: '/perfil',
-        cache: false,
-        views: {
-            'menuContent': {
-                templateUrl: 'views/perfil.html',
-                controller: 'PerfilController'
-            }
-        }
-    });
+
 
     $stateProvider.state('app.editarPerfil', {
         url: '/editar-perfil',
@@ -176,93 +170,33 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
     });
 
     $stateProvider.state('login', {
-        url: '/login',
+        url: '/auth/login',
         cache: false,
         templateUrl: 'src/auth_login/auth_login.html',
         controller: 'AuthLoginCtrl'
     });
 
     $stateProvider.state('registro', {
-        url: '/registro',
+        url: '/auth/registro',
         templateUrl: 'src/auth_registro/auth_registro.html',
         controller: 'AuthRegistroCtrl'
     });
 
     $stateProvider.state('registro2', {
-        url: '/registro/2',
+        url: '/auth/registro/2',
         templateUrl: 'src/auth_registro2/auth_registro2.html',
         controller: 'AuthRegistro2Ctrl'
     });
 
-
-
-    $stateProvider.state('app.home', {
-        url: '/',
+    $stateProvider.state('app.perfil', {
+        url: '/perfil',
         cache: false,
         views: {
             'menuContent': {
-                templateUrl: 'src/home/home.html',
-                controller: 'HomeCtrl'
+                templateUrl: 'src/auth_perfil/auth_perfil.html',
+                controller: 'AuthPerfilCtrl'
             }
         }
-    });
-
-    $stateProvider.state('app.capacitacion', {
-        url: '/:capacitacion',
-        cache: false,
-        views: {
-            'menuContent': {
-                templateUrl: 'src/capacitacion/capacitacion.html',
-                controller: 'CapacitacionCtrl'
-            }
-        }
-    });
-
-    $stateProvider.state('app.modulo', {
-        url: '/capacitacion/:modulo',
-        cache: false,
-        views: {
-            'menuContent': {
-                templateUrl: 'views/modulo.html',
-                controller: 'ModuloController'
-            }
-        }
-    });
-
-    $stateProvider.state('unidad', {
-        url: '/capacitacion/:modulo/:leccion/:unidad',
-        cache: false,
-        templateUrl: 'views/unidad.html',
-        controller: 'UnidadController'
-    });
-
-    $stateProvider.state('leccionTerminada', {
-        url: '/capacitacion/:modulo/:leccion/:unidad/leccion-terminada',
-        cache: false,
-        templateUrl: 'views/leccionTerminada.html',
-        controller: 'LeccionTerminadaController'
-    });
-
-    $stateProvider.state('sobre', {
-        url: '/sobre',
-        templateUrl: 'src/sobre/sobre.html',
-        controller: 'SobreCtrl'
-    });
-
-    $stateProvider.state('app.tips', {
-        url: '/tips',
-        views: {
-            'menuContent': {
-                templateUrl: 'src/tips/tips.html',
-                controller: 'TipsCtrl'
-            }
-        }
-    });
-
-    $stateProvider.state('tipsModulo', {
-        url: '/tips/:modulo',
-        templateUrl: 'src/tips-modulo/tips-modulo.html',
-        controller: 'TipsModuloCtrl'
     });
 
     $stateProvider.state('app.recetas', {
@@ -290,6 +224,84 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
         controller: 'RecetaCtrl'
     });
 
+    $stateProvider.state('app.home', {
+        url: '/',
+        cache: false,
+        views: {
+            'menuContent': {
+                templateUrl: 'src/home/home.html',
+                controller: 'HomeCtrl'
+            }
+        }
+    });
+
+    $stateProvider.state('home-buscar', {
+        url: '/app/buscar',
+        cahe: false,
+        templateUrl: 'src/home_buscar/home_buscar.html',
+        controller: 'HomeBuscarCtrl'
+    });
+
+    $stateProvider.state('app.capacitacion', {
+        url: '/:capacitacion',
+        cache: false,
+        views: {
+            'menuContent': {
+                templateUrl: 'src/capacitacion/capacitacion.html',
+                controller: 'CapacitacionCtrl'
+            }
+        }
+    });
+
+    $stateProvider.state('app.modulo', {
+        url: '/:capacitacion/:modulo',
+        cache: false,
+        views: {
+            'menuContent': {
+                templateUrl: 'views/modulo.html',
+                controller: 'ModuloController'
+            }
+        }
+    });
+
+    $stateProvider.state('unidad', {
+        url: '/:capacitacion/:modulo/:leccion/:unidad',
+        cache: false,
+        templateUrl: 'src/unidad/unidad.html',
+        controller: 'UnidadCtrl'
+    });
+
+    $stateProvider.state('leccionTerminada', {
+        url: '/:capacitacion/:modulo/:leccion/:unidad/leccion-terminada',
+        cache: false,
+        templateUrl: 'views/leccionTerminada.html',
+        controller: 'LeccionTerminadaController'
+    });
+
+    $stateProvider.state('sobre', {
+        url: '/sobre',
+        templateUrl: 'src/sobre/sobre.html',
+        controller: 'SobreCtrl'
+    });
+
+    $stateProvider.state('app.tips', {
+        url: '/tips',
+        views: {
+            'menuContent': {
+                templateUrl: 'src/tips/tips.html',
+                controller: 'TipsCtrl'
+            }
+        }
+    });
+
+    $stateProvider.state('tipsModulo', {
+        url: '/tips/:modulo',
+        templateUrl: 'src/tips-modulo/tips-modulo.html',
+        controller: 'TipsModuloCtrl'
+    });
+
+
+
     $ionicFilterBarConfigProvider.backdrop(false);
     $ionicFilterBarConfigProvider.placeholder('Buscar receta');
     $ionicFilterBarConfigProvider.search('ion-search');
@@ -310,26 +322,23 @@ nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cordovaFile
 
     $rootScope.globals = JSON.parse(localStorage.getItem('globals')) || {};
 
-    console.log($rootScope.globals);
-
-    nutrifami.getSessionId();
     $rootScope.$on('$locationChangeStart', function(event, next, current) {
+        console.log();
 
-        console.log($location.path());
+        //Guarda la información de usuario activo en el rootScope
+        $rootScope.usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo')) || {};
 
         //Redirecciona a la pagina de preload si estaba la app cerrada
         if ($location.path() === "") {
-            $rootScope.RELOAD = true; //Variable usada para recargar la información de usuario 
             $location.path('/preload');
         }
-        // Redirecciona a la pagina de auth si el usuario no está logeado
-        /*if (!$rootScope.globals.currentUser) {
-            if ($location.path() !== '/auth' && $location.path() !== '/preload' && $location.path() !== '/login') {
+        // Redirecciona a la pagina de auth si el usuario no está logeado e intenta ir a una página no autorizada
+        if (!$rootScope.globals.currentUser) {
+            var url = $location.path().substring(0, 5) // Tomamos los primeros 5 caracteres para hacer la validadción de las paginas
+            if (url !== '/auth' && url !== '/prel') {
                 $location.path('/auth');
             }
-        }*/
-
-
+        }
     });
 
     $ionicPlatform.ready(function() {
@@ -341,19 +350,23 @@ nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cordovaFile
 
         }
 
+        console.log(ionic.Platform.platform());
+
         if (window.StatusBar) {
             StatusBar.styleDefault();
         }
 
         if (window.cordova) {
 
-            if (ionic.Platform.isAndroid()) {
+
+            if (device.platform == "Android") {
+                console.log("isAndroid");
                 $rootScope.TARGETPATH = cordova.file.externalApplicationStorageDirectory;
                 window.addEventListener("native.hidekeyboard", function() {
                     StatusBar.hide();
                     window.AndroidFullScreen.immersiveMode(false, false);
                 });
-            } else if (ionic.Platform.isIPad() || ionic.Platform.isIOS()) {
+            } else {
                 console.log("Is iPad or iOS");
                 $rootScope.TARGETPATH = cordova.file.dataDirectory;;
             }

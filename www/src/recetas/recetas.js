@@ -67,7 +67,7 @@ nutrifamiMobile.controller('RecetasCtrl', function($ionicPlatform, $scope, $ioni
         $scope.irABuscar = function() {
             $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
             $location.path('/app/recetas/buscar');
-        }
+        };
 
         function init() {
 

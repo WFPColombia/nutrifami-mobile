@@ -10,7 +10,7 @@ nutrifamiMobile.factory('MediaService', function($cordovaMedia) {
      * 
      */
     service.preloadSimple = function(audios, callback) {
-        console.log("MediaService.preloadSimple");
+        //console.log("MediaService.preloadSimple");
         callback = callback || function() {};
         if (window.cordova) {
             for (audio in audios) {

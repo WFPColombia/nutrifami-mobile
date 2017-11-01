@@ -1,14 +1,16 @@
 /*global angular*/
-nutrifamiMobile.controller('PerfilController', function($ionicPlatform, $scope, $ionicPopup, $ionicLoading, PerfilService, UsuarioService) {
+nutrifamiMobile.controller('AuthPerfilCtrl', function($ionicPlatform, $scope, $ionicPopup, $ionicLoading, PerfilService, UsuarioService) {
     'use strict';
     $ionicPlatform.ready(function() {
 
         /* Cargamos la información del local storage*/
         $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
         $scope.usuarioFamilia = UsuarioService.getUsuarioFamilia();
+        
+        console.log($scope.usuarioActivo);
 
         /* Creamos un arreglo para mostrar los miembros de la familia de forma dinamica */
-        $scope.usuarioFamilia.miembrosPorRango = [{
+        /*$scope.usuarioFamilia.miembrosPorRango = [{
             rango: '0 a 2 años',
             cantidad: parseInt($scope.usuarioActivo.rango_0a2),
             rango_alias: '0a2'
@@ -35,7 +37,7 @@ nutrifamiMobile.controller('PerfilController', function($ionicPlatform, $scope, 
         $scope.usuarioActivo.totalMiembrosPorInscribir = 0;
         for (var i in $scope.usuarioFamilia.miembrosPorRango) {
             $scope.usuarioActivo.totalMiembrosPorInscribir = $scope.usuarioActivo.totalMiembrosPorInscribir + $scope.usuarioFamilia.miembrosPorRango[i].cantidad;
-        }
+        }*/
 
         $scope.familiar = {};
         $scope.familiar.FAM_PER_NOMBRE = '';
@@ -49,7 +51,7 @@ nutrifamiMobile.controller('PerfilController', function($ionicPlatform, $scope, 
             ]
         };
 
-        $scope.usuarioActivo.totalMiembrosInscritos = $scope.usuarioFamilia.length;
+        //$scope.usuarioActivo.totalMiembrosInscritos = $scope.usuarioFamilia.length;
 
         $scope.abrirModalEditarFamiliar = function(index) {
 
@@ -110,18 +112,13 @@ nutrifamiMobile.controller('PerfilController', function($ionicPlatform, $scope, 
 
                     UsuarioService.setUsuarioFamilia($scope.usuarioFamilia);
                     UsuarioService.setUsuarioActivo($scope.usuarioActivo, function(response) {});
-
-
                 }
-
                 $ionicLoading.hide();
                 $scope.popUpAgregarFamiliar.close();
                 var alertPopup = $ionicPopup.alert({
                     template: response.message,
                     cssClass: 'confirmacion'
                 });
-
-
             });
         };
     });

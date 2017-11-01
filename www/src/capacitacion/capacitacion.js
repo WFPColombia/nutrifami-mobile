@@ -1,20 +1,11 @@
 /*global angular*/
-nutrifamiMobile.controller('CapacitacionCtrl', function($ionicPlatform, $scope, $rootScope, $stateParams, UsuarioService, CapacitacionService) {
+nutrifamiMobile.controller('CapacitacionCtrl', function($ionicPlatform, $scope, $stateParams, UsuarioService, CapacitacionService) {
     'use strict';
 
     $ionicPlatform.ready(function() {
-
-        if ($rootScope.RELOAD) {
-            var username = UsuarioService.getUsuarioActivo();
-            console.log(username)
-            nutrifami.setLoginData(username.login_documento, username.login_codigo, function() {
-                nutrifami.login(function(response) {
-                    $rootScope.RELOAD = false;
-                });
-            });
-
-        }
-
+        
+        CapacitacionService.initClient();
+        
         $scope.mids = CapacitacionService.getModulosId($stateParams.capacitacion)
         $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
         $scope.usuarioAvance = UsuarioService.getUsuarioAvance();

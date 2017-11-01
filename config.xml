@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="org.nutrifami.mobile" version="1.2.22" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="org.nutrifami.mobile" version="1.2.23" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Nutrifami</name>
     <description>
         Aplicación móvil Nutrifami
@@ -19,6 +19,7 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="fullscreen" value="true" />
     <preference name="Orientation" value="portrait" />
+    <preference name="OverrideUserAgent" value="Mozilla/5.0 Google" />
     <feature name="StatusBar">
         <param name="ios-package" onload="true" value="CDVStatusBar" />
     </feature>
@@ -70,6 +71,8 @@
     <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
+    <allow-navigation href="http://192.168.0.18:8100" />
+    <allow-navigation href="http://192.168.0.11:8100" />
     <engine name="android" spec="^6.2.3" />
     <engine name="ios" spec="^4.4.0" />
     <plugin name="cordova-plugin-device" spec="^1.1.6" />

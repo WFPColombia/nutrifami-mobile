@@ -1,0 +1,76 @@
+<div class="home home-buscar">
+    <div class="bar bar-header bar-light">
+        <div class="bar bar-header bar-light item-input-inset">
+            <label class="item-input-wrapper">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="search" class="filter-bar-search ng-pristine ng-valid ng-empty ng-touched" ng-model="data.filterText" placeholder="Buscar receta" style="">
+                <button class="filter-bar-clear button button-icon icon filter-bar-element-hide" ng-class="getClearButtonClass()" style=""></button>
+            </label>
+            <button class="filter-bar-cancel button button-clear ng-binding" ng-bind-html="::cancelText">Cancelar</button>
+        </div>
+    </div>
+    <ion-view>
+        <ion-content class="has-header">
+            <div class="filtros" ng-show="mostrarFiltros">
+                <ng-repeat ng-repeat="filtro in filtros">
+                    <div class="row">
+                        <div class="col">
+                            <h4><i ng-class="filtro.clase" aria-hidden="true"></i> {{filtro.nombre}}</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button ng-click="filtrar(elementos.valor)" ng-repeat="elementos in filtro.elementos">{{elementos.valor}} {{filtro.label}}</button>
+                        </div>
+                    </div>
+                </ng-repeat>
+                <!--<div class="row">
+                    <div class="col">
+                        <h4><i class="icon ion-soup-can" aria-hidden="true"></i> Ingredientes</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button ng-click="prueba()">10 min</button>
+                        <button ng-click="prueba()">20 min</button>
+                        <button ng-click="prueba()">30 min</button>
+                        <button ng-click="prueba()">40 min</button>
+                        <button ng-click="prueba()">50 min</button>
+                        <button ng-click="prueba()">60 min</button>
+                        <button ng-click="prueba()">70 min</button>
+                    </div>
+                </div>-->
+            </div>
+            <div class="receta" ng-repeat="capacitacion in capacitaciones" ng-click="abrir(capacitacion.id)">
+                <div class="row">
+                    <div class="col">
+                        <div class="tarjeta">
+                            <div class="audio"><i class="icon ion-volume-high" aria-hidden="true"></i></div>
+                            <!--<div class="medalla"><img src="img/icons/ico-modulo-medalla.png" alt="" /></div>-->
+                            <div class="img">
+                                <img src="img/intro-01.png">
+                            </div>
+                            <div class="titulo">
+                                <h2>{{capacitacion.titulo}}</h2>
+                            </div>
+                            <p class="progress-text">100%</p>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                </div>
+                            </div>
+                            <button class="button button-full button-positive" ng-click="abrirCapacitacion(capacitacion.id)">INICIAR</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="capacitaciones !== undefined && !capacitaciones.length" class="no-results">
+                <div class="row">
+                    <div class="col">
+                        <img src="img/icons/ico-compras-triste.png">
+                        <p>No se encuentraron resultados para esta búsqueda</p>
+                    </div>
+                </div>
+            </div>
+        </ion-content>
+    </ion-view>
+</div>

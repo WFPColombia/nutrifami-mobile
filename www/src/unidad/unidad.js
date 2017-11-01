@@ -1,29 +1,35 @@
 /*global angular*/
-nutrifamiMobile.controller('UnidadController', function($ionicPlatform, $scope, $rootScope, $location, $stateParams, $ionicPopup, $ionicLoading, $ionicViewSwitcher, $timeout, $ionicScrollDelegate, MediaService, UsuarioService, CapacitacionService) {
+nutrifamiMobile.controller('UnidadCtrl', function($ionicPlatform, $scope, $rootScope, $location, $stateParams, $ionicPopup, $ionicLoading, $ionicViewSwitcher, $timeout, $ionicScrollDelegate, MediaService, UsuarioService, CapacitacionService) {
     'use strict';
     $ionicPlatform.ready(function() {
 
 
         $scope.unidad = CapacitacionService.getUnidad($stateParams.leccion, $stateParams.unidad);
+        console.log($scope.unidad);
         $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
         $scope.estadoUnidad = 'espera';
 
         $scope.unidad.numeroUnidad = $stateParams.unidad;
         $scope.unidad.totalUnidades = CapacitacionService.getUnidadesActivas($stateParams.leccion).length;
         $scope.scrolled = false;
-
+        
+        $scope.assetpath = $rootScope.TARGETPATH+$stateParams.modulo+"/"+$stateParams.leccion+"/"+$scope.unidad.id+"/";
+        $scope.assetpathRoot = $rootScope.TARGETPATH+$stateParams.modulo+"/";
         $scope.audios = {
-            'tipo': $rootScope.TARGETPATH + $scope.unidad.instruccion.audio.nombre,
-            'titulo': $rootScope.TARGETPATH + $scope.unidad.titulo.audio.nombre,
+            'tipo': $scope.assetpathRoot + $scope.unidad.instruccion.audio.nombre.split("training/images/")[1],
+            'titulo': $scope.assetpathRoot + $scope.unidad.titulo.audio.nombre.split("training/images/")[1],
             /*'muyBien': MediaService.getMediaURL('audios/muy-bien.mp3'),
             'respuestaIncorrecta': MediaService.getMediaURL('audios/respuesta-incorrecta.mp3'),*/
             'salir': MediaService.getMediaURL('audios/unidad-salir.wav')
         };
 
         $scope.feedback = {};
+        
 
 
-        console.log($scope.unidad);
+        console.log($scope.unidad.id);
+        
+        $scope.unidad.imagen.nombre = $scope.unidad.imagen.nombre.split("training/images/")[1];
 
         //$scope.audios = {};
 

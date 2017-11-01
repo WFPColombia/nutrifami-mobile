@@ -1,34 +1,52 @@
 nutrifamiMobile.factory('CapacitacionService', function(UsuarioService) {
     var service = {};
 
-    service.initClient = function() {
+    service.initClient = function(callback) {
+        console.log(nutrifami.training.cap_modulos['5']);
         if (typeof nutrifami.training.cap_modulos['5'] == 'undefined') {
-            //console.log("Recarga la capacitacion");
             var data = JSON.parse(localStorage.getItem('capacitacion'));
-
-            //console.log(data);
-
+            console.log(data);
             nutrifami.training.cap_capacitacionesId = data['serv_capacitacionesId'];
             nutrifami.training.cap_capacitaciones = data['serv_capacitaciones'];
             nutrifami.training.cap_modulos = data['serv_modulos'];
             nutrifami.training.cap_lecciones = data['serv_lecciones'];
             nutrifami.training.cap_unidadesinformacion = data['serv_unidades'];
             nutrifami.training.cap_unidadestips = data["serv_tips"];
+            
+            
+            console.log(nutrifami.training.cap_capacitaciones);
         }
-    }
+    };
 
+    service.getCapacitacionesId = function() {
+        this.initClient();
+        return nutrifami.training.getCapacitacionesId();
 
+    };
+    
+    service.getCapacitacionesActivas = function(){
+        this.initClient();
+        var capacitaciones = [];
+        cids = nutrifami.training.getCapacitacionesId();
+        for (var cid in cids) {
+            var tempCapacitacion = nutrifami.training.getCapacitacion(cids[cid]);
+            if (tempCapacitacion.activo === "1") {
+                capacitaciones.push(tempCapacitacion);
+            }
+        }
+        return capacitaciones;
+    };
 
     service.getModulosId = function(cid) {
         this.initClient();
         return nutrifami.training.getModulosId(cid);
 
-    }
+    };
     service.getModulosActivos = function(capacitacion) {
 
         this.initClient();
 
-        var modulos = []
+        var modulos = [];
         mids = nutrifami.training.getModulosId(capacitacion);
         var usuarioAvance = UsuarioService.getUsuarioAvance();
         for (var mid in mids) {
@@ -86,7 +104,7 @@ nutrifamiMobile.factory('CapacitacionService', function(UsuarioService) {
 
     service.getLeccionesActivas = function(modulo) {
         //this.initClient();
-        var lecciones = []
+        var lecciones = [];
         lids = nutrifami.training.getLeccionesId(modulo);
         for (var lid in lids) {
             var tempLeccion = nutrifami.training.getLeccion(lids[lid]);
@@ -104,7 +122,7 @@ nutrifamiMobile.factory('CapacitacionService', function(UsuarioService) {
     service.getLeccion = function(leccion) {
         this.initClient();
         return nutrifami.training.getLeccion(leccion);
-    }
+    };
 
     service.getUnidadesActivas = function(leccion) {
         this.initClient();

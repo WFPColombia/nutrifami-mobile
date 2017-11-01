@@ -1,0 +1,42 @@
+.filter-bar .bar.bar-stable,
+.filter-bar .bar.bar-light,
+.home-buscar .bar-header {
+    height: 64px;
+    background-color: #ffffff;
+    padding-top: 12px;
+    border-bottom: 1px solid #00c97e;
+}
+
+.filter-bar .bar-stable .button.button-clear,
+.filter-bar .bar-light .button.button-clear {
+    color: #00c97e;
+    padding: 0;
+    padding-right: 5px;
+    margin-left: 12px;
+}
+
+.filter-bar .placeholder-icon,
+.platform-android .filter-bar-wrapper .item-input-inset .filter-bar-cancel {
+    color: #00c97e;
+}
+
+.filter-bar button.filter-bar-clear.button.button-icon.icon.ion-android-close:before {
+    color: #00c97e;
+    width: 21px;
+}
+
+.filter-bar button.filter-bar-clear.button.button-icon.icon.ion-ios-close {
+
+    width: 26px;
+}
+
+.filter-bar .filter-bar-wrapper .item-input-inset .icon.placeholder-icon:before,
+.platform-android .filter-bar-wrapper .item-input-inset .filter-bar-cancel:before {
+    font-size: 26px;
+}
+
+.bar.item-input-inset .item-input-wrapper input {
+    font-size: 125%;
+    color: #2f3e47;
+    font-family: 'Muli', sans-serif;
+}

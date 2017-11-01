@@ -1,72 +1,7 @@
-var usuarioActivo = new Object(); /* Información del usuario logueado */
-var usuarioAvance = new Object(); /* Información de avance del usuario*/
-var usuarioFamilia = new Object(); /* Datos de la familia del usuario logueado, incluidos miembros de la familia*/
-var usuarioFamiliaAvance = new Object(); /* Datos de avance de la familia*/
-
-
-
 var base_url = 'http://www.nutrifami.org/';
 
 var nutrifami = {
-    /* nutrifami.usuarioActivoServerInfo */
-    usuarioActivoServerInfo: new Object(),
-    /*
-     * nutrifami.getSessionId(callback);
-     */
-    getSessionId: function(callback) {
-        callback = callback || function() {};
-        var serv = base_url + "app/api/get-session-id";
-        $.ajax({
-            url: serv,
-            async: false,
-            success: function(data) {
-                var objServ = JSON.parse(data);
-                usuarioActivo.sesionId = objServ.sid;
-                usuarioActivo.isLogin = usuarioActivo.isLogin || false;
-                usuarioActivo.login_documento = usuarioActivo.login_documento || '';
-                usuarioActivo.login_codigo = usuarioActivo.login_codigo || '';
-                usuarioActivo.token = usuarioActivo.token || '';
-                callback();
-            }
-        });
-    },
-
-    //Modificacion
-    /*
-     * nutrifami.buildToken(callback)
-     */
-    buildToken: function(callback) {
-        console.log("nutrifami.buildToken")
-        callback = callback || function() {};
-        if (usuarioActivo.sesionId && usuarioActivo.sesionId != '' && usuarioActivo.login_documento && usuarioActivo.login_documento != '' && usuarioActivo.login_codigo && usuarioActivo.login_codigo != '') {
-            var tempSid = usuarioActivo.sesionId;
-            var tempLdoc = usuarioActivo.login_documento;
-            var tempLcod = usuarioActivo.login_codigo;
-            var tokenTemp = tempSid.substring(0, 4) + tempLdoc.substring(0, 4) + tempSid.substring(4, 8) + tempLcod.substring(0, 4) + tempSid.substring(8, 12);
-            var tokenTemp = md5(tokenTemp);
-            usuarioActivo.token = tokenTemp;
-
-        } else {
-            usuarioActivo.token = '';
-        }
-        callback();
-    },
-    /*
-     * nutrifami.setLoginData(documento, codigo, callback)
-     */
-    setLoginData: function(documento, codigo, callback) {
-        console.log("nutrifami.setLoginData");
-        documento = documento || '';
-        codigo = codigo || '';
-        callback = callback || function() {};
-        if (documento != '' && codigo != '') {
-            usuarioActivo.login_documento = documento;
-            usuarioActivo.login_codigo = codigo;
-            this.buildToken(function() {
-                callback();
-            });
-        }
-    },
+    
     /*
      * nutrifami.login(callback);
      * 
@@ -75,57 +10,24 @@ var nutrifami = {
      * @param {type} callback
      * @returns {undefined}
      */
-    login: function(callback) {
+    login: function(documento, codigo, callback) {
         callback = callback || function() {};
-        console.log(usuarioActivo);
-        var serv = base_url + "app/api/login?d=" + usuarioActivo.login_documento + "&c=" + usuarioActivo.login_codigo + "&t=" + usuarioActivo.token;
+        var serv = base_url + "app/api/login?d=" + documento + "&c=" + codigo + "&t=no-token";
         response = {
             success: false,
-            message: ''
         };
         $.ajax({
             url: serv,
             type: 'POST',
             async: true,
             success: function(data) {
-                var objServ = JSON.parse(data);
-                if (objServ.response === 1) {
-
-                    /* Combinamos la información de usuarioActivo existente con la nueva */
-                    $.extend(usuarioActivo, objServ);
-                    usuarioActivo.narrador = true;
-
-                    /* Se copia la información de avance en un objeto independiente y se elimina la información de usuarioActivo*/
-                    usuarioAvance = usuarioActivo.avance[usuarioActivo.id];
-
-                    /* Se copia la informaciòn de avance de familia a un objeto independiente*/
-                    usuarioFamiliaAvance = usuarioActivo.avance;
-                    delete usuarioActivo["avance"];
-                    delete usuarioFamiliaAvance[usuarioActivo.id];
-
-                    /*Se copia información de familia de usuario Activo en objeto independiente*/
-                    usuarioFamilia = usuarioActivo.familia;
-                    delete usuarioActivo["familia"];
-
-                    /* Se almacena usuario activo en el locaStorage para llamarlo más facilmente */
-                    localStorage.setItem("usuarioActivo", JSON.stringify(usuarioActivo));
-                    localStorage.setItem("usuarioAvance", JSON.stringify(usuarioAvance));
-                    localStorage.setItem("usuarioFamiliaAvance", JSON.stringify(usuarioFamiliaAvance));
-                    localStorage.setItem("usuarioFamilia", JSON.stringify(usuarioFamilia));
-
-                    this.isloginFlag = true;
-                    response.success = true;
-                    response.message = usuarioActivo.token;
-
-                } else {
-                    response.success = false;
-                    response.message = 'Documento o Código incorrecto';
-                }
+                response = {
+                    success: true,
+                    data: JSON.parse(data)
+                };
                 callback(response);
             },
             error: function() {
-                response.success = false;
-                response.message = 'Ha ocurrido un error durante la ejecución';
                 callback(response);
             }
         });
@@ -269,9 +171,8 @@ var nutrifami = {
          *  Inicializa los objetos necesarios en la estructura de la capacitacion.
          *  
          */
-        initClient: function(capacitacion, callback) {
-            callback = callback || function() {};
-            capacitacion = capacitacion || '';
+        initClient: function() {
+            
 
             if (window.cordova) {
                 console.log("Mobile");

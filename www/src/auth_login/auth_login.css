@@ -3,9 +3,9 @@
 }
 
 .auth-login ion-slides {
-    height: 250px;
+    height: 270px;
 }
-
+    
 .swiper-pagination {
     display: none;
 }
@@ -83,8 +83,8 @@
 
 
 .auth-login .btn-default[disabled] {
-    color: rgba(255, 255, 255, 0.5);
-    border-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(254, 244, 24, 0.5);
+    border-color: rgba(254, 244, 24, 0.5);
 }
 
 .auth-login .btn-default:focus,

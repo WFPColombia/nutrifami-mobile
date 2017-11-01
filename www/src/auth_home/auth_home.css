@@ -6,6 +6,12 @@
     width: 100%;
 }
 
+.auth .btn-back{
+    position: absolute;
+    top: 40px;
+    left: 50px;
+}
+
 .container {
     max-width: 400px;
     margin: 0 auto;

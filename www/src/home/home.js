@@ -1,5 +1,5 @@
 /*global angular*/
-nutrifamiMobile.controller('HomeCtrl', function($ionicPlatform, $scope, $rootScope, UsuarioService, CapacitacionService, $ionicViewSwitcher, $location) {
+nutrifamiMobile.controller('HomeCtrl', function($ionicPlatform, $scope, $ionicViewSwitcher, $location, CapacitacionService) {
     'use strict';
 
     $ionicPlatform.ready(function() {
@@ -7,25 +7,24 @@ nutrifamiMobile.controller('HomeCtrl', function($ionicPlatform, $scope, $rootSco
         $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
 
 
+        $scope.capacitaciones = CapacitacionService.getCapacitacionesActivas();
 
         $scope.abrirCapacitacion = function(capacitacion) {
             //$location.path('/' + enlace);
             $location.path('/app/' + capacitacion);
         };
-
-        /*if ($rootScope.RELOAD) {
-            var username = UsuarioService.getUsuarioActivo();
-            console.log(username)
-            nutrifami.setLoginData(username.login_documento, username.login_codigo, function() {
-                nutrifami.login(function(response) {
-                    $rootScope.RELOAD = false;
-                });
-            });
-
-        }
+        
+        $scope.irABuscar = function() {
+            $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
+            $location.path('/app/buscar');
+        };
+        
+        
 
 
-        $scope.mids = CapacitacionService.getModulosId(3)
+
+
+        /*$scope.mids = CapacitacionService.getModulosId(3)
         $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
         $scope.usuarioAvance = UsuarioService.getUsuarioAvance();
 
