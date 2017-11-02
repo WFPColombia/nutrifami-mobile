@@ -19,13 +19,13 @@ nutrifamiMobile.factory('CapacitacionService', function(UsuarioService) {
     };
 
     service.getCapacitacionesId = function() {
-        this.initClient();
+        //this.initClient();
         return nutrifami.training.getCapacitacionesId();
 
     };
     
     service.getCapacitacionesActivas = function(){
-        this.initClient();
+        //this.initClient();
         var capacitaciones = [];
         cids = nutrifami.training.getCapacitacionesId();
         for (var cid in cids) {
@@ -38,13 +38,13 @@ nutrifamiMobile.factory('CapacitacionService', function(UsuarioService) {
     };
 
     service.getModulosId = function(cid) {
-        this.initClient();
+        //this.initClient();
         return nutrifami.training.getModulosId(cid);
 
     };
     service.getModulosActivos = function(capacitacion) {
 
-        this.initClient();
+        //this.initClient();
 
         var modulos = [];
         mids = nutrifami.training.getModulosId(capacitacion);
@@ -98,9 +98,9 @@ nutrifamiMobile.factory('CapacitacionService', function(UsuarioService) {
     };
 
     service.getModulo = function(modulo) {
-        this.initClient();
+        //this.initClient();
         return nutrifami.training.getModulo(modulo);
-    }
+    };
 
     service.getLeccionesActivas = function(modulo) {
         //this.initClient();
@@ -120,7 +120,7 @@ nutrifamiMobile.factory('CapacitacionService', function(UsuarioService) {
     };
 
     service.getLeccion = function(leccion) {
-        this.initClient();
+        //this.initClient();
         return nutrifami.training.getLeccion(leccion);
     };
 
@@ -138,7 +138,7 @@ nutrifamiMobile.factory('CapacitacionService', function(UsuarioService) {
     };
 
     service.getUnidad = function(leccion, rp_unidad) {
-        this.initClient();
+        //this.initClient();
         unidades = this.getUnidadesActivas(leccion);
         return unidades[rp_unidad - 1];
     };

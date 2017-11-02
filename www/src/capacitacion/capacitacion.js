@@ -1,16 +1,17 @@
 /*global angular*/
-nutrifamiMobile.controller('CapacitacionCtrl', function($ionicPlatform, $scope, $stateParams, UsuarioService, CapacitacionService) {
+nutrifamiMobile.controller('CapacitacionCtrl', function ($ionicPlatform, $scope, $rootScope, $ionicLoading, $stateParams, $location, $ionicPopup, UsuarioService, CapacitacionService) {
     'use strict';
 
-    $ionicPlatform.ready(function() {
-        
+    $ionicPlatform.ready(function () {
+
         CapacitacionService.initClient();
-        
         $scope.mids = CapacitacionService.getModulosId($stateParams.capacitacion)
         $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
         $scope.usuarioAvance = UsuarioService.getUsuarioAvance();
 
         $scope.modulos = [];
+
+        console.log("Mensaje de prueba");
         //Obtenemos los ids de los modulos de la capacitación 3 
 
         //Creamos un arreglo para poder recorerlo y mostrarlo a traves de directivas 
@@ -51,6 +52,32 @@ nutrifamiMobile.controller('CapacitacionCtrl', function($ionicPlatform, $scope, 
             }
 
         }
+
+        $rootScope.$on('descargaTerminada', function (event, response, mid) {
+            console.log(event);
+            $ionicLoading.hide();
+            if (response) {
+                $location.path('/app/' + $stateParams.capacitacion + '/' + mid);
+
+            } else {
+                $scope.modal = {
+                    texto1: 'Hubo un error en la descarga del módulo',
+                    texto2: 'Intentanlo nuevamente'
+                };
+                $ionicPopup.show({
+                    templateUrl: 'views/modals/modal.html',
+                    scope: $scope,
+                    cssClass: 'salir-unidad',
+                    buttons: [{
+                            text: 'Aceptar',
+                            type: 'button-positive',
+                            onTap: function (e) {
+                                console.log("Ok")
+                            }
+                        }]
+                });
+            }
+        });
     });
 
 });

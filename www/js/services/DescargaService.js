@@ -16,12 +16,12 @@ nutrifamiMobile.factory('DescargaService', function UserService($http, $rootScop
             console.log("Existe una versión");
             versionActual = JSON.parse(localStorage.getItem('version'));
         }
-//comprobamos la version nueva
+        //comprobamos la version nueva
         $http.get(BaseUrl + 'js/version.JSON').then(function (response) {
             versionNueva = response.data.Capacitacion.ID;
             console.log(versionNueva + " " + versionActual)
             if (versionActual != versionNueva) {
-//Actualizamos el numero de versión
+                //Actualizamos el numero de versión
                 localStorage.setItem("version", JSON.stringify(versionNueva));
                 callback(true);
             } else {
@@ -34,8 +34,7 @@ nutrifamiMobile.factory('DescargaService', function UserService($http, $rootScop
 
 
     service.actualizarCapacitacion = function (callback) {
-        callback = callback || function () {
-        };
+        callback = callback || function () {};
         $http.get(BaseUrl + 'js/capacitacionAll.JSON').then(function (response) {
             localStorage.setItem("capacitacion", JSON.stringify(response.data));
             CapacitacionService.initClient();
@@ -81,94 +80,143 @@ nutrifamiMobile.factory('DescargaService', function UserService($http, $rootScop
     };
 
 
-    service.descargarModulo = function (mid, callback) {
-        callback = callback || function () {
-        };
-        console.log("Pasa algo");
+    /**
+     * 
+     * @param {type} int: id del módulo
+     * @returns {Boolean}
+     * @description Retorna True si las imagenes del módulo ya fueron descargas en la aplicación
+     */
+    service.imagenesDescargadas = function (mid) {
+        mid = mid || 16;
         var gestorDescarga = JSON.parse(localStorage.getItem('gestorDescarga'));
 
-        if (gestorDescarga.modulos[mid].imagenes && gestorDescarga.modulos[mid].audios) {
-            console.log(1);
-            callback();
-        } else if (!gestorDescarga.modulos[mid].imagenes && !gestorDescarga.modulos[mid].audios) {
-            console.log(2);
-            service.descargarArchivo(gestorDescarga.modulos[mid].zip_imagenes, mid, function () {
-                gestorDescarga.modulos[mid].imagenes = true;
-                service.descargarArchivo(gestorDescarga.modulos[mid].zip_audios, mid, function () {
-                    gestorDescarga.modulos[mid].audios = true;
-                    localStorage.setItem("gestorDescarga", JSON.stringify(gestorDescarga));
-                    callback();
-                });
-            });
-        } else if (!gestorDescarga.modulos[mid].imagenes) {
-            console.log(3);
-            service.descargarArchivo(gestorDescarga.modulos[mid].zip_imagenes, mid, function () {
-                gestorDescarga.modulos[mid].imagenes = true;
-                localStorage.setItem("gestorDescarga", JSON.stringify(gestorDescarga));
-                callback();
-            });
+        if (gestorDescarga.modulos[mid]['imagenes']) {
+            return true;
 
-        } else if (!gestorDescarga.modulos[mid].audios) {
-            console.log(4);
-            service.descargarArchivo(gestorDescarga.modulos[mid].zip_audios, mid, function () {
-                gestorDescarga.modulos[mid].audios = true;
-                localStorage.setItem("gestorDescarga", JSON.stringify(gestorDescarga));
-                callback();
-            });
-
+        } else {
+            return false;
         }
+    };
 
+    /**
+     * 
+     * @param {type} mid
+     * @returns {Boolean}
+     * @description Retorna True si los audios del módulo ya fueron descargos
+     */
+    service.audiosDescargados = function (mid) {
+        mid = mid || 16;
+        var gestorDescarga = JSON.parse(localStorage.getItem('gestorDescarga'));
+
+        if (gestorDescarga.modulos[mid]['audios']) {
+            return true;
+
+        } else {
+            return false;
+        }
     };
 
 
 
+    service.descargarModulo = function (mid) {
+        console.log("Descargar modulo");
+        var gestorDescarga = JSON.parse(localStorage.getItem('gestorDescarga'));
 
-    service.descargarArchivo = function (url, mid, callback) {
-        callback = callback || function () {
-        };
-        if (window.cordova) {
-            var path = $rootScope.TARGETPATH + mid + ".zip";
-            $cordovaFileTransfer.download(url, path, options, trustHosts).then(function (result) {
-                console.log(path + " descargado con éxito");
-                console.log(result.nativeURL);
-                service.descomprimirArchivo(path, mid, function () {
-                    callback();
-                });
-
-            }, function (err) {
-                console.log("Error al descargar " + path);
-                console.log(err);
-                console.log(err.body);
-                callback();
-            }, function (progress) {
-                $timeout(function () {
-                    console.log("Descargando archivo " + path);
+        console.log("imagenes descargadas: " + service.imagenesDescargadas(mid));
+        if (!service.audiosDescargados(mid)) {
+            console.log(1);
+            service.descargarImagenes(mid, function () {
+                service.descargarArchivo(gestorDescarga.modulos[mid].zip_audios, mid, 'Descargando audios del módulo', function (response) {
+                    gestorDescarga.modulos[mid].audios = response;
+                    localStorage.setItem("gestorDescarga", JSON.stringify(gestorDescarga));
+                    $rootScope.$emit('descargaTerminada', response, mid);
                 });
             });
         } else {
-            callback();
+            console.log(2);
+            $rootScope.$emit('descargaTerminada', true, mid);
+
+        }
+    };
+
+
+    service.descargarImagenes = function (mid) {
+        console.log("service.descargarImagenes " + mid);
+        var gestorDescarga = JSON.parse(localStorage.getItem('gestorDescarga'));
+        if (!service.imagenesDescargadas(mid)) {
+            console.log(1);
+            service.descargarArchivo(gestorDescarga.modulos[mid].zip_imagenes, mid, 'Descargando imágenes del módulo', function (response) {
+                gestorDescarga.modulos[mid].imagenes = response;
+                localStorage.setItem("gestorDescarga", JSON.stringify(gestorDescarga));
+                $rootScope.$emit('descargaTerminada', response, mid);
+            });
+        } else {
+            console.log(2);
+            $rootScope.$emit('descargaTerminada', true, mid);
+        }
+
+    };
+
+    /**
+     * 
+     * @param {type} url
+     * @param {type} mid
+     * @param {type} callback
+     * @returns {undefined}
+     */
+    service.descargarArchivo = function (url, mid, mensaje, callback) {
+        console.log("Descargar archivo " + url);
+        callback = callback || function () {};
+        if (window.cordova) {
+            var path = $rootScope.TARGETPATH + mid + ".zip";
+            $cordovaFileTransfer.download(url, path, options, trustHosts).then(function (result) {
+                console.log(result.nativeURL + " descargado con éxito!! :)");
+                service.descomprimirArchivo(path, mid, function (response) {
+                    callback(response);
+                });
+            }, function (err) {
+                console.log(err);
+                callback(false);
+            }, function (progress) {
+                $timeout(function () {
+                    var downloadProgress = (progress.loaded / progress.total) * 100;
+                    console.log("Descargando " + url + " " + downloadProgress + "%");
+                    var response = {
+                        mensaje: mensaje,
+                        porcentaje: downloadProgress.toFixed(1)
+                    };
+                    $rootScope.$emit('actualizarCargador', response);
+                });
+            });
+        } else {
+            callback(true);
         }
 
     };
 
     service.descomprimirArchivo = function (path, nombre, callback) {
-        callback = callback || function () {
-        };
-        console.log("Descomprimiendo");
+        callback = callback || function () {};
+        console.log("Descomprimiendo archivo");
         $cordovaZip.unzip(path, $rootScope.TARGETPATH).then(function (response) {
             console.log(response);
             $cordovaFile.removeFile($rootScope.TARGETPATH, nombre + ".zip")
                     .then(function (success) {
                         console.log("Archivo " + path + " eliminado con éxito");
-                        callback();
+                        callback(true);
                     }, function (error) {
                         console.log(error);
+                        callback(false);
                     });
-        }, function () {
-            console.log("Error al descomprimir " + path);
-            callback();
+        }, function (err) {
+            console.log(err);
+            callback(false);
         }, function (progress) {
-            console.log("Descomprimiendo " + path);
+            var unzipProgress = parseInt((progress.loaded / progress.total) * 100);
+            var response = {
+                mensaje: "Descomprimiendo",
+                porcentaje: unzipProgress
+            };
+            $rootScope.$emit('actualizarCargador', response);
         });
     };
 

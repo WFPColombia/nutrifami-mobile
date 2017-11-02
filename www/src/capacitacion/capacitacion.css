@@ -26,6 +26,14 @@
     background-color: #ffba23;
 }
 
+.modulos .modulo .descarga {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 25px;
+    color: #ffffff;
+}
+
 .modulos .modulo .medalla {
     position: absolute;
     top: -15px;

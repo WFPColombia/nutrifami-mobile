@@ -4,9 +4,9 @@ nutrifamiMobile.controller('HomeCtrl', function($ionicPlatform, $scope, $ionicVi
 
     $ionicPlatform.ready(function() {
 
-        $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
+        
 
-
+        CapacitacionService.initClient();
         $scope.capacitaciones = CapacitacionService.getCapacitacionesActivas();
 
         $scope.abrirCapacitacion = function(capacitacion) {
