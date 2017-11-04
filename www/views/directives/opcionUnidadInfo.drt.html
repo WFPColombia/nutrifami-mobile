@@ -4,7 +4,7 @@
             <img ng-src="{{tp}}{{info.media.nombre}}" ng-hide="info.media === undefined|| info.media.nombre === ''" />
             <div ng-bind-html="info.texto | format | trust"></div>
         </div>
-        <div class="opcion-sonido" ng-click='$parent.playAudio(info.audio.id)' ng-class="info.selected ? 'selected' : 'no-selected'" ng-show="info.audio.url != ''" ion-ripple>
+        <div class="opcion-sonido" ng-click='$parent.playAudio(info.audio.id)' ng-class="info.selected ? 'selected' : 'no-selected'" ng-show="audiosDescargados" ion-ripple>
             <button class="icon ion-volume-high"></button>
         </div>
     </div>

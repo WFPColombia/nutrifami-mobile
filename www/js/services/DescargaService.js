@@ -34,7 +34,8 @@ nutrifamiMobile.factory('DescargaService', function UserService($http, $rootScop
 
 
     service.actualizarCapacitacion = function (callback) {
-        callback = callback || function () {};
+        callback = callback || function () {
+        };
         $http.get(BaseUrl + 'js/capacitacionAll.JSON').then(function (response) {
             localStorage.setItem("capacitacion", JSON.stringify(response.data));
             CapacitacionService.initClient();
@@ -125,9 +126,10 @@ nutrifamiMobile.factory('DescargaService', function UserService($http, $rootScop
         console.log("imagenes descargadas: " + service.imagenesDescargadas(mid));
         if (!service.audiosDescargados(mid)) {
             console.log(1);
-            service.descargarImagenes(mid, function () {
+            service.descargarImagenes(mid, true, function () {
                 service.descargarArchivo(gestorDescarga.modulos[mid].zip_audios, mid, 'Descargando audios del módulo', function (response) {
                     gestorDescarga.modulos[mid].audios = response;
+                    gestorDescarga.modulos[mid].imagenes = response;
                     localStorage.setItem("gestorDescarga", JSON.stringify(gestorDescarga));
                     $rootScope.$emit('descargaTerminada', response, mid);
                 });
@@ -140,19 +142,36 @@ nutrifamiMobile.factory('DescargaService', function UserService($http, $rootScop
     };
 
 
-    service.descargarImagenes = function (mid) {
+    service.descargarImagenes = function (mid, conAudios, callback) {
+        conAudios = conAudios || false;
+        callback = callback || function () {
+        };
         console.log("service.descargarImagenes " + mid);
         var gestorDescarga = JSON.parse(localStorage.getItem('gestorDescarga'));
         if (!service.imagenesDescargadas(mid)) {
             console.log(1);
             service.descargarArchivo(gestorDescarga.modulos[mid].zip_imagenes, mid, 'Descargando imágenes del módulo', function (response) {
+                console.log("DescargarImagenes despues del callback de descargarArchivo "+ response);
                 gestorDescarga.modulos[mid].imagenes = response;
                 localStorage.setItem("gestorDescarga", JSON.stringify(gestorDescarga));
-                $rootScope.$emit('descargaTerminada', response, mid);
+                if (conAudios) {
+                    if (response) {
+                        callback();
+                    } else {
+                        $rootScope.$emit('descargaTerminada', response, mid);
+                    }
+                } else {
+                    $rootScope.$emit('descargaTerminada', response, mid);
+
+                }
             });
         } else {
-            console.log(2);
-            $rootScope.$emit('descargaTerminada', true, mid);
+            if (conAudios) {
+                callback();
+            } else {
+                $rootScope.$emit('descargaTerminada', true, mid);
+
+            }
         }
 
     };
@@ -166,7 +185,8 @@ nutrifamiMobile.factory('DescargaService', function UserService($http, $rootScop
      */
     service.descargarArchivo = function (url, mid, mensaje, callback) {
         console.log("Descargar archivo " + url);
-        callback = callback || function () {};
+        callback = callback || function () {
+        };
         if (window.cordova) {
             var path = $rootScope.TARGETPATH + mid + ".zip";
             $cordovaFileTransfer.download(url, path, options, trustHosts).then(function (result) {
@@ -195,7 +215,8 @@ nutrifamiMobile.factory('DescargaService', function UserService($http, $rootScop
     };
 
     service.descomprimirArchivo = function (path, nombre, callback) {
-        callback = callback || function () {};
+        callback = callback || function () {
+        };
         console.log("Descomprimiendo archivo");
         $cordovaZip.unzip(path, $rootScope.TARGETPATH).then(function (response) {
             console.log(response);

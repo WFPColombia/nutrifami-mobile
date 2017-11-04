@@ -11,8 +11,8 @@
                     <button ng-click="salirUnidad()" class="icon ion-close-round" aria-hidden="true" ion-ripple></button>
                 </div>
                 <div class="col col-80 leccion-avance-progreso">
-                    <p class="instruccion" ng-click="playAudio('tipo')" ion-ripple><i class="icon ion-volume-high"></i> {{ unidad.instruccion.texto}}</p>
-                    <p class="titulo" ng-click="playAudio('titulo')" ion-ripple><i class="icon ion-volume-high"></i> {{ unidad.titulo.texto}}</p>
+                    <p class="instruccion" ng-click="playAudio('tipo')" ion-ripple><i ng-show="audiosDescargados" class="icon ion-volume-high"></i> {{ unidad.instruccion.texto}}</p>
+                    <p class="titulo" ng-show="audiosDescargados" ng-click="playAudio('titulo')" ion-ripple><i ng-show="audiosDescargados" class="icon ion-volume-high"></i> {{ unidad.titulo.texto}}</p>
                 </div>
             </div>
         </div>
@@ -21,11 +21,11 @@
 <ion-scroll style="height: 100%" on-scroll="getScrollPosition()">
     <div class='unidad'>
         <ng-include src="'views/template/leccionAvance.tpl.html'"></ng-include>
-        <div class="unidad-tipo" ng-click="playAudio('tipo')" ion-ripple>
+        <div class="unidad-tipo"  ng-click="playAudio('tipo')" ion-ripple>
             <img ng-src="img/icons/{{unidad.tipo.icono}}" />
             <div class="unidad-tipo-descripcion">
                 <div class="sonido">
-                    <button class="icon ion-volume-high" aria-hidden="true"></button>
+                    <button ng-show="audiosDescargados" class="icon ion-volume-high" aria-hidden="true"></button>
                 </div>
                 <p> {{ unidad.instruccion.texto}}</p>
             </div>
@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col">
                     <p class="unidad-instruccion" ng-click="playAudio('titulo')" ion-ripple>
-                        <button class="icon ion-volume-high" aria-hidden="true"></button> {{ unidad.titulo.texto}}
+                        <button class="icon ion-volume-high" ng-show="audiosDescargados" aria-hidden="true"></button> {{ unidad.titulo.texto}}
                     </p>
                 </div>
             </div>
@@ -55,16 +55,16 @@
                     <!--<button class="icon ion-volume-high" aria-hidden="true"></button> {{ unidad.texto}}</p>-->
                     <div ng-bind-html="unidad.texto | format | trust"></div>
                     <!--<ul ng-repeat="opcion in unidad.opciones">
-                        <li ng-click="playAudio(opcion.audio.id)">{{opcion.texto}}</li>
+                        <li ng-show="audiosDescargados" ng-click="playAudio(opcion.audio.id)">{{opcion.texto}}</li>
                     </ul>-->
                 </div>
             </div>
         </div>
         <div class="opciones" ng-show="unidad.tipo.id == 2">
-            <opcion-pareja-unidad-info ng-repeat="opcion in unidad.opciones" opc1="unidad.opciones[$index]" opc2="unidad.opciones[$index+1]" index1="$index" index2="$index + 1"></opcion-pareja-unidad-info>
+            <opcion-pareja-unidad-info ng-repeat="opcion in unidad.opciones" opc1="unidad.opciones[$index]" opc2="unidad.opciones[$index+1]" index1="$index" index2="$index + 1" audiosDescargados="audiosDescargados"></opcion-pareja-unidad-info>
         </div>
         <div class="opciones" ng-show="unidad.tipo.id == 3 || unidad.tipo.id == 4 ||unidad.tipo.id == 5" ng-class=" scrolled ? 'scrolled':''">
-            <opcion-unidad-info ng-repeat="opcion in unidad.opciones" info="opcion" index="{{$index}}" colspan="unidad.colspan" ng-click="validar()"></opcion-unidad-info>
+            <opcion-unidad-info ng-repeat="opcion in unidad.opciones" info="opcion" index="{{$index}}" audiosDescargados="audiosDescargados" ng-click="validar()"></opcion-unidad-info>
         </div>
     </div>
     <div class="zona-segura"></div>

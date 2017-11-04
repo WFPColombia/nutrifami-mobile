@@ -9,8 +9,8 @@ nutrifamiMobile.directive('moduloInfo', function ($location, $rootScope, $ionicL
         link: function ($scope, $element, $attrs) {
             $scope.cargadorTexto = "Preparando archivos para la descarga";
             $scope.cargadorPorcentaje = 0;
-            $scope.TARGETPATH = $rootScope.TARGETPATH;
-
+            $scope.assetpath = $rootScope.TARGETPATH+$scope.info.id+"/";
+            
             var optDescarga = {
                 template: '<h3>Descargando archivos</h3>{{cargadorTexto}}<h4>{{cargadorPorcentaje}}%</h4>',
                 scope: $scope

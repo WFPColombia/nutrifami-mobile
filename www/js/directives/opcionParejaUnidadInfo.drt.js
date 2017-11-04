@@ -10,6 +10,7 @@ nutrifamiMobile.directive('opcionParejaUnidadInfo', function($rootScope) {
         templateUrl: 'views/directives/opcionParejaUnidadInfo.drt.html',
         link: function($scope, $rootScope, $element, $attrs) {
             $scope.tp = $scope.$parent.TARGETPATH;
+            $scope.audiosDescargados = $scope.$parent.audiosDescargados;
 
             $scope.click = function(index) {
                 $scope.$parent.seleccionarPareja(index);

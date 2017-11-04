@@ -258,8 +258,8 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
         cache: false,
         views: {
             'menuContent': {
-                templateUrl: 'views/modulo.html',
-                controller: 'ModuloController'
+                templateUrl: 'src/modulo/modulo.html',
+                controller: 'ModuloCtrl'
             }
         }
     });

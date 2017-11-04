@@ -81,7 +81,7 @@ nutrifamiMobile.controller('LeccionTerminadaController', function($scope, $rootS
 
             } else {
                 MediaService.unload($scope.audios);
-                $location.path("/app/capacitacion/" + $stateParams.modulo);
+                $location.path('/app/'+ $stateParams.capacitacion+'/' + $stateParams.modulo);
 
             }
         };

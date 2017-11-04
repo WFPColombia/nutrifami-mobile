@@ -3,13 +3,13 @@ nutrifamiMobile.directive('opcionUnidadInfo', function($rootScope) {
         restrict: 'E',
         scope: {
             info: '=',
-            colspan: '=',
             index: '@'
         },
         templateUrl: 'views/directives/opcionUnidadInfo.drt.html',
         link: function($scope, $rootScope, $element, $attrs) {
             $scope.tp = $scope.$parent.TARGETPATH;
-
+            $scope.audiosDescargados = $scope.$parent.audiosDescargados;
+            
             $scope.click = function() {
                 $scope.$parent.seleccionarOpcion($scope.index);
             };
