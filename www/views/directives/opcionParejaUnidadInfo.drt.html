@@ -4,7 +4,7 @@
             <button ng-click='playAudio(opc1.audio.id)' class="icon ion-volume-high"></button>
         </div>
         <button class="opcion-pareja titulo" ng-click="click(index1)" ng-class="[opc1.selected ? 'selected' : '', opc1.match ? 'pareja-match':'', opc1.fallo ? 'pareja-mal':'', opc1.media.nombre != '' ? 'pareja-con-imagen':'']" ion-ripple>
-            <img ng-src="{{tp}}{{opc1.media.nombre}}" ng-hide="{{opc1.media.nombre ==''}}" />
+            <img ng-src="{{assetpath}}{{opc1.media.nombre}}" ng-hide="{{opc1.media.nombre ==''}}" />
             <div ng-class="opc1.media === undefined ? 'titulo-con-imagen':''" ng-bind-html="opc1.texto | format | trust" ng-hide=opc1.texto==""></div>
         </button>
     </div>

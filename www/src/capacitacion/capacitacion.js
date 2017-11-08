@@ -11,7 +11,6 @@ nutrifamiMobile.controller('CapacitacionCtrl', function ($ionicPlatform, $scope,
 
         $scope.modulos = [];
 
-        console.log("Mensaje de prueba");
         //Obtenemos los ids de los modulos de la capacitación 3 
 
         //Creamos un arreglo para poder recorerlo y mostrarlo a traves de directivas 
@@ -72,11 +71,36 @@ nutrifamiMobile.controller('CapacitacionCtrl', function ($ionicPlatform, $scope,
                             text: 'Aceptar',
                             type: 'button-positive',
                             onTap: function (e) {
-                                console.log("Ok")
+                                console.log("Ok");
                             }
                         }]
                 });
             }
+        });
+
+
+        $rootScope.$on('errorConexion', function (event, response, mid) {
+            console.log('Error de conexión');
+            console.log(event);
+            $ionicLoading.hide();
+
+            $scope.modal = {
+                texto1: 'Sin conexión a Internet',
+                texto2: 'Este módulo no se encuentra disponible sin conexión a Internet'
+            };
+            $ionicPopup.show({
+                templateUrl: 'views/modals/modal.html',
+                scope: $scope,
+                cssClass: 'salir-unidad',
+                buttons: [{
+                        text: 'Aceptar',
+                        type: 'button-positive',
+                        onTap: function (e) {
+                            console.log("Ok");
+                        }
+                    }]
+            });
+
         });
     });
 

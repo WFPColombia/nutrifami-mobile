@@ -1,4 +1,4 @@
-nutrifamiMobile.factory('DescargaService', function UserService($http, $rootScope, $cordovaFile, $cordovaFileTransfer, $timeout, $cordovaZip, CapacitacionService) {
+nutrifamiMobile.factory('DescargaService', function UserService($http, $rootScope, $cordovaFile, $cordovaFileTransfer, $cordovaNetwork, $timeout, $cordovaZip, CapacitacionService) {
 
     var service = {};
     var trustHosts = true;
@@ -8,6 +8,23 @@ nutrifamiMobile.factory('DescargaService', function UserService($http, $rootScop
         BaseUrl = 'http://nutrifami.org/';
     }
 
+    service.isOnline = function () {
+        console.log("isOnline?");
+        //Comprobamos la conexión a Internet   
+        if (window.cordova) {
+            //var isOnline = $cordovaNetwork.isOnline();
+            $rootScope.isOnline = $cordovaNetwork.isOnline();
+            if ($rootScope.isOnline) {
+                return true;
+            }else{
+                $rootScope.$emit('errorConexion', {message: "El dispositivo no tiene conexión a Internet"});
+                return false;
+            }
+        }else{
+            return true;
+        }
+    };
+    
     service.hayNuevaVersion = function (callback) {
         var versionActual = '';
         var versionNueva = '';
@@ -19,7 +36,7 @@ nutrifamiMobile.factory('DescargaService', function UserService($http, $rootScop
         //comprobamos la version nueva
         $http.get(BaseUrl + 'js/version.JSON').then(function (response) {
             versionNueva = response.data.Capacitacion.ID;
-            console.log(versionNueva + " " + versionActual)
+            console.log(versionNueva + " " + versionActual);
             if (versionActual != versionNueva) {
                 //Actualizamos el numero de versión
                 localStorage.setItem("version", JSON.stringify(versionNueva));
@@ -151,7 +168,7 @@ nutrifamiMobile.factory('DescargaService', function UserService($http, $rootScop
         if (!service.imagenesDescargadas(mid)) {
             console.log(1);
             service.descargarArchivo(gestorDescarga.modulos[mid].zip_imagenes, mid, 'Descargando imágenes del módulo', function (response) {
-                console.log("DescargarImagenes despues del callback de descargarArchivo "+ response);
+                console.log("DescargarImagenes despues del callback de descargarArchivo " + response);
                 gestorDescarga.modulos[mid].imagenes = response;
                 localStorage.setItem("gestorDescarga", JSON.stringify(gestorDescarga));
                 if (conAudios) {

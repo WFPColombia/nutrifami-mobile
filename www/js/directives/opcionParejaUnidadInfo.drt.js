@@ -1,4 +1,4 @@
-nutrifamiMobile.directive('opcionParejaUnidadInfo', function($rootScope) {
+nutrifamiMobile.directive('opcionParejaUnidadInfo', function($stateParams, CapacitacionService) {
     return {
         restrict: 'E',
         scope: {
@@ -8,17 +8,18 @@ nutrifamiMobile.directive('opcionParejaUnidadInfo', function($rootScope) {
             index2: '='
         },
         templateUrl: 'views/directives/opcionParejaUnidadInfo.drt.html',
-        link: function($scope, $rootScope, $element, $attrs) {
-            $scope.tp = $scope.$parent.TARGETPATH;
+        link: function($scope) {
+            $scope.unidad = CapacitacionService.getUnidad($stateParams.leccion, $stateParams.unidad);
+            $scope.assetpath = $scope.$parent.TARGETPATH+$stateParams.modulo+"/"+$stateParams.leccion+"/"+$scope.unidad.id+"/";
             $scope.audiosDescargados = $scope.$parent.audiosDescargados;
-
+            
             $scope.click = function(index) {
                 $scope.$parent.seleccionarPareja(index);
             };
 
             $scope.playAudio = function(audio) {
                 $scope.$parent.playAudio(audio);
-            }
+            };
         }
     };
 });

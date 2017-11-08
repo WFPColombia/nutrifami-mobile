@@ -97,12 +97,12 @@ nutrifamiMobile.controller('UnidadCtrl', function($ionicPlatform, $scope, $rootS
             /*Verifica si la opcion tienen audio y lo carga*/
             if (typeof $scope.unidad.opciones[i].audio !== 'undefined') {
                 $scope.unidad.opciones[i].audio.id = "opcion" + i;
-                $scope.audios[$scope.unidad.opciones[i].audio.id] = $rootScope.assetpath + $scope.unidad.opciones[i].audio.nombre;
+                $scope.audios[$scope.unidad.opciones[i].audio.id] = $scope.assetpath + $scope.unidad.opciones[i].audio.nombre;
             }
         }
 
         $scope.botonCalificar = false;
-
+        console.log($scope.audios);
         MediaService.preloadSimple($scope.audios, function(response) {
             $scope.audios = response;
         });
@@ -193,7 +193,7 @@ nutrifamiMobile.controller('UnidadCtrl', function($ionicPlatform, $scope, $rootS
 
                                 //$scope.feedback.feedbacks = [];
                                 $scope.feedback.audios = {
-                                    'feedback': $rootScope.assetpath + $scope.unidad.opciones[i].feedback.audio.nombre
+                                    'feedback': $scope.assetpath + $scope.unidad.opciones[i].feedback.audio.nombre
                                 };
                                 $scope.feedback.audios.mensaje = MediaService.getMediaURL("audios/muy-bien-respuesta-correcta.mp3");
                                 $scope.feedback.mensaje = "Muy bien! respuesta correcta";
@@ -275,14 +275,14 @@ nutrifamiMobile.controller('UnidadCtrl', function($ionicPlatform, $scope, $rootS
                             texto: $scope.unidad.opciones[i].feedback.texto,
                             nombre: 'feedback' + i
                         });
-                        tempFeedbackAciertoAudios['feedback' + i] = $rootScope.assetpath + $scope.unidad.opciones[i].feedback.audio.nombre;
+                        tempFeedbackAciertoAudios['feedback' + i] = $scope.assetpath + $scope.unidad.opciones[i].feedback.audio.nombre;
                         tempFeedbackAciertoUltimoAudio = 'feedback' + i;
                     } else {
                         tempFeedbackFallo.push({
                             texto: $scope.unidad.opciones[i].feedback.texto,
                             nombre: 'feedback' + i
                         });
-                        tempFeedbackFalloAudios['feedback' + i] = $rootScope.assetpath + $scope.unidad.opciones[i].feedback.audio.nombre;
+                        tempFeedbackFalloAudios['feedback' + i] = $scope.assetpath + $scope.unidad.opciones[i].feedback.audio.nombre;
                         tempFeedbackFalloUltimoAudio = 'feedback' + i;
                     }
                 }
@@ -440,7 +440,7 @@ nutrifamiMobile.controller('UnidadCtrl', function($ionicPlatform, $scope, $rootS
 
         $scope.getScrollPosition = function() {
 
-            if ($ionicScrollDelegate.getScrollPosition().top > 50) {
+            /*if ($ionicScrollDelegate.getScrollPosition().top > 50) {
                 if (!$scope.scrolled) {
 
                     $scope.$apply(function() {
@@ -456,8 +456,8 @@ nutrifamiMobile.controller('UnidadCtrl', function($ionicPlatform, $scope, $rootS
                     });
                 }
 
-            }
-        }
+            }*/
+        };
 
         /**
          * Shuffles array in place.

@@ -1,4 +1,4 @@
-nutrifamiMobile.directive('opcionUnidadInfo', function($rootScope) {
+nutrifamiMobile.directive('opcionUnidadInfo', function($stateParams, CapacitacionService) {
     return {
         restrict: 'E',
         scope: {
@@ -6,8 +6,9 @@ nutrifamiMobile.directive('opcionUnidadInfo', function($rootScope) {
             index: '@'
         },
         templateUrl: 'views/directives/opcionUnidadInfo.drt.html',
-        link: function($scope, $rootScope, $element, $attrs) {
-            $scope.tp = $scope.$parent.TARGETPATH;
+        link: function($scope) {
+            $scope.unidad = CapacitacionService.getUnidad($stateParams.leccion, $stateParams.unidad);
+            $scope.assetpath = $scope.$parent.TARGETPATH+$stateParams.modulo+"/"+$stateParams.leccion+"/"+$scope.unidad.id+"/";
             $scope.audiosDescargados = $scope.$parent.audiosDescargados;
             
             $scope.click = function() {

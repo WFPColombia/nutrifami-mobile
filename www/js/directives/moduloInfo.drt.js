@@ -9,8 +9,8 @@ nutrifamiMobile.directive('moduloInfo', function ($location, $rootScope, $ionicL
         link: function ($scope, $element, $attrs) {
             $scope.cargadorTexto = "Preparando archivos para la descarga";
             $scope.cargadorPorcentaje = 0;
-            $scope.assetpath = $rootScope.TARGETPATH+$scope.info.id+"/";
-            
+            $scope.assetpath = $rootScope.TARGETPATH + $scope.info.id + "/";
+
             var optDescarga = {
                 template: '<h3>Descargando archivos</h3>{{cargadorTexto}}<h4>{{cargadorPorcentaje}}%</h4>',
                 scope: $scope
@@ -34,28 +34,31 @@ nutrifamiMobile.directive('moduloInfo', function ($location, $rootScope, $ionicL
                 if ($scope.descargado) {
                     $location.path('/app/' + $stateParams.capacitacion + '/' + $scope.info.id);
                 } else {
-                    $scope.modal = {
-                        texto1: '¿Desea descargar el módulo con audios?',
-                        texto2: 'Descargar el módulo con audios le permitirá escuchar las lecciones, pero la descarga tomará más tiempo'
-                    };
-                    $ionicPopup.show({
-                        templateUrl: 'views/modals/modal.html',
-                        scope: $scope,
-                        cssClass: 'salir-unidad',
-                        buttons: [{
-                                text: 'Descargar con Audios',
-                                type: 'button-positive',
-                                onTap: function (e) {
-                                    $scope.descargarTodo();
-                                }
-                            }, {
-                                text: 'Descargar sin Audios',
-                                type: 'button-positive',
-                                onTap: function (e) {
-                                    $scope.descargarImagenes();
-                                }
-                            }]
-                    });
+
+                    if (DescargaService.isOnline()) {
+                        $scope.modal = {
+                            texto1: '¿Desea descargar el módulo con audios?',
+                            texto2: 'Descargar el módulo con audios le permitirá escuchar las lecciones, pero la descarga tomará más tiempo'
+                        };
+                        $ionicPopup.show({
+                            templateUrl: 'views/modals/modal.html',
+                            scope: $scope,
+                            cssClass: 'salir-unidad',
+                            buttons: [{
+                                    text: 'Descargar con Audios',
+                                    type: 'button-positive',
+                                    onTap: function (e) {
+                                        $scope.descargarTodo();
+                                    }
+                                }, {
+                                    text: 'Descargar sin Audios',
+                                    type: 'button-positive',
+                                    onTap: function (e) {
+                                        $scope.descargarImagenes();
+                                    }
+                                }]
+                        });
+                    } 
                 }
             };
 

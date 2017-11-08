@@ -2,10 +2,8 @@ nutrifamiMobile.factory('CapacitacionService', function(UsuarioService) {
     var service = {};
 
     service.initClient = function(callback) {
-        console.log(nutrifami.training.cap_modulos['5']);
         if (typeof nutrifami.training.cap_modulos['5'] == 'undefined') {
             var data = JSON.parse(localStorage.getItem('capacitacion'));
-            console.log(data);
             nutrifami.training.cap_capacitacionesId = data['serv_capacitacionesId'];
             nutrifami.training.cap_capacitaciones = data['serv_capacitaciones'];
             nutrifami.training.cap_modulos = data['serv_modulos'];

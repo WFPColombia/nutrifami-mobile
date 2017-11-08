@@ -23,145 +23,14 @@ nutrifamiMobile.controller('PreloadCtrl', function ($ionicPlatform, $ionicLoadin
             'descargado': false,
             'descomprimido': false
         };
-        
+
         //Verificar el destino
         var destino = "/login";
-        var acceso = false;
+        var puedeEntrar = false;
         if (UsuarioService.getUsuarioActivo() != null) {
-            acceso = true;
+            puedeEntrar = true;
             destino = '/app/';
         }
-
-
-
-        var descargarArchivo = function (objeto, callback) {
-            callback = callback || function () {
-            };
-            $cordovaFileTransfer.download(objeto.url, objeto.path, options, trustHosts).then(function (result) {
-                console.log(objeto.nombre + " descargado con éxito");
-                console.log(result.nativeURL);
-                callback(true);
-            }, function (err) {
-                console.log("Error al descargar " + objeto.nombre);
-                console.log(err);
-                console.log(err.body);
-                $scope.errorDescarga();
-                callback(false);
-            }, function (progress) {
-                $timeout(function () {
-                    console.log("Descargando archivo " + objeto.nombre);
-                    $scope.downloadProgress = (progress.loaded / progress.total) * 100;
-                });
-            });
-        }
-
-
-        var leerArchivo = function (objeto, callback) {
-            var obj = objeto;
-            callback = callback || function () {
-            };
-            console.log("Leer archivo " + $rootScope.TARGETPATH);
-            $cordovaFile.readAsText($rootScope.TARGETPATH, objeto.nombre)
-                    .then(function (response) {
-                        obj.data = JSON.parse(response);
-                        console.log(objeto.nombre + " leido con éxito");
-                        console.log(response);
-                        callback(obj);
-                    }, function (error) {
-                        console.log("Error al leer " + objeto.nombre);
-                        console.log(error);
-                        callback({});
-                    });
-        };
-        var descomprimirArchivo = function (objeto, callback) {
-            callback = callback || function () {
-            };
-            $cordovaZip.unzip(objeto.path, $rootScope.TARGETPATH).then(function () {
-                console.log(objeto.nombre + " descomprimido con éxito.");
-                $cordovaFile.removeFile($rootScope.TARGETPATH, objeto.nombre)
-                        .then(function (success) {
-                            console.log("Archivo " + objeto.nombre + " eliminado con éxito");
-                            callback();
-                        }, function (error) {
-                            console.log(error);
-                        });
-            }, function () {
-                console.log("Error al descomprimir " + objeto.nombre)
-                callback();
-            }, function (progress) {
-                console.log("Descomprimiendo " + objeto.nombre)
-                $scope.downloadProgress = (progress.loaded / progress.total) * 100;
-            });
-        };
-        var descargarLeerCapacitacion = function () {
-            descargarArchivo(capacitacionInfo, function (response) {
-                capacitacionInfo.descargado = response;
-                leerArchivo(capacitacionInfo, function (obj) {
-                    console.log(obj);
-                    $scope.myData = obj.data;
-                    nutrifami.training.initClient(obj.data, function () {
-                        predescargaAssets()
-                    });
-                });
-            });
-        };
-        var comprobarVersion = function () {
-            console.log("Comprobar Versión.");
-            if (version.movil == version.web) {
-                version.movil = version.web;
-                version.web = '';
-                if (assetsInfo.descomprimido) {
-                    $location.path(destino);
-                } else if (assetsInfo.descargado) {
-                    $scope.response = "Descomprimiendo archivos de capacitación";
-                    descomprimirArchivo(assetsInfo, function () {
-                        assetsInfo.descomprimido = true;
-                        localStorage.setItem("assetsInfo", JSON.stringify(assetsInfo));
-                        $location.path(destino);
-                    });
-                } else {
-                    $scope.response = "Descargando archivos de capacitación";
-                    descargarArchivo(assetsInfo, function (response) {
-                        assetsInfo.descargado = response;
-                        localStorage.setItem("assetsInfo", JSON.stringify(assetsInfo));
-                        descomprimirArchivo(assetsInfo, function () {
-                            assetsInfo.descomprimido = true;
-                            localStorage.setItem("assetsInfo", JSON.stringify(assetsInfo));
-                            $location.path(destino)
-                        });
-                    });
-                }
-            } else {
-                console.log("Las versiones son diferentes, Descargar capacitación");
-                version.movil = version.web;
-                version.web = '';
-                $scope.response = "Hay una actualización disponible. Descargando la última versión";
-                if (assetsInfo.descargado) {
-                    if (assetsInfo.descomprimido) {
-                        descargarLeerCapacitacion();
-                    } else {
-                        $scope.response = "Descomprimiendo archivos de capacitación";
-                        descomprimirArchivo(assetsInfo, function () {
-                            assetsInfo.descomprimido = true;
-                            localStorage.setItem("assetsInfo", JSON.stringify(assetsInfo));
-                            descargarLeerCapacitacion();
-                        });
-                    }
-                } else {
-                    descargarArchivo(assetsInfo, function (response) {
-                        assetsInfo.descargado = response;
-                        localStorage.setItem("assetsInfo", JSON.stringify(assetsInfo));
-                        $scope.response = "Descomprimiendo archivos de capacitación";
-                        descomprimirArchivo(assetsInfo, function () {
-                            assetsInfo.descomprimido = true;
-                            localStorage.setItem("assetsInfo", JSON.stringify(assetsInfo));
-                            descargarLeerCapacitacion();
-                        });
-                    });
-                }
-            }
-        }
-
 
         function predescargaAssets() {
             //Definimos varios lotes de descarga para que no se bloquee la app
@@ -338,93 +207,63 @@ nutrifamiMobile.controller('PreloadCtrl', function ($ionicPlatform, $ionicLoadin
                 ionic.Platform.exitApp();
             });
         };
-        
-        
+
         function initClient() {
-
-            DescargaService.hayNuevaVersion(function (response) {
-                if (response) {
-                    console.log("Existe una nueva versión de la capacitación");
-                    DescargaService.actualizarCapacitacion(function() {
+            if (DescargaService.isOnline()) {
+                DescargaService.hayNuevaVersion(function (response) {
+                    if (response) {
+                        console.log("Existe una nueva versión de la capacitación");
+                        DescargaService.actualizarCapacitacion(function () {
+                            $location.path(destino);
+                        });
+                    } else {
+                        console.log("Capacitación actualizada");
                         $location.path(destino);
-                    });
-                } else {
-                    console.log("Capacitación actualizada");
-                    $location.path(destino);
-                }
-            });
+                    }
+                });
+            } else {
+                if (puedeEntrar) {
 
-            //Comprobamos la conexión a Internet   
-            /*if (window.cordova) {
-             //var isOnline = $cordovaNetwork.isOnline();
-             $rootScope.isOffline = $cordovaNetwork.isOffline()
-             if ($rootScope.isOffline) {
-             if (!acceso) {
-             $ionicPopup.alert({
-             title: "Sin conexión a Internet",
-             content: "Actualmente tu equipo no tiene conexión a Internet. Para poder usar Nutrifami en modo Offline debe al menos ingresar una vez con conexión a Internet ",
-             buttons: [
-             { text: 'Salir' }
-             ]
-             })
-             .then(function(res) {
-             ionic.Platform.exitApp();
-             });
-             
-             } else {
-             $ionicPopup.alert({
-             title: "Sin conexión a Internet",
-             content: "Actualmente su dispositivo se encuentra desconectado de Internet. Usted podrá usar Nutrifami, pero el avance no será guardado.",
-             buttons: [
-             { text: 'Continuar' }
-             ]
-             })
-             .then(function(res) {
-             $location.path('/app/capacitacion');
-             });
-             }
-             } else {
-             
-             if(DescargaService.hayNuevaVersion()){
-             
-             }else{
-             
-             }
-             console.log("Versión móvil");
-             $scope.response = "Consultado la versión más reciente";
-             descargarArchivo(version, function(response) { //Descargamos la version.json
-             version.descargado = response;
-             leerArchivo(version, function(obj) {
-             version.web = obj.data.Capacitacion.ID;
-             comprobarVersion();
-             });
-             });
-             
-             
-             }
-             
-             } else {
-             
-             if(DescargaService.hayNuevaVersion()){
-             
-             }else{
-             
-             }
-             /*console.log("Versión web");
-             $http.get('js/version.JSON').then(function(response) {
-             nutrifami.training.initClient(response.data, function() {
-             $location.path(destino);
-             });
-             }, function errorCallback(err) {
-             console.log(err);
-             
-             });
-             }*/
+                    $scope.modal = {
+                        texto1: 'Sin conexión a Internet',
+                        texto2: 'Podrá usar Nutrifami sin Conexión a Internet, pero los cambios no serán guardados'
+                    };
+                    $scope.buttonsModal = [{
+                            text: 'Continuar',
+                            type: 'button-positive',
+                            onTap: function (e) {
+                                $location.path('/app/');
+                            }
+                        }];
+                } else {
+
+                    $scope.modal = {
+                        texto1: 'Sin conexión a Internet',
+                        texto2: 'Para poder usar Nutrifami sin Conexión a Internet, Debe haber iniciado sesión al menos una vez y haber descargado las capacitaciones'
+                    };
+                    $scope.buttonsModal = [{
+                            text: 'Salir',
+                            type: 'button-positive',
+                            onTap: function (e) {
+                                ionic.Platform.exitApp();
+                            }
+                        }];
+                }
+                $ionicPopup.show({
+                    templateUrl: 'views/modals/modal.html',
+                    scope: $scope,
+                    cssClass: 'salir-unidad',
+                    buttons: $scope.buttonsModal
+                });
+            }
         }
 
         $rootScope.$on('errorDescarga', function (event, data) {
             console.log(data.message);
         });
+
         initClient();
+
+
     });
 });

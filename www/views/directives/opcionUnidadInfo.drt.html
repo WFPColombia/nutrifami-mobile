@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col">
         <div class="opcion" ng-click="click()" ng-class="[info.media.nombre != '' ? 'opcion-con-imagen' : '',info.selected ? 'selected' : 'no-selected']" ion-ripple>
-            <img ng-src="{{tp}}{{info.media.nombre}}" ng-hide="info.media === undefined|| info.media.nombre === ''" />
+            <img ng-src="{{assetpath}}{{info.media.nombre}}" ng-hide="info.media === undefined|| info.media.nombre === ''" />
             <div ng-bind-html="info.texto | format | trust"></div>
         </div>
         <div class="opcion-sonido" ng-click='$parent.playAudio(info.audio.id)' ng-class="info.selected ? 'selected' : 'no-selected'" ng-show="audiosDescargados" ion-ripple>
