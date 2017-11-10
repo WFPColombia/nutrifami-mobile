@@ -14,11 +14,22 @@ nutrifamiMobile.controller('PreloadCtrl', function ($ionicPlatform, $ionicLoadin
         $scope.archivosError = 0;
         $scope.errores = [];
 
+        if (window.cordova){
+            window.plugins.insomnia.keepAwake(function () {
+                console.log("inmsonia ok");
+            }, function () {
+                console.log("insomnia error");
+            });
+
+        }
+
+
+
 
         var assetsInfo = {
             'alias': 'training',
             'nombre': 'training.zip',
-            'url': 'https://s3.amazonaws.com/nutrifami/training.zip',
+            'url': 'https://s3.amazonaws.com/capacitaciones/training.zip',
             'path': encodeURI($rootScope.TARGETPATH + "training.zip"),
             'descargado': false,
             'descomprimido': false

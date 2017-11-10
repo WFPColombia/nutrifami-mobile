@@ -1,5 +1,5 @@
 <div class="caja">
-    <div class="modulo" ng-class="info.avance.finalizado ? 'terminado' : (info.disponible ? 'actual':'')" ng-show="info.activo" ng-click="!info.disponible || irAlModulo()">
+    <div class="modulo" ng-class="info.avance.finalizado ? 'terminado' : (info.disponible ? 'actual' : '')" ng-show="info.activo" ng-click="!info.disponible || irAlModulo()">
         <img src="{{assetpath}}{{info.imagen.nombre}}">
         <div class="caption">
             <h3>{{ info.titulo.texto}}</h3>
@@ -10,8 +10,9 @@
             </div>
         </div>
         <div class="medalla" ng-show="info.avance.finalizado ? 'terminado' : ''"><img src="img/icons/ico-modulo-medalla.png" alt="" /></div>
-        <div class="descarga" ng-show="descargado">
-            <i class="ion-checkmark-circled"></i>
-        </div>
+
+    </div>
+    <div class="imagenesDescargadas" ng-click="abrirDescargas()" ng-hide='descarga'>
+        <i class="ion-android-download"></i>
     </div>
 </div>

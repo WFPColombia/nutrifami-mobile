@@ -3,11 +3,11 @@ nutrifamiMobile.controller('HomeCtrl', function($ionicPlatform, $scope, $ionicVi
     'use strict';
 
     $ionicPlatform.ready(function() {
-
         
-
         CapacitacionService.initClient();
         $scope.capacitaciones = CapacitacionService.getCapacitacionesActivas();
+        
+        console.log($scope.capacitaciones);
 
         $scope.abrirCapacitacion = function(capacitacion) {
             //$location.path('/' + enlace);

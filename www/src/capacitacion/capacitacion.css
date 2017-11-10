@@ -26,11 +26,11 @@
     background-color: #ffba23;
 }
 
-.modulos .modulo .descarga {
+.modulos .caja .imagenesDescargadas{
     position: absolute;
-    top: 15px;
-    left: 15px;
-    font-size: 25px;
+    top: 43px;
+    left: 13%;
+    font-size: 30px;
     color: #ffffff;
 }
 

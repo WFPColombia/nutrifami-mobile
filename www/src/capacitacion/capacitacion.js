@@ -3,7 +3,7 @@ nutrifamiMobile.controller('CapacitacionCtrl', function ($ionicPlatform, $scope,
     'use strict';
 
     $ionicPlatform.ready(function () {
-
+        
         CapacitacionService.initClient();
         $scope.mids = CapacitacionService.getModulosId($stateParams.capacitacion)
         $scope.usuarioActivo = UsuarioService.getUsuarioActivo();

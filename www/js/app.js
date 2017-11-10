@@ -4,7 +4,7 @@ dependencies = ['ionic', 'Authentication', 'ngCordova', 'ionMDRipple', 'ionicLaz
 var nutrifamiLogin = angular.module('Authentication', []);
 var nutrifamiMobile = angular.module('NutrifamiMobile', dependencies);
 
-nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $ionicFilterBarConfigProvider, $compileProvider, $authProvider) {
+nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $ionicFilterBarConfigProvider, $compileProvider, $authProvider) {
     'use strict';
 
     $ionicConfigProvider.tabs.position('top');
@@ -20,7 +20,7 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
             height: window.screen.height
         }
     };
-    
+
     console.log(location.origin + location.pathname);
 
     if (ionic.Platform.isIOS() || ionic.Platform.isAndroid() || ionic.Platform.platform() == 'linux') {
@@ -311,18 +311,18 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
     $urlRouterProvider.otherwise('/app/');
 });
 
-nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cordovaFileTransfer, $ionicHistory) {
+nutrifamiMobile.run(function ($ionicPlatform, $rootScope, $location, $cordovaFileTransfer, $ionicHistory) {
 
     //Deshabilitamos el boton de ir atrás del Hardware de Android
-    $ionicPlatform.registerBackButtonAction(function(e) {
+    $ionicPlatform.registerBackButtonAction(function (e) {
         //do your stuff
         e.preventDefault();
     }, 101);
 
 
     $rootScope.globals = JSON.parse(localStorage.getItem('globals')) || {};
-
-    $rootScope.$on('$locationChangeStart', function(event, next, current) {
+    
+    $rootScope.$on('$locationChangeStart', function (event, next, current) {
         console.log();
 
         //Guarda la información de usuario activo en el rootScope
@@ -341,7 +341,7 @@ nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cordovaFile
         }
     });
 
-    $ionicPlatform.ready(function() {
+    $ionicPlatform.ready(function () {
         ionic.Platform.fullScreen(true, false); //Fullscreen en ios, verificar para Android
 
         if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -362,13 +362,14 @@ nutrifamiMobile.run(function($ionicPlatform, $rootScope, $location, $cordovaFile
             if (device.platform == "Android") {
                 console.log("isAndroid");
                 $rootScope.TARGETPATH = cordova.file.externalApplicationStorageDirectory;
-                window.addEventListener("native.hidekeyboard", function() {
+                window.addEventListener("native.hidekeyboard", function () {
                     StatusBar.hide();
                     window.AndroidFullScreen.immersiveMode(false, false);
                 });
             } else {
                 console.log("Is iPad or iOS");
-                $rootScope.TARGETPATH = cordova.file.dataDirectory;;
+                $rootScope.TARGETPATH = cordova.file.dataDirectory;
+                ;
             }
 
         } else {

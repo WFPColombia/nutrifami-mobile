@@ -16,15 +16,15 @@ nutrifamiMobile.factory('DescargaService', function UserService($http, $rootScop
             $rootScope.isOnline = $cordovaNetwork.isOnline();
             if ($rootScope.isOnline) {
                 return true;
-            }else{
+            } else {
                 $rootScope.$emit('errorConexion', {message: "El dispositivo no tiene conexión a Internet"});
                 return false;
             }
-        }else{
+        } else {
             return true;
         }
     };
-    
+
     service.hayNuevaVersion = function (callback) {
         var versionActual = '';
         var versionNueva = '';
@@ -65,8 +65,8 @@ nutrifamiMobile.factory('DescargaService', function UserService($http, $rootScop
 
 
     service.crearGestorDescargas = function (capacitaciones) {
-
         var gestorDescarga = {
+            assetsIniciales:false, //La descarga inicial de archivos
             capacitaciones: {},
             modulos: {}
         };
@@ -96,8 +96,8 @@ nutrifamiMobile.factory('DescargaService', function UserService($http, $rootScop
         }
         localStorage.setItem("gestorDescarga", JSON.stringify(gestorDescarga));
     };
-
-
+    
+    
     /**
      * 
      * @param {type} int: id del módulo
@@ -134,12 +134,25 @@ nutrifamiMobile.factory('DescargaService', function UserService($http, $rootScop
         }
     };
 
+    service.descargarCapacitacion = function (cid){
+        
+        console.log(cid);
+        
+    }
 
 
+    /**
+     * 
+     * @param {type} mid
+     * @returns {undefined}
+     */
     service.descargarModulo = function (mid) {
         console.log("Descargar modulo");
         var gestorDescarga = JSON.parse(localStorage.getItem('gestorDescarga'));
 
+        if (window.cordova) {
+            cordova.plugins.backgroundMode.enable();
+        }
         console.log("imagenes descargadas: " + service.imagenesDescargadas(mid));
         if (!service.audiosDescargados(mid)) {
             console.log(1);
@@ -148,13 +161,12 @@ nutrifamiMobile.factory('DescargaService', function UserService($http, $rootScop
                     gestorDescarga.modulos[mid].audios = response;
                     gestorDescarga.modulos[mid].imagenes = response;
                     localStorage.setItem("gestorDescarga", JSON.stringify(gestorDescarga));
-                    $rootScope.$emit('descargaTerminada', response, mid);
+                    service.descargaTerminada(response, mid);
                 });
             });
         } else {
             console.log(2);
-            $rootScope.$emit('descargaTerminada', true, mid);
-
+            service.descargaTerminada(true, mid);
         }
     };
 
@@ -165,6 +177,9 @@ nutrifamiMobile.factory('DescargaService', function UserService($http, $rootScop
         };
         console.log("service.descargarImagenes " + mid);
         var gestorDescarga = JSON.parse(localStorage.getItem('gestorDescarga'));
+        if (window.cordova) {
+            cordova.plugins.backgroundMode.enable();
+        }
         if (!service.imagenesDescargadas(mid)) {
             console.log(1);
             service.descargarArchivo(gestorDescarga.modulos[mid].zip_imagenes, mid, 'Descargando imágenes del módulo', function (response) {
@@ -175,18 +190,17 @@ nutrifamiMobile.factory('DescargaService', function UserService($http, $rootScop
                     if (response) {
                         callback();
                     } else {
-                        $rootScope.$emit('descargaTerminada', response, mid);
+                        service.descargaTerminada(response, mid);
                     }
                 } else {
-                    $rootScope.$emit('descargaTerminada', response, mid);
-
+                    service.descargaTerminada(response, mid);
                 }
             });
         } else {
             if (conAudios) {
                 callback();
             } else {
-                $rootScope.$emit('descargaTerminada', true, mid);
+                service.descargaTerminada(true, mid);
 
             }
         }
@@ -256,6 +270,13 @@ nutrifamiMobile.factory('DescargaService', function UserService($http, $rootScop
             };
             $rootScope.$emit('actualizarCargador', response);
         });
+    };
+
+    service.descargaTerminada = function (response, mid) {
+        if (window.cordova) {
+            cordova.plugins.backgroundMode.disable();
+        }
+        $rootScope.$emit('descargaTerminada', response, mid);
     };
 
 
