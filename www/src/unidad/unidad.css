@@ -273,7 +273,6 @@
 .unidad .opciones .opcion-pareja.pareja-con-imagen p {
     position: absolute;
     color: #ffffff;
-    bottom: 10px;
     width: 100%;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.5);
@@ -283,12 +282,11 @@
 .unidad .opciones .opcion.opcion-con-imagen p {
     position: absolute;
     color: #ffffff;
-    bottom: 10px;
     width: 100%;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 10px 0;
-    top: inherit;
+    top: 50%;
     margin: 0;
 }
 
@@ -338,7 +336,8 @@
     color: #ffffff;
 }
 
-.unidad .opciones .opcion-pareja.selected {
+.unidad .opciones .opcion-pareja.selected,
+.unidad .opciones .opcion-con-imagen.selected{
     filter: sepia(1);
 }
 

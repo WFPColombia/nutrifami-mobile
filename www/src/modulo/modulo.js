@@ -9,8 +9,8 @@ nutrifamiMobile.controller('ModuloCtrl', function($ionicPlatform, $scope, $rootS
         $scope.usuarioAvance = UsuarioService.getUsuarioAvance();
         $scope.lecciones = [];
         
-        console.log($scope.modulo);
-                $scope.assetpath = $rootScope.TARGETPATH+$stateParams.modulo+"/";
+        $scope.assetpath = $rootScope.TARGETPATH+$stateParams.capacitacion+"/"+$stateParams.modulo+"/";
+        console.log($scope.assetpath);
 
         $scope.audios = {
                 'audioTitulo': $scope.assetpath + $scope.modulo.titulo.audio.nombre,
@@ -21,9 +21,9 @@ nutrifamiMobile.controller('ModuloCtrl', function($ionicPlatform, $scope, $rootS
         $scope.modulo.totalLecciones = 0;
 
         $scope.lids = nutrifami.training.getLeccionesId($stateParams.modulo);
-        $scope.audiosDescargados = DescargaService.audiosDescargados($stateParams.modulo);
+        $scope.audiosDescargados = DescargaService.paqueteDescargado('modulos',  $stateParams.modulo, 'audios');
         
-        console.log($rootScope.TARGETPATH+$stateParams.modulo+"/");
+        
 
 
         function cargarCapacitacion() {
@@ -48,7 +48,10 @@ nutrifamiMobile.controller('ModuloCtrl', function($ionicPlatform, $scope, $rootS
                 }
             }
             console.log($scope.audios);
-            MediaService.preloadSimple($scope.audios);
+            if($scope.audiosDescargados){
+                            MediaService.preloadSimple($scope.audios);
+
+            }
         }
 
         $scope.playAudio = function(audio) {
@@ -60,7 +63,9 @@ nutrifamiMobile.controller('ModuloCtrl', function($ionicPlatform, $scope, $rootS
         };
         $scope.irALeccion = function(index) {
             $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
+            if($scope.audiosDescargados){
             MediaService.unload($scope.audios);
+        }
             $location.path('/'+$stateParams.capacitacion+'/' + $stateParams.modulo + "/" + $scope.lids[index] + "/1");
         };
 
@@ -72,7 +77,9 @@ nutrifamiMobile.controller('ModuloCtrl', function($ionicPlatform, $scope, $rootS
         cargarCapacitacion();
 
         $scope.$on("$ionicView.beforeLeave", function(event, data) {
+            if($scope.audiosDescargados){
             MediaService.unload($scope.audios);
+        }
         });
     });
 

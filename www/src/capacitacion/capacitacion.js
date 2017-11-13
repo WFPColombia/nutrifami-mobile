@@ -8,6 +8,7 @@ nutrifamiMobile.controller('CapacitacionCtrl', function ($ionicPlatform, $scope,
         $scope.mids = CapacitacionService.getModulosId($stateParams.capacitacion)
         $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
         $scope.usuarioAvance = UsuarioService.getUsuarioAvance();
+        
 
         $scope.modulos = [];
 
@@ -51,17 +52,19 @@ nutrifamiMobile.controller('CapacitacionCtrl', function ($ionicPlatform, $scope,
             }
 
         }
+        
+        console.log($scope.modulos);
 
-        $rootScope.$on('descargaTerminada', function (event, response, mid) {
-            console.log(event);
+        $scope.$on('descargaTerminada', function (event, id) {
             $ionicLoading.hide();
-            if (response) {
-                $location.path('/app/' + $stateParams.capacitacion + '/' + mid);
-
-            } else {
-                $scope.modal = {
-                    texto1: 'Hubo un error en la descarga del módulo',
-                    texto2: 'Intentanlo nuevamente'
+            $location.path('/app/' + $stateParams.capacitacion + '/' + id);
+        });
+                
+        $scope.$on('errorDescarga', function (event, mensaje) {
+            $ionicLoading.hide();
+            $scope.modal = {
+                    texto1: mensaje,
+                    texto2: "Verifique la conexión a Internet e inténtelo más tarde"
                 };
                 $ionicPopup.show({
                     templateUrl: 'views/modals/modal.html',
@@ -71,15 +74,13 @@ nutrifamiMobile.controller('CapacitacionCtrl', function ($ionicPlatform, $scope,
                             text: 'Aceptar',
                             type: 'button-positive',
                             onTap: function (e) {
-                                console.log("Ok");
                             }
                         }]
                 });
-            }
         });
 
 
-        $rootScope.$on('errorConexion', function (event, response, mid) {
+        $scope.$on('errorConexion', function (event, response, mid) {
             console.log('Error de conexión');
             console.log(event);
             $ionicLoading.hide();

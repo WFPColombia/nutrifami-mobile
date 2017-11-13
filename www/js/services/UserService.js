@@ -43,7 +43,7 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth) {
         nutrifami.login(username, password, function(response) {
             if (response.success) {
                 if (response.data.response === 1) {
-                    response.data.token = 'no-token';
+                    response.data.access_token = 'no-token';
                     response.data.username = username;
                     //preparar el objeto para guardarlo luego
                     console.log(response);
@@ -70,7 +70,7 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth) {
                 var response2 = {
                     data: response.data.user
                 };
-                response2.data.token = response.data.token;
+                response2.data.access_token = response.data.token;
 
                 service.successAuth(response2);
             })
@@ -107,7 +107,7 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth) {
         var usuarioAvance = {};
         var usuarioFamiliaAvance = {};
         var usuarioFamilia = {};
-        if (data.token === 'no-token') {
+        if (data.access_token === 'no-token') {
             /* Se copia la información de avance en un objeto independiente y se elimina la información de usuarioActivo*/
             usuarioAvance = usuarioActivo.avance[usuarioActivo.id];
             /* Se copia la informaciòn de avance de familia a un objeto independiente*/
@@ -132,8 +132,8 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth) {
 
         $rootScope.globals = {
             currentUser: {
-                username: usuarioActivo.username,
-                id: usuarioActivo.id
+                username: 'usuarioActivo.username',
+                id: 'usuarioActivo.id'
             }
         };
         localStorage.setItem("usuarioActivo", JSON.stringify(usuarioActivo));
@@ -156,8 +156,9 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth) {
      */
     service.successAuth = function(response) {
         console.log("successAuth");
-        $auth.setToken(response.data.token);
-        service.setUser(response.data);
+        console.log(response);
+        $auth.setToken(response.access_token);
+        service.setUser(response);
         $rootScope.$emit('userLoggedIn', { data: response.data });
     };
 

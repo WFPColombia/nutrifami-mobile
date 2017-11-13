@@ -12,9 +12,9 @@ nutrifamiMobile.controller('UnidadCtrl', function($ionicPlatform, $scope, $rootS
         $scope.unidad.numeroUnidad = $stateParams.unidad;
         $scope.unidad.totalUnidades = CapacitacionService.getUnidadesActivas($stateParams.leccion).length;
         $scope.scrolled = false;
-        $scope.audiosDescargados = DescargaService.audiosDescargados($stateParams.modulo);
+        $scope.audiosDescargados = DescargaService.paqueteDescargado('modulos',  $stateParams.modulo, 'audios');
         
-        $scope.assetpath = $rootScope.TARGETPATH+$stateParams.modulo+"/"+$stateParams.leccion+"/"+$scope.unidad.id+"/";
+        $scope.assetpath = $rootScope.TARGETPATH+$stateParams.capacitacion+"/"+$stateParams.modulo+"/"+$stateParams.leccion+"/"+$scope.unidad.id+"/";
         $scope.audios = {
             'tipo': $scope.assetpath + $scope.unidad.instruccion.audio.nombre,
             'titulo': $scope.assetpath + $scope.unidad.titulo.audio.nombre,

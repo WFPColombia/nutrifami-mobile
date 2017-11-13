@@ -4,36 +4,59 @@ dependencies = ['ionic', 'Authentication', 'ngCordova', 'ionMDRipple', 'ionicLaz
 var nutrifamiLogin = angular.module('Authentication', []);
 var nutrifamiMobile = angular.module('NutrifamiMobile', dependencies);
 
-nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $ionicFilterBarConfigProvider, $compileProvider, $authProvider) {
+nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $ionicFilterBarConfigProvider, $compileProvider, $authProvider, $httpProvider) {
     'use strict';
 
     $ionicConfigProvider.tabs.position('top');
+    $ionicConfigProvider.backButton.previousTitleText(false).text('');
 
     //$compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|file|blob|cdvfile):|data:image\//);
     $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|file):/);
 
+    //initialize get if not there
+    if (!$httpProvider.defaults.headers.get) {
+        $httpProvider.defaults.headers.get = {};
+    }
+
+    // Answer edited to include suggestions from comments
+    // because previous version of code introduced browser-related errors
+
+    //disable IE ajax request caching
+    $httpProvider.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
+    // extra
+    $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
+    $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
+
+
+    // Configuration common for all providers.
     var commonConfig = {
+        // Popup should expand to full screen with no location bar/toolbar.
         popupOptions: {
             location: 'no',
-            toolbar: 'yes',
+            toolbar: 'no',
             width: window.screen.width,
             height: window.screen.height
         }
     };
-
-    console.log(location.origin + location.pathname);
-
-    if (ionic.Platform.isIOS() || ionic.Platform.isAndroid() || ionic.Platform.platform() == 'linux') {
-        commonConfig.redirectUri = 'http://usuarios.nutrifami.org';
-    }
-
+    
+    //$authProvider.baseUrl = 'http://usuarios.nutrifami.org/';
     $authProvider.loginUrl = 'http://usuarios.nutrifami.org/api-token-auth/';
 
+    // Change the platform and redirectUri only if we're on mobile
+    // so that development on browser can still work. 
+    if (ionic.Platform.isIOS() || ionic.Platform.isAndroid() || ionic.Platform.platform() === 'linux') {
+        $authProvider.platform = 'mobile';
+        commonConfig.redirectUri = 'http://usuarios.nutrifami.org';
+    }
+    
+    
+    // Configure Facebook login.
     $authProvider.facebook(angular.extend({}, commonConfig, {
         clientId: '126883721233688',
-        url: 'http://usuarios.nutrifami.org/api/login/social/token_user/facebook'
-
+        url: 'http://usuarios.nutrifami.org/api/login/social/token_user/facebook',
+        responseType: 'token'
     }));
+
 
     $authProvider.google({
         url: "http://usuarios.nutrifami.org/api/login/social/token_user/google-oauth2",
@@ -321,7 +344,7 @@ nutrifamiMobile.run(function ($ionicPlatform, $rootScope, $location, $cordovaFil
 
 
     $rootScope.globals = JSON.parse(localStorage.getItem('globals')) || {};
-    
+
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
         console.log();
 
@@ -357,11 +380,10 @@ nutrifamiMobile.run(function ($ionicPlatform, $rootScope, $location, $cordovaFil
         }
 
         if (window.cordova) {
-
-
             if (device.platform == "Android") {
                 console.log("isAndroid");
                 $rootScope.TARGETPATH = cordova.file.externalApplicationStorageDirectory;
+                $rootScope.ICON_DESCARGA = 'ion-android-download';
                 window.addEventListener("native.hidekeyboard", function () {
                     StatusBar.hide();
                     window.AndroidFullScreen.immersiveMode(false, false);
@@ -369,11 +391,12 @@ nutrifamiMobile.run(function ($ionicPlatform, $rootScope, $location, $cordovaFil
             } else {
                 console.log("Is iPad or iOS");
                 $rootScope.TARGETPATH = cordova.file.dataDirectory;
-                ;
+                $rootScope.ICON_DESCARGA = 'ion-ios-cloud-download-outline';
             }
 
         } else {
             $rootScope.TARGETPATH = "https://s3.amazonaws.com/nutrifami/";
+            $rootScope.ICON_DESCARGA = 'ion-ios-cloud-download-outline';
         }
     });
 });

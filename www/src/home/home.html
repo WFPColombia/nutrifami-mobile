@@ -23,7 +23,8 @@
             <div class="row">
                 <div class="col">
                     <div class="tarjeta">
-                        <div class="audio"><i class="icon ion-volume-high" aria-hidden="true"></i></div>
+                        <!--<div class="audio"><i class="icon ion-volume-high" aria-hidden="true"></i></div>-->
+                        <div class="descarga"><i class="icon {{ICON_DESCARGA}}" ng-hide="paqueteDescargado(capacitacion.id)" aria-hidden="true" ng-click="descargarCapacitacion(capacitacion.id)"></i></div>
                         <!--<div class="medalla"><img src="img/icons/ico-modulo-medalla.png" alt="" /></div>-->
                         <div class="img">
                             <img src="img/intro-01.png">

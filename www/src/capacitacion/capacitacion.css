@@ -29,7 +29,7 @@
 .modulos .caja .imagenesDescargadas{
     position: absolute;
     top: 43px;
-    left: 13%;
+    right: 14%;
     font-size: 30px;
     color: #ffffff;
 }
@@ -37,7 +37,7 @@
 .modulos .modulo .medalla {
     position: absolute;
     top: -15px;
-    right: -15px;
+    left: -15px;
 }
 
 .modulos .modulo .medalla img {

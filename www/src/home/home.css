@@ -75,11 +75,12 @@
     right: -11px;
 }
 
-.home .audio {
+.home .audio,
+.home .descarga{
     position: absolute;
     right: 8px;
     top: 8px;
-    font-size: 20px;
+    font-size: 25px;
     color: #ffffff;
 }
 

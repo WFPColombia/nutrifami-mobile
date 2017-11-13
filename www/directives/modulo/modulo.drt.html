@@ -9,10 +9,10 @@
                 </div>
             </div>
         </div>
-        <div class="medalla" ng-show="info.avance.finalizado ? 'terminado' : ''"><img src="img/icons/ico-modulo-medalla.png" alt="" /></div>
+        <div class="medalla terminado" ng-show="info.avance.finalizado ? 'terminado' : ''"><img src="img/icons/ico-modulo-medalla.png" alt="" /></div>
 
     </div>
-    <div class="imagenesDescargadas" ng-click="abrirDescargas()" ng-hide='descarga'>
-        <i class="ion-android-download"></i>
+    <div class="imagenesDescargadas" ng-click="abrirDescargas()" ng-hide="paqueteDescargado()">
+        <i class="icon {{icon_descarga}}"></i>
     </div>
 </div>
