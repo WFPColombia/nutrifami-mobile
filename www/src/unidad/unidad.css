@@ -294,7 +294,8 @@
     position: relative;
 }
 
-.unidad .opciones .opcion-sonido {
+.unidad .opciones .opcion-sonido, 
+.unidad .unidad-informativa .opcion-sonido{
     position: absolute;
     top: -5px;
     right: 2px;
@@ -304,12 +305,14 @@
     -moz-border-radius: 15px;
 }
 
-.unidad .opciones .opcion-sonido button {
+.unidad .opciones .opcion-sonido button,
+.unidad .unidad-informativa button{
     color: #00c97e;
     border: none;
     background-color: rgba(0, 0, 0, 0);
-    width: 30px;
-    height: 30px;
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
 }
 
 .unidad .opciones .pareja-con-imagen {
@@ -454,8 +457,9 @@
     text-align: left;
     font-size: 12pt;
     width: 100%;
-    padding: 5px 15px;
+    padding: 15px 15px;
     font-size: 11pt;
+    position: relative;
 }
 
 .unidad .unidad-informativa p {

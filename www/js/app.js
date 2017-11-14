@@ -384,6 +384,7 @@ nutrifamiMobile.run(function ($ionicPlatform, $rootScope, $location, $cordovaFil
                 console.log("isAndroid");
                 $rootScope.TARGETPATH = cordova.file.externalApplicationStorageDirectory;
                 $rootScope.ICON_DESCARGA = 'ion-android-download';
+                $rootScope.ICON_AUDIO = 'ion-android-volume-up';
                 window.addEventListener("native.hidekeyboard", function () {
                     StatusBar.hide();
                     window.AndroidFullScreen.immersiveMode(false, false);
@@ -392,11 +393,14 @@ nutrifamiMobile.run(function ($ionicPlatform, $rootScope, $location, $cordovaFil
                 console.log("Is iPad or iOS");
                 $rootScope.TARGETPATH = cordova.file.dataDirectory;
                 $rootScope.ICON_DESCARGA = 'ion-ios-cloud-download-outline';
+                $rootScope.ICON_AUDIO = 'ion-ios-volume-high';
+                
             }
 
         } else {
             $rootScope.TARGETPATH = "https://s3.amazonaws.com/nutrifami/";
             $rootScope.ICON_DESCARGA = 'ion-ios-cloud-download-outline';
+            $rootScope.ICON_AUDIO = 'ion-ios-volume-high';
         }
     });
 });

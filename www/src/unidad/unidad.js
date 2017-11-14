@@ -1,7 +1,7 @@
 /*global angular*/
-nutrifamiMobile.controller('UnidadCtrl', function($ionicPlatform, $scope, $rootScope, $location, $stateParams, $ionicPopup, $ionicLoading, $ionicViewSwitcher, $timeout, $ionicScrollDelegate, MediaService, UsuarioService, CapacitacionService, DescargaService) {
+nutrifamiMobile.controller('UnidadCtrl', function ($ionicPlatform, $scope, $rootScope, $location, $stateParams, $ionicPopup, $ionicLoading, $ionicViewSwitcher, $timeout, $ionicScrollDelegate, MediaService, UsuarioService, CapacitacionService, DescargaService) {
     'use strict';
-    $ionicPlatform.ready(function() {
+    $ionicPlatform.ready(function () {
 
 
         $scope.unidad = CapacitacionService.getUnidad($stateParams.leccion, $stateParams.unidad);
@@ -12,14 +12,15 @@ nutrifamiMobile.controller('UnidadCtrl', function($ionicPlatform, $scope, $rootS
         $scope.unidad.numeroUnidad = $stateParams.unidad;
         $scope.unidad.totalUnidades = CapacitacionService.getUnidadesActivas($stateParams.leccion).length;
         $scope.scrolled = false;
-        $scope.audiosDescargados = DescargaService.paqueteDescargado('modulos',  $stateParams.modulo, 'audios');
-        
-        $scope.assetpath = $rootScope.TARGETPATH+$stateParams.capacitacion+"/"+$stateParams.modulo+"/"+$stateParams.leccion+"/"+$scope.unidad.id+"/";
+        $scope.audiosDescargados = DescargaService.paqueteDescargado('modulos', $stateParams.modulo, 'audios');
+
+        $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitacion + "/" + $stateParams.modulo + "/" + $stateParams.leccion + "/" + $scope.unidad.id + "/";
         $scope.audios = {
             'tipo': $scope.assetpath + $scope.unidad.instruccion.audio.nombre,
             'titulo': $scope.assetpath + $scope.unidad.titulo.audio.nombre,
+            'texto': $scope.assetpath + $scope.unidad.media.nombre,
             /*'muyBien': MediaService.getMediaURL('audios/muy-bien.mp3'),
-            'respuestaIncorrecta': MediaService.getMediaURL('audios/respuesta-incorrecta.mp3'),*/
+             'respuestaIncorrecta': MediaService.getMediaURL('audios/respuesta-incorrecta.mp3'),*/
             'salir': MediaService.getMediaURL('audios/unidad-salir.wav')
         };
 
@@ -74,7 +75,7 @@ nutrifamiMobile.controller('UnidadCtrl', function($ionicPlatform, $scope, $rootS
             //Si es unidad informativa se crea el timer para habilitar el botón de seguir
 
             if ($scope.unidad.tipo.id == 1) {
-                $timeout(function() {
+                $timeout(function () {
                     $scope.botonCalificar = true;
                     $scope.textoBoton = 'continuar';
                 }, 10000);
@@ -103,11 +104,11 @@ nutrifamiMobile.controller('UnidadCtrl', function($ionicPlatform, $scope, $rootS
 
         $scope.botonCalificar = false;
         console.log($scope.audios);
-        MediaService.preloadSimple($scope.audios, function(response) {
+        MediaService.preloadSimple($scope.audios, function (response) {
             $scope.audios = response;
         });
 
-        $scope.seleccionarOpcion = function(index) {
+        $scope.seleccionarOpcion = function (index) {
             if ($scope.unidad.opciones[index].selected) {
                 $scope.unidad.opciones[index].selected = false;
                 respuestasSeleccionadas--;
@@ -142,7 +143,7 @@ nutrifamiMobile.controller('UnidadCtrl', function($ionicPlatform, $scope, $rootS
         var pareja2Pos = 0;
         var parejasCorrectas = 0;
 
-        $scope.seleccionarPareja = function(index) {
+        $scope.seleccionarPareja = function (index) {
             /* Verifica si es una opcion que no ha hecho match para poderla seleccionar*/
             if (!$scope.unidad.opciones[index].match) {
 
@@ -202,7 +203,7 @@ nutrifamiMobile.controller('UnidadCtrl', function($ionicPlatform, $scope, $rootS
 
 
 
-                                MediaService.preloadSimple($scope.feedback.audios, function(response) {
+                                MediaService.preloadSimple($scope.feedback.audios, function (response) {
                                     $scope.feedback.audios = response;
                                     $scope.playAudioFeedback('feedback');
                                 });
@@ -212,13 +213,13 @@ nutrifamiMobile.controller('UnidadCtrl', function($ionicPlatform, $scope, $rootS
                                     templateUrl: 'views/template/feedback.tpl.html',
                                     scope: $scope,
                                     buttons: [{
-                                        text: 'Continuar',
-                                        type: 'button-positive',
-                                        onTap: function(e) {
-                                            // MediaService.unload($scope.feedback.audios);
-                                            $scope.cerrarFeedback();
-                                        }
-                                    }]
+                                            text: 'Continuar',
+                                            type: 'button-positive',
+                                            onTap: function (e) {
+                                                // MediaService.unload($scope.feedback.audios);
+                                                $scope.cerrarFeedback();
+                                            }
+                                        }]
                                 });
                             }
 
@@ -249,7 +250,7 @@ nutrifamiMobile.controller('UnidadCtrl', function($ionicPlatform, $scope, $rootS
             }
         };
 
-        $scope.calificarUnidad = function() {
+        $scope.calificarUnidad = function () {
             /* Validar si acerto o fallo*/
 
             if ($scope.unidad.tipo.id == 1) {
@@ -314,8 +315,7 @@ nutrifamiMobile.controller('UnidadCtrl', function($ionicPlatform, $scope, $rootS
                 textoBoton = 'Continuar';
             }
 
-            MediaService.preloadSimple($scope.feedback.audios, function(response) {
-
+            MediaService.preloadSimple($scope.feedback.audios, function (response) {
                 $scope.feedback.audios = response;
                 console.log($scope.feedback.audios);
                 $scope.playAudioFeedback(tempFeedbackUltimoAudio);
@@ -326,45 +326,48 @@ nutrifamiMobile.controller('UnidadCtrl', function($ionicPlatform, $scope, $rootS
                 templateUrl: 'views/template/feedback.tpl.html',
                 scope: $scope,
                 buttons: [{
-                    text: textoBoton,
-                    type: 'button-positive',
-                    onTap: function(e) {
-                        // MediaService.unload($scope.feedback.audios);
-                        $scope.cerrarFeedback();
-                    }
-                }]
+                        text: textoBoton,
+                        type: 'button-positive',
+                        onTap: function (e) {
+                            // MediaService.unload($scope.feedback.audios);
+                            $scope.cerrarFeedback();
+                        }
+                    }]
             });
         };
 
-        $scope.cerrarFeedback = function() {
-            if ($scope.estadoUnidad === 'acierto') {
-                $scope.irASiguienteUnidad();
-            } else {
-                $scope.reiniciarUnidad();
-            }
+        $scope.cerrarFeedback = function () {
+            MediaService.stopAll($scope.feedback.audios, function () {
+                if ($scope.estadoUnidad === 'acierto') {
+                    $scope.irASiguienteUnidad();
+                } else {
+                    $scope.reiniciarUnidad();
+                }
+            });
+
 
         };
 
-        $scope.salirUnidad = function() {
+        $scope.salirUnidad = function () {
             var popUpFeedback = $ionicPopup.show({
                 templateUrl: 'views/template/salirUnidad.tpl.html',
                 scope: $scope,
                 cssClass: 'salir-unidad',
                 buttons: [{
-                    text: 'Salir de la lección',
-                    type: 'button-positive',
-                    onTap: function(e) {
-                        //MediaService.unload($scope.audios);
-                        MediaService.unload($scope.audios);
-                        MediaService.unload($scope.feedback.audios);
-                        $ionicViewSwitcher.nextDirection('back'); // 'forward', 'back', etc.
-                        $location.path('/app/'+ $stateParams.capacitacion +'/' + $stateParams.modulo);
-                    }
-                }]
+                        text: 'Salir de la lección',
+                        type: 'button-positive',
+                        onTap: function (e) {
+                            //MediaService.unload($scope.audios);
+                            MediaService.unload($scope.audios);
+                            MediaService.unload($scope.feedback.audios);
+                            $ionicViewSwitcher.nextDirection('back'); // 'forward', 'back', etc.
+                            $location.path('/app/' + $stateParams.capacitacion + '/' + $stateParams.modulo);
+                        }
+                    }]
             });
         }
 
-        $scope.irASiguienteUnidad = function() {
+        $scope.irASiguienteUnidad = function () {
             $scope.siguienteUnidad = parseInt($stateParams.unidad) + 1;
 
             if ($scope.siguienteUnidad > $scope.unidad.totalUnidades) {
@@ -395,12 +398,12 @@ nutrifamiMobile.controller('UnidadCtrl', function($ionicPlatform, $scope, $rootS
                     maxWidth: 40
                 });
 
-                UsuarioService.setUsuarioAvance(usuarioAvance, data, function(response) {
+                UsuarioService.setUsuarioAvance(usuarioAvance, data, function (response) {
                     $ionicLoading.hide();
                     if (response.success) {
                         MediaService.unload($scope.audios);
                         MediaService.unload($scope.feedback.audios);
-                        $location.path('/'+ $stateParams.capacitacion+'/' + $stateParams.modulo + "/" + $stateParams.leccion + "/" + $stateParams.unidad + "/leccion-terminada");
+                        $location.path('/' + $stateParams.capacitacion + '/' + $stateParams.modulo + "/" + $stateParams.leccion + "/" + $stateParams.unidad + "/leccion-terminada");
                     }
                 });
 
@@ -408,11 +411,11 @@ nutrifamiMobile.controller('UnidadCtrl', function($ionicPlatform, $scope, $rootS
             } else {
                 MediaService.unload($scope.audios);
                 MediaService.unload($scope.feedback.audios);
-                $location.path('/'+ $stateParams.capacitacion+'/' + $stateParams.modulo + "/" + $stateParams.leccion + "/" + $scope.siguienteUnidad);
+                $location.path('/' + $stateParams.capacitacion + '/' + $stateParams.modulo + "/" + $stateParams.leccion + "/" + $scope.siguienteUnidad);
             }
         };
 
-        $scope.reiniciarUnidad = function() {
+        $scope.reiniciarUnidad = function () {
             for (var i in $scope.unidad.opciones) {
                 $scope.unidad.opciones[i].selected = false;
                 $scope.unidad.opciones[i].evaluacion = false;
@@ -422,41 +425,41 @@ nutrifamiMobile.controller('UnidadCtrl', function($ionicPlatform, $scope, $rootS
             $scope.botonCalificar = false;
         };
 
-        $scope.porcentajeAvance = function() {
+        $scope.porcentajeAvance = function () {
             return (100 / $scope.unidad.totalUnidades * ($scope.unidad.numeroUnidad - 1));
         };
 
-        $scope.playAudio = function(audio) {
-            MediaService.stopAll($scope.feedback.audios, function() {
+        $scope.playAudio = function (audio) {
+            MediaService.stopAll($scope.feedback.audios, function () {
                 MediaService.play(audio, $scope.audios);
             });
         };
 
-        $scope.playAudioFeedback = function(audio) {
-            MediaService.stopAll($scope.audios, function() {
+        $scope.playAudioFeedback = function (audio) {
+            MediaService.stopAll($scope.audios, function () {
                 MediaService.play(audio, $scope.feedback.audios);
             });
         };
 
-        $scope.getScrollPosition = function() {
+        $scope.getScrollPosition = function () {
 
             /*if ($ionicScrollDelegate.getScrollPosition().top > 50) {
-                if (!$scope.scrolled) {
-
-                    $scope.$apply(function() {
-                        $scope.scrolled = true;
-                    });
-                }
-
-            } else {
-                if ($scope.scrolled) {
-
-                    $scope.$apply(function() {
-                        $scope.scrolled = false;
-                    });
-                }
-
-            }*/
+             if (!$scope.scrolled) {
+             
+             $scope.$apply(function() {
+             $scope.scrolled = true;
+             });
+             }
+             
+             } else {
+             if ($scope.scrolled) {
+             
+             $scope.$apply(function() {
+             $scope.scrolled = false;
+             });
+             }
+             
+             }*/
         };
 
         /**
@@ -492,7 +495,7 @@ nutrifamiMobile.controller('UnidadCtrl', function($ionicPlatform, $scope, $rootS
                 sortOrder = -1;
                 property = property.substr(1);
             }
-            return function(a, b) {
+            return function (a, b) {
                 var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
                 return result * sortOrder;
             };

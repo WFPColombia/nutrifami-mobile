@@ -3,7 +3,7 @@
         <ion-refresher pulling-icon="ion-arrow-down-b" on-refresh="refreshRecetas()"></ion-refresher>
         <div class="row home-header">
             <div class="col" ng-click="playAudio('audio1')" ion-ripple>
-                <h1><i class="icon ion-volume-high" aria-hidden="true"></i>Capacitaciones Activas</h1>
+                <h1><!--<i class="icon {{ICON_AUDIO}}" aria-hidden="true"></i>-->Capacitaciones Activas</h1>
             </div>
         </div>
         <!--<div class="row busqueda">
@@ -16,14 +16,14 @@
         </div>
         <div class="row home-header">
             <div class="col" ng-click="playAudio('audio2')" ion-ripple>
-                <h1><i class="icon ion-volume-high" aria-hidden="true"></i>Activas</h1>
+                <h1><i class="icon {{ICON_AUDIO}}" aria-hidden="true"></i>Activas</h1>
             </div>
         </div>-->
         <div class="capacitaciones" ng-repeat="capacitacion in capacitaciones">
             <div class="row">
                 <div class="col">
                     <div class="tarjeta">
-                        <!--<div class="audio"><i class="icon ion-volume-high" aria-hidden="true"></i></div>-->
+                        <!--<div class="audio"><i class="icon {{ICON_AUDIO}}" aria-hidden="true"></i></div>-->
                         <div class="descarga"><i class="icon {{ICON_DESCARGA}}" ng-hide="paqueteDescargado(capacitacion.id)" aria-hidden="true" ng-click="descargarCapacitacion(capacitacion.id)"></i></div>
                         <!--<div class="medalla"><img src="img/icons/ico-modulo-medalla.png" alt="" /></div>-->
                         <div class="img">
@@ -45,15 +45,15 @@
         </div>
         <!--<div class="row home-header">
             <div class="col" ng-click="playAudio('audio1')" ion-ripple>
-                <h1><i class="icon ion-volume-high" aria-hidden="true"></i>Otras Capacitaciones</h1>
-                <p><i class="icon ion-volume-high" aria-hidden="true"></i>Si quieres continuar aprendiendo puedes suscribirte en las siquientes capacitaciones:</p>
+                <h1><i class="icon {{ICON_AUDIO}}" aria-hidden="true"></i>Otras Capacitaciones</h1>
+                <p><i class="icon {{ICON_AUDIO}}" aria-hidden="true"></i>Si quieres continuar aprendiendo puedes suscribirte en las siquientes capacitaciones:</p>
             </div>
         </div>
         <div class="capacitaciones-otras">
             <div class="row">
                 <div class="col col-50">
                     <div class="tarjeta">
-                        <div class="audio"><i class="icon ion-volume-high" aria-hidden="true"></i></div>
+                        <div class="audio"><i class="icon {{ICON_AUDIO}}" aria-hidden="true"></i></div>
                         <div class="img">
                             <img src="img/intro-01.png">
                         </div>
@@ -63,7 +63,7 @@
                 </div>
                 <div class="col col-50">
                     <div class="tarjeta">
-                        <div class="audio"><i class="icon ion-volume-high" aria-hidden="true"></i></div>
+                        <div class="audio"><i class="icon {{ICON_AUDIO}}" aria-hidden="true"></i></div>
                         <div class="img">
                             <img src="img/intro-01.png">
                         </div>

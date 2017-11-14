@@ -37,7 +37,8 @@ nutrifamiMobile.factory('DescargaService', function UserService($http, $rootScop
         $http.get(BaseUrl + 'js/version.JSON').then(function (response) {
             versionNueva = response.data.Capacitacion.ID;
             console.log(versionNueva + " " + versionActual);
-            if (versionActual != versionNueva) {
+            console
+            if (versionActual != versionNueva || !service.assetsInicialesDescargados() ) {
                 //Actualizamos el numero de versión
                 localStorage.setItem("version", JSON.stringify(versionNueva));
                 callback(true);
@@ -108,7 +109,7 @@ nutrifamiMobile.factory('DescargaService', function UserService($http, $rootScop
             }
         }
         localStorage.setItem("gestorDescarga", JSON.stringify(gestorDescarga));
-    }
+    };
     
     
     service.paqueteDescargado = function (nivel,  id, tipo) {
@@ -126,6 +127,12 @@ nutrifamiMobile.factory('DescargaService', function UserService($http, $rootScop
         var audios = service.paqueteDescargado(nivel,id,'audios');
         return imagenes && audios;
     };
+    
+    service.assetsInicialesDescargados = function(){
+        var gestorDescarga = JSON.parse(localStorage.getItem('gestorDescarga'));
+
+        return gestorDescarga.assetsIniciales;
+    }
 
     /**
      * 
