@@ -8,7 +8,7 @@ nutrifamiMobile.directive('opcionUnidadInfo', function($stateParams, Capacitacio
         templateUrl: 'views/directives/opcionUnidadInfo.drt.html',
         link: function($scope) {
             $scope.unidad = CapacitacionService.getUnidad($stateParams.leccion, $stateParams.unidad);
-            $scope.assetpath = $scope.$parent.TARGETPATH+$stateParams.modulo+"/"+$stateParams.leccion+"/"+$scope.unidad.id+"/";
+            $scope.assetpath = $scope.$parent.TARGETPATH+$stateParams.capacitacion+"/"+$stateParams.modulo+"/"+$stateParams.leccion+"/"+$scope.unidad.id+"/";
             $scope.audiosDescargados = $scope.$parent.audiosDescargados;
             
             $scope.click = function() {
