@@ -1,12 +1,12 @@
 /*global angular*/
-nutrifamiMobile.controller('CapacitacionCtrl', function ($ionicPlatform, $scope, $rootScope, $ionicLoading, $stateParams, $location, $ionicPopup, UsuarioService, CapacitacionService) {
+nutrifamiMobile.controller('CapacitacionCtrl', function ($ionicPlatform, $scope, $rootScope, $ionicLoading, $stateParams, $location, $ionicPopup, UserService, UsuarioService, CapacitacionService) {
     'use strict';
 
     $ionicPlatform.ready(function () {
         
         CapacitacionService.initClient();
         $scope.mids = CapacitacionService.getModulosId($stateParams.capacitacion)
-        $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
+        $scope.usuarioActivo = UserService.getUser();
         $scope.usuarioAvance = UsuarioService.getUsuarioAvance();
         
 
@@ -64,10 +64,11 @@ nutrifamiMobile.controller('CapacitacionCtrl', function ($ionicPlatform, $scope,
             $ionicLoading.hide();
             $scope.modal = {
                     texto1: mensaje,
-                    texto2: "Verifique la conexión a Internet e inténtelo más tarde"
+                    texto2: "Verifique la conexión a Internet e inténtelo más tarde",
+                    estado: 'error' // ok, alert, error
                 };
                 $ionicPopup.show({
-                    templateUrl: 'views/modals/modal.html',
+                    templateUrl: 'modals/modal.html',
                     scope: $scope,
                     cssClass: 'salir-unidad',
                     buttons: [{
@@ -87,10 +88,11 @@ nutrifamiMobile.controller('CapacitacionCtrl', function ($ionicPlatform, $scope,
 
             $scope.modal = {
                 texto1: 'Sin conexión a Internet',
-                texto2: 'Este módulo no se encuentra disponible sin conexión a Internet'
+                texto2: 'Este módulo no se encuentra disponible sin conexión a Internet',
+                estado: 'alert' // ok, alert, error
             };
             $ionicPopup.show({
-                templateUrl: 'views/modals/modal.html',
+                templateUrl: 'modals/modal.html',
                 scope: $scope,
                 cssClass: 'salir-unidad',
                 buttons: [{

@@ -1,7 +1,7 @@
 nutrifamiMobile.factory('RecetasService', function($http) {
 
     var service = {};
-    var token = ''
+    var token = '';
     //var URL = 'http://127.0.0.1:8000/';
     var URL = 'http://recetas.nutrifami.org/';
 
@@ -78,7 +78,7 @@ nutrifamiMobile.factory('RecetasService', function($http) {
 
 
 
-    }
+    };
 
     service.leerRecetas = function(callback) {
         recetas = JSON.parse(localStorage.getItem('recetas'));

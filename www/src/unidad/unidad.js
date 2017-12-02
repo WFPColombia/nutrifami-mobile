@@ -1,12 +1,12 @@
 /*global angular*/
-nutrifamiMobile.controller('UnidadCtrl', function ($ionicPlatform, $scope, $rootScope, $location, $stateParams, $ionicPopup, $ionicLoading, $ionicViewSwitcher, $timeout, $ionicScrollDelegate, MediaService, UsuarioService, CapacitacionService, DescargaService) {
+nutrifamiMobile.controller('UnidadCtrl', function ($ionicPlatform, $scope, $rootScope, $location, $stateParams, $ionicPopup, $ionicLoading, $ionicViewSwitcher, $timeout, MediaService, UserService, CapacitacionService, DescargaService) {
     'use strict';
     $ionicPlatform.ready(function () {
 
 
         $scope.unidad = CapacitacionService.getUnidad($stateParams.leccion, $stateParams.unidad);
         console.log($scope.unidad);
-        $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
+        $scope.usuarioActivo = UserService.getUser();
         $scope.estadoUnidad = 'espera';
 
         $scope.unidad.numeroUnidad = $stateParams.unidad;

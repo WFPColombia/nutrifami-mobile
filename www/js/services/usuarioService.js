@@ -8,9 +8,7 @@ nutrifamiMobile.factory('UsuarioService', function() {
      * UsuarioService.getUsuarioActivo()
      *  
      */
-    service.getUsuarioActivo = function() {
-        return JSON.parse(localStorage.getItem('usuarioActivo'));
-    };
+    
 
     /**
      * 

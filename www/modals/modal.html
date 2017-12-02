@@ -1,0 +1,11 @@
+<div class="popup-header">
+    <span class="icon ion-alert" ng-show="modal.estado == 'alert'" ></span>
+    <span class="icon ion-checkmark-round" ng-show="modal.estado == 'ok'" style="background-color: #09df78;"></span>
+    <span class="icon ion-close-round" ng-show="modal.estado == 'error'" style="background-color: #ff1244;"></span>
+</div>
+<div class="popup-body">
+    <div ion-ripple>
+        <h1 class="mensaje">{{modal.texto1}}</h1>
+        <p class="mensaje">{{modal.texto2}}</p>
+    </div>
+</div>

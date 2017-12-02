@@ -1,5 +1,5 @@
 /*global angular*/
-nutrifamiMobile.controller('IntroCtrl', function($ionicPlatform, $scope, $location, MediaService, UsuarioService) {
+nutrifamiMobile.controller('IntroCtrl', function($ionicPlatform, $scope, $location, MediaService, UserService) {
     'use strict';
 
     $ionicPlatform.ready(function() {
@@ -16,7 +16,9 @@ nutrifamiMobile.controller('IntroCtrl', function($ionicPlatform, $scope, $locati
             $scope.audios = response;
         });
 
-        $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
+        $scope.usuarioActivo = UserService.getUser();
+        
+        console.log($scope.usuarioActivo);
 
         $scope.playAudio = function(audio) {
             MediaService.play(audio, $scope.audios);

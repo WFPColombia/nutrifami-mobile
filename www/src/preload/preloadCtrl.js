@@ -1,5 +1,5 @@
 /*global angular*/
-nutrifamiMobile.controller('PreloadCtrl', function ($ionicPlatform, $ionicLoading, $ionicPopup, $http, $scope, $cordovaZip, $rootScope, $timeout, $q, $location, $cordovaFile, $cordovaFileTransfer, $cordovaNetwork, UsuarioService, DescargaService, CapacitacionService) {
+nutrifamiMobile.controller('PreloadCtrl', function ($ionicPlatform, $ionicPopup, $scope, $location, UserService, DescargaService) {
     'use strict';
     $ionicPlatform.ready(function () {
 
@@ -17,7 +17,7 @@ nutrifamiMobile.controller('PreloadCtrl', function ($ionicPlatform, $ionicLoadin
         //Verificar el destino
         var destino = "/login";
         var puedeEntrar = false;
-        if (UsuarioService.getUsuarioActivo() != null) {
+        if (UserService.getUser() != null) {
             puedeEntrar = true;
             destino = '/app/';
         }

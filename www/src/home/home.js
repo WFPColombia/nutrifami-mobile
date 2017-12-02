@@ -1,5 +1,5 @@
 /*global angular*/
-nutrifamiMobile.controller('HomeCtrl', function ($ionicPlatform, $scope, $ionicViewSwitcher, $location, $ionicPopup, $ionicLoading, $rootScope, CapacitacionService, DescargaService) {
+nutrifamiMobile.controller('HomeCtrl', function ($ionicPlatform, $scope, $ionicViewSwitcher, $location, $ionicPopup, $ionicLoading, $rootScope, CapacitacionService, DescargaService, UserService) {
     'use strict';
 
     $ionicPlatform.ready(function () {
@@ -8,6 +8,7 @@ nutrifamiMobile.controller('HomeCtrl', function ($ionicPlatform, $scope, $ionicV
         $scope.capacitaciones = CapacitacionService.getCapacitacionesActivas();
 
         console.log($scope.capacitaciones);
+        console.log(UserService.getToken());
 
         $scope.abrirCapacitacion = function (capacitacion) {
             //$location.path('/' + enlace);
@@ -26,10 +27,11 @@ nutrifamiMobile.controller('HomeCtrl', function ($ionicPlatform, $scope, $ionicV
         $scope.descargarCapacitacion = function (cid) {
             $scope.modal = {
                 texto1: '¿Desea descargar la capacitación con audios?',
-                texto2: 'Descargar la capacitación con audios le permitirá escuchar las lecciones, pero la descarga tomará más tiempo'
+                texto2: 'Descargar la capacitación con audios le permitirá escuchar las lecciones, pero la descarga tomará más tiempo',
+                estado: 'alert' // ok, alert, error
             };
             $ionicPopup.show({
-                templateUrl: 'views/modals/modal.html',
+                templateUrl: 'modals/modal.html',
                 scope: $scope,
                 cssClass: 'salir-unidad',
                 buttons: [{
@@ -74,10 +76,11 @@ nutrifamiMobile.controller('HomeCtrl', function ($ionicPlatform, $scope, $ionicV
             $ionicLoading.hide();
             $scope.modal = {
                     texto1: mensaje,
-                    texto2: "Verifique la conexión a Internet e inténtelo más tarde"
+                    texto2: "Verifique la conexión a Internet e inténtelo más tarde",
+                    estado: 'error' // ok, alert, error
                 };
                 $ionicPopup.show({
-                    templateUrl: 'views/modals/modal.html',
+                    templateUrl: 'modals/modal.html',
                     scope: $scope,
                     cssClass: 'salir-unidad',
                     buttons: [{

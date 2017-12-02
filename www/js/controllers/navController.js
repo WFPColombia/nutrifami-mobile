@@ -1,4 +1,4 @@
-nutrifamiMobile.controller('NavController', function($scope, $ionicPopover, UsuarioService) {
+nutrifamiMobile.controller('NavController', function($scope, $ionicPopover, UserService) {
     $ionicPopover.fromTemplateUrl('views/template/popover.tpl.html', {
         scope: $scope
     }).then(function(popover) {
@@ -8,7 +8,7 @@ nutrifamiMobile.controller('NavController', function($scope, $ionicPopover, Usua
         $scope.popover.hide();
     };
 
-    $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
+    $scope.usuarioActivo = UserService.getUser();
 
 
 

@@ -40,7 +40,9 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
     };
     
     //$authProvider.baseUrl = 'http://usuarios.nutrifami.org/';
-    $authProvider.loginUrl = 'http://usuarios.nutrifami.org/api-token-auth/';
+    //$authProvider.loginUrl = 'http://usuarios.nutrifami.org/api-token-auth/';
+    $authProvider.loginUrl = 'http://localhost:8000/api/token-auth/';
+    $authProvider.signupUrl = 'http://localhost:8000/api/usuarios/';
 
     // Change the platform and redirectUri only if we're on mobile
     // so that development on browser can still work. 
@@ -72,19 +74,6 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         abstract: true,
         templateUrl: 'views/template/menu.tpl.html',
         controller: 'NavController'
-    });
-
-
-
-    $stateProvider.state('app.editarPerfil', {
-        url: '/editar-perfil',
-        cache: false,
-        views: {
-            'menuContent': {
-                templateUrl: 'views/editarPerfil.html',
-                controller: 'EditarPerfilController'
-            }
-        }
     });
 
     $stateProvider.state('app.misComprasIntro', {
@@ -218,6 +207,17 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
             'menuContent': {
                 templateUrl: 'src/auth_perfil/auth_perfil.html',
                 controller: 'AuthPerfilCtrl'
+            }
+        }
+    });
+    
+    $stateProvider.state('app.perfil_editar', {
+        url: '/editar-perfil',
+        cache: false,
+        views: {
+            'menuContent': {
+                templateUrl: 'src/auth_perfil_editar/auth_perfil_editar.html',
+                controller: 'AuthPerfilEditarCtrl'
             }
         }
     });

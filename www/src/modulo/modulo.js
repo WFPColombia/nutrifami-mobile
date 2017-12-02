@@ -1,11 +1,11 @@
-nutrifamiMobile.controller('ModuloCtrl', function($ionicPlatform, $scope, $rootScope, $location, $stateParams, $ionicViewSwitcher, $ionicLoading, MediaService, UsuarioService, CapacitacionService,DescargaService) {
+nutrifamiMobile.controller('ModuloCtrl', function($ionicPlatform, $scope, $rootScope, $location, $stateParams, $ionicViewSwitcher, MediaService, UsuarioService, UserService, CapacitacionService,DescargaService) {
     'use strict';
     $ionicPlatform.ready(function() {
 
         var media = [];
         CapacitacionService.initClient();
         $scope.modulo = CapacitacionService.getModulo($stateParams.modulo);
-        $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
+        $scope.usuarioActivo = UserService.getUser();
         $scope.usuarioAvance = UsuarioService.getUsuarioAvance();
         $scope.lecciones = [];
         

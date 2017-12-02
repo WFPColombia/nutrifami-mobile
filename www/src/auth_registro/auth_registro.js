@@ -1,54 +1,44 @@
-nutrifamiMobile.controller('AuthRegistroCtrl', function ($ionicPlatform, $scope, $rootScope, $ionicViewSwitcher, $location, $http, $auth) {
+nutrifamiMobile.controller('AuthRegistroCtrl', function ($ionicPlatform, $scope, $rootScope, $ionicViewSwitcher, $location, $ionicLoading, $auth, $timeout, UserService) {
     'use strict';
 
     $ionicPlatform.ready(function () {
-
-
-        console.log("Registro!!");
-
-
+        $scope.formSignup = {};
 
         $scope.signup = function () {
 
+            console.log($scope.formSignup);
 
-            /*$http({
-                method: 'POST',
-                url: 'http://localhost:8000/api-token-auth/',
-                data: {username: 'fats2005', password: 'Bog1986ota'}
-            }).then(function successCallback(response) {
-                console.log(response);
-                callback(response);
-            }, function errorCallback(response) {
-                console.log(response);
-                callback(false);
-            });*/
-
-            var user = {
-                username: 'fats2005',
-                password: 'Bog1986ota'
-            };
-
-            $auth.login(user)
-                    .then(function (response) {
-                        // Redirect user here after a successful log in.
-                        console.log(response);
-                    })
-                    .catch(function (response) {
-                        // Handle errors here, such as displaying a notification
-                        // for invalid email and/or password.
-                        console.log(response);
-                    });
+            if ($scope.formSignup.password === $scope.formSignup.password2) {
+                $scope.loading = $ionicLoading.show({
+                    animation: 'fade-in',
+                    showBackdrop: true,
+                    maxWidth: 40
+                });
+                UserService.signup($scope.formSignup.username, $scope.formSignup.email, $scope.formSignup.password);
+                
+            } else {
+                $scope.error = "Las contraseñas deben ser iguales";
+                $timeout(function () {
+                    $scope.error = "";
+                }, 5000);
+            }
         };
 
-        $rootScope.$on('userLoggedIn', function (data) {
+        $rootScope.$on('userLoggedIn', function (event, data) {
+            $ionicLoading.hide();
             $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
-            $location.path('/app/search');
+            $location.path('/intro');
 
         });
 
         // will fire in case authentication failed
-        $rootScope.$on('userFailedLogin', function () {
-            console.log("Error al iniciar sesión");
+        $rootScope.$on('userFailedLogin', function (event, response) {
+            $ionicLoading.hide();
+            console.log(response);
+            $scope.error = response.message;
+            $timeout(function () {
+                $scope.error = "";
+            }, 10000);
 
         });
 
