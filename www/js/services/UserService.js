@@ -94,7 +94,6 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth, $
         $auth.login(user)
                 .then(function (response) {
                     // Redirect user here after a successful log in.
-                    console.log(response.data);
                     //organizamos la respuesta para pasarla al SuccesAuth y que se guarden bien todos los datos
                     var response2 = {
                         data: response.data.user
@@ -133,31 +132,28 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth, $
      */
     service.setUser = function (data) {
         var usuarioActivo = data;
-        var usuarioAvance = {};
-        var usuarioFamiliaAvance = {};
-        var usuarioFamilia = {};
-        if (data.access_token === 'no-token') {
-            /* Se copia la información de avance en un objeto independiente y se elimina la información de usuarioActivo*/
-            usuarioAvance = usuarioActivo.avance[usuarioActivo.id];
-            /* Se copia la informaciòn de avance de familia a un objeto independiente*/
+        //var usuarioFamiliaAvance = {};
+        //var usuarioFamilia = {};
+        delete usuarioActivo["avances"];
+        /*if (data.access_token === 'no-token') {
             usuarioFamiliaAvance = usuarioActivo.avance;
-            delete usuarioActivo["avance"];
+           
             delete usuarioFamiliaAvance[usuarioActivo.id];
 
-            /*Se copia información de familia de usuario Activo en objeto independiente*/
+            
             usuarioFamilia = usuarioActivo.familia;
             delete usuarioActivo["familia"];
 
-            /* Se almacena usuario activo en el locaStorage para llamarlo más facilmente */
 
-            localStorage.setItem("usuarioAvance", JSON.stringify(usuarioAvance));
+
+            
             localStorage.setItem("usuarioFamiliaAvance", JSON.stringify(usuarioFamiliaAvance));
             localStorage.setItem("usuarioFamilia", JSON.stringify(usuarioFamilia));
         } else {
-            localStorage.setItem("usuarioAvance", JSON.stringify({}));
+            
             localStorage.setItem("usuarioFamiliaAvance", JSON.stringify({}));
             localStorage.setItem("usuarioFamilia", JSON.stringify({}));
-        }
+        }*/
 
         $rootScope.globals = {
             currentUser: {
@@ -189,6 +185,7 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth, $
             url: baseUrl + 'usuarios/'+user.id+'/',
             data: user
         }).then(function successCallback(response) {
+            delete response.data["avances"];
            localStorage.setItem("user", JSON.stringify(response.data));
            $rootScope.$broadcast('userUpdated', response.data);
         }, function errorCallback(response) {
@@ -204,8 +201,8 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth, $
      */
     service.successAuth = function (response) {
         console.log("successAuth");
-        console.log(response);
         $auth.setToken(response.access_token);
+        service.setAvance(response.data);
         service.setUser(response.data);
         $rootScope.$broadcast('userLoggedIn', {data: response.data});
     };
@@ -216,6 +213,114 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth, $
     service.failedAuth = function (response) {
         console.log("failedAuth");
         $rootScope.$broadcast('userFailedLogin', response);
+    };
+    
+    /**
+     * 
+     * @returns {undefined}
+     */
+    service.crearGestorAvance = function(){
+        
+        var usuarioAvance = {};
+        usuarioAvance['totalUnidades'] = Object.keys(nutrifami.training.cap_lecciones).length;
+        usuarioAvance['medallas'] = 0;
+        usuarioAvance['capacitacionesTerminadas'] = 0;
+        usuarioAvance['modulosTerminados'] = 0;
+        usuarioAvance['puntos'] = 0;
+        usuarioAvance['porcentaje'] = 0;
+        usuarioAvance['diplomas'] = [];
+        usuarioAvance['capacitaciones'] = {};
+        usuarioAvance['modulos'] = {};
+        usuarioAvance['lecciones'] = {};
+        
+        for (var i in nutrifami.training.cap_capacitaciones) {
+            if (i !== 'completo') {
+                var tempObject = {};
+                tempObject[i] = {
+                    completo : false,
+                    totalModulos:Object.keys(nutrifami.training.getModulosId(i)).length,
+                    completados : 0,
+                    porcentaje:0
+                };
+                $.extend(usuarioAvance.capacitaciones, tempObject);
+            }
+        }
+
+        for (var i in nutrifami.training.cap_modulos) {
+            var tempObject = {};
+            tempObject[i] = {
+                completo:false,
+                totalLecciones:Object.keys(nutrifami.training.getLeccionesId(i)).length,
+                completados : 0,
+                porcentaje:0
+            };
+            $.extend(usuarioAvance.modulos, tempObject);
+        }
+        
+        for (var i in nutrifami.training.cap_lecciones) {
+            var tempObject = {};
+            tempObject[i] = false;
+            $.extend(usuarioAvance.lecciones, tempObject);
+        }
+        
+        localStorage.setItem("usuarioAvance", JSON.stringify(usuarioAvance));
+        
+    };
+    
+    service.setAvance = function(data){
+        //service.crearGestorAvance();
+
+        var usuarioAvance = service.getAvance();
+        var avances = data.avances;
+        
+        for(var a in avances){
+            usuarioAvance['lecciones'][avances[a]['leccion']] = true; 
+            
+        }
+        
+        //Comprobar modulos completados
+        
+        for (var m in usuarioAvance.modulos){
+            usuarioAvance['modulos'][m]['completo'] = true;
+            var lids = nutrifami.training.getLeccionesId(m);
+            for (var lid in lids){
+                if (!usuarioAvance['lecciones'][lids[lid]]){
+                    usuarioAvance['modulos'][m]['completo'] = false;
+                }else{
+                    usuarioAvance['modulos'][m]['completados']++;
+                    usuarioAvance['medallas']++;
+                    
+                }
+            }
+            usuarioAvance['modulos'][m]['porcentaje'] = parseInt((100 / usuarioAvance['modulos'][m]['totalLecciones'] ) * usuarioAvance['modulos'][m]['completados']);
+        }
+        
+        for (var c in usuarioAvance.capacitaciones){
+            usuarioAvance['capacitaciones'][c]['completo'] = true;
+            var mids = nutrifami.training.getModulosId(c);
+            for (var mid in mids){
+                if (!usuarioAvance['modulos'][mids[mid]]['completo']){
+                    usuarioAvance['capacitaciones'][c]['completo'] = false;
+                }else{
+                    usuarioAvance['capacitaciones'][c]['completados']++;
+                    usuarioAvance['modulosTerminados']++;
+                    
+                }
+            }
+            usuarioAvance['capacitaciones'][c]['porcentaje'] = parseInt((100 / usuarioAvance['capacitaciones'][c]['totalModulos'] ) * usuarioAvance['capacitaciones'][c]['completados']);
+        }
+        
+        usuarioAvance['puntos']=usuarioAvance['medallas']*100;
+        usuarioAvance['porcentaje']=parseInt((100 / usuarioAvance['totalUnidades'] ) * usuarioAvance['medallas']);
+        
+        
+        console.log(usuarioAvance);
+        
+        
+    };
+    
+    service.getAvance = function(){
+        return JSON.parse(localStorage.getItem('usuarioAvance'));
     };
     
     return service;

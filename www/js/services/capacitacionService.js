@@ -12,7 +12,7 @@ nutrifamiMobile.factory('CapacitacionService', function(UsuarioService) {
             nutrifami.training.cap_unidadestips = data["serv_tips"];
             
             
-            console.log(nutrifami.training.cap_capacitaciones);
+            //console.log(nutrifami.training.cap_capacitaciones);
         }
     };
 

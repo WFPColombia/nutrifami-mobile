@@ -1,5 +1,5 @@
 /*global angular*/
-nutrifamiMobile.controller('CapacitacionCtrl', function ($ionicPlatform, $scope, $rootScope, $ionicLoading, $stateParams, $location, $ionicPopup, UserService, UsuarioService, CapacitacionService) {
+nutrifamiMobile.controller('CapacitacionCtrl', function ($ionicPlatform, $scope, $rootScope, $ionicLoading, $stateParams, $location, $ionicPopup, UserService, CapacitacionService) {
     'use strict';
 
     $ionicPlatform.ready(function () {
@@ -7,7 +7,9 @@ nutrifamiMobile.controller('CapacitacionCtrl', function ($ionicPlatform, $scope,
         CapacitacionService.initClient();
         $scope.mids = CapacitacionService.getModulosId($stateParams.capacitacion)
         $scope.usuarioActivo = UserService.getUser();
-        $scope.usuarioAvance = UsuarioService.getUsuarioAvance();
+        $scope.usuarioAvance = UserService.getAvance();
+        
+        console.log($scope.usuarioAvance);
         
 
         $scope.modulos = [];
@@ -53,7 +55,7 @@ nutrifamiMobile.controller('CapacitacionCtrl', function ($ionicPlatform, $scope,
 
         }
         
-        console.log($scope.modulos);
+        //console.log($scope.modulos);
 
         $scope.$on('descargaTerminada', function (event, id) {
             $ionicLoading.hide();

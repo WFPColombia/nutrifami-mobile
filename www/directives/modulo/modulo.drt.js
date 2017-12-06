@@ -11,7 +11,7 @@ nutrifamiMobile.directive('moduloDrt', function ($location, $rootScope, $ionicLo
             $scope.cargadorPorcentaje = 0;
             $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitacion + "/" + $scope.info.id + "/";
             $scope.icon_descarga = $rootScope.ICON_DESCARGA;
-            console.log($rootScope.TARGETPATH + $stateParams.capacitacion + "/" + $scope.info.id + "/");
+            //console.log($rootScope.TARGETPATH + $stateParams.capacitacion + "/" + $scope.info.id + "/");
 
             var optDescarga = {
                 template: '<h3>Descargando archivos</h3>{{cargadorTexto}}<h4>{{cargadorPorcentaje}}%</h4>',
