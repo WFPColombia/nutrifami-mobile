@@ -118,7 +118,7 @@ nutrifamiMobile.factory('CapacitacionService', function(UsuarioService) {
     };
 
     service.getLeccion = function(leccion) {
-        //this.initClient();
+        this.initClient();
         return nutrifami.training.getLeccion(leccion);
     };
 

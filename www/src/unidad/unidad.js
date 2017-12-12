@@ -5,7 +5,6 @@ nutrifamiMobile.controller('UnidadCtrl', function ($ionicPlatform, $scope, $root
 
 
         $scope.unidad = CapacitacionService.getUnidad($stateParams.leccion, $stateParams.unidad);
-        console.log($scope.unidad);
         $scope.usuarioActivo = UserService.getUser();
         $scope.estadoUnidad = 'espera';
 
@@ -371,42 +370,24 @@ nutrifamiMobile.controller('UnidadCtrl', function ($ionicPlatform, $scope, $root
             $scope.siguienteUnidad = parseInt($stateParams.unidad) + 1;
 
             if ($scope.siguienteUnidad > $scope.unidad.totalUnidades) {
-                var usuarioAvance = UsuarioService.getUsuarioAvance();
-                if (typeof usuarioAvance['3'] === 'undefined') {
-                    usuarioAvance['3'] = {};
-                    usuarioAvance['3'][$stateParams.modulo] = {};
-                }
-
-                //console.log(usuarioAvance['3']);
-                if (typeof usuarioAvance['3'][$stateParams.modulo] === 'undefined') {
-                    usuarioAvance['3'][$stateParams.modulo] = {};
-                }
-                usuarioAvance['3'][$stateParams.modulo][$stateParams.leccion] = "true";
 
                 var data = {
-                    'per_id': $scope.usuarioActivo.id,
-                    'cap_id': 3,
-                    'mod_id': $stateParams.modulo,
-                    'lec_id': $stateParams.leccion
+                    'capacitacion': $stateParams.capacitacion,
+                    'modulo': $stateParams.modulo,
+                    'leccion': $stateParams.leccion
                 };
 
+                console.log(data);
+
                 // Oberlay Cargando mientras se guarda el avance
-                $scope.loading = $ionicLoading.show({
+                $ionicLoading.show({
                     template: 'Guardando Avance...',
                     animation: 'fade-in',
                     showBackdrop: true,
                     maxWidth: 40
                 });
 
-                UsuarioService.setUsuarioAvance(usuarioAvance, data, function (response) {
-                    $ionicLoading.hide();
-                    if (response.success) {
-                        MediaService.unload($scope.audios);
-                        MediaService.unload($scope.feedback.audios);
-                        $location.path('/' + $stateParams.capacitacion + '/' + $stateParams.modulo + "/" + $stateParams.leccion + "/" + $stateParams.unidad + "/leccion-terminada");
-                    }
-                });
-
+                UserService.createAvance(data);
 
             } else {
                 MediaService.unload($scope.audios);
@@ -461,6 +442,22 @@ nutrifamiMobile.controller('UnidadCtrl', function ($ionicPlatform, $scope, $root
              
              }*/
         };
+
+
+
+        $scope.$on('avanceSaved', function (event, id) {
+            $ionicLoading.hide();
+            MediaService.unload($scope.audios);
+            MediaService.unload($scope.feedback.audios);
+            $location.path('/' + $stateParams.capacitacion + '/' + $stateParams.modulo + "/" + $stateParams.leccion + "/" + $stateParams.unidad + "/leccion-terminada");
+        });
+
+        $scope.$on('avanceFaliedSave', function (event, id) {
+            $ionicLoading.hide();
+            MediaService.unload($scope.audios);
+            MediaService.unload($scope.feedback.audios);
+            $location.path('/' + $stateParams.capacitacion + '/' + $stateParams.modulo + "/" + $stateParams.leccion + "/" + $stateParams.unidad + "/leccion-terminada");
+        });
 
         /**
          * Shuffles array in place.

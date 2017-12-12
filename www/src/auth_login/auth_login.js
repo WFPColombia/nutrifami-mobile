@@ -1,11 +1,9 @@
-nutrifamiMobile.controller('AuthLoginCtrl', function($ionicPlatform, $scope, $rootScope, $ionicViewSwitcher, $ionicSlideBoxDelegate, $ionicLoading, UserService, $timeout, CapacitacionService) {
+nutrifamiMobile.controller('AuthLoginCtrl', function($ionicPlatform, $scope, $rootScope, $location,  $ionicViewSwitcher, $ionicSlideBoxDelegate, $ionicLoading, UserService, $timeout, CapacitacionService) {
     'use strict';
 
     $ionicPlatform.ready(function() {
-        
-        CapacitacionService.initClient();
-        console.log(nutrifami.training);
-        UserService.crearGestorAvance();
+                
+        CapacitacionService.initClient();       
         $scope.activeIndex = 0;
 
         /*if (UserService.isAuthenticated()) {
@@ -51,7 +49,7 @@ nutrifamiMobile.controller('AuthLoginCtrl', function($ionicPlatform, $scope, $ro
         $rootScope.$on('userLoggedIn', function(event, data) {
             $ionicLoading.hide();
             $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
-            //$location.path('/intro');
+            $location.path('/intro');
 
         });
 

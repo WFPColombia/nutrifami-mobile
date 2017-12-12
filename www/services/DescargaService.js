@@ -37,7 +37,6 @@ nutrifamiMobile.factory('DescargaService', function UserService($http, $rootScop
         $http.get(BaseUrl + 'js/version.JSON').then(function (response) {
             versionNueva = response.data.Capacitacion.ID;
             console.log(versionNueva + " " + versionActual);
-            console
             if (versionActual != versionNueva || !service.assetsInicialesDescargados() ) {
                 //Actualizamos el numero de versión
                 localStorage.setItem("version", JSON.stringify(versionNueva));

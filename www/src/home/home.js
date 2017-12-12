@@ -56,6 +56,11 @@ nutrifamiMobile.controller('HomeCtrl', function ($ionicPlatform, $scope, $ionicV
                     }]
             });
         };
+        
+        $scope.getPorcentaje = function(cid){
+            var avanceCapacitacion = UserService.getAvanceCapacitacion(cid);
+            return avanceCapacitacion.porcentaje;
+        };
 
         $scope.irABuscar = function () {
             $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.

@@ -66,7 +66,7 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         redirectUri: "http://usuarios.nutrifami.org/"
     });
 
-    $authProvider.authToken = 'Token';
+    $authProvider.tokenType = 'Token';
 
 
     $stateProvider.state('app', {
@@ -104,16 +104,7 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
 
 
 
-    $stateProvider.state('app.progreso', {
-        url: '/progreso',
-        cache: false,
-        views: {
-            'menuContent': {
-                templateUrl: 'views/progreso.html',
-                controller: 'ProgresoController'
-            }
-        }
-    });
+    
 
     $stateProvider.state('nc', {
         url: '/nutricompra',
@@ -221,6 +212,17 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
             }
         }
     });
+    
+    $stateProvider.state('app.progreso', {
+        url: '/progreso',
+        cache: false,
+        views: {
+            'menuContent': {
+                templateUrl: 'src/progreso/progreso.html',
+                controller: 'ProgresoCtrl'
+            }
+        }
+    });
 
     $stateProvider.state('app.recetas', {
         url: '/recetas',
@@ -297,8 +299,8 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
     $stateProvider.state('leccionTerminada', {
         url: '/:capacitacion/:modulo/:leccion/:unidad/leccion-terminada',
         cache: false,
-        templateUrl: 'views/leccionTerminada.html',
-        controller: 'LeccionTerminadaController'
+        templateUrl: 'src/leccion_terminada/leccion_terminada.html',
+        controller: 'LeccionTerminadaCtrl'
     });
 
     $stateProvider.state('sobre', {
@@ -334,15 +336,16 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
     $urlRouterProvider.otherwise('/app/');
 });
 
-nutrifamiMobile.run(function ($ionicPlatform, $rootScope, $location, $cordovaFileTransfer, $ionicHistory) {
+nutrifamiMobile.run(function ($ionicPlatform, $rootScope, $location, $http) {
 
     //Deshabilitamos el boton de ir atrás del Hardware de Android
     $ionicPlatform.registerBackButtonAction(function (e) {
         //do your stuff
         e.preventDefault();
     }, 101);
-
-
+    
+    $http.defaults.headers.post.Authorization = "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==";
+    
     $rootScope.globals = JSON.parse(localStorage.getItem('globals')) || {};
 
     $rootScope.$on('$locationChangeStart', function (event, next, current) {

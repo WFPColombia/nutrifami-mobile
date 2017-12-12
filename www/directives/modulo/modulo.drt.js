@@ -1,17 +1,20 @@
-nutrifamiMobile.directive('moduloDrt', function ($location, $rootScope, $ionicLoading, $ionicPopup, $stateParams, DescargaService) {
+nutrifamiMobile.directive('moduloDrt', function ($location, $rootScope, $ionicLoading, $ionicPopup, $stateParams, DescargaService, UserService) {
     return {
         restrict: 'E',
         scope: {
             info: '=',
-            avance: '='
         },
         templateUrl: 'directives/modulo/modulo.drt.html',
         link: function ($scope) {
+            
+
             $scope.cargadorTexto = "Preparando archivos para la descarga";
             $scope.cargadorPorcentaje = 0;
             $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitacion + "/" + $scope.info.id + "/";
             $scope.icon_descarga = $rootScope.ICON_DESCARGA;
-            //console.log($rootScope.TARGETPATH + $stateParams.capacitacion + "/" + $scope.info.id + "/");
+            $scope.avance = UserService.getAvanceModulo($scope.info.id);
+            console.log($scope.avance);
+
 
             var optDescarga = {
                 template: '<h3>Descargando archivos</h3>{{cargadorTexto}}<h4>{{cargadorPorcentaje}}%</h4>',
@@ -28,10 +31,7 @@ nutrifamiMobile.directive('moduloDrt', function ($location, $rootScope, $ionicLo
                 }
                 return (totalLecciones);
             };
-            $scope.porcentajeAvance = function () {
-                return (100 / $scope.totalLecciones() * $scope.info.avance.leccionesFinalizadas);
-            };
-
+            
             $scope.paqueteDescargado = function () {
                 return DescargaService.paqueteCompletoDescargado('modulos', $scope.info.id);
             };

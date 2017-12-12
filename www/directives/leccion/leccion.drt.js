@@ -1,4 +1,4 @@
-nutrifamiMobile.directive('leccionInfo', function () {
+nutrifamiMobile.directive('leccionDrt', function (UserService) {
     return {
         restrict: 'E',
         scope: {
@@ -6,9 +6,12 @@ nutrifamiMobile.directive('leccionInfo', function () {
             modulo: '=',
             index: '@'
         },
-        templateUrl: 'views/directives/leccionInfo.drt.html',
-        link: function ($scope, $element, $attrs) {
+        templateUrl: 'directives/leccion/leccion.drt.html',
+        link: function ($scope) {
             $scope.audiosDescargados = $scope.$parent.audiosDescargados;
+            $scope.avance = UserService.getAvanceLeccion($scope.leccion.id);
+            console.log($scope.avance);
+            
             $scope.porcentajeAvance = function () {
                 return(100 / $scope.totalLecciones() * $scope.avance.leccionesTerminadas);
             };

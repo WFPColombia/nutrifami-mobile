@@ -6,7 +6,6 @@ nutrifamiMobile.controller('ModuloCtrl', function($ionicPlatform, $scope, $rootS
         CapacitacionService.initClient();
         $scope.modulo = CapacitacionService.getModulo($stateParams.modulo);
         $scope.usuarioActivo = UserService.getUser();
-        $scope.usuarioAvance = UsuarioService.getUsuarioAvance();
         $scope.lecciones = [];
         
         $scope.assetpath = $rootScope.TARGETPATH+$stateParams.capacitacion+"/"+$stateParams.modulo+"/";
@@ -31,17 +30,11 @@ nutrifamiMobile.controller('ModuloCtrl', function($ionicPlatform, $scope, $rootS
                 var tempLeccion = nutrifami.training.getLeccion($scope.lids[lid]);
 
                 if (tempLeccion.activo == 1) {
-                    tempLeccion.avance = {};
 
                     if (tempLeccion.titulo.audio.nombre !== null) {
                         var id = parseInt(lid) + 1;
                         tempLeccion.titulo.audio.id = "paso" + id;
                         $scope.audios[tempLeccion.titulo.audio.id] = $scope.assetpath +$scope.lids[lid]+"/"+tempLeccion.titulo.audio.nombre;
-                    }
-                    if (typeof $scope.usuarioAvance['3'] !== 'undefined' && typeof $scope.usuarioAvance['3'][$stateParams.modulo] !== 'undefined' && typeof $scope.usuarioAvance['3'][$stateParams.modulo][$scope.lids[lid]] !== 'undefined') {
-                        tempLeccion.avance.terminada = true;
-                    } else {
-                        tempLeccion.avance.terminada = false;
                     }
                     $scope.modulo.totalLecciones++;
                     $scope.lecciones.push(tempLeccion);
@@ -49,8 +42,7 @@ nutrifamiMobile.controller('ModuloCtrl', function($ionicPlatform, $scope, $rootS
             }
             console.log($scope.audios);
             if($scope.audiosDescargados){
-                            MediaService.preloadSimple($scope.audios);
-
+                MediaService.preloadSimple($scope.audios);
             }
         }
 

@@ -1,17 +1,17 @@
-nutrifamiMobile.controller('ProgresoController', function($ionicPlatform, $ionicPopup, $scope, $ionicLoading, UsuarioService) {
+nutrifamiMobile.controller('ProgresoCtrl', function ($ionicPlatform, $ionicPopup, $scope, $ionicLoading, UserService) {
     'use strict';
-    $ionicPlatform.ready(function() {
+    $ionicPlatform.ready(function () {
 
-        $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
-        $scope.usuarioAvance = UsuarioService.getUsuarioAvance();
-        $scope.usuarioFamilia = UsuarioService.getUsuarioFamilia();
+        $scope.usuarioActivo = UserService.getUser();
+        $scope.usuarioAvance = UserService.getAvance();
+        //$scope.usuarioFamilia = UsuarioService.getUsuarioFamilia();
 
         console.log($scope.usuarioActivo);
         console.log($scope.usuarioAvance);
         console.log($scope.usuarioFamilia);
 
 
-        $scope.cargarMiProgreso = function() {
+        $scope.cargarMiProgreso = function () {
             $scope.loading = $ionicLoading.show({
                 //template: 'Cargando datos...',
                 animation: 'fade-in',
@@ -23,7 +23,7 @@ nutrifamiMobile.controller('ProgresoController', function($ionicPlatform, $ionic
             $ionicLoading.hide();
         };
 
-        $scope.cargarMiFamiliaProgreso = function() {
+        $scope.cargarMiFamiliaProgreso = function () {
             $scope.loading = $ionicLoading.show({
                 //template: 'Cargando datos...',
                 animation: 'fade-in',
@@ -36,29 +36,28 @@ nutrifamiMobile.controller('ProgresoController', function($ionicPlatform, $ionic
 
         };
 
-        $scope.verDiploma = function(index) {
+        $scope.verDiploma = function (index) {
 
             $scope.diplomaTitulo = $scope.usuarioAvance.diplomas[index];
 
-            var popUpDiploma = $ionicPopup.show({
-                templateUrl: 'views/modals/diploma.modal.html',
+            $ionicPopup.show({
+                templateUrl: 'modals/diploma.modal.html',
                 scope: $scope,
                 cssClass: 'diploma',
                 buttons: [
                     /*{
-                                            text: 'Descargar',
-                                            type: 'button-positive',
-                                            onTap: function(e) {
-                                                $scope.descargar();
-                                            }
-                                        }
-                                        , */
+                     text: 'Descargar',
+                     type: 'button-positive',
+                     onTap: function(e) {
+                     $scope.descargar();
+                     }
+                     }
+                     , */
                     {
                         text: 'Continuar',
                         type: 'button-positive',
-                        onTap: function(e) {
+                        onTap: function (e) {
                             //MediaService.unload($scope.audios);
-
                         }
                     }
                 ]
@@ -67,17 +66,16 @@ nutrifamiMobile.controller('ProgresoController', function($ionicPlatform, $ionic
 
         };
 
-        $scope.descargar = function() {
+        $scope.descargar = function () {
             console.log("Imprimir");
             html2canvas(document.getElementById('prueba'), {
-
-                onrendered: function(canvas) {
+                onrendered: function (canvas) {
                     var data = canvas.toDataURL();
                     var docDefinition = {
                         content: [{
-                            image: data,
-                            width: 798
-                        }],
+                                image: data,
+                                width: 798
+                            }],
                         pageSize: {
                             width: 800,
                             height: 500
