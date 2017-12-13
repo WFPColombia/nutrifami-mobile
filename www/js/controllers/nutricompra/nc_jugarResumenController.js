@@ -1,10 +1,10 @@
 /*global angular*/
-nutrifamiMobile.controller('nc_jugarResumenController', function($scope, $location, UsuarioService, NutricompraService) {
+nutrifamiMobile.controller('nc_jugarResumenController', function($scope, $location, UserService, NutricompraService) {
     'use strict';
 
 
 
-    $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
+    $scope.usuarioActivo = UserService.getUser();
 
 
     $scope.nutricompra = true;

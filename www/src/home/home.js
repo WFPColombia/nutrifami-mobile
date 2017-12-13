@@ -7,6 +7,13 @@ nutrifamiMobile.controller('HomeCtrl', function ($ionicPlatform, $scope, $ionicV
         CapacitacionService.initClient();
         $scope.capacitaciones = CapacitacionService.getCapacitacionesActivas();
 
+        //UserService.readAvance();
+        
+        for (var c in $scope.capacitaciones){
+            $scope.capacitaciones[c]['porcentaje'] = getPorcentaje($scope.capacitaciones[c].id);
+            console.log();
+        }
+
         console.log($scope.capacitaciones);
         console.log(UserService.getToken());
 
@@ -57,7 +64,7 @@ nutrifamiMobile.controller('HomeCtrl', function ($ionicPlatform, $scope, $ionicV
             });
         };
         
-        $scope.getPorcentaje = function(cid){
+        function getPorcentaje(cid){
             var avanceCapacitacion = UserService.getAvanceCapacitacion(cid);
             return avanceCapacitacion.porcentaje;
         };

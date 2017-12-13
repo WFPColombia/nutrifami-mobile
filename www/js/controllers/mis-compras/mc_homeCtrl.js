@@ -1,9 +1,9 @@
-nutrifamiMobile.controller('mc_homeCtrl', function($ionicPlatform, $scope, $rootScope, $ionicHistory, $ionicLoading, $ionicPopup, $ionicViewSwitcher, $state, $location, $timeout, ComprasService, UsuarioService, MediaService) {
+nutrifamiMobile.controller('mc_homeCtrl', function($ionicPlatform, $scope, $rootScope, $ionicHistory, $ionicLoading, $ionicPopup, $ionicViewSwitcher, $state, $location, $timeout, ComprasService, UserService, MediaService) {
     'use strict';
     $ionicPlatform.ready(function() {
 
         $scope.audios = {};
-        $scope.usuarioActivo = UsuarioService.getUsuarioActivo()
+        $scope.usuarioActivo = UserService.getUser();
         $scope.animar = false;
 
         var usuario = {};

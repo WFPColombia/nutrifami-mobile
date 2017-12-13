@@ -1,10 +1,10 @@
 /*global angular*/
-nutrifamiMobile.controller('nc_homeController', function($scope, $location, $ionicViewSwitcher, UsuarioService) {
+nutrifamiMobile.controller('nc_homeController', function($scope, $location, $ionicViewSwitcher, UserService) {
     'use strict';
 
 
 
-    $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
+    $scope.usuarioActivo = UserService.getUser();
 
     $scope.salir = function() {
 

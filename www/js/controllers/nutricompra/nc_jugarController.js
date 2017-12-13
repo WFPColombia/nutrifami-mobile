@@ -1,10 +1,10 @@
 /*global angular*/
-nutrifamiMobile.controller('nc_jugarController', function($scope, $location, $ionicPopup, $ionicViewSwitcher, UsuarioService, NutricompraService) {
+nutrifamiMobile.controller('nc_jugarController', function($scope, $location, $ionicPopup, $ionicViewSwitcher, UserService, NutricompraService) {
     'use strict';
 
 
 
-    $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
+   $scope.usuarioActivo = UserService.getUser();
     $scope.pagina = 1;
 
     $scope.nutricompra = true;

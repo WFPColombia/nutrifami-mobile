@@ -1,9 +1,9 @@
-nutrifamiMobile.controller('mc_introCtrl', function($ionicLoading, $ionicPlatform, $ionicViewSwitcher, $location, $scope, $rootScope, $ionicPopup, $state, ComprasService, UsuarioService, MediaService) {
+nutrifamiMobile.controller('mc_introCtrl', function($ionicLoading, $ionicPlatform, $ionicViewSwitcher, $location, $scope, $rootScope, $ionicPopup, $state, ComprasService, UserService, MediaService) {
     'use strict';
     $ionicPlatform.ready(function() {
 
         $scope.audios = {};
-        $scope.usuarioActivo = UsuarioService.getUsuarioActivo()
+        $scope.usuarioActivo = UserService.getUser();
 
         $scope.goTo = function() {
             $location.path('/app/mis-compras');

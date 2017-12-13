@@ -22,10 +22,10 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
     // because previous version of code introduced browser-related errors
 
     //disable IE ajax request caching
-    $httpProvider.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
+    //$httpProvider.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
     // extra
-    $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
-    $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
+    //$httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
+    //$httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
 
 
     // Configuration common for all providers.
@@ -39,10 +39,10 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         }
     };
     
-    //$authProvider.baseUrl = 'http://usuarios.nutrifami.org/';
-    //$authProvider.loginUrl = 'http://usuarios.nutrifami.org/api-token-auth/';
+    //$authProvider.loginUrl = 'http://usuarios.nutrifami.org/api/token-auth/';
+    //$authProvider.signupUrl = 'http://usuarios.nutrifami.org/api/create-user/';
     $authProvider.loginUrl = 'http://localhost:8000/api/token-auth/';
-    $authProvider.signupUrl = 'http://localhost:8000/api/usuarios/';
+    $authProvider.signupUrl = 'http://localhost:8000/api/create-user/';
 
     // Change the platform and redirectUri only if we're on mobile
     // so that development on browser can still work. 
@@ -168,6 +168,7 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
 
     $stateProvider.state('auth', {
         url: '/auth',
+        cache: false,
         templateUrl: 'src/auth_home/auth_home.html',
         controller: 'AuthHomeCtrl'
     });
@@ -181,12 +182,14 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
 
     $stateProvider.state('registro', {
         url: '/auth/registro',
+        cache: false,
         templateUrl: 'src/auth_registro/auth_registro.html',
         controller: 'AuthRegistroCtrl'
     });
 
     $stateProvider.state('registro2', {
         url: '/auth/registro/2',
+        cache: false,
         templateUrl: 'src/auth_registro2/auth_registro2.html',
         controller: 'AuthRegistro2Ctrl'
     });

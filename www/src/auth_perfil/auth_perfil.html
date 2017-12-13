@@ -10,7 +10,7 @@
                                     <div class="boton-flotante">
                                         <button class="btn btn-default" go-click="app/editar-perfil" ion-ripple><span class="icon ion-edit" aria-hidden="true"></span> Editar <i ng-show="usuarioActivo.municipio == '' || usuarioActivo.municipio == null" class="ion-ios-information"></i> </button>
                                     </div>
-                                    <img ng-src="img/icons/ico-{{usuarioActivo.genero}}.png">
+                                    <img ng-src="img/icons/ico-{{usuarioActivo.genero == null || usuarioActivo.genero == '' ? 'Masculino' : usuarioActivo.genero }}.png">
                                     <h2>{{ usuarioActivo.username }}</h2>
                                     <!--<h1>Mi información</h1>-->
                                 </div>

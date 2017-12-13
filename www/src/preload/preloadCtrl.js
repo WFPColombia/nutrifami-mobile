@@ -28,7 +28,7 @@ nutrifamiMobile.controller('PreloadCtrl', function ($ionicPlatform, $ionicPopup,
                     if (response) {
                         console.log("Existe una nueva versión de la capacitación");
                         DescargaService.actualizarCapacitacion(function () {
-                            UserService.crearGestorAvance();
+                            UserService.readAvance();
                             DescargaService.descargaInicial();
                         });
                     } else {

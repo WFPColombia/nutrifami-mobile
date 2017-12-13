@@ -3,7 +3,7 @@
         <div class="row">
             <div class="perfil-panel editar-perfil">
                 <div class="perfil-header">
-                    <img ng-src="img/icons/ico-{{usuarioActivo.genero}}.png" alt="Genero {{usuarioActivo.genero}}">
+                    <img ng-src="img/icons/ico-{{usuarioActivo.genero == null || usuarioActivo.genero == '' ? 'Masculino' : usuarioActivo.genero }}.png" alt="Genero {{usuarioActivo.genero}}">
                     <h1>Mi información</h1>
                 </div>
                 <div class="perfil-body">

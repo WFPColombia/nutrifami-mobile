@@ -214,7 +214,7 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth, $
     service.successAuth = function (response) {
         console.log("successAuth");
         $auth.setToken(response.access_token);
-        service.setAvance(response.data);
+        service.setAvance(response.data.avances);
         service.setUser(response.data);
         $rootScope.$broadcast('userLoggedIn', {data: response.data});
     };
@@ -278,7 +278,6 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth, $
         }
 
         localStorage.setItem("usuarioAvance", JSON.stringify(usuarioAvance));
-        console.log("Crear gestor descarga");
 
     };
 
@@ -287,12 +286,10 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth, $
      * @param {type} data
      * @returns {undefined}
      */
-    service.setAvance = function (data) {
+    service.setAvance = function (avances) {
         service.crearGestorAvance();
 
         var usuarioAvance = service.getAvance();
-        var avances = data.avances;
-
         for (var a in avances) {
             usuarioAvance['lecciones'][avances[a]['leccion']] = true;
         }
@@ -302,7 +299,25 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth, $
 
 
     };
-
+    
+    service.readAvance = function(){
+        $http({
+            method: 'GET',
+            url: baseUrl + 'avance-user/',
+            data: {},
+        }).then(function successCallback(response) {
+            console.log(response);
+            service.setAvance(response.data);
+            //localStorage.setItem("user", JSON.stringify(response.data));
+            //$rootScope.$broadcast('userUpdated', response.data);
+        }, function errorCallback(response) {
+            console.log(response);
+            //$rootScope.$broadcast('userFaliedUpdate', response.data);
+        });
+        
+    }
+    
+    
     service.getAvance = function () {
         return JSON.parse(localStorage.getItem('usuarioAvance'));
     };

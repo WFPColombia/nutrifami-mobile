@@ -1,8 +1,8 @@
-nutrifamiMobile.controller('mc_grupoCtrl', function($ionicPlatform, $location, $scope, $ionicLoading, $ionicPopup, $stateParams, ComprasService, UsuarioService, MediaService) {
+nutrifamiMobile.controller('mc_grupoCtrl', function($ionicPlatform, $location, $scope, $ionicLoading, $ionicPopup, $stateParams, ComprasService, UserService, MediaService) {
     'use strict';
     $ionicPlatform.ready(function() {
 
-        $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
+        $scope.usuarioActivo = UserService.getUser();
 
         var usuario = {};
         var puntoVenta = {

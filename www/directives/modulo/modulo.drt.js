@@ -45,10 +45,11 @@ nutrifamiMobile.directive('moduloDrt', function ($location, $rootScope, $ionicLo
                     if (DescargaService.isOnline()) {
                         $scope.modal = {
                             texto1: '¿Desea descargar el módulo con audios?',
-                            texto2: 'Descargar el módulo con audios le permitirá escuchar las lecciones, pero la descarga tomará más tiempo'
+                            texto2: 'Descargar el módulo con audios le permitirá escuchar las lecciones, pero la descarga tomará más tiempo',
+                            estado: 'alert' // ok, alert, error
                         };
                         $ionicPopup.show({
-                            templateUrl: 'views/modals/modal.html',
+                            templateUrl: 'modals/modal.html',
                             scope: $scope,
                             cssClass: 'salir-unidad',
                             buttons: [{
