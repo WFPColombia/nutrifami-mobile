@@ -1,14 +1,20 @@
 <ion-view>
-    <ion-content overflow-scroll="true" class="auth auth-login auth-registro">
+    <ion-content overflow-scroll="true" class="auth auth-login auth-registro2">
+        
         <div>
             <div class="container">
                 <div class="btn-back">
-                    <a href="#/auth"><img src="img/nutricompra/nc-btn-back.png"></a>
-                </div>
+            <a href="#/auth"><img src="img/nutricompra/nc-btn-back.png"></a>
+        </div>
                 <!--<button ng-click="playAudio('audiologin')" class="login-sonido icon ion-volume-high" aria-hidden="true" ion-ripple></button>-->
                 <div class="row logo center-block">
                     <div class="col col-100">
                         <img src="img/logo-nutrifami.png" alt="Nutrifami" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h2>Hemos mejorado la seguridad de Nutrifami, solo debes llenar los siguientes campos!</h2>
                     </div>
                 </div>
                 <form name="form" ng-submit="signup()" role="form">
@@ -57,21 +63,6 @@
                         </div>
                     </div>
                 </form>
-                <!--<div class="redes-sociales">
-                    <div class="row">
-                        <div class="col">
-                            <p>Puedes ingresar con: </p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <button class="button button-block facebook" ng-click="authenticate('facebook')"><i class="icon ion-social-facebook"></i> Facebook
-                        </div>
-                        <div class="col">
-                            <button class="button button-block google" ng-click="authenticate('google')"><i class="icon ion-social-google"></i> Google</button>
-                        </div>
-                    </div>
-                </div>-->
             </div>
         </div>
     </ion-content>

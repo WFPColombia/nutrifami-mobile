@@ -1,4 +1,4 @@
-nutrifamiMobile.controller('AuthLoginCtrl', function($ionicPlatform, $scope, $rootScope, $location,  $ionicViewSwitcher, $ionicSlideBoxDelegate, $ionicLoading, UserService, $timeout, CapacitacionService) {
+nutrifamiMobile.controller('AuthLoginCtrl', function($ionicPlatform, $scope, $rootScope, $location,  $ionicViewSwitcher, $ionicSlideBoxDelegate, $ionicLoading, UserService, $timeout, $cordovaInAppBrowser, CapacitacionService) {
     'use strict';
 
     $ionicPlatform.ready(function() {
@@ -42,11 +42,31 @@ nutrifamiMobile.controller('AuthLoginCtrl', function($ionicPlatform, $scope, $ro
         };
 
         $scope.authenticate = function(provider) {
-            console.log("Click " + provider)
+            console.log("Click " + provider);
             UserService.authenticate(provider);
         };
+        
+        $scope.olvidoContrasena = function() {
 
-        $rootScope.$on('userLoggedIn', function(event, data) {
+            var options = {
+                location: 'yes',
+                clearcache: 'yes',
+                toolbar: 'yes'
+            };
+
+            $cordovaInAppBrowser.open('http://usuarios.nutrifami.org/admin/password_reset/', '_blank', options)
+                .then(function(event) {
+                    // success
+                })
+                .catch(function(event) {
+                    // error
+                });
+
+
+        }
+
+        $scope.$on('userLoggedIn', function(event, data) {
+            console.log("userLoggedIn Login");
             $ionicLoading.hide();
             $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
             $location.path('/intro');
@@ -54,13 +74,19 @@ nutrifamiMobile.controller('AuthLoginCtrl', function($ionicPlatform, $scope, $ro
         });
 
         // will fire in case authentication failed
-        $rootScope.$on('userFailedLogin', function(event, response) {
+        $scope.$on('userFailedLogin', function(event, response) {
             $ionicLoading.hide();
             console.log(response);
             $scope.error = response.message;
             $timeout(function() {
                 $scope.error = "";
             }, 3000);
+        });
+        
+        $scope.$on('userLoggedInwithDocument', function(event, data) {
+            $ionicLoading.hide();
+            $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
+            $location.path('/auth/migration');
 
         });
 

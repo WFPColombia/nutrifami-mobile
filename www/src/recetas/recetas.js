@@ -1,8 +1,8 @@
-nutrifamiMobile.controller('RecetasCtrl', function($ionicPlatform, $scope, $ionicLoading, $location, $ionicViewSwitcher, $ionicFilterBar, RecetasService, UsuarioService) {
+nutrifamiMobile.controller('RecetasCtrl', function($ionicPlatform, $scope, $ionicLoading, $location, $ionicViewSwitcher, $ionicFilterBar, RecetasService, UserService) {
     'use strict';
 
     $scope.recetas = {};
-    $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
+    $scope.usuarioActivo = UserService.getUser();
     var filterBarInstance;
 
     $scope.search = { text: '' };

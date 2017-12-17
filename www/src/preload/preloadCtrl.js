@@ -6,6 +6,8 @@ nutrifamiMobile.controller('PreloadCtrl', function ($ionicPlatform, $ionicPopup,
         $scope.cargadorTexto = "Estamos preparando Nutrifami. Por favor espera un momento";
         $scope.cargadorPorcentaje = 0.0;
         
+        console.log(UserService.getVersionApp());
+        
         if (window.cordova) {
             window.plugins.insomnia.keepAwake(function () {
                 console.log("inmsonia ok");
@@ -15,11 +17,15 @@ nutrifamiMobile.controller('PreloadCtrl', function ($ionicPlatform, $ionicPopup,
         }
 
         //Verificar el destino
-        var destino = "/login";
+        var destino = "/auth";
         var puedeEntrar = false;
         if (UserService.getUser() != null) {
             puedeEntrar = true;
             destino = '/app/';
+        }
+        
+        if(UserService.getVersionApp() == null || UserService.getVersionApp() != 2){
+            var destino = "/auth";
         }
 
         function initClient() {

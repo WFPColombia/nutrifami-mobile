@@ -32,14 +32,14 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="first_name">Nombres</label>
-                                    <input type="text" class="form-control" name='first_name' placeholder="Ingrese su nombre" ng-model="usuarioActivo.first_name" ng-model-options="{ updateOn: 'blur' }" required>
+                                    <input type="text" class="form-control" name='first_name' placeholder="Ingrese su nombre" ng-model="usuarioActivo.first_name" ng-model-options="{ updateOn: 'blur' }">
                                     <div class="help-block" ng-show="form.first_name.$error.required">El campo es obligatorio.</div>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="last_name">Apellidos</label>
-                                    <input type="text" class="form-control" name="last_name" placeholder="Ingrese su apellido" ng-model="usuarioActivo.last_name" ng-model-options="{ updateOn: 'blur' }" required>
+                                    <input type="text" class="form-control" name="last_name" placeholder="Ingrese su apellido" ng-model="usuarioActivo.last_name" ng-model-options="{ updateOn: 'blur' }">
                                     <div class="help-block" ng-show="form.last_name.$error.required">El campo es obligatorio.</div>
                                 </div>
                             </div>
@@ -48,8 +48,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="tipo_documento">Tipo de Documento de Identidad</label>
-                                    <select class="form-control" name="tipo_documento" ng-options="option.name for option in tipos_documento.availableOptions track by option.id" ng-model="tipos_documento.selectedOption" required>
-                                        <option disabled value> -- Elige una opción -- </option>
+                                    <select class="form-control" name="tipos_documento" ng-options="option.name for option in tipos_documento.availableOptions track by option.id" ng-model="tipos_documento.selectedOption" required>
                                     </select>
                                     <div class="help-block" ng-show="form.tipos_documento.$error.required">El campo es obligatorio.</div>
                                 </div>

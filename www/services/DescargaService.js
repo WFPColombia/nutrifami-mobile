@@ -7,7 +7,12 @@ nutrifamiMobile.factory('DescargaService', function ($http, $rootScope, $cordova
     if (window.cordova) {
         BaseUrl = 'http://nutrifami.org/';
     }
-
+    
+    /**
+     * 
+     * @returns {Boolean}
+     * @returns {Boolean}
+     */
     service.isOnline = function () {
         console.log("isOnline?");
         //Comprobamos la conexión a Internet   

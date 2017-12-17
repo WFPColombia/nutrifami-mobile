@@ -1,10 +1,24 @@
-nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth, $http) {
+nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth, $http, $q) {
 
     var service = {};
 
-    //var baseUrl = 'http://usuarios.nutrifami.org/api/';
-    var baseUrl = 'http://localhost:8000/api/';
-
+    var baseUrl = 'http://usuarios.nutrifami.org/api/';
+    //var baseUrl = 'http://localhost:8000/api/';
+    
+    /**
+     * 
+     */
+    service.getVersionApp = function() {
+        return JSON.parse(localStorage.getItem('versionApp'));
+    }
+    
+    /**
+     * 
+     */
+    service.setVersionApp = function() {
+        localStorage.setItem("versionApp", JSON.stringify(2));
+    }
+    
     /**
      * @description Retorna el token de usuario
      * @returns {unresolved}
@@ -43,18 +57,12 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth, $
      * @param {type} password
      * @returns {undefined}
      */
-    service.signup = function (username, email, password) {
-        var user = {
-            username: username,
-            email: email,
-            password: password,
-            token: 'token'
-        };
-
+    service.signup = function (user) {
+        console.log(user);
         $auth.signup(user)
                 .then(function (response) {
                     console.log(response);
-                    service.login(username, password);
+                    service.login(user.username, user.password);
                 })
                 .catch(function (response) {
                     console.log(response);
@@ -62,6 +70,8 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth, $
                         service.failedAuth({message: "Ya existe este nombre de usuario"});
                     } else if (response.data.email) {
                         service.failedAuth({message: "El correo electrónico ya se encuentra registrado"});
+                    } else if (response.data.id_antiguo) {
+                        service.failedAuth({message: "Ya se ha generado una contraseña para esta cuenta."});
                     } else {
                         service.failedAuth({message: "Ha ocurrido un error inesperado, inténtelo más tarde!!"});
                     }
@@ -79,11 +89,7 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth, $
         nutrifami.login(username, password, function (response) {
             if (response.success) {
                 if (response.data.response === 1) {
-                    response.data.access_token = 'no-token';
-                    response.data.username = username;
-                    //preparar el objeto para guardarlo luego
-                    console.log(response);
-                    service.successAuth(response);
+                    service.userMigration(response.data);
                 } else {
                     service.failedAuth({message: 'El documento es incorrecto'});
                 }
@@ -205,6 +211,74 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth, $
             $rootScope.$broadcast('userFaliedUpdate', response.data);
         });
     };
+    
+    service.userMigration = function (data){
+        
+        var oldUser = data;
+        var oldAvance = data.avance[oldUser.id];
+        var tempAvance = [];
+        console.log(oldUser);
+  
+        
+        for (var c in oldAvance){
+            for (var m in oldAvance[c]){
+                for(var l in oldAvance[c][m]){
+                    if (oldAvance[c][m][l]){
+                        tempAvance.push(l);
+                    }
+                }
+            }
+        }
+        
+        var tempUser = {
+        "first_name": oldUser["nombre"],
+        "last_name": oldUser["apellido"],
+        "id_antiguo": oldUser["id"]
+    };
+
+        localStorage.setItem("tempUser", JSON.stringify(tempUser));
+        localStorage.setItem("tempAvance", JSON.stringify(tempAvance));
+        
+        $rootScope.$broadcast('userLoggedInwithDocument', {data: data});
+    };
+    
+    service.migrarAvance = function(){
+        
+        var tempAvance = JSON.parse(localStorage.getItem('tempAvance'));
+        
+        
+        var deferred = $q.defer();
+        var promises = [];
+            
+        for (var a in tempAvance){
+            var data = {
+                'capacitacion': 0,
+                'modulo': 0,
+                'leccion': tempAvance[a]
+            };
+            
+            promises.push(
+                    $http({
+                        method: 'POST',
+                        url: baseUrl + 'avances/',
+                        data: data
+                    }).then(function successCallback(response) {
+                        console.log(response);
+                    }, function errorCallback(response) {
+                        console.log(response);
+                    }));
+        }
+        
+        $q.all(promises).then(function(res) {
+                deferred.resolve();
+                localStorage.removeItem('tempUser');
+                localStorage.removeItem("tempAvance");
+                service.readAvance();
+        });
+        
+        return deferred.promise;
+        
+    };
 
     /**
      * 
@@ -216,6 +290,7 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth, $
         $auth.setToken(response.access_token);
         service.setAvance(response.data.avances);
         service.setUser(response.data);
+        service.setVersionApp();
         $rootScope.$broadcast('userLoggedIn', {data: response.data});
     };
 

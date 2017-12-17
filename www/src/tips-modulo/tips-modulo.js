@@ -1,8 +1,8 @@
-nutrifamiMobile.controller('TipsModuloCtrl', function($ionicPlatform, $scope, $location, $stateParams, AudioService, UsuarioService, TipsService) {
+nutrifamiMobile.controller('TipsModuloCtrl', function($ionicPlatform, $scope, $location, $stateParams, AudioService, UserService, TipsService) {
     'use strict';
     $ionicPlatform.ready(function() {
 
-        $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
+        $scope.usuarioActivo = UserService.getUser();
 
         $scope.lecciones = [];
 

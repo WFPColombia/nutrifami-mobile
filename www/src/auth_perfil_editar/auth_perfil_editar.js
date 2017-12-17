@@ -108,6 +108,8 @@ nutrifamiMobile.controller('AuthPerfilEditarCtrl', function ($ionicPlatform, $fi
          });*/
 
         $scope.updateUser = function () {
+            
+            console.log("UpdateUser");
 
             $scope.loading = $ionicLoading.show({
                 template: 'Guardando Cambios...',

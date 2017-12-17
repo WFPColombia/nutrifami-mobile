@@ -39,10 +39,10 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         }
     };
     
-    //$authProvider.loginUrl = 'http://usuarios.nutrifami.org/api/token-auth/';
-    //$authProvider.signupUrl = 'http://usuarios.nutrifami.org/api/create-user/';
-    $authProvider.loginUrl = 'http://localhost:8000/api/token-auth/';
-    $authProvider.signupUrl = 'http://localhost:8000/api/create-user/';
+    $authProvider.loginUrl = 'http://usuarios.nutrifami.org/api/token-auth/';
+    $authProvider.signupUrl = 'http://usuarios.nutrifami.org/api/create-user/';
+    //$authProvider.loginUrl = 'http://localhost:8000/api/token-auth/';
+    //$authProvider.signupUrl = 'http://localhost:8000/api/create-user/';
 
     // Change the platform and redirectUri only if we're on mobile
     // so that development on browser can still work. 
@@ -179,6 +179,13 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         templateUrl: 'src/auth_login/auth_login.html',
         controller: 'AuthLoginCtrl'
     });
+    
+    $stateProvider.state('migration', {
+        url: '/auth/migration',
+        cache: false,
+        templateUrl: 'src/auth_migration/auth_migration.html',
+        controller: 'AuthMigrationCtrl'
+    });
 
     $stateProvider.state('registro', {
         url: '/auth/registro',
@@ -269,6 +276,22 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         templateUrl: 'src/home_buscar/home_buscar.html',
         controller: 'HomeBuscarCtrl'
     });
+    
+    $stateProvider.state('app.tips', {
+        url: '/tips',
+        views: {
+            'menuContent': {
+                templateUrl: 'src/tips/tips.html',
+                controller: 'TipsCtrl'
+            }
+        }
+    });
+
+    $stateProvider.state('tipsModulo', {
+        url: '/tips/:modulo',
+        templateUrl: 'src/tips-modulo/tips-modulo.html',
+        controller: 'TipsModuloCtrl'
+    });
 
     $stateProvider.state('app.capacitacion', {
         url: '/:capacitacion',
@@ -311,24 +334,6 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         templateUrl: 'src/sobre/sobre.html',
         controller: 'SobreCtrl'
     });
-
-    $stateProvider.state('app.tips', {
-        url: '/tips',
-        views: {
-            'menuContent': {
-                templateUrl: 'src/tips/tips.html',
-                controller: 'TipsCtrl'
-            }
-        }
-    });
-
-    $stateProvider.state('tipsModulo', {
-        url: '/tips/:modulo',
-        templateUrl: 'src/tips-modulo/tips-modulo.html',
-        controller: 'TipsModuloCtrl'
-    });
-
-
 
     $ionicFilterBarConfigProvider.backdrop(false);
     $ionicFilterBarConfigProvider.placeholder('Buscar receta');

@@ -1,4 +1,4 @@
-nutrifamiMobile.controller('RecetaCtrl', function($ionicPlatform, $scope, $ionicLoading, $location, $stateParams, $ionicViewSwitcher, $ionicHistory, UsuarioService, RecetasService) {
+nutrifamiMobile.controller('RecetaCtrl', function($ionicPlatform, $scope, $ionicLoading, $location, $stateParams, $ionicViewSwitcher, $ionicHistory, UserService, RecetasService) {
     'use strict';
 
 
@@ -6,7 +6,7 @@ nutrifamiMobile.controller('RecetaCtrl', function($ionicPlatform, $scope, $ionic
 
 
         var receta_id = $stateParams.receta_id;
-        $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
+        $scope.usuarioActivo = UserService.getUser();
 
         $scope.$on("$ionicSlides.sliderInitialized", function(event, data) {
             // data.slider is the instance of Swiper
