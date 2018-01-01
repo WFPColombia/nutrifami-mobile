@@ -143,6 +143,7 @@ nutrifamiMobile.factory('DescargaService', function ($http, $rootScope, $cordova
      * @returns {Boolean}
      */
     service.descargaInicial = function () {
+        console.log('DescargaInicial');
         var gestorDescarga = JSON.parse(localStorage.getItem('gestorDescarga'));
         var url = 'https://s3.amazonaws.com/capacitaciones/training.zip';
         var nombre = 'training.zip';
