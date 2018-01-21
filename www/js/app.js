@@ -1,6 +1,5 @@
 dependencies = ['ionic', 'Authentication', 'ngCordova', 'ionMDRipple', 'ionicLazyLoad', 'jett.ionic.filter.bar', 'satellizer'];
 
-
 var nutrifamiLogin = angular.module('Authentication', []);
 var nutrifamiMobile = angular.module('NutrifamiMobile', dependencies);
 
@@ -39,10 +38,10 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         }
     };
     
-    $authProvider.loginUrl = 'http://usuarios.nutrifami.org/api/token-auth/';
-    $authProvider.signupUrl = 'http://usuarios.nutrifami.org/api/create-user/';
-    //$authProvider.loginUrl = 'http://localhost:8000/api/token-auth/';
-    //$authProvider.signupUrl = 'http://localhost:8000/api/create-user/';
+    //$authProvider.loginUrl = 'http://usuarios.nutrifami.org/api/token-auth/';
+    //$authProvider.signupUrl = 'http://usuarios.nutrifami.org/api/create-user/';
+    $authProvider.loginUrl = 'http://localhost:8000/api/token-auth/';
+    $authProvider.signupUrl = 'http://localhost:8000/api/create-user/';
 
     // Change the platform and redirectUri only if we're on mobile
     // so that development on browser can still work. 
@@ -68,13 +67,6 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
 
     $authProvider.tokenType = 'Token';
 
-
-    $stateProvider.state('app', {
-        url: '/app',
-        abstract: true,
-        templateUrl: 'views/template/menu.tpl.html',
-        controller: 'NavController'
-    });
 
     $stateProvider.state('app.misComprasIntro', {
         url: '/mis-compras/intro',
@@ -153,6 +145,13 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
 
 
     // Organizados :)
+    
+    $stateProvider.state('app', {
+        url: '/app',
+        abstract: true,
+        templateUrl: 'src/nav/nav.html',
+        controller: 'NavCtrl'
+    });
 
     $stateProvider.state('preload', {
         url: '/preload',
@@ -286,6 +285,17 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
             }
         }
     });
+    
+    $stateProvider.state('app.capacitador', {
+        url: '/capacitador',
+        cache: false,
+        views: {
+            'menuContent': {
+                templateUrl: 'src/capacitador/capacitador.html',
+                controller: 'CapacitadorCtrl'
+            }
+        }
+    });
 
     $stateProvider.state('tipsModulo', {
         url: '/tips/:modulo',
@@ -334,6 +344,8 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         templateUrl: 'src/sobre/sobre.html',
         controller: 'SobreCtrl'
     });
+    
+    
 
     $ionicFilterBarConfigProvider.backdrop(false);
     $ionicFilterBarConfigProvider.placeholder('Buscar receta');

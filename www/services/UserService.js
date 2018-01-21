@@ -4,21 +4,21 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth, $
 
     var baseUrl = 'http://usuarios.nutrifami.org/api/';
     //var baseUrl = 'http://localhost:8000/api/';
-    
+
     /**
      * 
      */
-    service.getVersionApp = function() {
+    service.getVersionApp = function () {
         return JSON.parse(localStorage.getItem('versionApp'));
-    }
-    
+    };
+
     /**
      * 
      */
-    service.setVersionApp = function() {
+    service.setVersionApp = function () {
         localStorage.setItem("versionApp", JSON.stringify(2));
-    }
-    
+    };
+
     /**
      * @description Retorna el token de usuario
      * @returns {unresolved}
@@ -139,6 +139,8 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth, $
         localStorage.removeItem("usuarioFamilia");
         localStorage.removeItem("usuarioFamiliaAvance");
         localStorage.removeItem("misCompras");
+        localStorage.removeItem("staff");
+        localStorage.removeItem("current_trainee");
         $rootScope.$emit('userLoggedOut');
     };
 
@@ -153,18 +155,14 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth, $
         var usuarioActivo = data;
         //var usuarioFamiliaAvance = {};
         //var usuarioFamilia = {};
-        delete usuarioActivo["avances"];
+
         /*if (data.access_token === 'no-token') {
          usuarioFamiliaAvance = usuarioActivo.avance;
          
          delete usuarioFamiliaAvance[usuarioActivo.id];
          
-         
          usuarioFamilia = usuarioActivo.familia;
          delete usuarioActivo["familia"];
-         
-         
-         
          
          localStorage.setItem("usuarioFamiliaAvance", JSON.stringify(usuarioFamiliaAvance));
          localStorage.setItem("usuarioFamilia", JSON.stringify(usuarioFamilia));
@@ -180,8 +178,25 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth, $
                 id: 'usuarioActivo.id'
             }
         };
+
+        if (usuarioActivo.is_staff) {
+            var current_trainee = {
+                name: 'Yo',
+                document: usuarioActivo.documento
+            };
+            localStorage.setItem("current_trainee", JSON.stringify(current_trainee));
+        }
+        //Save the staff member info in a temporal object for an offline purposes
+        var staff = {
+            is_staff: usuarioActivo.is_staff,
+            is_active: true,
+            advance: usuarioActivo.avances
+        };
+        delete usuarioActivo["avances"];
+
         localStorage.setItem("user", JSON.stringify(usuarioActivo));
         localStorage.setItem("globals", JSON.stringify($rootScope.globals));
+        localStorage.setItem("staff", JSON.stringify(staff));
     };
 
 
@@ -211,73 +226,73 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth, $
             $rootScope.$broadcast('userFaliedUpdate', response.data);
         });
     };
-    
-    service.userMigration = function (data){
-        
+
+    service.userMigration = function (data) {
+
         var oldUser = data;
         var oldAvance = data.avance[oldUser.id];
         var tempAvance = [];
         console.log(oldUser);
-  
-        
-        for (var c in oldAvance){
-            for (var m in oldAvance[c]){
-                for(var l in oldAvance[c][m]){
-                    if (oldAvance[c][m][l]){
+
+
+        for (var c in oldAvance) {
+            for (var m in oldAvance[c]) {
+                for (var l in oldAvance[c][m]) {
+                    if (oldAvance[c][m][l]) {
                         tempAvance.push(l);
                     }
                 }
             }
         }
-        
+
         var tempUser = {
-        "first_name": oldUser["nombre"],
-        "last_name": oldUser["apellido"],
-        "id_antiguo": oldUser["id"]
-    };
+            "first_name": oldUser["nombre"],
+            "last_name": oldUser["apellido"],
+            "id_antiguo": oldUser["id"]
+        };
 
         localStorage.setItem("tempUser", JSON.stringify(tempUser));
         localStorage.setItem("tempAvance", JSON.stringify(tempAvance));
-        
+
         $rootScope.$broadcast('userLoggedInwithDocument', {data: data});
     };
-    
-    service.migrarAvance = function(){
-        
+
+    service.migrarAvance = function () {
+
         var tempAvance = JSON.parse(localStorage.getItem('tempAvance'));
-        
-        
+
+
         var deferred = $q.defer();
         var promises = [];
-            
-        for (var a in tempAvance){
+
+        for (var a in tempAvance) {
             var data = {
                 'capacitacion': 0,
                 'modulo': 0,
                 'leccion': tempAvance[a]
             };
-            
+
             promises.push(
                     $http({
                         method: 'POST',
                         url: baseUrl + 'avances/',
                         data: data
                     }).then(function successCallback(response) {
-                        console.log(response);
-                    }, function errorCallback(response) {
-                        console.log(response);
-                    }));
+                console.log(response);
+            }, function errorCallback(response) {
+                console.log(response);
+            }));
         }
-        
-        $q.all(promises).then(function(res) {
-                deferred.resolve();
-                localStorage.removeItem('tempUser');
-                localStorage.removeItem("tempAvance");
-                service.readAvance();
+
+        $q.all(promises).then(function (res) {
+            deferred.resolve();
+            localStorage.removeItem('tempUser');
+            localStorage.removeItem("tempAvance");
+            service.readAvance();
         });
-        
+
         return deferred.promise;
-        
+
     };
 
     /**
@@ -362,6 +377,7 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth, $
      * @returns {undefined}
      */
     service.setAvance = function (avances) {
+        console.log(avances);
         service.crearGestorAvance();
 
         var usuarioAvance = service.getAvance();
@@ -370,12 +386,9 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth, $
         }
         localStorage.setItem("usuarioAvance", JSON.stringify(usuarioAvance));
         service.comprobarAvanceModulo();
-
-
-
     };
-    
-    service.readAvance = function(){
+
+    service.readAvance = function () {
         $http({
             method: 'GET',
             url: baseUrl + 'avance-user/',
@@ -389,10 +402,10 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth, $
             console.log(response);
             //$rootScope.$broadcast('userFaliedUpdate', response.data);
         });
-        
+
     }
-    
-    
+
+
     service.getAvance = function () {
         return JSON.parse(localStorage.getItem('usuarioAvance'));
     };

@@ -1,5 +1,5 @@
 /*global angular*/
-nutrifamiMobile.controller('UnidadCtrl', function ($ionicPlatform, $scope, $rootScope, $location, $stateParams, $ionicPopup, $ionicLoading, $ionicViewSwitcher, $timeout, MediaService, UserService, CapacitacionService, DescargaService) {
+nutrifamiMobile.controller('UnidadCtrl', function ($ionicPlatform, $scope, $rootScope, $location, $stateParams, $ionicPopup, $ionicLoading, $ionicViewSwitcher, $timeout, MediaService, UserService, CapacitacionService, DescargaService, TrainingService) {
     'use strict';
     $ionicPlatform.ready(function () {
 
@@ -387,7 +387,15 @@ nutrifamiMobile.controller('UnidadCtrl', function ($ionicPlatform, $scope, $root
                     maxWidth: 40
                 });
 
-                UserService.createAvance(data);
+                if (TrainingService.isTraineeActive()) {
+                    console.log('Save trainee advance');
+                    TrainingService.saveTraineeAdvance(data);
+
+                } else {
+                    console.log('Save normal advance');
+                    UserService.createAvance(data);
+                }
+
 
             } else {
                 MediaService.unload($scope.audios);

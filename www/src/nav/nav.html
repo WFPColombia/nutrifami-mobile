@@ -4,7 +4,7 @@
             <ion-nav-back-button>
             </ion-nav-back-button>
             <ion-nav-buttons side="left">
-                <button class="button button-icon button-clear ion-navicon" menu-toggle="left"><i ng-show="usuarioActivo.municipio === '' || usuarioActivo.municipio === null" class="ion-ios-information"></i></button>
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="left"><i ng-show="user.municipio === '' || user.municipio === null" class="ion-ios-information"></i></button>
             </ion-nav-buttons>
             <ion-nav-title>
                 <img src="img/logo-nutrifami-header.png" alt="Nutrifami" />
@@ -41,12 +41,18 @@
                     <img class="icono" src="img/icons/ico-menu-recetas.png" alt="Cerrar Sesion" />Recetas
                 </ion-item>
                 <ion-item menu-close href="#/app/perfil">
-                    <img class="icono" src="img/icons/ico-menu-perfil.png" alt="Perfil" />Perfil <i ng-show="usuarioActivo.municipio === '' || usuarioActivo.municipio === null" class="ion-ios-information"></i>
+                    <img class="icono" src="img/icons/ico-menu-perfil.png" alt="Perfil" />Perfil <i ng-show="user.municipio === '' || user.municipio === null" class="ion-ios-information"></i>
+                </ion-item>
+                <ion-item ng-show="user.is_staff" menu-close href="#/app/capacitador" class="capacitador">
+                    <img class="icono" src="img/icons/ico-menu-capacitador.png" alt="Capacitador" />Capacitador
                 </ion-item>
                 <ion-item menu-close href="#/auth">
                     <img class="icono" src="img/icons/ico-menu-salir.png" alt="Cerrar Sesion" />Cerrar Sesión
                 </ion-item>
             </ion-list>
+            <div class="capacitador">
+                <p class="usuarioActual" ng-show="user.is_staff"><b>Aprendiz Actual</b> {{current_trainee.name}} ({{current_trainee.document}})</p>
+            </div>
         </ion-content>
     </ion-side-menu>
 </ion-side-menus>

@@ -1,4 +1,4 @@
-nutrifamiMobile.factory('CapacitacionService', function(UsuarioService) {
+nutrifamiMobile.factory('CapacitacionService', function() {
     var service = {};
 
     service.initClient = function(callback) {
@@ -46,7 +46,6 @@ nutrifamiMobile.factory('CapacitacionService', function(UsuarioService) {
 
         var modulos = [];
         mids = nutrifami.training.getModulosId(capacitacion);
-        var usuarioAvance = UsuarioService.getUsuarioAvance();
         for (var mid in mids) {
             var tempModulo = nutrifami.training.getModulo(mids[mid]);
 
@@ -61,18 +60,7 @@ nutrifamiMobile.factory('CapacitacionService', function(UsuarioService) {
             } else {
                 tempModulo.activo = false;
             }
-
-            if (typeof usuarioAvance['3'] !== 'undefined' && typeof usuarioAvance['3'][mids[mid]] !== 'undefined') {
-                tempModulo.avance.leccionesFinalizadas = Object.keys(usuarioAvance['3'][mids[mid]]).length;
-                if (this.getLeccionesActivas(tempModulo.id).length == tempModulo.avance.leccionesFinalizadas) {
-                    tempModulo.avance.finalizado = true;
-                }
-            } else {
-                tempModulo.avance.leccionesFinalizadas = 0;
-            }
-
             modulos.push(tempModulo);
-
         }
 
         modulos[0].disponible = true;

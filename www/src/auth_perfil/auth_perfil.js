@@ -1,11 +1,11 @@
 /*global angular*/
-nutrifamiMobile.controller('AuthPerfilCtrl', function($ionicPlatform, $scope, $ionicPopup, $ionicLoading, PerfilService, UsuarioService, UserService) {
+nutrifamiMobile.controller('AuthPerfilCtrl', function($ionicPlatform, $scope, $ionicPopup, $ionicLoading, PerfilService, UserService) {
     'use strict';
     $ionicPlatform.ready(function() {
 
         /* Cargamos la información del local storage*/
         $scope.usuarioActivo = UserService.getUser();
-        $scope.usuarioFamilia = UsuarioService.getUsuarioFamilia();
+        //$scope.usuarioFamilia = UsuarioService.getUsuarioFamilia();
         
         console.log($scope.usuarioActivo);
 
@@ -110,8 +110,8 @@ nutrifamiMobile.controller('AuthPerfilCtrl', function($ionicPlatform, $scope, $i
                     $scope.usuarioFamilia.push(familiar);
 
 
-                    UsuarioService.setUsuarioFamilia($scope.usuarioFamilia);
-                    UsuarioService.setUsuarioActivo($scope.usuarioActivo, function(response) {});
+                    //UsuarioService.setUsuarioFamilia($scope.usuarioFamilia);
+                    //UsuarioService.setUsuarioActivo($scope.usuarioActivo, function(response) {});
                 }
                 $ionicLoading.hide();
                 $scope.popUpAgregarFamiliar.close();

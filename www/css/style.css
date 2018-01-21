@@ -126,66 +126,14 @@ button {
 /* FINAL - PRELOADING*/
 
 
-/* MENU LEFT */
+/* HEADER */
 
 .app {
     background-color: #f5f5f5;
 }
 
-.menu-left {
-    background-color: #00c97e;
-}
-
-.menu-left .item {
-    border: none;
-}
-
-.menu-left .bar.bar-stable {
-    background-color: rgba(0, 0, 0, 0);
-    background-image: none;
-    padding-top: 16px;
-    padding-left: 16px;
-    height: 57px;
-}
-
 .has-header {
     top: 64px;
-}
-
-.menu-left .item-content {
-    background-color: #00c97e;
-    border: none;
-    font-size: 14pt;
-    line-height: 35px;
-    margin-bottom: 0;
-    color: #ffffff;
-}
-
-.menu-left .item-content.activated {
-    background-color: #2f6551;
-}
-
-.menu-left .item-content img {
-    position: relative;
-    top: 10px;
-}
-
-.item-complex .item-content,
-.item-radio .item-content {
-    padding: 3px 0 0 16px;
-    height: 57px;
-}
-
-.menu-left .item-content.active,
-.menu-left .item-content.active:focus,
-.menu-left button.item-content:focus {
-    background-color: #2f6551;
-    border-color: #2f6551;
-    color: #ffffff;
-}
-
-.menu-left .item-content .icono {
-    margin-right: 17px;
 }
 
 .bar.bar-stable {
@@ -213,33 +161,12 @@ button {
 .bar-stable .ion-ios-information,
 .menu-left .ion-ios-information {
     color: red;
-
     position: absolute;
     right: 0px;
     top: 0px;
 }
 
-.menu-left .ion-ios-information {
-    right: initial;
-    left: 42px;
-}
-
-.menu-right .popover {
-    height: 155px;
-    font-family: 'Muli', sans-serif;
-    font-size: 13pt;
-}
-
-.menu-right .popover .item {
-    padding: 13px 18px;
-    border: none;
-}
-
-
-
-
-
-/* END - MENU-LEFT - HEADER*/
+/* END -  HEADER*/
 
 /*MODAL FEEDBACK*/
 
