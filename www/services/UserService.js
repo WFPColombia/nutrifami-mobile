@@ -184,19 +184,21 @@ nutrifamiMobile.factory('UserService', function UserService($rootScope, $auth, $
                 name: 'Yo',
                 document: usuarioActivo.documento
             };
-            localStorage.setItem("current_trainee", JSON.stringify(current_trainee));
+            localStorage.setItem("current_trainee", JSON.stringify(current_trainee));        
+            //Save the staff member info in a temporal object for an offline purposes
+            var staff = {
+                is_staff: usuarioActivo.is_staff,
+                is_active: true,
+                advance: usuarioActivo.avances,
+                syncronized : false
+            };
+            localStorage.setItem("staff", JSON.stringify(staff));
         }
-        //Save the staff member info in a temporal object for an offline purposes
-        var staff = {
-            is_staff: usuarioActivo.is_staff,
-            is_active: true,
-            advance: usuarioActivo.avances
-        };
+        
         delete usuarioActivo["avances"];
 
         localStorage.setItem("user", JSON.stringify(usuarioActivo));
         localStorage.setItem("globals", JSON.stringify($rootScope.globals));
-        localStorage.setItem("staff", JSON.stringify(staff));
     };
 
 

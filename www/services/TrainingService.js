@@ -8,7 +8,12 @@ nutrifamiMobile.factory('TrainingService', function ($rootScope, UserService) {
      */
     service.isStaff = function () {
         var staff = JSON.parse(localStorage.getItem('staff'));
-        return staff.is_staff;
+        if (staff){
+            return staff.is_staff;
+        }else{
+            return false;
+        }
+        
     };
     
     /**
@@ -63,7 +68,12 @@ nutrifamiMobile.factory('TrainingService', function ($rootScope, UserService) {
      */
     service.isTraineeActive = function () {
         var staff = JSON.parse(localStorage.getItem('staff'));
-        return !staff.is_active;
+        if (staff){
+            return !staff.is_active;
+        }else{
+            return false;
+        }
+        
     };
     
     /**
