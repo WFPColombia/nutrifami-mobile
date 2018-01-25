@@ -61,9 +61,7 @@ nutrifamiMobile.controller('AuthLoginCtrl', function($ionicPlatform, $scope, $ro
                 .catch(function(event) {
                     // error
                 });
-
-
-        }
+        };
 
         $scope.$on('userLoggedIn', function(event, data) {
             console.log("userLoggedIn Login");
@@ -107,7 +105,7 @@ nutrifamiMobile.controller('AuthLoginCtrl', function($ionicPlatform, $scope, $ro
             $scope.slider.slideTo(id);
             $ionicSlideBoxDelegate.slide(id);
 
-        }
+        };
 
 
     });

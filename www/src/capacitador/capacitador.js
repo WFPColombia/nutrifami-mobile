@@ -1,4 +1,4 @@
-nutrifamiMobile.controller('CapacitadorCtrl', function ($ionicPlatform, $scope, TrainingService, UserService) {
+nutrifamiMobile.controller('CapacitadorCtrl', function ($ionicPlatform, $scope, $ionicLoading, $ionicPopup, TrainingService, UserService, DescargaService) {
     'use strict';
 
     $ionicPlatform.ready(function () {
@@ -13,8 +13,8 @@ nutrifamiMobile.controller('CapacitadorCtrl', function ($ionicPlatform, $scope, 
             TrainingService.saveCurrentTrainee(trainee, false);
             $scope.current_trainee = trainee;
         };
-        
-        $scope.changeCurrentTraineeToMe = function(){
+
+        $scope.changeCurrentTraineeToMe = function () {
             var new_trainee = {
                 name: 'Yo',
                 document: $scope.user.documento
@@ -46,11 +46,47 @@ nutrifamiMobile.controller('CapacitadorCtrl', function ($ionicPlatform, $scope, 
             TrainingService.saveCurrentTrainee(new_trainee, false);
 
             $scope.current_trainee = new_trainee;
+            $scope.form_add_trainee.id = 0;
             $scope.form_add_trainee.name = '';
             $scope.form_add_trainee.document = '';
+            $scope.form_add_trainee.synchronized = false;
         };
 
+        $scope.sinchronizeTraining = function () {
 
+            if (DescargaService.isOnline()) {
+                TrainingService.sinchronizeTraining();
+                $ionicLoading.show({
+                    animation: 'fade-in',
+                    showBackdrop: true,
+                    maxWidth: 40
+                });
+            } else {
+                $scope.modal = {
+                    texto1: 'No hay conexión a Internet',
+                    texto2: 'Para subir cambios debe estar conectado a Internet',
+                    estado: 'alert' // ok, alert, error
+                };
+                $ionicPopup.show({
+                    templateUrl: 'modals/modal.html',
+                    scope: $scope,
+                    cssClass: 'salir-unidad',
+                    buttons: [{
+                            text: 'Aceptar',
+                            type: 'button-positive',
+                            onTap: function (e) {
+                            }
+                        }]
+                });
+
+            }
+
+        };
+
+        $scope.$on('synchronizeTrainingFinished', function (event) {
+            console.log('synchronizeTrainingFinished');
+            $ionicLoading.hide();
+        });
 
         function init() {
             if (TrainingService.isStaff()) {

@@ -389,6 +389,7 @@ nutrifamiMobile.controller('UnidadCtrl', function ($ionicPlatform, $scope, $root
 
                 if (TrainingService.isTraineeActive()) {
                     console.log('Save trainee advance');
+                    data['synchronized'] = false;
                     TrainingService.saveTraineeAdvance(data);
 
                 } else {

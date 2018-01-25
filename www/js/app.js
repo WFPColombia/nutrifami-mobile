@@ -37,20 +37,20 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
             height: window.screen.height
         }
     };
-    
-    //$authProvider.loginUrl = 'http://usuarios.nutrifami.org/api/token-auth/';
-    //$authProvider.signupUrl = 'http://usuarios.nutrifami.org/api/create-user/';
-    $authProvider.loginUrl = 'http://localhost:8000/api/token-auth/';
-    $authProvider.signupUrl = 'http://localhost:8000/api/create-user/';
 
     // Change the platform and redirectUri only if we're on mobile
     // so that development on browser can still work. 
     if (ionic.Platform.isIOS() || ionic.Platform.isAndroid() || ionic.Platform.platform() === 'linux') {
         $authProvider.platform = 'mobile';
         commonConfig.redirectUri = 'http://usuarios.nutrifami.org';
+        $authProvider.loginUrl = 'http://usuarios.nutrifami.org/api/token-auth/';
+        $authProvider.signupUrl = 'http://usuarios.nutrifami.org/api/create-user/';
+    } else {
+        $authProvider.loginUrl = 'http://localhost:8000/api/token-auth/';
+        $authProvider.signupUrl = 'http://localhost:8000/api/create-user/';
     }
-    
-    
+
+
     // Configure Facebook login.
     $authProvider.facebook(angular.extend({}, commonConfig, {
         clientId: '126883721233688',
@@ -96,7 +96,7 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
 
 
 
-    
+
 
     $stateProvider.state('nc', {
         url: '/nutricompra',
@@ -145,7 +145,7 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
 
 
     // Organizados :)
-    
+
     $stateProvider.state('app', {
         url: '/app',
         abstract: true,
@@ -178,7 +178,7 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         templateUrl: 'src/auth_login/auth_login.html',
         controller: 'AuthLoginCtrl'
     });
-    
+
     $stateProvider.state('migration', {
         url: '/auth/migration',
         cache: false,
@@ -210,7 +210,7 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
             }
         }
     });
-    
+
     $stateProvider.state('app.perfil_editar', {
         url: '/editar-perfil',
         cache: false,
@@ -221,7 +221,7 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
             }
         }
     });
-    
+
     $stateProvider.state('app.progreso', {
         url: '/progreso',
         cache: false,
@@ -275,7 +275,7 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         templateUrl: 'src/home_buscar/home_buscar.html',
         controller: 'HomeBuscarCtrl'
     });
-    
+
     $stateProvider.state('app.tips', {
         url: '/tips',
         views: {
@@ -285,7 +285,7 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
             }
         }
     });
-    
+
     $stateProvider.state('app.capacitador', {
         url: '/capacitador',
         cache: false,
@@ -344,8 +344,8 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         templateUrl: 'src/sobre/sobre.html',
         controller: 'SobreCtrl'
     });
-    
-    
+
+
 
     $ionicFilterBarConfigProvider.backdrop(false);
     $ionicFilterBarConfigProvider.placeholder('Buscar receta');
@@ -363,9 +363,9 @@ nutrifamiMobile.run(function ($ionicPlatform, $rootScope, $location, $http) {
         //do your stuff
         e.preventDefault();
     }, 101);
-    
+
     $http.defaults.headers.post.Authorization = "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==";
-    
+
     $rootScope.globals = JSON.parse(localStorage.getItem('globals')) || {};
 
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
@@ -388,6 +388,7 @@ nutrifamiMobile.run(function ($ionicPlatform, $rootScope, $location, $http) {
     });
 
     $ionicPlatform.ready(function () {
+
         ionic.Platform.fullScreen(true, false); //Fullscreen en ios, verificar para Android
 
         if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -396,13 +397,12 @@ nutrifamiMobile.run(function ($ionicPlatform, $rootScope, $location, $http) {
 
         }
 
-        console.log(ionic.Platform.platform());
-
         if (window.StatusBar) {
             StatusBar.styleDefault();
         }
 
         if (window.cordova) {
+            $rootScope.BASE_URL = 'http://usuarios.nutrifami.org/';
             if (device.platform == "Android") {
                 console.log("isAndroid");
                 $rootScope.TARGETPATH = cordova.file.externalApplicationStorageDirectory;
@@ -417,10 +417,11 @@ nutrifamiMobile.run(function ($ionicPlatform, $rootScope, $location, $http) {
                 $rootScope.TARGETPATH = cordova.file.dataDirectory;
                 $rootScope.ICON_DESCARGA = 'ion-ios-cloud-download-outline';
                 $rootScope.ICON_AUDIO = 'ion-ios-volume-high';
-                
+
             }
 
         } else {
+            $rootScope.BASE_URL = 'http://localhost:8000/';
             $rootScope.TARGETPATH = "https://s3.amazonaws.com/nutrifami/";
             $rootScope.ICON_DESCARGA = 'ion-ios-cloud-download-outline';
             $rootScope.ICON_AUDIO = 'ion-ios-volume-high';
