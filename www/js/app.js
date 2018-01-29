@@ -37,19 +37,26 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
             height: window.screen.height
         }
     };
-
+    
+    console.log('is??');
+    console.log(ionic.Platform.isIPad());
+    console.log(ionic.Platform);
+    console.log('----')
+    
+    
     // Change the platform and redirectUri only if we're on mobile
     // so that development on browser can still work. 
-    if (ionic.Platform.isIOS() || ionic.Platform.isAndroid() || ionic.Platform.platform() === 'linux') {
+    if (ionic.Platform.isIOS() || ionic.Platform.isAndroid() || ionic.Platform.platform() === 'linux' || ionic.Platform.isIPad()) {
+        console.log('is mobile');
         $authProvider.platform = 'mobile';
         commonConfig.redirectUri = 'http://usuarios.nutrifami.org';
         $authProvider.loginUrl = 'http://usuarios.nutrifami.org/api/token-auth/';
         $authProvider.signupUrl = 'http://usuarios.nutrifami.org/api/create-user/';
     } else {
+        console.log('is not mobile');
         $authProvider.loginUrl = 'http://localhost:8000/api/token-auth/';
         $authProvider.signupUrl = 'http://localhost:8000/api/create-user/';
     }
-
 
     // Configure Facebook login.
     $authProvider.facebook(angular.extend({}, commonConfig, {

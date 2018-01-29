@@ -113,6 +113,7 @@ nutrifamiMobile.factory('UserService', function ($rootScope, $auth, $http, $q) {
                 .then(function (response) {
                     // Redirect user here after a successful log in.
                     //organizamos la respuesta para pasarla al SuccesAuth y que se guarden bien todos los datos
+                    console.log(response);
                     var response2 = {
                         data: response.data.user
                     };
@@ -216,7 +217,7 @@ nutrifamiMobile.factory('UserService', function ($rootScope, $auth, $http, $q) {
     service.updateUser = function (user) {
         $http({
             method: 'PUT',
-            url: $rootScope.BASE_URL + 'usuarios/' + user.id + '/',
+            url: $rootScope.BASE_URL + 'api/usuarios/' + user.id + '/',
             data: user
         }).then(function successCallback(response) {
             delete response.data["avances"];
@@ -271,7 +272,7 @@ nutrifamiMobile.factory('UserService', function ($rootScope, $auth, $http, $q) {
             };
             promises.push($http({
                 method: 'POST',
-                url: $rootScope.BASE_URL + 'avances/',
+                url: $rootScope.BASE_URL + 'api/avances/',
                 data: data
             }).then(function successCallback(response) {
                 console.log(response);
@@ -387,7 +388,7 @@ nutrifamiMobile.factory('UserService', function ($rootScope, $auth, $http, $q) {
     service.readAvance = function () {
         $http({
             method: 'GET',
-            url: $rootScope.BASE_URL + 'avance-user/',
+            url: $rootScope.BASE_URL + 'api/avance-user/',
             data: {},
         }).then(function successCallback(response) {
             console.log(response);
@@ -492,7 +493,7 @@ nutrifamiMobile.factory('UserService', function ($rootScope, $auth, $http, $q) {
 
         $http({
             method: 'POST',
-            url: $rootScope.BASE_URL + 'avances/',
+            url: $rootScope.BASE_URL + 'api/avances/',
             data: data
         }).then(function successCallback(response) {
             console.log(response);

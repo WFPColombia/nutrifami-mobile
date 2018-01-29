@@ -69,7 +69,7 @@ nutrifamiMobile.controller('PreloadCtrl', function ($ionicPlatform, $ionicPopup,
                         }];
                 }
                 $ionicPopup.show({
-                    templateUrl: 'views/modals/modal.html',
+                    templateUrl: 'modals/modal.html',
                     scope: $scope,
                     cssClass: 'salir-unidad',
                     buttons: $scope.buttonsModal
