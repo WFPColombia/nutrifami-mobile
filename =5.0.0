@@ -1,0 +1,17 @@
+[2K[G> cordova plugin add cordova-plugin-file@ --save
+[2K[GUnmet project requirements for latest version of cordova-plugin-file:
+[2K[G
+    cordova-android (6.2.3 in project, >=6.3.0 required)
+Fetching highest version of cordova-plugin-file that this project supports: 4.3.3 (latest is 6.0.1)
+[2K[GError: Failed to fetch plugin cordova-plugin-file@@4.3.3 via registry.
+Probably this is either a connection problem, or plugin spec is incorrect.
+Check your connection and plugin name/version/URL.
+Error: npm: Command failed with exit code 1 Error output:
+npm ERR! code EINVALIDTAGNAME
+npm ERR! Invalid tag name "@4.3.3": Tags may not have any characters that encodeURIComponent encodes.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /Users/fats2005/.npm/_logs/2018-01-31T17_25_49_976Z-debug.log
+[2K[G
+[2K[G[ERROR] An error occurred while running cordova plugin add cordova-plugin-file@ --save (exit code 1).
+        

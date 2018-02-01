@@ -1,4 +1,4 @@
-nutrifamiMobile.controller('mc_grupoCtrl', function($ionicPlatform, $location, $scope, $ionicLoading, $ionicPopup, $stateParams, ComprasService, UserService, MediaService) {
+nutrifamiMobile.controller('ShoppingGroupCtrl', function($ionicPlatform, $location, $scope, $rootScope, $ionicLoading, $ionicPopup, $stateParams, ComprasService, UserService, MediaService) {
     'use strict';
     $ionicPlatform.ready(function() {
 
@@ -6,10 +6,10 @@ nutrifamiMobile.controller('mc_grupoCtrl', function($ionicPlatform, $location, $
 
         var usuario = {};
         var puntoVenta = {
-            'pid': 0
+            pid: 0
         };
 
-        usuario.did = $scope.usuarioActivo.login_documento;
+        usuario.did = $scope.usuarioActivo.documento;
         //usuario.did = '1006330568';
         usuario.nombre = $scope.usuarioActivo.nombre;
 
@@ -25,16 +25,16 @@ nutrifamiMobile.controller('mc_grupoCtrl', function($ionicPlatform, $location, $
             ComprasService.getConsolidadoComprasUltimoMes(usuario, function(response) {
                 if (response.success) {
                     $scope.consumoUltimoMes = response.data;
-                    puntoVenta['pid'] = response.puntoVenta;
+                    puntoVenta.pid = response.puntoVenta;
 
                     $scope.data = $scope.consumoUltimoMes[$stateParams.grupo - 1];
 
                     $scope.audios = {
-                        'audio4': MediaService.getMediaURL('audios/compras-intro-4.wav'),
-                        'feedback': MediaService.getMediaURL($scope.data.feedback.audio)
-                    }
+                        audio4: MediaService.getMediaURL('audios/compras-intro-4.wav'),
+                        feedback: MediaService.getMediaURL($scope.data.feedback.audio)
+                    };
                     MediaService.preloadSimple($scope.audios);
-                    MediaService.play('feedback', $scope.audios);
+                    MediaService.play('feedback');
                     ComprasService.getProductosPuntoVenta(puntoVenta, function(response) {
                         if (response.success) {
                             $scope.recomendados = response.data[$stateParams.grupo - 1];
@@ -61,11 +61,8 @@ nutrifamiMobile.controller('mc_grupoCtrl', function($ionicPlatform, $location, $
             });
         };
 
-
-
-
         $scope.playAudio = function(audio) {
-            MediaService.play(audio, $scope.audios);
+            MediaService.play(audio);
         };
 
         $scope.$on('$ionicView.enter', function() {
@@ -75,7 +72,7 @@ nutrifamiMobile.controller('mc_grupoCtrl', function($ionicPlatform, $location, $
 
         $scope.$on("$ionicView.beforeLeave", function(event, data) {
             console.log("BeforeLeave view");
-            MediaService.unload($scope.audios);
+            MediaService.unload();
         });
 
 

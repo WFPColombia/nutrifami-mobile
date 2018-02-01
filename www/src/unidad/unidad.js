@@ -3,7 +3,6 @@ nutrifamiMobile.controller('UnidadCtrl', function ($ionicPlatform, $scope, $root
     'use strict';
     $ionicPlatform.ready(function () {
 
-
         $scope.unidad = CapacitacionService.getUnidad($stateParams.leccion, $stateParams.unidad);
         $scope.usuarioActivo = UserService.getUser();
         $scope.estadoUnidad = 'espera';
@@ -15,20 +14,14 @@ nutrifamiMobile.controller('UnidadCtrl', function ($ionicPlatform, $scope, $root
 
         $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitacion + "/" + $stateParams.modulo + "/" + $stateParams.leccion + "/" + $scope.unidad.id + "/";
         $scope.audios = {
-            'tipo': $scope.assetpath + $scope.unidad.instruccion.audio.nombre,
-            'titulo': $scope.assetpath + $scope.unidad.titulo.audio.nombre,
-            'texto': $scope.assetpath + $scope.unidad.media.nombre,
-            /*'muyBien': MediaService.getMediaURL('audios/muy-bien.mp3'),
-             'respuestaIncorrecta': MediaService.getMediaURL('audios/respuesta-incorrecta.mp3'),*/
-            'salir': MediaService.getMediaURL('audios/unidad-salir.wav')
+            tipo: $scope.assetpath + $scope.unidad.instruccion.audio.nombre,
+            titulo: $scope.assetpath + $scope.unidad.titulo.audio.nombre,
+            texto: $scope.assetpath + $scope.unidad.media.nombre,
+            salir: MediaService.getMediaURL('audios/unidad-salir.wav')
         };
 
         $scope.feedback = {};
-
-        //$scope.audios = {};
-
         $scope.textoBoton = 'Calificar';
-
         var tempOpciones = [];
 
         //Limpiamos el objeto de las opciones que no se deben mostrar
@@ -37,7 +30,6 @@ nutrifamiMobile.controller('UnidadCtrl', function ($ionicPlatform, $scope, $root
                 delete $scope.unidad.opciones[i];
             }
         }
-
         /* Validamos el tipo de actividad
          * if - Si es parejas ponemos las imagenes de primeras y los textos abajo
          * else - Si es otro tipo de unidad, desorganizamos las opciones */
@@ -72,7 +64,6 @@ nutrifamiMobile.controller('UnidadCtrl', function ($ionicPlatform, $scope, $root
             $scope.unidad.opciones = tempOpciones;
 
             //Si es unidad informativa se crea el timer para habilitar el botón de seguir
-
             if ($scope.unidad.tipo.id == 1) {
                 $timeout(function () {
                     $scope.botonCalificar = true;
@@ -93,19 +84,11 @@ nutrifamiMobile.controller('UnidadCtrl', function ($ionicPlatform, $scope, $root
             $scope.unidad.opciones[i].evaluacion = false;
             $scope.unidad.opciones[i].pareja = '';
             $scope.unidad.opciones[i].match = false;
-
-            /*Verifica si la opcion tienen audio y lo carga*/
-            if (typeof $scope.unidad.opciones[i].audio !== 'undefined') {
-                $scope.unidad.opciones[i].audio.id = "opcion" + i;
-                $scope.audios[$scope.unidad.opciones[i].audio.id] = $scope.assetpath + $scope.unidad.opciones[i].audio.nombre;
-            }
+            $scope.audios['opcion' + $scope.unidad.opciones[i].id] = $scope.assetpath + $scope.unidad.opciones[i].audio.nombre;
+            $scope.audios['feedback' + $scope.unidad.opciones[i].id] = $scope.assetpath + $scope.unidad.opciones[i].feedback.audio.nombre;
         }
 
         $scope.botonCalificar = false;
-        console.log($scope.audios);
-        MediaService.preloadSimple($scope.audios, function (response) {
-            $scope.audios = response;
-        });
 
         $scope.seleccionarOpcion = function (index) {
             if ($scope.unidad.opciones[index].selected) {
@@ -127,7 +110,6 @@ nutrifamiMobile.controller('UnidadCtrl', function ($ionicPlatform, $scope, $root
                     }
                 }
             }
-
             if (respuestasSeleccionadas === respuestasCorrectas) {
                 $scope.botonCalificar = true;
             } else {
@@ -182,46 +164,23 @@ nutrifamiMobile.controller('UnidadCtrl', function ($ionicPlatform, $scope, $root
                             pareja1Orden = 0;
                             pareja2Orden = 0;
 
-                            /*ngAudio.play("audios/sound-ok.mp3");*/
-                            /*ngAudio.play("audios/muy-bien.mp3");*/
-
                             parejasCorrectas++;
 
                             if (parejasCorrectas == ($scope.unidad.opciones.length / 2)) {
                                 /*Si las parejas correctas es igual a la mitad de la cantidad de opciones habilitar el botón de continuar*/
                                 $scope.estadoUnidad = 'acierto';
-
-                                //$scope.feedback.feedbacks = [];
-                                $scope.feedback.audios = {
-                                    'feedback': $scope.assetpath + $scope.unidad.opciones[i].feedback.audio.nombre
-                                };
-                                $scope.feedback.audios.mensaje = MediaService.getMediaURL("audios/muy-bien-respuesta-correcta.mp3");
-                                $scope.feedback.mensaje = "Muy bien! respuesta correcta";
-
-                                console.log($scope.feedback);
-
-
-
-                                MediaService.preloadSimple($scope.feedback.audios, function (response) {
-                                    $scope.feedback.audios = response;
-                                    $scope.playAudioFeedback('feedback');
-                                });
-
-
-                                var popUpFeedback = $ionicPopup.show({
+                                $ionicPopup.show({
                                     templateUrl: 'views/template/feedback.tpl.html',
                                     scope: $scope,
                                     buttons: [{
                                             text: 'Continuar',
                                             type: 'button-positive',
                                             onTap: function (e) {
-                                                // MediaService.unload($scope.feedback.audios);
                                                 $scope.cerrarFeedback();
                                             }
                                         }]
                                 });
                             }
-
                         } else {
                             $scope.unidad.opciones[pareja2Pos].pareja = '';
                             $scope.unidad.opciones[pareja2Pos].selected = false;
@@ -237,98 +196,72 @@ nutrifamiMobile.controller('UnidadCtrl', function ($ionicPlatform, $scope, $root
                             pareja2Pos = 0;
                             pareja1Orden = 0;
                             pareja2Orden = 0;
-
-                            if (navigator && navigator.vibrate) {
-                                navigator.vibrate([300, 100, 300]);
-                            }
-
                         }
                     }
                 }
-
             }
         };
 
         $scope.calificarUnidad = function () {
-            /* Validar si acerto o fallo*/
-
+            var textoBoton = '';
+            var respuestasAcertadas = 0;
+            var feedbacks_ok = [];
+            var feedbacks_ok_last = '';
+            var feedbacks_bad = [];
+            var feedbacks_bad_last = '';
             if ($scope.unidad.tipo.id == 1) {
                 $scope.irASiguienteUnidad();
                 return;
             }
 
-            var respuestasAcertadas = 0;
-            var tempFeedbackAcierto = [];
-            var tempFeedbackAciertoAudios = {};
-            var tempFeedbackAciertoUltimoAudio = '';
-            var tempFeedbackFallo = [];
-            var tempFeedbackFalloAudios = {};
-            var tempFeedbackFalloUltimoAudio = '';
-            var tempFeedbackUltimoAudio = '';
-            $scope.feedback = {};
+            $scope.feedback = {
+                feedbacks: []
+            };
+
             for (var i in $scope.unidad.opciones) {
                 if ($scope.unidad.opciones[i].selected) {
                     $scope.unidad.opciones[i].evaluacion = true;
                     if ($scope.unidad.opciones[i].selected == $scope.unidad.opciones[i].correcta) {
                         respuestasAcertadas++;
-                        tempFeedbackAcierto.push({
+                        feedbacks_ok.push({
                             texto: $scope.unidad.opciones[i].feedback.texto,
-                            nombre: 'feedback' + i
+                            nombre: 'feedback' + $scope.unidad.opciones[i].id
                         });
-                        tempFeedbackAciertoAudios['feedback' + i] = $scope.assetpath + $scope.unidad.opciones[i].feedback.audio.nombre;
-                        tempFeedbackAciertoUltimoAudio = 'feedback' + i;
+                        feedbacks_ok_last = 'feedback' + $scope.unidad.opciones[i].id;
                     } else {
-                        tempFeedbackFallo.push({
+                        feedbacks_bad.push({
                             texto: $scope.unidad.opciones[i].feedback.texto,
-                            nombre: 'feedback' + i
+                            nombre: 'feedback' + $scope.unidad.opciones[i].id
                         });
-                        tempFeedbackFalloAudios['feedback' + i] = $scope.assetpath + $scope.unidad.opciones[i].feedback.audio.nombre;
-                        tempFeedbackFalloUltimoAudio = 'feedback' + i;
+                        feedbacks_bad_last = 'feedback' + $scope.unidad.opciones[i].id;
+
                     }
+
+
                 }
             }
+
             if (respuestasAcertadas === respuestasCorrectas) {
                 $scope.estadoUnidad = 'acierto';
-                $scope.feedback.feedbacks = eliminarRepitidos(tempFeedbackAcierto, 'texto');
-                $scope.feedback.audios = tempFeedbackAciertoAudios;
-                $scope.feedback.audios.mensaje = MediaService.getMediaURL("audios/muy-bien-respuesta-correcta.mp3");
-                $scope.feedback.mensaje = "Muy bien! respuesta correcta";
-                tempFeedbackUltimoAudio = tempFeedbackAciertoUltimoAudio;
-
+                $scope.feedback.feedbacks = feedbacks_ok;
+                $scope.playAudio(feedbacks_ok_last);
+                textoBoton = 'Continuar';
             } else {
                 $scope.estadoUnidad = 'fallo';
-                $scope.feedback.feedbacks = eliminarRepitidos(tempFeedbackFallo, 'texto');
-                $scope.feedback.audios = tempFeedbackFalloAudios;
-                $scope.feedback.audios.mensaje = MediaService.getMediaURL("audios/intenta-de-nuevo.mp3");
-                $scope.feedback.mensaje = "Intenta de nuevo! respuesta incorrecta";
-                tempFeedbackUltimoAudio = tempFeedbackFalloUltimoAudio;
-
-                if (navigator && navigator.vibrate) {
-                    navigator.vibrate(1000);
-                }
+                $scope.feedback.feedbacks = feedbacks_bad;
+                $scope.playAudio(feedbacks_bad_last);
+                textoBoton = 'Intentar de nuevo';
             }
 
-            var textoBoton = 'Intentar de nuevo';
+            $scope.feedback.feedbacks = eliminarRepitidos($scope.feedback.feedbacks, 'texto');
 
-            if ($scope.estadoUnidad === 'acierto') {
-                textoBoton = 'Continuar';
-            }
-
-            MediaService.preloadSimple($scope.feedback.audios, function (response) {
-                $scope.feedback.audios = response;
-                console.log($scope.feedback.audios);
-                $scope.playAudioFeedback(tempFeedbackUltimoAudio);
-            });
-
-            // An elaborate, custom popup
-            var popUpFeedback = $ionicPopup.show({
+            $ionicPopup.show({
                 templateUrl: 'views/template/feedback.tpl.html',
                 scope: $scope,
                 buttons: [{
                         text: textoBoton,
                         type: 'button-positive',
                         onTap: function (e) {
-                            // MediaService.unload($scope.feedback.audios);
                             $scope.cerrarFeedback();
                         }
                     }]
@@ -336,19 +269,15 @@ nutrifamiMobile.controller('UnidadCtrl', function ($ionicPlatform, $scope, $root
         };
 
         $scope.cerrarFeedback = function () {
-            MediaService.stopAll($scope.feedback.audios, function () {
-                if ($scope.estadoUnidad === 'acierto') {
-                    $scope.irASiguienteUnidad();
-                } else {
-                    $scope.reiniciarUnidad();
-                }
-            });
-
-
+            if ($scope.estadoUnidad === 'acierto') {
+                $scope.irASiguienteUnidad();
+            } else {
+                $scope.reiniciarUnidad();
+            }
         };
 
         $scope.salirUnidad = function () {
-            var popUpFeedback = $ionicPopup.show({
+            $ionicPopup.show({
                 templateUrl: 'views/template/salirUnidad.tpl.html',
                 scope: $scope,
                 cssClass: 'salir-unidad',
@@ -356,29 +285,21 @@ nutrifamiMobile.controller('UnidadCtrl', function ($ionicPlatform, $scope, $root
                         text: 'Salir de la lección',
                         type: 'button-positive',
                         onTap: function (e) {
-                            //MediaService.unload($scope.audios);
-                            MediaService.unload($scope.audios);
-                            MediaService.unload($scope.feedback.audios);
                             $ionicViewSwitcher.nextDirection('back'); // 'forward', 'back', etc.
                             $location.path('/app/' + $stateParams.capacitacion + '/' + $stateParams.modulo);
                         }
                     }]
             });
-        }
+        };
 
         $scope.irASiguienteUnidad = function () {
             $scope.siguienteUnidad = parseInt($stateParams.unidad) + 1;
-
             if ($scope.siguienteUnidad > $scope.unidad.totalUnidades) {
-
                 var data = {
-                    'capacitacion': $stateParams.capacitacion,
-                    'modulo': $stateParams.modulo,
-                    'leccion': $stateParams.leccion
+                    capacitacion: $stateParams.capacitacion,
+                    modulo: $stateParams.modulo,
+                    leccion: $stateParams.leccion
                 };
-
-                console.log(data);
-
                 // Oberlay Cargando mientras se guarda el avance
                 $ionicLoading.show({
                     template: 'Guardando Avance...',
@@ -386,21 +307,15 @@ nutrifamiMobile.controller('UnidadCtrl', function ($ionicPlatform, $scope, $root
                     showBackdrop: true,
                     maxWidth: 40
                 });
-
                 if (TrainingService.isTraineeActive()) {
                     console.log('Save trainee advance');
                     data['synchronized'] = false;
                     TrainingService.saveTraineeAdvance(data);
-
                 } else {
                     console.log('Save normal advance');
                     UserService.createAvance(data);
                 }
-
-
             } else {
-                MediaService.unload($scope.audios);
-                MediaService.unload($scope.feedback.audios);
                 $location.path('/' + $stateParams.capacitacion + '/' + $stateParams.modulo + "/" + $stateParams.leccion + "/" + $scope.siguienteUnidad);
             }
         };
@@ -420,51 +335,30 @@ nutrifamiMobile.controller('UnidadCtrl', function ($ionicPlatform, $scope, $root
         };
 
         $scope.playAudio = function (audio) {
-            MediaService.stopAll($scope.feedback.audios, function () {
-                MediaService.play(audio, $scope.audios);
-            });
+            MediaService.play(audio);
         };
 
-        $scope.playAudioFeedback = function (audio) {
-            MediaService.stopAll($scope.audios, function () {
-                MediaService.play(audio, $scope.feedback.audios);
-            });
+        $scope.getScrollPosition = function () {/*if ($ionicScrollDelegate.getScrollPosition().top > 50) {if (!$scope.scrolled) {$scope.$apply(function() {$scope.scrolled = true;});}} else {if ($scope.scrolled) {$scope.$apply(function() {$scope.scrolled = false;});}}*/
         };
 
-        $scope.getScrollPosition = function () {
-
-            /*if ($ionicScrollDelegate.getScrollPosition().top > 50) {
-             if (!$scope.scrolled) {
-             
-             $scope.$apply(function() {
-             $scope.scrolled = true;
-             });
-             }
-             
-             } else {
-             if ($scope.scrolled) {
-             
-             $scope.$apply(function() {
-             $scope.scrolled = false;
-             });
-             }
-             
-             }*/
-        };
-
-
+        $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+            console.log('$stateChangeSuccess');
+            if (toParams.unidad == $scope.unidad.numeroUnidad || fromState.name == 'app.modulo') {
+                MediaService.preloadSimple($scope.audios, function () {
+                    if ($scope.audiosDescargados) {
+                        MediaService.play('titulo');
+                    }
+                });
+            }
+        });
 
         $scope.$on('avanceSaved', function (event, id) {
             $ionicLoading.hide();
-            MediaService.unload($scope.audios);
-            MediaService.unload($scope.feedback.audios);
             $location.path('/' + $stateParams.capacitacion + '/' + $stateParams.modulo + "/" + $stateParams.leccion + "/" + $stateParams.unidad + "/leccion-terminada");
         });
 
         $scope.$on('avanceFaliedSave', function (event, id) {
             $ionicLoading.hide();
-            MediaService.unload($scope.audios);
-            MediaService.unload($scope.feedback.audios);
             $location.path('/' + $stateParams.capacitacion + '/' + $stateParams.modulo + "/" + $stateParams.leccion + "/" + $stateParams.unidad + "/leccion-terminada");
         });
 

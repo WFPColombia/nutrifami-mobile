@@ -10,8 +10,6 @@ nutrifamiMobile.directive('leccionDrt', function (UserService) {
         link: function ($scope) {
             $scope.audiosDescargados = $scope.$parent.audiosDescargados;
             $scope.avance = UserService.getAvanceLeccion($scope.leccion.id);
-            console.log($scope.avance);
-            
             $scope.porcentajeAvance = function () {
                 return(100 / $scope.totalLecciones() * $scope.avance.leccionesTerminadas);
             };

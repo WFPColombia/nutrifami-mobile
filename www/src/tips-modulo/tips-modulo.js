@@ -1,4 +1,4 @@
-nutrifamiMobile.controller('TipsModuloCtrl', function($ionicPlatform, $scope, $location, $stateParams, AudioService, UserService, TipsService) {
+nutrifamiMobile.controller('TipsModuloCtrl', function($ionicPlatform, $scope, $stateParams, UserService, TipsService) {
     'use strict';
     $ionicPlatform.ready(function() {
 

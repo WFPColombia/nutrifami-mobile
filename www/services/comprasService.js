@@ -123,7 +123,13 @@ nutrifamiMobile.factory('ComprasService', ['$http', '$rootScope', '$timeout',
          * ComprasService.getConsolidadoCompras(usuario, function (response){});
          */
         service.getConsolidadoCompras = function(usuario, callback) {
-            var misCompras = JSON.parse(localStorage.getItem('misCompras'));
+            var misCompras = '';
+            try{
+                misCompras = JSON.parse(localStorage.getItem('misCompras'));
+            }
+            catch(err){
+                misCompras = null;
+            }
 
             if (misCompras === null) {
                 nutrifami.consumo.getConsolidadoCompras(usuario, function(response) {

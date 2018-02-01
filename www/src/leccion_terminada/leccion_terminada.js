@@ -1,41 +1,32 @@
 /*global angular*/
 /*global angular*/
-nutrifamiMobile.controller('LeccionTerminadaCtrl', function ($scope, $rootScope, $stateParams, $timeout, $location, $ionicPlatform, $ionicPopup, MediaService, CapacitacionService, UserService) {
+nutrifamiMobile.controller('LeccionTerminadaCtrl', function ($scope, $rootScope, $stateParams, $location, $ionicPlatform, $ionicPopup, MediaService, CapacitacionService, UserService, DescargaService) {
     'use strict';
 
     $ionicPlatform.ready(function () {
 
         $scope.usuarioActivo = UserService.getUser();
-        console.log($scope.usuarioActivo);
         $scope.leccion = CapacitacionService.getLeccion($stateParams.leccion);
+        $scope.media_downloaded = DescargaService.paqueteDescargado('modulos', $stateParams.modulo, 'audios');
+        $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitacion + "/" + $stateParams.modulo + "/";
+
         var avanceModulo = UserService.getAvanceModulo($stateParams.modulo);
 
-
         $scope.audios = {
-            'leccionCompletada': MediaService.getMediaURL('audios/muy-bien-leccion-completada.mp3'),
-            /*'audioPuntos': 'audios/' + $scope.leccion.finalizado.puntos + '-puntos-ganados.mp3',*/
-            'audioFinalizado': $rootScope.TARGETPATH + $scope.leccion.finalizado.audio.nombre,
+            audioFinalizado: $scope.assetpath + $scope.leccion.finalizado.audio.nombre
         };
-
-
-        MediaService.preloadSimple($scope.audios, function (response) {
-            $scope.audios = response;
-        });
-
-        console.log(UserService.getAvanceModulo($stateParams.modulo));
         
-        $timeout(function () {
-            $scope.playAudio('audioFinalizado');
-        }, 1000);
+        console.log($scope.audios);
 
         $scope.playAudio = function (audio) {
-            MediaService.play(audio, $scope.audios);
+            if ($scope.media_downloaded) {
+                MediaService.play(audio);
+            }
         };
 
         $scope.continuar = function () {
             if (avanceModulo.completo) {
                 $scope.modulo = CapacitacionService.getModulo($stateParams.modulo);
-
                 $scope.diplomaTitulo = $scope.modulo.titulo.texto;
                 $ionicPopup.show({
                     templateUrl: 'modals/diploma.modal.html',
@@ -55,18 +46,27 @@ nutrifamiMobile.controller('LeccionTerminadaCtrl', function ($scope, $rootScope,
                             text: 'Continuar',
                             type: 'button-positive',
                             onTap: function (e) {
-                                MediaService.unload($scope.audios);
+                                MediaService.unload();
                                 $location.path('/app/' + $stateParams.capacitacion + '/' + $stateParams.modulo);
                             }
                         }
                     ]
                 });
-
             } else {
-                MediaService.unload($scope.audios);
+                MediaService.unload();
                 $location.path('/app/' + $stateParams.capacitacion + '/' + $stateParams.modulo);
-
             }
         };
+
+        $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+            console.log('$stateChangeSuccess');
+            console.log(fromState.name);
+            if (fromState.name === 'unidad' && $scope.media_downloaded) {
+                MediaService.preloadSimple($scope.audios, function () {
+                    MediaService.play('audioFinalizado');
+                });
+            }
+        });
+
     });
 });

@@ -1,4 +1,4 @@
-dependencies = ['ionic', 'Authentication', 'ngCordova', 'ionMDRipple', 'ionicLazyLoad', 'jett.ionic.filter.bar', 'satellizer'];
+var dependencies = ['ionic', 'Authentication', 'ngCordova', 'ionMDRipple', 'ionicLazyLoad', 'jett.ionic.filter.bar', 'satellizer'];
 
 var nutrifamiLogin = angular.module('Authentication', []);
 var nutrifamiMobile = angular.module('NutrifamiMobile', dependencies);
@@ -38,15 +38,9 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         }
     };
     
-    console.log('is??');
-    console.log(ionic.Platform.isIPad());
-    console.log(ionic.Platform);
-    console.log('----')
-    
-    
     // Change the platform and redirectUri only if we're on mobile
     // so that development on browser can still work. 
-    if (ionic.Platform.isIOS() || ionic.Platform.isAndroid() || ionic.Platform.platform() === 'linux' || ionic.Platform.isIPad()) {
+    if (window.cordova) {
         console.log('is mobile');
         $authProvider.platform = 'mobile';
         commonConfig.redirectUri = 'http://usuarios.nutrifami.org';
@@ -73,37 +67,6 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
     });
 
     $authProvider.tokenType = 'Token';
-
-
-    $stateProvider.state('app.misComprasIntro', {
-        url: '/mis-compras/intro',
-        views: {
-            'menuContent': {
-                templateUrl: 'views/mis-compras/mc_intro.html',
-                controller: 'mc_introCtrl'
-            }
-        }
-    });
-
-    $stateProvider.state('app.compras', {
-        url: '/mis-compras',
-        views: {
-            'menuContent': {
-                templateUrl: 'views/mis-compras/mc_home.html',
-                controller: 'mc_homeCtrl'
-            }
-        }
-    });
-
-    $stateProvider.state('comprasGrupo', {
-        url: '/mis-compras/:grupo',
-        templateUrl: 'views/mis-compras/mc_grupo.html',
-        controller: 'mc_grupoCtrl'
-    });
-
-
-
-
 
     $stateProvider.state('nc', {
         url: '/nutricompra',
@@ -141,15 +104,6 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         templateUrl: 'views/nutricompra/nc_terminar.html',
         controller: 'nc_jugarTerminarController'
     });
-
-
-    $stateProvider.state('home', {
-        url: '/home',
-        templateUrl: 'views/home.html',
-        controller: 'HomeController'
-    });
-
-
 
     // Organizados :)
 
@@ -264,6 +218,32 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         templateUrl: 'src/receta/receta.html',
         controller: 'RecetaCtrl'
     });
+    
+    $stateProvider.state('app.shopping_intro', {
+        url: '/mis-compras/intro',
+        views: {
+            menuContent: {
+                templateUrl: 'src/shopping_intro/shopping_intro.html',
+                controller: 'ShoppingIntroCtrl'
+            }
+        }
+    });
+
+    $stateProvider.state('app.shopping_home', {
+        url: '/mis-compras',
+        views: {
+            menuContent: {
+                templateUrl: 'src/shopping_home/shopping_home.html',
+                controller: 'ShoppingHomeCtrl'
+            }
+        }
+    });
+
+    $stateProvider.state('shopping_group', {
+        url: '/mis-compras/:grupo',
+        templateUrl: 'src/shopping_group/shopping_group.html',
+        controller: 'ShoppingGroupCtrl'
+    });
 
     $stateProvider.state('app.home', {
         url: '/',
@@ -351,9 +331,8 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         templateUrl: 'src/sobre/sobre.html',
         controller: 'SobreCtrl'
     });
-
-
-
+    
+    
     $ionicFilterBarConfigProvider.backdrop(false);
     $ionicFilterBarConfigProvider.placeholder('Buscar receta');
     $ionicFilterBarConfigProvider.search('ion-search');

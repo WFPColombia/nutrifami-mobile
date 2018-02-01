@@ -23,7 +23,7 @@
             <div class="col">
                 <div class="badget">
                     <img src="img/badgets/flags/ico_flag_{{leccion.icono}}.png">
-                    <p ng-click="playAudio('audioPuntos')" ion-ripple>Más 100 puntos de experiencia <i class="fa fa-volume-up"></i></p>
+                    <p>Más 100 puntos de experiencia</p>
                 </div>
             </div>
         </div>
@@ -31,8 +31,8 @@
             <div class="col">
                 <div class="feedback" ng-click="playAudio('audioFinalizado')" ion-ripple>
                     <div ng-bind-html="leccion.finalizado.texto | format | trust"></div>
-                    <div class="feedback-sonido">
-                        <i class="icon ion-volume-high" aria-hidden="true"></i>
+                    <div class="feedback-sonido" ng-show="media_downloaded">
+                        <i class="icon {{ICON_AUDIO}}" aria-hidden="true"></i>
                     </div>
                 </div>
             </div>

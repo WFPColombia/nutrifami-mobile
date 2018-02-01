@@ -57,7 +57,7 @@ nutrifamiMobile.controller('ProgresoCtrl', function ($ionicPlatform, $ionicPopup
                         text: 'Continuar',
                         type: 'button-positive',
                         onTap: function (e) {
-                            //MediaService.unload($scope.audios);
+                            //MediaService.unload();
                         }
                     }
                 ]
