@@ -9,8 +9,6 @@ nutrifamiMobile.controller('AuthMigrationCtrl', function ($ionicPlatform, $scope
         
         $scope.signup = function () {
 
-            console.log($scope.formSignup);
-
             if ($scope.formSignup.password === $scope.formSignup.password2) {
                 $scope.loading = $ionicLoading.show({
                     animation: 'fade-in',

@@ -13,10 +13,11 @@ nutrifamiMobile.controller('UnidadCtrl', function ($ionicPlatform, $scope, $root
         $scope.audiosDescargados = DescargaService.paqueteDescargado('modulos', $stateParams.modulo, 'audios');
 
         $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitacion + "/" + $stateParams.modulo + "/" + $stateParams.leccion + "/" + $scope.unidad.id + "/";
+        $scope.assetpath_audio = $rootScope.TARGETPATH_AUDIO + $stateParams.capacitacion + "/" + $stateParams.modulo + "/" + $stateParams.leccion + "/" + $scope.unidad.id + "/";
         $scope.audios = {
-            tipo: $scope.assetpath + $scope.unidad.instruccion.audio.nombre,
-            titulo: $scope.assetpath + $scope.unidad.titulo.audio.nombre,
-            texto: $scope.assetpath + $scope.unidad.media.nombre,
+            tipo: $scope.assetpath_audio + $scope.unidad.instruccion.audio.nombre,
+            titulo: $scope.assetpath_audio + $scope.unidad.titulo.audio.nombre,
+            texto: $scope.assetpath_audio + $scope.unidad.media.nombre,
             salir: MediaService.getMediaURL('audios/unidad-salir.wav')
         };
 
@@ -84,8 +85,8 @@ nutrifamiMobile.controller('UnidadCtrl', function ($ionicPlatform, $scope, $root
             $scope.unidad.opciones[i].evaluacion = false;
             $scope.unidad.opciones[i].pareja = '';
             $scope.unidad.opciones[i].match = false;
-            $scope.audios['opcion' + $scope.unidad.opciones[i].id] = $scope.assetpath + $scope.unidad.opciones[i].audio.nombre;
-            $scope.audios['feedback' + $scope.unidad.opciones[i].id] = $scope.assetpath + $scope.unidad.opciones[i].feedback.audio.nombre;
+            $scope.audios['opcion' + $scope.unidad.opciones[i].id] = $scope.assetpath_audio + $scope.unidad.opciones[i].audio.nombre;
+            $scope.audios['feedback' + $scope.unidad.opciones[i].id] = $scope.assetpath_audio + $scope.unidad.opciones[i].feedback.audio.nombre;
         }
 
         $scope.botonCalificar = false;

@@ -1,8 +1,9 @@
-nutrifamiMobile.controller('TipsCtrl', function ($ionicPlatform, $scope, $rootScope, $location, MediaService, UserService, CapacitacionService) {
+nutrifamiMobile.controller('TipsCtrl', function ($ionicPlatform, $stateParams, $scope, $rootScope, $location, MediaService, UserService, CapacitacionService) {
     'use strict';
     $ionicPlatform.ready(function () {
 
         $scope.usuarioActivo = UserService.getUser();
+        $scope.assetpath = $rootScope.TARGETPATH + "3/";
 
         CapacitacionService.initClient();
 
@@ -14,7 +15,7 @@ nutrifamiMobile.controller('TipsCtrl', function ($ionicPlatform, $scope, $rootSc
         /*Creamos un arreglo para poder recorerlo y mostrarlo a traves de directivas */
         for (var mid in $scope.mids) {
             var tempModulo = CapacitacionService.getModulo($scope.mids[mid]);
-            $scope.audios["modulo" + tempModulo.id] = $rootScope.TARGETPATH + '3/' + tempModulo.id + '/' + tempModulo.titulo.audio.nombre;
+            $scope.audios["modulo" + tempModulo.id] = $rootScope.TARGETPATH_AUDIO + '3/' + tempModulo.id + '/' + tempModulo.titulo.audio.nombre;
             $scope.modulos.push(tempModulo);
         }
 

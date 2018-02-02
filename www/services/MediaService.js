@@ -1,4 +1,4 @@
-nutrifamiMobile.factory('MediaService', function ($cordovaMedia) {
+nutrifamiMobile.factory('MediaService', function ($cordovaMedia, $cordovaFile) {
     var service = {};
     var audios = {};
 
@@ -12,13 +12,10 @@ nutrifamiMobile.factory('MediaService', function ($cordovaMedia) {
         callback = callback || function () {};
         service.unload(function () {
             console.log("MediaService.preloadSimple");
-            if (window.cordova) {
-                for (var audio in aud) {
-                    audios[audio] = $cordovaMedia.newMedia(aud[audio], function (response) {
-                        console.log("playAudio():Audio Success " + response);
-                    }, function (err) {
-                        console.log("playAudio():Audio Error: " + err);
-                    });
+            for (var audio in aud) {
+                console.log(aud[audio]);
+                if (window.cordova) {
+                    audios[audio] = $cordovaMedia.newMedia(aud[audio]);
                 }
             }
             console.log(audios);

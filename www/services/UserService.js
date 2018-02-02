@@ -70,7 +70,7 @@ nutrifamiMobile.factory('UserService', function ($rootScope, $auth, $http, $q) {
                     } else if (response.data.email) {
                         service.failedAuth({message: "El correo electrónico ya se encuentra registrado"});
                     } else if (response.data.id_antiguo) {
-                        service.failedAuth({message: "Ya se ha generado una contraseña para esta cuenta."});
+                        service.failedAuth({message: "Ya se ha generado una contraseña para esta cuenta. Vuelve a la ventana de login e inicia sesión"});
                     } else {
                         service.failedAuth({message: "Ha ocurrido un error inesperado, inténtelo más tarde!!"});
                     }
@@ -234,9 +234,6 @@ nutrifamiMobile.factory('UserService', function ($rootScope, $auth, $http, $q) {
         var oldUser = data;
         var oldAvance = data.avance[oldUser.id];
         var tempAvance = [];
-        console.log(oldUser);
-
-
         for (var c in oldAvance) {
             for (var m in oldAvance[c]) {
                 for (var l in oldAvance[c][m]) {
@@ -248,9 +245,9 @@ nutrifamiMobile.factory('UserService', function ($rootScope, $auth, $http, $q) {
         }
 
         var tempUser = {
-            "first_name": oldUser["nombre"],
-            "last_name": oldUser["apellido"],
-            "id_antiguo": oldUser["id"]
+            first_name: oldUser["nombre"] || '',
+            last_name: oldUser["apellido"] || '',
+            id_antiguo: oldUser["id"]
         };
 
         localStorage.setItem("tempUser", JSON.stringify(tempUser));

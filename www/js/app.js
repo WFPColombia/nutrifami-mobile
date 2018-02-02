@@ -392,6 +392,7 @@ nutrifamiMobile.run(function ($ionicPlatform, $rootScope, $location, $http) {
             if (device.platform == "Android") {
                 console.log("isAndroid");
                 $rootScope.TARGETPATH = cordova.file.externalApplicationStorageDirectory;
+                $rootScope.TARGETPATH_AUDIO = cordova.file.externalApplicationStorageDirectory;
                 $rootScope.ICON_DESCARGA = 'ion-android-download';
                 $rootScope.ICON_AUDIO = 'ion-android-volume-up';
                 window.addEventListener("native.hidekeyboard", function () {
@@ -401,6 +402,10 @@ nutrifamiMobile.run(function ($ionicPlatform, $rootScope, $location, $http) {
             } else {
                 console.log("Is iPad or iOS");
                 $rootScope.TARGETPATH = cordova.file.dataDirectory;
+                resolveLocalFileSystemURL($rootScope.TARGETPATH, function(entry) {
+                    $rootScope.TARGETPATH_AUDIO = entry.toInternalURL();
+                    console.log('cdvfile URI: ' + entry.toInternalURL());
+                });
                 $rootScope.ICON_DESCARGA = 'ion-ios-cloud-download-outline';
                 $rootScope.ICON_AUDIO = 'ion-ios-volume-high';
 

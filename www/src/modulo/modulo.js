@@ -8,10 +8,11 @@ nutrifamiMobile.controller('ModuloCtrl', function ($ionicPlatform, $scope, $root
         $scope.lecciones = [];
 
         $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitacion + "/" + $stateParams.modulo + "/";
+        $scope.assetpath_audio = $rootScope.TARGETPATH_AUDIO + $stateParams.capacitacion + "/" + $stateParams.modulo + "/";
 
         $scope.audios = {
-            audioTitulo: $scope.assetpath + $scope.modulo.titulo.audio.nombre,
-            audioDescripcion: $scope.assetpath + $scope.modulo.descripcion.audio.nombre
+            audioTitulo: $scope.assetpath_audio + $scope.modulo.titulo.audio.nombre,
+            audioDescripcion: $scope.assetpath_audio + $scope.modulo.descripcion.audio.nombre
         };
 
         $scope.modulo.totalLecciones = 0;
@@ -26,7 +27,7 @@ nutrifamiMobile.controller('ModuloCtrl', function ($ionicPlatform, $scope, $root
                     if (tempLeccion.titulo.audio.nombre !== null) {
                         var id = parseInt(lid) + 1;
                         tempLeccion.titulo.audio.id = "paso" + id;
-                        $scope.audios[tempLeccion.titulo.audio.id] = $scope.assetpath + $scope.lids[lid] + "/" + tempLeccion.titulo.audio.nombre;
+                        $scope.audios[tempLeccion.titulo.audio.id] = $scope.assetpath_audio + $scope.lids[lid] + "/" + tempLeccion.titulo.audio.nombre;
                     }
                     $scope.modulo.totalLecciones++;
                     $scope.lecciones.push(tempLeccion);

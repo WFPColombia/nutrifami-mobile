@@ -9,11 +9,12 @@ nutrifamiMobile.controller('LeccionTerminadaCtrl', function ($scope, $rootScope,
         $scope.leccion = CapacitacionService.getLeccion($stateParams.leccion);
         $scope.media_downloaded = DescargaService.paqueteDescargado('modulos', $stateParams.modulo, 'audios');
         $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitacion + "/" + $stateParams.modulo + "/";
+        $scope.assetpath_audio = $rootScope.TARGETPATH_AUDIO + $stateParams.capacitacion + "/" + $stateParams.modulo + "/";
 
         var avanceModulo = UserService.getAvanceModulo($stateParams.modulo);
 
         $scope.audios = {
-            audioFinalizado: $scope.assetpath + $scope.leccion.finalizado.audio.nombre
+            audioFinalizado: $scope.assetpath_audio + $scope.leccion.finalizado.audio.nombre
         };
         
         console.log($scope.audios);
