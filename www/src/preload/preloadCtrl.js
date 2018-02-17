@@ -83,7 +83,7 @@ nf2.controller('PreloadCtrl', function ($ionicPlatform, $ionicPopup, $scope, $lo
                     texto2: "Verifique la conexión a Internet e inténtelo más tarde"
                 };
                 $ionicPopup.show({
-                    templateUrl: 'views/modals/modal.html',
+                    templateUrl: 'modals/modal.html',
                     scope: $scope,
                     cssClass: 'salir-unidad',
                     buttons: [{

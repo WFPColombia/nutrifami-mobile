@@ -3,10 +3,7 @@ nf2.factory('DescargaService', function ($http, $rootScope, $cordovaFile, $cordo
     var service = {};
     var trustHosts = true;
     var options = {};
-    var BaseUrl = '';
-    if (window.cordova) {
-        BaseUrl = 'http://nutrifami.org/';
-    }
+    var BaseUrl = 'http://www.nutrifami.org/';
     
     /**
      * 
@@ -39,7 +36,7 @@ nf2.factory('DescargaService', function ($http, $rootScope, $cordovaFile, $cordo
             versionActual = JSON.parse(localStorage.getItem('version'));
         }
         //comprobamos la version nueva
-        $http.get(BaseUrl + 'js/version.JSON').then(function (response) {
+        $http.get(BaseUrl + 'js/json.php?file=version.JSON').then(function (response) {
             versionNueva = response.data.Capacitacion.ID;
             console.log(versionNueva + " " + versionActual);
             if (versionActual != versionNueva || !service.assetsInicialesDescargados() ) {
@@ -58,7 +55,7 @@ nf2.factory('DescargaService', function ($http, $rootScope, $cordovaFile, $cordo
     service.actualizarCapacitacion = function (callback) {
         callback = callback || function () {
         };
-        $http.get(BaseUrl + 'js/capacitacionAll.JSON').then(function (response) {
+        $http.get(BaseUrl + 'js/json.php?file=capacitacionAll.JSON').then(function (response) {
             localStorage.setItem("capacitacion", JSON.stringify(response.data));
             CapacitacionService.initClient();
             service.crearGestorDescargas(response.data);

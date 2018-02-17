@@ -14,7 +14,7 @@ var nutrifami = {
         callback = callback || function() {};
         var serv = base_url + "app/api/login?d=" + documento + "&c=" + codigo + "&t=no-token";
         response = {
-            success: false,
+            success: false
         };
         $.ajax({
             url: serv,
@@ -172,8 +172,6 @@ var nutrifami = {
          *  
          */
         initClient: function() {
-            
-
             if (window.cordova) {
                 console.log("Mobile");
                 localStorage.setItem("capacitacion", JSON.stringify(capacitacion));
@@ -187,8 +185,8 @@ var nutrifami = {
                 callback();
             } else {
                 console.log("Web");
-                var ran = Math.floor((Math.random() * 100) + 1);
-                $.getJSON("js/capacitacion.json?" + ran, function(data) {
+                $.getJSON("http://www.nutrifami.org/js/json.php?file=capacitacionAll.JSON", function(data) {
+                    console.log(data);
                     localStorage.setItem("capacitacion", JSON.stringify(data));
                     nutrifami.training.cap_capacitacionesId = data['serv_capacitacionesId'];
                     nutrifami.training.cap_capacitaciones = data['serv_capacitaciones'];
@@ -196,10 +194,10 @@ var nutrifami = {
                     nutrifami.training.cap_lecciones = data['serv_lecciones'];
                     nutrifami.training.cap_unidadesinformacion = data['serv_unidades'];
                     nutrifami.training.cap_unidadestips = data["serv_tips"];
-                    callback();
                 }).fail(function(jqxhr, textStatus, error) {
                     console.log(jqxhr);
                     var err = textStatus + ", " + error;
+                    console.log(err);
                 });
             }
         },
