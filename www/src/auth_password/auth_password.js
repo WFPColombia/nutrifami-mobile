@@ -3,7 +3,6 @@ nf2.controller('AuthPasswordCtrl', function($ionicPlatform, $scope, $state, $ion
 
     $ionicPlatform.ready(function() {
                 
-        CapacitacionService.initClient();       
         $scope.activeIndex = 0;
 
         $scope.options = {

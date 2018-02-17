@@ -40,7 +40,7 @@
                 <ion-item menu-close href="#/app/recetas">
                     <img class="icono" src="img/icons/ico-menu-recetas.png" alt="Cerrar Sesion" />Recetas
                 </ion-item>
-                <ion-item menu-close href="#/app/perfil">
+                <ion-item menu-close ui-sref="nf.auth_profile">
                     <img class="icono" src="img/icons/ico-menu-perfil.png" alt="Perfil" />Perfil <i ng-show="user.municipio === '' || user.municipio === null" class="ion-ios-information"></i>
                 </ion-item>
                 <ion-item ng-show="user.is_staff" menu-close href="#/app/capacitador" class="capacitador">

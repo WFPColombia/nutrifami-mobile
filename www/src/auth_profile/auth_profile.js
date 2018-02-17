@@ -1,5 +1,5 @@
 /*global angular*/
-nf2.controller('AuthPerfilCtrl', function($ionicPlatform, $scope, $ionicPopup, $ionicLoading, PerfilService, UserService) {
+nf2.controller('AuthProfileCtrl', function($ionicPlatform, $scope, $ionicPopup, $ionicLoading, PerfilService, UserService) {
     'use strict';
     $ionicPlatform.ready(function() {
 

@@ -5,6 +5,8 @@ var nf2 = angular.module('nfmobile', dependencies);
 
 nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $ionicFilterBarConfigProvider, $compileProvider, $authProvider, $httpProvider) {
     'use strict';
+    
+    console.log('config');
 
     $ionicConfigProvider.tabs.position('top');
     $ionicConfigProvider.backButton.previousTitleText(false).text('');
@@ -148,10 +150,10 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
     });
 
     $stateProvider.state('auth_signup', {
-        url: '/auth/registro',
+        url: '/auth/signup',
         cache: false,
-        templateUrl: 'src/auth_registro/auth_registro.html',
-        controller: 'AuthRegistroCtrl'
+        templateUrl: 'src/auth_signup/auth_signup.html',
+        controller: 'AuthSignupCtrl'
     });
 
     $stateProvider.state('registro2', {
@@ -161,24 +163,24 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
         controller: 'AuthRegistro2Ctrl'
     });
 
-    $stateProvider.state('nf.perfil', {
-        url: '/perfil',
+    $stateProvider.state('nf.auth_profile', {
+        url: '/profile',
         cache: false,
         views: {
             'menuContent': {
-                templateUrl: 'src/auth_perfil/auth_perfil.html',
-                controller: 'AuthPerfilCtrl'
+                templateUrl: 'src/auth_profile/auth_profile.html',
+                controller: 'AuthProfileCtrl'
             }
         }
     });
 
-    $stateProvider.state('nf.perfil_editar', {
-        url: '/editar-perfil',
+    $stateProvider.state('nf.auth_profile_edit', {
+        url: '/profile/edit',
         cache: false,
         views: {
             'menuContent': {
-                templateUrl: 'src/auth_perfil_editar/auth_perfil_editar.html',
-                controller: 'AuthPerfilEditarCtrl'
+                templateUrl: 'src/auth_profile_edit/auth_profile_edit.html',
+                controller: 'AuthProfileEditCtrl'
             }
         }
     });
@@ -343,7 +345,8 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
 });
 
 nf2.run(function ($ionicPlatform, $rootScope, $location, $http) {
-
+    console.log('run');
+    
     //Deshabilitamos el boton de ir atrás del Hardware de Android
     $ionicPlatform.registerBackButtonAction(function (e) {
         //do your stuff

@@ -25,7 +25,7 @@
 .auth h2 {
     color: #ffffff;
     font-size: 26px;
-    margin: 30px 0;
+    margin-top: 30px;
     text-align: center;
 }
 
@@ -57,7 +57,6 @@
     font-size: 16pt;
     height: 58px;
     width: 100%;
-    margin-top: 20px;
 }
 
 .auth .registro p {

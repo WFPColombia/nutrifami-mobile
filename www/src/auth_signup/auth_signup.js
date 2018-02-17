@@ -1,12 +1,10 @@
-nf2.controller('AuthRegistroCtrl', function ($ionicPlatform, $scope, $rootScope, $ionicViewSwitcher, $location, $ionicLoading, $auth, $timeout, $cordovaInAppBrowser, UserService) {
+nf2.controller('AuthSignupCtrl', function ($ionicPlatform, $scope, $rootScope, $ionicViewSwitcher, $location, $ionicLoading, $auth, $timeout, $cordovaInAppBrowser, UserService) {
     'use strict';
 
     $ionicPlatform.ready(function () {
         $scope.formSignup = {};
 
         $scope.signup = function () {
-
-            console.log($scope.formSignup);
 
             if ($scope.formSignup.password === $scope.formSignup.password2) {
                 $scope.loading = $ionicLoading.show({
@@ -17,7 +15,7 @@ nf2.controller('AuthRegistroCtrl', function ($ionicPlatform, $scope, $rootScope,
 
                 var user = {
                     username: $scope.formSignup.username,
-                    email: $scope.formSignup.email,
+                    email: '',
                     password: $scope.formSignup.password,
                     first_name: '',
                     last_name: '',
@@ -28,9 +26,6 @@ nf2.controller('AuthRegistroCtrl', function ($ionicPlatform, $scope, $rootScope,
 
             } else {
                 $scope.error = "Las contraseñas deben ser iguales";
-                $timeout(function () {
-                    $scope.error = "";
-                }, 5000);
             }
         };
         
@@ -42,7 +37,7 @@ nf2.controller('AuthRegistroCtrl', function ($ionicPlatform, $scope, $rootScope,
                 toolbar: 'yes'
             };
 
-            $cordovaInAppBrowser.open('http://nutrifami.org/#/terminos-y-condiciones', '_blank', options)
+            $cordovaInAppBrowser.open('http://nutrifami.org/#!/terminos-y-condiciones', '_blank', options)
                 .then(function(event) {
                     // success
                 })

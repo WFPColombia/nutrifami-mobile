@@ -8,7 +8,7 @@
                             <div class="perfil-panel">
                                 <div class="perfil-header">
                                     <div class="boton-flotante">
-                                        <button class="btn btn-default" go-click="app/editar-perfil" ion-ripple><span class="icon ion-edit" aria-hidden="true"></span> Editar <i ng-show="usuarioActivo.municipio == '' || usuarioActivo.municipio == null" class="ion-ios-information"></i> </button>
+                                        <button class="btn btn-default" ui-sref="nf.auth_profile_edit" ion-ripple><span class="icon ion-edit" aria-hidden="true"></span> Editar <i ng-show="usuarioActivo.municipio == '' || usuarioActivo.municipio == null" class="ion-ios-information"></i> </button>
                                     </div>
                                     <img ng-src="img/icons/ico-{{usuarioActivo.genero == null || usuarioActivo.genero == '' ? 'Masculino' : usuarioActivo.genero }}.png">
                                     <h2>{{ usuarioActivo.username }}</h2>
@@ -16,6 +16,12 @@
                                 </div>
                                 <div class="perfil-body">
                                     <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label>Tipo de documento</label>
+                                                <p ng-class="usuarioActivo.tipo_documento != undefined && usuarioActivo.tipo_documento!='' ? '' : 'sin-registro'">{{ usuarioActivo.tipo_documento!=undefined && usuarioActivo.tipo_documento!='' ? usuarioActivo.tipo_documento : 'Tipo de documento no ingresado'}}</p>
+                                            </div>
+                                        </div>
                                         <div class="col">
                                             <div class="form-group">
                                                 <label>Correo electrónico</label>
@@ -39,23 +45,6 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label>Tipo de documento de identidad</label>
-                                                <p ng-class="usuarioActivo.tipo_documento != undefined && usuarioActivo.tipo_documento!='' ? '' : 'sin-registro'">{{ usuarioActivo.tipo_documento!=undefined && usuarioActivo.tipo_documento!='' ? usuarioActivo.tipo_documento : 'Tipo de documento no ingresado'}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label>No. documento</label>
-                                                <p ng-class="usuarioActivo.documento != undefined && usuarioActivo.documento!='' ? '' : 'sin-registro'">{{ usuarioActivo.documento!=undefined && usuarioActivo.documento!='' ? usuarioActivo.documento : 'Documento no ingresado'}}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="row">
-
                                         <div class="col">
                                             <div class="form-group">
                                                 <label>Teléfono fijo</label>
