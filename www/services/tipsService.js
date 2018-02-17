@@ -1,4 +1,4 @@
-nutrifamiMobile.factory('TipsService', function() {
+nf2.factory('TipsService', function() {
     var service = {};
 
     /**

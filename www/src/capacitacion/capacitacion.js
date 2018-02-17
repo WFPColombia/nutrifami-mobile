@@ -1,5 +1,5 @@
 /*global angular*/
-nutrifamiMobile.controller('CapacitacionCtrl', function ($ionicPlatform, $scope, $rootScope, $ionicLoading, $stateParams, $location, $ionicPopup, UserService, CapacitacionService) {
+nf2.controller('CapacitacionCtrl', function ($ionicPlatform, $scope, $rootScope, $ionicLoading, $stateParams, $location, $ionicPopup, UserService, CapacitacionService) {
     'use strict';
 
     $ionicPlatform.ready(function () {

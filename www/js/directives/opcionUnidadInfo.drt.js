@@ -1,4 +1,4 @@
-nutrifamiMobile.directive('opcionUnidadInfo', function($stateParams, CapacitacionService) {
+nf2.directive('opcionUnidadInfo', function($stateParams, CapacitacionService) {
     return {
         restrict: 'E',
         scope: {

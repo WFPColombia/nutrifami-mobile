@@ -1,4 +1,4 @@
-nutrifamiMobile.controller('ModuloCtrl', function ($ionicPlatform, $scope, $rootScope, $location, $stateParams, $ionicViewSwitcher, MediaService, UserService, CapacitacionService, DescargaService) {
+nf2.controller('ModuloCtrl', function ($ionicPlatform, $scope, $rootScope, $location, $stateParams, $ionicViewSwitcher, MediaService, UserService, CapacitacionService, DescargaService) {
     'use strict';
     $ionicPlatform.ready(function () {
 

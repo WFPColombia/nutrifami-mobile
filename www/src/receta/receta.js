@@ -1,4 +1,4 @@
-nutrifamiMobile.controller('RecetaCtrl', function($ionicPlatform, $scope, $ionicLoading, $location, $stateParams, $ionicViewSwitcher, $ionicHistory, UserService, RecetasService) {
+nf2.controller('RecetaCtrl', function($ionicPlatform, $scope, $ionicLoading, $location, $stateParams, $ionicViewSwitcher, $ionicHistory, UserService, RecetasService) {
     'use strict';
 
 

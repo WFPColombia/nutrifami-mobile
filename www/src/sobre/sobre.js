@@ -1,4 +1,4 @@
-nutrifamiMobile.controller('SobreCtrl', function($ionicPlatform, $scope, $ionicLoading) {
+nf2.controller('SobreCtrl', function($ionicPlatform, $scope, $ionicLoading) {
     'use strict';
     $ionicPlatform.ready(function() {
 

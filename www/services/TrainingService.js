@@ -1,4 +1,4 @@
-nutrifamiMobile.factory('TrainingService', function ($rootScope, $http, $q, UserService) {
+nf2.factory('TrainingService', function ($rootScope, $http, $q, UserService) {
 
     var service = {};
 

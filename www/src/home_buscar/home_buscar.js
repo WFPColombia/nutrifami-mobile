@@ -1,4 +1,4 @@
-nutrifamiMobile.controller('HomeBuscarCtrl', function($ionicPlatform, $scope, $ionicLoading, $location, $ionicViewSwitcher, $ionicFilterBar, CapacitacionService, UsuarioService) {
+nf2.controller('HomeBuscarCtrl', function($ionicPlatform, $scope, $ionicLoading, $location, $ionicViewSwitcher, $ionicFilterBar, CapacitacionService, UsuarioService) {
     'use strict';
 
     $scope.recetas = {};

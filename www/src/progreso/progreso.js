@@ -1,4 +1,4 @@
-nutrifamiMobile.controller('ProgresoCtrl', function ($ionicPlatform, $ionicPopup, $scope, $ionicLoading, UserService) {
+nf2.controller('ProgresoCtrl', function ($ionicPlatform, $ionicPopup, $scope, $ionicLoading, UserService) {
     'use strict';
     $ionicPlatform.ready(function () {
 

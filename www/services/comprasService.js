@@ -1,4 +1,4 @@
-nutrifamiMobile.factory('ComprasService', ['$http', '$rootScope', '$timeout',
+nf2.factory('ComprasService', ['$http', '$rootScope', '$timeout',
     function() {
         var service = {};
 

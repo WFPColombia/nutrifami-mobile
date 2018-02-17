@@ -1,4 +1,4 @@
-nutrifamiMobile.factory('MediaService', function ($cordovaMedia, $cordovaFile) {
+nf2.factory('MediaService', function ($cordovaMedia, $cordovaFile) {
     var service = {};
     var audios = {};
 

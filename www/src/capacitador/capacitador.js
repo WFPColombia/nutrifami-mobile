@@ -1,4 +1,4 @@
-nutrifamiMobile.controller('CapacitadorCtrl', function ($ionicPlatform, $scope, $ionicLoading, $ionicPopup, TrainingService, UserService, DescargaService) {
+nf2.controller('CapacitadorCtrl', function ($ionicPlatform, $scope, $ionicLoading, $ionicPopup, TrainingService, UserService, DescargaService) {
     'use strict';
 
     $ionicPlatform.ready(function () {

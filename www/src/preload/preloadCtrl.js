@@ -1,5 +1,5 @@
 /*global angular*/
-nutrifamiMobile.controller('PreloadCtrl', function ($ionicPlatform, $ionicPopup, $scope, $location, UserService, DescargaService) {
+nf2.controller('PreloadCtrl', function ($ionicPlatform, $ionicPopup, $scope, $location, UserService, DescargaService) {
     'use strict';
     $ionicPlatform.ready(function () {
 

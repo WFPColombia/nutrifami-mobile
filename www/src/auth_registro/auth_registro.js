@@ -1,4 +1,4 @@
-nutrifamiMobile.controller('AuthRegistroCtrl', function ($ionicPlatform, $scope, $rootScope, $ionicViewSwitcher, $location, $ionicLoading, $auth, $timeout, $cordovaInAppBrowser, UserService) {
+nf2.controller('AuthRegistroCtrl', function ($ionicPlatform, $scope, $rootScope, $ionicViewSwitcher, $location, $ionicLoading, $auth, $timeout, $cordovaInAppBrowser, UserService) {
     'use strict';
 
     $ionicPlatform.ready(function () {

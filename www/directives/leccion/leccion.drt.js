@@ -1,4 +1,4 @@
-nutrifamiMobile.directive('leccionDrt', function (UserService) {
+nf2.directive('leccionDrt', function (UserService) {
     return {
         restrict: 'E',
         scope: {

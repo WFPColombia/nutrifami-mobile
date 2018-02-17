@@ -1,4 +1,4 @@
-nutrifamiMobile.factory('RecetasService', function($http) {
+nf2.factory('RecetasService', function($http) {
 
     var service = {};
     var token = '';

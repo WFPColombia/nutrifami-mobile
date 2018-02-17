@@ -1,9 +1,9 @@
 var dependencies = ['ionic', 'Authentication', 'ngCordova', 'ionMDRipple', 'ionicLazyLoad', 'jett.ionic.filter.bar', 'satellizer'];
 
 var nutrifamiLogin = angular.module('Authentication', []);
-var nutrifamiMobile = angular.module('NutrifamiMobile', dependencies);
+var nf2 = angular.module('nfmobile', dependencies);
 
-nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $ionicFilterBarConfigProvider, $compileProvider, $authProvider, $httpProvider) {
+nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $ionicFilterBarConfigProvider, $compileProvider, $authProvider, $httpProvider) {
     'use strict';
 
     $ionicConfigProvider.tabs.position('top');
@@ -107,7 +107,7 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
 
     // Organizados :)
 
-    $stateProvider.state('app', {
+    $stateProvider.state('nf', {
         url: '/app',
         abstract: true,
         templateUrl: 'src/nav/nav.html',
@@ -133,11 +133,11 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         controller: 'AuthHomeCtrl'
     });
 
-    $stateProvider.state('login', {
-        url: '/auth/login',
+    $stateProvider.state('password', {
+        url: '/auth/password',
         cache: false,
-        templateUrl: 'src/auth_login/auth_login.html',
-        controller: 'AuthLoginCtrl'
+        templateUrl: 'src/auth_password/auth_password.html',
+        controller: 'AuthPasswordCtrl'
     });
 
     $stateProvider.state('migration', {
@@ -147,7 +147,7 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         controller: 'AuthMigrationCtrl'
     });
 
-    $stateProvider.state('registro', {
+    $stateProvider.state('auth_signup', {
         url: '/auth/registro',
         cache: false,
         templateUrl: 'src/auth_registro/auth_registro.html',
@@ -161,7 +161,7 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         controller: 'AuthRegistro2Ctrl'
     });
 
-    $stateProvider.state('app.perfil', {
+    $stateProvider.state('nf.perfil', {
         url: '/perfil',
         cache: false,
         views: {
@@ -172,7 +172,7 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         }
     });
 
-    $stateProvider.state('app.perfil_editar', {
+    $stateProvider.state('nf.perfil_editar', {
         url: '/editar-perfil',
         cache: false,
         views: {
@@ -183,7 +183,7 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         }
     });
 
-    $stateProvider.state('app.progreso', {
+    $stateProvider.state('nf.progreso', {
         url: '/progreso',
         cache: false,
         views: {
@@ -194,7 +194,7 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         }
     });
 
-    $stateProvider.state('app.recetas', {
+    $stateProvider.state('nf.recetas', {
         url: '/recetas',
         cache: false,
         views: {
@@ -219,7 +219,7 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         controller: 'RecetaCtrl'
     });
     
-    $stateProvider.state('app.shopping_intro', {
+    $stateProvider.state('nf.shopping_intro', {
         url: '/mis-compras/intro',
         views: {
             menuContent: {
@@ -229,7 +229,7 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         }
     });
 
-    $stateProvider.state('app.shopping_home', {
+    $stateProvider.state('nf.shopping_home', {
         url: '/mis-compras',
         views: {
             menuContent: {
@@ -245,7 +245,7 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         controller: 'ShoppingGroupCtrl'
     });
 
-    $stateProvider.state('app.home', {
+    $stateProvider.state('nf.cap_home', {
         url: '/',
         cache: false,
         views: {
@@ -263,7 +263,7 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         controller: 'HomeBuscarCtrl'
     });
 
-    $stateProvider.state('app.tips', {
+    $stateProvider.state('nf.tips', {
         url: '/tips',
         views: {
             'menuContent': {
@@ -273,7 +273,7 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         }
     });
 
-    $stateProvider.state('app.capacitador', {
+    $stateProvider.state('nf.capacitador', {
         url: '/capacitador',
         cache: false,
         views: {
@@ -290,7 +290,7 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         controller: 'TipsModuloCtrl'
     });
 
-    $stateProvider.state('app.capacitacion', {
+    $stateProvider.state('nf.capacitacion', {
         url: '/:capacitacion',
         cache: false,
         views: {
@@ -301,7 +301,7 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
         }
     });
 
-    $stateProvider.state('app.modulo', {
+    $stateProvider.state('nf.modulo', {
         url: '/:capacitacion/:modulo',
         cache: false,
         views: {
@@ -342,7 +342,7 @@ nutrifamiMobile.config(function ($stateProvider, $urlRouterProvider, $ionicConfi
     $urlRouterProvider.otherwise('/app/');
 });
 
-nutrifamiMobile.run(function ($ionicPlatform, $rootScope, $location, $http) {
+nf2.run(function ($ionicPlatform, $rootScope, $location, $http) {
 
     //Deshabilitamos el boton de ir atrás del Hardware de Android
     $ionicPlatform.registerBackButtonAction(function (e) {

@@ -1,5 +1,5 @@
 
-nutrifamiMobile.controller('AuthMigrationCtrl', function ($ionicPlatform, $scope, $rootScope, $ionicViewSwitcher, $location, $ionicLoading, $timeout, $cordovaInAppBrowser, UserService) {
+nf2.controller('AuthMigrationCtrl', function ($ionicPlatform, $scope, $rootScope, $ionicViewSwitcher, $location, $ionicLoading, $timeout, $cordovaInAppBrowser, UserService) {
     'use strict';
 
     $ionicPlatform.ready(function () {

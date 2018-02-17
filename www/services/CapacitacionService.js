@@ -1,4 +1,4 @@
-nutrifamiMobile.factory('CapacitacionService', function() {
+nf2.factory('CapacitacionService', function() {
     var service = {};
 
     service.initClient = function(callback) {

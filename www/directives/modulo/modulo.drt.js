@@ -1,4 +1,4 @@
-nutrifamiMobile.directive('moduloDrt', function ($location, $rootScope, $ionicLoading, $ionicPopup, $stateParams, DescargaService, UserService) {
+nf2.directive('moduloDrt', function ($location, $rootScope, $ionicLoading, $ionicPopup, $stateParams, DescargaService, UserService) {
     return {
         restrict: 'E',
         scope: {

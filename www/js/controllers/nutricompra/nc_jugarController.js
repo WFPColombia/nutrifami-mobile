@@ -1,5 +1,5 @@
 /*global angular*/
-nutrifamiMobile.controller('nc_jugarController', function($scope, $location, $ionicPopup, $ionicViewSwitcher, UserService, NutricompraService) {
+nf2.controller('nc_jugarController', function($scope, $location, $ionicPopup, $ionicViewSwitcher, UserService, NutricompraService) {
     'use strict';
 
 

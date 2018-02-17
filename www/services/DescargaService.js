@@ -1,4 +1,4 @@
-nutrifamiMobile.factory('DescargaService', function ($http, $rootScope, $cordovaFile, $cordovaFileTransfer, $cordovaNetwork, $timeout, $cordovaZip,$stateParams, CapacitacionService, UserService) {
+nf2.factory('DescargaService', function ($http, $rootScope, $cordovaFile, $cordovaFileTransfer, $cordovaNetwork, $timeout, $cordovaZip,$stateParams, CapacitacionService, UserService) {
 
     var service = {};
     var trustHosts = true;

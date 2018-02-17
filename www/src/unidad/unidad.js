@@ -1,5 +1,5 @@
 /*global angular*/
-nutrifamiMobile.controller('UnidadCtrl', function ($ionicPlatform, $scope, $rootScope, $location, $stateParams, $ionicPopup, $ionicLoading, $ionicViewSwitcher, $timeout, MediaService, UserService, CapacitacionService, DescargaService, TrainingService) {
+nf2.controller('UnidadCtrl', function ($ionicPlatform, $scope, $rootScope, $location, $stateParams, $ionicPopup, $ionicLoading, $ionicViewSwitcher, $timeout, MediaService, UserService, CapacitacionService, DescargaService, TrainingService) {
     'use strict';
     $ionicPlatform.ready(function () {
 

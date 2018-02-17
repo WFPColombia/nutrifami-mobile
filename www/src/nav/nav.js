@@ -1,4 +1,4 @@
-nutrifamiMobile.controller('NavCtrl', function ($scope, $ionicPopover, UserService, TrainingService) {
+nf2.controller('NavCtrl', function ($scope, $ionicPopover, UserService, TrainingService) {
 
     $ionicPopover.fromTemplateUrl('views/template/popover.tpl.html', {
         scope: $scope

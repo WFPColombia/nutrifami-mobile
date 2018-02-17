@@ -1,5 +1,5 @@
 /*global angular*/
-nutrifamiMobile.controller('nc_jugarResumenController', function($scope, $location, UserService, NutricompraService) {
+nf2.controller('nc_jugarResumenController', function($scope, $location, UserService, NutricompraService) {
     'use strict';
 
 

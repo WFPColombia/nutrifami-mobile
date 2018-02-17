@@ -1,4 +1,4 @@
-nutrifamiMobile.factory('PerfilService', function($http) {
+nf2.factory('PerfilService', function($http) {
     var service = {};
     service.editarUsuario = function(usuario, callback) {
         nutrifami.editarUsuarioActivo(usuario, function(response) {

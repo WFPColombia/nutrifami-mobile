@@ -1,4 +1,4 @@
-nutrifamiMobile.controller('ShoppingIntroCtrl', function ($ionicPlatform, $location, $scope, $rootScope, $ionicPopup, UserService, MediaService) {
+nf2.controller('ShoppingIntroCtrl', function ($ionicPlatform, $location, $scope, $rootScope, $ionicPopup, UserService, MediaService) {
     'use strict';
     $ionicPlatform.ready(function () {
 

@@ -1,4 +1,4 @@
-nutrifamiMobile.directive('goClick', function($location, $timeout, $ionicViewSwitcher) {
+nf2.directive('goClick', function($location, $timeout, $ionicViewSwitcher) {
     return function(scope, element, attrs) {
         var path;
 
