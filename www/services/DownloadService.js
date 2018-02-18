@@ -1,4 +1,4 @@
-nf2.factory('DescargaService', function ($http, $rootScope, $cordovaFile, $cordovaFileTransfer, $cordovaNetwork, $timeout, $cordovaZip,$stateParams, CapacitacionService, UserService) {
+nf2.factory('DownloadService', function ($http, $rootScope, $cordovaFile, $cordovaFileTransfer, $cordovaNetwork, $timeout, $cordovaZip,$stateParams, CapacitationService, UserService) {
 
     var service = {};
     var trustHosts = true;
@@ -55,9 +55,9 @@ nf2.factory('DescargaService', function ($http, $rootScope, $cordovaFile, $cordo
     service.actualizarCapacitacion = function (callback) {
         callback = callback || function () {
         };
-        $http.get(BaseUrl + 'js/json.php?file=capacitacionAll.JSON').then(function (response) {
+        $http.get(BaseUrl + 'js/json.php?file=capacitacion.JSON').then(function (response) {
             localStorage.setItem("capacitacion", JSON.stringify(response.data));
-            CapacitacionService.initClient();
+            CapacitationService.initClient();
             service.crearGestorDescargas(response.data);
             callback();
         }, function errorCallback(err) {
@@ -103,7 +103,7 @@ nf2.factory('DescargaService', function ($http, $rootScope, $cordovaFile, $cordo
         var gestorDescarga = JSON.parse(localStorage.getItem('gestorDescarga'));
         gestorDescarga[nivel][id][tipo] = true;
         if(nivel == 'capacitaciones'){
-            mids = CapacitacionService.getModulosId(id);
+            mids = CapacitationService.getModulosId(id);
             for(mid in mids){
                 tempMid = mids[mid];
                 gestorDescarga['modulos'][tempMid][tipo] = true;

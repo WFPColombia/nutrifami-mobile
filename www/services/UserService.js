@@ -1,4 +1,4 @@
-nf2.factory('UserService', function ($rootScope, $auth, $http, $q) {
+nf2.factory('UserService', function ($rootScope, $auth, $http, $q, CapacitationService) {
 
     var service = {};
 
@@ -62,9 +62,7 @@ nf2.factory('UserService', function ($rootScope, $auth, $http, $q) {
         console.log(user);
         $auth.signup(user)
                 .then(function (response) {
-                    console.log(response);
-                    localStorage.setItem("username", JSON.stringify(user.username));
-                    service.login(user.password);
+                    service.login(user.username, user.password);
                 })
                 .catch(function (response) {
                     console.log(response);
@@ -87,41 +85,7 @@ nf2.factory('UserService', function ($rootScope, $auth, $http, $q) {
      * @param {type} password
      * @returns {undefined}
      */
-    service.loginCedula = function (username, password) {
-        nutrifami.login(username, password, function (response) {
-            if (response.success) {
-                if (response.data.response === 1) {
-                    service.userMigration(response.data);
-                } else {
-                    service.failedAuth({message: 'El documento es incorrecto'});
-                }
-            } else {
-                service.failedAuth({message: 'Ha ocurrido un error durante la ejecución'});
-            }
-        });
-    };
-    
-    service.checkUser = function (username){
-        $http({
-            method: 'GET',
-            url: $rootScope.BASE_URL + 'api/check-user/' + username
-        }).then(function (response) {
-            localStorage.setItem("username", JSON.stringify(username));
-            $rootScope.$broadcast('userChecked');
-        }, function (error) {
-            service.failedAuth({message: 'El documento o usuario no existe'});
-        });
-        
-    };
-
-    /**
-     * 
-     * @param {type} username
-     * @param {type} password
-     * @returns {undefined}
-     */
-    service.login = function (password) {
-        var username = JSON.parse(localStorage.getItem('username'));
+    service.login = function (username, password) {
         var user = {
             username: username,
             password: password
@@ -248,66 +212,6 @@ nf2.factory('UserService', function ($rootScope, $auth, $http, $q) {
         });
     };
 
-    service.userMigration = function (data) {
-
-        var oldUser = data;
-        var oldAvance = data.avance[oldUser.id];
-        var tempAvance = [];
-        for (var c in oldAvance) {
-            for (var m in oldAvance[c]) {
-                for (var l in oldAvance[c][m]) {
-                    if (oldAvance[c][m][l]) {
-                        tempAvance.push(l);
-                    }
-                }
-            }
-        }
-
-        var tempUser = {
-            first_name: oldUser["nombre"] || '',
-            last_name: oldUser["apellido"] || '',
-            id_antiguo: oldUser["id"]
-        };
-
-        localStorage.setItem("tempUser", JSON.stringify(tempUser));
-        localStorage.setItem("tempAvance", JSON.stringify(tempAvance));
-
-        $rootScope.$broadcast('userLoggedInwithDocument', {data: data});
-    };
-
-    service.migrarAvance = function () {
-
-        var tempAvance = JSON.parse(localStorage.getItem('tempAvance'));
-        var deferred = $q.defer();
-        var promises = [];
-        for (var a in tempAvance) {
-            var data = {
-                'capacitacion': 0,
-                'modulo': 0,
-                'leccion': tempAvance[a]
-            };
-            promises.push($http({
-                method: 'POST',
-                url: $rootScope.BASE_URL + 'api/avances/',
-                data: data
-            }).then(function successCallback(response) {
-                console.log(response);
-            }, function errorCallback(response) {
-                console.log(response);
-            }));
-        }
-
-        $q.all(promises).then(function (res) {
-            deferred.resolve();
-            localStorage.removeItem('tempUser');
-            localStorage.removeItem("tempAvance");
-            service.readAvance();
-        });
-
-        return deferred.promise;
-
-    };
-
     /**
      * 
      * @param {type} response
@@ -337,9 +241,9 @@ nf2.factory('UserService', function ($rootScope, $auth, $http, $q) {
     service.crearGestorAvance = function () {
 
         console.log("Crear gestor descarga");
-
+        
         var usuarioAvance = {};
-        usuarioAvance['totalUnidades'] = Object.keys(nutrifami.training.cap_lecciones).length;
+        usuarioAvance['totalUnidades'] = Object.keys(CapacitationService.getPublicLessons()).length;
         usuarioAvance['medallas'] = 0;
         usuarioAvance['capacitacionesTerminadas'] = 0;
         usuarioAvance['modulosTerminados'] = 0;
@@ -349,13 +253,13 @@ nf2.factory('UserService', function ($rootScope, $auth, $http, $q) {
         usuarioAvance['capacitaciones'] = {};
         usuarioAvance['modulos'] = {};
         usuarioAvance['lecciones'] = {};
-
-        for (var i in nutrifami.training.cap_capacitaciones) {
+        
+        for (var i in CapacitationService.getPublicCapacitations()) {
             if (i !== 'completo') {
                 var tempObject = {};
                 tempObject[i] = {
                     completo: false,
-                    totalModulos: Object.keys(nutrifami.training.getModulosId(i)).length,
+                    totalModulos: Object.keys(CapacitationService.getModulesIds(i)).length,
                     completados: 0,
                     porcentaje: 0
                 };
@@ -363,18 +267,18 @@ nf2.factory('UserService', function ($rootScope, $auth, $http, $q) {
             }
         }
 
-        for (var i in nutrifami.training.cap_modulos) {
+        for (var i in CapacitationService.getPublicModules()) {
             var tempObject = {};
             tempObject[i] = {
                 completo: false,
-                totalLecciones: Object.keys(nutrifami.training.getLeccionesId(i)).length,
+                totalLecciones: Object.keys(CapacitationService.getLessonsIds(i)).length,
                 completados: 0,
                 porcentaje: 0
             };
             $.extend(usuarioAvance.modulos, tempObject);
         }
 
-        for (var i in nutrifami.training.cap_lecciones) {
+        for (var i in CapacitationService.getPublicLessons()) {
             var tempObject = {};
             tempObject[i] = false;
             $.extend(usuarioAvance.lecciones, tempObject);
@@ -405,7 +309,7 @@ nf2.factory('UserService', function ($rootScope, $auth, $http, $q) {
         $http({
             method: 'GET',
             url: $rootScope.BASE_URL + 'api/avance-user/',
-            data: {},
+            data: {}
         }).then(function successCallback(response) {
             console.log(response);
             service.setAvance(response.data);
@@ -434,13 +338,13 @@ nf2.factory('UserService', function ($rootScope, $auth, $http, $q) {
         var diplomas = [];
         for (var c in usuarioAvance.capacitaciones) {
             usuarioAvance['capacitaciones'][c]['completo'] = true;
-            var mids = nutrifami.training.getModulosId(c);
+            var mids = CapacitationService.getModulesIds(c);
             var completados = 0;
             for (var mid in mids) {
                 if (!usuarioAvance['modulos'][mids[mid]]['completo']) {
                     usuarioAvance['capacitaciones'][c]['completo'] = false;
                 } else {
-                    var modulo = nutrifami.training.getModulo(mids[mid]);
+                    var modulo = CapacitationService.getModule(mids[mid]);
                     diplomas.push(modulo.titulo.texto);
                     completados++;
                     modulosTerminados++;
@@ -469,7 +373,7 @@ nf2.factory('UserService', function ($rootScope, $auth, $http, $q) {
 
         for (var m in usuarioAvance.modulos) {
             usuarioAvance['modulos'][m]['completo'] = true;
-            var lids = nutrifami.training.getLeccionesId(m);
+            var lids = CapacitationService.getLessonsIds(m);
             var completados = 0;
             for (var lid in lids) {
                 if (!usuarioAvance['lecciones'][lids[lid]]) {

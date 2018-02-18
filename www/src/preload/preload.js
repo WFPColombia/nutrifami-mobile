@@ -1,5 +1,5 @@
 /*global angular*/
-nf2.controller('PreloadCtrl', function ($ionicPlatform, $ionicPopup, $scope, $location, UserService, DescargaService) {
+nf2.controller('PreloadCtrl', function ($ionicPlatform, $ionicPopup, $scope, $location, UserService, DownloadService) {
     'use strict';
     $ionicPlatform.ready(function () {
 
@@ -29,13 +29,13 @@ nf2.controller('PreloadCtrl', function ($ionicPlatform, $ionicPopup, $scope, $lo
         }
 
         function initClient() {
-            if (DescargaService.isOnline()) {
-                DescargaService.hayNuevaVersion(function (response) {
+            if (DownloadService.isOnline()) {
+                DownloadService.hayNuevaVersion(function (response) {
                     if (response) {
                         console.log("Existe una nueva versión de la capacitación");
-                        DescargaService.actualizarCapacitacion(function () {
+                        DownloadService.actualizarCapacitacion(function () {
                             UserService.readAvance();
-                            DescargaService.descargaInicial();
+                            DownloadService.descargaInicial();
                         });
                     } else {
                         console.log("Capacitación actualizada");

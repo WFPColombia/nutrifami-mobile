@@ -135,20 +135,6 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
         controller: 'AuthHomeCtrl'
     });
 
-    $stateProvider.state('password', {
-        url: '/auth/password',
-        cache: false,
-        templateUrl: 'src/auth_password/auth_password.html',
-        controller: 'AuthPasswordCtrl'
-    });
-
-    $stateProvider.state('migration', {
-        url: '/auth/migration',
-        cache: false,
-        templateUrl: 'src/auth_migration/auth_migration.html',
-        controller: 'AuthMigrationCtrl'
-    });
-
     $stateProvider.state('auth_signup', {
         url: '/auth/signup',
         cache: false,
@@ -252,8 +238,8 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
         cache: false,
         views: {
             'menuContent': {
-                templateUrl: 'src/home/home.html',
-                controller: 'HomeCtrl'
+                templateUrl: 'src/cap_home/cap_home.html',
+                controller: 'CapHomeCtrl'
             }
         }
     });

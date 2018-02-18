@@ -1,11 +1,11 @@
 /*global angular*/
-nf2.controller('HomeCtrl', function ($ionicPlatform, $scope, $ionicViewSwitcher, $location, $ionicPopup, $ionicLoading, $rootScope, CapacitacionService, DescargaService, UserService) {
+nf2.controller('CapHomeCtrl', function ($ionicPlatform, $scope, $ionicViewSwitcher, $location, $ionicPopup, $ionicLoading, CapacitationService, DownloadService, UserService) {
     'use strict';
 
     $ionicPlatform.ready(function () {
 
-        CapacitacionService.initClient();
-        $scope.capacitaciones = CapacitacionService.getCapacitacionesActivas();
+        CapacitationService.initClient();
+        $scope.capacitaciones = CapacitationService.getCapacitationsActives();
 
         //UserService.readAvance();
         
@@ -28,7 +28,7 @@ nf2.controller('HomeCtrl', function ($ionicPlatform, $scope, $ionicViewSwitcher,
         };
         
         $scope.paqueteDescargado = function (cid){
-            return DescargaService.paqueteCompletoDescargado('capacitaciones', cid);
+            return DownloadService.paqueteCompletoDescargado('capacitaciones', cid);
         };
 
         $scope.descargarCapacitacion = function (cid) {
@@ -51,14 +51,14 @@ nf2.controller('HomeCtrl', function ($ionicPlatform, $scope, $ionicViewSwitcher,
                         type: 'button-positive',
                         onTap: function (e) {
                             $ionicLoading.show(optDescarga);
-                            DescargaService.descargarPaqueteCompleto('capacitaciones',cid);
+                            DownloadService.descargarPaqueteCompleto('capacitaciones',cid);
                         }
                     }, {
                         text: 'Descargar sin audios',
                         type: 'button-positive',
                         onTap: function (e) {
                             $ionicLoading.show(optDescarga);
-                            DescargaService.descargarPaquete('capacitaciones',cid, 'imagenes');
+                            DownloadService.descargarPaquete('capacitaciones',cid, 'imagenes');
                         }
                     }]
             });

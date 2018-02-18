@@ -1,10 +1,8 @@
-nf2.controller('AuthHomeCtrl', function($ionicPlatform, $scope, $ionicViewSwitcher, $ionicLoading, $state, UserService) {
+nf2.controller('AuthHomeCtrl', function($ionicPlatform, $scope, $ionicViewSwitcher, $ionicLoading, $state, $cordovaInAppBrowser,  UserService) {
     'use strict';
 
     $ionicPlatform.ready(function() {
         
-        $scope.usuarioNuevo = {};
-             
         UserService.logOut();
         
         $scope.options = {
@@ -13,7 +11,6 @@ nf2.controller('AuthHomeCtrl', function($ionicPlatform, $scope, $ionicViewSwitch
         };
 
         $scope.formLogin = {};
-        $scope.formLoginCedula = {};
 
         $scope.login = function() {
             $scope.error = '';
@@ -22,19 +19,36 @@ nf2.controller('AuthHomeCtrl', function($ionicPlatform, $scope, $ionicViewSwitch
                 showBackdrop: true,
                 maxWidth: 40
             });
-            UserService.checkUser($scope.formLogin.username);
+            UserService.login($scope.formLogin.username, $scope.formLogin.password);
         };
+        
+        $scope.olvidoContrasena = function() {
+            var options = {
+                location: 'yes',
+                clearcache: 'yes',
+                toolbar: 'yes'
+            };
+            $cordovaInAppBrowser.open('http://usuarios.nutrifami.org/admin/password_reset/', '_blank', options);
+        };
+
+        $scope.$on('userLoggedIn', function(event, data) {
+            console.log("userLoggedIn Login");
+            $ionicLoading.hide();
+            //$ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
+            $state.go('nf.cap_home');
+
+        });
         
         $scope.$on('userFailedLogin', function(event, response) {
             $ionicLoading.hide();
             $scope.error = response.message;
         });
         
-        $scope.$on('userChecked', function (event, data) {
-            console.log('userChecked');
+        $scope.$on('userLoggedIn', function (event, data) {
+            console.log('userLoggedIn');
             $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
             $ionicLoading.hide();
-            $state.go('password');
+            $state.go('nf.cap_home');
         });
 
     });

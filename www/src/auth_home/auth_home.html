@@ -23,7 +23,20 @@
                 </div>
                 <div class="row">
                     <div class="col col-100">
-                        <button type="submit" class="btn btn-default center-block" ng-disabled="form.$invalid">SIGUIENTE</button>
+                        <label class="item item-input">
+                            <input type="password" placeholder="Escriba su contraseña" autocomplete="off" ng-model="formLogin.password" required>
+                        </label>
+                    </div>
+                </div>
+                <p>Si no ha modificado su contraseña, la contraseña por defecto es el mismo número de documento</p>
+                <div class="row">
+                    <div class="col col-100">
+                        <button type="submit" class="btn btn-default center-block" ng-disabled="form.$invalid">INGRESAR</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-100">
+                        <a href ng-click="olvidoContrasena()">¿Ha olvidado la contraseña?</a>
                     </div>
                 </div>
             </form>
