@@ -1,4 +1,4 @@
-nf2.directive('opcionParejaUnidadInfo', function($stateParams, CapacitacionService) {
+nf2.directive('opcionParejaUnidadInfo', function($stateParams, CapacitationService) {
     return {
         restrict: 'E',
         scope: {
@@ -9,8 +9,8 @@ nf2.directive('opcionParejaUnidadInfo', function($stateParams, CapacitacionServi
         },
         templateUrl: 'views/directives/opcionParejaUnidadInfo.drt.html',
         link: function($scope) {
-            $scope.unidad = CapacitacionService.getUnidad($stateParams.leccion, $stateParams.unidad);
-            $scope.assetpath = $scope.$parent.TARGETPATH+$stateParams.capacitacion+"/"+$stateParams.modulo+"/"+$stateParams.leccion+"/"+$scope.unidad.id+"/";
+            $scope.unidad = CapacitationService.getUnit($stateParams.leccion, $stateParams.unidad);
+            $scope.assetpath = $scope.$parent.TARGETPATH+$stateParams.capacitation+"/"+$stateParams.module+"/"+$stateParams.leccion+"/"+$scope.unidad.id+"/";
             $scope.audiosDescargados = $scope.$parent.audiosDescargados;
             
             $scope.click = function(index) {

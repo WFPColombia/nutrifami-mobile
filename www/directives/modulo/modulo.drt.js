@@ -1,4 +1,4 @@
-nf2.directive('moduloDrt', function ($location, $rootScope, $ionicLoading, $ionicPopup, $stateParams, DescargaService, UserService) {
+nf2.directive('moduloDrt', function ($state, $rootScope, $ionicLoading, $ionicPopup, $stateParams, DownloadService, UserService, CapacitationService) {
     return {
         restrict: 'E',
         scope: {
@@ -10,7 +10,7 @@ nf2.directive('moduloDrt', function ($location, $rootScope, $ionicLoading, $ioni
 
             $scope.cargadorTexto = "Preparando archivos para la descarga";
             $scope.cargadorPorcentaje = 0;
-            $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitacion + "/" + $scope.info.id + "/";
+            $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitation + "/" + $scope.info.id + "/";
             $scope.icon_descarga = $rootScope.ICON_DESCARGA;
             $scope.avance = UserService.getAvanceModulo($scope.info.id);
             console.log($scope.avance);
@@ -24,7 +24,7 @@ nf2.directive('moduloDrt', function ($location, $rootScope, $ionicLoading, $ioni
             $scope.totalLecciones = function () {
                 var totalLecciones = 0;
                 for (var lid in $scope.info.lecciones) {
-                    var tempLeccion = nutrifami.training.getLeccion($scope.info.lecciones[lid]);
+                    var tempLeccion = CapacitationService.getLesson($scope.info.lecciones[lid]);
                     if (tempLeccion.activo === 1) {
                         totalLecciones++;
                     }
@@ -33,16 +33,19 @@ nf2.directive('moduloDrt', function ($location, $rootScope, $ionicLoading, $ioni
             };
             
             $scope.paqueteDescargado = function () {
-                return DescargaService.paqueteCompletoDescargado('modulos', $scope.info.id);
+                return DownloadService.paqueteCompletoDescargado('modulos', $scope.info.id);
             };
 
 
             $scope.irAlModulo = function () {
-                if (DescargaService.paqueteDescargado('modulos', $scope.info.id, 'imagenes')) {
-                    $location.path('/app/' + $stateParams.capacitacion + '/' + $scope.info.id);
+                if (DownloadService.paqueteDescargado('modulos', $scope.info.id, 'imagenes')) {
+                    $state.go('nf.cap_module', {
+                        capacitation: $stateParams.capacitation,
+                        module: $scope.info.id
+                    });
                 } else {
 
-                    if (DescargaService.isOnline()) {
+                    if (DownloadService.isOnline()) {
                         $scope.modal = {
                             texto1: '¿Desea descargar el módulo con audios?',
                             texto2: 'Descargar el módulo con audios le permitirá escuchar las lecciones, pero la descarga tomará más tiempo',
@@ -98,14 +101,14 @@ nf2.directive('moduloDrt', function ($location, $rootScope, $ionicLoading, $ioni
             $scope.descargarPaqueteCompleto = function () {
                 console.log("Descargar todo el modulo");
                 $ionicLoading.show(optDescarga);
-                DescargaService.descargarPaqueteCompleto('modulos', $scope.info.id);
+                DownloadService.descargarPaqueteCompleto('modulos', $scope.info.id);
 
             };
 
             $scope.descargarPaquete = function () {
                 console.log("Descargar paquete de imagenes");
                 $ionicLoading.show(optDescarga);
-                DescargaService.descargarPaquete('modulos', $scope.info.id, 'imagenes');
+                DownloadService.descargarPaquete('modulos', $scope.info.id, 'imagenes');
             };
 
             $scope.$on('actualizarCargador', function (event, response) {

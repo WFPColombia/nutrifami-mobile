@@ -19,7 +19,7 @@
                 <h1><i class="icon {{ICON_AUDIO}}" aria-hidden="true"></i>Activas</h1>
             </div>
         </div>-->
-        <div class="capacitaciones" ng-repeat="capacitacion in capacitaciones">
+        <div class="capacitaciones" ng-repeat="capacitacion in capacitations" ng-show="capacitacion.visible">
             <div class="row">
                 <div class="col">
                     <div class="tarjeta">
@@ -37,7 +37,7 @@
                             <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{capacitacion.porcentaje}}%;">
                             </div>
                         </div>
-                        <button class="button button-full button-positive" ng-click="abrirCapacitacion(capacitacion.id)">INICIAR</button>
+                        <button class="button button-full button-positive" ui-sref="nf.cap_capacitation({capacitation:'{{capacitacion.id}}'})">INICIAR</button>
                     </div>
                 </div>
             </div>

@@ -1,19 +1,19 @@
 /*global angular*/
-nf2.controller('UnidadCtrl', function ($ionicPlatform, $scope, $rootScope, $location, $stateParams, $ionicPopup, $ionicLoading, $ionicViewSwitcher, $timeout, MediaService, UserService, CapacitacionService, DescargaService, TrainingService) {
+nf2.controller('UnidadCtrl', function ($ionicPlatform, $scope, $rootScope, $location, $stateParams, $ionicPopup, $ionicLoading, $ionicViewSwitcher, $timeout, MediaService, UserService, CapacitationService, DownloadService, TrainingService) {
     'use strict';
     $ionicPlatform.ready(function () {
 
-        $scope.unidad = CapacitacionService.getUnidad($stateParams.leccion, $stateParams.unidad);
+        $scope.unidad = CapacitationService.getUnit($stateParams.leccion, $stateParams.unidad);
         $scope.usuarioActivo = UserService.getUser();
         $scope.estadoUnidad = 'espera';
 
         $scope.unidad.numeroUnidad = $stateParams.unidad;
-        $scope.unidad.totalUnidades = CapacitacionService.getUnidadesActivas($stateParams.leccion).length;
+        $scope.unidad.totalUnidades = CapacitationService.getUnitsActives($stateParams.leccion).length;
         $scope.scrolled = false;
-        $scope.audiosDescargados = DescargaService.paqueteDescargado('modulos', $stateParams.modulo, 'audios');
+        $scope.audiosDescargados = DownloadService.paqueteDescargado('modulos', $stateParams.module, 'audios');
 
-        $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitacion + "/" + $stateParams.modulo + "/" + $stateParams.leccion + "/" + $scope.unidad.id + "/";
-        $scope.assetpath_audio = $rootScope.TARGETPATH_AUDIO + $stateParams.capacitacion + "/" + $stateParams.modulo + "/" + $stateParams.leccion + "/" + $scope.unidad.id + "/";
+        $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitation + "/" + $stateParams.module + "/" + $stateParams.leccion + "/" + $scope.unidad.id + "/";
+        $scope.assetpath_audio = $rootScope.TARGETPATH_AUDIO + $stateParams.capacitation + "/" + $stateParams.module + "/" + $stateParams.leccion + "/" + $scope.unidad.id + "/";
         $scope.audios = {
             tipo: $scope.assetpath_audio + $scope.unidad.instruccion.audio.nombre,
             titulo: $scope.assetpath_audio + $scope.unidad.titulo.audio.nombre,
@@ -287,7 +287,7 @@ nf2.controller('UnidadCtrl', function ($ionicPlatform, $scope, $rootScope, $loca
                         type: 'button-positive',
                         onTap: function (e) {
                             $ionicViewSwitcher.nextDirection('back'); // 'forward', 'back', etc.
-                            $location.path('/app/' + $stateParams.capacitacion + '/' + $stateParams.modulo);
+                            $location.path('/app/' + $stateParams.capacitation + '/' + $stateParams.module);
                         }
                     }]
             });
@@ -297,8 +297,8 @@ nf2.controller('UnidadCtrl', function ($ionicPlatform, $scope, $rootScope, $loca
             $scope.siguienteUnidad = parseInt($stateParams.unidad) + 1;
             if ($scope.siguienteUnidad > $scope.unidad.totalUnidades) {
                 var data = {
-                    capacitacion: $stateParams.capacitacion,
-                    modulo: $stateParams.modulo,
+                    capacitacion: $stateParams.capacitation,
+                    modulo: $stateParams.module,
                     leccion: $stateParams.leccion
                 };
                 // Oberlay Cargando mientras se guarda el avance
@@ -317,7 +317,7 @@ nf2.controller('UnidadCtrl', function ($ionicPlatform, $scope, $rootScope, $loca
                     UserService.createAvance(data);
                 }
             } else {
-                $location.path('/' + $stateParams.capacitacion + '/' + $stateParams.modulo + "/" + $stateParams.leccion + "/" + $scope.siguienteUnidad);
+                $location.path('/' + $stateParams.capacitation + '/' + $stateParams.module + "/" + $stateParams.leccion + "/" + $scope.siguienteUnidad);
             }
         };
 
@@ -355,12 +355,12 @@ nf2.controller('UnidadCtrl', function ($ionicPlatform, $scope, $rootScope, $loca
 
         $scope.$on('avanceSaved', function (event, id) {
             $ionicLoading.hide();
-            $location.path('/' + $stateParams.capacitacion + '/' + $stateParams.modulo + "/" + $stateParams.leccion + "/" + $stateParams.unidad + "/leccion-terminada");
+            $location.path('/' + $stateParams.capacitation + '/' + $stateParams.module + "/" + $stateParams.leccion + "/" + $stateParams.unidad + "/leccion-terminada");
         });
 
         $scope.$on('avanceFaliedSave', function (event, id) {
             $ionicLoading.hide();
-            $location.path('/' + $stateParams.capacitacion + '/' + $stateParams.modulo + "/" + $stateParams.leccion + "/" + $stateParams.unidad + "/leccion-terminada");
+            $location.path('/' + $stateParams.capacitation + '/' + $stateParams.module + "/" + $stateParams.leccion + "/" + $stateParams.unidad + "/leccion-terminada");
         });
 
         /**

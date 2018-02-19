@@ -11,7 +11,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="username">Número de documento</label>
+                                    <label for="username">Número de documento *</label>
                                     <input type="text" class="form-control" name="username" placeholder="Ingrese su número de documento" ng-model="usuarioActivo.username" ng-model-options="{ updateOn: 'blur' }"  ng-minlength="6" required>
                                     <div class="help-block" ng-show="form.username.$error.required">El campo es obligatorio.</div>
                                     <div class="help-block" ng-show="form.username.$error.minlength">El documento es muy corto</div>
@@ -19,7 +19,7 @@
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="tipo_documento">Tipo de Documento</label>
+                                    <label for="tipo_documento">Tipo de Documento *</label>
                                     <select class="form-control" name="tipos_documento" ng-options="option.name for option in tipos_documento.availableOptions track by option.id" ng-model="tipos_documento.selectedOption" required>
                                     </select>
                                     <div class="help-block" ng-show="form.tipos_documento.$error.required">El campo es obligatorio.</div>
@@ -88,7 +88,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="pais">País</label>
+                                    <label for="pais">País *</label>
                                     <input type="text" class="form-control" name="pais" placeholder="Ingrese su país" ng-model="usuarioActivo.pais" ng-model-options="{ updateOn: 'blur' }" required>
                                     <!--<select name="pais" id="pais" class="form-control" ng-disabled="!paises" ng-model="usuarioActivo.pais_id" ng-options="pais.id as pais.name for pais in paises track by pais.sortname" ng-change="updateDropDownDepartamentos(usuarioActivo.pais_id)">
                                         <option disabled value="">Seleccione su país</option>
@@ -98,7 +98,7 @@
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="departamento">Departamento</label>
+                                    <label for="departamento">Departamento *</label>
                                     <input type="text" class="form-control" name="departamento" placeholder="Ingrese su departamento" ng-model="usuarioActivo.departamento" ng-model-options="{ updateOn: 'blur' }" required>
                                     <!--<select name="departamento" id="departamento" class="form-control" ng-disabled="!usuarioActivo.pais_id" ng-model="usuarioActivo.departamento_id" ng-options="departamento.id as departamento.name for departamento in departamentos_filter track by departamento.name" ng-change="updateDropDownCiudades(usuarioActivo.departamento_id)">
                                         <option disabled value="">Seleccione su departamento</option>
@@ -110,7 +110,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="municipio">Muncipio</label>
+                                    <label for="municipio">Muncipio *</label>
                                     <input type="text" class="form-control" name="municipio" placeholder="Ingrese su municipio o ciudad" ng-model="usuarioActivo.municipio" ng-model-options="{ updateOn: 'blur' }" required>
                                     <!--<select name="municipio" id="municipio" class="form-control" ng-disabled="!usuarioActivo.departamento_id" ng-model="usuarioActivo.municipio_id" ng-options="ciudad.id as ciudad.name for ciudad in ciudades_filter track by ciudad.name">
                                         <option disabled value="">Seleccione su ciudad o municipio</option>
@@ -156,8 +156,13 @@
                             <div class="botones">
                                 <div class="col">
                                     <button type="submit" class="btn btn-default center-block" ng-disabled="form.$invalid" ion-ripple>Guardar Cambios</button>
-                                    <a class='cancelar' href="#/app/perfil" class="button">Cancelar</a>
+                                    <a class="button cancelar" href="#/app/perfil">Cancelar</a>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                                <div class="col">
+                                    <p>(*) Campos obligatorios</p>
                             </div>
                         </div>
                     </form>

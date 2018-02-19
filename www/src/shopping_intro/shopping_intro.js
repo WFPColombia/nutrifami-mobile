@@ -1,4 +1,4 @@
-nf2.controller('ShoppingIntroCtrl', function ($ionicPlatform, $location, $scope, $rootScope, $ionicPopup, UserService, MediaService) {
+nf2.controller('ShoppingIntroCtrl', function ($ionicPlatform, $state, $scope, $rootScope, $ionicPopup, UserService, MediaService) {
     'use strict';
     $ionicPlatform.ready(function () {
 
@@ -8,9 +8,6 @@ nf2.controller('ShoppingIntroCtrl', function ($ionicPlatform, $location, $scope,
         };
         $scope.usuarioActivo = UserService.getUser();
 
-        $scope.goTo = function () {
-            $location.path('/app/mis-compras');
-        };
 
         $scope.playAudio = function (audio) {
             MediaService.play(audio);
@@ -26,16 +23,25 @@ nf2.controller('ShoppingIntroCtrl', function ($ionicPlatform, $location, $scope,
         });
 
         if ($rootScope.isOffline) {
-            $ionicPopup.alert({
-                title: "Sin conexión a Internet",
-                content: "Actualmente su equipo no tiene conexión a Internet. Para ver esta sección debe estár conectado a Internet ",
-                buttons: [
-                    {text: 'Salir'}
-                ]
-            })
-                    .then(function (res) {
-                        $location.path('/app/capacitacion');
-                    });
+            $scope.modal = {
+                texto1: 'Sin conexión a Internet',
+                texto2: 'Actualmente su equipo no tiene conexión a Internet. Para ver esta sección debe estár conectado a Internet',
+                estado: 'error' // ok, alert, error
+            };
+            $ionicPopup.show({
+                templateUrl: 'modals/modal.html',
+                scope: $scope,
+                cssClass: 'salir-unidad',
+                buttons: [{
+                        text: 'Salir',
+                        type: 'button-positive',
+                        onTap: function (e) {
+                            $state.go('nf.cap_home');
+                        }
+                    }]
+            });
+
+
         }
 
     });

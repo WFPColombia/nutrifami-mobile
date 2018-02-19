@@ -103,9 +103,9 @@ nf2.factory('DownloadService', function ($http, $rootScope, $cordovaFile, $cordo
         var gestorDescarga = JSON.parse(localStorage.getItem('gestorDescarga'));
         gestorDescarga[nivel][id][tipo] = true;
         if(nivel == 'capacitaciones'){
-            mids = CapacitationService.getModulosId(id);
-            for(mid in mids){
-                tempMid = mids[mid];
+            var mids = CapacitationService.getModulesIds(id);
+            for(var mid in mids){
+                var tempMid = mids[mid];
                 gestorDescarga['modulos'][tempMid][tipo] = true;
             }
         }
@@ -250,7 +250,7 @@ nf2.factory('DownloadService', function ($http, $rootScope, $cordovaFile, $cordo
         var destinoUnzip = $rootScope.TARGETPATH;
         
         if(nivel == 'modulos'){
-            destinoUnzip = $rootScope.TARGETPATH+$stateParams.capacitacion;
+            destinoUnzip = $rootScope.TARGETPATH+$stateParams.capacitation;
         }
         console.log("Descomprimiendo archivo");
         $cordovaZip.unzip(path, destinoUnzip).then(function () {

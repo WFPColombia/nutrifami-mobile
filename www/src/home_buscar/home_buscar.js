@@ -1,4 +1,4 @@
-nf2.controller('HomeBuscarCtrl', function($ionicPlatform, $scope, $ionicLoading, $location, $ionicViewSwitcher, $ionicFilterBar, CapacitacionService, UsuarioService) {
+nf2.controller('HomeBuscarCtrl', function($ionicPlatform, $scope, $ionicLoading, $location, $ionicViewSwitcher, $ionicFilterBar, CapacitationService, UsuarioService) {
     'use strict';
 
     $scope.recetas = {};
@@ -55,7 +55,7 @@ nf2.controller('HomeBuscarCtrl', function($ionicPlatform, $scope, $ionicLoading,
         
 
         function init() {            
-            $scope.capacitaciones = CapacitacionService.getCapacitacionesActivas();
+            $scope.capacitaciones = CapacitationService.getCapacitacionesActivas();
             console.log($scope.capacitaciones);
         }
         init();

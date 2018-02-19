@@ -4,30 +4,33 @@ nf2.controller('CapHomeCtrl', function ($ionicPlatform, $scope, $ionicViewSwitch
 
     $ionicPlatform.ready(function () {
 
-        CapacitationService.initClient();
-        $scope.capacitaciones = CapacitationService.getCapacitationsActives();
+        $scope.capacitations = CapacitationService.getCapacitationsActives();
 
-        //UserService.readAvance();
-        
-        for (var c in $scope.capacitaciones){
-            $scope.capacitaciones[c]['porcentaje'] = getPorcentaje($scope.capacitaciones[c].id);
-            console.log();
+        for (var c in $scope.capacitations) {
+            $scope.capacitations[c]['porcentaje'] = getPorcentaje($scope.capacitations[c].id);
+            $scope.capacitations[c].visible = false;
+
+            if ($scope.capacitations[c].status.nombre === 'publico') {
+                $scope.capacitations[c].visible = true;
+            } else {
+                for (var g in $scope.user.groups) {
+                    if ($scope.user.groups[g].name === 'creator' && $scope.capacitations[c].status.nombre === 'borrador') {
+                        $scope.capacitations[c].visible = true;
+                    }
+
+                    if ($scope.user.groups[g].name === 'reviser' && $scope.capacitations[c].status.nombre === 'revision') {
+                        $scope.capacitations[c].visible = true;
+                    }
+                }
+            }
         }
-
-        console.log($scope.capacitaciones);
-        console.log(UserService.getToken());
-
-        $scope.abrirCapacitacion = function (capacitacion) {
-            //$location.path('/' + enlace);
-            $location.path('/app/' + capacitacion);
-        };
 
         var optDescarga = {
             template: '<h3>Descargando archivos</h3>{{cargadorTexto}}<h4>{{cargadorPorcentaje}}%</h4>',
             scope: $scope
         };
-        
-        $scope.paqueteDescargado = function (cid){
+
+        $scope.paqueteDescargado = function (cid) {
             return DownloadService.paqueteCompletoDescargado('capacitaciones', cid);
         };
 
@@ -51,59 +54,64 @@ nf2.controller('CapHomeCtrl', function ($ionicPlatform, $scope, $ionicViewSwitch
                         type: 'button-positive',
                         onTap: function (e) {
                             $ionicLoading.show(optDescarga);
-                            DownloadService.descargarPaqueteCompleto('capacitaciones',cid);
+                            DownloadService.descargarPaqueteCompleto('capacitaciones', cid);
                         }
                     }, {
                         text: 'Descargar sin audios',
                         type: 'button-positive',
                         onTap: function (e) {
                             $ionicLoading.show(optDescarga);
-                            DownloadService.descargarPaquete('capacitaciones',cid, 'imagenes');
+                            DownloadService.descargarPaquete('capacitaciones', cid, 'imagenes');
                         }
                     }]
             });
         };
-        
-        function getPorcentaje(cid){
+
+        function getPorcentaje(cid) {
             var avanceCapacitacion = UserService.getAvanceCapacitacion(cid);
-            return avanceCapacitacion.porcentaje;
+
+            if (avanceCapacitacion) {
+                return avanceCapacitacion.porcentaje;
+            } else {
+                return 0;
+            }
         };
 
         $scope.irABuscar = function () {
             $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
             $location.path('/app/buscar');
         };
-                
+
         $scope.$on('descargaTerminada', function (event, id) {
             $ionicLoading.hide();
             $location.path('/app/' + id);
         });
-        
+
         $scope.$on('actualizarCargador', function (event, response) {
             $scope.cargadorTexto = response.mensaje;
             $scope.cargadorPorcentaje = response.porcentaje;
         });
-        
+
         $scope.$on('errorDescarga', function (event, mensaje) {
             $ionicLoading.hide();
             $scope.modal = {
-                    texto1: mensaje,
-                    texto2: "Verifique la conexión a Internet e inténtelo más tarde",
-                    estado: 'error' // ok, alert, error
-                };
-                $ionicPopup.show({
-                    templateUrl: 'modals/modal.html',
-                    scope: $scope,
-                    cssClass: 'salir-unidad',
-                    buttons: [{
-                            text: 'Aceptar',
-                            type: 'button-positive',
-                            onTap: function (e) {
-                            }
-                        }]
-                });
+                texto1: mensaje,
+                texto2: "Verifique la conexión a Internet e inténtelo más tarde",
+                estado: 'error' // ok, alert, error
+            };
+            $ionicPopup.show({
+                templateUrl: 'modals/modal.html',
+                scope: $scope,
+                cssClass: 'salir-unidad',
+                buttons: [{
+                        text: 'Aceptar',
+                        type: 'button-positive',
+                        onTap: function (e) {
+                        }
+                    }]
+            });
         });
-        
+
 
     });
 

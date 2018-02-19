@@ -1,11 +1,10 @@
 /*global angular*/
-nf2.controller('CapacitacionCtrl', function ($ionicPlatform, $scope, $rootScope, $ionicLoading, $stateParams, $location, $ionicPopup, UserService, CapacitacionService) {
+nf2.controller('CapCapacitationCtrl', function ($ionicPlatform, $scope, $ionicLoading, $stateParams, $location, $ionicPopup, UserService, CapacitationService) {
     'use strict';
 
     $ionicPlatform.ready(function () {
         
-        CapacitacionService.initClient();
-        $scope.mids = CapacitacionService.getModulosId($stateParams.capacitacion)
+        $scope.mids = CapacitationService.getModulesIds($stateParams.capacitation)
         $scope.usuarioActivo = UserService.getUser();
 
         $scope.modulos = [];
@@ -13,7 +12,7 @@ nf2.controller('CapacitacionCtrl', function ($ionicPlatform, $scope, $rootScope,
 
         //Creamos un arreglo para poder recorerlo y mostrarlo a traves de directivas 
         for (var mid in $scope.mids) {
-            var tempModulo = CapacitacionService.getModulo($scope.mids[mid]);
+            var tempModulo = CapacitationService.getModule($scope.mids[mid]);
             tempModulo.disponible = true;
             if (tempModulo.activo == '1') {
                 tempModulo.activo = true;
@@ -25,7 +24,7 @@ nf2.controller('CapacitacionCtrl', function ($ionicPlatform, $scope, $rootScope,
 
         $scope.$on('descargaTerminada', function (event, id) {
             $ionicLoading.hide();
-            $location.path('/app/' + $stateParams.capacitacion + '/' + id);
+            $location.path('/app/' + $stateParams.capacitation + '/' + id);
         });
                 
         $scope.$on('errorDescarga', function (event, mensaje) {

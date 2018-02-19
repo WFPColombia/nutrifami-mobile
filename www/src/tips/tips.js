@@ -1,20 +1,20 @@
-nf2.controller('TipsCtrl', function ($ionicPlatform, $stateParams, $scope, $rootScope, $location, MediaService, UserService, CapacitacionService) {
+nf2.controller('TipsCtrl', function ($ionicPlatform, $stateParams, $scope, $rootScope, $location, MediaService, UserService, CapacitationService) {
     'use strict';
     $ionicPlatform.ready(function () {
 
         $scope.usuarioActivo = UserService.getUser();
         $scope.assetpath = $rootScope.TARGETPATH + "3/";
 
-        CapacitacionService.initClient();
+        CapacitationService.initClient();
 
         $scope.audios = {};
         $scope.modulos = [];
         // Obtenemos los ids de los modulos de la capacitación 3
 
-        $scope.mids = CapacitacionService.getModulosId(3);
+        $scope.mids = CapacitationService.getModulesIds(3);
         /*Creamos un arreglo para poder recorerlo y mostrarlo a traves de directivas */
         for (var mid in $scope.mids) {
-            var tempModulo = CapacitacionService.getModulo($scope.mids[mid]);
+            var tempModulo = CapacitationService.getModule($scope.mids[mid]);
             $scope.audios["modulo" + tempModulo.id] = $rootScope.TARGETPATH_AUDIO + '3/' + tempModulo.id + '/' + tempModulo.titulo.audio.nombre;
             $scope.modulos.push(tempModulo);
         }

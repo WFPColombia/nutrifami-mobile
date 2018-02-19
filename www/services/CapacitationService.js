@@ -3,16 +3,25 @@ nf2.factory('CapacitationService', function ($http) {
 
     service.capacitation = {};
 
-    service.initClient = function () {
+    service.initClient = function (callback) {
         console.log('initClient');
         service.capacitation = JSON.parse(localStorage.getItem('capacitacion'));
-        if (!service.capacitation) {
-            console.log('hay que descargar la capacitacion');
-            $http.get('http://www.nutrifami.org/js/json.php?file=capacitacion.JSON').then(function (response) {
-                localStorage.setItem("capacitacion", JSON.stringify(response.data));
-                service.capacitation = response.data;
-            });
-        }
+        var version_old = JSON.parse(localStorage.getItem('version'));
+        var version_new = '';
+
+        $http.get('http://www.nutrifami.org/js/json.php?file=version.JSON').then(function (response) {
+            version_new = response.data.Capacitacion.ID;
+            if (version_old !== version_new || !service.capacitation) {
+                localStorage.setItem("version", JSON.stringify(version_new));
+                $http.get('http://www.nutrifami.org/js/json.php?file=capacitacion.JSON').then(function (response) {
+                    localStorage.setItem("capacitacion", JSON.stringify(response.data));
+                    service.capacitation = response.data;
+                    callback();
+                });
+            } else {
+                callback();
+            }
+        });
     };
 
 
@@ -20,8 +29,8 @@ nf2.factory('CapacitationService', function ($http) {
     service.getPublicCapacitations = function () {
         var capacitations = service.capacitation.serv_capacitaciones;
         var publicCapacitations = {};
-        
-        
+
+
         for (var c in capacitations) {
             if (capacitations[c].activo === '1' && capacitations[c].status.nombre === 'publico') {
                 publicCapacitations[capacitations[c].id] = capacitations[c];
@@ -66,8 +75,8 @@ nf2.factory('CapacitationService', function ($http) {
     service.getPublicModules = function () {
         var capacitations = service.getPublicCapacitations();
         var public_modules = {};
-        for (var c in capacitations){
-            for (var m in capacitations[c].modulos){
+        for (var c in capacitations) {
+            for (var m in capacitations[c].modulos) {
                 public_modules[capacitations[c].modulos[m]] = service.getModule(capacitations[c].modulos[m]);
             }
         }
@@ -92,9 +101,9 @@ nf2.factory('CapacitationService', function ($http) {
         //this.initClient();
 
         var modulos = [];
-        mids = nutrifami.training.getModulosId(capacitacion);
+        var mids = service.getModulesIds(capacitacion);
         for (var mid in mids) {
-            var tempModulo = nutrifami.training.getModulo(mids[mid]);
+            var tempModulo = service.getModule(mids[mid]);
 
             tempModulo.avance = {};
             tempModulo.avance.finalizado = false;
@@ -145,8 +154,8 @@ nf2.factory('CapacitationService', function ($http) {
     service.getPublicLessons = function () {
         var modules = service.getPublicModules();
         var public_lessons = {};
-        for (var m in modules){
-            for (var l in modules[m].lecciones){
+        for (var m in modules) {
+            for (var l in modules[m].lecciones) {
                 public_lessons[modules[m].lecciones[l]] = service.getLesson(modules[m].lecciones[l]);
             }
         }
@@ -165,9 +174,9 @@ nf2.factory('CapacitationService', function ($http) {
     service.getLessonsActives = function (modulo) {
         //this.initClient();
         var lecciones = [];
-        lids = nutrifami.training.getLeccionesId(modulo);
+        var lids = service.getLessonsIds(modulo);
         for (var lid in lids) {
-            var tempLeccion = nutrifami.training.getLeccion(lids[lid]);
+            var tempLeccion = service.getLesson(lids[lid]);
 
             if (tempLeccion.activo == 1) {
                 lecciones.push(tempLeccion);
@@ -200,7 +209,6 @@ nf2.factory('CapacitationService', function ($http) {
     };
 
     service.getUnitsActives = function (lid) {
-        this.initClient();
         var uids = service.getUnitsIds(lid);
         var temp = [];
         for (var i in uids) {
@@ -223,10 +231,47 @@ nf2.factory('CapacitationService', function ($http) {
 
     service.getUnitFromOrder = function (lid, rp_unidad) {
         //this.initClient();
-        unidades = service.getUnitsActives(lid);
+        var unidades = service.getUnitsActives(lid);
         return unidades[rp_unidad - 1];
     };
-    return service;
+    
 
     /* End - Units */
+
+    /* Tips */
+
+    /**
+     * 
+     * @returns {Array|Object}
+     * 
+     * TipsService.getTipsByLeccion()
+     *  
+     */
+    service.getTipsByLesson = function (leccion) {
+
+        var tids = service.getLesson(leccion).tips;
+        var tips = [];
+        for (var i in tids) {
+            //console.log(tids[i]);
+            var tip = service.getTipById(tids[i]);
+
+            if (tip.activo != 0) {
+                tips.push(tip);
+            }
+        }
+
+        return tips;
+    };
+
+    service.getTipById = function (tid) {
+        if (typeof service.capacitation.serv_tips !== 'undefined') {
+            return service.capacitation.serv_tips[tid];
+        } else {
+            return false;
+        }
+    };
+
+    /* End - Tips */
+    
+    return service;
 });

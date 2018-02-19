@@ -304,7 +304,7 @@ nf2.factory('NutricompraService', ['$http', '$rootScope', '$timeout',
             var pos = Math.floor((Math.random() * max) + min);
 
             if (pos > max) {
-                pos = max
+                pos = max;
 
             }
 

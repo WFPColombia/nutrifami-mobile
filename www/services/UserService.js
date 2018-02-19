@@ -425,6 +425,16 @@ nf2.factory('UserService', function ($rootScope, $auth, $http, $q, CapacitationS
         });
 
     };
+    
+    service.getLocation = function(callback) {
+        $http.get('js/location.json').then(function(response) {
+            console.log(response);
+            callback(response.data);
+        }, function errorCallback(err) {
+            console.log(err);
+            callback({});
+        });
+    };
 
     return service;
 });

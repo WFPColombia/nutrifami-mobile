@@ -1,13 +1,12 @@
-nf2.controller('ShoppingGroupCtrl', function($ionicPlatform, $location, $scope, $rootScope, $ionicLoading, $ionicPopup, $stateParams, ComprasService, UserService, MediaService) {
+nf2.controller('ShoppingGroupCtrl', function ($ionicPlatform, $state, $scope, $ionicLoading, $ionicPopup, $stateParams, ShoppingService, UserService, MediaService) {
     'use strict';
-    $ionicPlatform.ready(function() {
+    $ionicPlatform.ready(function () {
 
         $scope.usuarioActivo = UserService.getUser();
 
+        console.log('ShoppingGroupCtrl');
+
         var usuario = {};
-        var puntoVenta = {
-            pid: 0
-        };
 
         usuario.did = $scope.usuarioActivo.documento;
         //usuario.did = '1006330568';
@@ -21,13 +20,12 @@ nf2.controller('ShoppingGroupCtrl', function($ionicPlatform, $location, $scope, 
         });
 
 
-        var cargarRecomendados = function() {
-            ComprasService.getConsolidadoComprasUltimoMes(usuario, function(response) {
-                if (response.success) {
-                    $scope.consumoUltimoMes = response.data;
-                    puntoVenta.pid = response.puntoVenta;
+        var cargarRecomendados = function () {
+            ShoppingService.getConsolidadoComprasUltimoMes(usuario, function (response) {
+                if (response) {
+                    $scope.consumoUltimoMes = response;
 
-                    $scope.data = $scope.consumoUltimoMes[$stateParams.grupo - 1];
+                    $scope.data = $scope.consumoUltimoMes[$stateParams.group - 1];
 
                     $scope.audios = {
                         audio4: MediaService.getMediaURL('audios/compras-intro-4.wav'),
@@ -35,10 +33,14 @@ nf2.controller('ShoppingGroupCtrl', function($ionicPlatform, $location, $scope, 
                     };
                     MediaService.preloadSimple($scope.audios);
                     MediaService.play('feedback');
-                    ComprasService.getProductosPuntoVenta(puntoVenta, function(response) {
-                        if (response.success) {
-                            $scope.recomendados = response.data[$stateParams.grupo - 1];
-                        } else {}
+                    ShoppingService.getProductosPuntoVenta(function (response) {
+                        console.log(response);
+                        if (response) {
+                            console.log(response)
+                            $scope.recomendados = response[$stateParams.group];
+                            console.log($scope.recomendados);
+                        } else {
+                        }
                         $ionicLoading.hide();
                     });
                 } else {
@@ -48,29 +50,33 @@ nf2.controller('ShoppingGroupCtrl', function($ionicPlatform, $location, $scope, 
 
         };
 
-        $scope.negarAcceso = function() {
-            var negarPopUp = $ionicPopup.alert({
-                title: '',
-                template: 'No hay información de compras para este usuario',
-                buttons: [
-                    { text: 'Salir' }
-                ]
-            });
-            negarPopUp.then(function(res) {
-                $location.path('/app/mis-compras/intro');
+        $scope.negarAcceso = function () {
+            $scope.modal = {
+                texto1: 'No hay información de compras para este usuario',
+                texto2: '',
+                estado: 'alert' // ok, alert, error
+            };
+            $ionicPopup.show({
+                templateUrl: 'modals/modal.html',
+                scope: $scope,
+                cssClass: 'salir-unidad',
+                buttons: [{
+                        text: 'Salir',
+                        type: 'button-positive',
+                        onTap: function (e) {
+                            $state.go('nf.shopping_intro');
+                        }
+                    }]
             });
         };
 
-        $scope.playAudio = function(audio) {
+        $scope.playAudio = function (audio) {
             MediaService.play(audio);
         };
 
-        $scope.$on('$ionicView.enter', function() {
-            cargarRecomendados();
+        cargarRecomendados();
 
-        });
-
-        $scope.$on("$ionicView.beforeLeave", function(event, data) {
+        $scope.$on("$ionicView.beforeLeave", function (event, data) {
             console.log("BeforeLeave view");
             MediaService.unload();
         });

@@ -15,13 +15,13 @@
                     </header>
                     <div class="tips-modulo-body">
                         <ion-list>
-                            <div ng-repeat="group in grupos">
+                            <div ng-repeat="group in grupos track by group.name">
                                 <ion-item class="item-stable" ng-click="toggleGroup(group)" ng-class="{active: isGroupShown(group)}">
                                     {{group.name}}
                                     <!--<i class="icon ion-volume-high"></i>-->
                                     <i class="icon " ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus' "></i>
                                 </ion-item>
-                                <ion-item class="item-accordion item-icon-left" ng-click="clickTip(item.texto)" ng-repeat="item in group.items" ng-show="isGroupShown(group)">
+                                <ion-item class="item-accordion item-icon-left" ng-click="clickTip(item.texto)" ng-repeat="item in group.items track by item.id" ng-show="isGroupShown(group)">
                                     <i class="icon ion-android-share-alt"></i>
                                     <div ng-bind-html="item.texto | format | trust"></div>
                                 </ion-item>

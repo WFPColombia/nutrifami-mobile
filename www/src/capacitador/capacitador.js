@@ -1,4 +1,4 @@
-nf2.controller('CapacitadorCtrl', function ($ionicPlatform, $scope, $ionicLoading, $ionicPopup, TrainingService, UserService, DescargaService) {
+nf2.controller('CapacitadorCtrl', function ($ionicPlatform, $scope, $ionicLoading, $ionicPopup, TrainingService, UserService, DownloadService) {
     'use strict';
 
     $ionicPlatform.ready(function () {
@@ -54,7 +54,7 @@ nf2.controller('CapacitadorCtrl', function ($ionicPlatform, $scope, $ionicLoadin
 
         $scope.sinchronizeTraining = function () {
 
-            if (DescargaService.isOnline()) {
+            if (DownloadService.isOnline()) {
                 TrainingService.sinchronizeTraining();
                 $ionicLoading.show({
                     animation: 'fade-in',

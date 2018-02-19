@@ -208,7 +208,7 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
     });
     
     $stateProvider.state('nf.shopping_intro', {
-        url: '/mis-compras/intro',
+        url: '/shopping/intro',
         views: {
             menuContent: {
                 templateUrl: 'src/shopping_intro/shopping_intro.html',
@@ -218,7 +218,7 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
     });
 
     $stateProvider.state('nf.shopping_home', {
-        url: '/mis-compras',
+        url: '/shopping',
         views: {
             menuContent: {
                 templateUrl: 'src/shopping_home/shopping_home.html',
@@ -228,7 +228,7 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
     });
 
     $stateProvider.state('shopping_group', {
-        url: '/mis-compras/:grupo',
+        url: '/shopping/:group',
         templateUrl: 'src/shopping_group/shopping_group.html',
         controller: 'ShoppingGroupCtrl'
     });
@@ -260,6 +260,12 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
             }
         }
     });
+    
+    $stateProvider.state('tips_module', {
+        url: '/tips/:module',
+        templateUrl: 'src/tips_module/tips_module.html',
+        controller: 'TipsModuleCtrl'
+    });
 
     $stateProvider.state('nf.capacitador', {
         url: '/capacitador',
@@ -272,43 +278,39 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
         }
     });
 
-    $stateProvider.state('tipsModulo', {
-        url: '/tips/:modulo',
-        templateUrl: 'src/tips-modulo/tips-modulo.html',
-        controller: 'TipsModuloCtrl'
-    });
 
-    $stateProvider.state('nf.capacitacion', {
-        url: '/:capacitacion',
+
+    $stateProvider.state('nf.cap_capacitation', {
+        url: '/:capacitation',
         cache: false,
         views: {
-            'menuContent': {
-                templateUrl: 'src/capacitacion/capacitacion.html',
-                controller: 'CapacitacionCtrl'
+            menuContent: {
+                templateUrl: 'src/cap_capacitation/cap_capacitation.html',
+                controller: 'CapCapacitationCtrl'
             }
         }
     });
 
-    $stateProvider.state('nf.modulo', {
-        url: '/:capacitacion/:modulo',
+    $stateProvider.state('nf.cap_module', {
+        url: '/:capacitation/:module',
         cache: false,
         views: {
-            'menuContent': {
-                templateUrl: 'src/modulo/modulo.html',
-                controller: 'ModuloCtrl'
+            menuContent: {
+                templateUrl: 'src/cap_module/cap_module.html',
+                controller: 'CapModuleCtrl'
             }
         }
     });
 
     $stateProvider.state('unidad', {
-        url: '/:capacitacion/:modulo/:leccion/:unidad',
+        url: '/:capacitation/:module/:leccion/:unidad',
         cache: false,
         templateUrl: 'src/unidad/unidad.html',
         controller: 'UnidadCtrl'
     });
 
     $stateProvider.state('leccionTerminada', {
-        url: '/:capacitacion/:modulo/:leccion/:unidad/leccion-terminada',
+        url: '/:capacitation/:module/:leccion/:unidad/leccion-terminada',
         cache: false,
         templateUrl: 'src/leccion_terminada/leccion_terminada.html',
         controller: 'LeccionTerminadaCtrl'
@@ -330,7 +332,7 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
     $urlRouterProvider.otherwise('/app/');
 });
 
-nf2.run(function ($ionicPlatform, $rootScope, $location, $http) {
+nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationService) {
     console.log('run');
     
     //Deshabilitamos el boton de ir atrás del Hardware de Android
@@ -339,12 +341,9 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http) {
         e.preventDefault();
     }, 101);
 
-    $http.defaults.headers.post.Authorization = "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==";
-
     $rootScope.globals = JSON.parse(localStorage.getItem('globals')) || {};
 
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
-        console.log();
 
         //Guarda la información de usuario activo en el rootScope
         $rootScope.usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo')) || {};
@@ -361,6 +360,10 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http) {
             }
         }
     });
+    
+    CapacitationService.initClient(function(){
+        
+    }); 
 
     $ionicPlatform.ready(function () {
 
@@ -369,7 +372,6 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http) {
         if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             cordova.plugins.Keyboard.disableScroll(true);
-
         }
 
         if (window.StatusBar) {

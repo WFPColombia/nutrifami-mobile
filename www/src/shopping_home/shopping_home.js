@@ -1,4 +1,4 @@
-nf2.controller('ShoppingHomeCtrl', function ($ionicPlatform, $scope, $rootScope, $ionicLoading, $ionicPopup, $location, $timeout, ComprasService, UserService, MediaService) {
+nf2.controller('ShoppingHomeCtrl', function ($ionicPlatform, $scope, $ionicLoading, $ionicPopup, $state, $timeout, ShoppingService, UserService, MediaService) {
     'use strict';
     $ionicPlatform.ready(function () {
 
@@ -8,10 +8,8 @@ nf2.controller('ShoppingHomeCtrl', function ($ionicPlatform, $scope, $rootScope,
         $scope.usuarioActivo = UserService.getUser();
         $scope.animar = false;
 
-        var usuario = {};
 
-        usuario.did = $scope.usuarioActivo.documento;
-        //usuario.did = '1006330568';
+        //$scope.usuarioActivo.username = '1006330568';
 
         $scope.consumoUltimoMes = [{
                 'nombre': "Cereales, raíces, tubérculos y plátanos.",
@@ -48,10 +46,10 @@ nf2.controller('ShoppingHomeCtrl', function ($ionicPlatform, $scope, $rootScope,
                 maxWidth: 40
             });
 
-            ComprasService.getConsolidadoComprasUltimoMes(usuario, function (response) {
-                $scope.noHayDatos = false;
-                if (response.success) {
-                    $scope.consumoUltimoMes = response.data;
+            ShoppingService.getConsolidadoComprasUltimoMes($scope.usuarioActivo, function (response) {
+                console.log(response);
+                if (response) {
+                    $scope.consumoUltimoMes = response;
 
                     $timeout(function () {
                         $scope.animar = true;
@@ -64,17 +62,23 @@ nf2.controller('ShoppingHomeCtrl', function ($ionicPlatform, $scope, $rootScope,
         };
 
         $scope.negarAcceso = function () {
-            var negarPopUp = $ionicPopup.alert({
-                title: '',
-                template: 'No hay información de compras para este usuario',
-                buttons: [
-                    {text: 'Salir'}
-                ]
+            $scope.modal = {
+                texto1: 'No hay información de compras para este usuario',
+                texto2: '',
+                estado: 'alert' // ok, alert, error
+            };
+            $ionicPopup.show({
+                templateUrl: 'modals/modal.html',
+                scope: $scope,
+                cssClass: 'salir-unidad',
+                buttons: [{
+                        text: 'Salir',
+                        type: 'button-positive',
+                        onTap: function (e) {
+                            $state.go('nf.shopping_intro');
+                        }
+                    }]
             });
-            negarPopUp.then(function (res) {
-                $location.path('/app/mis-compras/intro');
-            });
-
         };
 
         $scope.playAudio = function (audio) {

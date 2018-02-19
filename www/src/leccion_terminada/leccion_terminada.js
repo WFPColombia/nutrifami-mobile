@@ -1,17 +1,17 @@
 /*global angular*/
 /*global angular*/
-nf2.controller('LeccionTerminadaCtrl', function ($scope, $rootScope, $stateParams, $location, $ionicPlatform, $ionicPopup, MediaService, CapacitacionService, UserService, DescargaService) {
+nf2.controller('LeccionTerminadaCtrl', function ($scope, $rootScope, $stateParams, $location, $ionicPlatform, $ionicPopup, MediaService, CapacitationService, UserService, DownloadService) {
     'use strict';
 
     $ionicPlatform.ready(function () {
 
         $scope.usuarioActivo = UserService.getUser();
-        $scope.leccion = CapacitacionService.getLeccion($stateParams.leccion);
-        $scope.media_downloaded = DescargaService.paqueteDescargado('modulos', $stateParams.modulo, 'audios');
-        $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitacion + "/" + $stateParams.modulo + "/";
-        $scope.assetpath_audio = $rootScope.TARGETPATH_AUDIO + $stateParams.capacitacion + "/" + $stateParams.modulo + "/";
+        $scope.leccion = CapacitationService.getLesson($stateParams.leccion);
+        $scope.media_downloaded = DownloadService.paqueteDescargado('modulos', $stateParams.module, 'audios');
+        $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitation + "/" + $stateParams.module + "/";
+        $scope.assetpath_audio = $rootScope.TARGETPATH_AUDIO + $stateParams.capacitation + "/" + $stateParams.module + "/";
 
-        var avanceModulo = UserService.getAvanceModulo($stateParams.modulo);
+        var avanceModulo = UserService.getAvanceModulo($stateParams.module);
 
         $scope.audios = {
             audioFinalizado: $scope.assetpath_audio + $scope.leccion.finalizado.audio.nombre
@@ -27,7 +27,7 @@ nf2.controller('LeccionTerminadaCtrl', function ($scope, $rootScope, $stateParam
 
         $scope.continuar = function () {
             if (avanceModulo.completo) {
-                $scope.modulo = CapacitacionService.getModulo($stateParams.modulo);
+                $scope.modulo = CapacitationService.getModule($stateParams.module);
                 $scope.diplomaTitulo = $scope.modulo.titulo.texto;
                 $ionicPopup.show({
                     templateUrl: 'modals/diploma.modal.html',
@@ -48,14 +48,14 @@ nf2.controller('LeccionTerminadaCtrl', function ($scope, $rootScope, $stateParam
                             type: 'button-positive',
                             onTap: function (e) {
                                 MediaService.unload();
-                                $location.path('/app/' + $stateParams.capacitacion + '/' + $stateParams.modulo);
+                                $location.path('/app/' + $stateParams.capacitation + '/' + $stateParams.module);
                             }
                         }
                     ]
                 });
             } else {
                 MediaService.unload();
-                $location.path('/app/' + $stateParams.capacitacion + '/' + $stateParams.modulo);
+                $location.path('/app/' + $stateParams.capacitation + '/' + $stateParams.module);
             }
         };
 
