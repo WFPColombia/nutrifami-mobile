@@ -1,5 +1,5 @@
 /*global angular*/
-nf2.controller('AuthProfileCtrl', function($ionicPlatform, $scope, $ionicPopup, $ionicLoading, PerfilService, UserService) {
+nf2.controller('AuthProfileCtrl', function($ionicPlatform, $scope, $ionicPopup, $ionicLoading, UserService) {
     'use strict';
     $ionicPlatform.ready(function() {
 
@@ -97,7 +97,7 @@ nf2.controller('AuthProfileCtrl', function($ionicPlatform, $scope, $ionicPopup, 
             console.log(familiar);
 
             delete familiar["parentescos"];
-            PerfilService.agregarFamiliar(familiar, function(response) {
+            /*PerfilService.agregarFamiliar(familiar, function(response) {
                 if (response.success) {
                     if (familiar.rango !== false) {
                         $scope.usuarioFamilia.miembrosPorRango[index].cantidad--;
@@ -119,7 +119,7 @@ nf2.controller('AuthProfileCtrl', function($ionicPlatform, $scope, $ionicPopup, 
                     template: response.message,
                     cssClass: 'confirmacion'
                 });
-            });
+            });*/
         };
     });
 });

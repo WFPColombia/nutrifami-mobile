@@ -5,12 +5,8 @@ nf2.controller('ShoppingGroupCtrl', function ($ionicPlatform, $state, $scope, $i
         $scope.usuarioActivo = UserService.getUser();
 
         console.log('ShoppingGroupCtrl');
-
-        var usuario = {};
-
-        usuario.did = $scope.usuarioActivo.documento;
-        //usuario.did = '1006330568';
-        usuario.nombre = $scope.usuarioActivo.nombre;
+        
+        $scope.usuarioActivo.username = '1006330568';
 
         $scope.loading = $ionicLoading.show({
             //template: 'Cargando datos...',
@@ -21,7 +17,7 @@ nf2.controller('ShoppingGroupCtrl', function ($ionicPlatform, $state, $scope, $i
 
 
         var cargarRecomendados = function () {
-            ShoppingService.getConsolidadoComprasUltimoMes(usuario, function (response) {
+            ShoppingService.getConsolidadoComprasUltimoMes($scope.usuarioActivo, function (response) {
                 if (response) {
                     $scope.consumoUltimoMes = response;
 

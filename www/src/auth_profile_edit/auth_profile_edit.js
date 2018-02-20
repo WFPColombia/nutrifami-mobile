@@ -1,5 +1,5 @@
 /*global angular*/
-nf2.controller('AuthProfileEditCtrl', function ($ionicPlatform, $filter, $scope, $rootScope, $location, $ionicLoading, $ionicPopup, UserService, PerfilService) {
+nf2.controller('AuthProfileEditCtrl', function ($ionicPlatform, $filter, $scope, $rootScope, $state, $ionicLoading, $ionicPopup, UserService) {
     'use strict';
     $ionicPlatform.ready(function () {
 
@@ -12,7 +12,7 @@ nf2.controller('AuthProfileEditCtrl', function ($ionicPlatform, $filter, $scope,
                 ]
             })
                     .then(function (res) {
-                        $location.path('/app/capacitacion');
+                        $state.go('nf.cap_home');
                     });
         }
 
