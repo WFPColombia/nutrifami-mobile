@@ -8,6 +8,8 @@ nf2.controller('CapModuleCtrl', function ($ionicPlatform, $scope, $rootScope, $l
 
         $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitation + "/" + $stateParams.module + "/";
         $scope.assetpath_audio = $rootScope.TARGETPATH_AUDIO + $stateParams.capacitation + "/" + $stateParams.module + "/";
+        
+        console.log($rootScope.TARGETPATH_AUDIO);
 
         $scope.audios = {
             audioTitulo: $scope.assetpath_audio + $scope.modulo.titulo.audio.nombre,

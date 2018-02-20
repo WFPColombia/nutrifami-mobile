@@ -1,12 +1,12 @@
 /*global angular*/
 /*global angular*/
-nf2.controller('LeccionTerminadaCtrl', function ($scope, $rootScope, $stateParams, $location, $ionicPlatform, $ionicPopup, MediaService, CapacitationService, UserService, DownloadService) {
+nf2.controller('CapUnitEndCtrl', function ($scope, $rootScope, $stateParams, $location, $ionicPlatform, $ionicPopup, MediaService, CapacitationService, UserService, DownloadService) {
     'use strict';
 
     $ionicPlatform.ready(function () {
 
         $scope.usuarioActivo = UserService.getUser();
-        $scope.leccion = CapacitationService.getLesson($stateParams.leccion);
+        $scope.leccion = CapacitationService.getLesson($stateParams.lesson);
         $scope.media_downloaded = DownloadService.paqueteDescargado('modulos', $stateParams.module, 'audios');
         $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitation + "/" + $stateParams.module + "/";
         $scope.assetpath_audio = $rootScope.TARGETPATH_AUDIO + $stateParams.capacitation + "/" + $stateParams.module + "/";

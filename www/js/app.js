@@ -278,8 +278,6 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
         }
     });
 
-
-
     $stateProvider.state('nf.cap_capacitation', {
         url: '/:capacitation',
         cache: false,
@@ -302,24 +300,23 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
         }
     });
 
-    $stateProvider.state('unidad', {
-        url: '/:capacitation/:module/:leccion/:unidad',
+    $stateProvider.state('cap_unit', {
+        url: '/:capacitation/:module/:lesson/:unit',
         cache: false,
-        templateUrl: 'src/unidad/unidad.html',
-        controller: 'UnidadCtrl'
+        templateUrl: 'src/cap_unit/cap_unit.html',
+        controller: 'CapUnitCtrl'
     });
 
-    $stateProvider.state('leccionTerminada', {
-        url: '/:capacitation/:module/:leccion/:unidad/leccion-terminada',
+    $stateProvider.state('cap_unit_end', {
+        url: '/:capacitation/:module/:lesson/:unit/end',
         cache: false,
-        templateUrl: 'src/leccion_terminada/leccion_terminada.html',
-        controller: 'LeccionTerminadaCtrl'
+        templateUrl: 'src/cap_unit_end/cap_unit_end.html',
+        controller: 'CapUnitEndCtrl'
     });
 
-    $stateProvider.state('sobre', {
-        url: '/sobre',
-        templateUrl: 'src/sobre/sobre.html',
-        controller: 'SobreCtrl'
+    $stateProvider.state('about', {
+        url: '/about',
+        templateUrl: 'src/about/about.html'
     });
     
     
@@ -405,6 +402,7 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
         } else {
             $rootScope.BASE_URL = 'http://localhost:8000/';
             $rootScope.TARGETPATH = "https://s3.amazonaws.com/nutrifami/";
+            $rootScope.TARGETPATH_AUDIO = "https://s3.amazonaws.com/nutrifami/";
             $rootScope.ICON_DESCARGA = 'ion-ios-cloud-download-outline';
             $rootScope.ICON_AUDIO = 'ion-ios-volume-high';
         }

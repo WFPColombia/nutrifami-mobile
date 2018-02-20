@@ -39,7 +39,7 @@ nf2.factory('DownloadService', function ($http, $rootScope, $cordovaFile, $cordo
         $http.get(BaseUrl + 'js/json.php?file=version.JSON').then(function (response) {
             versionNueva = response.data.Capacitacion.ID;
             console.log(versionNueva + " " + versionActual);
-            if (versionActual != versionNueva || !service.assetsInicialesDescargados() ) {
+            if (versionActual !== versionNueva || !service.assetsInicialesDescargados() ) {
                 //Actualizamos el numero de versión
                 localStorage.setItem("version", JSON.stringify(versionNueva));
                 callback(true);
@@ -132,8 +132,8 @@ nf2.factory('DownloadService', function ($http, $rootScope, $cordovaFile, $cordo
     service.assetsInicialesDescargados = function(){
         var gestorDescarga = JSON.parse(localStorage.getItem('gestorDescarga'));
 
-        return gestorDescarga.assetsIniciales;
-    }
+        return gestorDescarga;
+        }
 
     /**
      * 
