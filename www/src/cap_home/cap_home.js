@@ -1,5 +1,5 @@
 /*global angular*/
-nf2.controller('CapHomeCtrl', function ($ionicPlatform, $scope, $ionicViewSwitcher, $location, $ionicPopup, $ionicLoading, CapacitationService, DownloadService, UserService) {
+nf2.controller('CapHomeCtrl', function ($ionicPlatform, $scope, $ionicViewSwitcher, $state, $location, $ionicPopup, $ionicLoading, CapacitationService, DownloadService, UserService) {
     'use strict';
 
     $ionicPlatform.ready(function () {
@@ -10,19 +10,32 @@ nf2.controller('CapHomeCtrl', function ($ionicPlatform, $scope, $ionicViewSwitch
             $scope.capacitations[c]['porcentaje'] = getPorcentaje($scope.capacitations[c].id);
             $scope.capacitations[c].visible = false;
 
-            if ($scope.capacitations[c].status.nombre === 'publico') {
-                $scope.capacitations[c].visible = true;
-            } else {
-                for (var g in $scope.user.groups) {
-                    if ($scope.user.groups[g].name === 'creator' && $scope.capacitations[c].status.nombre === 'borrador') {
-                        $scope.capacitations[c].visible = true;
-                    }
+            try {
+                if ($scope.capacitations[c].status.nombre === 'publico') {
+                    $scope.capacitations[c].visible = true;
+                } else {
+                    for (var g in $scope.user.groups) {
+                        if ($scope.user.groups[g].name === 'creator' && $scope.capacitations[c].status.nombre === 'borrador') {
+                            $scope.capacitations[c].visible = true;
+                        }
 
-                    if ($scope.user.groups[g].name === 'reviser' && $scope.capacitations[c].status.nombre === 'revision') {
-                        $scope.capacitations[c].visible = true;
+                        if ($scope.user.groups[g].name === 'reviser' && $scope.capacitations[c].status.nombre === 'revision') {
+                            $scope.capacitations[c].visible = true;
+                        }
                     }
                 }
+
+            } catch (err) {
+                console.log('Hubo error');
+                console.log(err);
+                localStorage.removeItem("version");
+                
+                UserService.logOut();
+                $state.go('preload');
+
             }
+
+
         }
 
         var optDescarga = {
@@ -75,7 +88,8 @@ nf2.controller('CapHomeCtrl', function ($ionicPlatform, $scope, $ionicViewSwitch
             } else {
                 return 0;
             }
-        };
+        }
+        ;
 
         $scope.irABuscar = function () {
             $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.

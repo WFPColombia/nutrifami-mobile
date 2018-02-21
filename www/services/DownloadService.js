@@ -32,7 +32,6 @@ nf2.factory('DownloadService', function ($http, $rootScope, $cordovaFile, $cordo
         var versionNueva = '';
         //Comprobamos si existe una version previa
         if (localStorage.getItem('version') !== null) {
-            console.log("Existe una versión");
             versionActual = JSON.parse(localStorage.getItem('version'));
         }
         //comprobamos la version nueva
@@ -41,6 +40,7 @@ nf2.factory('DownloadService', function ($http, $rootScope, $cordovaFile, $cordo
             console.log(versionNueva + " " + versionActual);
             if (versionActual !== versionNueva || !service.assetsInicialesDescargados() ) {
                 //Actualizamos el numero de versión
+                console.log('entra al if');
                 localStorage.setItem("version", JSON.stringify(versionNueva));
                 callback(true);
             } else {
