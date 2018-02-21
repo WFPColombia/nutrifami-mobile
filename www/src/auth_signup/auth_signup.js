@@ -6,30 +6,25 @@ nf2.controller('AuthSignupCtrl', function ($ionicPlatform, $scope, $rootScope, $
 
         $scope.signup = function () {
 
-            if ($scope.formSignup.password === $scope.formSignup.password2) {
-                $scope.loading = $ionicLoading.show({
-                    animation: 'fade-in',
-                    showBackdrop: true,
-                    maxWidth: 40
-                });
+            $scope.loading = $ionicLoading.show({
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 40
+            });
 
-                var user = {
-                    username: $scope.formSignup.username,
-                    email: '',
-                    password: $scope.formSignup.password,
-                    first_name: '',
-                    last_name: '',
-                    id_antiguo: null,
-                    terminos: $scope.formSignup.terminos,
-                };
-                UserService.signup(user);
-
-            } else {
-                $scope.error = "Las contraseñas deben ser iguales";
-            }
+            var user = {
+                username: $scope.formSignup.username,
+                email: '',
+                password: 'abc12345',
+                first_name: $scope.formSignup.first_name,
+                last_name: $scope.formSignup.last_name,
+                id_antiguo: null,
+                terminos: $scope.formSignup.terminos
+            };
+            UserService.signup(user);
         };
-        
-        $scope.verTerminos = function() {
+
+        $scope.verTerminos = function () {
 
             var options = {
                 location: 'yes',
@@ -38,12 +33,12 @@ nf2.controller('AuthSignupCtrl', function ($ionicPlatform, $scope, $rootScope, $
             };
 
             $cordovaInAppBrowser.open('http://nutrifami.org/#!/terminos-y-condiciones', '_blank', options)
-                .then(function(event) {
-                    // success
-                })
-                .catch(function(event) {
-                    // error
-                });
+                    .then(function (event) {
+                        // success
+                    })
+                    .catch(function (event) {
+                        // error
+                    });
         };
 
         $scope.$on('userLoggedIn', function (event, data) {

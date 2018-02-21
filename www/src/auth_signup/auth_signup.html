@@ -15,8 +15,6 @@
                     <div class="help-block">
                         <span ng-show="error">{{error}}</span>
                         <span ng-show="form.username.$error.minlength">El nombre de usuario es muy corto</span>
-                        <span ng-show="form.password.$error.minlength">La contraseña es muy corta</span>
-                        <span ng-show="form.email.$error.email">E-mail no válido</span>
                         <span ng-show="form.email.$error.terminos">Debes aceptar los términos y condiciones</span>
                     </div>
                     <div class="row">
@@ -36,14 +34,14 @@
                     <div class="row">
                         <div class="col col-100">
                             <label class="item item-input">
-                                <input type="password" placeholder="Escriba su contraseña" name="password" autocomplete="off" ng-model="formSignup.password" ng-minlength="8" required>
+                                <input type="text" placeholder="Ingrese su nombre" name="first_name" autocomplete="off" ng-model="formSignup.first_name" required>
                             </label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col col-100">
                             <label class="item item-input">
-                                <input type="password" placeholder="Repita su contraseña" autocomplete="off" ng-model="formSignup.password2" required>
+                                <input type="text" placeholder="Ingrese su apellido" name="last_name" autocomplete="off" ng-model="formSignup.last_name" required>
                             </label>
                         </div>
                     </div>

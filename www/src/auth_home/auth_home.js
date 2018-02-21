@@ -19,7 +19,7 @@ nf2.controller('AuthHomeCtrl', function($ionicPlatform, $scope, $ionicViewSwitch
                 showBackdrop: true,
                 maxWidth: 40
             });
-            UserService.login($scope.formLogin.username, $scope.formLogin.password);
+            UserService.login($scope.formLogin.username, 'abc12345');
         };
         
         $scope.olvidoContrasena = function() {
