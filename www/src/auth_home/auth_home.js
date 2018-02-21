@@ -31,14 +31,6 @@ nf2.controller('AuthHomeCtrl', function($ionicPlatform, $scope, $ionicViewSwitch
             $cordovaInAppBrowser.open('http://usuarios.nutrifami.org/admin/password_reset/', '_blank', options);
         };
 
-        $scope.$on('userLoggedIn', function(event, data) {
-            console.log("userLoggedIn Login");
-            $ionicLoading.hide();
-            //$ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
-            $state.go('nf.cap_home');
-
-        });
-        
         $scope.$on('userFailedLogin', function(event, response) {
             $ionicLoading.hide();
             $scope.error = response.message;
@@ -48,7 +40,7 @@ nf2.controller('AuthHomeCtrl', function($ionicPlatform, $scope, $ionicViewSwitch
             console.log('userLoggedIn');
             $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
             $ionicLoading.hide();
-            $state.go('nf.cap_home');
+            $state.go('intro');
         });
 
     });

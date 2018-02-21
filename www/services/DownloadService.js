@@ -1,10 +1,10 @@
-nf2.factory('DownloadService', function ($http, $rootScope, $cordovaFile, $cordovaFileTransfer, $cordovaNetwork, $timeout, $cordovaZip,$stateParams, CapacitationService, UserService) {
+nf2.factory('DownloadService', function ($http, $rootScope, $cordovaFile, $cordovaFileTransfer, $cordovaNetwork, $timeout, $cordovaZip, $stateParams, CapacitationService, UserService) {
 
     var service = {};
     var trustHosts = true;
     var options = {};
     var BaseUrl = 'http://www.nutrifami.org/';
-    
+
     /**
      * 
      * @returns {Boolean}
@@ -38,7 +38,7 @@ nf2.factory('DownloadService', function ($http, $rootScope, $cordovaFile, $cordo
         $http.get(BaseUrl + 'js/json.php?file=version.JSON').then(function (response) {
             versionNueva = response.data.Capacitacion.ID;
             console.log(versionNueva + " " + versionActual);
-            if (versionActual !== versionNueva || !service.assetsInicialesDescargados() ) {
+            if (versionActual !== versionNueva || !service.assetsInicialesDescargados()) {
                 //Actualizamos el numero de versión
                 console.log('entra al if');
                 localStorage.setItem("version", JSON.stringify(versionNueva));
@@ -72,7 +72,9 @@ nf2.factory('DownloadService', function ($http, $rootScope, $cordovaFile, $cordo
             capacitaciones: {},
             modulos: {}
         };
+        console.log(capacitaciones);
         for (var i in capacitaciones.serv_capacitaciones) {
+            console.log(i);
             if (i !== 'completo') {
                 var tempObject = {};
                 tempObject[i] = {
@@ -98,42 +100,42 @@ nf2.factory('DownloadService', function ($http, $rootScope, $cordovaFile, $cordo
         }
         localStorage.setItem("gestorDescarga", JSON.stringify(gestorDescarga));
     };
-    
-    service.actualizarGestorDescarga = function(nivel, id, tipo){
+
+    service.actualizarGestorDescarga = function (nivel, id, tipo) {
         var gestorDescarga = JSON.parse(localStorage.getItem('gestorDescarga'));
         gestorDescarga[nivel][id][tipo] = true;
-        if(nivel == 'capacitaciones'){
+        if (nivel == 'capacitaciones') {
             var mids = CapacitationService.getModulesIds(id);
-            for(var mid in mids){
+            for (var mid in mids) {
                 var tempMid = mids[mid];
                 gestorDescarga['modulos'][tempMid][tipo] = true;
             }
         }
         localStorage.setItem("gestorDescarga", JSON.stringify(gestorDescarga));
     };
-    
-    
-    service.paqueteDescargado = function (nivel,  id, tipo) {
+
+
+    service.paqueteDescargado = function (nivel, id, tipo) {
         nivel = nivel || 'capacitaciones';
         id = id || 3;
         tipo = tipo || 'imagenes';
         var gestorDescarga = JSON.parse(localStorage.getItem('gestorDescarga'));
         return gestorDescarga[nivel][id][tipo];
     };
-    
-    service.paqueteCompletoDescargado = function (nivel,  id) {
+
+    service.paqueteCompletoDescargado = function (nivel, id) {
         nivel = nivel || 'capacitaciones';
         id = id || 3;
-        var imagenes = service.paqueteDescargado(nivel,id,'imagenes');
-        var audios = service.paqueteDescargado(nivel,id,'audios');
+        var imagenes = service.paqueteDescargado(nivel, id, 'imagenes');
+        var audios = service.paqueteDescargado(nivel, id, 'audios');
         return imagenes && audios;
     };
-    
-    service.assetsInicialesDescargados = function(){
+
+    service.assetsInicialesDescargados = function () {
         var gestorDescarga = JSON.parse(localStorage.getItem('gestorDescarga'));
 
         return gestorDescarga;
-        }
+    }
 
     /**
      * 
@@ -145,16 +147,16 @@ nf2.factory('DownloadService', function ($http, $rootScope, $cordovaFile, $cordo
         var url = 'https://s3.amazonaws.com/capacitaciones/training.zip';
         var nombre = 'training.zip';
         var mensaje = 'Descargando archivos necesarios!';
-        
-        service.descargarZip(url, nombre, mensaje,'', function(response){
-            if(response){
+
+        service.descargarZip(url, nombre, mensaje, '', function (response) {
+            if (response) {
                 gestorDescarga.assetsIniciales = true;
                 localStorage.setItem("gestorDescarga", JSON.stringify(gestorDescarga));
                 service.descargaTerminada();
-            }else{
+            } else {
                 service.errorDescarga("Hubo un error al descargar los archivos iniciales");
             }
-        });        
+        });
     };
 
     service.descargarPaquete = function (nivel, id, tipo, callback) {
@@ -163,23 +165,23 @@ nf2.factory('DownloadService', function ($http, $rootScope, $cordovaFile, $cordo
         id = id || 3;
         tipo = tipo || 'imagenes';
         var abc = {
-            'imagenes':'imágenes ',
-            'audios':'audios ',
-            'modulos':'del módulo.',
+            'imagenes': 'imágenes ',
+            'audios': 'audios ',
+            'modulos': 'del módulo.',
             'capacitaciones': 'de la capacitación.'
-            
+
         }
         var gestorDescarga = JSON.parse(localStorage.getItem('gestorDescarga'));
-        var url = gestorDescarga[nivel][id]['zip_'+tipo];
-        var nombre = nivel+id+tipo+'.zip';
-        var mensaje = 'Descargando paquete de '+abc[tipo]+abc[nivel];
+        var url = gestorDescarga[nivel][id]['zip_' + tipo];
+        var nombre = nivel + id + tipo + '.zip';
+        var mensaje = 'Descargando paquete de ' + abc[tipo] + abc[nivel];
         if (!service.paqueteDescargado(nivel, id, tipo)) {
             service.descargarZip(url, nombre, mensaje, nivel, function (response) {
                 if (response) {
                     service.actualizarGestorDescarga(nivel, id, tipo);
-                    if(typeof callback == 'undefined'){
+                    if (typeof callback == 'undefined') {
                         service.descargaTerminada(id);
-                    }else{
+                    } else {
                         callback();
                     }
                 } else {
@@ -187,22 +189,22 @@ nf2.factory('DownloadService', function ($http, $rootScope, $cordovaFile, $cordo
                 }
             });
         } else {
-            if(typeof callback == 'undefined'){
+            if (typeof callback == 'undefined') {
                 service.descargaTerminada(id);
-            }else{
+            } else {
                 callback();
             }
-        }  
+        }
     };
-    
-    service.descargarPaqueteCompleto = function(nivel,id){
+
+    service.descargarPaqueteCompleto = function (nivel, id) {
         console.log("descargar paquete completo");
-        service.descargarPaquete(nivel,id,'imagenes',function(){
-            service.descargarPaquete(nivel,id,'audios');
+        service.descargarPaquete(nivel, id, 'imagenes', function () {
+            service.descargarPaquete(nivel, id, 'audios');
         });
     }
-     
-     
+
+
     /**
      * 
      * @param {type} url
@@ -220,7 +222,7 @@ nf2.factory('DownloadService', function ($http, $rootScope, $cordovaFile, $cordo
             var path = $rootScope.TARGETPATH + nombre;
             $cordovaFileTransfer.download(url, path, options, trustHosts).then(function (result) {
                 console.log(result.nativeURL + " descargado con éxito!! :)");
-                service.descomprimirZip(path, nombre, nivel,function (response) {
+                service.descomprimirZip(path, nombre, nivel, function (response) {
                     callback(response);
                 });
             }, function (err) {
@@ -246,11 +248,11 @@ nf2.factory('DownloadService', function ($http, $rootScope, $cordovaFile, $cordo
     service.descomprimirZip = function (path, nombre, nivel, callback) {
         callback = callback || function () {
         };
-        
+
         var destinoUnzip = $rootScope.TARGETPATH;
-        
-        if(nivel == 'modulos'){
-            destinoUnzip = $rootScope.TARGETPATH+$stateParams.capacitation;
+
+        if (nivel == 'modulos') {
+            destinoUnzip = $rootScope.TARGETPATH + $stateParams.capacitation;
         }
         console.log("Descomprimiendo archivo");
         $cordovaZip.unzip(path, destinoUnzip).then(function () {
@@ -280,22 +282,22 @@ nf2.factory('DownloadService', function ($http, $rootScope, $cordovaFile, $cordo
         if (window.cordova) {
             cordova.plugins.backgroundMode.disable();
         }
-        $rootScope.$broadcast ('descargaTerminada', id);
+        $rootScope.$broadcast('descargaTerminada', id);
     };
-    
+
     service.errorDescarga = function (mensaje) {
         if (window.cordova) {
             cordova.plugins.backgroundMode.disable();
         }
-        $rootScope.$broadcast ('errorDescarga', mensaje);
+        $rootScope.$broadcast('errorDescarga', mensaje);
     };
-    
+
     service.errorConexion = function (mensaje) {
         if (window.cordova) {
             cordova.plugins.backgroundMode.disable();
         }
         $rootScope.$broadcast('errorConexion', mensaje);
     };
-    
+
     return service;
 });
