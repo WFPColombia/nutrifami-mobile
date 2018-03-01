@@ -5,7 +5,7 @@ var nf2 = angular.module('nfmobile', dependencies);
 
 nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $ionicFilterBarConfigProvider, $compileProvider, $authProvider, $httpProvider) {
     'use strict';
-    
+
     console.log('config');
 
     $ionicConfigProvider.tabs.position('top');
@@ -39,7 +39,7 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
             height: window.screen.height
         }
     };
-    
+
     // Change the platform and redirectUri only if we're on mobile
     // so that development on browser can still work. 
     if (window.cordova) {
@@ -206,7 +206,7 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
         templateUrl: 'src/receta/receta.html',
         controller: 'RecetaCtrl'
     });
-    
+
     $stateProvider.state('nf.shopping_intro', {
         url: '/shopping/intro',
         views: {
@@ -260,7 +260,7 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
             }
         }
     });
-    
+
     $stateProvider.state('tips_module', {
         url: '/tips/:module',
         templateUrl: 'src/tips_module/tips_module.html',
@@ -318,8 +318,8 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
         url: '/about',
         templateUrl: 'src/about/about.html'
     });
-    
-    
+
+
     $ionicFilterBarConfigProvider.backdrop(false);
     $ionicFilterBarConfigProvider.placeholder('Buscar receta');
     $ionicFilterBarConfigProvider.search('ion-search');
@@ -331,7 +331,7 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
 
 nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationService) {
     console.log('run');
-    
+
     //Deshabilitamos el boton de ir atrás del Hardware de Android
     $ionicPlatform.registerBackButtonAction(function (e) {
         //do your stuff
@@ -357,17 +357,18 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
             }
         }
     });
-    
-    CapacitationService.initClient(function(){
-        
-    }); 
+
+    CapacitationService.initClient(function () {
+
+    });
 
     $ionicPlatform.ready(function () {
 
         ionic.Platform.fullScreen(true, false); //Fullscreen en ios, verificar para Android
-
         if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+            if (device.platform !== "windows") {
+                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+            }
             cordova.plugins.Keyboard.disableScroll(true);
         }
 
@@ -377,7 +378,7 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
 
         if (window.cordova) {
             $rootScope.BASE_URL = 'http://usuarios.nutrifami.org/';
-            if (device.platform == "Android") {
+            if (device.platform === "Android") {
                 console.log("isAndroid");
                 $rootScope.TARGETPATH = cordova.file.externalApplicationStorageDirectory;
                 $rootScope.TARGETPATH_AUDIO = cordova.file.externalApplicationStorageDirectory;
@@ -387,10 +388,17 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
                     StatusBar.hide();
                     window.AndroidFullScreen.immersiveMode(false, false);
                 });
+            } else if (device.platform === "windows") {
+                console.log('is Windows');
+                $rootScope.TARGETPATH = cordova.file.dataDirectory;
+                $rootScope.TARGETPATH_AUDIO = cordova.file.dataDirectory;
+                //agregar icono de audio
+                //agregar icono de descarga
+
             } else {
                 console.log("Is iPad or iOS");
                 $rootScope.TARGETPATH = cordova.file.dataDirectory;
-                resolveLocalFileSystemURL($rootScope.TARGETPATH, function(entry) {
+                resolveLocalFileSystemURL($rootScope.TARGETPATH, function (entry) {
                     $rootScope.TARGETPATH_AUDIO = entry.toInternalURL();
                     console.log('cdvfile URI: ' + entry.toInternalURL());
                 });
