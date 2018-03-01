@@ -150,6 +150,17 @@ nutrifamiMobile.config(function($stateProvider, $urlRouterProvider, $ionicConfig
         }
     });
 
+    $stateProvider.state('app.recetas', {
+        url: '/recetas',
+        cache: true,
+        views: {
+            'menuContent': {
+                templateUrl: 'src/recetas/recetas.html',
+                controller: 'RecetasCtrl'
+            }
+        }
+    });
+
     $stateProvider.state('sobre', {
         url: '/sobre',
         templateUrl: 'views/sobre.html',
