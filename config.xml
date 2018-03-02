@@ -9,7 +9,6 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
-    <preference name="windows-target-version" value="10.0" />
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
@@ -71,6 +70,10 @@
         <icon height="1024" src="resources/ios/icon/icon-1024.png" width="1024" />
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
+    <preference name="windows-target-version" value="10.0" />
+    <preference name="WindowsStoreIdentityName" value="17634nutrifami.nutrifami" />
+    <preference name="WindowsStorePublisherName" value="nutrifami" />
+    <preference name="WindowsStoreDisplayName" value="Nutrifami" />
     <platform name="windows">
         <icon height="50" src="resources/windows/icon/NewStoreLogo.scale-100.png" width="50" />
         <icon height="63" src="resources/windows/icon/NewStoreLogo.scale-125.png" width="63" />
