@@ -1,0 +1,9 @@
+<ion-view>
+    <ion-content>
+        <ion-list>
+            <ion-radio ng-repeat="l in languages" ng-model="lang.current" ng-value="l.id" ng-change="changeLanguage()"><img src="img/flags/{{l.id}}.svg" width="20px"/> {{l.name| translate}}</a></ion-radio>
+        </ion-list>
+    </ion-content>
+</ion-view>
+
+

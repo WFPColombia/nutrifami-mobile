@@ -1,9 +1,9 @@
-var dependencies = ['ionic', 'Authentication', 'ngCordova', 'ionMDRipple', 'ionicLazyLoad', 'jett.ionic.filter.bar', 'satellizer'];
+var dependencies = ['ionic', 'Authentication', 'satellizer', 'ngCordova', 'ngCookies', 'ionMDRipple', 'ionicLazyLoad', 'jett.ionic.filter.bar', 'pascalprecht.translate'];
 
 var nutrifamiLogin = angular.module('Authentication', []);
 var nf2 = angular.module('nfmobile', dependencies);
 
-nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $ionicFilterBarConfigProvider, $compileProvider, $authProvider, $httpProvider) {
+nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $ionicFilterBarConfigProvider, $compileProvider, $authProvider, $httpProvider, $translateProvider) {
     'use strict';
 
     console.log('config');
@@ -39,6 +39,15 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
             height: window.screen.height
         }
     };
+
+    // Multilanguaje Settings
+
+    $translateProvider.useStaticFilesLoader({
+        prefix: 'translations/locale-',
+        suffix: '.json'
+    }).preferredLanguage('es')
+            .useLocalStorage()
+            .useMissingTranslationHandlerLog();
 
     // Change the platform and redirectUri only if we're on mobile
     // so that development on browser can still work. 
@@ -277,6 +286,17 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
             }
         }
     });
+    
+    $stateProvider.state('nf.language', {
+        url: '/language',
+        cache: false,
+        views: {
+            menuContent: {
+                templateUrl: 'src/language/language.html',
+                controller: 'LanguageCtrl'
+            }
+        }
+    });
 
     $stateProvider.state('nf.cap_capacitation', {
         url: '/:capacitation',
@@ -318,8 +338,8 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
         url: '/about',
         templateUrl: 'src/about/about.html'
     });
-
-
+    
+    
     $ionicFilterBarConfigProvider.backdrop(false);
     $ionicFilterBarConfigProvider.placeholder('Buscar receta');
     $ionicFilterBarConfigProvider.search('ion-search');
@@ -329,7 +349,7 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
     $urlRouterProvider.otherwise('/app/');
 });
 
-nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationService) {
+nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationService, $window, $translate) {
     console.log('run');
 
     //Deshabilitamos el boton de ir atrás del Hardware de Android
@@ -361,6 +381,21 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
     CapacitationService.initClient(function () {
 
     });
+
+    // Language settings
+    var stored_lang_key = localStorage.getItem('NG_TRANSLATE_LANG_KEY');
+    if (stored_lang_key) {
+        console.log('stored_lang_key');
+        $rootScope.lang = stored_lang_key;
+        $translate.use(stored_lang_key);
+    } else {
+        console.log('not stored_lang_key');
+        var locale = $window.navigator.language || $window.navigator.userLanguage;
+        var lang = locale.substring(0, 2);
+        $rootScope.lang = lang;
+        console.log($rootScope.lang);
+        $translate.use(lang);
+    }
 
     $ionicPlatform.ready(function () {
 
