@@ -35,7 +35,7 @@ nf2.controller('CapCapacitationCtrl', function ($ionicPlatform, $scope, $ionicLo
                     estado: 'error' // ok, alert, error
                 };
                 $ionicPopup.show({
-                    templateUrl: 'modals/modal.html',
+                    templateUrl: 'modals/simple/simple.modal.html',
                     scope: $scope,
                     cssClass: 'salir-unidad',
                     buttons: [{
@@ -59,7 +59,7 @@ nf2.controller('CapCapacitationCtrl', function ($ionicPlatform, $scope, $ionicLo
                 estado: 'alert' // ok, alert, error
             };
             $ionicPopup.show({
-                templateUrl: 'modals/modal.html',
+                templateUrl: 'modals/simple/simple.modal.html',
                 scope: $scope,
                 cssClass: 'salir-unidad',
                 buttons: [{

@@ -56,6 +56,7 @@
     font-size: 16pt;
     height: 58px;
     width: 100%;
+    text-transform: uppercase;
 }
 
 .auth p {
@@ -83,7 +84,7 @@
 .auth-login ion-slides {
     height: 270px;
 }
-    
+
 .swiper-pagination {
     display: none;
 }

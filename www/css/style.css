@@ -305,9 +305,7 @@ button {
 
 .salir-unidad .popup .popup-buttons .button {
     height: 30px;
-    background-color: #ffffff;
-    letter-spacing: 3px;
-    color: #00c97e;
+    letter-spacing: 0px;
     text-transform: uppercase;
     border: none;
     border-radius: 26px;
@@ -317,7 +315,15 @@ button {
     font-size: 11pt;
 }
 
+.salir-unidad .popup .popup-buttons .button-positive{
+    background-color: #ffffff;
+    color: #00c97e;
+}
 
+.salir-unidad .popup .popup-buttons .button-negative{
+    background-color: red;
+    color: #00c97e;
+}
 
 
 

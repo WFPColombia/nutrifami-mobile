@@ -29,7 +29,7 @@ nf2.controller('ShoppingIntroCtrl', function ($ionicPlatform, $state, $scope, $r
                 estado: 'error' // ok, alert, error
             };
             $ionicPopup.show({
-                templateUrl: 'modals/modal.html',
+                templateUrl: 'modals/simple/simple.modal.html',
                 scope: $scope,
                 cssClass: 'salir-unidad',
                 buttons: [{

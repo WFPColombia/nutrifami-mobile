@@ -53,7 +53,7 @@ nf2.controller('ShoppingGroupCtrl', function ($ionicPlatform, $state, $scope, $i
                 estado: 'alert' // ok, alert, error
             };
             $ionicPopup.show({
-                templateUrl: 'modals/modal.html',
+                templateUrl: 'modals/simple/simple.modal.html',
                 scope: $scope,
                 cssClass: 'salir-unidad',
                 buttons: [{

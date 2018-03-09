@@ -203,7 +203,7 @@ nf2.controller('AuthProfileEditCtrl', function ($ionicPlatform, $filter, $scope,
                 estado: 'ok' // ok, alert, error
             };
             $ionicPopup.show({
-                templateUrl: 'modals/modal.html',
+                templateUrl: 'modals/simple/simple.modal.html',
                 scope: $scope,
                 cssClass: 'salir-unidad',
                 buttons: [{
@@ -223,7 +223,7 @@ nf2.controller('AuthProfileEditCtrl', function ($ionicPlatform, $filter, $scope,
                 estado: 'error' // ok, alert, error
             };
             $ionicPopup.show({
-                templateUrl: 'modals/modal.html',
+                templateUrl: 'modals/simple/simple.modal.html',
                 scope: $scope,
                 cssClass: 'salir-unidad',
                 buttons: [{

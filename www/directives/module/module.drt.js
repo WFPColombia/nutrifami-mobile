@@ -52,7 +52,7 @@ nf2.directive('moduleDrt', function ($state, $rootScope, $ionicLoading, $ionicPo
                             estado: 'alert' // ok, alert, error
                         };
                         $ionicPopup.show({
-                            templateUrl: 'modals/modal.html',
+                            templateUrl: 'modals/simple/simple.modal.html',
                             scope: $scope,
                             cssClass: 'salir-unidad',
                             buttons: [{
@@ -80,7 +80,7 @@ nf2.directive('moduleDrt', function ($state, $rootScope, $ionicLoading, $ionicPo
                     estado: 'alert' // ok, alert, error
                 };
                 $ionicPopup.show({
-                    templateUrl: 'modals/modal.html',
+                    templateUrl: 'modals/simple/simple.modal.html',
                     scope: $scope,
                     cssClass: 'salir-unidad',
                     buttons: [{

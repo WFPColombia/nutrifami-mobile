@@ -4,8 +4,8 @@
     <span class="icon ion-close-round" ng-show="modal.estado == 'error'" style="background-color: #ff1244;"></span>
 </div>
 <div class="popup-body">
-    <div ion-ripple>
-        <h1 class="mensaje">{{modal.texto1}}</h1>
-        <p class="mensaje">{{modal.texto2}}</p>
+    <div ng-click="playAudio(modal.audio)" ion-ripple>
+        <h1 class="mensaje">{{modal.texto1 | translate }} <i ng-show="modal.audio" class="icon ion-volume-high"></i></h1>
+        <p class="mensaje">{{modal.texto2 | translate}}</p>
     </div>
 </div>

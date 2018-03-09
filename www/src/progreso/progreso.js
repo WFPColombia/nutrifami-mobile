@@ -41,7 +41,7 @@ nf2.controller('ProgresoCtrl', function ($ionicPlatform, $ionicPopup, $scope, $i
             $scope.diplomaTitulo = $scope.usuarioAvance.diplomas[index];
 
             $ionicPopup.show({
-                templateUrl: 'modals/diploma.modal.html',
+                templateUrl: 'modals/certificate/certificate.modal.html',
                 scope: $scope,
                 cssClass: 'diploma',
                 buttons: [

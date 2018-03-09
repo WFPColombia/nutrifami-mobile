@@ -30,7 +30,7 @@ nf2.controller('CapUnitEndCtrl', function ($scope, $rootScope, $stateParams, $lo
                 $scope.modulo = CapacitationService.getModule($stateParams.module);
                 $scope.diplomaTitulo = $scope.modulo.titulo.texto;
                 $ionicPopup.show({
-                    templateUrl: 'modals/diploma.modal.html',
+                    templateUrl: 'modals/certificate/certificate.modal.html',
                     scope: $scope,
                     cssClass: 'diploma',
                     buttons: [

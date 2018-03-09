@@ -3,6 +3,6 @@
     <div class="leccion" ng-class="avance ? 'leccion-terminada' : ''" ng-click="click()">
         <img ng-src="img/badgets/icons/ico_{{leccion.icono}}.png" width="65"/>
         <h2>{{ leccion.titulo.texto}} </h2>
-        <button class="leccion-comenzar" aria-hidden="true">{{ avance ? 'Repetir' : 'Comenzar' }}</button>
+        <button class="leccion-comenzar" aria-hidden="true">{{ avance ? ('Repetir' | translate) : ('Comenzar' | translate) }}</button>
     </div>
 </div>
