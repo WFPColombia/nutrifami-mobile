@@ -1,10 +1,10 @@
-nf2.directive('moduloDrt', function ($state, $rootScope, $ionicLoading, $ionicPopup, $stateParams, DownloadService, UserService, CapacitationService) {
+nf2.directive('moduleDrt', function ($state, $rootScope, $ionicLoading, $ionicPopup, $stateParams, DownloadService, UserService, CapacitationService) {
     return {
         restrict: 'E',
         scope: {
-            info: '=',
+            info: '='
         },
-        templateUrl: 'directives/modulo/modulo.drt.html',
+        templateUrl: 'directives/module/module.drt.html',
         link: function ($scope) {
             
 

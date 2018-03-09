@@ -14,7 +14,7 @@ nf2.controller('CapCapacitationCtrl', function ($ionicPlatform, $scope, $ionicLo
         for (var mid in $scope.mids) {
             var tempModulo = CapacitationService.getModule($scope.mids[mid]);
             tempModulo.disponible = true;
-            if (tempModulo.activo == '1') {
+            if (tempModulo.activo === '1') {
                 tempModulo.activo = true;
             } else {
                 tempModulo.activo = false;
