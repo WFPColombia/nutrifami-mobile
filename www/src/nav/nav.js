@@ -1,6 +1,6 @@
 nf2.controller('NavCtrl', function ($scope, $rootScope, $ionicPopover, UserService, TrainingService) {
 
-    $ionicPopover.fromTemplateUrl('views/template/popover.tpl.html', {
+    $ionicPopover.fromTemplateUrl('template/popover.html', {
         scope: $scope
     }).then(function (popover) {
         $scope.popover = popover;

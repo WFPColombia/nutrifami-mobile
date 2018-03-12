@@ -286,7 +286,7 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
             }
         }
     });
-    
+
     $stateProvider.state('nf.language', {
         url: '/language',
         cache: false,
@@ -338,8 +338,8 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
         url: '/about',
         templateUrl: 'src/about/about.html'
     });
-    
-    
+
+
     $ionicFilterBarConfigProvider.backdrop(false);
     $ionicFilterBarConfigProvider.placeholder('Buscar receta');
     $ionicFilterBarConfigProvider.search('ion-search');

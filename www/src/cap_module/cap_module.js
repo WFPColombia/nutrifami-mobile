@@ -32,7 +32,6 @@ nf2.controller('CapModuleCtrl', function ($ionicPlatform, $scope, $rootScope, $l
                     $scope.lecciones.push(tempLeccion);
                 }
             }
-            console.log($scope.lecciones);
         }
         
         $scope.playAudio = function (audio) {

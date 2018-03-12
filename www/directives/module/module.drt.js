@@ -1,4 +1,4 @@
-nf2.directive('moduleDrt', function ($state, $rootScope, $ionicLoading, $ionicPopup, $stateParams, DownloadService, UserService, CapacitationService) {
+nf2.directive('moduleDrt', function ($state, $rootScope, $ionicLoading, $ionicPopup, $stateParams, $filter, DownloadService, UserService, CapacitationService) {
     return {
         restrict: 'E',
         scope: {
@@ -17,7 +17,7 @@ nf2.directive('moduleDrt', function ($state, $rootScope, $ionicLoading, $ionicPo
 
 
             var optDescarga = {
-                template: '<h3>Descargando archivos</h3>{{cargadorTexto}}<h4>{{cargadorPorcentaje}}%</h4>',
+                template: "<h3>{{'Descargando archivos necesarios!' | translate }}</h3>{{cargadorTexto | translate }}<h4>{{cargadorPorcentaje}}%</h4>",
                 scope: $scope
             };
 
@@ -56,13 +56,13 @@ nf2.directive('moduleDrt', function ($state, $rootScope, $ionicLoading, $ionicPo
                             scope: $scope,
                             cssClass: 'salir-unidad',
                             buttons: [{
-                                    text: 'Descargar con Audios',
+                                    text: $filter('translate')('Descargar con audios'),
                                     type: 'button-positive',
                                     onTap: function (e) {
                                         $scope.descargarPaqueteCompleto();
                                     }
                                 }, {
-                                    text: 'Descargar sin Audios',
+                                    text: $filter('translate')('Descargar sin audios'),
                                     type: 'button-positive',
                                     onTap: function (e) {
                                         $scope.descargarPaquete();
@@ -84,12 +84,12 @@ nf2.directive('moduleDrt', function ($state, $rootScope, $ionicLoading, $ionicPo
                     scope: $scope,
                     cssClass: 'salir-unidad',
                     buttons: [{
-                            text: 'Cancelar',
+                            text: $filter('translate')('Cancelar'),
                             type: 'button-positive',
                             onTap: function (e) {
                             }
                         }, {
-                            text: 'Descargar módulo',
+                            text: $filter('translate')('Descargar módulo'),
                             type: 'button-positive',
                             onTap: function (e) {
                                 $scope.descargarPaqueteCompleto();

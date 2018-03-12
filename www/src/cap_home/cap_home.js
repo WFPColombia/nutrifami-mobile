@@ -39,7 +39,7 @@ nf2.controller('CapHomeCtrl', function ($ionicPlatform, $scope, $ionicViewSwitch
         }
 
         var optDescarga = {
-            template: '<h3>Descargando archivos</h3>{{cargadorTexto}}<h4>{{cargadorPorcentaje}}%</h4>',
+            template: "<h3>{{'Descargando archivos necesarios!' | translate }}</h3>{{cargadorTexto | translate }}<h4>{{cargadorPorcentaje}}%</h4>",
             scope: $scope
         };
 
@@ -118,7 +118,7 @@ nf2.controller('CapHomeCtrl', function ($ionicPlatform, $scope, $ionicViewSwitch
                 scope: $scope,
                 cssClass: 'salir-unidad',
                 buttons: [{
-                        text: 'Aceptar',
+                        text: $filter('translate')('Aceptar'),
                         type: 'button-positive',
                         onTap: function (e) {
                         }
