@@ -22,22 +22,22 @@
         </ion-header-bar>
         <ion-content>
             <ion-list>
-                <ion-item menu-close href="#/app">
+                <ion-item menu-close ui-sref="nf.cap_home">
                     <img class="icono" src="img/icons/ico-menu-capacitacion.png" alt="Capacitación" /><span>{{'Capacitación' | translate }}</span>
                 </ion-item>
-                <ion-item menu-close ui-sref="nf.shopping_intro">
-                    <img class="icono" src="img/icons/ico-menu-compras.png" alt="Compras" />{{'Mis Compras' | translate }}
+                <ion-item menu-close ui-sref="nf.shopping_intro" ng-show="lang == 'es'">
+                    <img class="icono" src="img/icons/ico-menu-compras.png" alt="Mis Compras" />{{'Mis Compras' | translate }}
                 </ion-item>
-                <ion-item menu-close href="#/app/progreso">
-                    <img class="icono" src="img/icons/ico-menu-progreso.png" alt="Consumo" />{{'Progreso' | translate }}
+                <ion-item menu-close ui-sref="nf.progress">
+                    <img class="icono" src="img/icons/ico-menu-progreso.png" alt="progreso" />{{'Progreso' | translate }}
                 </ion-item>
-                <ion-item menu-close ui-sref="nf.tips">
+                <ion-item menu-close ui-sref="nf.tips" ng-show="lang == 'es'">
                     <img class="icono" src="img/icons/ico-menu-tips.png" alt="Tips" />{{'Consejos Saludables' | translate }}
                 </ion-item>
-                <ion-item menu-close href="#/nutricompra">
+                <ion-item menu-close ui-sref="nc_home">
                     <img class="icono" src="img/icons/ico-menu-nutricompra.png" alt="Cerrar Sesion" />{{'Nutricompra' | translate }}
                 </ion-item>
-                <ion-item menu-close href="#/app/recetas">
+                <ion-item menu-close href="#/app/recetas" ng-show="lang == 'es'">
                     <img class="icono" src="img/icons/ico-menu-recetas.png" alt="Cerrar Sesion" />{{'Recetas' | translate }}
                 </ion-item>
                 <ion-item menu-close ui-sref="nf.auth_profile">

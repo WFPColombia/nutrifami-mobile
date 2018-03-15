@@ -1,4 +1,4 @@
-nf2.controller('ProgresoCtrl', function ($ionicPlatform, $ionicPopup, $scope, $ionicLoading, UserService) {
+nf2.controller('ProgressCtrl', function ($ionicPlatform, $ionicPopup, $scope, $ionicLoading, $filter, UserService) {
     'use strict';
     $ionicPlatform.ready(function () {
 
@@ -54,7 +54,7 @@ nf2.controller('ProgresoCtrl', function ($ionicPlatform, $ionicPopup, $scope, $i
                      }
                      , */
                     {
-                        text: 'Continuar',
+                        text: $filter('translate')('Continuar'),
                         type: 'button-positive',
                         onTap: function (e) {
                             //MediaService.unload();

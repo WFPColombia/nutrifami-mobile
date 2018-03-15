@@ -79,41 +79,41 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
 
     $authProvider.tokenType = 'Token';
 
-    $stateProvider.state('nc', {
-        url: '/nutricompra',
+    $stateProvider.state('nc_home', {
+        url: '/nc',
         cache: false,
-        templateUrl: 'views/nutricompra/nc_home.html',
-        controller: 'nc_homeController'
+        templateUrl: 'src/nc_home/nc_home.html',
+        controller: 'ncHomeCtrl'
+
     });
 
-    $stateProvider.state('nc_como', {
-        url: '/nutricompra/como-jugar',
+    $stateProvider.state('nc_tutorial', {
+        url: '/nc/tutorial',
         cache: false,
-        templateUrl: 'views/nutricompra/nc_comoJugar.html',
-        controller: 'nc_comoJugarController'
+        templateUrl: 'src/nc_tutorial/nc_tutorial.html'
     });
 
-    $stateProvider.state('nc_jugar', {
-        url: '/nutricompra/jugar',
+    $stateProvider.state('nc_play', {
+        url: '/nc/play',
         cache: false,
-        templateUrl: 'views/nutricompra/nc_jugar.html',
-        controller: 'nc_jugarController'
-    });
-
-
-    $stateProvider.state('nc_resumen', {
-        url: '/nutricompra/jugar/resumen',
-        cache: false,
-        templateUrl: 'views/nutricompra/nc_resumen.html',
-        controller: 'nc_jugarResumenController'
+        templateUrl: 'src/nc_play/nc_play.html',
+        controller: 'ncPlayCtrl'
     });
 
 
-    $stateProvider.state('nc_terminar', {
-        url: '/nutricompra/jugar/terminar',
+    $stateProvider.state('nc_cart', {
+        url: '/nc/cart',
         cache: false,
-        templateUrl: 'views/nutricompra/nc_terminar.html',
-        controller: 'nc_jugarTerminarController'
+        templateUrl: 'src/nc_cart/nc_cart.html',
+        controller: 'ncCartCtrl'
+    });
+
+
+    $stateProvider.state('nc_end', {
+        url: '/nc/end',
+        cache: false,
+        templateUrl: 'src/nc_end/nc_end.html',
+        controller: 'ncEndCtrl'
     });
 
     // Organizados :)
@@ -180,13 +180,13 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
         }
     });
 
-    $stateProvider.state('nf.progreso', {
-        url: '/progreso',
+    $stateProvider.state('nf.progress', {
+        url: '/progress',
         cache: false,
         views: {
             'menuContent': {
-                templateUrl: 'src/progreso/progreso.html',
-                controller: 'ProgresoCtrl'
+                templateUrl: 'src/progress/progress.html',
+                controller: 'ProgressCtrl'
             }
         }
     });

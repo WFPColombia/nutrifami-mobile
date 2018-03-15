@@ -2,7 +2,7 @@
     <ion-content scroll='false'>
         <div class='progreso'>
             <ion-tabs class="tabs-icon-top">
-                <ion-tab title="Yo ({{usuarioActivo.first_name}})" on-select="cargarMiProgreso()">
+                <ion-tab title="{{'Yo' | translate}} ({{usuarioActivo.first_name}})" on-select="cargarMiProgreso()">
                     <ion-content class="has-header has-footer" overflow-scroll="true">
                         <div class="progreso-tab">
                             <div class="progreso-panel">
@@ -12,7 +12,7 @@
                                             <img width="46" src="img/badgets/flags/ico_flag_{{usuarioAvance.modulosTerminados}}.png" />
                                         </div>
                                         <div class="col">
-                                            <p> {{usuarioAvance.puntos}} puntos de Experiencia
+                                            <p> {{usuarioAvance.puntos}} {{'puntos de experiencia' | translate}}
                                                 <!--<button class="icon ion-volume-high"></button>-->
                                             </p>
                                         </div>
@@ -22,7 +22,7 @@
                                     <div class="row">
                                         <div class="col col-center">
                                             <div class="progress-radial progress-{{usuarioAvance.porcentaje}}">
-                                                <div class="overlay">{{usuarioAvance.porcentaje}}% <span>Aprendido</span></div>
+                                                <div class="overlay">{{usuarioAvance.porcentaje}}% <span>{{'Aprendido' | translate}}</span></div>
                                             </div>
                                         </div>
                                     </div>
@@ -30,26 +30,26 @@
                                 <div class="progreso-resumen">
                                     <div class="row">
                                         <div class="col">
-                                            <img src="img/icons/ico-progreso-nivel.png" /> Niveles
+                                            <img src="img/icons/ico-progreso-nivel.png" /> {{' Capacitaciones Terminadas' | translate}}
                                             <br><span>{{usuarioAvance.capacitacionesTerminadas}}</span>
                                         </div>
                                         <div class="col">
-                                            <img src="img/icons/ico-progreso-leccion.png" /> Módulos
+                                            <img src="img/icons/ico-progreso-leccion.png" /> {{'Módulos Terminados' | translate}}
                                             <br><span>{{usuarioAvance.modulosTerminados}}</span>
                                         </div>
                                         <div class="col">
-                                            <img src="img/icons/ico-progreso-medallas.png" /> Lecciones
+                                            <img src="img/icons/ico-progreso-medallas.png" /> {{'Lecciones Terminadas' | translate}}
                                             <br><span>{{usuarioAvance.medallas}}</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="mis-diplomas" id="prueba">
-                                    <h2 class="text-center">Mis Diplomas</h2>
+                                    <h2 class="text-center">{{'Mis Diplomas' | translate}}</h2>
                                     <div ng-repeat="diploma in usuarioAvance.diplomas">
                                         <div class="diplomas">
                                             <div class="row">
                                                 <div class="col col-90  titulo-diploma">
-                                                    <p>Modulo: {{diploma}}</p>
+                                                    <p>{{'Módulo' | translate}}: {{diploma}}</p>
                                                 </div>
                                                 <div class="col imprimir-diploma">
                                                     <a href ng-click="verDiploma($index)" tooltip-placement="bottom" uib-tooltip="Ver diploma ganado"><i class="ion-document-text" aria-hidden="true"></i></a>
