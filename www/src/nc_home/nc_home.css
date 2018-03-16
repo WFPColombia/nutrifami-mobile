@@ -198,7 +198,7 @@
 
 .nutricompra .vitrina {
     background-color: #00c97e;
-    background-image: url('/img/nutricompra/bg_tienda.png');
+    background-image: url('../../img/nutricompra/bg_tienda.png');
     height: 536px;
     margin: 0 auto;
     padding: 0px 14px;
@@ -254,7 +254,7 @@
 
 .nutricompra .pagina-siguiente,
 .nutricompra .pagina-anterior {
-    background-image: url('/img/nutricompra/bnt_next.png');
+    background-image: url('../../img/nutricompra/bnt_next.png');
     bottom: 29px;
     cursor: pointer;
     height: 63px;
@@ -375,7 +375,7 @@
 }
 
 .nutricompra .terminar .titulo {
-    background-image: url('/img/nutricompra/ico_cinta.png');
+    background-image: url('../../img/nutricompra/ico_cinta.png');
     height: 76px;
     margin: 0 auto;
     text-align: center;

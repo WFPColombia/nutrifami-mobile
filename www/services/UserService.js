@@ -159,7 +159,7 @@ nf2.factory('UserService', function ($rootScope, $auth, $http, $q, CapacitationS
         if (usuarioActivo.is_staff) {
             var current_trainee = {
                 name: 'Yo',
-                document: usuarioActivo.documento
+                document: usuarioActivo.username
             };
             localStorage.setItem("current_trainee", JSON.stringify(current_trainee));
             //Save the staff member info in a temporal object for an offline purposes

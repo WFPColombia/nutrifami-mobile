@@ -1,0 +1,42 @@
+<ion-view>
+    <ion-content class="capacitador">
+        <div class="row header">
+            <div class="col">
+                <h1>{{'Aprendiz Actual'| translate }}</h1>
+                <p style="text-align: center">{{current_trainee.name}} ({{current_trainee.document}})</p>
+            </div>
+        </div>
+        <div class="row header">
+            <h1>{{'Otros Aprendices'| translate }}</h1>
+        </div>
+        <div>
+            <div class="list">
+                <div class="item item-button-right me" >
+                    {{'Yo'| translate }} ({{user.username}})
+                    <button class="button ion-checkmark-circled" ng-class="current_trainee.document == user.username ? 'button-balanced' : ''" ng-click="changeCurrentTraineeToMe()">
+                    </button>
+
+                </div>
+                <div class="item" ng-repeat="trainee in trainees track by trainee.document">
+                    {{trainee.name}} ({{trainee.document}})
+                    <button class="button ion-checkmark-circled" ng-class="current_trainee.document == trainee.document ? 'button-balanced' : ''" ng-click="changeCurrentTrainee(trainee)">
+                    </button>
+                    <button class="button ion-edit" ng-click="openModal('edit', $index)">
+                    </button>
+                    <button class="button button-assertive ion-trash-a" ng-click="deleteTrainee($index)">
+                    </button>
+                </div>
+                <div class="item add-trainee">
+                    {{'Agregar Aprendiz'| translate }}
+                    <button class="button button-positive ion-person-add" ng-click="openModal('new')">
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row header">
+            <button type="submit" class="button button-full button-positive" ng-click="sinchronizeTraining()">
+                <i class="icon ion-upload"> {{'Subir Avances'| translate }}</i>
+            </button>
+        </div>
+    </ion-content>
+</ion-view>

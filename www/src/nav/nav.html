@@ -43,7 +43,7 @@
                 <ion-item menu-close ui-sref="nf.auth_profile">
                     <img class="icono" src="img/icons/ico-menu-perfil.png" alt="Perfil" />{{'Perfil' | translate }} <i ng-show="user.municipio === '' || user.municipio === null" class="ion-ios-information"></i>
                 </ion-item>
-                <ion-item ng-show="user.is_staff" menu-close href="#/app/capacitador" class="capacitador">
+                <ion-item ng-show="user.is_staff" menu-close ui-sref="nf.capacitator" class="capacitador">
                     <img class="icono" src="img/icons/ico-menu-capacitador.png" alt="Capacitador" />{{'Capacitador' | translate }}
                 </ion-item>
                 <ion-item menu-close ui-sref="nf.language" >
@@ -54,7 +54,7 @@
                 </ion-item>
             </ion-list>
             <div class="capacitador">
-                <p class="usuarioActual" ng-show="user.is_staff"><b>Aprendiz Actual</b> {{current_trainee.name}} ({{current_trainee.document}})</p>
+                <p class="usuarioActual" ng-show="user.is_staff"><b>{{'Aprendiz Actual' | translate }}</b> {{current_trainee.name }} ({{current_trainee.document}})</p>
             </div>
         </ion-content>
     </ion-side-menu>

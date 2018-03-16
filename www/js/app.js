@@ -276,13 +276,13 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
         controller: 'TipsModuleCtrl'
     });
 
-    $stateProvider.state('nf.capacitador', {
-        url: '/capacitador',
+    $stateProvider.state('nf.capacitator', {
+        url: '/capacitator',
         cache: false,
         views: {
             'menuContent': {
-                templateUrl: 'src/capacitador/capacitador.html',
-                controller: 'CapacitadorCtrl'
+                templateUrl: 'src/capacitator/capacitator.html',
+                controller: 'CapacitatorCtrl'
             }
         }
     });
