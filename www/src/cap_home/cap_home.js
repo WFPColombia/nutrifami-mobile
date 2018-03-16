@@ -1,5 +1,5 @@
 /*global angular*/
-nf2.controller('CapHomeCtrl', function ($ionicPlatform, $scope, $ionicViewSwitcher, $state, $location, $ionicPopup, $ionicLoading, CapacitationService, DownloadService, UserService) {
+nf2.controller('CapHomeCtrl', function ($ionicPlatform, $scope, $ionicViewSwitcher, $state, $location, $ionicPopup, $ionicLoading, $filter, CapacitationService, DownloadService, UserService) {
     'use strict';
 
     $ionicPlatform.ready(function () {
@@ -39,7 +39,7 @@ nf2.controller('CapHomeCtrl', function ($ionicPlatform, $scope, $ionicViewSwitch
         }
 
         var optDescarga = {
-            template: '<h3>Descargando archivos</h3>{{cargadorTexto}}<h4>{{cargadorPorcentaje}}%</h4>',
+            template: "<h3>{{'Descargando archivos necesarios!' | translate }}</h3>{{cargadorTexto | translate }}<h4>{{cargadorPorcentaje}}%</h4>",
             scope: $scope
         };
 
@@ -54,23 +54,23 @@ nf2.controller('CapHomeCtrl', function ($ionicPlatform, $scope, $ionicViewSwitch
                 estado: 'alert' // ok, alert, error
             };
             $ionicPopup.show({
-                templateUrl: 'modals/modal.html',
+                templateUrl: 'modals/simple/simple.modal.html',
                 scope: $scope,
                 cssClass: 'salir-unidad',
                 buttons: [{
-                        text: 'Cancelar',
+                        text: $filter('translate')('Cancelar'),
                         type: 'button-positive',
                         onTap: function (e) {
                         }
                     }, {
-                        text: 'Descargar con audios',
+                        text: $filter('translate')('Descargar con audios'),
                         type: 'button-positive',
                         onTap: function (e) {
                             $ionicLoading.show(optDescarga);
                             DownloadService.descargarPaqueteCompleto('capacitaciones', cid);
                         }
                     }, {
-                        text: 'Descargar sin audios',
+                        text: $filter('translate')('Descargar sin audios'),
                         type: 'button-positive',
                         onTap: function (e) {
                             $ionicLoading.show(optDescarga);
@@ -114,11 +114,11 @@ nf2.controller('CapHomeCtrl', function ($ionicPlatform, $scope, $ionicViewSwitch
                 estado: 'error' // ok, alert, error
             };
             $ionicPopup.show({
-                templateUrl: 'modals/modal.html',
+                templateUrl: 'modals/simple/simple.modal.html',
                 scope: $scope,
                 cssClass: 'salir-unidad',
                 buttons: [{
-                        text: 'Aceptar',
+                        text: $filter('translate')('Aceptar'),
                         type: 'button-positive',
                         onTap: function (e) {
                         }

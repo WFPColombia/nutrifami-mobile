@@ -1,9 +1,9 @@
-var dependencies = ['ionic', 'Authentication', 'ngCordova', 'ionMDRipple', 'ionicLazyLoad', 'jett.ionic.filter.bar', 'satellizer'];
+var dependencies = ['ionic', 'Authentication', 'satellizer', 'ngCordova', 'ngCookies', 'ionMDRipple', 'ionicLazyLoad', 'jett.ionic.filter.bar', 'pascalprecht.translate'];
 
 var nutrifamiLogin = angular.module('Authentication', []);
 var nf2 = angular.module('nfmobile', dependencies);
 
-nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $ionicFilterBarConfigProvider, $compileProvider, $authProvider, $httpProvider) {
+nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $ionicFilterBarConfigProvider, $compileProvider, $authProvider, $httpProvider, $translateProvider) {
     'use strict';
 
     console.log('config');
@@ -40,6 +40,15 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
         }
     };
 
+    // Multilanguaje Settings
+
+    $translateProvider.useStaticFilesLoader({
+        prefix: 'translations/locale-',
+        suffix: '.json'
+    }).preferredLanguage('es')
+            .useLocalStorage()
+            .useMissingTranslationHandlerLog();
+
     // Change the platform and redirectUri only if we're on mobile
     // so that development on browser can still work. 
     if (window.cordova) {
@@ -70,41 +79,41 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
 
     $authProvider.tokenType = 'Token';
 
-    $stateProvider.state('nc', {
-        url: '/nutricompra',
+    $stateProvider.state('nc_home', {
+        url: '/nc',
         cache: false,
-        templateUrl: 'views/nutricompra/nc_home.html',
-        controller: 'nc_homeController'
+        templateUrl: 'src/nc_home/nc_home.html',
+        controller: 'ncHomeCtrl'
+
     });
 
-    $stateProvider.state('nc_como', {
-        url: '/nutricompra/como-jugar',
+    $stateProvider.state('nc_tutorial', {
+        url: '/nc/tutorial',
         cache: false,
-        templateUrl: 'views/nutricompra/nc_comoJugar.html',
-        controller: 'nc_comoJugarController'
+        templateUrl: 'src/nc_tutorial/nc_tutorial.html'
     });
 
-    $stateProvider.state('nc_jugar', {
-        url: '/nutricompra/jugar',
+    $stateProvider.state('nc_play', {
+        url: '/nc/play',
         cache: false,
-        templateUrl: 'views/nutricompra/nc_jugar.html',
-        controller: 'nc_jugarController'
-    });
-
-
-    $stateProvider.state('nc_resumen', {
-        url: '/nutricompra/jugar/resumen',
-        cache: false,
-        templateUrl: 'views/nutricompra/nc_resumen.html',
-        controller: 'nc_jugarResumenController'
+        templateUrl: 'src/nc_play/nc_play.html',
+        controller: 'ncPlayCtrl'
     });
 
 
-    $stateProvider.state('nc_terminar', {
-        url: '/nutricompra/jugar/terminar',
+    $stateProvider.state('nc_cart', {
+        url: '/nc/cart',
         cache: false,
-        templateUrl: 'views/nutricompra/nc_terminar.html',
-        controller: 'nc_jugarTerminarController'
+        templateUrl: 'src/nc_cart/nc_cart.html',
+        controller: 'ncCartCtrl'
+    });
+
+
+    $stateProvider.state('nc_end', {
+        url: '/nc/end',
+        cache: false,
+        templateUrl: 'src/nc_end/nc_end.html',
+        controller: 'ncEndCtrl'
     });
 
     // Organizados :)
@@ -171,13 +180,13 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
         }
     });
 
-    $stateProvider.state('nf.progreso', {
-        url: '/progreso',
+    $stateProvider.state('nf.progress', {
+        url: '/progress',
         cache: false,
         views: {
             'menuContent': {
-                templateUrl: 'src/progreso/progreso.html',
-                controller: 'ProgresoCtrl'
+                templateUrl: 'src/progress/progress.html',
+                controller: 'ProgressCtrl'
             }
         }
     });
@@ -267,13 +276,24 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
         controller: 'TipsModuleCtrl'
     });
 
-    $stateProvider.state('nf.capacitador', {
-        url: '/capacitador',
+    $stateProvider.state('nf.capacitator', {
+        url: '/capacitator',
         cache: false,
         views: {
             'menuContent': {
-                templateUrl: 'src/capacitador/capacitador.html',
-                controller: 'CapacitadorCtrl'
+                templateUrl: 'src/capacitator/capacitator.html',
+                controller: 'CapacitatorCtrl'
+            }
+        }
+    });
+
+    $stateProvider.state('nf.language', {
+        url: '/language',
+        cache: false,
+        views: {
+            menuContent: {
+                templateUrl: 'src/language/language.html',
+                controller: 'LanguageCtrl'
             }
         }
     });
@@ -329,7 +349,7 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
     $urlRouterProvider.otherwise('/app/');
 });
 
-nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationService) {
+nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationService, $window, $translate) {
     console.log('run');
 
     //Deshabilitamos el boton de ir atrás del Hardware de Android
@@ -361,6 +381,21 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
     CapacitationService.initClient(function () {
 
     });
+
+    // Language settings
+    var stored_lang_key = localStorage.getItem('NG_TRANSLATE_LANG_KEY');
+    if (stored_lang_key) {
+        console.log('stored_lang_key');
+        $rootScope.lang = stored_lang_key;
+        $translate.use(stored_lang_key);
+    } else {
+        console.log('not stored_lang_key');
+        var locale = $window.navigator.language || $window.navigator.userLanguage;
+        var lang = locale.substring(0, 2);
+        $rootScope.lang = lang;
+        console.log($rootScope.lang);
+        $translate.use(lang);
+    }
 
     $ionicPlatform.ready(function () {
 

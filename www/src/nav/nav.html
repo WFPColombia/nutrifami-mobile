@@ -22,36 +22,39 @@
         </ion-header-bar>
         <ion-content>
             <ion-list>
-                <ion-item menu-close href="#/app">
-                    <img class="icono" src="img/icons/ico-menu-capacitacion.png" alt="Capacitación" /><span>Capacitación</span>
+                <ion-item menu-close ui-sref="nf.cap_home">
+                    <img class="icono" src="img/icons/ico-menu-capacitacion.png" alt="Capacitación" /><span>{{'Capacitación' | translate }}</span>
                 </ion-item>
-                <ion-item menu-close ui-sref="nf.shopping_intro">
-                    <img class="icono" src="img/icons/ico-menu-compras.png" />Mis Compras
+                <ion-item menu-close ui-sref="nf.shopping_intro" ng-show="lang == 'es'">
+                    <img class="icono" src="img/icons/ico-menu-compras.png" alt="Mis Compras" />{{'Mis Compras' | translate }}
                 </ion-item>
-                <ion-item menu-close href="#/app/progreso">
-                    <img class="icono" src="img/icons/ico-menu-progreso.png" alt="Consumo" />Progreso
+                <ion-item menu-close ui-sref="nf.progress">
+                    <img class="icono" src="img/icons/ico-menu-progreso.png" alt="progreso" />{{'Progreso' | translate }}
                 </ion-item>
-                <ion-item menu-close ui-sref="nf.tips">
-                    <img class="icono" src="img/icons/ico-menu-tips.png" alt="Tips" />Consejos Saludables
+                <ion-item menu-close ui-sref="nf.tips" ng-show="lang == 'es'">
+                    <img class="icono" src="img/icons/ico-menu-tips.png" alt="Tips" />{{'Consejos Saludables' | translate }}
                 </ion-item>
-                <ion-item menu-close href="#/nutricompra">
-                    <img class="icono" src="img/icons/ico-menu-nutricompra.png" alt="Cerrar Sesion" />Nutricompra
+                <ion-item menu-close ui-sref="nc_home">
+                    <img class="icono" src="img/icons/ico-menu-nutricompra.png" alt="Cerrar Sesion" />{{'Nutricompra' | translate }}
                 </ion-item>
-                <ion-item menu-close href="#/app/recetas">
-                    <img class="icono" src="img/icons/ico-menu-recetas.png" alt="Cerrar Sesion" />Recetas
+                <ion-item menu-close href="#/app/recetas" ng-show="lang == 'es'">
+                    <img class="icono" src="img/icons/ico-menu-recetas.png" alt="Cerrar Sesion" />{{'Recetas' | translate }}
                 </ion-item>
                 <ion-item menu-close ui-sref="nf.auth_profile">
-                    <img class="icono" src="img/icons/ico-menu-perfil.png" alt="Perfil" />Perfil <i ng-show="user.municipio === '' || user.municipio === null" class="ion-ios-information"></i>
+                    <img class="icono" src="img/icons/ico-menu-perfil.png" alt="Perfil" />{{'Perfil' | translate }} <i ng-show="user.municipio === '' || user.municipio === null" class="ion-ios-information"></i>
                 </ion-item>
-                <ion-item ng-show="user.is_staff" menu-close href="#/app/capacitador" class="capacitador">
-                    <img class="icono" src="img/icons/ico-menu-capacitador.png" alt="Capacitador" />Capacitador
+                <ion-item ng-show="user.is_staff" menu-close ui-sref="nf.capacitator" class="capacitador">
+                    <img class="icono" src="img/icons/ico-menu-capacitador.png" alt="Capacitador" />{{'Capacitador' | translate }}
                 </ion-item>
-                <ion-item menu-close href="#/auth">
-                    <img class="icono" src="img/icons/ico-menu-salir.png" alt="Cerrar Sesion" />Cerrar Sesión
+                <ion-item menu-close ui-sref="nf.language" >
+                    <img class="icono" src="img/flags/{{lang}}.svg" width="32px" height="32px" alt="Idioma">{{'Idioma' | translate }}
+                </ion-item>
+                <ion-item menu-close ui-sref="auth">
+                    <img class="icono" src="img/icons/ico-menu-salir.png" alt="Cerrar Sesion" />{{'Cerrar Sesión' | translate }}
                 </ion-item>
             </ion-list>
             <div class="capacitador">
-                <p class="usuarioActual" ng-show="user.is_staff"><b>Aprendiz Actual</b> {{current_trainee.name}} ({{current_trainee.document}})</p>
+                <p class="usuarioActual" ng-show="user.is_staff"><b>{{'Aprendiz Actual' | translate }}</b> {{current_trainee.name }} ({{current_trainee.document}})</p>
             </div>
         </ion-content>
     </ion-side-menu>

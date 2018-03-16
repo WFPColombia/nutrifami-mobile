@@ -1,0 +1,27 @@
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">{{'Aprendiz Nuevo'| translate }}</h1>
+        <button class="button button-clear button-primary" ng-click="closeModal()">{{'Cancelar'| translate }}</button>
+    </ion-header-bar>
+    <ion-content class="padding">
+        <form name="form" ng-submit="addTrainee()" role="form">
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">{{'Nombre'| translate}}</span>
+
+                    <input type="text"ng-model="form_add_trainee.name" required>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">{{'Documento'| translate}}</span>
+
+                    <input type="number" ng-model="form_add_trainee.document" required>
+                </label>
+            </div>
+            <div ng-show="error" class="help-block">{{error| translate}}</div>
+            <button type="submit" class="button button-full button-positive" ng-disabled="form.$invalid">
+                {{ formStatus == 'new' ? ('Agregar Aprendiz'| translate) : ('Editar'| translate)  }}
+            </button>
+        </form>
+    </ion-content>
+</ion-modal-view>
+

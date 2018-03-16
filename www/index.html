@@ -25,6 +25,12 @@
         <script src="lib/js-md5/build/md5.min.js" type="text/javascript"></script>
         <script src="lib/html2canvas/build/html2canvas.min.js" type="text/javascript"></script>
         <script src="lib/pdfmake/build/vfs_fonts.js" type="text/javascript"></script>
+        <script src="lib/angular-cookies/angular-cookies.min.js" type="text/javascript"></script>
+        <script src="lib/angular-translate/angular-translate.js" type="text/javascript"></script>
+        <script src="lib/angular-translate-handler-log/angular-translate-handler-log.js" type="text/javascript"></script>
+        <script src="lib/angular-translate-loader-static-files/angular-translate-loader-static-files.js" type="text/javascript"></script>
+        <script src="lib/angular-translate-storage-cookie/angular-translate-storage-cookie.js" type="text/javascript"></script>
+        <script src="lib/angular-translate-storage-local/angular-translate-storage-local.js" type="text/javascript"></script>
         <script src="cordova.js"></script>
         <!-- your app's js -->
         <!--<script src="js/capacitacion.js" type="text/javascript"></script>-->
@@ -51,8 +57,8 @@
         <script src="src/nav/nav.js" type="text/javascript"></script>
         <link href="src/nav/nav.css" rel="stylesheet">
         <!-- Progreso -->
-        <script src="src/progreso/progreso.js" type="text/javascript"></script>
-        <link href="src/progreso/progreso.css" rel="stylesheet">
+        <script src="src/progress/progress.js" type="text/javascript"></script>
+        <link href="src/progress/progress.css" rel="stylesheet">
         <!-- Intro-->
         <script src="src/intro/intro.js" type="text/javascript"></script>
         <link href="src/intro/intro.css" rel="stylesheet">
@@ -93,8 +99,8 @@
         <script src="src/receta/receta.js" type="text/javascript"></script>
         <link href="src/receta/receta.css" rel="stylesheet">
         <!-- Receta -->
-        <script src="src/capacitador/capacitador.js" type="text/javascript"></script>
-        <link href="src/capacitador/capacitador.css" rel="stylesheet">
+        <script src="src/capacitator/capacitator.js" type="text/javascript"></script>
+        <link href="src/capacitator/capacitator.css" rel="stylesheet">
         <!-- Shopping Intro -->
         <script src="src/shopping_intro/shopping_intro.js" type="text/javascript"></script>
         <link href="src/shopping_intro/shopping_intro.css" rel="stylesheet">
@@ -104,28 +110,31 @@
         <!-- Shopping Group -->
         <script src="src/shopping_group/shopping_group.js" type="text/javascript"></script>
         <link href="src/shopping_group/shopping_group.css" rel="stylesheet">
+        <!-- Language -->
+        <script src="src/language/language.js" type="text/javascript"></script>
         <!-- -->   
-        <script src="js/controllers/nutricompra/nc_homeController.js" type="text/javascript"></script>
-        <script src="js/controllers/nutricompra/nc_comoJugarController.js" type="text/javascript"></script>
-        <script src="js/controllers/nutricompra/nc_jugarController.js" type="text/javascript"></script>
-        <script src="js/controllers/nutricompra/nc_jugarResumenController.js" type="text/javascript"></script>
-        <script src="js/controllers/nutricompra/nc_jugarTerminarController.js" type="text/javascript"></script>
+        <script src="src/nc_home/nc_home.js" type="text/javascript"></script>
+        <script src="src/nc_cart/nc_cart.js" type="text/javascript"></script>
+        <script src="src/nc_play/nc_play.js" type="text/javascript"></script>
+        <script src="src/nc_end/nc_end.js" type="text/javascript"></script>
+        <link href="src/nc_home/nc_home.css" rel="stylesheet">
 
         <!-- Directives-->
-        <script src="directives/modulo/modulo.drt.js" type="text/javascript"></script>
-        <script src="directives/leccion/leccion.drt.js" type="text/javascript"></script>
+        <script src="directives/module/module.drt.js" type="text/javascript"></script>
+        <script src="directives/lesson/lesson.drt.js" type="text/javascript"></script>
         <script src="js/directives/opcionUnidadInfo.drt.js" type="text/javascript"></script>
         <script src="js/directives/opcionParejaUnidadInfo.drt.js" type="text/javascript"></script>
         <script src="js/directives/goClick.drt.js" type="text/javascript"></script>
         <!-- Servicios -->
         <script src="services/MediaService.js" type="text/javascript"></script>
-        <script src="services/nutricompraService.js" type="text/javascript"></script>
+        
 
         <script src="services/CapacitationService.js" type="text/javascript"></script>
         <script src="services/DownloadService.js" type="text/javascript"></script>
         <script src="services/TrainingService.js" type="text/javascript"></script>
         <script src="services/UserService.js" type="text/javascript"></script>
         <script src="services/ShoppingService.js" type="text/javascript"></script>
+        <script src="services/NutricompraService.js" type="text/javascript"></script>
 
         <script src="filters/filters.js" type="text/javascript"></script>
     </head>

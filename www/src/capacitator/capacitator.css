@@ -1,0 +1,36 @@
+.capacitador .header h1{
+    color: #00c97e;
+    font-family: 'Muli', sans-serif;
+    font-size: 150%;
+    text-align: center;
+    margin: 10px auto;
+}
+
+.capacitador .ion-trash-a,
+.capacitador .ion-edit,
+.capacitador .ion-checkmark-circled,
+.capacitador .ion-person-add{
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    min-width: 34px;
+    min-height: 34px;
+    font-size: 18px;
+    line-height: 32px;
+}
+
+.capacitador .me .ion-checkmark-circled{
+    right: 16px !important;
+}
+
+.capacitador .ion-edit{
+    right: 60px;
+}
+
+.capacitador .ion-checkmark-circled{
+    right: 107px;
+}
+
+.capacitador .add-trainee{
+    background-color: #d8eadd;
+}

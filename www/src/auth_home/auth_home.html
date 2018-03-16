@@ -9,28 +9,28 @@
             </div>
             <div>
                 <div class="col col-80 col-offset-10">
-                    <h2>¡Aprenda Jugando sobre nutrición, alimentación y hábitos saludables!</h2>
+                    <h2>{{'¡Aprenda Jugando sobre nutrición, alimentación y hábitos saludables!' | translate }}</h2>
                 </div>
             </div>
             <form name="form" ng-submit="login()" role="form">
-                <div class="help-block"><span ng-show="error">{{error}}</span></div>
+                <div class="help-block"><span ng-show="error">{{error | translate }}</span></div>
                 <div class="row">
                     <div class="col col-100">
                         <label class="item item-input">
-                            <input type="text" placeholder="Ingrese documento o usuario" autocomplete="off" ng-model="formLogin.username" required>
+                            <input type="text" placeholder="{{'Ingrese documento o usuario' | translate }}" autocomplete="off" ng-model="formLogin.username" required>
                         </label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col col-100">
-                        <button type="submit" class="btn btn-default center-block" ng-disabled="form.$invalid">INGRESAR</button>
+                        <button type="submit" class="btn btn-default center-block" ng-disabled="form.$invalid">{{'INGRESAR' | translate }}</button>
                     </div>
                 </div>
             </form>
             <div class="row registro">
                 <div class="col col-100">
-                    <p>¿No tienes cuenta?</p>
-                    <button class="btn btn-default center-block" ui-sref="auth_signup" ion-ripple>CREAR CUENTA</button>
+                    <p>{{'¿No tienes una cuenta?' | translate }}</p>
+                    <button class="btn btn-default center-block" ui-sref="auth_signup" ion-ripple>{{'Crear cuenta' | translate }}</button>
                 </div>
             </div>
             <div class="row logo-wfp center-block">

@@ -1,6 +1,6 @@
-nf2.controller('NavCtrl', function ($scope, $ionicPopover, UserService, TrainingService) {
+nf2.controller('NavCtrl', function ($scope, $rootScope, $ionicPopover, UserService, TrainingService) {
 
-    $ionicPopover.fromTemplateUrl('views/template/popover.tpl.html', {
+    $ionicPopover.fromTemplateUrl('template/popover.html', {
         scope: $scope
     }).then(function (popover) {
         $scope.popover = popover;
@@ -20,6 +20,13 @@ nf2.controller('NavCtrl', function ($scope, $ionicPopover, UserService, Training
 
     $scope.$on('traineeUpdated', function (event, data) {
         $scope.current_trainee = data;
+    });
+
+    $rootScope.$on('$translateChangeSuccess', function (event, data) {
+        console.log('$translateChangeSuccess');
+        var language = data.language;
+        $rootScope.lang = language;
+        $scope.lang = language;
     });
 
 

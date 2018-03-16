@@ -27,9 +27,11 @@ nf2.factory('TrainingService', function ($rootScope, $http, $q, UserService) {
     /**
      * @description Save the info of the current trainee
      * @param {type} data
+     * @param {type} is_staff
      * @returns {undefined}
      */
     service.saveCurrentTrainee = function (data, is_staff) {
+        console.log('saveCurrentTrainee');
         localStorage.setItem("current_trainee", JSON.stringify(data));
         var staff = JSON.parse(localStorage.getItem('staff'));
         if (is_staff) {
@@ -113,6 +115,8 @@ nf2.factory('TrainingService', function ($rootScope, $http, $q, UserService) {
 
         var deferred = $q.defer();
         var promises = [];
+        var promises2 = [];
+        var deferred2 = $q.defer();
         for (var trainee in trainees) {
 
             var temp_trainee = trainees[trainee];
@@ -125,28 +129,60 @@ nf2.factory('TrainingService', function ($rootScope, $http, $q, UserService) {
             if (!temp_trainee.synchronized) {
                 promises.push(
                         $http({
-                            method: 'POST',
-                            url: $rootScope.BASE_URL + 'api/trainees/',
+                            method: 'GET',
+                            url: $rootScope.BASE_URL + 'api/check-user/' + data.document,
                             data: data
                         }).
                         then(function successCallback(response) {
                             trainees[response.config.data.temp_id].synchronized = true;
-                            trainees[response.config.data.temp_id].id = response.data.id;
+                            trainees[response.config.data.temp_id].id = response.data[0].id;
 
                         }, function errorCallback(response) {
-                            console.log(response);
+                            trainees[response.config.data.temp_id].synchronized = false;
+                            trainees[response.config.data.temp_id].id = 0;
                         }));
             }
         }
 
         $q.all(promises).then(function (res) {
             deferred.resolve();
-            service.saveAllTrainees(trainees);
-            console.log('Trainees Synchronized');
-            service.synchronizeTraineesAdvance();
+            for (var trainee in trainees) {
+                var temp_trainee = trainees[trainee];
+                var data = {
+                    username: temp_trainee.document,
+                    password: 'abc12345',
+                    terminos: true,
+                    temp_id: trainee
+                };
+                if (!temp_trainee.synchronized) {
+                    promises2.push(
+                            $http({
+                                method: 'POST',
+                                url: $rootScope.BASE_URL + 'api/create-user/',
+                                data: data
+                            }).
+                            then(function successCallback(response) {
+                                trainees[response.config.data.temp_id].synchronized = true;
+                                trainees[response.config.data.temp_id].id = response.data.id;
 
+                            }, function errorCallback(response) {
+                                console.log(response);
+                                trainees[response.config.data.temp_id].synchronized = false;
+                                trainees[response.config.data.temp_id].id = 0;
+                            }));
+                }
+
+            }
+
+            $q.all(promises2).then(function (res) {
+                deferred2.resolve();
+                console.log(trainees);
+                service.saveAllTrainees(trainees);
+                service.synchronizeTraineesAdvance();
+            });
         });
-        return deferred.promise;
+
+
     };
 
     service.synchronizeTraineesAdvance = function () {
@@ -162,10 +198,10 @@ nf2.factory('TrainingService', function ($rootScope, $http, $q, UserService) {
                 var data = {
                     temp_id_user: trainee,
                     temp_id_advance: advance,
-                    trainee: temp_trainee.id,
-                    capacitation: temp_advance.capacitacion,
-                    module: temp_advance.modulo,
-                    lesson: temp_advance.leccion
+                    usuario: temp_trainee.id,
+                    capacitacion: temp_advance.capacitacion,
+                    modulo: temp_advance.modulo,
+                    leccion: temp_advance.leccion
                 };
 
                 if (!temp_advance.synchronized) {

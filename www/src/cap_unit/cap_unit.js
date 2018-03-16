@@ -1,5 +1,5 @@
 /*global angular*/
-nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $state, $stateParams, $ionicPopup, $ionicLoading, $ionicViewSwitcher, $timeout, MediaService, UserService, CapacitationService, DownloadService, TrainingService) {
+nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $state, $filter, $stateParams, $ionicPopup, $ionicLoading, $ionicViewSwitcher, $timeout, MediaService, UserService, CapacitationService, DownloadService, TrainingService) {
     'use strict';
     $ionicPlatform.ready(function () {
 
@@ -20,7 +20,7 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
             texto: $scope.assetpath_audio + $scope.unidad.media.nombre,
             salir: MediaService.getMediaURL('audios/unidad-salir.wav')
         };
-        
+
         console.log($scope.unidad);
         console.log($scope.audios);
 
@@ -260,10 +260,10 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
             $scope.feedback.feedbacks = eliminarRepitidos($scope.feedback.feedbacks, 'texto');
 
             $ionicPopup.show({
-                templateUrl: 'views/template/feedback.tpl.html',
+                templateUrl: 'modals/feedback/feedback.modal.html',
                 scope: $scope,
                 buttons: [{
-                        text: textoBoton,
+                        text: $filter('translate')(textoBoton),
                         type: 'button-positive',
                         onTap: function (e) {
                             $scope.cerrarFeedback();
@@ -281,22 +281,49 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
         };
 
         $scope.salirUnidad = function () {
+            $scope.modal = {
+                texto1: '¿Estás seguro de salir?',
+                texto2: 'Si sales perderás los avances en esta lección.',
+                estado: 'alert', // ok, alert, error
+                audio: 'salir'
+            };
             $ionicPopup.show({
-                templateUrl: 'views/template/salirUnidad.tpl.html',
+                templateUrl: 'modals/simple/simple.modal.html',
                 scope: $scope,
                 cssClass: 'salir-unidad',
                 buttons: [{
-                        text: 'Salir de la lección',
+                        text: $filter('translate')('Salir de la lección'),
                         type: 'button-positive',
                         onTap: function (e) {
                             $ionicViewSwitcher.nextDirection('back'); // 'forward', 'back', etc.
                             $state.go('nf.cap_module', {
                                 capacitation: $stateParams.capacitation,
-                                module: $stateParams.module,
+                                module: $stateParams.module
                             });
+                        }
+                    }, {
+                        text: $filter('translate')('Continuar Lección'),
+                        onTap: function (e) {
                         }
                     }]
             });
+
+            /* $ionicPopup.show({
+             templateUrl: 'views/template/salirUnidad.tpl.html',
+             scope: $scope,
+             cssClass: 'salir-unidad',
+             buttons: [{
+             text: 'Salir de la lección',
+             type: 'button-positive',
+             onTap: function (e) {
+             $ionicViewSwitcher.nextDirection('back'); // 'forward', 'back', etc.
+             $state.go('nf.cap_module', {
+             capacitation: $stateParams.capacitation,
+             module: $stateParams.module,
+             });
+             }
+             }]
+             }); */
         };
 
         $scope.irASiguienteUnidad = function () {

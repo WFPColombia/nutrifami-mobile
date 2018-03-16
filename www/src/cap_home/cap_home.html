@@ -3,7 +3,7 @@
         <!--<ion-refresher pulling-icon="ion-arrow-down-b" on-refresh="refreshRecetas()"></ion-refresher>-->
         <div class="row home-header">
             <div class="col" ng-click="playAudio('audio1')" ion-ripple>
-                <h1><!--<i class="icon {{ICON_AUDIO}}" aria-hidden="true"></i>-->Capacitaciones Activas</h1>
+                <h1><!--<i class="icon {{ICON_AUDIO}}" aria-hidden="true"></i>--> {{'Capacitaciones Activas' | translate }}</h1>
             </div>
         </div>
         <!--<div class="row busqueda">
@@ -37,7 +37,7 @@
                             <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{capacitacion.porcentaje}}%;">
                             </div>
                         </div>
-                        <button class="button button-full button-positive" ui-sref="nf.cap_capacitation({capacitation:'{{capacitacion.id}}'})">INICIAR</button>
+                        <button class="button button-full button-positive" ui-sref="nf.cap_capacitation({capacitation:'{{capacitacion.id}}'})">{{'INICIAR' | translate }}</button>
                     </div>
                 </div>
             </div>

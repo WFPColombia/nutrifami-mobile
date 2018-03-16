@@ -32,8 +32,8 @@
     top: 10px;
 }
 
-.item-complex .item-content,
-.item-radio .item-content {
+.menu-left .item-complex .item-content,
+.menu-left .item-radio .item-content {
     padding: 3px 0 0 16px;
     height: 57px;
 }

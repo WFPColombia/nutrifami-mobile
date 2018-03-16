@@ -1,26 +1,11 @@
 /*global angular*/
-nf2.controller('CapCapacitationCtrl', function ($ionicPlatform, $scope, $ionicLoading, $stateParams, $location, $ionicPopup, UserService, CapacitationService) {
+nf2.controller('CapCapacitationCtrl', function ($ionicPlatform, $scope, $ionicLoading, $stateParams, $location, $filter, $ionicPopup, UserService, CapacitationService) {
     'use strict';
 
     $ionicPlatform.ready(function () {
         
-        $scope.mids = CapacitationService.getModulesIds($stateParams.capacitation)
         $scope.usuarioActivo = UserService.getUser();
-
-        $scope.modulos = [];
-        //Obtenemos los ids de los modulos de la capacitación 3 
-
-        //Creamos un arreglo para poder recorerlo y mostrarlo a traves de directivas 
-        for (var mid in $scope.mids) {
-            var tempModulo = CapacitationService.getModule($scope.mids[mid]);
-            tempModulo.disponible = true;
-            if (tempModulo.activo == '1') {
-                tempModulo.activo = true;
-            } else {
-                tempModulo.activo = false;
-            }
-            $scope.modulos.push(tempModulo);
-        }
+        $scope.modulos = CapacitationService.getModulesActives($stateParams.capacitation);
 
         $scope.$on('descargaTerminada', function (event, id) {
             $ionicLoading.hide();
@@ -35,11 +20,11 @@ nf2.controller('CapCapacitationCtrl', function ($ionicPlatform, $scope, $ionicLo
                     estado: 'error' // ok, alert, error
                 };
                 $ionicPopup.show({
-                    templateUrl: 'modals/modal.html',
+                    templateUrl: 'modals/simple/simple.modal.html',
                     scope: $scope,
                     cssClass: 'salir-unidad',
                     buttons: [{
-                            text: 'Aceptar',
+                            text: $filter('translate')('Aceptar'),
                             type: 'button-positive',
                             onTap: function (e) {
                             }
@@ -59,11 +44,11 @@ nf2.controller('CapCapacitationCtrl', function ($ionicPlatform, $scope, $ionicLo
                 estado: 'alert' // ok, alert, error
             };
             $ionicPopup.show({
-                templateUrl: 'modals/modal.html',
+                templateUrl: 'modals/simple/simple.modal.html',
                 scope: $scope,
                 cssClass: 'salir-unidad',
                 buttons: [{
-                        text: 'Aceptar',
+                        text: $filter('translate')('Aceptar'),
                         type: 'button-positive',
                         onTap: function (e) {
                             console.log("Ok");

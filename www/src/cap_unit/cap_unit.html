@@ -20,7 +20,22 @@
 </div>
 <ion-scroll style="height: 100%" on-scroll="getScrollPosition()">
     <div class='unidad'>
-        <ng-include src="'views/template/leccionAvance.tpl.html'"></ng-include>
+        <header>
+            <div class="leccion-avance">
+                <div class="row">
+                    <div class="col leccion-avance-cerrar">
+                        <button ng-click="salirUnidad()" class="icon ion-close-round" aria-hidden="true" ion-ripple></button>
+                    </div>
+                    <div class="col col-80 leccion-avance-progreso">
+                        <span>{{'Unidad' | translate }} {{unidad.numeroUnidad}} {{ 'de' | translate }} {{unidad.totalUnidades}}</span>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentajeAvance()}}%;"></div>
+                            <div class="complete"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
         <div class="unidad-tipo"  ng-click="playAudio('tipo')" ion-ripple>
             <img ng-src="img/icons/{{unidad.tipo.icono}}" />
             <div class="unidad-tipo-descripcion">
@@ -72,7 +87,7 @@
     <div class="zona-segura"></div>
 </ion-scroll>
 <div class="bar bar-footer calificar" ng-class=" botonCalificar ? 'habilitado' : ''">
-    <button ng-click="calificarUnidad()" ng-disabled="!botonCalificar" ion-ripple>{{textoBoton}}</button>
+    <button ng-click="calificarUnidad()" ng-disabled="!botonCalificar" ion-ripple>{{textoBoton | translate}}</button>
 </div>
 <!--
 <div class="mostrar-tip">

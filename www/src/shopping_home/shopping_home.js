@@ -68,7 +68,7 @@ nf2.controller('ShoppingHomeCtrl', function ($ionicPlatform, $scope, $ionicLoadi
                 estado: 'alert' // ok, alert, error
             };
             $ionicPopup.show({
-                templateUrl: 'modals/modal.html',
+                templateUrl: 'modals/simple/simple.modal.html',
                 scope: $scope,
                 cssClass: 'salir-unidad',
                 buttons: [{

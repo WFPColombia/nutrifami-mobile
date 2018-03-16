@@ -4,10 +4,10 @@
             <div class="container">
                 <button ng-click="playAudio('audio1')" class="intro-sonido icon ion-volume-high" aria-hidden="true" ion-ripple></button>
                 <div class="slide-body">
-                    <h1>¡Bienvenido/a {{usuarioActivo.first_name}}!</h1>
-                    <p>Nutrifami es una herramienta para transmitir conocimientos sobre nutrición y alimentación</p>
+                    <h1>¡{{'Bienvenido/a' | translate }} {{usuarioActivo.first_name}}!</h1>
+                    <p>{{'Nutrifami es una herramienta para transmitir conocimientos sobre nutrición y alimentación' | translate }}</p>
                     <img src="img/intro-01.png" style="margin-left: 45px;" />
-                    <h1>Alimentación Saludable</h1>
+                    <h1>{{'Alimentación Saludable' | translate }}</h1>
                 </div>
             </div>
         </ion-slide>
@@ -15,7 +15,7 @@
             <div class="container">
                 <button ng-click="playAudio('audio2')" class="intro-sonido icon ion-volume-high" aria-hidden="true" ion-ripple></button>
                 <div class="slide-body">
-                    <h2>5 módulos para aprender jugando. <br> Lea, escuche y seleccione las respuestas correctas</h2>
+                    <h2>{{'5 módulos para aprender jugando. Lea, escuche y seleccione las respuestas correctas' | translate }}</h2>
                     <img src="img/intro-02.png" />
                 </div>
             </div>
@@ -24,7 +24,7 @@
             <div class="container">
                 <button ng-click="playAudio('audio3')" class="intro-sonido icon ion-volume-high" aria-hidden="true" ion-ripple></button>
                 <div class="slide-body">
-                    <h2>Si es beneficiario PMA, Nutrifami analiza sus compras y le brinda consejos para la diversidad de su dieta.</h2>
+                    <h2>{{'Si es beneficiario PMA, Nutrifami analiza sus compras y le brinda consejos para la diversidad de su dieta.' | translate }}</h2>
                     <img src="img/intro-03.png" />
                 </div>
             </div>
@@ -33,11 +33,11 @@
             <div class="container">
                 <button ng-click="playAudio('audio4')" class="intro-sonido icon ion-volume-high" aria-hidden="true" ion-ripple></button>
                 <div class="slide-body">
-                    <h2 class="last">Aprenda jugando sobre nutrición,<br> alimentación y hábitos saludables</h2>
+                    <h2 class="last">{{'¡Aprenda Jugando sobre nutrición, alimentación y hábitos saludables!' | translate }}</h2>
                     <img src="img/intro-02.png" style="margin-bottom: 0px" />
                     <div class="row">
                         <div class="col">
-                            <button type="submit" class="btn btn-default" class="comenzar" ng-click="comenzar()" ion-ripple>Comenzar</button>
+                            <button type="submit" class="btn btn-default" class="comenzar" ng-click="comenzar()" ion-ripple>{{'Comenzar' | translate }}</button>
                         </div>
                     </div>
                 </div>

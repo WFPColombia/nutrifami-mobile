@@ -9,8 +9,6 @@ nf2.controller('CapModuleCtrl', function ($ionicPlatform, $scope, $rootScope, $l
         $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitation + "/" + $stateParams.module + "/";
         $scope.assetpath_audio = $rootScope.TARGETPATH_AUDIO + $stateParams.capacitation + "/" + $stateParams.module + "/";
         
-        console.log($rootScope.TARGETPATH_AUDIO);
-
         $scope.audios = {
             audioTitulo: $scope.assetpath_audio + $scope.modulo.titulo.audio.nombre,
             audioDescripcion: $scope.assetpath_audio + $scope.modulo.descripcion.audio.nombre
@@ -24,7 +22,7 @@ nf2.controller('CapModuleCtrl', function ($ionicPlatform, $scope, $rootScope, $l
         function cargarCapacitacion() {
             for (var lid in $scope.lids) {
                 var tempLeccion = CapacitationService.getLesson($scope.lids[lid]);
-                if (tempLeccion.activo == 1) {
+                if (tempLeccion.activo === "1") {
                     if (tempLeccion.titulo.audio.nombre !== null) {
                         var id = parseInt(lid) + 1;
                         tempLeccion.titulo.audio.id = "paso" + id;
@@ -34,19 +32,10 @@ nf2.controller('CapModuleCtrl', function ($ionicPlatform, $scope, $rootScope, $l
                     $scope.lecciones.push(tempLeccion);
                 }
             }
-            
         }
-
+        
         $scope.playAudio = function (audio) {
             MediaService.play(audio);
-        };
-
-        $scope.porcentajeAvance = function () {
-            return (100 / $scope.modulo.totalLecciones * $scope.usuarioAvance.leccionesTerminadas);
-        };
-        $scope.irALeccion = function (index) {
-            $ionicViewSwitcher.nextDirection('forward'); // 'forward', 'back', etc.
-            $location.path('/' + $stateParams.capacitation + '/' + $stateParams.module + "/" + $scope.lids[index] + "/1");
         };
 
         cargarCapacitacion();
