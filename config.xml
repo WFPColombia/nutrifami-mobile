@@ -113,9 +113,6 @@
     </platform>
     <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
-    <engine name="android" spec="^6.4.0" />
-    <engine name="ios" spec="^4.4.0" />
-    <engine name="windows" spec="5.0.0" />
     <plugin name="cordova-plugin-background-mode" spec="^0.7.2" />
     <plugin name="cordova-plugin-device" spec="^2.0.1" />
     <plugin name="cordova-plugin-file" spec="^6.0.1" />
@@ -131,4 +128,7 @@
     <plugin name="cordova-plugin-x-socialsharing" spec="^5.2.1" />
     <plugin name="cordova-plugin-zip" spec="git+https://github.com/fats2005/cordova-plugin-zip" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
+    <engine name="android" spec="^6.4.0" />
+    <engine name="ios" spec="^4.4.0" />
+    <engine name="windows" spec="5.0.0" />
 </widget>

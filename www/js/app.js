@@ -11,8 +11,7 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
     $ionicConfigProvider.tabs.position('top');
     $ionicConfigProvider.backButton.previousTitleText(false).text('');
 
-    //$compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|file|blob|cdvfile):|data:image\//);
-    $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|file):/);
+    $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|file|blob|cdvfile|ms-appx-web|ms-appdata):|data:image\//);
 
     //initialize get if not there
     if (!$httpProvider.defaults.headers.get) {
@@ -427,9 +426,8 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
                 console.log('is Windows');
                 $rootScope.TARGETPATH = cordova.file.dataDirectory;
                 $rootScope.TARGETPATH_AUDIO = cordova.file.dataDirectory;
-                //agregar icono de audio
-                //agregar icono de descarga
-
+                $rootScope.ICON_DESCARGA = 'ion-android-download';
+                $rootScope.ICON_AUDIO = 'ion-volume-high';
             } else {
                 console.log("Is iPad or iOS");
                 $rootScope.TARGETPATH = cordova.file.dataDirectory;

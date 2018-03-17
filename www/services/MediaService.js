@@ -1,4 +1,4 @@
-nf2.factory('MediaService', function ($cordovaMedia, $cordovaFile) {
+nf2.factory('MediaService', function ($cordovaMedia, $cordovaFile, $rootScope) {
     var service = {};
     var audios = {};
 
@@ -87,6 +87,8 @@ nf2.factory('MediaService', function ($cordovaMedia, $cordovaFile) {
         if (window.cordova) {
             if (device.platform.toLowerCase() === "android") {
                 return "/android_asset/www/" + s;
+            } else if (device.platform.toLowerCase() === 'windows') {
+                return "ms-appx-web://17634nutrifami.nutrifami/www/" + s;
             }
 
         }
