@@ -204,9 +204,7 @@ nf2.factory('CapacitationService', function ($http) {
 
     service.getUnitFromOrder = function (lid, rp_unidad) {
         //this.initClient();
-        console.log(lid, rp_unidad);
         var unidades = service.getUnitsActives(lid);
-        console.log(unidades);
         return unidades[rp_unidad - 1];
     };
 

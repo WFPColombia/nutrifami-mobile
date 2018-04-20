@@ -1,8 +1,8 @@
-nf2.controller('RecetasBuscarCtrl', function($ionicPlatform, $scope, $ionicLoading, $location, $ionicViewSwitcher, $ionicFilterBar, RecetasService, UsuarioService) {
+nf2.controller('RecetasBuscarCtrl', function($ionicPlatform, $scope, $ionicLoading, $location, $ionicViewSwitcher, $ionicFilterBar, RecetasService, UserService) {
     'use strict';
 
     $scope.recetas = {};
-    $scope.usuarioActivo = UsuarioService.getUsuarioActivo();
+    $scope.usuarioActivo = UserService.getUser();
 
 
     $ionicPlatform.ready(function() {

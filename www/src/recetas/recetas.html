@@ -19,7 +19,7 @@
                 <h1><!--<i class="icon ion-volume-high" aria-hidden="true"></i>-->Recetas Destacadas</h1>
             </div>
         </div>
-        <div class="row" ng-repeat="receta in recetas">
+        <div class="row" ng-repeat="receta in recetas | reverse">
             <div class="col">
                 <div class="receta">
                     <img ng-src="{{receta.imagen != null ? receta.imagen : 'img/recetas/receta-no-imagen.png'}}" ng-click="abrirReceta(receta.id)">

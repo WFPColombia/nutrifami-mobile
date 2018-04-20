@@ -7,7 +7,7 @@ nf2.directive('opcionUnidadInfo', function($stateParams, CapacitationService) {
         },
         templateUrl: 'views/directives/opcionUnidadInfo.drt.html',
         link: function($scope) {
-            $scope.unidad = CapacitationService.getUnit($stateParams.lesson, $stateParams.unit);
+            $scope.unidad = CapacitationService.getUnitFromOrder($stateParams.lesson, $stateParams.unit);
             $scope.assetpath = $scope.$parent.TARGETPATH+$stateParams.capacitation+"/"+$stateParams.module+"/"+$stateParams.lesson+"/"+$scope.unidad.id+"/";
             $scope.audiosDescargados = $scope.$parent.audiosDescargados;
             
