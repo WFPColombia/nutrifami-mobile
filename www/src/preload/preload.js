@@ -6,8 +6,6 @@ nf2.controller('PreloadCtrl', function ($ionicPlatform, $ionicPopup, $scope, $lo
         $scope.cargadorTexto = "Estamos preparando Nutrifami. Por favor espera un momento";
         $scope.cargadorPorcentaje = 0.0;
         
-        console.log(UserService.getVersionApp());
-        
         if (window.cordova) {
             window.plugins.insomnia.keepAwake(function () {
                 console.log("inmsonia ok");
@@ -49,7 +47,7 @@ nf2.controller('PreloadCtrl', function ($ionicPlatform, $ionicPopup, $scope, $lo
                         texto2: 'Podrá usar Nutrifami sin Conexión a Internet, pero los cambios no serán guardados'
                     };
                     $scope.buttonsModal = [{
-                            text: 'Continuar',
+                            text: $filter('translate')('Continuar'),
                             type: 'button-positive',
                             onTap: function (e) {
                                 $location.path('/app/');
@@ -61,7 +59,7 @@ nf2.controller('PreloadCtrl', function ($ionicPlatform, $ionicPopup, $scope, $lo
                         texto2: 'Para poder usar Nutrifami sin Conexión a Internet, Debe haber iniciado sesión al menos una vez y haber descargado las capacitaciones'
                     };
                     $scope.buttonsModal = [{
-                            text: 'Salir',
+                            text: $filter('translate')('Salir'),
                             type: 'button-positive',
                             onTap: function (e) {
                                 ionic.Platform.exitApp();
@@ -87,7 +85,7 @@ nf2.controller('PreloadCtrl', function ($ionicPlatform, $ionicPopup, $scope, $lo
                     scope: $scope,
                     cssClass: 'salir-unidad',
                     buttons: [{
-                            text: 'Aceptar',
+                            text: $filter('translate')('Salir'),
                             type: 'button-positive',
                             onTap: function (e) {
                                 ionic.Platform.exitApp();

@@ -34,7 +34,7 @@
                 <ion-item menu-close ui-sref="nf.tips" ng-show="lang == 'es'">
                     <img class="icono" src="img/icons/ico-menu-tips.png" alt="Tips" />{{'Consejos Saludables' | translate }}
                 </ion-item>
-                <ion-item menu-close ui-sref="nc_home">
+                <ion-item menu-close ui-sref="nc_home" ng-show="lang != 'fr'">
                     <img class="icono" src="img/icons/ico-menu-nutricompra.png" alt="Cerrar Sesion" />{{'Nutricompra' | translate }}
                 </ion-item>
                 <ion-item menu-close href="#/app/recetas" ng-show="lang == 'es'">
@@ -54,7 +54,7 @@
                 </ion-item>
             </ion-list>
             <div class="capacitador">
-                <p class="usuarioActual" ng-show="user.is_staff"><b>{{'Aprendiz Actual' | translate }}</b> {{current_trainee.name }} ({{current_trainee.document}})</p>
+                <p class="usuarioActual" ng-show="user.is_staff"><b>{{'Aprendiz Actual' | translate }}</b> {{current_trainee.name | translate }} ({{current_trainee.document}})</p>
             </div>
         </ion-content>
     </ion-side-menu>

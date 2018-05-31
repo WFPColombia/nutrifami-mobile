@@ -68,7 +68,7 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label>{{'Genero' | translate }}</label>
-                                                <p ng-class="usuarioActivo.genero != undefined && usuarioActivo.genero!='' ? '' : 'sin-registro'">{{ usuarioActivo.genero != undefined && usuarioActivo.genero != '' ? usuarioActivo.genero : ('Genero no ingresado'| translate)}}</p>
+                                                <p ng-class="usuarioActivo.genero != undefined && usuarioActivo.genero!='' ? '' : 'sin-registro'">{{ usuarioActivo.genero != undefined && usuarioActivo.genero != '' ? (usuarioActivo.genero | translate) : ('Genero no ingresado'| translate)}}</p>
                                             </div>
                                         </div>
                                     </div>

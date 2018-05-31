@@ -19,7 +19,7 @@ nf2.factory('DownloadService', function ($http, $rootScope, $cordovaFile, $cordo
             if ($rootScope.isOnline) {
                 return true;
             } else {
-                service.errorConexion('El dispositivo no tiene conexión a Internet');
+                service.errorConexion('Sin conexión a Internet');
                 return false;
             }
         } else {
@@ -170,7 +170,7 @@ nf2.factory('DownloadService', function ($http, $rootScope, $cordovaFile, $cordo
             'modulos': 'del módulo.',
             'capacitaciones': 'de la capacitación.'
 
-        }
+        };
         var gestorDescarga = JSON.parse(localStorage.getItem('gestorDescarga'));
         var url = gestorDescarga[nivel][id]['zip_' + tipo];
         var nombre = nivel + id + tipo + '.zip';
@@ -185,7 +185,7 @@ nf2.factory('DownloadService', function ($http, $rootScope, $cordovaFile, $cordo
                         callback();
                     }
                 } else {
-                    service.errorDescarga("Hubo un error al descargar paquete de archivos ");
+                    service.errorDescarga("Hubo un error al descargar paquete de archivos");
                 }
             });
         } else {

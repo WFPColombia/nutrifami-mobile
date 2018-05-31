@@ -4,56 +4,49 @@ nf2.controller('AuthProfileEditCtrl', function ($ionicPlatform, $filter, $scope,
     $ionicPlatform.ready(function () {
 
         if ($rootScope.isOffline) {
-            $ionicPopup.alert({
-                title: "Sin conexión a Internet",
-                content: "Actualmente su equipo no tiene conexión a Internet. Para ver esta sección debe estár conectado a Internet ",
-                buttons: [
-                    {text: 'Salir'}
-                ]
-            })
-                    .then(function (res) {
-                        $state.go('nf.cap_home');
-                    });
+            $scope.modal = {
+                texto1: 'Sin conexión a Internet',
+                texto2: 'Actualmente su equipo no tiene conexión a Internet. Para ver esta sección debe estár conectado a Internet',
+                estado: 'error' // ok, alert, error
+            };
+            $ionicPopup.show({
+                templateUrl: 'modals/simple/simple.modal.html',
+                scope: $scope,
+                cssClass: 'salir-unidad',
+                buttons: [{
+                        text: $filter('translate')('Salir'),
+                        type: 'button-positive',
+                        onTap: function (e) {
+                            $state.go('nf.auth_profile');
+                        }
+                    }]
+            });
         }
 
-        $scope.usuarioActivo = UserService.getUser();
-
-        console.log($scope.usuarioActivo);
+        $scope.user = UserService.getUser();
 
         $scope.generos = {
-            availableOptions: [
-                {id: 'Femenino', name: 'Femenino'},
-                {id: 'Masculino', name: 'Masculino'}
+        availableOptions: [
+                {id: 'Femenino', name: $filter('translate')('Femenino')},
+                {id: 'Masculino', name: $filter('translate')('Masculino')}
             ],
-            selectedOption: {id: $scope.usuarioActivo.genero, name: $scope.usuarioActivo.genero}
-        };
-
-        $scope.etnias = {
-            availableOptions: [
-                {id: 'Afrocolombianos', name: 'Afrocolombianos'},
-                {id: 'Indigenas', name: 'Indigenas'},
-                {id: 'Mestizo', name: 'Mestizo'},
-                {id: 'Otros', name: 'Otros'},
-                {id: 'Ninguno', name: 'Ninguno'}
-            ],
-            selectedOption: {id: $scope.usuarioActivo.etnia, name: $scope.usuarioActivo.etnia}
+            selectedOption: {id: $scope.user.genero, name: $scope.user.genero}
         };
 
         $scope.tipos_documento = {
             availableOptions: [
-                {id: 'Cédula de ciudadania', name: 'Cédula de ciudadania'},
-                {id: 'Cédula de extranjeria', name: 'Cédula de extranjeria'},
-                {id: 'Tarjeta de identidad', name: 'Tarjeta de identidad'},
-                {id: 'Pasaporte', name: 'Pasaporte'}
+                {id: 'Cédula de ciudadania', name: $filter('translate')('Cédula de ciudadania / DNI')},
+                {id: 'Pasaporte', name: $filter('translate')('Pasaporte')},
+                {id: 'Otro', name: $filter('translate')('Otro')}
             ],
-            selectedOption: {id: $scope.usuarioActivo.tipo_documento, name: $scope.usuarioActivo.tipo_documento}
+            selectedOption: {id: $scope.user.tipo_documento, name: $scope.user.tipo_documento}
         };
 
         $scope.date = {};
 
 
-        if ($scope.usuarioActivo.fecha_nacimiento !== null) {
-            var nacimiento = $scope.usuarioActivo.fecha_nacimiento;
+        if ($scope.user.fecha_nacimiento !== null) {
+            var nacimiento = $scope.user.fecha_nacimiento;
             var n_ano = nacimiento.slice(0, 4);
             var n_mes = nacimiento.slice(5, 7) - 1;
             var n_dia = nacimiento.slice(8, 10);
@@ -70,8 +63,8 @@ nf2.controller('AuthProfileEditCtrl', function ($ionicPlatform, $filter, $scope,
          $scope.ciudades = response.cities;
          
          for (var pais in response.countries) {
-         if ($scope.usuarioActivo.pais == response.countries[pais].name) {
-         $scope.usuarioActivo.pais_id = {
+         if ($scope.user.pais == response.countries[pais].name) {
+         $scope.user.pais_id = {
          id: response.countries[pais].id,
          name: response.countries[pais].name,
          phonecode: response.countries[pais].phonecode,
@@ -82,35 +75,30 @@ nf2.controller('AuthProfileEditCtrl', function ($ionicPlatform, $filter, $scope,
          }
          
          for (var departamento in response.states) {
-         if ($scope.usuarioActivo.departamento == response.states[departamento].name) {
-         console.log(response.states[departamento])
-         $scope.usuarioActivo.departamento_id = {
+         if ($scope.user.departamento == response.states[departamento].name) {
+         $scope.user.departamento_id = {
          id: response.states[departamento].id,
          name: response.states[departamento].name,
          country_id: response.states[departamento].country_id,
          };
-         $scope.departamentos_filter = [$scope.usuarioActivo.departamento_id];
+         $scope.departamentos_filter = [$scope.user.departamento_id];
          
          }
          }
          
          for (var ciudad in response.cities) {
-         if ($scope.usuarioActivo.municipio == response.cities[ciudad].name) {
-         console.log(response.cities[ciudad]);
-         $scope.usuarioActivo.municipio_id = {
+         if ($scope.user.municipio == response.cities[ciudad].name) {
+         $scope.user.municipio_id = {
          id: response.cities[ciudad].id,
          name: response.cities[ciudad].name,
          state_id: response.cities[ciudad].state_id,
          };
-         $scope.ciudades_filter = [$scope.usuarioActivo.municipio_id];
+         $scope.ciudades_filter = [$scope.user.municipio_id];
          }
          }
          });*/
 
         $scope.updateUser = function () {
-            
-            console.log("UpdateUser");
-
             $scope.loading = $ionicLoading.show({
                 template: 'Guardando Cambios...',
                 animation: 'fade-in',
@@ -118,10 +106,8 @@ nf2.controller('AuthProfileEditCtrl', function ($ionicPlatform, $filter, $scope,
                 maxWidth: 40
             });
 
-            $scope.usuarioActivo.genero = $scope.generos.selectedOption.id || '';
-            $scope.usuarioActivo.etnia = $scope.etnias.selectedOption.id || '';
-            $scope.usuarioActivo.tipo_documento = $scope.tipos_documento.selectedOption.id || '';
-            console.log($scope.date.fecha_nacimiento);
+            $scope.user.genero = $scope.generos.selectedOption.id || '';
+            $scope.user.tipo_documento = $scope.tipos_documento.selectedOption.id || '';
 
             var tempMonth = $scope.date.fecha_nacimiento.getMonth() + 1;
             var tempDay = $scope.date.fecha_nacimiento.getDate();
@@ -129,7 +115,7 @@ nf2.controller('AuthProfileEditCtrl', function ($ionicPlatform, $filter, $scope,
             if (tempMonth < 10) {
                 tempMonth = "0" + tempMonth;
             }
-            $scope.usuarioActivo.fecha_nacimiento = $scope.date.fecha_nacimiento.getFullYear() + "-" + tempMonth + "-" + tempDay;
+            $scope.user.fecha_nacimiento = $scope.date.fecha_nacimiento.getFullYear() + "-" + tempMonth + "-" + tempDay;
 
             /*for (var pais in $scope.paises) {
              if ($scope.paises[pais].id == usuarioActivo.pais_id) {
@@ -156,10 +142,7 @@ nf2.controller('AuthProfileEditCtrl', function ($ionicPlatform, $filter, $scope,
              
              */
 
-
-            console.log($scope.usuarioActivo);
-
-            UserService.updateUser($scope.usuarioActivo);
+            UserService.updateUser($scope.user);
 
             /*UsuarioService.setUsuarioActivo(usuarioActivo, function(response) {
              if (response.success) {
@@ -185,21 +168,17 @@ nf2.controller('AuthProfileEditCtrl', function ($ionicPlatform, $filter, $scope,
         };
 
         $scope.updateDropDownDepartamentos = function (pais) {
-            console.log(pais);
             $scope.departamentos_filter = $filter('filter')($scope.departamentos, {country_id: pais}, true);
         };
 
         $scope.updateDropDownCiudades = function (estado) {
-            console.log(estado);
             $scope.ciudades_filter = $filter('filter')($scope.ciudades, {state_id: estado}, true);
-            console.log($scope.ciudades_filter);
         };
 
         $scope.$on('userUpdated', function (event, data) {
-            console.log(data);
             $ionicLoading.hide();
             $scope.modal = {
-                texto1: 'Perfil actualizado con éxito',
+                texto1: 'Los datos han sido guardado con éxito',
                 estado: 'ok' // ok, alert, error
             };
             $ionicPopup.show({
@@ -207,7 +186,7 @@ nf2.controller('AuthProfileEditCtrl', function ($ionicPlatform, $filter, $scope,
                 scope: $scope,
                 cssClass: 'salir-unidad',
                 buttons: [{
-                        text: 'Continuar',
+                        text: $filter('translate')('Continuar'),
                         type: 'button-positive',
                         onTap: function (e) {
                         }
@@ -218,7 +197,7 @@ nf2.controller('AuthProfileEditCtrl', function ($ionicPlatform, $filter, $scope,
         $scope.$on('userFaliedUpdate', function (event, data) {
             var error = data[Object.keys(data)[0]];
             $scope.modal = {
-                texto1: 'Hubo un error al actualizar el perfil',
+                texto1: 'Ops!! Hubo un error y los datos no fueron guardado',
                 texto2: error[0],
                 estado: 'error' // ok, alert, error
             };
@@ -227,7 +206,7 @@ nf2.controller('AuthProfileEditCtrl', function ($ionicPlatform, $filter, $scope,
                 scope: $scope,
                 cssClass: 'salir-unidad',
                 buttons: [{
-                        text: 'Continuar',
+                        text: $filter('translate')('Continuar'),
                         type: 'button-positive',
                         onTap: function (e) {
                         }
