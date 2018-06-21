@@ -3,206 +3,155 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
     'use strict';
     $ionicPlatform.ready(function () {
 
+        // Preparing variables
         $scope.unidad = CapacitationService.getUnitFromOrder($stateParams.lesson, $stateParams.unit);
-        $scope.usuarioActivo = UserService.getUser();
         $scope.estadoUnidad = 'espera';
-
         $scope.unidad.numeroUnidad = $stateParams.unit;
         $scope.unidad.totalUnidades = CapacitationService.getUnitsActives($stateParams.lesson).length;
         $scope.scrolled = false;
         $scope.audiosDescargados = DownloadService.paqueteDescargado('modulos', $stateParams.module, 'audios');
-
-        $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitation + "/" + $stateParams.module + "/" + $stateParams.lesson + "/" + $scope.unidad.id + "/";
         $scope.assetpath_audio = $rootScope.TARGETPATH_AUDIO + $stateParams.capacitation + "/" + $stateParams.module + "/" + $stateParams.lesson + "/" + $scope.unidad.id + "/";
-        $scope.audios = {
-            tipo: $scope.assetpath_audio + $scope.unidad.instruccion.audio.nombre,
-            titulo: $scope.assetpath_audio + $scope.unidad.titulo.audio.nombre,
-            texto: $scope.assetpath_audio + $scope.unidad.media.nombre,
-            salir: MediaService.getMediaURL('audios/unidad-salir.wav')
-        };
 
-        console.log($scope.unidad);
-        console.log($scope.audios);
-
+        if ($rootScope.isMobile) {
+            $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitation + "/" + $stateParams.module + "/" + $stateParams.lesson + "/" + $scope.unidad.id + "/";
+        } else {
+            $scope.assetpath = $rootScope.TARGETPATH;
+        }
+        
         $scope.feedback = {};
         $scope.textoBoton = 'Calificar';
-        var tempOpciones = [];
+        $scope.advancePercentage = 100 / $scope.unidad.totalUnidades * ($scope.unidad.numeroUnidad - 1);
+        $scope.botonCalificar = false;
+        $scope.correctOptions = 0
+        $scope.selectedOptions = 0
 
-        //Limpiamos el objeto de las opciones que no se deben mostrar
+        // Limpiamos el objeto de las opciones que no se deben mostrar
         for (var i in $scope.unidad.opciones) {
-            if ($scope.unidad.opciones[i].visible == 0) {
+            if ($scope.unidad.opciones[i].visible === 0) {
                 delete $scope.unidad.opciones[i];
             }
         }
-        /* Validamos el tipo de actividad
-         * if - Si es parejas ponemos las imagenes de primeras y los textos abajo
-         * else - Si es otro tipo de unidad, desorganizamos las opciones */
 
-        if ($scope.unidad.tipo.id == 2) {
-            var tempImagenes = [];
-            /* Recorre todo el objeto de las opciones para crear el arreglo*/
-            for (var i in $scope.unidad.opciones) {
-                if ($scope.unidad.opciones[i].columna == 1) {
-                    tempImagenes.push($scope.unidad.opciones[i]);
-                } else {
-                    tempOpciones.push($scope.unidad.opciones[i]);
-                }
-            }
-
-            /* Se mezclan los arreglos */
-            shuffle(tempImagenes);
-            shuffle(tempOpciones);
-
-            var opcionesUnidad = [];
-            /* Se concatenan los arreglos elemento por elemento, con las imagenes primero y las opciones despues */
-            for (var i = 0; i < tempImagenes.length; i++) { /* CAMBIO DE FORMA DE LLENADO DEL ARREGLO */
-                opcionesUnidad.push(tempImagenes[i]);
-                opcionesUnidad.push(tempOpciones[i]);
-            }
-            $scope.unidad.opciones = opcionesUnidad;
+        // Preparamos las opciones según el tipo de unidad
+        if ( $scope.unidad.tipo.id === '2' ){
+            $scope.unidad.opciones = preparePairsOptions($scope.unidad)
         } else {
-            for (var i in $scope.unidad.opciones) {
-                tempOpciones.push($scope.unidad.opciones[i]);
-            }
-            shuffle(tempOpciones);
-            $scope.unidad.opciones = tempOpciones;
-
-            //Si es unidad informativa se crea el timer para habilitar el botón de seguir
-            if ($scope.unidad.tipo.id == 1) {
-                $timeout(function () {
-                    $scope.botonCalificar = true;
-                    $scope.textoBoton = 'continuar';
-                }, 10000);
-
-            }
+            $scope.unidad.opciones = prepareSimpleOptions($scope.unidad)
         }
 
-        /* Obtenemos la cantidad de respuestas correctas*/
-        var respuestasCorrectas = 0;
-        var respuestasSeleccionadas = 0;
-        for (var i in $scope.unidad.opciones) {
-            if ($scope.unidad.opciones[i].correcta == 1) {
-                respuestasCorrectas++;
-            }
-            $scope.unidad.opciones[i].selected = false;
-            $scope.unidad.opciones[i].evaluacion = false;
-            $scope.unidad.opciones[i].pareja = '';
-            $scope.unidad.opciones[i].match = false;
-            $scope.audios['opcion' + $scope.unidad.opciones[i].id] = $scope.assetpath_audio + $scope.unidad.opciones[i].audio.nombre;
-            $scope.audios['feedback' + $scope.unidad.opciones[i].id] = $scope.assetpath_audio + $scope.unidad.opciones[i].feedback.audio.nombre;
+        console.log($scope.unidad.opciones)
+
+        //$scope.audios = prepareAudios($scope.unidad)
+
+
+
+         //Si es unidad informativa se crea el timer para habilitar el botón de seguir
+        if ($scope.unidad.tipo.id == 1) {
+            $timeout(function () {
+                $scope.botonCalificar = true;
+                $scope.textoBoton = 'continuar';
+            }, 10000);
         }
 
-        $scope.botonCalificar = false;
-
-        $scope.seleccionarOpcion = function (index) {
+        $scope.choiceOption = function (index) {
             if ($scope.unidad.opciones[index].selected) {
                 $scope.unidad.opciones[index].selected = false;
-                respuestasSeleccionadas--;
+                $scope.selectedOptions--;
             } else {
                 $scope.unidad.opciones[index].selected = true;
-                respuestasSeleccionadas++;
+                $scope.selectedOptions++;
             }
-
-            if (respuestasCorrectas === 1) {
+            if ($scope.correctOptions === 1) {
                 for (var i in $scope.unidad.opciones) {
-                    if (i !== index) {
+                    if (parseInt(i) !== index) {
                         if ($scope.unidad.opciones[i].selected) {
                             $scope.unidad.opciones[i].selected = false;
                             $scope.unidad.opciones[i].evaluacion = false;
-                            respuestasSeleccionadas--;
+                            $scope.selectedOptions--;
                         }
                     }
                 }
             }
-            if (respuestasSeleccionadas === respuestasCorrectas) {
+            // Si la cantidad de pregutnas seleccionadas es igual a la cantidad de opciones correctas habilitamos el botón de calificar
+            if ($scope.selectedOptions === $scope.correctOptions) {
                 $scope.botonCalificar = true;
             } else {
                 $scope.botonCalificar = false;
             }
         };
 
-        var parejasContador = 0;
-        var pareja1Orden = 0;
-        var pareja2Orden = 0;
-        var pareja1Pos = 0;
-        var pareja2Pos = 0;
-        var parejasCorrectas = 0;
+        $scope.chociePair = function (index, column, otherColumn) {
+            var counter = 0;
+            var pairNumberColum = $scope.unidad.opciones[column][index].orden
+            var pairNumberOtherColum = 0
+            var otherIndex = 0
+            var comparePair = false
 
-        $scope.seleccionarPareja = function (index) {
-            /* Verifica si es una opcion que no ha hecho match para poderla seleccionar*/
-            if (!$scope.unidad.opciones[index].match) {
-
-                for (var i in $scope.unidad.opciones) {
-                    $scope.unidad.opciones[i].fallo = false;
-                }
-
-                /* Toggle para seleccionar y deseleccionar tarjeta*/
-                if ($scope.unidad.opciones[index].selected) {
-                    $scope.unidad.opciones[index].selected = false;
-                    /*Si se deselecciona la carta se resta del contador*/
-                    parejasContador--;
-                } else {
-                    $scope.unidad.opciones[index].selected = true;
-                    /*Almacenar la respuesta correcta para validar más adelante si es una pareja*/
-
-                    parejasContador++;
-                    if (parejasContador === 1) {
-                        pareja1Orden = $scope.unidad.opciones[index].orden;
-                        pareja1Pos = index;
-                    } else if (parejasContador === 2) {
-                        pareja2Orden = $scope.unidad.opciones[index].orden;
-                        pareja2Pos = index;
-
-                        if (pareja1Orden === pareja2Orden) {
-                            /*Estilos para la pareja actual*/
-                            $scope.unidad.opciones[pareja2Pos].selected = false;
-                            $scope.unidad.opciones[pareja2Pos].match = true;
-
-                            /*Estilos para pareja anterior*/
-                            $scope.unidad.opciones[pareja1Pos].selected = false;
-                            $scope.unidad.opciones[pareja1Pos].match = true;
-
-                            parejasContador = 0;
-                            pareja1Pos = 0;
-                            pareja2Pos = 0;
-                            pareja1Orden = 0;
-                            pareja2Orden = 0;
-
-                            parejasCorrectas++;
-
-                            if (parejasCorrectas == ($scope.unidad.opciones.length / 2)) {
-                                /*Si las parejas correctas es igual a la mitad de la cantidad de opciones habilitar el botón de continuar*/
-                                $scope.estadoUnidad = 'acierto';
-                                $ionicPopup.show({
-                                    templateUrl: 'views/template/feedback.tpl.html',
-                                    scope: $scope,
-                                    buttons: [{
-                                            text: 'Continuar',
-                                            type: 'button-positive',
-                                            onTap: function (e) {
-                                                $scope.cerrarFeedback();
-                                            }
-                                        }]
-                                });
-                            }
-                        } else {
-                            $scope.unidad.opciones[pareja2Pos].pareja = '';
-                            $scope.unidad.opciones[pareja2Pos].selected = false;
-                            $scope.unidad.opciones[pareja2Pos].match = false;
-                            $scope.unidad.opciones[pareja2Pos].fallo = true;
-                            $scope.unidad.opciones[pareja1Pos].pareja = '';
-                            $scope.unidad.opciones[pareja1Pos].selected = false;
-                            $scope.unidad.opciones[pareja1Pos].match = false;
-                            $scope.unidad.opciones[pareja1Pos].fallo = true;
-
-                            parejasContador = 0;
-                            pareja1Pos = 0;
-                            pareja2Pos = 0;
-                            pareja1Orden = 0;
-                            pareja2Orden = 0;
-                        }
+             /* Verifica si es una opcion que no ha hecho match para poderla seleccionar*/
+            if (!$scope.unidad.opciones[column][index].match) {
+                for (var i in $scope.unidad.opciones[column]) {
+                    if (i == index) {
+                        $scope.unidad.opciones[column][index].selected = !$scope.unidad.opciones[column][index].selected
+                        $scope.unidad.opciones[column][i].fallo = false;
+                    } else {
+                        $scope.unidad.opciones[column][i].selected = false;
+                        $scope.unidad.opciones[column][i].fallo = false; // Cambiamos el estado a false para que se vea la animación en caso de fallo
                     }
                 }
+            } else {
+                return
+            }
+           
+
+            //validamos si en la otra columna hay una opcion seleccionada para comparar las respuestas en el siguiente if
+            for (var i in $scope.unidad.opciones[otherColumn]){
+                $scope.unidad.opciones[otherColumn][i].fallo = false // Cambiamos el estado a false para que se vea la animación en caso de fallo
+                if($scope.unidad.opciones[otherColumn][i].selected){
+                    comparePair = true
+                    pairNumberOtherColum = $scope.unidad.opciones[otherColumn][i].orden
+                    otherIndex = i
+                }
+
+            }
+           
+            // Comparamos las respuestas
+            if (comparePair) {
+                // Si hay match, cambiamos los estilos
+                if(pairNumberColum == pairNumberOtherColum){
+                    $scope.unidad.opciones[column][index].match = true;
+                    $scope.unidad.opciones[column][index].selected = false;
+                    
+                    $scope.unidad.opciones[otherColumn][otherIndex].match = true;
+                    $scope.unidad.opciones[otherColumn][otherIndex].selected = false;
+
+                    $scope.correctOptions++
+                } else { // Si no hay match, reiniciamos los estilos
+                    $scope.unidad.opciones[column][index].selected = false;
+                    $scope.unidad.opciones[column][index].match = false;
+                    $scope.unidad.opciones[column][index].fallo = true;  // Para ver la animación cuando se falla
+
+                    $scope.unidad.opciones[otherColumn][otherIndex].selected = false;
+                    $scope.unidad.opciones[otherColumn][otherIndex].match = false;
+                    $scope.unidad.opciones[otherColumn][otherIndex].fallo = true; // Para ver la animación cuando se falla
+
+                }
+
+            } 
+
+            if ($scope.correctOptions == $scope.unidad.opciones[column].length) {
+                // Si las parejas correctas es igual a la mitad de la cantidad de opciones habilitar el botón de continuar
+                $scope.estadoUnidad = 'acierto';
+                $ionicPopup.show({
+                    templateUrl: 'views/template/feedback.tpl.html',
+                    scope: $scope,
+                    buttons: [{
+                            text: 'Continuar',
+                            type: 'button-positive',
+                            onTap: function (e) {
+                                $scope.cerrarFeedback();
+                            }
+                        }]
+                });
             }
         };
 
@@ -245,7 +194,7 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
                 }
             }
 
-            if (respuestasAcertadas === respuestasCorrectas) {
+            if (respuestasAcertadas === $scope.correctOptions) {
                 $scope.estadoUnidad = 'acierto';
                 $scope.feedback.feedbacks = feedbacks_ok;
                 $scope.playAudio(feedbacks_ok_last);
@@ -307,23 +256,6 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
                         }
                     }]
             });
-
-            /* $ionicPopup.show({
-             templateUrl: 'views/template/salirUnidad.tpl.html',
-             scope: $scope,
-             cssClass: 'salir-unidad',
-             buttons: [{
-             text: 'Salir de la lección',
-             type: 'button-positive',
-             onTap: function (e) {
-             $ionicViewSwitcher.nextDirection('back'); // 'forward', 'back', etc.
-             $state.go('nf.cap_module', {
-             capacitation: $stateParams.capacitation,
-             module: $stateParams.module,
-             });
-             }
-             }]
-             }); */
         };
 
         $scope.irASiguienteUnidad = function () {
@@ -363,14 +295,10 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
             for (var i in $scope.unidad.opciones) {
                 $scope.unidad.opciones[i].selected = false;
                 $scope.unidad.opciones[i].evaluacion = false;
-                respuestasSeleccionadas = 0;
+                $scope.selectedOptions = 0;
             }
             $scope.estadoUnidad = 'espera';
             $scope.botonCalificar = false;
-        };
-
-        $scope.porcentajeAvance = function () {
-            return (100 / $scope.unidad.totalUnidades * ($scope.unidad.numeroUnidad - 1));
         };
 
         $scope.playAudio = function (audio) {
@@ -380,6 +308,8 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
 
         $scope.getScrollPosition = function () {/*if ($ionicScrollDelegate.getScrollPosition().top > 50) {if (!$scope.scrolled) {$scope.$apply(function() {$scope.scrolled = true;});}} else {if ($scope.scrolled) {$scope.$apply(function() {$scope.scrolled = false;});}}*/
         };
+
+        // Events
 
         $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             console.log('$stateChangeSuccess');
@@ -411,6 +341,62 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
                 unit: $scope.siguienteUnidad
             });
         });
+
+
+        // Functions
+
+        function prepareSimpleOptions(unit){
+            console.log('prepareSimpleOptions')
+            var options = []
+            for (let i in unit.opciones) {
+                if (unit.opciones[i].correcta == 1) {
+                    $scope.correctOptions++;
+                }
+                unit.opciones[i].selected = false;
+                unit.opciones[i].evaluacion = false;
+                options.push(unit.opciones[i]);
+            }
+            shuffle(options);
+            return options;
+        }
+
+        function preparePairsOptions(unit){
+            console.log('preparePairsOptions')
+            let columnA = [];
+            let columnB = []
+            /* Recorre todo el objeto de las opciones para crear el arreglo*/
+            for (let i in unit.opciones) {
+                unit.opciones[i].selected = false;
+                unit.opciones[i].evaluacion = false;
+                unit.opciones[i].pareja = '';
+                unit.opciones[i].match = false;
+                if (unit.opciones[i].columna == 1) {
+                    columnA.push(unit.opciones[i]);
+                } else {
+                    columnB.push(unit.opciones[i]);
+                }
+            }
+            /* Se mezclan los arreglos */
+            shuffle(columnA);
+            shuffle(columnB);
+            return { columnA, columnB }
+        }
+
+        function prepareAudios(unit) {
+            var audios = {
+                tipo: $scope.assetpath_audio + unit.instruccion.audio.nombre,
+                titulo: $scope.assetpath_audio + unit.titulo.audio.nombre,
+                texto: $scope.assetpath_audio + unit.media.nombre,
+                salir: MediaService.getMediaURL('audios/unidad-salir.wav')
+            };
+
+            for (let i in unit.opciones) {
+                audios['opcion' + unit.opciones[i].id] = $scope.assetpath_audio + unit.opciones[i].audio.nombre;
+                audios['feedback' + unit.opciones[i].id] = $scope.assetpath_audio + unit.opciones[i].feedback.audio.nombre;
+            }
+
+            return audios
+        }
 
         /**
          * Shuffles array in place.

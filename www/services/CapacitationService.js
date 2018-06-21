@@ -4,7 +4,7 @@ nf2.factory('CapacitationService', function ($http) {
     service.capacitation = {};
 
     service.initClient = function (callback) {
-        console.log('initClient');
+        console.log('CapacitacionService.initClient');
         service.capacitation = JSON.parse(localStorage.getItem('capacitacion'));
         var version_old = JSON.parse(localStorage.getItem('version'));
         var version_new = '';

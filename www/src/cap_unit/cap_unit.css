@@ -233,22 +233,25 @@
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
     color: #2f3e47;
-    font-size: 12pt;
-    height: 80px;
+    font-size: 1rem;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 0px;
-    text-align: center;
     width: 100%;
 }
 
+.unidad .opciones .opcion p {
+    text-align: center;
+    margin: 0px;
+    font-size: 1rem;
+}
+
 .unidad .opciones .opcion-pareja p {
-    font-size: 9pt;
-    padding: 5px;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
-    width: 100%;
+    font-size: 0.75rem;
+    margin: 0px;
+    text-align: center;
 }
 
 .unidad .opciones .opcion-pareja.titulo p {
@@ -263,11 +266,6 @@
 .unidad .opciones .opcion img {
     width: 100%;
     position: absolute;
-    left: 50%;
-    top: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
 }
 
 .unidad .opciones .opcion-pareja.pareja-con-imagen p {
@@ -276,18 +274,18 @@
     width: 100%;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.5);
-    padding: 10px 0;
+    padding: 5px 0;
+    left: 0;
 }
 
 .unidad .opciones .opcion.opcion-con-imagen p {
     position: absolute;
     color: #ffffff;
     width: 100%;
-    text-align: center;
     background-color: rgba(0, 0, 0, 0.5);
-    padding: 10px 0;
+    padding: 5px 0;
     top: 50%;
-    margin: 0;
+    left: 0;
 }
 
 .unidad .opciones .col {
@@ -339,9 +337,13 @@
     color: #ffffff;
 }
 
-.unidad .opciones .opcion-pareja.selected,
+.unidad .opciones .opcion-pareja.selected{
+    border: 3px solid #75a8fe;
+}
+
 .unidad .opciones .opcion-con-imagen.selected{
-    filter: sepia(1);
+    border: 3px solid #75a8fe;
+    background-color: #fff;
 }
 
 .unidad .opciones .opcion-sonido.selected button {
@@ -373,17 +375,7 @@
     100% {}
 }
 
-.unidad .opciones .opcion p {
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
-    padding-left: 10px;
-    padding-right: 10px;
-    width: 100%;
-    text-align: center;
-}
+
 
 .calificar {
     height: 58px;

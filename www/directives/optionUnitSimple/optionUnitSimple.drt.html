@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col">
+        <div class="opcion" ng-click="click()" ng-class="[data.media.nombre != '' ? 'opcion-con-imagen' : '',data.selected ? 'selected' : 'no-selected']" ion-ripple>
+            <img ng-src="{{assetpath}}{{data.media.nombre}}" ng-hide="data.media === undefined || data.media.nombre === ''" />
+            <div ng-bind-html="data.texto | format | trust" ng-if="data.texto !== ''"></div>
+
+        </div>
+        <div class="opcion-sonido" ng-click="$parent.playAudio('opcion'+data.id)" ng-class="data.selected ? 'selected' : 'no-selected'" ng-if="audios" ion-ripple>
+            <button class="icon ion-volume-high"></button>
+        </div>
+    </div>
+</div>

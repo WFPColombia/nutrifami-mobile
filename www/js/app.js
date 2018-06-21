@@ -5,9 +5,7 @@ var nf2 = angular.module('nfmobile', dependencies);
 
 nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $ionicFilterBarConfigProvider, $compileProvider, $authProvider, $httpProvider, $translateProvider) {
     'use strict';
-
-    console.log('config');
-
+    console.log('App Config');
     $ionicConfigProvider.tabs.position('top');
     $ionicConfigProvider.backButton.previousTitleText(false).text('');
 
@@ -349,7 +347,7 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
 });
 
 nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationService, $window, $translate) {
-    console.log('run');
+    console.log('App Run');
 
     //Deshabilitamos el boton de ir atrás del Hardware de Android
     $ionicPlatform.registerBackButtonAction(function (e) {
@@ -384,11 +382,9 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
     // Language settings
     var stored_lang_key = localStorage.getItem('NG_TRANSLATE_LANG_KEY');
     if (stored_lang_key) {
-        console.log('stored_lang_key');
         $rootScope.lang = stored_lang_key;
         $translate.use(stored_lang_key);
     } else {
-        console.log('not stored_lang_key');
         var locale = $window.navigator.language || $window.navigator.userLanguage;
         var lang = locale.substring(0, 2);
         $rootScope.lang = lang;
@@ -412,6 +408,7 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
 
         if (window.cordova) {
             $rootScope.BASE_URL = 'http://usuarios.nutrifami.org/';
+            $rootScope.isMobile = true;
             if (device.platform === "Android") {
                 console.log("isAndroid");
                 $rootScope.TARGETPATH = cordova.file.externalApplicationStorageDirectory;
@@ -442,10 +439,11 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
 
         } else {
             $rootScope.BASE_URL = 'http://localhost:8000/';
-            $rootScope.TARGETPATH = "https://s3.amazonaws.com/nutrifami/";
+            $rootScope.TARGETPATH = "https://s3.amazonaws.com/nutrifami/training/images/";
             $rootScope.TARGETPATH_AUDIO = "https://s3.amazonaws.com/nutrifami/";
             $rootScope.ICON_DESCARGA = 'ion-ios-cloud-download-outline';
             $rootScope.ICON_AUDIO = 'ion-ios-volume-high';
+            $rootScope.isMobile = false;
         }
     });
 });
