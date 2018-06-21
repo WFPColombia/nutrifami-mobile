@@ -1,15 +1,19 @@
 /*global angular*/
-nf2.controller('IntroCtrl', function($ionicPlatform, $scope, $location, MediaService, UserService) {
+nf2.controller('IntroCtrl', ['$ionicPlatform', '$scope', '$rootScope', '$location', 'MediaService', 'UserService', function($ionicPlatform, $scope, $rootScope, $location, MediaService, UserService) {
     'use strict';
 
     $ionicPlatform.ready(function() {
 
+        var lang = $rootScope.lang
+
         $scope.audios = {
-            audio1: MediaService.getMediaURL('audios/intro-1.wav'),
-            audio2: MediaService.getMediaURL('audios/intro-2.wav'),
-            audio3: MediaService.getMediaURL('audios/intro-3.wav'),
-            audio4: MediaService.getMediaURL('audios/intro-4.wav')
+            audio1: MediaService.getMediaURL('audios/' + lang + '/intro-1.wav'),
+            audio2: MediaService.getMediaURL('audios/' + lang + '/intro-2.wav'),
+            audio3: MediaService.getMediaURL('audios/' + lang + '/intro-3.wav'),
+            audio4: MediaService.getMediaURL('audios/' + lang + '/intro-4.wav')
         };
+
+        
         
         $scope.usuarioActivo = UserService.getUser();
         
@@ -22,6 +26,7 @@ nf2.controller('IntroCtrl', function($ionicPlatform, $scope, $location, MediaSer
         };
         
         $scope.$on('$ionicView.enter', function () {
+            console.log('ionicView.enter')
             MediaService.preloadSimple($scope.audios);
         });
         
@@ -30,4 +35,4 @@ nf2.controller('IntroCtrl', function($ionicPlatform, $scope, $location, MediaSer
         });
 
     });
-});
+}]);

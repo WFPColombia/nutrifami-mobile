@@ -19,7 +19,7 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label>{{'Tipo de Documento de Identidad' | translate }}</label>
-                                                <p ng-class="usuarioActivo.tipo_documento != undefined && usuarioActivo.tipo_documento!='' ? '' : 'sin-registro'">{{ usuarioActivo.tipo_documento!=undefined && usuarioActivo.tipo_documento!='' ? usuarioActivo.tipo_documento : ('Tipo de documento no ingresado'| translate)}}</p>
+                                                <p ng-class="usuarioActivo.tipo_documento != undefined && usuarioActivo.tipo_documento!='' ? '' : 'sin-registro'">{{ usuarioActivo.tipo_documento!=undefined && usuarioActivo.tipo_documento!='' ? ( usuarioActivo.tipo_documento | translate ) : ('Tipo de documento no ingresado'| translate)}}</p>
                                             </div>
                                         </div>
                                         <div class="col">

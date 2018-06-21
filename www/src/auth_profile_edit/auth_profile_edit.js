@@ -100,7 +100,7 @@ nf2.controller('AuthProfileEditCtrl', function ($ionicPlatform, $filter, $scope,
 
         $scope.updateUser = function () {
             $scope.loading = $ionicLoading.show({
-                template: 'Guardando Cambios...',
+                template: $filter('translate')('Guardando Cambios'),
                 animation: 'fade-in',
                 showBackdrop: true,
                 maxWidth: 40

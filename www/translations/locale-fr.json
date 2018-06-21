@@ -218,6 +218,7 @@
     "Si eliminas este aprendiz se borraran todos sus datos":"Si vous supprimez cet apprenti toutes vos données seront supprimées",
     "Eliminar":"Supprimer",
     "Cédula de ciudadania / DNI":"Carte d'identité",
+    "Cédula de ciudadania":"Carte d'identité",
     "Pasaporte": "Passeport",
     "Otro": "Autre",
     "Ingrese la étnia a la que pertenece": "Ecrivez votre ethnicité",
@@ -238,5 +239,6 @@
     "Descargando paquete de imagenes del módulo.":"Téléchargement du paquet d'images du module.",
     "Descargando paquete de imagenes de la capacitación.":"Téléchargement du paquet d'images d'entraînement",
     "Descargando paquete de audios del módulo.":"Téléchargement du paquet d'audio du module.",
-    "Descargando paquete de audios de la capacitación.":"Téléchargement du paquet d'audios d'entraînement"
+    "Descargando paquete de audios de la capacitación.":"Téléchargement du paquet d'audios d'entraînement",
+    "Guardando Cambios":"Sauvegarde des mises à jours"
 }
