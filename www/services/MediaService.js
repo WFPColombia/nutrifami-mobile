@@ -9,6 +9,7 @@ nf2.factory('MediaService', function ($cordovaMedia, $cordovaFile, $rootScope) {
      * @returns {undefined}
      */
     service.preloadSimple = function (aud, callback) {
+        console.log(aud)
         callback = callback || function () {};
         service.unload(function () {
             console.log("MediaService.preloadSimple");

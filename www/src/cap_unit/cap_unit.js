@@ -25,6 +25,15 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
         $scope.correctOptions = 0
         $scope.selectedOptions = 0
 
+        // Preparamos los audios generales
+
+        $scope.audios = {
+                tipo: $scope.assetpath_audio + $scope.unidad.instruccion.audio.nombre,
+                titulo: $scope.assetpath_audio + $scope.unidad.titulo.audio.nombre,
+                texto: $scope.assetpath_audio + $scope.unidad.media.nombre,
+                salir: MediaService.getMediaURL('audios/unidad-salir.wav')
+            };
+
         // Limpiamos el objeto de las opciones que no se deben mostrar
         for (var i in $scope.unidad.opciones) {
             if ($scope.unidad.opciones[i].visible === 0) {
@@ -39,13 +48,8 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
             $scope.unidad.opciones = prepareSimpleOptions($scope.unidad)
         }
 
-        console.log($scope.unidad.opciones)
 
-        //$scope.audios = prepareAudios($scope.unidad)
-
-
-
-         //Si es unidad informativa se crea el timer para habilitar el botón de seguir
+        //Si es unidad informativa se crea el timer para habilitar el botón de seguir
         if ($scope.unidad.tipo.id == 1) {
             $timeout(function () {
                 $scope.botonCalificar = true;
@@ -316,7 +320,7 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
             if (toParams.unit === $scope.unidad.numeroUnidad || fromState.name === 'nf.cap_module') {
                 MediaService.preloadSimple($scope.audios, function () {
                     if ($scope.audiosDescargados) {
-                        $scope.playAudio.play('titulo');
+                        $scope.playAudio('titulo');
                     }
                 });
             }
@@ -349,9 +353,15 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
             console.log('prepareSimpleOptions')
             var options = []
             for (let i in unit.opciones) {
+                // Preparamos audios de cada opción
+                $scope.audios['opcion' + unit.opciones[i].id] = $scope.assetpath_audio + unit.opciones[i].audio.nombre;
+                $scope.audios['feedback' + unit.opciones[i].id] = $scope.assetpath_audio + unit.opciones[i].feedback.audio.nombre;
+
                 if (unit.opciones[i].correcta == 1) {
                     $scope.correctOptions++;
                 }
+
+
                 unit.opciones[i].selected = false;
                 unit.opciones[i].evaluacion = false;
                 options.push(unit.opciones[i]);
@@ -370,6 +380,7 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
                 unit.opciones[i].evaluacion = false;
                 unit.opciones[i].pareja = '';
                 unit.opciones[i].match = false;
+                $scope.audios['opcion' + unit.opciones[i].id] = $scope.assetpath_audio + unit.opciones[i].audio.nombre;
                 if (unit.opciones[i].columna == 1) {
                     columnA.push(unit.opciones[i]);
                 } else {
@@ -380,22 +391,6 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
             shuffle(columnA);
             shuffle(columnB);
             return { columnA, columnB }
-        }
-
-        function prepareAudios(unit) {
-            var audios = {
-                tipo: $scope.assetpath_audio + unit.instruccion.audio.nombre,
-                titulo: $scope.assetpath_audio + unit.titulo.audio.nombre,
-                texto: $scope.assetpath_audio + unit.media.nombre,
-                salir: MediaService.getMediaURL('audios/unidad-salir.wav')
-            };
-
-            for (let i in unit.opciones) {
-                audios['opcion' + unit.opciones[i].id] = $scope.assetpath_audio + unit.opciones[i].audio.nombre;
-                audios['feedback' + unit.opciones[i].id] = $scope.assetpath_audio + unit.opciones[i].feedback.audio.nombre;
-            }
-
-            return audios
         }
 
         /**

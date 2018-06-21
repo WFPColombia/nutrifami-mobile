@@ -5,7 +5,7 @@
             <div ng-bind-html="data.texto | format | trust" ng-if="data.texto !== ''"></div>
 
         </div>
-        <div class="opcion-sonido" ng-click="$parent.playAudio('opcion'+data.id)" ng-class="data.selected ? 'selected' : 'no-selected'" ng-if="audios" ion-ripple>
+        <div class="opcion-sonido" ng-click="playAudio()" ng-class="data.selected ? 'selected' : 'no-selected'" ng-if="audios" ion-ripple>
             <button class="icon ion-volume-high"></button>
         </div>
     </div>

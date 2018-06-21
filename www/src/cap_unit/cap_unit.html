@@ -81,16 +81,16 @@
       <div ng-repeat="opcion in unidad.opciones.columnA">
         <div class="row">
           <div class="col">
-            <option-unit-pairs data="opcion" on-click="chociePair($index, 'columnA', 'columnB')"></option-unit-pairs>
+            <option-unit-pairs data="opcion" on-click="chociePair($index, 'columnA', 'columnB')" on-play-audio="playAudio('opcion'+opcion.id)"></option-unit-pairs>
           </div>
           <div class="col">
-            <option-unit-pairs data="unidad.opciones.columnB[$index]" on-click="chociePair($index, 'columnB', 'columnA')"></option-unit-pairs>
+            <option-unit-pairs data="unidad.opciones.columnB[$index]" on-click="chociePair($index, 'columnB', 'columnA')" on-play-audio="playAudio('opcion'+unidad.opciones.columnB[$index].id)"></option-unit-pairs>
           </div>
         </div>
       </div>
     </div>
     <div class="opciones" ng-if="unidad.tipo.id == 3 || unidad.tipo.id == 4 || unidad.tipo.id == 5" ng-class=" scrolled ? 'scrolled':''">
-        <option-unit-simple ng-repeat="option in unidad.opciones" data="option" on-click="choiceOption($index)"></option-unit-simple>
+        <option-unit-simple ng-repeat="option in unidad.opciones" data="option" on-click="choiceOption($index)" on-play-audio="playAudio('opcion'+option.id)"></option-unit-simple>
     </div>
   </div>
   <div class="zona-segura"></div>

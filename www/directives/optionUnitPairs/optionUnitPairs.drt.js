@@ -3,7 +3,8 @@ nf2.directive('optionUnitPairs', ['$rootScope', '$stateParams', 'CapacitationSer
         restrict: 'E',
         scope: {
             data: '=',
-            click: '&onClick'
+            click: '&onClick',
+            playAudio: '&onPlayAudio'
         },
         templateUrl: 'directives/optionUnitPairs/optionUnitPairs.drt.html',
         link: function($scope) {
@@ -15,10 +16,6 @@ nf2.directive('optionUnitPairs', ['$rootScope', '$stateParams', 'CapacitationSer
             }
 
             $scope.audiosDescargados = $scope.$parent.audiosDescargados;
-            
-            $scope.playAudio = function(audio) {
-                $scope.$parent.playAudio(audio);
-            };
         }
     };
 }]);

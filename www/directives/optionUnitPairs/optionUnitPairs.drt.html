@@ -1,5 +1,5 @@
 <div class="opcion-sonido" ng-show="audiosDescargados" ng-class="[data.selected ? 'selected' : '',data.media !== undefined ? 'sonido-con-imagen':'']" ion-ripple>
-  <button ng-click="playAudio('opcion'+data.id)" class="icon ion-volume-high"></button>
+  <button ng-click="playAudio()" class="icon ion-volume-high"></button>
 </div>
 <button class="opcion-pareja titulo" ng-click="click(index1)" ng-class="[data.selected ? 'selected' : '', data.match ? 'pareja-match':'', data.fallo ? 'pareja-mal':'', data.media.nombre != '' ? 'pareja-con-imagen':'']" ion-ripple>
   <img ng-src="{{assetpath}}{{data.media.nombre}}" ng-hide="{{data.media.nombre ==''}}" />

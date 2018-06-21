@@ -2,7 +2,8 @@ nf2.directive('optionUnitSimple', ['$rootScope', '$stateParams', 'CapacitationSe
     return {
         scope: {
             data: '=',
-            click: '&onClick'
+            click: '&onClick',
+            playAudio: '&onPlayAudio'
         },
         templateUrl: 'directives/optionUnitSimple/optionUnitSimple.drt.html',
         link: function($scope) {
