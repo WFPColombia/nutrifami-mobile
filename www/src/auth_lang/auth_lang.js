@@ -1,5 +1,5 @@
 /*global angular*/
-nf2.controller('LanguageCtrl', function ($ionicPlatform, $scope, $rootScope, $translate) {
+nf2.controller('AuthLangCtrl', function ($ionicPlatform, $scope, $rootScope, $translate) {
     'use strict';
 
     $ionicPlatform.ready(function () {

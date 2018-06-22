@@ -18,13 +18,19 @@
 }
 
 .auth .logo {
-    padding-top: 6em;
+    padding-top: 4rem;
     text-align: center;
 }
 
-.auth h2 {
+.auth h2{
     color: #ffffff;
-    font-size: 26px;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.auth h3{
+    font-size: 1.3rem;
+    color: #fef418;
     text-align: center;
 }
 
@@ -198,4 +204,9 @@
 
 .redes-sociales .button.google {
     background-color: #dc4e41;
+}
+
+.title-lang{
+    min-height: 100px;
+    margin-top: 1rem;
 }

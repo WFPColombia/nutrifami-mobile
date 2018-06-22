@@ -125,7 +125,8 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
     $stateProvider.state('preload', {
         url: '/preload',
         templateUrl: 'src/preload/preload.html',
-        controller: 'PreloadCtrl'
+        controller: 'PreloadCtrl',
+        cache: false
     });
 
     $stateProvider.state('intro', {
@@ -139,6 +140,12 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
         cache: false,
         templateUrl: 'src/auth_home/auth_home.html',
         controller: 'AuthHomeCtrl'
+    });
+
+    $stateProvider.state('auth_lang', {
+        url: '/auth/lang',
+        templateUrl: 'src/auth_lang/auth_lang.html',
+        controller: 'AuthLangCtrl'
     });
 
     $stateProvider.state('auth_signup', {
@@ -364,13 +371,19 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
 
         //Redirecciona a la pagina de preload si estaba la app cerrada
         if ($location.path() === "") {
-            $location.path('/preload');
+            if ($rootScope.globals.currentUser) {
+                $location.path('/preload');
+            } else {
+                $location.path('/auth/lang');
+            }
+
+            
         }
         // Redirecciona a la pagina de auth si el usuario no está logeado e intenta ir a una página no autorizada
         if (!$rootScope.globals.currentUser) {
             var url = $location.path().substring(0, 5) // Tomamos los primeros 5 caracteres para hacer la validadción de las paginas
             if (url !== '/auth' && url !== '/prel') {
-                $location.path('/auth');
+                $location.path('/auth/lang');
             }
         }
     });

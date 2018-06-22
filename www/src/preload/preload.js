@@ -1,5 +1,5 @@
 /*global angular*/
-nf2.controller('PreloadCtrl', function ($ionicPlatform, $ionicPopup, $scope, $location, UserService, DownloadService) {
+nf2.controller('PreloadCtrl', ['$ionicPlatform', '$ionicPopup', '$scope', '$location', '$filter', 'UserService', 'DownloadService', function ($ionicPlatform, $ionicPopup, $scope, $location, $filter, UserService, DownloadService) {
     'use strict';
     $ionicPlatform.ready(function () {
 
@@ -27,7 +27,9 @@ nf2.controller('PreloadCtrl', function ($ionicPlatform, $ionicPopup, $scope, $lo
         }
 
         function initClient() {
-            if (DownloadService.isOnline()) {
+            console.log(DownloadService.isOnline())
+            if ("console.log('Entra al If')", DownloadService.isOnline()) {
+                console.log('Entra al If')
                 DownloadService.hayNuevaVersion(function (response) {
                     if (response) {
                         console.log("Existe una nueva versión de la capacitación");
@@ -41,6 +43,7 @@ nf2.controller('PreloadCtrl', function ($ionicPlatform, $ionicPopup, $scope, $lo
                     }
                 });
             } else {
+                console.log('Entra al else')
                 if (puedeEntrar) {
                     $scope.modal = {
                         texto1: 'Sin conexión a Internet',
@@ -106,4 +109,4 @@ nf2.controller('PreloadCtrl', function ($ionicPlatform, $ionicPopup, $scope, $lo
         
         initClient();
     });
-});
+}]);

@@ -6,6 +6,8 @@ nf2.controller('IntroCtrl', ['$ionicPlatform', '$scope', '$rootScope', '$locatio
 
         var lang = $rootScope.lang
 
+        console.log(lang)
+
         $scope.audios = {
             audio1: MediaService.getMediaURL('audios/' + lang + '/intro-1.wav'),
             audio2: MediaService.getMediaURL('audios/' + lang + '/intro-2.wav'),

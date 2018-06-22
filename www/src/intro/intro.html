@@ -2,7 +2,9 @@
     <ion-slide-box on-slide-changed="slideHasChanged($index)">
         <ion-slide>
             <div class="container">
-                <button ng-click="playAudio('audio1')" ng-if="lang!='en'" class="intro-sonido icon ion-volume-high" aria-hidden="true" ion-ripple></button>
+                <button class="intro-sonido" ng-click="playAudio('audio1')" ng-if="lang!='en'" ion-ripple>
+                    <i class="icon {{ICON_AUDIO}}"></i>
+                </button>
                 <div class="slide-body">
                     <h1>{{'Bienvenido/a' | translate }} {{usuarioActivo.first_name}}!</h1>
                     <p>{{'Nutrifami es una herramienta para transmitir conocimientos sobre nutrición y alimentación' | translate }}</p>
@@ -13,7 +15,9 @@
         </ion-slide>
         <ion-slide>
             <div class="container">
-                <button ng-click="playAudio('audio2')" class="intro-sonido icon ion-volume-high" aria-hidden="true" ion-ripple></button>
+                <button class="intro-sonido" ng-click="playAudio('audio2')" ng-if="lang!='en'" ion-ripple>
+                    <i class="icon {{ICON_AUDIO}}"></i>
+                </button>
                 <div class="slide-body">
                     <h2>{{'5 módulos para aprender jugando. Lea, escuche y seleccione las respuestas correctas' | translate }}</h2>
                     <img src="img/intro-02.png" />
@@ -22,7 +26,9 @@
         </ion-slide>
         <ion-slide>
             <div class="container">
-                <button ng-click="playAudio('audio3')" class="intro-sonido icon ion-volume-high" aria-hidden="true" ion-ripple></button>
+                <button class="intro-sonido" ng-click="playAudio('audio3')" ng-if="lang!='en'" ion-ripple>
+                    <i class="icon {{ICON_AUDIO}}"></i>
+                </button>
                 <div class="slide-body">
                     <h2>{{'Si es beneficiario PMA, Nutrifami analiza sus compras y le brinda consejos para la diversidad de su dieta.' | translate }}</h2>
                     <img src="img/intro-03.png" />
@@ -31,7 +37,9 @@
         </ion-slide>
         <ion-slide>
             <div class="container">
-                <button ng-click="playAudio('audio4')" class="intro-sonido icon ion-volume-high" aria-hidden="true" ion-ripple></button>
+                <button class="intro-sonido" ng-click="playAudio('audio4')" ng-if="lang!='en'" ion-ripple>
+                    <i class="icon {{ICON_AUDIO}}"></i>
+                </button>
                 <div class="slide-body">
                     <h2 class="last">{{'¡Aprenda Jugando sobre nutrición, alimentación y hábitos saludables!' | translate }}</h2>
                     <img src="img/intro-02.png" style="margin-bottom: 0px" />

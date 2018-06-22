@@ -13,6 +13,8 @@ nf2.controller('CapUnitEndCtrl', function ($scope, $rootScope, $stateParams, $lo
 
         var avanceModulo = UserService.getAvanceModulo($stateParams.module);
 
+        console.log($scope.leccion)
+
         $scope.audios = {
             audioFinalizado: $scope.assetpath_audio + $scope.leccion.finalizado.audio.nombre
         };
@@ -62,12 +64,14 @@ nf2.controller('CapUnitEndCtrl', function ($scope, $rootScope, $stateParams, $lo
         $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             console.log('$stateChangeSuccess');
             console.log(fromState.name);
-            if (fromState.name === 'unidad' && $scope.media_downloaded) {
+            if (fromState.name === 'cap_unit') {
                 MediaService.preloadSimple($scope.audios, function () {
-                    MediaService.play('audioFinalizado');
+                    $scope.playAudio('audioFinalizado');
                 });
             }
         });
+
+
 
     });
 });

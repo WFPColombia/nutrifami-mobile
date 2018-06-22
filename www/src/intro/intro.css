@@ -17,9 +17,12 @@
     border-radius: 29px;
     text-align: center;
     font-weight: normal;
-    font-size: 22px;
     color: #00c97e;
     border: none;
+}
+
+.intro .intro-sonido .icon{
+    font-size: 2rem;
 }
 
 .intro .slider {

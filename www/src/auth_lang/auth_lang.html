@@ -1,0 +1,37 @@
+<ion-view>
+  <ion-content overflow-scroll="true" class="auth auth-login">
+    <div class="container">
+      <!--<button ng-click="playAudio('audiologin')" class="login-sonido icon ion-volume-high" aria-hidden="true" ion-ripple></button>-->
+      <div class="row logo center-block">
+        <div class="col col-100">
+          <img src="img/logo-nutrifami.png" alt="Nutrifami" />
+        </div>
+      </div>
+      <div>
+        <div class="col title-lang">
+          <h2>{{'¡Bienvenido a Nutrifami!' | translate }}</h2>
+          <h3>{{'Eliga su idioma' | translate }}</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <ion-list>
+            <ion-radio ng-repeat="l in languages" ng-model="lang.current" ng-value="l.id" ng-change="changeLanguage()">
+              <img src="img/flags/{{l.id}}.svg" width="20px" /> {{l.name| translate}}
+            </ion-radio>
+          </ion-list>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col col-100">
+              <button class="btn btn-default center-block" ui-sref="preload">{{'Continuar' | translate }}</button>
+          </div>
+      </div>
+      <div class="row logo-wfp center-block">
+        <div class="col col-100 ">
+          <img src="img/logo-wfp.png" />
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
