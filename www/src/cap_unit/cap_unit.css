@@ -265,7 +265,7 @@
 .unidad .opciones .opcion-pareja img,
 .unidad .opciones .opcion img {
     width: 100%;
-    position: absolute;
+    /* position: absolute; */
 }
 
 .unidad .opciones .opcion-pareja.pareja-con-imagen p {
@@ -357,7 +357,9 @@
 
 .unidad .opciones .pareja-match {
     -webkit-filter: grayscale(100%) opacity(40%);
-    /* Chrome, Safari, Opera */
+    -moz-filter: grayscale(100%) opacity(40%);
+    -ms-filter: grayscale(100%) opacity(40%);
+    -o-filter: grayscale(100%) opacity(40%);
     filter: grayscale(100%) opacity(40%);
 }
 

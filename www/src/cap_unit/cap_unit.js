@@ -85,6 +85,7 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
         };
 
         $scope.chociePair = function (index, column, otherColumn) {
+            console.log('chociePair', index, column, otherColumn)
             var counter = 0;
             var pairNumberColum = $scope.unidad.opciones[column][index].orden
             var pairNumberOtherColum = 0
@@ -93,6 +94,7 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
 
              /* Verifica si es una opcion que no ha hecho match para poderla seleccionar*/
             if (!$scope.unidad.opciones[column][index].match) {
+                console.log('If Verifica match')
                 for (var i in $scope.unidad.opciones[column]) {
                     if (i == index) {
                         $scope.unidad.opciones[column][index].selected = !$scope.unidad.opciones[column][index].selected
@@ -109,6 +111,7 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
 
             //validamos si en la otra columna hay una opcion seleccionada para comparar las respuestas en el siguiente if
             for (var i in $scope.unidad.opciones[otherColumn]){
+                console.log('for validamos otra columna seleccionada')
                 $scope.unidad.opciones[otherColumn][i].fallo = false // Cambiamos el estado a false para que se vea la animación en caso de fallo
                 if($scope.unidad.opciones[otherColumn][i].selected){
                     comparePair = true
@@ -120,8 +123,10 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
            
             // Comparamos las respuestas
             if (comparePair) {
+                console.log('if comparePair')
                 // Si hay match, cambiamos los estilos
                 if(pairNumberColum == pairNumberOtherColum){
+                    console.log('hay match')
                     $scope.unidad.opciones[column][index].match = true;
                     $scope.unidad.opciones[column][index].selected = false;
                     
@@ -130,6 +135,7 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
 
                     $scope.correctOptions++
                 } else { // Si no hay match, reiniciamos los estilos
+                    console.log('no hay match')
                     $scope.unidad.opciones[column][index].selected = false;
                     $scope.unidad.opciones[column][index].match = false;
                     $scope.unidad.opciones[column][index].fallo = true;  // Para ver la animación cuando se falla
@@ -142,8 +148,11 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
 
             } 
 
+            console.log($scope.unidad.opciones, $scope.correctOptions)
+
             if ($scope.correctOptions == $scope.unidad.opciones[column].length) {
                 // Si las parejas correctas es igual a la mitad de la cantidad de opciones habilitar el botón de continuar
+                console.log('Respuestas correctas')
                 $scope.estadoUnidad = 'acierto';
                 $ionicPopup.show({
                     templateUrl: 'views/template/feedback.tpl.html',
