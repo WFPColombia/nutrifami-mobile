@@ -1,12 +1,12 @@
-<div class="unit-question" ng-click="playAudio('tipo')" ion-ripple>
+<div class="unit-question" >
   <div class="row">
     <div class="col">
-      <p class="instruction"><img ng-src="img/icons/{{data.tipo.icono}}" height="20" /> <i class="icon {{$root.ICON_AUDIO}}"></i> {{ data.instruccion.texto}}</p>
+      <p class="instruction" ng-click="playAudioType()" ion-ripple><img ng-src="img/icons/{{data.tipo.icono}}" height="20" /> <i class="icon {{$root.ICON_AUDIO}}"></i> {{ data.instruccion.texto}}</p>
     </div>
   </div>
   <div class="row">
     <div class="col">
-      <p class="question" ng-click="playAudio('titulo')" ion-ripple>
+      <p class="question" ng-click="playAudioTitle()" ion-ripple>
         <i class="icon {{$root.ICON_AUDIO}}"></i> {{ data.titulo.texto}}
       </p>
     </div>

@@ -456,6 +456,8 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
             $rootScope.TARGETPATH_AUDIO = "https://s3.amazonaws.com/nutrifami/";
             $rootScope.ICON_DESCARGA = 'ion-android-download';
             $rootScope.ICON_AUDIO = 'ion-android-volume-up';
+            $rootScope.ICON_AUDIO_OFF = 'ion-android-volume-off';
+            $rootScope.reproduceAudios = true;
             $rootScope.isMobile = false;
         }
     });

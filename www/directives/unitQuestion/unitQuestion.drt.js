@@ -3,13 +3,11 @@ nf2.directive('unitQuestion', [ '$rootScope', function( $rootScope) {
         scope: {
             data: '=',
             assetpath: '=',
-            exitUnit: '&onExitUnit',
+            playAudioTitle: '&onPlayAudioTitle',
+            playAudioType: '&onPlayAudioType'
         },
         templateUrl: 'directives/unitQuestion/unitQuestion.drt.html',
         link: function($scope) {
-            console.log($scope.$parent.ICON_AUDIO)
-            $scope.ICON_AUDIO = $scope.$parent.ICON_AUDIO;
-            
         }
     };
 }]);

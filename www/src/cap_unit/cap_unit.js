@@ -28,8 +28,8 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
         // Preparamos los audios generales
 
         $scope.audios = {
-                tipo: $scope.assetpath_audio + $scope.unidad.instruccion.audio.nombre,
-                titulo: $scope.assetpath_audio + $scope.unidad.titulo.audio.nombre,
+                type: $scope.assetpath_audio + $scope.unidad.instruccion.audio.nombre,
+                title: $scope.assetpath_audio + $scope.unidad.titulo.audio.nombre,
                 texto: $scope.assetpath_audio + $scope.unidad.media.nombre,
                 salir: MediaService.getMediaURL('audios/unidad-salir.wav')
             };
@@ -58,10 +58,12 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
         }
 
         $scope.choiceOption = function (index) {
+            
             if ($scope.unidad.opciones[index].selected) {
                 $scope.unidad.opciones[index].selected = false;
                 $scope.selectedOptions--;
             } else {
+                $scope.playAudio('option' + $scope.unidad.opciones[index].id);
                 $scope.unidad.opciones[index].selected = true;
                 $scope.selectedOptions++;
             }
@@ -85,7 +87,6 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
         };
 
         $scope.chociePair = function (index, column, otherColumn) {
-            console.log('chociePair', index, column, otherColumn)
             var counter = 0;
             var pairNumberColum = $scope.unidad.opciones[column][index].orden
             var pairNumberOtherColum = 0
@@ -94,9 +95,11 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
 
              /* Verifica si es una opcion que no ha hecho match para poderla seleccionar*/
             if (!$scope.unidad.opciones[column][index].match) {
-                console.log('If Verifica match')
                 for (var i in $scope.unidad.opciones[column]) {
                     if (i == index) {
+                        if(!$scope.unidad.opciones[column][index].selected){
+                            $scope.playAudio('option' + $scope.unidad.opciones[column][index].id);
+                        }
                         $scope.unidad.opciones[column][index].selected = !$scope.unidad.opciones[column][index].selected
                         $scope.unidad.opciones[column][i].fallo = false;
                     } else {
@@ -111,7 +114,6 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
 
             //validamos si en la otra columna hay una opcion seleccionada para comparar las respuestas en el siguiente if
             for (var i in $scope.unidad.opciones[otherColumn]){
-                console.log('for validamos otra columna seleccionada')
                 $scope.unidad.opciones[otherColumn][i].fallo = false // Cambiamos el estado a false para que se vea la animación en caso de fallo
                 if($scope.unidad.opciones[otherColumn][i].selected){
                     comparePair = true
@@ -147,8 +149,6 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
                 }
 
             } 
-
-            console.log($scope.unidad.opciones, $scope.correctOptions)
 
             if ($scope.correctOptions == $scope.unidad.opciones[column].length) {
                 // Si las parejas correctas es igual a la mitad de la cantidad de opciones habilitar el botón de continuar
@@ -242,7 +242,7 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
             }
         };
 
-        $scope.salirUnidad = function () {
+        $scope.exitUnit = function () {
             $scope.modal = {
                 texto1: '¿Estás seguro de salir?',
                 texto2: 'Si sales perderás los avances en esta lección.',
@@ -316,20 +316,27 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
 
         $scope.playAudio = function (audio) {
             console.log(audio);
-            MediaService.play(audio);
+            if($rootScope.reproduceAudios){
+                MediaService.play(audio);
+            }
         };
 
         $scope.getScrollPosition = function () {/*if ($ionicScrollDelegate.getScrollPosition().top > 50) {if (!$scope.scrolled) {$scope.$apply(function() {$scope.scrolled = true;});}} else {if ($scope.scrolled) {$scope.$apply(function() {$scope.scrolled = false;});}}*/
         };
+
+        $scope.changeAudio = function(){
+            $rootScope.reproduceAudios = !$rootScope.reproduceAudios
+        }
 
         // Events
 
         $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             console.log('$stateChangeSuccess');
             if (toParams.unit === $scope.unidad.numeroUnidad || fromState.name === 'nf.cap_module') {
+                console.log($scope.audios)
                 MediaService.preloadSimple($scope.audios, function () {
                     if ($scope.audiosDescargados) {
-                        $scope.playAudio('titulo');
+                        $scope.playAudio('title');
                     }
                 });
             }
@@ -363,7 +370,7 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
             var options = []
             for (let i in unit.opciones) {
                 // Preparamos audios de cada opción
-                $scope.audios['opcion' + unit.opciones[i].id] = $scope.assetpath_audio + unit.opciones[i].audio.nombre;
+                $scope.audios['option' + unit.opciones[i].id] = $scope.assetpath_audio + unit.opciones[i].audio.nombre;
                 $scope.audios['feedback' + unit.opciones[i].id] = $scope.assetpath_audio + unit.opciones[i].feedback.audio.nombre;
 
                 if (unit.opciones[i].correcta == 1) {
@@ -389,7 +396,7 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
                 unit.opciones[i].evaluacion = false;
                 unit.opciones[i].pareja = '';
                 unit.opciones[i].match = false;
-                $scope.audios['opcion' + unit.opciones[i].id] = $scope.assetpath_audio + unit.opciones[i].audio.nombre;
+                $scope.audios['option' + unit.opciones[i].id] = $scope.assetpath_audio + unit.opciones[i].audio.nombre;
                 if (unit.opciones[i].columna == 1) {
                     columnA.push(unit.opciones[i]);
                 } else {

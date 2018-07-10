@@ -6,7 +6,7 @@ nf2.controller('CapModuleCtrl', function ($ionicPlatform, $scope, $rootScope, $l
         $scope.usuarioActivo = UserService.getUser();
         $scope.lecciones = [];
 
-        $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitation + "/" + $stateParams.module + "/";
+        
         $scope.assetpath_audio = $rootScope.TARGETPATH_AUDIO + $stateParams.capacitation + "/" + $stateParams.module + "/";
         
         $scope.audios = {
@@ -15,6 +15,12 @@ nf2.controller('CapModuleCtrl', function ($ionicPlatform, $scope, $rootScope, $l
         };
 
         $scope.modulo.totalLecciones = 0;
+
+        if ($rootScope.isMobile) {
+            $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitation + "/" + $stateParams.module + "/";
+        } else {
+            $scope.assetpath = $rootScope.TARGETPATH;
+        }
 
         $scope.lids = CapacitationService.getLessonsIds($stateParams.module);
         $scope.audiosDescargados = DownloadService.paqueteDescargado('modulos', $stateParams.module, 'audios');

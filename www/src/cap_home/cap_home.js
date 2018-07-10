@@ -63,20 +63,20 @@ nf2.controller('CapHomeCtrl', function ($ionicPlatform, $scope, $ionicViewSwitch
                         onTap: function (e) {
                         }
                     }, {
-                        text: $filter('translate')('Descargar con audios'),
+                        text: $filter('translate')('Descargar'),
                         type: 'button-positive',
                         onTap: function (e) {
                             $ionicLoading.show(optDescarga);
                             DownloadService.descargarPaqueteCompleto('capacitaciones', cid);
                         }
-                    }, {
+                    }/*, {
                         text: $filter('translate')('Descargar sin audios'),
                         type: 'button-positive',
                         onTap: function (e) {
                             $ionicLoading.show(optDescarga);
                             DownloadService.descargarPaquete('capacitaciones', cid, 'imagenes');
                         }
-                    }]
+                    }*/]
             });
         };
 

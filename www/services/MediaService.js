@@ -35,7 +35,7 @@ nf2.factory('MediaService', function ($cordovaMedia, $cordovaFile, $rootScope) {
      */
     service.play = function (audio) {
         this.stopAll(function () {
-            console.log("MediaService.play: " + audio);
+            console.log("MediaService.play: ", audio);
             if (window.plugins) {
                 audios[audio].setVolume(1);
                 audios[audio].play();

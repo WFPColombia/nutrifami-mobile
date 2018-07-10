@@ -8,6 +8,6 @@
     </div>
   </div>
   <div class="sound">
-    <button aria-hidden="true" ion-ripple><i class="icon {{$root.ICON_AUDIO}}"></i></button>
+    <button ng-click="changeAudio()" aria-hidden="true" ion-ripple><i class="icon" ng-class="$root.reproduceAudios ?  $root.ICON_AUDIO : $root.ICON_AUDIO_OFF"></i></button>
   </div>
 </header>

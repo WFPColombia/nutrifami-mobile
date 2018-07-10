@@ -10,10 +10,16 @@ nf2.directive('moduleDrt', function ($state, $rootScope, $ionicLoading, $ionicPo
 
             $scope.cargadorTexto = "Preparando archivos para la descarga";
             $scope.cargadorPorcentaje = 0;
-            $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitation + "/" + $scope.info.id + "/";
+            
             $scope.icon_descarga = $rootScope.ICON_DESCARGA;
             $scope.avance = UserService.getAvanceModulo($scope.info.id);
-            console.log($scope.avance);
+            
+
+            if ($rootScope.isMobile) {
+                $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitation + "/" + $scope.info.id + "/";
+            } else {
+                $scope.assetpath = $rootScope.TARGETPATH;
+            }
 
 
             var optDescarga = {
@@ -55,19 +61,26 @@ nf2.directive('moduleDrt', function ($state, $rootScope, $ionicLoading, $ionicPo
                             templateUrl: 'modals/simple/simple.modal.html',
                             scope: $scope,
                             cssClass: 'salir-unidad',
-                            buttons: [{
-                                    text: $filter('translate')('Descargar con audios'),
-                                    type: 'button-positive',
-                                    onTap: function (e) {
-                                        $scope.descargarPaqueteCompleto();
-                                    }
-                                }, {
-                                    text: $filter('translate')('Descargar sin audios'),
-                                    type: 'button-positive',
-                                    onTap: function (e) {
-                                        $scope.descargarPaquete();
-                                    }
-                                }]
+                            buttons: [
+                            {
+                                text: $filter('translate')('Cancelar'),
+                                type: 'button-positive',
+                                onTap: function (e) {
+                                }
+                            },{
+                                text: $filter('translate')('Descargar con audios'),
+                                type: 'button-positive',
+                                onTap: function (e) {
+                                    $scope.descargarPaqueteCompleto();
+                            },
+                            /*{
+                                text: $filter('translate')('Descargar sin audios'),
+                                type: 'button-positive',
+                                onTap: function (e) {
+                                    $scope.descargarPaquete();
+                                }
+                            }*/
+                            }]
                         });
                     }
                 }
