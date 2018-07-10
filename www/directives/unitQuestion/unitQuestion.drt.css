@@ -1,0 +1,113 @@
+.unit-question {
+    background-color: #ffffff;
+    font-family: 'Muli', sans-serif;
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
+}
+
+.unit-question .instruction {
+    text-align: center;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-family: 'Raleway-Bold', sans-serif;
+    color: #00965e;
+    margin-bottom: 0px;
+}
+
+.unit-question .instruction img{
+    position: relative;
+    top: 5px;
+    margin-right: 5px;
+}
+
+.unit-question .question{
+    text-align: center;
+    color: #4d6675;
+    font-size: 1rem;
+    margin-bottom: 0px;
+}
+
+.unit-question .unit-image{
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow:  hidden;
+}
+
+.unit-question .unit-image img {
+    height: 150px;
+}
+
+.unidad .unidad-tipo .unidad-tipo-descripcion p {
+    font-size: 11pt;
+    padding-left: 105px;
+    padding-right: 40px;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.unidad .unidad-tipo .unidad-tipo-descripcion .sonido {
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.unidad .unidad-tipo .unidad-tipo-descripcion .sonido button {
+    background-color: rgba(0, 0, 0, 0);
+    -moz-border: none;
+    -webkit-border: none;
+    border: none;
+    font-size: 20pt;
+    color: #00965e;
+    position: relative;
+    padding: 0;
+}
+
+.unidad .unidad-descripcion {
+    color: #2f3e47;
+    text-align: center;
+    font-size: 12pt;
+}
+
+.unidad .unidad-descripcion .fa {
+    margin-right: 7px;
+}
+
+.unidad .unidad-descripcion .col {
+    padding: 0 5px;
+}
+
+.unidad .unidad-descripcion .unidad-instruccion {
+    margin-top: 0px;
+    margin-bottom: 5px;
+    font-family: 'Muli', sans-serif;
+    color: #2f3e47;
+    font-size: 13pt;
+}
+
+.unidad .unidad-descripcion .unidad-instruccion button {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    -moz-border: none;
+    -webkit-border: none;
+    font-size: 14pt;
+    color: #2f3e47;
+}
+
+.unidad .unidad-descripcion img {
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border: solid 1px #dcdcdc;
+    width: 100%;
+    min-height: 60px;
+}

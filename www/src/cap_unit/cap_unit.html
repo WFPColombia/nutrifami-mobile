@@ -1,69 +1,8 @@
-<style type="text/css">
-.unidad .leccion-avance-fixed::after {
-  background-image: url("{{assetpath}}{{unidad.imagen.nombre}}");
-}
-</style>
-<div class='unidad'>
-  <header ng-show="scrolled">
-    <div class="leccion-avance-fixed">
-      <div class="row">
-        <div class="col leccion-avance-cerrar">
-          <button ng-click="salirUnidad()" class="icon ion-close-round" aria-hidden="true" ion-ripple></button>
-        </div>
-        <div class="col col-80 leccion-avance-progreso">
-          <p class="instruccion" ng-click="playAudio('tipo')" ion-ripple><i ng-show="audiosDescargados" class="icon {{ICON_AUDIO}}"></i> {{ unidad.instruccion.texto}}</p>
-          <p class="titulo" ng-show="audiosDescargados" ng-click="playAudio('titulo')" ion-ripple><i ng-show="audiosDescargados" class="icon {{ICON_AUDIO}}"></i> {{ unidad.titulo.texto}}</p>
-        </div>
-      </div>
-    </div>
-  </header>
-</div>
-<ion-scroll style="height: 100%" on-scroll="getScrollPosition()">
-  <div class='unidad'>
-    <header>
-      <div class="leccion-avance">
-        <div class="row">
-          <div class="col leccion-avance-cerrar">
-            <button ng-click="salirUnidad()" class="icon ion-close-round" aria-hidden="true" ion-ripple></button>
-          </div>
-          <div class="col col-80 leccion-avance-progreso">
-            <span>{{'Unidad' | translate }} {{unidad.numeroUnidad}} {{ 'de' | translate }} {{unidad.totalUnidades}}</span>
-            <div class="progress">
-              <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{advancePercentage}}%;"></div>
-              <div class="complete"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-    <div class="unidad-tipo" ng-click="playAudio('tipo')" ion-ripple>
-      <img ng-src="img/icons/{{unidad.tipo.icono}}" />
-      <div class="unidad-tipo-descripcion">
-        <div class="sonido">
-          <button ng-show="audiosDescargados" class="icon {{ICON_AUDIO}}" aria-hidden="true"></button>
-        </div>
-        <p> {{ unidad.instruccion.texto}}</p>
-      </div>
-    </div>
-    <div class="unidad-descripcion" ng-hide="scrolled">
-      <div class="row">
-        <div class="col">
-          <p class="unidad-instruccion" ng-click="playAudio('titulo')" ion-ripple>
-            <button class="icon {{ICON_AUDIO}}" ng-show="audiosDescargados" aria-hidden="true"></button> {{ unidad.titulo.texto}}
-          </p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <img ng-src="{{assetpath}}{{unidad.imagen.nombre}}" ng-hide="unidad.imagen === undefined || unidad.imagen.nombre === ''" />
-        </div>
-      </div>
-      <div class="row" ng-hide="unidad.texto == undefined || unidad.texto == '' || unidad.tipo.id == 1">
-        <div class="col">
-          <div ng-bind-html="unidad.texto | format | trust"></div>
-        </div>
-      </div>
-    </div>
+<ion-scroll>
+  <div class='unit'>
+    <unit-header on-exit-unit="salirUnidad()" data="advancePercentage"></unit-header>
+    <unit-question data="unidad" assetpath="assetpath"></unit-question>
+    
     <div class="row" ng-show="unidad.tipo.id == 1">
       <div class="col">
         <div class="unidad-informativa">
@@ -77,20 +16,12 @@
         </div>
       </div>
     </div>
-    <div class="opciones" ng-if="unidad.tipo.id == 2">
-      <div ng-repeat="opcion in unidad.opciones.columnA">
-        <div class="row">
-          <div class="col">
-            <option-unit-pairs data="opcion" on-click="chociePair($index, 'columnA', 'columnB')" on-play-audio="playAudio('opcion'+opcion.id)"></option-unit-pairs>
-          </div>
-          <div class="col">
-            <option-unit-pairs data="unidad.opciones.columnB[$index]" on-click="chociePair($index, 'columnB', 'columnA')" on-play-audio="playAudio('opcion'+unidad.opciones.columnB[$index].id)"></option-unit-pairs>
-          </div>
-        </div>
-      </div>
+    <div class="options" ng-repeat="opcion in unidad.opciones.columnA" ng-if="unidad.tipo.id == 2">
+      <unit-option-pairs data="opcion" assetpath="assetpath" column="'A'" column-a-image="opcion.media" on-click="chociePair($index, 'columnA', 'columnB')" on-play-audio="playAudio('opcion'+opcion.id)"></unit-option-pairs>
+      <unit-option-pairs data="unidad.opciones.columnB[$index]" assetpath="assetpath" column="'B'" column-a-image="opcion.media" on-click="chociePair($index, 'columnB', 'columnA')" on-play-audio="playAudio('opcion'+unidad.opciones.columnB[$index].id)"></unit-option-pairs>
     </div>
-    <div class="opciones" ng-if="unidad.tipo.id == 3 || unidad.tipo.id == 4 || unidad.tipo.id == 5" ng-class=" scrolled ? 'scrolled':''">
-        <option-unit-simple ng-repeat="option in unidad.opciones" data="option" on-click="choiceOption($index)" on-play-audio="playAudio('opcion'+option.id)"></option-unit-simple>
+    <div class="options" ng-if="unidad.tipo.id == 3 || unidad.tipo.id == 4 || unidad.tipo.id == 5" ng-class=" scrolled ? 'scrolled':''">
+        <unit-option-simple ng-repeat="option in unidad.opciones" data="option" assetpath="assetpath" on-click="choiceOption($index)" on-play-audio="playAudio('opcion'+option.id)"></unit-option-simple>
     </div>
   </div>
   <div class="zona-segura"></div>

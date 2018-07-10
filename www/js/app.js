@@ -454,8 +454,8 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
             $rootScope.BASE_URL = 'http://localhost:8000/';
             $rootScope.TARGETPATH = "https://s3.amazonaws.com/nutrifami/training/images/";
             $rootScope.TARGETPATH_AUDIO = "https://s3.amazonaws.com/nutrifami/";
-            $rootScope.ICON_DESCARGA = 'ion-ios-cloud-download-outline';
-            $rootScope.ICON_AUDIO = 'ion-ios-volume-high';
+            $rootScope.ICON_DESCARGA = 'ion-android-download';
+            $rootScope.ICON_AUDIO = 'ion-android-volume-up';
             $rootScope.isMobile = false;
         }
     });

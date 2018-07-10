@@ -1,0 +1,9 @@
+<div ng-click="click()" ng-class="[data.media.nombre != '' ? 'option-image' : 'option-simple',data.selected ? 'selected' : 'no-selected']" ion-ripple>
+    <div class="img-container">
+        <img ng-src="{{assetpath}}{{data.media.nombre}}" ng-hide="data.media === undefined || data.media.nombre === ''" />
+    </div>
+    <div ng-bind-html="data.texto | format | trust" ng-if="data.texto !== ''"></div>
+    <div ng-if="data.media.nombre != ''" class="layer" ng-class="[data.selected ? 'selected' : '', data.fallo ? 'wrong':'']"></div>
+</div>
+
+

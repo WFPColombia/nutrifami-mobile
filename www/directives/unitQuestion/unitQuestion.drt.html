@@ -1,0 +1,22 @@
+<div class="unit-question" ng-click="playAudio('tipo')" ion-ripple>
+  <div class="row">
+    <div class="col">
+      <p class="instruction"><img ng-src="img/icons/{{data.tipo.icono}}" height="20" /> <i class="icon {{$root.ICON_AUDIO}}"></i> {{ data.instruccion.texto}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p class="question" ng-click="playAudio('titulo')" ion-ripple>
+        <i class="icon {{$root.ICON_AUDIO}}"></i> {{ data.titulo.texto}}
+      </p>
+    </div>
+  </div>
+  <div class="unit-image" ng-if="data.imagen !== undefined && data.imagen.nombre !== ''">
+      <img ng-src="{{assetpath}}{{data.imagen.nombre}}" />
+  </div>
+  <div class="row" ng-hide="data.texto == undefined || data.texto == '' || data.tipo.id == 1">
+    <div class="col">
+      <div ng-bind-html="data.texto | format | trust"></div>
+    </div>
+  </div>
+</div>
