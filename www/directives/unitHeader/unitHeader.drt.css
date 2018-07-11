@@ -23,12 +23,14 @@
     padding-bottom: 0;  
 }
 
-.unit-header .sound i{
+.unit-header .sound .icon-circle{
     background-color: #d200ff;
     width: 35px;
     height: 35px;
-    display: inline-block;
     border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .unit-header .progress-container{

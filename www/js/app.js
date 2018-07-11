@@ -428,6 +428,7 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
                 $rootScope.TARGETPATH_AUDIO = cordova.file.externalApplicationStorageDirectory;
                 $rootScope.ICON_DESCARGA = 'ion-android-download';
                 $rootScope.ICON_AUDIO = 'ion-android-volume-up';
+                $rootScope.ICON_AUDIO_OFF = 'ion-android-volume-off';
                 window.addEventListener("native.hidekeyboard", function () {
                     StatusBar.hide();
                     window.AndroidFullScreen.immersiveMode(false, false);
@@ -438,6 +439,7 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
                 $rootScope.TARGETPATH_AUDIO = cordova.file.dataDirectory;
                 $rootScope.ICON_DESCARGA = 'ion-android-download';
                 $rootScope.ICON_AUDIO = 'ion-volume-high';
+                $rootScope.ICON_AUDIO_OFF = 'ion-volume-off';
             } else {
                 console.log("Is iPad or iOS");
                 $rootScope.TARGETPATH = cordova.file.dataDirectory;
@@ -447,6 +449,7 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
                 });
                 $rootScope.ICON_DESCARGA = 'ion-ios-cloud-download-outline';
                 $rootScope.ICON_AUDIO = 'ion-ios-volume-high';
+                $rootScope.ICON_AUDIO_OFF = 'ion-ios-volume-off';
 
             }
 
@@ -455,8 +458,8 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
             $rootScope.TARGETPATH = "https://s3.amazonaws.com/nutrifami/training/images/";
             $rootScope.TARGETPATH_AUDIO = "https://s3.amazonaws.com/nutrifami/";
             $rootScope.ICON_DESCARGA = 'ion-android-download';
-            $rootScope.ICON_AUDIO = 'ion-android-volume-up';
-            $rootScope.ICON_AUDIO_OFF = 'ion-android-volume-off';
+            $rootScope.ICON_AUDIO = 'ion-volume-high';
+            $rootScope.ICON_AUDIO_OFF = 'ion-volume-low';
             $rootScope.reproduceAudios = true;
             $rootScope.isMobile = false;
         }
