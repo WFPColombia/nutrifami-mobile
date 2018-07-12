@@ -6,12 +6,12 @@
     -webkit-border-radius: 5px;
     color: #2f3e47;
     font-size: 1rem;
-    height: 80px;
+    height: 75px;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .option-simple p{

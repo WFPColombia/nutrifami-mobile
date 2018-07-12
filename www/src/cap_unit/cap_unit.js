@@ -25,6 +25,9 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
         $scope.correctOptions = 0
         $scope.selectedOptions = 0
 
+
+        
+
         // Preparamos los audios generales
 
         $scope.audios = {
@@ -56,6 +59,21 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
                 $scope.textoBoton = 'continuar';
             }, 10000);
         }
+
+        // Esperamos tres segundos para saber el tamaño de unit, si es muy grande ponemos la animacion de scroll
+
+        $timeout(function () {
+                var elementUnit = document.getElementById("unit");
+                var windowsHeight = window.innerHeight;
+                console.log(elementUnit.offsetHeight, windowsHeight, elementUnit.offsetHeight >= ( windowsHeight - 40 ))
+                if(elementUnit.offsetHeight >= ( windowsHeight - 40 )){
+                    console.log('Animación scrolling')
+                }else{
+                    console.log('No es necesario la animación')
+                }
+        }, 3000);
+
+        
 
         $scope.choiceOption = function (index) {
             
@@ -325,7 +343,9 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
         };
 
         $scope.changeAudio = function(){
-            $rootScope.reproduceAudios = !$rootScope.reproduceAudios
+            MediaService.stopAll(function () {
+                $rootScope.reproduceAudios = !$rootScope.reproduceAudios
+            });
         }
 
         // Events

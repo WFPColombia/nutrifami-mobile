@@ -64,26 +64,26 @@ ng-view {
 
 @keyframes swipe-animation {
     0% {
-        left: calc(50% - 150px);
+        left: calc(50% - 125px);
         visibility: visible;
     }
     10% {
-        left: calc(50% - 100px);
+        left: calc(50% - 75px);
     }
     30% {
-        left: calc(50% - 200px);
+        left: calc(50% - 175px);
     }
     50% {
-        left: calc(50% - 100px);
+        left: calc(50% - 75px);
     }
     70% {
-        left: calc(50% - 200px);
+        left: calc(50% - 175px);
     }
     90% {
-        left: calc(50% - 100px);
+        left: calc(50% - 75px);
     }
     100% {
-        left: calc(50% - 150px);
+        left: calc(50% - 125px);
         visibility: hidden;
     }
 }
@@ -91,11 +91,12 @@ ng-view {
 .swipe-ayuda {
     position: fixed;
     top: calc(70% - 150px);
-    left: calc(50% - 150px);
+    left: calc(50% - 125px);
     animation-name: swipe-animation;
-    animation-duration: 4s;
+    animation-duration: 3s;
     animation-delay: 1s;
     visibility: hidden;
+    pointer-events:none;
 }
 
 

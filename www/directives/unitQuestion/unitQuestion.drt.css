@@ -6,6 +6,10 @@
     box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
 }
 
+.unit-question .row{
+    padding-bottom: 0px;
+}
+
 .unit-question .instruction {
     text-align: center;
     font-size: 0.75rem;

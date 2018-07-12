@@ -419,6 +419,12 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
             StatusBar.styleDefault();
         }
 
+        $rootScope.ICON_DESCARGA = 'ion-android-download';
+        $rootScope.ICON_AUDIO = 'ion-android-volume-up';
+        $rootScope.ICON_AUDIO_OFF = 'ion-android-volume-off';
+        $rootScope.reproduceAudios = true;
+
+
         if (window.cordova) {
             $rootScope.BASE_URL = 'http://usuarios.nutrifami.org/';
             $rootScope.isMobile = true;
@@ -457,10 +463,6 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
             $rootScope.BASE_URL = 'http://localhost:8000/';
             $rootScope.TARGETPATH = "https://s3.amazonaws.com/nutrifami/training/images/";
             $rootScope.TARGETPATH_AUDIO = "https://s3.amazonaws.com/nutrifami/";
-            $rootScope.ICON_DESCARGA = 'ion-android-download';
-            $rootScope.ICON_AUDIO = 'ion-volume-high';
-            $rootScope.ICON_AUDIO_OFF = 'ion-volume-low';
-            $rootScope.reproduceAudios = true;
             $rootScope.isMobile = false;
         }
     });

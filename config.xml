@@ -114,9 +114,6 @@
     <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <allow-navigation href="http://192.168.0.12:8100" />
-    <engine name="android" spec="7.1.0" />
-    <engine name="ios" spec="^4.5.4" />
-    <engine name="windows" spec="^6.0.0" />
     <plugin name="cordova-plugin-background-mode" spec="^0.7.2" />
     <plugin name="cordova-plugin-compat" spec="~1.2.0" />
     <plugin name="cordova-plugin-device" spec="^2.0.1" />
@@ -133,4 +130,7 @@
     <plugin name="cordova-plugin-x-socialsharing" spec="^5.3.2" />
     <plugin name="cordova-plugin-zip" spec="git+https://github.com/fats2005/cordova-plugin-zip.git" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
+    <engine name="ios" spec="^4.5.4" />
+    <engine name="windows" spec="^6.0.0" />
+    <engine name="android" spec="~7.0.0" />
 </widget>

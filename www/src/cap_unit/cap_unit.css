@@ -113,7 +113,7 @@
 
 
 .calificar {
-    height: 58px;
+    height: 40px;
     background-color: #d0d0d0;
     border: none;
     text-align: center;
@@ -126,7 +126,7 @@
 
 .calificar button {
     font-family: 'Raleway-Bold', sans-serif;
-    font-size: 12pt;
+    font-size: 1rem;
     color: #ffffff;
     text-align: center;
     text-transform: uppercase;

@@ -9,7 +9,7 @@
   </div>
   <div class="sound">
     <button ng-click="changeAudio()" aria-hidden="true" ion-ripple>
-      <span class="icon-circle">
+      <span class="icon-circle" ng-class="$root.reproduceAudios ?  '' : 'off'">
         <i class="icon" ng-class="$root.reproduceAudios ?  $root.ICON_AUDIO : $root.ICON_AUDIO_OFF"></i>
       </span>
     </button>

@@ -32,7 +32,7 @@
     "private": false,
     "license": "MIT",
     "dependencies": {
-        "cordova-android": "7.1.0",
+        "cordova-android": "7.0.0",
         "cordova-ios": "^4.5.4",
         "cordova-plugin-background-mode": "^0.7.2",
         "cordova-plugin-compat": "~1.2.0",
@@ -66,9 +66,9 @@
     },
     "cordova": {
         "platforms": [
-            "android",
             "ios",
-            "windows"
+            "windows",
+            "android"
         ],
         "plugins": {
             "cordova-plugin-device": {},

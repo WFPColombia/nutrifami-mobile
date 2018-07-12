@@ -1,5 +1,5 @@
 <ion-content>
-  <div class='unit'>
+  <div class='unit' id='unit'>
     <unit-header on-exit-unit="exitUnit()" data="advancePercentage" on-change-audio="changeAudio()"></unit-header>
     <unit-question data="unidad" assetpath="assetpath" on-play-audio-title="playAudio('title')" on-play-audio-type="playAudio('type')"></unit-question>
     <div class="row" ng-show="unidad.tipo.id == 1">
@@ -12,9 +12,11 @@
         </div>
       </div>
     </div>
-    <div class="options" ng-repeat="opcion in unidad.opciones.columnA" ng-if="unidad.tipo.id == 2">
-      <unit-option-pairs data="opcion" assetpath="assetpath" column="'A'" column-a-image="opcion.media" on-click="chociePair($index, 'columnA', 'columnB')" on-play-audio="playAudio('opcion'+opcion.id)"></unit-option-pairs>
-      <unit-option-pairs data="unidad.opciones.columnB[$index]" assetpath="assetpath" column="'B'" column-a-image="opcion.media" on-click="chociePair($index, 'columnB', 'columnA')" on-play-audio="playAudio('opcion'+unidad.opciones.columnB[$index].id)"></unit-option-pairs>
+    <div class="options" ng-if="unidad.tipo.id == 2">
+      <div ng-repeat="opcion in unidad.opciones.columnA">
+        <unit-option-pairs data="opcion" assetpath="assetpath" column="'A'" column-a-image="opcion.media" on-click="chociePair($index, 'columnA', 'columnB')" on-play-audio="playAudio('opcion'+opcion.id)"></unit-option-pairs>
+        <unit-option-pairs data="unidad.opciones.columnB[$index]" assetpath="assetpath" column="'B'" column-a-image="opcion.media" on-click="chociePair($index, 'columnB', 'columnA')" on-play-audio="playAudio('opcion'+unidad.opciones.columnB[$index].id)"></unit-option-pairs>
+      </div>
     </div>
     <div class="options" ng-if="unidad.tipo.id == 3 || unidad.tipo.id == 4 || unidad.tipo.id == 5" ng-class=" scrolled ? 'scrolled':''">
         <unit-option-simple ng-repeat="option in unidad.opciones" data="option" assetpath="assetpath" on-click="choiceOption($index)" on-play-audio="playAudio('opcion'+option.id)"></unit-option-simple>
