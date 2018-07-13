@@ -37,9 +37,6 @@ ng-view {
 }
 
 
-
-
-
 /* LAZY LOADING IMAGENES*/
 
 .image-loader-container {
@@ -124,7 +121,11 @@ button {
 /* END RIPPLE EFFECT*/
 
 
-/* FINAL - PRELOADING*/
+/* Se usa para cuando se muestran textos con ng-bind-html="unidad.texto | format | trust" e iconos */
+.text-container, 
+.text-container p{
+    display: inline;
+}
 
 
 /* HEADER */
@@ -191,50 +192,46 @@ button {
 .popup-container .popup .calificacion .popup-header,
 .salir-unidad .popup .popup-header {
     text-align: center;
-    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.popup-container .popup .calificacion .popup-header .icon,
-.salir-unidad .popup .popup-header .icon {
-    display: inline-block;
+.popup-container .popup .calificacion .popup-header .icon-container,
+.salir-unidad .popup .popup-header .icon-container {
     color: #ffffff;
-    font-size: 30pt;
+    font-size: 3rem;
     height: 86px;
     width: 86px;
     background-color: #09df78;
-    border-radius: 43px;
-    text-align: center;
-    padding-top: 27px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.salir-unidad .popup .popup-header .icon {
-    background-color: #ffba23;
-}
-
-.popup-container .popup .calificacion .popup-header .wrong {
+.popup-container .popup .calificacion .popup-header .icon-container.wrong,
+.salir-unidad .popup .popup-header .icon-container.wrong {
     background-color: #ff1244;
 }
 
-.popup-container .popup .calificacion .mensaje,
-.salir-unidad .popup .mensaje {
-    text-align: center;
-    color: #2f3e47;
-    font-size: 12pt;
-    margin-top: 20px;
-    margin-bottom: 37px;
+.salir-unidad .popup .popup-header .icon-container.alert {
+    background-color: #ffba23;
 }
 
-.salir-unidad .popup .mensaje {
-    font-size: 16pt;
+
+.salir-unidad .popup h1 {
+    font-size: 1.2rem;
+    padding: 0 15px;
+}
+
+.salir-unidad .popup p {
+    font-size: 1.1rem;
     padding: 0 15px;
 }
 
 .popup-container .popup .calificacion .mensaje i {
     color: #8e8e8e;
-}
-
-.salir-unidad .popup .mensaje i {
-    color: #00c97e;
 }
 
 .salir-unidad .popup .popup-body .button {
@@ -264,25 +261,9 @@ button {
     padding: 15px 10px;
 }
 
-.popup-container .popup .calificacion .feedback div {
-    padding: 0px 10px;
-}
 
 .popup-container .popup .calificacion .feedback p {
-    font-size: 14pt;
-    padding-top: 10px;
-}
-
-.popup-container .popup .calificacion .feedback .sonido {
-    color: #00965e;
-    position: absolute;
-    left: 10px;
-    top: 10px;
-}
-
-.popup-container .popup .popup-buttons {
-    /*margin-top: 25px;
-    margin-bottom: 10px;*/
+    font-size: 1.1rem;
 }
 
 .popup-container .popup .popup-buttons .button {
@@ -363,7 +344,7 @@ button {
 }
 
 .zona-segura {
-    height: 60px;
+    height: 45px;
 }
 
 

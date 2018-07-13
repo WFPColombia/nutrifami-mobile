@@ -22,8 +22,12 @@
         <unit-option-simple ng-repeat="option in unidad.opciones" data="option" assetpath="assetpath" on-click="choiceOption($index)" on-play-audio="playAudio('opcion'+option.id)"></unit-option-simple>
     </div>
   </div>
-  <div class="zona-segura"></div>
+  <div class="zona-segura" ng-if="unidad.tipo.id != 2"></div>
+
 </ion-content>
-<div class="bar bar-footer calificar" ng-class=" botonCalificar ? 'habilitado' : ''">
+<div class="bar bar-footer calificar" ng-class=" botonCalificar ? 'habilitado' : ''" ng-if="unidad.tipo.id != 2">
   <button ng-click="calificarUnidad()" ng-disabled="!botonCalificar" ion-ripple>{{textoBoton | translate}}</button>
+</div>
+<div class="scroll-help" ng-class="isScroll ? 'active':''">
+  <img src="img/scroll-icon.png" width="100px">
 </div>

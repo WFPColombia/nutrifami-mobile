@@ -28,15 +28,9 @@
     top: -2px;
 }
 
-.lecciones .lecciones-header p,
 .lecciones .lecciones-header img {
     margin-top: 0px;
     padding: 0px;
-    width: 90%;
-    margin: 0 5%;
-}
-
-.lecciones .lecciones-header img {
     width: 60%;
 }
 
@@ -52,8 +46,6 @@
     border: none;
     color: #4d6675;
     font-size: 20px;
-    position: absolute;
-    left: 2px;
 }
 
 .lecciones .lecciones-body .leccion,

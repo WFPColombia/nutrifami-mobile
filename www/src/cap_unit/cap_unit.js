@@ -24,9 +24,8 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
         $scope.botonCalificar = false;
         $scope.correctOptions = 0
         $scope.selectedOptions = 0
-
-
-        
+        $scope.isScroll = false;
+        $scope.allowCloseFeedback = false;
 
         // Preparamos los audios generales
 
@@ -63,15 +62,17 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
         // Esperamos tres segundos para saber el tamaño de unit, si es muy grande ponemos la animacion de scroll
 
         $timeout(function () {
-                var elementUnit = document.getElementById("unit");
-                var windowsHeight = window.innerHeight;
-                console.log(elementUnit.offsetHeight, windowsHeight, elementUnit.offsetHeight >= ( windowsHeight - 40 ))
-                if(elementUnit.offsetHeight >= ( windowsHeight - 40 )){
-                    console.log('Animación scrolling')
-                }else{
-                    console.log('No es necesario la animación')
-                }
-        }, 3000);
+            var elementUnit = document.getElementById("unit");
+            var windowsHeight = window.innerHeight;
+            let secureZone = 0
+            //Si es parejas desaparecemos el botón entonces no hay zona segura
+            if($scope.unidad.tipo.id !== '2'){
+                secureZone = 40
+            }
+            if(elementUnit.offsetHeight >= ( windowsHeight - secureZone )){
+                $scope.isScroll = true;
+            }
+        }, 2000);
 
         
 
@@ -172,8 +173,9 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
                 // Si las parejas correctas es igual a la mitad de la cantidad de opciones habilitar el botón de continuar
                 console.log('Respuestas correctas')
                 $scope.estadoUnidad = 'acierto';
-                $ionicPopup.show({
-                    templateUrl: 'views/template/feedback.tpl.html',
+                $scope.cerrarFeedback();
+                /*$ionicPopup.show({
+                    templateUrl: 'modals/feedback/feedback.modal.html',
                     scope: $scope,
                     buttons: [{
                             text: 'Continuar',
@@ -182,7 +184,7 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
                                 $scope.cerrarFeedback();
                             }
                         }]
-                });
+                });*/
             }
         };
 
@@ -236,23 +238,35 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
                 $scope.playAudio(feedbacks_bad_last);
                 textoBoton = 'Intentar de nuevo';
             }
+            console.log($scope.unidad.opciones)
 
             $scope.feedback.feedbacks = eliminarRepitidos($scope.feedback.feedbacks, 'texto');
 
-            $ionicPopup.show({
+            $timeout(function() {
+                $scope.allowCloseFeedback = true;
+                
+            }, 5000);
+
+             $scope.feedbackPopup = $ionicPopup.show({
                 templateUrl: 'modals/feedback/feedback.modal.html',
                 scope: $scope,
-                buttons: [{
-                        text: $filter('translate')(textoBoton),
-                        type: 'button-positive',
-                        onTap: function (e) {
-                            $scope.cerrarFeedback();
-                        }
-                    }]
+                /*buttons: [{
+                            text: 'Continuar',
+                            type: 'button-positive',
+                            onTap: function (e) {
+                                $scope.cerrarFeedback();
+                            }
+                        }]*/
+
             });
         };
 
         $scope.cerrarFeedback = function () {
+            console.log('cerrarFeedback')
+            $scope.allowCloseFeedback = false;
+            if($scope.feedbackPopup){
+                $scope.feedbackPopup.close();
+            }
             if ($scope.estadoUnidad === 'acierto') {
                 $scope.irASiguienteUnidad();
             } else {
@@ -408,6 +422,7 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
 
         function preparePairsOptions(unit){
             console.log('preparePairsOptions')
+            // Ocultamos en botón de calificar que no se usa!!
             let columnA = [];
             let columnB = []
             /* Recorre todo el objeto de las opciones para crear el arreglo*/

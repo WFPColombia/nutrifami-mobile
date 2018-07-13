@@ -1,11 +1,15 @@
 <div class="popup-header">
-    <span class="icon ion-alert" ng-show="modal.estado == 'alert'" ></span>
-    <span class="icon ion-checkmark-round" ng-show="modal.estado == 'ok'" style="background-color: #09df78;"></span>
-    <span class="icon ion-close-round" ng-show="modal.estado == 'error'" style="background-color: #ff1244;"></span>
+    <span class="icon-container" ng-class="[modal.estado == 'alert' ? 'alert' : '', modal.estado == 'error'  ? 'wrong':'']">
+        <i class="icon ion-checkmark-round" ng-show="modal.estado == 'ok'"></i>
+        <i class="icon ion-alert" ng-show="modal.estado == 'alert'" ></i>
+        <i class="icon ion-close-round" ng-show="modal.estado == 'error'"></i>
+    </span>
 </div>
 <div class="popup-body">
     <div ng-click="playAudio(modal.audio)" ion-ripple>
-        <h1 class="mensaje">{{modal.texto1 | translate }} <i ng-show="modal.audio" class="icon ion-volume-high"></i></h1>
+        <h1 class="mensaje"><i ng-show="modal.audio" class="icon {{$root.ICON_AUDIO}}"></i> {{modal.texto1 | translate }}</h1>
         <p class="mensaje">{{modal.texto2 | translate}}</p>
     </div>
 </div>
+
+

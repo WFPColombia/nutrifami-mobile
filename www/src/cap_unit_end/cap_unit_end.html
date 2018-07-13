@@ -1,44 +1,43 @@
-<div class="leccion-finalizada">
-    <ion-scroll style="height: 100%;">
-        <div class="header">
-            <div class="row">
-                <div class="col">
-                    <h1>{{'Muy bien!' | translate }}<br>{{'Lección Completada' | translate }}</h1>
-                </div>
-            </div>
+<ion-content>
+  <div class="leccion-finalizada">
+    <div class="header">
+      <div class="row">
+        <div class="col">
+          <h1>{{'Muy bien!' | translate }}<br>{{'Lección Completada' | translate }}</h1>
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="progreso">
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <div class="sticker">
-                        <span class="icon ion-checkmark-round" aria-hidden="true"></span>
-                    </div>
-                </div>
-            </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="progreso">
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <div class="sticker">
+            <span class="icon ion-checkmark-round" aria-hidden="true"></span>
+          </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="badget">
-                    <img src="img/badgets/flags/ico_flag_{{leccion.icono}}.png">
-                    <p>{{'Más 100 puntos de experiencia' | translate }}</p>
-                </div>
-            </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="badget">
+          <img src="img/badgets/flags/ico_flag_{{leccion.icono}}.png">
+          <p>{{'Más 100 puntos de experiencia' | translate }}</p>
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="feedback" ng-click="playAudio('audioFinalizado')" ion-ripple>
-                    <div ng-bind-html="leccion.finalizado.texto | format | trust"></div>
-                    <div class="feedback-sonido" ng-show="media_downloaded">
-                        <i class="icon {{ICON_AUDIO}}" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="feedback" ng-click="playAudio('audioFinalizado')" ion-ripple>
+          <i class="icon {{ICON_AUDIO}}" aria-hidden="true"></i>
+          <div class="text-container" ng-bind-html="leccion.finalizado.texto | format | trust"></div>
         </div>
-    </ion-scroll>
-</div>
+      </div>
+    </div>
+  </div>
+  <div class="zona-segura"></div>
+</ion-content>
 <div class="bar bar-footer calificar habilitado">
-    <button ng-click="continuar()" ion-ripple>{{'Continuar' | translate }}</button>
+  <button ng-click="continuar()" ion-ripple>{{'Continuar' | translate }}</button>
 </div>

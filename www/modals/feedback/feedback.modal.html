@@ -1,13 +1,18 @@
 <div class="calificacion">
     <div class="popup-header">
-        <span class="icon" ng-class="estadoUnidad == 'acierto' ? 'ion-checkmark-round':'ion-close-round wrong'"></span>
+        <span class="icon-container" ng-class="estadoUnidad == 'acierto' ? '':'wrong'">
+            <i class="icon" ng-class="estadoUnidad == 'acierto' ? 'ion-checkmark-round':'ion-close-round'"></i>
+        </span>
     </div>
     <div class="popup-body">
         <div class="feedback" ng-show="feedback.feedbacks !== undefined">
-            <div ng-repeat="fb in feedback.feedbacks" ion-ripple ng-click='playAudio(fb.nombre)'>
-                <i class="sonido icon ion-volume-high" aria-hidden="true" ng-show="audiosDescargados"></i>
-                <div ng-bind-html="fb.texto | format | trust "></div>
+            <div style="margin-bottom: 10px" ng-repeat="fb in feedback.feedbacks" ion-ripple ng-click='playAudio(fb.nombre)'>
+                <i class="sonido icon {{$root.ICON_AUDIO}}" aria-hidden="true" ng-show="audiosDescargados"></i>
+                <div class="text-container" ng-bind-html="fb.texto | format | trust "></div>
             </div>
         </div>
+    </div>
+    <div class="popup-buttons">
+        <button ng-click="cerrarFeedback()" ng-disabled="!allowCloseFeedback" class="button ng-binding button-positive">{{ textoBoton | translate }}</button>
     </div>
 </div>
