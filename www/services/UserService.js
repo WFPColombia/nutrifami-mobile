@@ -1,4 +1,4 @@
-nf2.factory('UserService', function ($rootScope, $auth, $http, $q, CapacitationService) {
+nf2.factory('UserService', function ($rootScope, $translate, $auth, $http, $q, CapacitationService) {
 
     var service = {};
 
@@ -156,6 +156,11 @@ nf2.factory('UserService', function ($rootScope, $auth, $http, $q, CapacitationS
             }
         };
 
+        if(usuarioActivo.language) { // Si el usuario ya tiene un lenguaje guardado, se lo cargamos
+            $translate.use(usuarioActivo.language);
+            $rootScope.lang = usuarioActivo.language
+        }
+
         if (usuarioActivo.is_staff) {
             var current_trainee = {
                 name: 'Yo',
@@ -176,6 +181,10 @@ nf2.factory('UserService', function ($rootScope, $auth, $http, $q, CapacitationS
 
         localStorage.setItem("user", JSON.stringify(usuarioActivo));
         localStorage.setItem("globals", JSON.stringify($rootScope.globals));
+
+        if(!usuarioActivo.language){ // Si el usuario no tiene idioma cargado, le guardamos el que está elegido actualmente
+            service.updateUserLanguage($rootScope.lang)
+        }
     };
 
 
@@ -188,7 +197,7 @@ nf2.factory('UserService', function ($rootScope, $auth, $http, $q, CapacitationS
     };
 
     /**
-     * @description Devuelve la informacion de usuario guardada en cache
+     * @description Actualiza la informacion de usuario en el servidor
      * @returns {Array|Object}
      */
     service.updateUser = function (user) {
@@ -204,6 +213,28 @@ nf2.factory('UserService', function ($rootScope, $auth, $http, $q, CapacitationS
             console.log(response);
             $rootScope.$broadcast('userFaliedUpdate', response.data);
         });
+    };
+
+    /**
+     * @description Actualiza el idioma del usuario
+     * @returns {Array|Object}
+     */
+    service.updateUserLanguage = function (lang) {
+        console.log('updateUserLanguage', lang)
+
+        let user = service.getUser();
+        user.language = lang
+        console.log(user)
+        $http({
+            method: 'PUT',
+            url: $rootScope.BASE_URL + 'api/usuarios/' + user.id + '/',
+            data: user
+        }).then(function successCallback(response) {
+            console.log('Idioma actualizado', response)
+        }, function errorCallback(response) {
+            console.log('Idioma no actualizado', response)
+        });
+        
     };
 
     /**

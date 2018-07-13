@@ -1,5 +1,5 @@
 /*global angular*/
-nf2.controller('AuthLangCtrl', function ($ionicPlatform, $scope, $rootScope, $translate) {
+nf2.controller('AuthLangCtrl', function ($ionicPlatform, $scope, $rootScope, $translate, $location) {
     'use strict';
 
     $ionicPlatform.ready(function () {
@@ -30,6 +30,7 @@ nf2.controller('AuthLangCtrl', function ($ionicPlatform, $scope, $rootScope, $tr
             console.log('changeLanguage ' + $scope.lang.current);
             $translate.use($scope.lang.current);
             $rootScope.lang = $scope.lang.current
+            $location.path('/auth');
         };
 
         

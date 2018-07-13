@@ -241,7 +241,16 @@
     "Descargando paquete de audios del módulo.":"Downloading audio packages of the module",
     "Descargando paquete de audios de la capacitación.":"Downloading audio packages of the capacitation",
     "Guardando Cambios":"Saving",
-    "¡Bienvenido a Nutrifami!":"¡Welcome to Nutrifami!",
+    "¡Bienvenido a Nutrifami!":"Welcome to Nutrifami!",
     "Eliga su idioma":"Select your language",
+    "Tipo de usuario":"Role of user",
+    "Tipo de usuario no ingresado":"Role not entered",
+    "Director":"School principal",
+    "Profesor":"Teacher",
+    "Encargado del Comedor":"School Canteen manager",
+    "Cocinero":"Cook",
+    "Jefe de Cocina":"Head of kitchen",
+    "Comité de Gestión":"Management Committee",
+    "Estudiante":"Student",
     "":""
 }

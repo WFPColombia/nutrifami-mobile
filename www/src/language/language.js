@@ -1,5 +1,5 @@
 /*global angular*/
-nf2.controller('LanguageCtrl', function ($ionicPlatform, $scope, $rootScope, $translate) {
+nf2.controller('LanguageCtrl', function ($ionicPlatform, $scope, $rootScope, $translate, $ionicHistory, $location, $ionicSideMenuDelegate, UserService) {
     'use strict';
 
     $ionicPlatform.ready(function () {
@@ -30,6 +30,11 @@ nf2.controller('LanguageCtrl', function ($ionicPlatform, $scope, $rootScope, $tr
             console.log('changeLanguage ' + $scope.lang.current);
             $translate.use($scope.lang.current);
             $rootScope.lang = $scope.lang.current
+            UserService.updateUserLanguage($scope.lang.current);
+            // var backView = $ionicHistory.backView()
+            // $location.path(backView.stateName);
+
+            $ionicSideMenuDelegate.toggleLeft();
         };
 
         

@@ -8,7 +8,7 @@
                             <div class="perfil-panel">
                                 <div class="perfil-header">
                                     <div class="boton-flotante">
-                                        <button class="btn btn-default" ui-sref="nf.auth_profile_edit" ion-ripple><span class="icon ion-edit" aria-hidden="true"></span> {{'Editar' | translate }} <i ng-show="usuarioActivo.municipio == '' || usuarioActivo.municipio == null" class="ion-ios-information"></i> </button>
+                                        <button class="btn btn-default" ui-sref="nf.auth_profile_edit" ion-ripple><span class="icon ion-edit" aria-hidden="true"></span> {{'Editar' | translate }} <i ng-show="usuarioActivo.municipio == '' || usuarioActivo.municipio == null || user.tipo_usuario === null" class="ion-ios-information"></i> </button>
                                     </div>
                                     <img ng-src="img/icons/ico-{{usuarioActivo.genero == null || usuarioActivo.genero == '' ? 'Masculino' : usuarioActivo.genero }}.png">
                                     <h2>{{ usuarioActivo.username }}</h2>
@@ -24,11 +24,18 @@
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
+                                                <label>{{'Tipo de usuario' | translate }}</label>
+                                                <p ng-class="usuarioActivo.tipo_usuario != undefined && usuarioActivo.tipo_usuario!='' ? '' : 'sin-registro'">{{ usuarioActivo.tipo_usuario!=undefined && usuarioActivo.tipo_usuario!='' ? ( usuarioActivo.tipo_usuario | translate ) : ('Tipo de usuario no ingresado'| translate)}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
                                                 <label>{{'Correo electrónico' | translate }}</label>
                                                 <p ng-class="usuarioActivo.email != undefined && usuarioActivo.email!='' ? '' : 'sin-registro'">{{ usuarioActivo.email!=undefined && usuarioActivo.email!='' ? usuarioActivo.email: ('Documento no ingresado'| translate)}}</p>
                                             </div>
                                         </div>
-
                                     </div>
                                     <div class="row">
                                         <div class="col">

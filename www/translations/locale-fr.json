@@ -240,5 +240,17 @@
     "Descargando paquete de imagenes de la capacitación.":"Téléchargement du paquet d'images d'entraînement",
     "Descargando paquete de audios del módulo.":"Téléchargement du paquet d'audio du module.",
     "Descargando paquete de audios de la capacitación.":"Téléchargement du paquet d'audios d'entraînement",
-    "Guardando Cambios":"Sauvegarde des mises à jours"
+    "Guardando Cambios":"Sauvegarde des mises à jours",
+    "¡Bienvenido a Nutrifami!":"Bienvenue à Nutrifami!",
+    "Eliga su idioma":"Choisissez votre langue",
+    "Tipo de usuario":"Rôler",
+    "Tipo de usuario no ingresado":"Rôler non saisie",
+    "Director":"Directeur",
+    "Profesor":"Enseignant",
+    "Encargado del Comedor":"Gestionnaire de cantine",
+    "Cocinero":"Cuisinière",
+    "Jefe de Cocina":"Chef-cuisinière",
+    "Comité de Gestión":"Comité de gestion",
+    "Estudiante":"Elève",
+    "":""
 }

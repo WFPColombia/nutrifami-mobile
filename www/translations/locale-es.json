@@ -243,9 +243,17 @@
     "Guardando Cambios":"Guardando Cambios",
     "¡Bienvenido a Nutrifami!":"¡Bienvenido a Nutrifami!",
     "Eliga su idioma":"Eliga su idioma",
+    "Tipo de usuario":"Tipo de usuario",
+    "Tipo de usuario no ingresado":"Tipo de usuario no ingresado",
+    "Director":"Director",
+    "Profesor":"Profesor",
+    "Encargado del Comedor":"Encargado del Comedor",
+    "Cocinero":"Cocinero",
+    "Jefe de Cocina":"Jefe de Cocina",
+    "Comité de Gestión":"Comité de Gestión",
+    "Estudiante":"Estudiante",
     "":"",
     "":"",
     "":"",
     "":""
-    
 }

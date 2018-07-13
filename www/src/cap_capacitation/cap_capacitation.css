@@ -5,6 +5,7 @@
 .modulos .caja {
     max-width: 400px;
     margin: 0 auto;
+    position: relative;
 }
 
 .modulo {
@@ -28,8 +29,8 @@
 
 .modulos .caja .imagenesDescargadas{
     position: absolute;
-    top: 43px;
-    right: 14%;
+    top: 5px;
+    right: calc(10% + 10px);
     font-size: 30px;
     color: #ffffff;
 }

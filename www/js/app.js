@@ -371,19 +371,13 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
 
         //Redirecciona a la pagina de preload si estaba la app cerrada
         if ($location.path() === "") {
-            if ($rootScope.globals.currentUser) {
-                $location.path('/preload');
-            } else {
-                $location.path('/auth/lang');
-            }
-
-            
+            $location.path('/preload');
         }
         // Redirecciona a la pagina de auth si el usuario no está logeado e intenta ir a una página no autorizada
         if (!$rootScope.globals.currentUser) {
             var url = $location.path().substring(0, 5) // Tomamos los primeros 5 caracteres para hacer la validadción de las paginas
             if (url !== '/auth' && url !== '/prel') {
-                $location.path('/auth/lang');
+                $location.path('/auth');
             }
         }
     });
@@ -393,27 +387,33 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
     });
 
     // Language settings
+    console.log("Navigator language", $window.navigator.language, $window.navigator.userLanguage)
     var stored_lang_key = localStorage.getItem('NG_TRANSLATE_LANG_KEY');
     if (stored_lang_key) {
+        console.log("Language saved on cache", stored_lang_key)
+    
         $rootScope.lang = stored_lang_key;
         $translate.use(stored_lang_key);
     } else {
         var locale = $window.navigator.language || $window.navigator.userLanguage;
         var lang = locale.substring(0, 2);
+
+        if (lang != 'es' && lang != 'en' && lang != 'fr'){
+            lang = 'es' // Si el idioma no existe, dejamos Español por defecto
+        }
+        console.log("Language used", lang)
         $rootScope.lang = lang;
-        console.log($rootScope.lang);
         $translate.use(lang);
     }
 
     $ionicPlatform.ready(function () {
 
         ionic.Platform.fullScreen(true, false); //Fullscreen en ios, verificar para Android
-        if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+        /*if (window.cordova && window.cordova.plugins && Keyboard) {
             if (device.platform !== "windows") {
-                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+                Keyboard.hideFormAccessoryBar(true);
             }
-            cordova.plugins.Keyboard.disableScroll(true);
-        }
+        }*/
 
         if (window.StatusBar) {
             StatusBar.styleDefault();
@@ -435,10 +435,16 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
                 $rootScope.ICON_DESCARGA = 'ion-android-download';
                 $rootScope.ICON_AUDIO = 'ion-android-volume-up';
                 $rootScope.ICON_AUDIO_OFF = 'ion-android-volume-off';
-                window.addEventListener("native.hidekeyboard", function () {
-                    StatusBar.hide();
+                window.AndroidFullScreen.immersiveMode(false, false);
+
+                window.addEventListener('keyboardDidHide', () => {
+                     console.log('keyboardDidHide')
+                     StatusBar.hide();
                     window.AndroidFullScreen.immersiveMode(false, false);
+                    // Describe your logic which will be run each time keyboard is closed.
                 });
+
+                
             } else if (device.platform === "windows") {
                 console.log('is Windows');
                 $rootScope.TARGETPATH = cordova.file.dataDirectory;

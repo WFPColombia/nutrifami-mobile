@@ -12,7 +12,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="username">{{'Documento' | translate }} *</label>
-                                    <input type="text" class="form-control" name="username" placeholder="{{'Ingrese el Número de Documento de Identidad' | translate }}" ng-model="user.username" ng-model-options="{ updateOn: 'blur' }"  ng-minlength="6" required>
+                                    <input type="text" class="form-control" name="username" ng-model="user.username" ng-model-options="{ updateOn: 'blur' }"  ng-minlength="6" required>
                                     <div class="help-block" ng-show="form.username.$error.required">{{'El campo es obligatorio' | translate }}</div>
                                     <div class="help-block" ng-show="form.username.$error.minlength">{{'El número de documento es muy corto' | translate }}</div>
                                 </div>
@@ -29,8 +29,16 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
+                                    <label for="tipo_usuario">{{'Tipo de usuario' | translate }} *</label>
+                                    <select class="form-control" name="tipos_usuario" ng-options="option.name for option in tipos_usuario.availableOptions track by option.id" ng-model="tipos_usuario.selectedOption" required>
+                                    </select>
+                                    <div class="help-block" ng-show="form.tipos_usuario.$error.required">{{'El campo es obligatorio' | translate }}</div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
                                     <label for="email">{{'Correo electrónico' | translate }}</label>
-                                    <input type="email" class="form-control" name="email" placeholder="{{'Ingrese su correo electrónico' | translate }}" ng-model="user.email" ng-model-options="{ updateOn: 'blur' }">
+                                    <input type="email" class="form-control" name="email" ng-model="user.email" ng-model-options="{ updateOn: 'blur' }">
                                     <div class="help-block" ng-show="form.email.$error.required">{{'El campo es obligatorio' | translate }}</div>
                                     <div class="help-block" ng-show="form.email.$error.email">{{'El formato de correo no es válido' | translate }}</div>
                                 </div>
@@ -40,14 +48,14 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="first_name">{{'Nombres' | translate }}</label>
-                                    <input type="text" class="form-control" name='first_name' placeholder="{{'Ingrese su nombre' | translate }}" ng-model="user.first_name" ng-model-options="{ updateOn: 'blur' }">
+                                    <input type="text" class="form-control" name='first_name' ng-model="user.first_name" ng-model-options="{ updateOn: 'blur' }">
                                     <div class="help-block" ng-show="form.first_name.$error.required">{{'El campo es obligatorio' | translate }}</div>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="last_name">{{'Apellidos' | translate }}</label>
-                                    <input type="text" class="form-control" name="last_name" placeholder="{{'Ingrese su apellido' | translate }}" ng-model="user.last_name" ng-model-options="{ updateOn: 'blur' }">
+                                    <input type="text" class="form-control" name="last_name" ng-model="user.last_name" ng-model-options="{ updateOn: 'blur' }">
                                     <div class="help-block" ng-show="form.last_name.$error.required">{{'El campo es obligatorio' | translate }}</div>
                                 </div>
                             </div>
@@ -56,14 +64,14 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="telefono">{{'Teléfono' | translate }}</label>
-                                    <input type="number" class="form-control" name="telefono" placeholder="{{'Ingrese su número teléfono' | translate }}" ng-model="user.telefono" ng-model-options="{ updateOn: 'blur' }">
+                                    <input type="number" class="form-control" name="telefono" ng-model="user.telefono" ng-model-options="{ updateOn: 'blur' }">
                                     <div class="help-block" ng-show="form.telefono.$error.required">{{'El campo es obligatorio' | translate }}</div>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="movil">{{'Teléfono Móvil' | translate }}</label>
-                                    <input type="number" class="form-control" name="movil" placeholder="{{'Ingrese su número teléfono móvil' | translate }}" ng-model="user.movil" ng-model-options="{ updateOn: 'blur' }">
+                                    <input type="number" class="form-control" name="movil" ng-model="user.movil" ng-model-options="{ updateOn: 'blur' }">
                                     <div class="help-block" ng-show="form.movil.$error.required">{{'El campo es obligatorio' | translate }}</div>
                                 </div>
                             </div>
@@ -89,7 +97,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="pais">{{'País' | translate }} *</label>
-                                    <input type="text" class="form-control" name="pais" placeholder="{{'Ingrese su país' | translate }}" ng-model="user.pais" ng-model-options="{ updateOn: 'blur' }" required>
+                                    <input type="text" class="form-control" name="pais" ng-model="user.pais" ng-model-options="{ updateOn: 'blur' }" required>
                                     <!--<select name="pais" id="pais" class="form-control" ng-disabled="!paises" ng-model="user.pais_id" ng-options="pais.id as pais.name for pais in paises track by pais.sortname" ng-change="updateDropDownDepartamentos(user.pais_id)">
                                         <option disabled value="">Seleccione su país</option>
                                     </select>-->
@@ -99,7 +107,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="departamento">{{'Departamento' | translate }} *</label>
-                                    <input type="text" class="form-control" name="departamento" placeholder="{{'Ingrese su departamento' | translate }}" ng-model="user.departamento" ng-model-options="{ updateOn: 'blur' }" required>
+                                    <input type="text" class="form-control" name="departamento" ng-model="user.departamento" ng-model-options="{ updateOn: 'blur' }" required>
                                     <!--<select name="departamento" id="departamento" class="form-control" ng-disabled="!user.pais_id" ng-model="user.departamento_id" ng-options="departamento.id as departamento.name for departamento in departamentos_filter track by departamento.name" ng-change="updateDropDownCiudades(user.departamento_id)">
                                         <option disabled value="">Seleccione su departamento</option>
                                     </select>-->
@@ -111,7 +119,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="municipio">{{'Municipio' | translate }} *</label>
-                                    <input type="text" class="form-control" name="municipio" placeholder="{{'Ingrese su municipio o ciudad' | translate }}" ng-model="user.municipio" ng-model-options="{ updateOn: 'blur' }" required>
+                                    <input type="text" class="form-control" name="municipio" ng-model="user.municipio" ng-model-options="{ updateOn: 'blur' }" required>
                                     <!--<select name="municipio" id="municipio" class="form-control" ng-disabled="!user.departamento_id" ng-model="user.municipio_id" ng-options="ciudad.id as ciudad.name for ciudad in ciudades_filter track by ciudad.name">
                                         <option disabled value="">Seleccione su ciudad o municipio</option>
                                     </select>-->
@@ -121,7 +129,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="comunidad">{{'Comunidad' | translate }}</label>
-                                    <input type="text" class="form-control" name="comunidad" placeholder="{{'Ingrese la comunidad a la que pertenece' | translate }}" ng-model="user.comunidad" ng-model-options="{ updateOn: 'blur' }">
+                                    <input type="text" class="form-control" name="comunidad" ng-model="user.comunidad" ng-model-options="{ updateOn: 'blur' }">
                                     <div class="help-block" ng-show="form.comunidad.$error.required">{{'El campo es obligatorio' | translate }}</div>
                                 </div>
                             </div>
@@ -130,14 +138,14 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="zona">{{'Zona' | translate }}</label>
-                                    <input type="text" class="form-control" id="zona" name="zona" placeholder="{{'Ingrese la zona en la que vive' | translate }}" ng-model="user.zona" ng-model-options="{ updateOn: 'blur' }">
+                                    <input type="text" class="form-control" id="zona" name="zona" ng-model="user.zona" ng-model-options="{ updateOn: 'blur' }">
                                     <div class="help-block" ng-show="form.zona.$error.required">{{'El campo es obligatorio' | translate }}</div>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="etnia">{{'Etnia' | translate }}</label>
-                                    <input type="text" class="form-control" id="etnia" name="etnia" placeholder="{{'Ingrese la étnia a la que pertenece' | translate }}" ng-model="user.etnia" ng-model-options="{ updateOn: 'blur' }">
+                                    <input type="text" class="form-control" id="etnia" name="etnia" ng-model="user.etnia" ng-model-options="{ updateOn: 'blur' }">
                                 </div>
                             </div>
                         </div>
@@ -145,7 +153,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="direccion">{{'Dirección' | translate }}</label>
-                                    <input type="text" class="form-control" name="direccion" id="direccion" placeholder="{{'Ingrese su dirección de residencia' | translate }}" ng-model="user.direccion" ng-model-options="{ updateOn: 'blur' }">
+                                    <input type="text" class="form-control" name="direccion" id="direccion" ng-model="user.direccion" ng-model-options="{ updateOn: 'blur' }">
                                     <div class="help-block" ng-show="form.direccion.$error.required">{{'El campo es obligatorio' | translate }}</div>
                                 </div>
                             </div>
@@ -154,7 +162,7 @@
                             <div class="botones">
                                 <div class="col">
                                     <button type="submit" class="btn btn-default center-block" ng-disabled="form.$invalid" ion-ripple>{{'Guardar Cambios' | translate }}</button>
-                                    <a class="button cancelar" href="#/app/perfil">{{'Cancelar' | translate }}</a>
+                                    <a class="button cancelar" ui-sref="nf.auth_profile">{{'Cancelar' | translate }}</a>
                                 </div>
                             </div>
                         </div>

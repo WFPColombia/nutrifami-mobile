@@ -210,3 +210,18 @@
     min-height: 100px;
     margin-top: 1rem;
 }
+
+.language-selector {
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 5px;
+    right: 15px;
+    left: unset;
+    position: absolute;
+    top: 15px;
+}
+
+.language-selector a{
+    color: #444;
+    text-decoration: none;
+}

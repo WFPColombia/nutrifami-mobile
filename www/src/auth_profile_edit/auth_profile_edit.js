@@ -3,6 +3,8 @@ nf2.controller('AuthProfileEditCtrl', function ($ionicPlatform, $filter, $scope,
     'use strict';
     $ionicPlatform.ready(function () {
 
+        console.log($rootScope.lang)
+
         if ($rootScope.isOffline) {
             $scope.modal = {
                 texto1: 'Sin conexión a Internet',
@@ -40,6 +42,20 @@ nf2.controller('AuthProfileEditCtrl', function ($ionicPlatform, $filter, $scope,
                 {id: 'Otro', name: $filter('translate')('Otro')}
             ],
             selectedOption: {id: $scope.user.tipo_documento, name: $scope.user.tipo_documento}
+        };
+
+        $scope.tipos_usuario = {
+            availableOptions: [
+                {id: 'Director', name: $filter('translate')('Director')},
+                {id: 'Profesor', name: $filter('translate')('Profesor')},
+                {id: 'Encargado del Comedor', name: $filter('translate')('Encargado del Comedor')},
+                {id: 'Cocinero', name: $filter('translate')('Cocinero')},
+                {id: 'Jefe de Cocina', name: $filter('translate')('Jefe de Cocina')},
+                {id: 'Comité de Gestión', name: $filter('translate')('Comité de Gestión')},
+                {id: 'Estudiante', name: $filter('translate')('Estudiante')},
+                {id: 'Otro', name: $filter('translate')('Otro')}
+            ],
+            selectedOption: {id: $scope.user.tipo_usuario, name: $scope.user.tipo_usuario}
         };
 
         $scope.date = {};
@@ -108,6 +124,7 @@ nf2.controller('AuthProfileEditCtrl', function ($ionicPlatform, $filter, $scope,
 
             $scope.user.genero = $scope.generos.selectedOption.id || '';
             $scope.user.tipo_documento = $scope.tipos_documento.selectedOption.id || '';
+            $scope.user.tipo_usuario = $scope.tipos_usuario.selectedOption.id || '';
 
             var tempMonth = $scope.date.fecha_nacimiento.getMonth() + 1;
             var tempDay = $scope.date.fecha_nacimiento.getDate();
@@ -117,53 +134,9 @@ nf2.controller('AuthProfileEditCtrl', function ($ionicPlatform, $filter, $scope,
             }
             $scope.user.fecha_nacimiento = $scope.date.fecha_nacimiento.getFullYear() + "-" + tempMonth + "-" + tempDay;
 
-            /*for (var pais in $scope.paises) {
-             if ($scope.paises[pais].id == usuarioActivo.pais_id) {
-             usuarioActivo.pais = $scope.paises[pais].name;
-             
-             }
-             }
-             
-             for (var departamento in $scope.departamentos) {
-             if ($scope.departamentos[departamento].id == usuarioActivo.departamento_id) {
-             usuarioActivo.departamento = $scope.departamentos[departamento].name;
-             
-             }
-             }
-             
-             for (var ciudad in $scope.ciudades) {
-             if ($scope.ciudades[ciudad].id == usuarioActivo.municipio_id) {
-             usuarioActivo.municipio = $scope.ciudades[ciudad].name;
-             
-             }
-             }
-             
-             
-             
-             */
+            console.log($scope.user)
 
             UserService.updateUser($scope.user);
-
-            /*UsuarioService.setUsuarioActivo(usuarioActivo, function(response) {
-             if (response.success) {
-             $scope.mensaje = {
-             texto: "Los datos han sido guardado con éxito",
-             };
-             UsuarioService.setUsuarioActivo(usuarioActivo, function(response) {});
-             } else {
-             
-             $scope.mensaje = {
-             texto: "Ops!! Hubo un error y los datos no fueron guardados. Por favor intenta más tarde."
-             
-             };
-             }
-             
-             $ionicLoading.hide();
-             $scope.dataLoading = false;
-             
-             
-             
-             });*/
 
         };
 
@@ -189,12 +162,14 @@ nf2.controller('AuthProfileEditCtrl', function ($ionicPlatform, $filter, $scope,
                         text: $filter('translate')('Continuar'),
                         type: 'button-positive',
                         onTap: function (e) {
+                            $state.go('nf.auth_profile');
                         }
                     }]
             });
         });
 
         $scope.$on('userFaliedUpdate', function (event, data) {
+            $ionicLoading.hide();
             var error = data[Object.keys(data)[0]];
             $scope.modal = {
                 texto1: 'Ops!! Hubo un error y los datos no fueron guardado',
@@ -212,7 +187,6 @@ nf2.controller('AuthProfileEditCtrl', function ($ionicPlatform, $filter, $scope,
                         }
                     }]
             });
-            $ionicLoading.hide();
         });
 
     }, false);
