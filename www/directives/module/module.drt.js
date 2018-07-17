@@ -10,7 +10,7 @@ nf2.directive('moduleDrt', function ($state, $rootScope, $ionicLoading, $ionicPo
 
             $scope.cargadorTexto = "Preparando archivos para la descarga";
             $scope.cargadorPorcentaje = 0;
-            $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitation + "/" + $scope.info.id + "/";
+            $scope.assetpath = $rootScope.TARGETPATH_IMAGES + $stateParams.capacitation + "/" + $scope.info.id + "/";
             $scope.icon_descarga = $rootScope.ICON_DESCARGA;
             $scope.avance = UserService.getAvanceModulo($scope.info.id);
             console.log($scope.avance);

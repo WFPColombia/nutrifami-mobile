@@ -6,7 +6,7 @@ nf2.controller('CapModuleCtrl', function ($ionicPlatform, $scope, $rootScope, $l
         $scope.usuarioActivo = UserService.getUser();
         $scope.lecciones = [];
 
-        $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitation + "/" + $stateParams.module + "/";
+        $scope.assetpath = $rootScope.TARGETPATH_IMAGES + $stateParams.capacitation + "/" + $stateParams.module + "/";
         $scope.assetpath_audio = $rootScope.TARGETPATH_AUDIO + $stateParams.capacitation + "/" + $stateParams.module + "/";
         
         $scope.audios = {

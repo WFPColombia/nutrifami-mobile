@@ -44,7 +44,8 @@ nf2.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $
         suffix: '.json'
     }).preferredLanguage('es')
             .useLocalStorage()
-            .useMissingTranslationHandlerLog();
+            .useMissingTranslationHandlerLog()
+            //.useSanitizeValueStrategy('sanitize');
 
     // Change the platform and redirectUri only if we're on mobile
     // so that development on browser can still work. 
@@ -426,6 +427,7 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
                 console.log("isAndroid");
                 $rootScope.TARGETPATH = cordova.file.externalApplicationStorageDirectory;
                 $rootScope.TARGETPATH_AUDIO = cordova.file.externalApplicationStorageDirectory;
+                $rootScope.TARGETPATH_IMAGES = cordova.file.externalApplicationStorageDirectory;
                 $rootScope.ICON_DESCARGA = 'ion-android-download';
                 $rootScope.ICON_AUDIO = 'ion-android-volume-up';
                 window.addEventListener("native.hidekeyboard", function () {
@@ -436,6 +438,7 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
                 console.log('is Windows');
                 $rootScope.TARGETPATH = cordova.file.dataDirectory;
                 $rootScope.TARGETPATH_AUDIO = cordova.file.dataDirectory;
+                $rootScope.TARGETPATH_IMAGES = cordova.file.dataDirectory;
                 $rootScope.ICON_DESCARGA = 'ion-android-download';
                 $rootScope.ICON_AUDIO = 'ion-volume-high';
             } else {
@@ -445,6 +448,7 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
                     $rootScope.TARGETPATH_AUDIO = entry.toInternalURL();
                     console.log('cdvfile URI: ' + entry.toInternalURL());
                 });
+                $rootScope.TARGETPATH_IMAGES = $rootScope.TARGETPATH.replace(/^file:\/\//, '');
                 $rootScope.ICON_DESCARGA = 'ion-ios-cloud-download-outline';
                 $rootScope.ICON_AUDIO = 'ion-ios-volume-high';
 
@@ -453,6 +457,7 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
         } else {
             $rootScope.BASE_URL = 'http://localhost:8000/';
             $rootScope.TARGETPATH = "https://s3.amazonaws.com/nutrifami/training/images/";
+            $rootScope.TARGETPATH_IMAGES = "https://s3.amazonaws.com/nutrifami/training/images/";
             $rootScope.TARGETPATH_AUDIO = "https://s3.amazonaws.com/nutrifami/";
             $rootScope.ICON_DESCARGA = 'ion-ios-cloud-download-outline';
             $rootScope.ICON_AUDIO = 'ion-ios-volume-high';

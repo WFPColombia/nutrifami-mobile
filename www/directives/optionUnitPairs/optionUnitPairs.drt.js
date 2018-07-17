@@ -10,7 +10,7 @@ nf2.directive('optionUnitPairs', ['$rootScope', '$stateParams', 'CapacitationSer
         link: function($scope) {
             var unit = CapacitationService.getUnitFromOrder($stateParams.lesson, $stateParams.unit);
             if ($rootScope.isMobile) {
-                $scope.assetpath = $scope.$parent.TARGETPATH+$stateParams.capacitation+"/"+$stateParams.module+"/"+$stateParams.lesson+"/"+unit.id+"/";
+                $scope.assetpath = $scope.$parent.TARGETPATH_IMAGES+$stateParams.capacitation+"/"+$stateParams.module+"/"+$stateParams.lesson+"/"+unit.id+"/";
             } else {
                 $scope.assetpath = $rootScope.TARGETPATH;
             }

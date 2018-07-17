@@ -13,7 +13,7 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
         $scope.assetpath_audio = $rootScope.TARGETPATH_AUDIO + $stateParams.capacitation + "/" + $stateParams.module + "/" + $stateParams.lesson + "/" + $scope.unidad.id + "/";
 
         if ($rootScope.isMobile) {
-            $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitation + "/" + $stateParams.module + "/" + $stateParams.lesson + "/" + $scope.unidad.id + "/";
+            $scope.assetpath = $rootScope.TARGETPATH_IMAGES + $stateParams.capacitation + "/" + $stateParams.module + "/" + $stateParams.lesson + "/" + $scope.unidad.id + "/";
         } else {
             $scope.assetpath = $rootScope.TARGETPATH;
         }
