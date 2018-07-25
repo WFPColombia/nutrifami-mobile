@@ -2,16 +2,8 @@
   <div class='unit' id='unit'>
     <unit-header on-exit-unit="exitUnit()" data="advancePercentage" on-change-audio="changeAudio()"></unit-header>
     <unit-question data="unidad" assetpath="assetpath" on-play-audio-title="playAudio('title')" on-play-audio-type="playAudio('type')"></unit-question>
-    <div class="row" ng-show="unidad.tipo.id == 1">
-      <div class="col">
-        <div class="unidad-informativa">
-          <div class="opcion-sonido" ng-click='playAudio("texto")' ng-show="audiosDescargados" ion-ripple>
-            <button class="icon {{ICON_AUDIO}}"></button>
-          </div>
-          <div ng-bind-html="unidad.texto | format | trust"></div>
-        </div>
-      </div>
-    </div>
+    {{unidad.tipo}}
+    <unit-option-info ng-show="unidad.tipo.id == 1" data="unidad" on-click="playAudio('texto')"></unit-option-info>
     <div class="options" ng-if="unidad.tipo.id == 2">
       <div ng-repeat="opcion in unidad.opciones.columnA">
         <unit-option-pairs data="opcion" assetpath="assetpath" column="'A'" column-a-image="opcion.media" on-click="chociePair($index, 'columnA', 'columnB')" on-play-audio="playAudio('opcion'+opcion.id)"></unit-option-pairs>

@@ -231,12 +231,12 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
                 $scope.estadoUnidad = 'acierto';
                 $scope.feedback.feedbacks = feedbacks_ok;
                 $scope.playAudio(feedbacks_ok_last);
-                textoBoton = 'Continuar';
+                $scope.textoBoton = 'Continuar';
             } else {
                 $scope.estadoUnidad = 'fallo';
                 $scope.feedback.feedbacks = feedbacks_bad;
                 $scope.playAudio(feedbacks_bad_last);
-                textoBoton = 'Intentar de nuevo';
+                $scope.textoBoton = 'Intentar de nuevo';
             }
             console.log($scope.unidad.opciones)
 

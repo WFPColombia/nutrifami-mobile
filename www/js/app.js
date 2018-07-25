@@ -459,8 +459,7 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
                     $rootScope.TARGETPATH_AUDIO = entry.toInternalURL();
                     console.log('cdvfile URI: ' + entry.toInternalURL());
                 });
-
-                $rootScope.TARGETPATH = $rootScope.TARGETPATH.replace(/^file:\/\//, '');
+                $rootScope.TARGETPATH_IMAGES = $rootScope.TARGETPATH.replace(/^file:\/\//, '');
                 $rootScope.ICON_DESCARGA = 'ion-ios-cloud-download-outline';
                 $rootScope.ICON_AUDIO = 'ion-ios-volume-high';
                 $rootScope.ICON_AUDIO_OFF = 'ion-ios-volume-off';
