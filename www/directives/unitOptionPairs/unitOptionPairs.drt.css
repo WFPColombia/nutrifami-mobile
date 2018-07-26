@@ -43,7 +43,6 @@
     position: relative;
     width: calc(50% - 7px);
     height: 145px;
-    display: inline-block;
     margin-right: 2px;
     margin-left: 2px;
     border-radius: 5px 5px 0 0;
@@ -77,11 +76,14 @@
 .option-pair.column-A,
 .option-pair-image.column-A{
     border: 1px solid #ffb716;
+    float: left;
+    margin-bottom: 5px;
 }
 
 .option-pair.column-B,
 .option-pair-image.column-B{
     border: 1px solid #d200ff;
+    margin-bottom: 5px;
 }
 .option-pair.selected,
 .option-pair-image.selected {

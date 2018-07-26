@@ -2,7 +2,6 @@
   <div class='unit' id='unit'>
     <unit-header on-exit-unit="exitUnit()" data="advancePercentage" on-change-audio="changeAudio()"></unit-header>
     <unit-question data="unidad" assetpath="assetpath" on-play-audio-title="playAudio('title')" on-play-audio-type="playAudio('type')"></unit-question>
-    {{unidad.tipo}}
     <unit-option-info ng-show="unidad.tipo.id == 1" data="unidad" on-click="playAudio('texto')"></unit-option-info>
     <div class="options" ng-if="unidad.tipo.id == 2">
       <div ng-repeat="opcion in unidad.opciones.columnA">

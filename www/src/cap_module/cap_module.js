@@ -17,9 +17,9 @@ nf2.controller('CapModuleCtrl', function ($ionicPlatform, $scope, $rootScope, $l
         $scope.modulo.totalLecciones = 0;
 
         if ($rootScope.isMobile) {
-            $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitation + "/" + $stateParams.module + "/";
+            $scope.assetpath = $rootScope.TARGETPATH_IMAGES + $stateParams.capacitation + "/" + $stateParams.module + "/";
         } else {
-            $scope.assetpath = $rootScope.TARGETPATH;
+            $scope.assetpath = $rootScope.TARGETPATH_IMAGES;
         }
 
         $scope.lids = CapacitationService.getLessonsIds($stateParams.module);

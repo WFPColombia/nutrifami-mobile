@@ -431,6 +431,7 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
             if (device.platform === "Android") {
                 console.log("isAndroid");
                 $rootScope.TARGETPATH = cordova.file.externalApplicationStorageDirectory;
+                $rootScope.TARGETPATH_IMAGES = cordova.file.externalApplicationStorageDirectory;
                 $rootScope.TARGETPATH_AUDIO = cordova.file.externalApplicationStorageDirectory;
                 $rootScope.ICON_DESCARGA = 'ion-android-download';
                 $rootScope.ICON_AUDIO = 'ion-android-volume-up';
@@ -448,6 +449,7 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
             } else if (device.platform === "windows") {
                 console.log('is Windows');
                 $rootScope.TARGETPATH = cordova.file.dataDirectory;
+                $rootScope.TARGETPATH_IMAGES = cordova.file.dataDirectory;
                 $rootScope.TARGETPATH_AUDIO = cordova.file.dataDirectory;
                 $rootScope.ICON_DESCARGA = 'ion-android-download';
                 $rootScope.ICON_AUDIO = 'ion-volume-high';
@@ -462,13 +464,14 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
                 $rootScope.TARGETPATH_IMAGES = $rootScope.TARGETPATH.replace(/^file:\/\//, '');
                 $rootScope.ICON_DESCARGA = 'ion-ios-cloud-download-outline';
                 $rootScope.ICON_AUDIO = 'ion-ios-volume-high';
-                $rootScope.ICON_AUDIO_OFF = 'ion-ios-volume-off';
+                $rootScope.ICON_AUDIO_OFF = 'ion-ios-volume-low';
 
             }
 
         } else {
             $rootScope.BASE_URL = 'http://localhost:8000/';
             $rootScope.TARGETPATH = "https://s3.amazonaws.com/nutrifami/training/images/";
+            $rootScope.TARGETPATH_IMAGES = "https://s3.amazonaws.com/nutrifami/training/images/";
             $rootScope.TARGETPATH_AUDIO = "https://s3.amazonaws.com/nutrifami/";
             $rootScope.isMobile = false;
         }

@@ -13,9 +13,9 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
         $scope.assetpath_audio = $rootScope.TARGETPATH_AUDIO + $stateParams.capacitation + "/" + $stateParams.module + "/" + $stateParams.lesson + "/" + $scope.unidad.id + "/";
 
         if ($rootScope.isMobile) {
-            $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitation + "/" + $stateParams.module + "/" + $stateParams.lesson + "/" + $scope.unidad.id + "/";
+            $scope.assetpath = $rootScope.TARGETPATH_IMAGES + $stateParams.capacitation + "/" + $stateParams.module + "/" + $stateParams.lesson + "/" + $scope.unidad.id + "/";
         } else {
-            $scope.assetpath = $rootScope.TARGETPATH;
+            $scope.assetpath = $rootScope.TARGETPATH_IMAGES;
         }
         
         $scope.feedback = {};
@@ -38,7 +38,7 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
 
         // Limpiamos el objeto de las opciones que no se deben mostrar
         for (var i in $scope.unidad.opciones) {
-            if ($scope.unidad.opciones[i].visible === 0) {
+            if ($scope.unidad.opciones[i].visible == 0) {
                 delete $scope.unidad.opciones[i];
             }
         }
@@ -58,6 +58,8 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
                 $scope.textoBoton = 'continuar';
             }, 10000);
         }
+
+        console.log($scope.unidad)
 
         // Esperamos tres segundos para saber el tamaño de unit, si es muy grande ponemos la animacion de scroll
 

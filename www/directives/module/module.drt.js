@@ -15,9 +15,9 @@ nf2.directive('moduleDrt', function($state, $rootScope, $ionicLoading, $ionicPop
 
 
       if ($rootScope.isMobile) {
-        $scope.assetpath = $rootScope.TARGETPATH + $stateParams.capacitation + "/" + $scope.info.id + "/";
+        $scope.assetpath = $rootScope.TARGETPATH_IMAGES + $stateParams.capacitation + "/" + $scope.info.id + "/";
       } else {
-        $scope.assetpath = $rootScope.TARGETPATH;
+        $scope.assetpath = $rootScope.TARGETPATH_IMAGES;
       }
 
 
