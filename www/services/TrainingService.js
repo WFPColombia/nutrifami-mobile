@@ -152,9 +152,11 @@ nf2.factory('TrainingService', function ($rootScope, $http, $q, UserService) {
                     username: temp_trainee.document,
                     password: 'abc12345',
                     terminos: true,
-                    temp_id: trainee
+                    temp_id: trainee,
+                    is_trainee: true
                 };
                 if (!temp_trainee.synchronized) {
+                console.log(data)
                     promises2.push(
                             $http({
                                 method: 'POST',
@@ -162,6 +164,7 @@ nf2.factory('TrainingService', function ($rootScope, $http, $q, UserService) {
                                 data: data
                             }).
                             then(function successCallback(response) {
+                                console.log(response)
                                 trainees[response.config.data.temp_id].synchronized = true;
                                 trainees[response.config.data.temp_id].id = response.data.id;
 
