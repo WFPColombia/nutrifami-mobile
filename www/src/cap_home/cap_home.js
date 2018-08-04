@@ -38,6 +38,8 @@ nf2.controller('CapHomeCtrl', function ($ionicPlatform, $scope, $ionicViewSwitch
 
         }
 
+        console.log($scope.capacitations)
+
         var optDescarga = {
             template: "<h3>{{'Descargando archivos necesarios!' | translate }}</h3>{{cargadorTexto | translate }}<h4>{{cargadorPorcentaje}}%</h4>",
             scope: $scope

@@ -77,11 +77,9 @@
     border-radius: 23px;
     border: none;
     height: 50px;
-    padding: 17px 57px;
     font-size: 12pt;
-    margin-bottom: 10px;
     width: 100%;
-    letter-spacing: 5px;
+    letter-spacing: 2px;
 }
 
 .intro .slider-pager .slider-pager-page.active {

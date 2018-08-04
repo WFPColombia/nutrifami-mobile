@@ -21,6 +21,11 @@
     width: 100%;
     height: 100%;
     padding-bottom: 0;  
+    padding-left: initial;
+    padding-right: initial;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .unit-header .sound .icon-circle{

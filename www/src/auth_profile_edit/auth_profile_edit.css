@@ -117,8 +117,8 @@
     -moz-appearance: none;
     background-position: 96% 50%;
     background-repeat: no-repeat;
-    background-image: url('../img/icons/ico-selector.png');
-    padding: 6px 22px;
+    background-image: url('../../img/icons/ico-selector.png');
+    padding: 6px 5px;
 }
 
 .perfil-body .form-group label,
@@ -148,8 +148,8 @@
     -moz-appearance: none;
     background-position: 96% 50%;
     background-repeat: no-repeat;
-    background-image: url('../img/icons/ico-datepicker.png');
-    padding: 6px 22px;
+    background-image: url('../../img/icons/ico-datepicker.png');
+    padding: 6px 5px;
 }
 
 .perfil-body .btn-default,
@@ -162,11 +162,8 @@
     border-radius: 23px;
     border: none;
     height: 50px;
-    padding: 17px 57px;
     font-size: 12pt;
-    margin-bottom: 10px;
     width: 100%;
-    letter-spacing: 3px;
     font-family: 'Raleway-Bold';
 }
 
@@ -184,7 +181,6 @@
 .agregar-familiar .popup .cancelar,
 .editar-perfil .cancelar {
     background-color: #ffffff;
-    letter-spacing: 3px;
     color: #fc4cab;
     text-transform: uppercase;
     border: none;
@@ -192,10 +188,11 @@
     -moz-border-radius: 26px;
     -webkit-border-radius: 26px;
     font-size: 10pt;
-}
-
-.editar-perfil .botones {
-    text-align: center;
+    width: 100%;
+    min-height: initial;
+    height: 30px;
+    padding: 0px;
+    line-height: 2rem;
 }
 
 .confirmacion .popup {

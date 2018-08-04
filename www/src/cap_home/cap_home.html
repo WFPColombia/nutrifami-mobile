@@ -32,7 +32,10 @@
                             <img src="img/intro-01.png">
                         </div>
                         <div class="titulo">
+                            <div>
                             <h2>{{capacitacion.titulo}}</h2>
+                            <p><img ng-src="img/flags/{{capacitacion.idioma.id}}.svg" width="20px"/> {{ capacitacion.idioma.nombre | translate }} </p>
+                            </div>
                         </div>
                         <p class="progress-text">{{capacitacion.porcentaje}}%</p>
                         <div class="progress">

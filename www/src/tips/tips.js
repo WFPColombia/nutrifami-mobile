@@ -3,7 +3,13 @@ nf2.controller('TipsCtrl', function ($ionicPlatform, $stateParams, $scope, $root
     $ionicPlatform.ready(function () {
 
         $scope.usuarioActivo = UserService.getUser();
-        $scope.assetpath = $rootScope.TARGETPATH_IMAGES + "3/";
+        
+
+        if ($rootScope.isMobile) {
+            $scope.assetpath = $rootScope.TARGETPATH_IMAGES + "3/";
+        } else {
+            $scope.assetpath = $rootScope.TARGETPATH_IMAGES;
+        }
 
         CapacitationService.initClient();
 

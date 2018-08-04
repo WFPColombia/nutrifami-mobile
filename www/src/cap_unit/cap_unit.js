@@ -372,7 +372,10 @@ nf2.controller('CapUnitCtrl', function ($ionicPlatform, $scope, $rootScope, $sta
                 console.log($scope.audios)
                 MediaService.preloadSimple($scope.audios, function () {
                     if ($scope.audiosDescargados) {
-                        $scope.playAudio('title');
+                        $timeout(function () {
+                            $scope.playAudio('type');
+                        }, 1000);
+                        
                     }
                 });
             }

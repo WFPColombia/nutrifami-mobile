@@ -89,12 +89,10 @@
     color: #ffffff;
 }
 
-
-
 .home .tarjeta .img {
     float: left;
     height: 85px;
-    margin: 15px 0 0 15px;
+    margin: 15px 0 0 5px;
     text-align: center;
     width: 130px;
 }
@@ -104,19 +102,30 @@
 }
 
 .home .tarjeta .titulo {
-    height: 85px;
-    display: table;
-    margin: 15px 15px 0 0px;
-    text-align: left;
+    height: calc(100% - 50px);
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.home .tarjeta .titulo div{
+    width: 100%
 }
 
 .home .tarjeta h2 {
     color: #ffffff;
     font-family: 'Muli', sans-serif;
     font-size: 20px;
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
+}
+
+.home .tarjeta p {
+    color: #ffffff;
+    font-family: 'Muli', sans-serif;
+}
+
+.home .tarjeta p img{
+    top: 3px;
+    position: relative;
 }
 
 .home .progress-text {
@@ -156,6 +165,7 @@
     letter-spacing: 5px;
     position: absolute;
     margin: 0px;
+    height: 50px;
 }
 
 .home .tarjeta.terminada .button {

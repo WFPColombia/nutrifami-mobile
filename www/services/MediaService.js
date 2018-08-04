@@ -25,6 +25,7 @@ nf2.factory('MediaService', function ($cordovaMedia, $cordovaFile, $rootScope) {
 
     };
 
+
     /**
      * 
      * @param {type} audio

@@ -415,6 +415,13 @@ nf2.run(function ($ionicPlatform, $rootScope, $location, $http, CapacitationServ
             }
         }*/
 
+        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard for form inputs)
+        if(window.cordova && window.cordova.plugins.Keyboard) {
+
+        // Change this to false to return accessory bar 
+          cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
+        }
+
         if (window.StatusBar) {
             StatusBar.styleDefault();
         }
