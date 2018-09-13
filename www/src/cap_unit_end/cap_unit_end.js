@@ -9,11 +9,11 @@ nf2.controller('CapUnitEndCtrl', function ($scope, $rootScope, $stateParams, $lo
         $scope.leccion = CapacitationService.getLesson($stateParams.lesson);
         $scope.media_downloaded = DownloadService.paqueteDescargado('modulos', $stateParams.module, 'audios');
         $scope.assetpath = $rootScope.TARGETPATH_IMAGES + $stateParams.capacitation + "/" + $stateParams.module + "/";
-        $scope.assetpath_audio = $rootScope.TARGETPATH_AUDIO + $stateParams.capacitation + "/" + $stateParams.module + "/";
+        $scope.assetpath_audio = $rootScope.TARGETPATH_AUDIO + $stateParams.capacitation + "/" + $stateParams.module + "/" + $stateParams.lesson + "/";
 
         var avanceModulo = UserService.getAvanceModulo($stateParams.module);
 
-        console.log($scope.leccion)
+        console.log($scope.assetpath_audio)
 
         $scope.audios = {
             audioFinalizado: $scope.assetpath_audio + $scope.leccion.finalizado.audio.nombre
